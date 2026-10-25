@@ -10,3 +10,4 @@ how much water by age (split-screen versus opening), radium beauty products, Bot
 
 Owner feedback to apply from episode 02 on: captions at true centre (x=540); open with a clear "Do you know…?"
 intro so viewers instantly know what the video is about.
+CLAIMED 2026-10-25 20:47 IST | 02-carmine-lipstick | Your Red Lipstick Might Be Made of Crushed Bugs (Carmine)
