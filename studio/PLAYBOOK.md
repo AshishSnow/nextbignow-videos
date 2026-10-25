@@ -37,7 +37,7 @@ Disk is limited (~8 GB free): delete `work/part*.mp4`, frames and old projects a
 ## 4. Script (`scripts/vo_lines.py`)
 Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words], ending)` — see `examples/*/vo_lines.py`.
 - 50–70 s total, 14–19 lines. MrBeast-style: simple words, high energy, stakes, short sentences.
-- Line 1 = hook inside 3 s with the brand + the surprising claim (vary the opener: "Do you know…?", a shocking number, "This is why…", etc.).
+- Line 1 = an intro **question** inside 3 s that names the brand/topic and the surprising claim, so viewers instantly know what the video is about (e.g. "Do you know Starbucks is sitting on one point seven billion dollars… of your money?"). Vary the wording each video.
 - Middle: 3–4 clear beats (steps/secrets/reasons) — vary the structure from the previous video.
 - Payoff twist line, then CTA: "Send this to the friend who …!" (always tied to the topic).
 - Line ids: hook `i*`, beats `a*`/`b*`/`c*`/`d*`, ending `e1`, CTA `e2` (the template's shots use these). Unique words help timing anchors.
@@ -54,6 +54,7 @@ Clean, no hiss, natural. Output: `work/vo.wav`, `work/align.json` (word times us
 - 1080×1920, 24 fps. Safe zone: nothing important in top 250 px, bottom 420 px, right 120 px, left 60 px. Key visuals central.
 - Bright, vibrant, extra-saturated sets (`stage(scheme, sun_colour, x, y, R)` — big colour circle), beautiful background in every shot.
   Schemes: cream, sky, yellow, purple, teal, red, emerald, orange, pink. Change scheme every shot; match colour to the moment.
+- All on-screen text truly centred at x = 540 (keep `ui_word` default x; no off-centre captions), max width ~840 px.
 - Two-tier editorial captions **only at key moments** (`ui_word(f, lead, BIG, y≈470, t, t0, ...)`): one big word/number + small lead.
   No word-by-word subtitles, no emoji, no persistent counters/meters.
 - First 3 s: a strong visual (object + action) + one short caption with the brand/claim. No giant text-only opener.
