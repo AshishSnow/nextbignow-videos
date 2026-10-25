@@ -17,4 +17,4 @@ Never repeat a topic (or a close variant) from this list. Append one line per ne
 - 2026-10-25 | Why Costco's $1.50 Hot Dog Is Actually an Ad | oopsmybusiness/01-costco-hot-dog.mp4 | uploaded manually by owner (Metricool post kept as draft) | Costco FY2026 8-K, Q4 FY2026 call, Wikipedia (Sinegal quote), 2025 annual report
 - 2026-10-25 | Starbucks Is Secretly a Bank | oopsmybusiness/02-starbucks-secret-bank.mp4 | 2026-10-25 19:00 | Starbucks Q3 FY2026 10-Q, FY2025 10-K, FDIC
 - 2026-10-25 | Amazon's Real Money Machine Is AWS | oopsmybusiness/03-amazon-aws-profit.mp4 | 2026-10-26 05:00 | Amazon Q2 2026 earnings release (segment info, Jul 30 2026)
-- CLAIMED 2026-10-26 01:40 IST | Chick-fil-A Is Closed Every Sunday and Still Wins
+- 2026-10-26 | Chick-fil-A Closed Sundays Yet Still Wins | oopsmybusiness/04-chickfila-sundays.mp4 | 2026-10-26 10:00 | Chick-fil-A 2026 FDD via QSR + Restaurant Business, Fortune (Oct 2026), McDonald's FY2025 10-K, Fox News (Sep 2026), Forbes, Business Insider
