@@ -89,9 +89,9 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
   `RAW_URL=…` (public, 200). After `createScheduledPost` returns a `static.metricool.com` media URL, run
   `bash studio/host_video.sh delete <slug>`. If the returned media is NOT on static.metricool.com, keep the branch and say so in the report.
 - Metricool: brand **Oopsmybusiness, blogId `7643430`**, timezone `Asia/Calcutta`. Never post to other brands.
-- Time: `getScheduledPosts` for 7643430 (next 3 days); schedule at `max(now + 20 min, latest scheduled post + 5 h)`; prefer the higher
-  value from `getBestTimeToPostByNetwork` within ±30 min of that slot. **Owner's safety rule: one reel/short per 4–5 hours — never two posts
-  less than 4.5 h apart.**
+- Time: fixed daily slots (IST): **00:00, 05:00, 10:00, 15:00, 19:30** (gaps 5/5/5/4.5/4.5 h). `getScheduledPosts` for 7643430
+  (next 3 days) and use the earliest slot that is ≥ now + 20 min AND ≥ 4.5 h after the latest scheduled post and has no post yet.
+  **Owner's safety rule: one reel/short per 4–5 hours — never two posts less than 4.5 h apart.**
 - `createScheduledPost` (see the Starbucks post in topics.md for a working example):
   - providers: instagram + youtube; `media`: [raw URL]; `videoCoverMilliseconds`: a frame with the hook caption visible.
   - `text`: line 1 = keyword sentence (brand + claim); 2–3 short lines of value; CTA line; "Follow for more business secrets.";
