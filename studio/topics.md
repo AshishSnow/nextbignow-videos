@@ -16,3 +16,4 @@ Never repeat a topic (or a close variant) from this list. Append one line per ne
 ## Autopilot log
 - 2026-10-25 | Why Costco's $1.50 Hot Dog Is Actually an Ad | oopsmybusiness/01-costco-hot-dog.mp4 | uploaded manually by owner (Metricool post kept as draft) | Costco FY2026 8-K, Q4 FY2026 call, Wikipedia (Sinegal quote), 2025 annual report
 - 2026-10-25 | Starbucks Is Secretly a Bank | oopsmybusiness/02-starbucks-secret-bank.mp4 | 2026-10-25 19:00 | Starbucks Q3 FY2026 10-Q, FY2025 10-K, FDIC
+- CLAIMED 2026-10-25 20:33 IST | Amazon's Real Money Machine Is AWS, Not the Store
