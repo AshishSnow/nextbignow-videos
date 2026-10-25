@@ -9,5 +9,7 @@ Earlier FreshNestHub reels (made before the engine; also do not repeat): whale v
 mystery + money counter opening), Kim Kardashian salmon-sperm (PDRN) facial (paparazzi flash opening),
 how much water by age (split-screen versus opening), radium beauty products, Botox, body fat, hair, blue light.
 
+Owner feedback after episode 02 (apply from episode 03): it was too fast — make videos 45–60 s, slower clearer
+voice (v2 MOOD table), 14–20 explaining scenes (step-by-step visuals), never rushed.
 Owner feedback to apply from episode 02 on: captions at true centre (x=540); open with a clear "Do you know…?"
 intro so viewers instantly know what the video is about.

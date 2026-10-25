@@ -14,15 +14,19 @@ def mix(**w):
 
 
 # style, speed, gain dB, pitch semitones (formant-preserving)
+# v2 (owner feedback 25 Oct): slower, clearer, more natural. Kokoro sounds best near speed 0.95 with little/no pitch
+# shifting, so emotion comes mainly from the style blend + gain (loud highs / soft lows), not from speed or pitch.
 MOOD = {
-    "hook":    (mix(heart=0.75, bella=0.15, nicole=0.10), 1.04, 1.0, 0.6),
-    "excited": (mix(heart=0.55, bella=0.45), 1.14, 3.0, 1.3),
-    "curious": (mix(heart=0.85, bella=0.15), 1.06, 0.5, 0.3),
-    "whisper": (mix(heart=0.40, nicole=0.60), 0.86, -6.0, -0.9),
-    "cheeky":  (mix(heart=0.65, bella=0.35), 1.08, 1.0, 0.6),
-    "serious": (mix(heart=0.85, sarah=0.15), 0.95, -1.0, -0.5),
-    "warm":    (mix(heart=0.85, bella=0.15), 1.05, 0.5, 0.2),
+    "hook":    (mix(heart=0.90, bella=0.10), 0.97, 1.0, 0.0),
+    "excited": (mix(heart=0.75, bella=0.25), 1.01, 2.5, 0.3),
+    "curious": (mix(heart=1.0), 0.95, 0.0, 0.0),
+    "whisper": (mix(heart=0.70, nicole=0.30), 0.88, -4.5, -0.3),
+    "cheeky":  (mix(heart=0.85, bella=0.15), 0.98, 0.5, 0.0),
+    "serious": (mix(heart=0.90, sarah=0.10), 0.93, -1.0, 0.0),
+    "warm":    (mix(heart=1.0), 0.95, 0.5, 0.0),
 }
+# PLAN rules: split a line into phrases ONLY at a real dramatic pause ("…") or a sentence end — never cut a question
+# or a clause in half (it breaks the intonation). Pauses: 0.30-0.45 s inside a line, 0.55-0.75 s between lines.
 
 
 def pitch(a, sr, st):

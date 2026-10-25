@@ -1,6 +1,6 @@
 # FreshNestHub autonomous reel engine — PLAYBOOK
 
-Runs every 5 hours. Every run makes ONE new 30–45 s vertical reel for **FreshNestHub** (skin, hair, beauty, body and home-hygiene
+Runs every 5 hours. Every run makes ONE new 45–60 s vertical reel for **FreshNestHub** (skin, hair, beauty, body and home-hygiene
 curiosities for a worldwide English audience), hosted by **Nessa** (stick-figure host, female voice ~30),
 and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** through Metricool.
 The owner (Ashish) is usually not watching: decide, build, verify, post, log. Never ask questions mid-run.
@@ -34,18 +34,29 @@ ENG=/home/claude/nextbignow-videos/fnh-engine
 - NO dosing, treatment or diagnosis advice. Only safe general tips (e.g. "remove makeup before bed",
   "see a dermatologist if…"). No real private people. Celebrities only for documented public facts. No brand names/logos.
 
-## 3. Script (MrBeast energy, Zack D. Films clarity) — 90–115 words, 30–45 s
-Structure (each line becomes one shot):
-1. **INTRO QUESTION (0–2.5 s, mandatory, owner's rule):** Nessa asks a "Do you know…?" question that names the
-   topic so the viewer instantly knows what the video is about, e.g. "Do you know what happens to your skin
-   when you pop a pimple?" / "Do you know your lipstick might be made of bugs?". On screen at the same time:
-   the topic visual + a two-tier title (small "do you know" line + 1–3 big words). Visual first, text supports it.
-2. Shock fact / reveal (punch + shake).
-3. 4–6 escalating facts, each with its own visual; one "but wait" twist.
-4. One practical, safe takeaway (tip card with a check that ticks).
-5. **Loop ending:** last line flows back into the opening question (no "follow us" line in the VO).
-- Simple words, numbers written as words in voice text, short sentences, contrast of HIGH (excited) and LOW
-  (whisper) lines. Max ~4 caption moments per video (key moments only).
+## 3. Script — CLEAR, UNHURRIED, EXPLAINED (owner feedback 25 Oct: episode 02 felt too fast)
+Target **45–60 s, 120–150 words, 10–14 lines**. The viewer must fully understand the topic; never rush.
+Structure:
+1. **INTRO QUESTION (0–3 s, mandatory):** Nessa asks a "Do you know…?" question that names the topic, e.g.
+   "Do you know your red lipstick might be made of bugs?". Topic visual + two-tier title on screen with it.
+2. **Answer + what it is** (1–2 lines): name the thing and show it big and clearly.
+3. **EXPLAIN IT STEP BY STEP (the core, 4–6 lines):** walk through HOW/WHY with one visual per step, like a mini
+   documentary — e.g. carmine: cactus field -> the bug close-up -> harvest -> drying in the sun -> crushing into
+   red powder -> mixed into a lipstick. Use process sequences (step 1 -> 2 -> 3 with arrows or a camera move from
+   one object to the next), labelled cross-sections, zoom-ins, scale comparisons ("70,000 bugs" shown as a pile next
+   to a lipstick), before/after. Every new word or number gets its own visual.
+4. One "but wait" twist with its own scene.
+5. One practical, safe takeaway (tip card that ticks).
+6. **Loop ending** that flows back into the opening question (no "follow us" in the VO).
+Pacing rules:
+- One idea per line, short simple sentences. 2.5–4.5 s per shot, **14–20 shots** per video. Hold every key visual
+  at least 2 s after the word that introduces it; captions stay on screen at least 1.5 s.
+- 0.55–0.75 s pause between lines, 0.30–0.45 s at dramatic "…" pauses. Contrast HIGH (excited) and LOW (whisper)
+  lines, but the overall pace stays calm and clear.
+- Voice: use the v2 MOOD table in the template voice.py (speeds 0.88–1.01, almost no pitch shift). Split a line
+  into phrases only at real pauses or sentence ends — never cut a question or clause in half.
+- Numbers written as words in the voice text; max ~4–5 caption moments per video (key moments only).
+- Take the time needed for quality: test frames of EVERY shot before the full render.
 
 ## 4. Build the episode
 ```
@@ -93,7 +104,7 @@ Fix and re-test until clean. Then:
 ```
 bash $ENG/build_ep.sh NN-slug        # voice -> align -> timeline -> music -> mix -> 2x parallel render -> mux
 ```
-Verify the printout: 1080×1920, 30–46 s, I ≈ −14 LUFS, peak ≤ −1.4 dBTP, and look at
+Verify the printout: 1080×1920, 45–62 s, I ≈ −14 LUFS, peak ≤ −1.4 dBTP, and look at
 `/home/claude/outputs/NN-slug_sheet.jpg`. Render takes ~10–20 min.
 
 ## 5. Host + post
