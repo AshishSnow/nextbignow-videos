@@ -1,5 +1,14 @@
 # Topic seeds (verify every fact with >= 2 reputable sources before using; skip any that don't hold up)
 
+## UP NEXT (owner was told this order — take the first one not yet in topics_done.md; skip only if facts fail)
+1. 02-carmine-lipstick — Do you know your red lipstick might be made of crushed bugs? (carmine / cochineal)
+2. 03-dandruff-fungus — Do you know a fungus is eating your scalp right now? (Malassezia and dandruff)
+3. 04-tattoo-ink-cells — Do you know your tattoo is being eaten by your own cells? (macrophages hold the ink)
+4. 05-wrinkly-fingers — Do you know why your fingers wrinkle in water? (it's your nerves, not water)
+5. 06-fish-scale-shimmer — Do you know some makeup shimmer comes from fish scales? (guanine)
+
+## Pool
+
 1. Red lipstick and candy colour made from crushed insects (carmine / cochineal, E120; FDA requires "carmine" on labels).
 2. Shimmer in some cosmetics comes from fish scales (guanine / "pearl essence").
 3. A fungus (Malassezia) eats your scalp oil — the main driver of dandruff.

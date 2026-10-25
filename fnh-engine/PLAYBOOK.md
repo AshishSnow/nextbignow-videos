@@ -1,6 +1,6 @@
 # FreshNestHub autonomous reel engine — PLAYBOOK
 
-Every run makes ONE new 30–45 s vertical reel for **FreshNestHub** (skin, hair, beauty, body and home-hygiene
+Runs every 5 hours. Every run makes ONE new 30–45 s vertical reel for **FreshNestHub** (skin, hair, beauty, body and home-hygiene
 curiosities for a worldwide English audience), hosted by **Nessa** (stick-figure host, female voice ~30),
 and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** through Metricool.
 The owner (Ashish) is usually not watching: decide, build, verify, post, log. Never ask questions mid-run.
@@ -18,7 +18,8 @@ ENG=/home/claude/nextbignow-videos/fnh-engine
 
 ## 1. Claim a topic (avoid repeats and parallel-run collisions)
 1. `git pull` then read `topics_done.md` (all past topics + openings used) and `topic_ideas.md`.
-2. Pick a topic NOT in topics_done (no near-duplicates either). Prefer `topic_ideas.md`, or find a better one
+2. Take the FIRST topic in the "UP NEXT" list of `topic_ideas.md` that is not yet in topics_done (the owner expects
+   that order). If it fails verification, take the next one. When UP NEXT is empty, pick from the pool or find a better one
    (WebSearch: recent science news on skin/hair/body/beauty, weird beauty-industry facts, myths).
 3. Topic test — all must be true:
    - Instantly clear in 3 s, gross/surprising/"wait, what?", relevant to the viewer's own body/home/beauty routine.
