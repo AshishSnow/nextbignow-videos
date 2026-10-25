@@ -84,8 +84,9 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
 3. Facts on screen and in VO match the sources.
 
 ## 9. Host and post
-- Copy to the repo: `oopsmybusiness/NN-slug.mp4` (next number), commit, push. Check
-  `https://raw.githubusercontent.com/AshishSnow/nextbignow-videos/main/oopsmybusiness/NN-slug.mp4` returns 200 with the right size.
+- Never commit MP4s to `main`. Host on a throwaway branch: `bash studio/host_video.sh push $P/work/final.mp4 <slug>` → prints
+  `RAW_URL=…` (public, 200). After `createScheduledPost` returns a `static.metricool.com` media URL, run
+  `bash studio/host_video.sh delete <slug>`. If the returned media is NOT on static.metricool.com, keep the branch and say so in the report.
 - Metricool: brand **Oopsmybusiness, blogId `7643430`**, timezone `Asia/Calcutta`. Never post to other brands.
 - Time: `getScheduledPosts` for 7643430 (next 2 days); schedule at `max(now + 20 min, latest scheduled post + 3 h)`; prefer the higher
   value from `getBestTimeToPostByNetwork` within ±45 min of that slot. Never two posts less than 2.5 h apart.

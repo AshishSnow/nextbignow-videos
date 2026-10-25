@@ -1,7 +1,7 @@
 # OopsMyBusiness — topic log
 
 Never repeat a topic (or a close variant) from this list. Append one line per new video:
-`YYYY-MM-DD | Title | file | Metricool post time (IST) | key sources`
+`YYYY-MM-DD | Title | slug | Metricool post time (IST) | key sources`
 
 ## Already made before the autopilot
 - McDonald's is really a real-estate company
