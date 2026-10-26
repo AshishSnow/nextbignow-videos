@@ -14,9 +14,14 @@ python3 scripts/mix.py 2>&1 | grep "VO/bed"
 rm -f frames/*.jpg
 bash scripts/render_all.sh > work/render.log 2>&1; tail -1 work/render.log
 cp work/final.mp4 "$O"
-SZ=$(stat -c %s "$O")
-if [ "$SZ" -gt 95000000 ]; then
-  ffmpeg -v error -y -i work/final.mp4 -c:v libx264 -preset slow -crf 16 -tune animation -pix_fmt yuv420p -c:a copy -movflags +faststart "$O"
+# keep the hosted file < 95 MB (GitHub raw limit 100 MB) while staying as high quality as possible (long videos)
+for CRF in 16 18 20 22; do
+  [ "$(stat -c %s "$O")" -le 95000000 ] && break
+  ffmpeg -v error -y -i work/final.mp4 -c:v libx264 -preset slow -crf $CRF -tune animation -pix_fmt yuv420p -c:a copy -movflags +faststart "$O"
+done
+if [ "$(stat -c %s "$O")" -gt 95000000 ]; then
+  DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 work/final.mp4); BR=$(python3 -c "print(int(88e6*8/$DUR/1000)-330)")
+  ffmpeg -v error -y -i work/final.mp4 -c:v libx264 -preset slow -b:v ${BR}k -maxrate ${BR}k -bufsize $((BR*2))k -tune animation -pix_fmt yuv420p -c:a copy -movflags +faststart "$O"
 fi
 ffprobe -v error -show_entries stream=codec_name,width,height -show_entries format=duration,size -of compact "$O"
 ffmpeg -hide_banner -i "$O" -af ebur128=peak=true -f null - 2>&1 | grep -E "^\s+(I|Peak):"

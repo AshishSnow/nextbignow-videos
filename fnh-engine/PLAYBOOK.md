@@ -1,6 +1,6 @@
 # FreshNestHub autonomous reel engine — PLAYBOOK v4 "CHUBBY" (approved by owner 26 Oct 2026)
 
-Runs every 5 hours. Every run makes ONE new 45–62 s vertical animated reel for **FreshNestHub** — fun, surprising
+Runs every 5 hours. Every run makes ONE new vertical animated reel (45 s–3 min — as long as full understanding needs) for **FreshNestHub** — fun, surprising
 **food + health facts** — and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** via Metricool.
 The owner (Ashish) is usually not watching: decide, build, verify, post, log. Never ask questions mid-run.
 
@@ -52,7 +52,16 @@ WebSearch/WebFetch the sources; write down every fact + URL. Numbers must match 
 think…" or drop it. NO dosing, treatment or diagnosis advice; at most one safe general tip ("if X, see a doctor").
 No brand names/logos in visuals (generic "a can of cola" is fine), no real private people.
 
-## 4. Script — `scripts/vo_lines.py` (12–15 lines, 120–145 words, 45–55 s of voice at the calmer A pace; longer only if data says it holds)
+## 4. Script — `scripts/vo_lines.py` (length = whatever the topic needs for FULL understanding: 45 s to 3 min)
+**Owner, 26 Oct 23:25: "It's not important to make a 1-minute video — go 2 or 3 minutes if needed. Script and visuals
+that make people UNDERSTAND what they are watching matter the most."**
+- Length follows the content: a simple fact can be 45–60 s; a "how it works" topic 1.5–3 min. Hard cap 2:55 (both
+  platforms treat vertical videos up to 3 min as Shorts/Reels). Never pad; never cut an explanation short to save time.
+- Roughly 150–160 words per minute of video at the calmer A pace (≈ 120–145 words ≈ 50 s; ≈ 260–300 words ≈ 1:50).
+- Clarity first: define every term the moment it appears (with a picture), one idea per line, everyday comparisons
+  ("as big as…", "like a…"), "first / then / finally" signposting, and a 1-line recap before the twist/CTA.
+- Longer videos need re-hooks every 20–30 s (a new question, "but here's the weird part…", a mini-reveal) so
+  people keep watching; chapter-like beats: hook -> what it is -> how it works step by step -> proof/number -> twist -> takeaway.
 Format: `(id, text, speed, pause_after, base_semitones, range_expand, [stressed words], ending)`; see template.
 - Speed 1.0 everywhere, pauses 0.30–0.45 s. Stressed words = 1–3 per line, copied exactly as written (with punctuation).
 - Line 1 (`i1`) = clear intro question inside 3 s: "Do you know…?" naming the food/body thing + the surprise.
@@ -72,7 +81,8 @@ python3 -c "import json;A=json.load(open('work/align.json'));[print(w['line'],w[
 Then write (read the template versions first — they are the reference; use the craft helpers in `anim_fx.py`):
 - `scripts/anim_props6.py` — NEW props for this topic (PIL supersampled, gradient `shape_grad`, soft shadows `_ov`,
   ink outlines where needed, cache with `gcache`). Reuse existing props when they fit (list below).
-- `scripts/anim_shots.py` — SHOTLIST (16–20 shots, 1.5–4.5 s each, cut on word times `T(line, word)`), one
+- `scripts/anim_shots.py` — SHOTLIST (about one shot per 2.5–3.5 s, i.e. ~18 shots per minute; every shot must SHOW
+  the idea being said so a viewer understands even on mute; cut on word times `T(line, word)`), one
   `shot_<ID>(t, n)` per shot, `IMPACTS` (shake on every big moment). Keep `ui_word/rays/slam/ring/rs/_bl/compose` as in
   the template. Transitions vary: cut, whip, zoom, flash, punch, focus.
 - `scripts/music.py` — cues on every reveal. **New genre each video** (template = bouncy food-funk with marimba/slap
@@ -116,7 +126,7 @@ radar_screen, moon, zzz_moon, mirror_el.
 `python3 $ENG/engine/tools/sheet.py /tmp/sheet.jpg frames/r_*.jpg` and LOOK (Read the image). Fix overlaps, clipped
 props, text in unsafe zones, props hidden behind Chubby's head (use hold_front), unreadable diagrams. Re-test.
 Then: `SKIP_VO=1 bash $ENG/build_ep.sh NN-slug` (≈7 min) → /home/claude/outputs/NN-slug.mp4 + _sheet.jpg.
-QA: 1080×1920, 45–62 s, ≈ −11 LUFS, peak ≤ −1 dBFS; look at the sheet; facts on screen = sources.
+QA: 1080×1920, 45 s–2:55, ≈ −11 LUFS, peak ≤ −1 dBFS; look at the sheet; facts on screen = sources.
 
 ## 6. Host + post
 `bash $ENG/host_video.sh NN-slug push` → RAW_URL. Metricool brand **Freshnesthub blogId 7643474**, tz Asia/Calcutta.

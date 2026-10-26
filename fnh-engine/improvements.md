@@ -17,7 +17,9 @@ Socialync (2026), Android Headlines / TechCrunch (Jul 2026, YouTube monetization
    => Frame 0 already moving, Chubby + the object + the question on screen inside 1.5 s; no slow build-up.
 2. **Retention/completion is the main Shorts signal.** Third-party guides: 30–60 s Shorts want ≈ 50 %+ average view;
    cut or change the picture every 2–4 s (nothing static > 4 s); an ending that flows back into the opening helps loops.
-   => Keep videos 40–55 s unless our own data says longer holds; tease the best fact early ("and the last one is wild").
+   => OWNER PRIORITY (26 Oct 23:25): understanding beats length — videos may run 2–3 min when the topic needs it.
+   Keep retention with re-hooks every 20–30 s, a clear step-by-step structure and constant visual change; tease the
+   best fact early ("and the last one is wild"). Compare watch % of short vs long videos in performance.md.
 3. **Sends/shares are the strongest signal for reaching non-followers (Instagram).** => Every video needs a
    share trigger: a surprising fact + a practical takeaway + "Send this to the friend who…".
 4. **Originality / no mass-produced feel.** Instagram excludes repost/aggregator accounts from recommendations;
@@ -87,6 +89,8 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 26 Oct 23:25 (between runs): length cap removed — 45 s to 3 min, whatever gives full understanding; explaining skills
+  added to the curriculum; build keeps files < 95 MB for long videos.
 - 26 Oct 22:50 (between runs): voice A pace refined (A4 above) + UTMOS gate added; daily algorithm + trend scans.
 - 07 carrots (26 Oct, interactive): new CHUBBY v4 style baseline (owner approved). Voice A, 19 shots, food-funk score.
 - 08 pineapple (26 Oct, auto run): same style; calypso score. Review: good consistency, but Chubby small in corners in
@@ -102,7 +106,7 @@ Script / packaging:
 | 26 Oct | **A4 SPD 0.88 PZ 1.6 PMIN 0.3 (adopted)** | **4.36** | 197 | 0.13 | 17.4 | 0 |
 | 26 Oct | A5 = A2 with GT 160 | 4.34 | 200 | 0.12 | 17.4 | 0 |
 | 26 Oct | A6 SPD 0.86 PZ 1.5 PMIN 0.35 | 4.31 | 193 | 0.12 | 17.4 | 0 |
-Note: the calmer pace makes the same script ~13 % longer — write 120–145 words to stay at 45–55 s.
+Note: the calmer pace makes the same script ~13 % longer (~155 words per minute). Length now follows the topic (45 s–3 min).
 
 ## G. Craft learning — one NEW skill every run (mandatory; this is the heart of improving)
 Every run: take the next unchecked skill below (or a better one you discover), research it for ~5 minutes
@@ -139,6 +143,15 @@ Sound:
 - [ ] Foley that matches the action (crunch, fizz, squelch, sizzle) synthesized per video
 - [ ] Music that follows the story (build -> drop on the reveal -> soft under explanations), stems ducking
 - [ ] A signature 1-second FreshNestHub audio logo
+Explaining (the owner's #1 priority — people must understand what they watch):
+- [ ] Mayer's multimedia principles: signalling (highlight what matters), segmenting (one step per shot), coherence
+      (no decoration that distracts), no redundant on-screen paragraphs (picture + short label, voice explains)
+- [ ] Analogies and visual metaphors for invisible things (enzymes as scissors, receptors as doorbells…)
+- [ ] Define-on-sight: every new term appears with its picture and a 2–4 word label the moment it is spoken
+- [ ] Step diagrams that build up piece by piece (1 -> 2 -> 3) and a 5-second visual recap at the end
+- [ ] Scale cues (hand, coin, Chubby next to the thing) so viewers know how big/small it is
+- [ ] Mute test: watch the test-frame sheet without audio — can you follow the story? If not, fix the visuals
+- [ ] Structure for 2–3 min videos: chapters + re-hooks every 20–30 s + open loops paid off in order
 Story & topics:
 - [ ] Curiosity gap + open loop in the first line, payoff placed at ~70 % of the video
 - [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
