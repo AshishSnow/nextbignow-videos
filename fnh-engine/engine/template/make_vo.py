@@ -15,13 +15,17 @@ from parselmouth.praat import call
 SR = 48000; LEAD = 0.25
 k = Kokoro(f"{R}/models/kokoro/kokoro-v1.0.onnx", f"{R}/models/kokoro/voices-v1.0.bin"); V = k.get_voice_style
 import os
-EW = float(os.environ.get("EW", "0.75")); GT = float(os.environ.get("GT", "165")); BS = float(os.environ.get("BS", "0.6"))
-VOICE = (1 - EW) * V("am_fenrir") + EW * V("am_eric")   # young, bright, energetic
+EW = float(os.environ.get("EW", "0.75")); _GT = os.environ.get("GT", "165"); BS = float(os.environ.get("BS", "0.6"))
+_VS = os.environ.get("VOICES", "")   # e.g. "am_eric:0.75,am_fenrir:0.25" (overrides EW)
+if _VS:
+    VOICE = sum(float(w) * V(n) for n, w in (x.split(":") for x in _VS.split(",")))
+else:
+    VOICE = (1 - EW) * V("am_fenrir") + EW * V("am_eric")   # young, bright, energetic
 CFG = {L[0]: L for L in LINES}
 
 import os, hashlib
 EXS = float(os.environ.get("EXS", "0.5")); BMP = float(os.environ.get("BMP", "0.8")); STR = float(os.environ.get("STR", "1.0"))
-_key = hashlib.md5(repr([L[:3] for L in LINES] + [EW]).encode()).hexdigest()
+_key = hashlib.md5(repr([L[:3] for L in LINES] + [EW, os.environ.get("VOICES", "")]).encode()).hexdigest()
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}
 t = LEAD
@@ -96,6 +100,7 @@ snd = parselmouth.Sound(flat.astype(np.float64), SR)
 pitch = snd.to_pitch_ac(0.01, 65, 15, False, 0.03, 0.45, 0.01, 0.35, 0.14, 400)
 f0 = pitch.selected_array["frequency"]; tf = pitch.xs(); vo_ = f0 > 0
 G = float(np.median(f0[vo_])); print("global median F0", round(G, 1))
+GT = G * float(_GT[4:] or 1) if _GT.startswith("auto") else float(_GT)   # "auto" = keep the voice's own register
 line_med = {}
 for lid, L in lines.items():
     m = vo_ & (tf >= L["start"]) & (tf <= L["end"])

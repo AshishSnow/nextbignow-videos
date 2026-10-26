@@ -26,20 +26,30 @@ bash $ENG/setup.sh                      # studio engine -> /home/claude/studio (
 ```
 Never edit anything outside `fnh-engine/` (studio/ and oopsmybusiness/ belong to another channel).
 
-## 1. Claim a topic
+## 1. Learn first (≈10 min) — mandatory, see improvements.md
+1. Read `improvements.md` (algorithm notes, protocol, backlog, learnings, changelog) and `performance.md`.
+2. Refresh performance.md from Metricool analytics (exact metric ids are in its header) and write 1–2 dated learnings.
+3. If the algorithm notes are older than 7 days, re-check (WebSearch: Instagram Reels + YouTube Shorts ranking news)
+   and update section A.
+4. Choose this video's upgrades: at least ONE voice + ONE visual/edit improvement (section C or your learnings).
+   Apply them in this episode and log them in section E at the end. Never ship a video identical in method to the last.
+
+## 2. Claim a topic
 1. `git pull`, read `topics_done.md` (titles + openings already used) and `topic_ideas.md`.
 2. Take the FIRST "UP NEXT" topic not in topics_done. If facts don't hold up → next. If the list is empty, find new
    ones of the same kind (food science, everyday-body facts, food myths) with WebSearch.
 3. Topic test: instantly clear in 3 s, surprising, about food/the viewer's own body, can be SHOWN with Chubby + props,
    ≥ 2 reputable sources (NIH/NHS/CDC/FDA/WHO/Mayo/Cleveland Clinic, universities, journals, major outlets).
 4. Append `CLAIMED <date time IST> | NN-slug | working title` to topics_done.md, commit, fetch+rebase, push.
+   NN = next free episode number (the highest NN in topics_done/episodes + 1); slug = the topic's slug.
+   Topic choice may follow the learnings (e.g. broad, everyday topics reach more) — skip ahead in the list if justified.
 
-## 2. Research (≈10 min)
+## 3. Research (≈10 min)
 WebSearch/WebFetch the sources; write down every fact + URL. Numbers must match the source; contested → "scientists
 think…" or drop it. NO dosing, treatment or diagnosis advice; at most one safe general tip ("if X, see a doctor").
 No brand names/logos in visuals (generic "a can of cola" is fine), no real private people.
 
-## 3. Script — `scripts/vo_lines.py` (13–16 lines, 140–165 words, 50–60 s of voice)
+## 4. Script — `scripts/vo_lines.py` (12–15 lines, 125–150 words, 45–55 s of voice; longer only if data says it holds)
 Format: `(id, text, speed, pause_after, base_semitones, range_expand, [stressed words], ending)`; see template.
 - Speed 1.0 everywhere, pauses 0.30–0.45 s. Stressed words = 1–3 per line, copied exactly as written (with punctuation).
 - Line 1 (`i1`) = clear intro question inside 3 s: "Do you know…?" naming the food/body thing + the surprise.
@@ -47,11 +57,12 @@ Format: `(id, text, speed, pause_after, base_semitones, range_expand, [stressed 
   line → one honest catch or safe tip → a twist/bonus fact → CTA "Send this to the friend who …!" tied to the topic.
 - Numbers as words ("ten a day", "four milligrams"). Avoid words the TTS/ASR confuses (check the read-back).
 
-## 4. Build
+## 5. Build
 ```
 P=$(bash $ENG/new_ep.sh NN-slug)          # project = studio template + FreshNestHub template (ep 07 files)
 # write $P/scripts/vo_lines.py, then:
-cd $P && python3 scripts/make_vo.py && python3 $ENG/engine/tools/asr_check.py $P   # every line must read back right
+cd $P && (set -a; . $ENG/voice.env; set +a; python3 scripts/make_vo.py) && python3 $ENG/engine/tools/asr_check.py $P
+# every line must read back right. voice.env = the channel voice; voice upgrades are logged in improvements.md
 python3 -c "import json;A=json.load(open('work/align.json'));[print(w['line'],w['w'],w['t']) for w in A['words']]"
 ```
 Then write (read the template versions first — they are the reference):
@@ -103,7 +114,7 @@ props, text in unsafe zones, props hidden behind Chubby's head (use hold_front),
 Then: `SKIP_VO=1 bash $ENG/build_ep.sh NN-slug` (≈7 min) → /home/claude/outputs/NN-slug.mp4 + _sheet.jpg.
 QA: 1080×1920, 45–62 s, ≈ −11 LUFS, peak ≤ −1 dBFS; look at the sheet; facts on screen = sources.
 
-## 5. Host + post
+## 6. Host + post
 `bash $ENG/host_video.sh NN-slug push` → RAW_URL. Metricool brand **Freshnesthub blogId 7643474**, tz Asia/Calcutta.
 Time: `getScheduledPosts` (7643474, last 24 h → next 2 days). Post at the later of (now + 10 min) and
 (latest FreshNestHub post + 4 h 30 min). TWO posts, same time:
@@ -111,19 +122,21 @@ Time: `getScheduledPosts` (7643474, last 24 h → next 2 days). Post at the late
   (≈ 2500–3500), mediaAltText one sentence, instagramData {type REEL, showReelOnFeed true, collaborators [],
   isAiGenerated true}. Caption: line 1 = the search question ("Can eating too many carrots turn your skin orange?"),
   3–5 short lines of facts, question/CTA line, `Sources: …`, then ≤ 5 hashtags (2 topic, 1–2 niche like #healthfacts
-  #foodfacts #nutritionfacts, `#freshnesthub`). No emoji.
+  #foodfacts #nutritionfacts, `#freshnesthub`). No emoji. firstCommentText = one specific question that invites
+  comments (e.g. "Have you ever felt this after eating pineapple? Yes or no?").
 - YouTube: providers [youtube], youtubeData {title keyword-first ≤ 60 chars, type short, privacy public, tags 8–12
   phrases, category EDUCATION, madeForKids false, isAiGeneratedContent false}. Description: keyword sentence, 2–3 lines,
   "Animated explainer. Narration voice is AI-generated.", Sources, 3 hashtags incl. #shorts.
 Check both returned media URLs start with https://static.metricool.com/, then `bash $ENG/host_video.sh NN-slug delete`
 (the session proxy usually refuses branch deletes — just note it in runs_log).
 
-## 6. Log + commit (code only — never commit mp4 to main)
+## 7. Log + commit (code only — never commit mp4 to main)
 Replace your CLAIMED line in topics_done.md with `| date | NN-slug | title | opening used | IG planner | YT planner |`,
-append a runs_log.md line (duration, LUFS, peak, VO/bed min, shots, post time, links, sources), copy the project's
+append a runs_log.md line (duration, LUFS, peak, VO/bed min, shots, post time, links, sources, upgrades made),
+add your section-E line to improvements.md and update performance.md, copy the project's
 scripts to `episodes/NN-slug/`, commit, fetch + rebase, push. Delete the project's work/ and frames/ after posting.
 
-## 7. Failure policy
+## 8. Failure policy
 Facts can't be verified → next topic. Build fails → fix and retry (max 2 full renders). Still failing → do NOT post;
 log the reason, mark the CLAIMED line FAILED, commit, end. Never edit/delete published posts. Never post to other
 Metricool brands (nextbignow 7639492, Oopsmybusiness 7643430).

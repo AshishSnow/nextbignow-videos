@@ -1,13 +1,13 @@
 # FreshNestHub topic list v4 — food + health facts with Chubby (verify every fact with >= 2 sources first)
 
-## UP NEXT (take the first one not yet in topics_done.md)
+## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
+Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
 1. (DONE) 08-pineapple-eats-you — Do you know pineapple is eating you back while you eat it? (bromelain enzyme breaks down
    proteins in your tongue/cheeks -> tingle; your mouth repairs fast; cooked/canned pineapple loses it). Chubby: tongue
    close-up with tiny "scissors" enzymes.
 2. 09-spicy-food-burn — Do you know spicy food doesn't actually burn you? (capsaicin triggers TRPV1 heat sensors, brain
    thinks "fire"; why milk (casein) helps more than water). Chubby breathes fire, then drinks milk.
-3. 10-honey-never-spoils — Do you know honey can last thousands of years? (very little water, acidic, glucose oxidase ->
-   hydrogen peroxide; honey reported in ancient Egyptian tombs; safe tip: never give honey to babies under 1 — CDC).
+3. (SKIP — honey already covered by the 20 Oct "fake honey / honey lasts 3,000 years" reel) honey-never-spoils
 4. 11-mint-feels-cold — Do you know mint tricks your brain into feeling cold? (menthol triggers TRPM8 cold sensors;
    nothing actually gets colder). Pair visually opposite to the spicy video.
 5. 12-sugar-in-a-soda — Do you know how much sugar is in one can of soda? (≈ 39 g ≈ 9–10 teaspoons in a 12 oz cola;

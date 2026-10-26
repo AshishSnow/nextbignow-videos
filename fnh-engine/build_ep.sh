@@ -5,6 +5,7 @@ set -e
 HERE=$(cd "$(dirname "$0")" && pwd)
 STUDIO=${STUDIO:-/home/claude/studio}; S=$1; P="$STUDIO/projects/$S"; O=/home/claude/outputs/$S.mp4
 cd "$P"
+[ -f "$HERE/voice.env" ] && { set -a; . "$HERE/voice.env"; set +a; }
 [ "$SKIP_VO" = "1" ] || python3 scripts/make_vo.py 2>&1 | grep -v -i warn | tail -3
 python3 "$HERE/engine/tools/asr_check.py" "$P" 2>&1 | grep "|"
 python3 scripts/music.py 2>&1 | grep -v -i "warn\|mean\|ret =" | tail -1
