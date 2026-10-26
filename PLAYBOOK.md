@@ -118,7 +118,9 @@ Last updated: 26 Oct 2026.
   - 0.6 s on '...' beats
   - +0.25 s between paragraphs
   - +1.3 s at chapter breaks (`---`)
+- **Even pacing (added 27 Oct):** Chatterbox sometimes rushes long sentences and end-of-video CTAs (4.3–4.6 words/s against a 2.8–3.0 median). make_vo4.py now re-stretches any chunk of 5+ words above 3.5 words/s to about 3.3 (max 18% extra stretch) and logs it. Re-run an existing voice with `--reuse` to apply it without regenerating.
 - **Checks:** every word is checked with the forced aligner. New words go into the aligner's custom dictionary.
+- **Memory:** the voice model takes about 4.8 GB of the 8 GB box. Don't run a second heavy job beside it (an ffmpeg filtergraph that reads the same input twice got the voice job OOM-killed). Splice patches by encoding segments separately and using the concat demuxer.
 - **Research note:** modern neural voices teach as well as human voices, but an obviously synthetic voice lowers enjoyment and trust. Keep the voice as natural and warm as possible, and listen for wrong stresses.
 
 ## 5. Visual rules
@@ -172,7 +174,7 @@ Last updated: 26 Oct 2026.
 - [Instagram: 3-minute Reels shown to non-followers](https://creators.instagram.com/blog/the-latest-with-instagram?)
 - [Socialinsider: Reels length data 2026](https://socialinsider.io/blog/instagram-reels-length/)
 
-**Episode facts (27–28)**
+**Episode facts (27–29)**
 - [Sylacauga meteorite (Wikipedia)](https://en.wikipedia.org/wiki/Sylacauga_(meteorite))
 - [Encyclopedia of Alabama: Hodges meteorite strike](https://encyclopediaofalabama.org/article/hodges-meteorite-strike-sylacauga-aerolite/)
 - [ScienceAlert: first recorded human meteorite strike](https://www.sciencealert.com/first-recorded-human-meteorite-strike-still-a-wild-tale-70-years-on)
@@ -180,6 +182,9 @@ Last updated: 26 Oct 2026.
 - [Nature news 2005: quicksand can't swallow you](https://www.nature.com/news/2005/050926/full/news050926-9.html)
 - [National Geographic: quicksand science](https://www.nationalgeographic.com/science/article/quicksand-science-why-it-traps-how-to-escape/)
 - [Mental Floss: quicksand facts (1-in-35 films stat)](https://www.mentalfloss.com/science/geology/8-fascinating-facts-about-quicksand-01hh2se7qweb)
+- [Smithsonian: Charles Osborne, who hiccuped for 68 years](https://www.smithsonianmag.com/history/the-curious-case-of-charles-osborne-who-hiccuped-for-68-years-straight-180980232/)
+- [Howes 2012 (PMC): hiccups and the amphibian gill-ventilation hypothesis](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3504071/)
+- [Guinness World Records: the 68-year hiccup attack](https://www.guinnessworldrecords.com/news/2023/7/extreme-measures-person-with-68-year-attack-of-hiccups-took-to-try-and-stop-them-754877)
 
 ## 8. Improvement log
 
@@ -192,3 +197,4 @@ Last updated: 26 Oct 2026.
 | 26 | What if you fell out of a plane? | Juliane Koepcke (1971) + Vesna Vulović record. Terminal-velocity graph, starfish vs pencil cards, stopwatch. New layered rainforest set (light shafts, vines, ferns). "INSERT COIN" game-over gag. 141 wpm. | pending |
 | 27 | What if a meteorite hit you? | Ann Hodges (1954). Crash animated in one continuous room set (roof → radio → hip) with camera push. Myth-buster beat (meteorites land cold) with a cross-section, then the frozen-mascot gag. Landlord/farmer twist ("space is not fair"). | pending |
 | 28 | What if you stepped into quicksand? | First myth-buster format (no single survivor). Old-film sepia parody with film grain and sprocket holes, microscope grain view of liquefaction, density bars, stretched-arms gag, "really lazy" escape payoff. | pending |
+| 29 | What if you never stopped hiccuping? | Charles Osborne (68 years). Weird-body science format. Synthesised "hic" sound effect synced to every on-screen jolt. Animated diaphragm and vocal-cord cutaway, odometer to 430 million, envelope avalanche, shotgun-scare and "I do" gags. First voice with even pacing. | pending |
