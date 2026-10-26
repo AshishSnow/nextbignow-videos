@@ -31,3 +31,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 - 2026-10-26 | How Planet Fitness Profits at $15 a Month | oopsmybusiness/06-planet-fitness.mp4 | 2026-10-26 19:30 | Planet Fitness FY2025 10-K + Q4 2025 results 8-K (Feb 2026), DellaVigna & Malmendier AER 2006 / NBER w10819
 - 2026-10-26 | Movie Theaters Really Make Money on Popcorn | oopsmybusiness/07-cinema-popcorn.mp4 | 2026-10-27 00:00 | AMC Entertainment Q4 + full-year 2025 results 8-K (Feb 23, 2026)
 - 2026-10-26 | Visa Never Lends You a Dollar. Here's the Trick | oopsmybusiness/08-visa-toll-road.mp4 | 2026-10-27 05:00 | Visa FY2025 10-K (not a bank, ~14,500 FIs, 175M+ merchant locations), Visa Q4 + fiscal 2025 results 8-K (Oct 2025: $40.0B net revenue, $20.1B net income, 257.5B transactions)
+- CLAIMED 2026-10-27 01:46 IST | Duolingo's streak: how a free app makes $1B (psychology of the streak)
