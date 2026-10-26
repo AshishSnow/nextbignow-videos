@@ -128,9 +128,13 @@ Last updated: 26 Oct 2026.
 - **Captions:** two-tier and centred, at key moments only. The big-word baseline sits at y = 650.
 - **Look:** vibrant sets, foreground depth-of-field dust and fog, a sound effect for every moment, and screen shake on impacts.
 - **Loop:** the final scene flows back into the hook frame.
+- **Small caption line:** 30 characters or fewer. Longer lines run past the frame edges; put the detail in the voice, not the caption.
 - **Before rendering:**
-  - Check a guide sheet with the safe-zone overlays.
+  - Do a layout pass *before* the voice exists: make a fake `align.json` from `paras.txt` (about 0.37 s per word, +0.4 s per sentence, +1.3 s per `---`) and render guide stills against it. Layout bugs get fixed while the voice is generating, so the real-timing check is quick.
+  - Check a guide sheet with the safe-zone overlays (again with the real timings).
+  - Check that the mix still lines up: align `mix16.wav` against the script and compare with the voice-only timings (mean drift should be under 0.05 s).
   - Look at a contact sheet of the rendered video.
+- **Format variety:** YouTube's July 2026 rule penalises mass-produced, templated videos. Rotate formats: survivor story (24–27), myth-buster explainer (28), and keep new sets, props and gags per episode.
 
 ## 6. Posting
 
@@ -168,6 +172,15 @@ Last updated: 26 Oct 2026.
 - [Instagram: 3-minute Reels shown to non-followers](https://creators.instagram.com/blog/the-latest-with-instagram?)
 - [Socialinsider: Reels length data 2026](https://socialinsider.io/blog/instagram-reels-length/)
 
+**Episode facts (27–28)**
+- [Sylacauga meteorite (Wikipedia)](https://en.wikipedia.org/wiki/Sylacauga_(meteorite))
+- [Encyclopedia of Alabama: Hodges meteorite strike](https://encyclopediaofalabama.org/article/hodges-meteorite-strike-sylacauga-aerolite/)
+- [ScienceAlert: first recorded human meteorite strike](https://www.sciencealert.com/first-recorded-human-meteorite-strike-still-a-wild-tale-70-years-on)
+- [Smithsonian Insider: meteorite landing speed and temperature](https://insider.si.edu/?p=24002)
+- [Nature news 2005: quicksand can't swallow you](https://www.nature.com/news/2005/050926/full/news050926-9.html)
+- [National Geographic: quicksand science](https://www.nationalgeographic.com/science/article/quicksand-science-why-it-traps-how-to-escape/)
+- [Mental Floss: quicksand facts (1-in-35 films stat)](https://www.mentalfloss.com/science/geology/8-fascinating-facts-about-quicksand-01hh2se7qweb)
+
 ## 8. Improvement log
 
 | # | Video | What changed | Result (fill in after 48 h) |
@@ -175,3 +188,7 @@ Last updated: 26 Oct 2026.
 | 24 | What if a whale swallowed you? | 42 s instead of 61–84 s. 13 scenes, about 3 s per beat. Real story (Michael Packard, 2021). Loop ending. Subtle 3D cards. No yes/no comment bait. Re-voiced with voice C before publishing. | pending |
 | 24 v2 | What if a whale swallowed you? (remake, 2:43) | Too fast (175 wpm), so rebuilt as a 2:43 version at 139 wpm. Humour beats (sandwich plan, "snack with a scuba tank", party story, snake twist). Three chapters with breaks. Size chart, 90-species grid, FAKE newspaper. Emotion tags in the voice. | pending |
 | 25 | What if your elevator cable snapped? | Voice C from the start. Real story (Betty Lou Oliver, 1945). Depth-of-field foreground dust, drifting fog, speed lines. Camera follows the falling car. Warmer, more vibrant building palette. Physics moment (weightless float in the falling car). 3/4-view bomber. | pending |
+| 25 v2 | What if your elevator cable snapped? (remake, 2:42) | 2–3 min format at 138 wpm, four chapters. Gags after each explanation ("steel spaghetti" mattress, jump-timing ceiling bonk, awkward silence callback). Elisha Otis 1854 demo with crowd. | pending |
+| 26 | What if you fell out of a plane? | Juliane Koepcke (1971) + Vesna Vulović record. Terminal-velocity graph, starfish vs pencil cards, stopwatch. New layered rainforest set (light shafts, vines, ferns). "INSERT COIN" game-over gag. 141 wpm. | pending |
+| 27 | What if a meteorite hit you? | Ann Hodges (1954). Crash animated in one continuous room set (roof → radio → hip) with camera push. Myth-buster beat (meteorites land cold) with a cross-section, then the frozen-mascot gag. Landlord/farmer twist ("space is not fair"). | pending |
+| 28 | What if you stepped into quicksand? | First myth-buster format (no single survivor). Old-film sepia parody with film grain and sprocket holes, microscope grain view of liquefaction, density bars, stretched-arms gag, "really lazy" escape payoff. | pending |
