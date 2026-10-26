@@ -9,5 +9,6 @@ P="$STUDIO/projects/$1"
 mkdir -p "$P"/{scripts,work,frames}
 cp "$HERE"/engine/template/* "$P/scripts/"
 cp "$HERE"/template/* "$P/scripts/"
+cp "$HERE/voice.env" "$P/scripts/voice.env"
 chmod +x "$P/scripts/render_all.sh"
 echo "$P"

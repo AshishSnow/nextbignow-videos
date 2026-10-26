@@ -6,6 +6,13 @@ import os
 R = os.environ.get("STUDIO", "/home/claude/studio"); B = os.environ.get("PROJ") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, f"{R}/lib"); sys.path.insert(0, f"{B}/scripts")
 from vo_lines import LINES
+# FreshNestHub: the channel voice lives in scripts/voice.env (copied by new_ep.sh); explicit env vars still win.
+_ve = os.path.join(B, "scripts", "voice.env")
+if os.path.exists(_ve):
+    for _l in open(_ve):
+        _l = _l.strip()
+        if _l and not _l.startswith("#") and "=" in _l:
+            _k, _v = _l.split("=", 1); os.environ.setdefault(_k.strip(), _v.strip())
 from kokoro_onnx import Kokoro
 import voice_clean
 from num2words import num2words
