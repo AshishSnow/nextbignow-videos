@@ -3,8 +3,10 @@
 Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 days):
 - Instagram reels fields: `IGRE02` date, `IGRE03` caption, `IGRE23` views, `IGRE11` reach, `IGRE24` avg watch time (s),
   `IGRE28` 3-second view rate (%), `IGRE21` shares, `IGRE12` saves, `IGRE10` likes, `IGRE07` comments.
-- YouTube fields: `YTVP02` date, `YTVP17` title, `YTVP06` views, `YTVP08` avg view duration, `YTVP09` likes, `YTVP12` shares
-  (YouTube numbers can lag a day or two; null = not synced yet).
+- YouTube fields: `YTVP02` date, `YTVP17` title, `YTVP06` views, `YTVP08` avg view duration, `YTVP09` likes, `YTVP12` shares.
+  As of 26 Oct these return titles but **null numbers**, and the "all videos" connector (`YTVV*`) returns nothing — Metricool
+  isn't getting YouTube analytics for this channel. Try once per run; until numbers appear, Instagram is the signal.
+- Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
 ## Instagram (snapshot 2026-10-26 21:50 IST)

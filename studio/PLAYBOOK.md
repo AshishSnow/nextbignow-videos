@@ -56,11 +56,15 @@ Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words]
 - Numbers: write them as words the TTS reads cleanly ("one point seven billion", "four ninety-nine"). Check abbreviations in the ASR read-back.
 
 ## 5. Voice (local, no ElevenLabs)
-`python3 scripts/make_vo.py` — Kokoro blend 75% am_eric + 25% am_fenrir, Praat PSOLA prosody: lifted register (~170 Hz median),
-wide pitch range, stressed words, question rises, low endings. Energy like an energetic, expressive, fun young male narrator.
-Knobs (env): `EW` (eric weight 0.75), `GT` (target Hz 165), `BS` (line offsets 0.6), `EXS` 0.5, `BMP` 0.8, `STR` 1.0. Keep defaults.
-QA: transcribe each line with parakeet (see `make_vo.py` align) — every line must read back correctly; fix spelling/phrasing and regenerate if not.
-Clean, no hiss, natural. Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line_id, word)`).
+`python3 scripts/make_vo.py` — Kokoro blend **am_michael 0.5 + am_eric 0.3 + am_fenrir 0.2** in its **own register** (no global
+pitch lift), Praat PSOLA prosody for per-line highs and lows, stressed words, question rises, low endings; calm, unhurried pace
+(~180 wpm while speaking, real pauses). Chosen by the 26 Oct voice lab (UTMOS naturalness 4.12 → 4.36; see IMPROVEMENTS.md).
+Knobs (env, defaults = lab winner): `VMIX` blend, `SPD` 0.88 (speed multiplier), `PZ` 1.6 (pause multiplier), `PMIN` 0.3 s,
+`GT` 0 (= keep own pitch; **every global lift tested so far lowered naturalness**), `EXS` 1.0 (range expansion), `BMP` 1.0 (stress bumps), `STR` 1.0.
+Write line speeds 1.0–1.06 and pauses 0.2–0.45 in `vo_lines.py` as in the examples; SPD/PZ make them calm.
+QA: `python3 /home/claude/nextbignow-videos/studio/tools/voice_report.py $P` → UTMOS ≥ 4.0 (aim ≥ 4.3), `asr_bad_lines` empty,
+pitch range ≥ 15 st, speaking pace 165–190 wpm. Fix spelling/phrasing and regenerate if a line reads back wrong.
+Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line_id, word)`).
 
 ## 6. Visual style (non-negotiable)
 - 1080×1920, 24 fps. Safe zone: nothing important in top 250 px, bottom 420 px, right 120 px, left 60 px. Key visuals central.
@@ -98,7 +102,7 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
 1. Contact sheet of the final (1 frame / 2 s) — look at every frame: no broken layouts, nothing in unsafe zones, text spelled right, no logos.
 2. `ffprobe`: 1080×1920, h264 + aac; `ebur128`: about −11 LUFS, peak ≤ −1 dBTP.
 3. Facts on screen and in VO match the sources.
-4. `python3 studio/tools/voice_report.py $P work/vo.wav` — UTMOS ≥ 4.0, no ASR bad lines, pitch range ≥ 10 st. Put the numbers in the run log.
+4. `python3 studio/tools/voice_report.py $P work/vo.wav` — UTMOS ≥ 4.0 (aim ≥ 4.3), no ASR bad lines, pitch range ≥ 15 st, 165–190 wpm. Put the numbers in the run log.
 5. Score the quality bar in `IMPROVEMENTS.md` (hook, clarity, pacing, voice, visual, audio, ending). Anything below 4 → fix it first.
 6. Originality: it must not look like the previous video with new text (YouTube treats "minor template changes" as unoriginal).
    At least one new prop set, one new layout idea and a different music genre.

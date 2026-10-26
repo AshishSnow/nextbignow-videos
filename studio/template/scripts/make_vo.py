@@ -15,17 +15,18 @@ from parselmouth.praat import call
 SR = 48000; LEAD = 0.25
 k = Kokoro(f"{R}/models/kokoro/kokoro-v1.0.onnx", f"{R}/models/kokoro/voices-v1.0.bin"); V = k.get_voice_style
 import os
-EW = float(os.environ.get("EW", "0.75")); GT = float(os.environ.get("GT", "165")); BS = float(os.environ.get("BS", "0.6"))
+# Defaults = winner of the 26 Oct voice lab (studio/IMPROVEMENTS.md): warm blend, own register (no global pitch lift), calmer pace.
+EW = float(os.environ.get("EW", "0.75")); GT = float(os.environ.get("GT", "0")); BS = float(os.environ.get("BS", "0.6"))
 VOICE = (1 - EW) * V("am_fenrir") + EW * V("am_eric")   # young, bright, energetic
 # VMIX overrides the blend, e.g. VMIX="am_michael:0.4,am_onyx:0.2,am_fenrir:0.2,am_echo:0.2"
-VMIX = os.environ.get("VMIX", "")
+VMIX = os.environ.get("VMIX", "am_michael:0.5,am_eric:0.3,am_fenrir:0.2")
 if VMIX:
     VOICE = sum(float(w) * V(n) for n, w in (p.split(":") for p in VMIX.split(",")))
 CFG = {L[0]: L for L in LINES}
 
 import os, hashlib
 # SPD scales every line's speed, PZ scales every pause (PMIN = shortest pause, s) -> calmer, clearer pacing
-SPD = float(os.environ.get("SPD", "1.0")); PZ = float(os.environ.get("PZ", "1.0")); PMIN = float(os.environ.get("PMIN", "0.0")); EXS = float(os.environ.get("EXS", "0.5")); BMP = float(os.environ.get("BMP", "0.8")); STR = float(os.environ.get("STR", "1.0"))
+SPD = float(os.environ.get("SPD", "0.88")); PZ = float(os.environ.get("PZ", "1.6")); PMIN = float(os.environ.get("PMIN", "0.3")); EXS = float(os.environ.get("EXS", "1.0")); BMP = float(os.environ.get("BMP", "1.0")); STR = float(os.environ.get("STR", "1.0"))
 _key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX]).encode()).hexdigest()   # pauses are baked into the cache too
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}

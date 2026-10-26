@@ -1,5 +1,5 @@
 # (id, text, speed, pause_after, base_semitones, range_expand, stressed_words, ending)
-# energetic young narrator (Bunty-style energy): faster, tight pauses, lifted register; "w:dn" = drop low + stretched
+# narrator: energetic but natural and unhurried (make_vo.py defaults SPD 0.88 + PZ 1.6 slow these down); "w:dn" = drop low + stretched
 LINES = [
     ("i1", "Do you know Starbucks is sitting on one point seven billion dollars… of your money?", 1.06, 0.25, +1.0, 1.4, ["know", "seven", "your"], "q"),
     ("i2", "That's more than most banks in America have!", 1.06, 0.30, +1.6, 1.45, ["more", "banks"], None),

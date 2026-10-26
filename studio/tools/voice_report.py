@@ -42,6 +42,7 @@ try:
     def norm(s):
         # compare words, not formatting: "$1.7 billion" == "one point seven billion dollars", "Step 1." == "step one"
         s = s.lower().replace("%", " percent ")
+        s = re.sub(r"\b((?:[a-z]\.){2,})", lambda m: m.group(1).replace(".", ""), s)   # "U.S." == "US"
         s = re.sub(r"\d[\d,]*(\.\d+)?", _num, s)
         s = re.sub(r"[^a-z ]", " ", s.replace("-", " "))
         return [w for w in s.split() if w not in ("dollar", "dollars", "and")]
