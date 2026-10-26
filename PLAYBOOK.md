@@ -196,6 +196,11 @@ Last updated: 26 Oct 2026.
 - [José Salvador Alvarenga (Wikipedia)](https://en.wikipedia.org/wiki/Jos%C3%A9_Salvador_Alvarenga)
 - [CNN via WTVR: real-life castaway survived 438 days lost at sea](https://www.wtvr.com/2016/01/08/real-life-castaway-survived-438-days-lost-at-sea)
 
+## 7b. Topic backlog (researched, not yet made)
+
+- **What if you never stopped sneezing?** Donna Griffiths (UK) started sneezing on 13 Jan 1981 and had her first sneeze-free day on 16 Sep 1983, the 977th day. Guinness estimates about a million sneezes in the first year. Myth-busters: a measured sneeze peaks around 4.5 m/s (about 10 mph), not 100 mph (Tang et al. 2013). The photic sneeze reflex (the "ACHOO" syndrome) affects roughly 10–35% of people. Sources: [Guinness record](https://www.guinnessworldrecords.com/world-records/67595-longest-sneezing-fit), [PopSci on sneeze speed](https://www.popsci.com/science/article/2013-08/fyi-how-forceful-sneeze/), [PBS on the photic sneeze reflex](https://www.pbs.org/newshour/science/does-the-sun-make-you-sneeze). It is too close in format to the hiccups episode (29), so space it at least a week apart.
+- **Space evergreen:** the Mars reel was our top Instagram reach. Rotate a space topic back in, for example a 2–3 minute "What if you fell into Jupiter?"
+
 ## 8. Improvement log
 
 | # | Video | What changed | Result (fill in after 48 h) |
