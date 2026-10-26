@@ -1,11 +1,18 @@
-# FreshNestHub autonomous reel engine — PLAYBOOK
+# FreshNestHub autonomous reel engine — PLAYBOOK (v3 "BODY FILES", 26 Oct 2026)
 
-Runs every 5 hours. Every run makes ONE new 45–60 s vertical reel for **FreshNestHub** (skin, hair, beauty, body and home-hygiene
-curiosities for a worldwide English audience), hosted by **Nessa** (stick-figure host, female voice ~30),
-and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** through Metricool.
+Runs every 5 hours. Every run makes ONE new 45–62 s vertical reel for **FreshNestHub — BODY FILES**: surprising,
+genuinely interesting **health / human-body** explainers ("what really happens when…") for a worldwide English
+audience, and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** through Metricool.
 The owner (Ashish) is usually not watching: decide, build, verify, post, log. Never ask questions mid-run.
 
-Benchmark: `episodes/01-face-mites/` (posted 25 Oct 2026) — study its `render.py` before building anything.
+**Owner feedback 26 Oct (episodes 01–04 were rejected):** he did NOT like the vibrant stick-figure sets, the
+Nessa character or the young voice, and found beauty-trivia topics boring. From episode 05 on:
+- **Look = clean white-paper medical explainer** (`kit/english/scripts/plates.py`), **no mascot / no stick figure**.
+- **Voice = mature British female narrator** (Kokoro `bf_emma`, `en-gb`), calm documentary pace — owner picked it.
+- **Topics = health / body, interesting and useful** (see topic_ideas.md UP NEXT).
+
+**Benchmark/template: `episodes/05-knuckle-crack/`** — study its `render.py`, `voice.py`, `music.py`, `mix.py`
+before building anything. Copy it for every new episode. Ignore episodes 01–04 (old rejected style).
 
 ---------------------------------------------------------------------------------------------------
 ## 0. Setup (≈5 min)
@@ -17,78 +24,60 @@ bash /home/claude/nextbignow-videos/fnh-engine/setup.sh          # installs kit 
 ENG=/home/claude/nextbignow-videos/fnh-engine
 
 ## 1. Claim a topic (avoid repeats and parallel-run collisions)
-1. `git pull` then read `topics_done.md` (all past topics + openings used) and `topic_ideas.md`.
-2. Take the FIRST topic in the "UP NEXT" list of `topic_ideas.md` that is not yet in topics_done (the owner expects
-   that order). If it fails verification, take the next one. When UP NEXT is empty, pick from the pool or find a better one
-   (WebSearch: recent science news on skin/hair/body/beauty, weird beauty-industry facts, myths).
+1. `git pull` then read `topics_done.md` (past topics + openings) and `topic_ideas.md`.
+2. Take the FIRST topic in the "UP NEXT" list that is not yet in topics_done. If it fails verification, take the next.
+   When UP NEXT is empty, find new ones of the same kind (WebSearch recent health/body science, myths, case reports).
 3. Topic test — all must be true:
-   - Instantly clear in 3 s, gross/surprising/"wait, what?", relevant to the viewer's own body/home/beauty routine.
-   - Can be SHOWN with real-looking animation (inside the body, macro skin, cross-sections, products, objects).
-   - Backed by ≥ 2 reputable sources (university, peer-reviewed journal, NIH/NHS/CDC/FDA/WHO/AAD, major newsroom).
-4. Immediately append a line `CLAIMED <date-time IST> | NN-slug | working title` to `topics_done.md`, commit and
-   push (fetch + rebase first). NN = next number.
+   - About the viewer's own body/health, instantly clear, makes people say "wait, really?" and want to share it.
+   - Can be SHOWN inside the body: X-ray / MRI plates, textbook cross-sections, step-by-step process diagrams.
+   - Backed by ≥ 2 reputable sources (peer-reviewed journal, university, NIH/NHS/CDC/WHO/Mayo Clinic, major newsroom).
+4. Immediately append `CLAIMED <date-time IST> | NN-slug | working title` to `topics_done.md`, commit and push
+   (fetch + rebase first). NN = next number.
 
 ## 2. Research (≈10 min)
 - WebSearch/WebFetch the primary sources. Write down every fact you will say, with its source URL.
-- Numbers must match the source. If a claim is contested, say "scientists think…" or drop it.
-- NO dosing, treatment or diagnosis advice. Only safe general tips (e.g. "remove makeup before bed",
-  "see a dermatologist if…"). No real private people. Celebrities only for documented public facts. No brand names/logos.
+- Numbers must match the source. Contested science → "one study found…" / "scientists think…", or drop it.
+- NO dosing, treatment or diagnosis advice. Only safe general tips ("if it hurts or swells, talk to a doctor").
+  Include one honest nuance/catch when the evidence has one (like the 1990 grip study in episode 05).
+- No real private people; no brand names or logos.
 
-## 3. Script — CLEAR, UNHURRIED, EXPLAINED (owner feedback 25 Oct: episode 02 felt too fast)
-Target **45–60 s, 120–150 words, 10–14 lines**. The viewer must fully understand the topic; never rush.
-Structure:
-1. **INTRO QUESTION (0–3 s, mandatory):** Nessa asks a "Do you know…?" question that names the topic, e.g.
-   "Do you know your red lipstick might be made of bugs?". Topic visual + two-tier title on screen with it.
-2. **Answer + what it is** (1–2 lines): name the thing and show it big and clearly.
-3. **EXPLAIN IT STEP BY STEP (the core, 4–6 lines):** walk through HOW/WHY with one visual per step, like a mini
-   documentary — e.g. carmine: cactus field -> the bug close-up -> harvest -> drying in the sun -> crushing into
-   red powder -> mixed into a lipstick. Use process sequences (step 1 -> 2 -> 3 with arrows or a camera move from
-   one object to the next), labelled cross-sections, zoom-ins, scale comparisons ("70,000 bugs" shown as a pile next
-   to a lipstick), before/after. Every new word or number gets its own visual.
-4. One "but wait" twist with its own scene.
-5. One practical, safe takeaway (tip card that ticks).
-6. **Loop ending** that flows back into the opening question (no "follow us" in the VO).
-Pacing rules:
-- One idea per line, short simple sentences. 2.5–4.5 s per shot, **14–20 shots** per video. Hold every key visual
-  at least 2 s after the word that introduces it; captions stay on screen at least 1.5 s.
-- 0.55–0.75 s pause between lines, 0.30–0.45 s at dramatic "…" pauses. Contrast HIGH (excited) and LOW (whisper)
-  lines, but the overall pace stays calm and clear.
-- Voice: use the v2 MOOD table in the template voice.py (speeds 0.88–1.01, almost no pitch shift). Split a line
-  into phrases only at real pauses or sentence ends — never cut a question or clause in half.
-- Numbers written as words in the voice text; max ~4–5 caption moments per video (key moments only).
-- Take the time needed for quality: test frames of EVERY shot before the full render.
+## 3. Script — calm, clear, explained (45–62 s, 120–150 words, 12–15 lines)
+1. **INTRO QUESTION (0–3 s, mandatory):** "Do you know what really happens when…?" naming the topic. On screen at
+   the same moment: the topic visual (e.g. X-ray plate) + a two-row Anton headline with the key word in red.
+2. Bust the common belief or state the surprise (stamp "MYTH" / reveal).
+3. **Explain step by step** (5–7 lines), one diagram state per line: anatomy → what changes → the key moment.
+4. The evidence: a named study/scan/experiment with a plate and a small source line.
+5. One honest nuance + one safe tip card.
+6. **Loop ending:** the last line returns to the opening question/visual (no "follow us" in the VO).
+- Short sentences, everyday words, numbers as words in the voice text. Split a line into phrases only at real pauses.
 
 ## 4. Build the episode
 ```
-cp -r $ENG/episodes/01-face-mites $ENG/episodes/NN-slug
+cp -r $ENG/episodes/05-knuckle-crack $ENG/episodes/NN-slug
 ```
 Rewrite inside `episodes/NN-slug/`:
-- `lines.py` — LINES = [(id, text)] exactly as spoken (used for alignment; keep caps/ellipses fine).
-- `voice.py` — only the PLAN list (+ moods if needed). Moods: hook, excited, curious, whisper, cheeky, serious, warm.
-  Keep the MOOD table (it gives the loud-highs / soft-lows the owner asked for). Output must stay `work/take.wav`.
-- `timeline.py` — events via F(line_id, word) and the shot list ORDER/TRANS (whip, pop, zoomblur, dip, punch,
-  flash, flashp). One shot per line or per beat; 1.5–4 s each.
-- `render.py` — keep everything above `# ================= shots` (helpers) and the compose/camera/main
-  section; replace the `shot_*` functions, PUNCH/SHAKE lists and any scene builders that don't fit.
-- `music.py` / `mix.py` — keep helpers, rewrite the cue sections for the new events (SFX on every moment,
-  hard stops before reveals, music box / soft pad under whispers). Keep `BED` and the line-gain `LG` dict
-  (update ids). Target VO/bed ≥ 12 dB on every line (printed by mix.py).
+- `lines.py` — LINES = [(id, text)] exactly as spoken.
+- `voice.py` — only the PLAN list (moods: hook, calm, emph, soft, question, warm). Keep `bf_emma`, `en-gb` and the
+  MOOD table. Pauses: 0.3 s inside a line, 0.55–0.75 s between lines.
+- `timeline.py` — events via F(line_id, word); shot list ORDER/TRANS (slide, push, cut). 14–18 shots, 2.2–5.5 s each.
+- `render.py` — keep the camera / transitions / compose / main sections; rewrite the shot functions. Build new
+  diagrams in the same style (add reusable drawing functions to `kit/english/scripts/plates.py` and commit them):
+  * page = `paper()` + `header(f)`; headline(...) for 1–2 key moments per shot max; `fig_label` for diagrams.
+  * dark plates (`dark_plate_with`) for X-ray / MRI / scan imagery; light plates (`plate_light`) for colour diagrams.
+  * `leader()` draw-on labels in mono caps, `stamp()` for MYTH/CRACK moments, `badge()` for verdicts,
+    `tip_card()` for the tip, `arrow()`, `ring_pulse()`, icons (`clock_icon`, `hand_icon`, `gauge_icon`).
+  * Colours: ink black, red (#E22428) for the key word, blue for process labels, green for good verdicts,
+    textbook colours inside diagrams (ivory bone, blue cartilage, pink tissue, golden fluid).
+- `music.py` / `mix.py` — calm documentary piano score with a tension build into the key moment, hard stop on the
+  big question; SFX for every moment (pen scribble on labels, paper slide on transitions, stamp thud, ticks, dings).
+  Keep the `LG` line-gain dict (update ids) and BED; target VO/bed ≥ 15 dB on every line (printed by mix.py).
 
-### Visual rules (owner's preferences — all mandatory)
-- 1080×1920, 30 fps. **All text centred on x = 540 (true centre, `CX`), width ≤ 840 px (`MAXW`, auto-fit in
-  `tier()`).** Nothing important in top 250 px, bottom 420 px, right 120 px, left 60 px. Key visuals central.
-- Vibrant, saturated MrBeast-style colour, never washed out or dull; beautiful designed backgrounds in every shot.
-- Approved look: bright designed sets with a big colour circle, real-looking objects/creatures, big words tucked
-  behind objects, editorial two-tier type (small lowercase line + huge Anton word).
-- Real-looking visuals: procedural skin macro (`gen_skin`), shaded 3D sphere-stamp creatures/tubes
-  (`draw_mite`, `sphere`, `stamp`), cross-section blocks (see `follicle_block`), lens zooms, cards with subtle 3D.
-- Nessa (`nessa.py`): poses stand, wave, point, pointup, shock, cheer, think, whisper, shrug, hips, magnify,
-  mirror, cover, cradle, wipe, stretch; expressions smile, talk, wow, shock, whisper, mischief, laugh, worried,
-  gross, think, sleep, sleepsmile, nervous; styles nessa, mom, guy, guy2, bald, girl, girl2; `head()` for close-ups.
-  Mouth follows the voice via `mouth(t)`. She appears in most shots (reacting), never covering the key visual.
-- No emoji, no persistent counters/meters, captions only on key moments, screen shake on impacts,
-  scene-matched colour, a sound effect for each moment.
-- **New opening every time** — check the "opening" column in topics_done.md and never reuse one.
+### Visual rules (mandatory)
+- 1080×1920, 30 fps, white page. **All text centred at x = 540 (`CX`), width ≤ 840 px (`fit`).**
+- Safe zones: nothing important in top 250 px, bottom 420 px, right 120 px, left 60 px. Headlines start at y ≈ 372;
+  plates sit between y ≈ 560 and 1450. Labels inside x 60–960.
+- No mascot, no emoji, no persistent counters. Captions only at key moments (headline/stamp/badge/labels).
+- A new opening composition every video (check topics_done "opening" column).
 
 ### Test before the full render (mandatory)
 ```
@@ -96,28 +85,26 @@ cp $ENG/episodes/NN-slug/lines.py /home/claude/reel-kit/english/scripts/vo_lines
 cd /tmp && python3 -I $ENG/episodes/NN-slug/voice.py
 python3 -I /home/claude/reel-kit/english/scripts/align_en.py /home/claude/reel-kit/english/work/take.wav 1.0
 python3 -I $ENG/episodes/NN-slug/timeline.py
-GUIDES=1 python3 -I $ENG/episodes/NN-slug/render.py /tmp/x.mp4 0,45,90,...   # 2-3 frames per shot
+GUIDES=1 python3 -I $ENG/episodes/NN-slug/render.py /tmp/x.mp4 0,45,90,...   # 2 frames per shot + frame 0
 ```
-Frames land in `/home/claude/reel-kit/english/frames/r_NNNN.jpg`. Look at every one (Read the images or a tiled
-sheet): text centred and inside the guides, no overlaps, nothing clipped, no empty frames, colours vivid.
-Fix and re-test until clean. Then:
+Look at every frame (Read the images or a tiled sheet): text centred and inside the guides, nothing overlapping or
+clipped, diagrams readable. Fix and re-test until clean. Then:
 ```
-bash $ENG/build_ep.sh NN-slug        # voice -> align -> timeline -> music -> mix -> 2x parallel render -> mux
+bash $ENG/build_ep.sh NN-slug
 ```
-Verify the printout: 1080×1920, 45–62 s, I ≈ −14 LUFS, peak ≤ −1.4 dBTP, and look at
-`/home/claude/outputs/NN-slug_sheet.jpg`. Render takes ~10–20 min.
+Verify: 1080×1920, 45–62 s, I ≈ −14 LUFS, peak ≤ −1.4 dBTP; look at `/home/claude/outputs/NN-slug_sheet.jpg`.
 
 ## 5. Host + post
 ```
 bash $ENG/host_video.sh NN-slug push        # prints RAW_URL=https://raw.githubusercontent.com/...
 ```
-Metricool brand **Freshnesthub**: `blogId = 7643474`, timezone `Asia/Calcutta`.
-Schedule 10 minutes from now (ISO, +05:30). Make TWO posts (each platform gets its own copy):
+Metricool brand **Freshnesthub**: `blogId = 7643474`, timezone `Asia/Calcutta`. Schedule 10 minutes from now.
+TWO posts (each platform its own copy):
 
 Instagram (`providers:[{"network":"instagram"}]`):
 ```
 {"autoPublish":true,"descendants":[],"draft":false,"firstCommentText":"","hasNotReadNotes":false,
- "media":["<RAW_URL>"],"videoCoverMilliseconds":<ms of the intro title frame, ~1500-2700>,
+ "media":["<RAW_URL>"],"videoCoverMilliseconds":<ms of the intro frame, ~1200-2000>,
  "mediaAltText":[],"providers":[{"network":"instagram"}],
  "publicationDate":{"dateTime":"YYYY-MM-DDTHH:MM:SS","timezone":"Asia/Calcutta"},
  "shortener":false,"smartLinkData":{"ids":[]},"text":"<IG caption>",
@@ -129,28 +116,24 @@ YouTube (`providers:[{"network":"youtube"}]`, no cover fields):
  "youtubeData":{"title":"<title>","type":"short","privacy":"public","tags":[...8-12 tags],
                 "category":"EDUCATION","madeForKids":false,"isAiGeneratedContent":false}
 ```
-AI disclosure: Instagram `isAiGenerated: true` (Nessa's voice is realistic AI audio — Meta requires the label).
-YouTube `isAiGeneratedContent: false` because the video is fully animated (YouTube exempts clearly
-unrealistic/animated content). If a video ever contains realistic AI footage of real-looking scenes, set it true.
+AI disclosure: Instagram `isAiGenerated: true` (AI narrator voice). YouTube `isAiGeneratedContent: false`
+(clearly illustrated diagrams, not realistic footage).
 
-### SEO copy rules (owner's rules)
-- IG caption: line 1 = the exact search phrase (e.g. "Carmine (crushed bugs) is in red lipstick."), 2–3 short
-  lines of facts, a share/comment question, `Sources: ...`, then **exactly ≤ 5 hashtags**:
-  1 exact topic + 2 niche + 1 broad + `#freshnesthub`.
-- YouTube title: keyword first, ≤ 60 chars. Description: first sentence contains the keyword, 2–3 lines,
-  "Animated explainer. Narration voice is AI-generated.", Sources line, then 3 hashtags. Tags: 8–12 phrases.
-- No emoji in copy.
+### SEO copy rules
+- IG caption: line 1 = the exact search phrase ("What really happens when you crack your knuckles"), 2–3 short
+  lines of facts, a share/comment question, `Sources: ...`, then **≤ 5 hashtags** (1 exact, 2 niche, 1 broad,
+  `#freshnesthub`).
+- YouTube title: keyword first, ≤ 60 chars. Description: keyword sentence, 2–3 lines, "Illustrated explainer.
+  Narration voice is AI-generated.", Sources line, 3 hashtags. Tags: 8–12 phrases. No emoji.
+After `createScheduledPost`, check each `media` URL starts with `https://static.metricool.com/`; then
+`bash $ENG/host_video.sh NN-slug delete` (if the proxy refuses, note it in runs_log.md).
 
-After `createScheduledPost` returns, check each `media` URL now starts with `https://static.metricool.com/`
-(Metricool copied the file). Then `bash $ENG/host_video.sh NN-slug delete`.
-
-## 6. Log + commit (code only, never commit mp4 to main)
-Replace your CLAIMED line in `topics_done.md` with:
-`| date IST | NN-slug | title | opening used | IG plannerUrl | YT plannerUrl |`
-Commit `episodes/NN-slug/` + `topics_done.md` (+ `runs_log.md`) to main (fetch + rebase, then push).
+## 6. Log + commit (code only, never mp4 to main)
+Replace your CLAIMED line in `topics_done.md` with `| date IST | NN-slug | title | opening used | IG | YT |`,
+append a line to `runs_log.md`, commit `episodes/NN-slug/` + logs (+ any new reusable plates.py functions),
+fetch + rebase, push.
 
 ## 7. Failure policy
-- Facts can't be verified → choose another topic. Build fails → fix and retry (max 2 full renders).
-- If still failing, do NOT post anything half-done. Append the reason to `runs_log.md`, mark the CLAIMED line
-  `FAILED`, commit, and end the run.
-- Never delete or edit already-published posts. Never touch other Metricool brands (nextbignow, Oopsmybusiness).
+- Facts can't be verified → next topic. Build fails → fix and retry (max 2 full renders).
+- Still failing → do NOT post. Log the reason in `runs_log.md`, mark the CLAIMED line `FAILED`, commit, end.
+- Never edit/delete published posts. Never touch other Metricool brands or other repo folders (studio/, oopsmybusiness/).
