@@ -120,6 +120,7 @@ Last updated: 26 Oct 2026.
   - +1.3 s at chapter breaks (`---`)
 - **Even pacing (added 27 Oct):** Chatterbox sometimes rushes long sentences and end-of-video CTAs (4.3–4.6 words/s against a 2.8–3.0 median). make_vo4.py now re-stretches any chunk of 5+ words above 3.5 words/s to about 3.3 (max 18% extra stretch) and logs it. Re-run an existing voice with `--reuse` to apply it without regenerating.
 - **Checks:** every word is checked with the forced aligner. New words go into the aligner's custom dictionary.
+- **Background jobs:** a background shell is killed after at most 2 hours, along with any renders it started. Don't use one long-running queue. Start each render on its own with `render_one.sh <episode> <out.mp4>` (about 25 minutes per 2:30 video).
 - **Memory:** the voice model takes about 4.8 GB of the 8 GB box. Don't run a second heavy job beside it (an ffmpeg filtergraph that reads the same input twice got the voice job OOM-killed). Splice patches by encoding segments separately and using the concat demuxer.
 - **Research note:** modern neural voices teach as well as human voices, but an obviously synthetic voice lowers enjoyment and trust. Keep the voice as natural and warm as possible, and listen for wrong stresses.
 
@@ -140,7 +141,8 @@ Last updated: 26 Oct 2026.
 
 ## 6. Posting
 
-- **Instagram:** 4 a day at 05:30 (US evening), 10:00 (India peak), 14:30 and 19:00 IST.
+- **Instagram:** 4 a day at 05:30 (US evening), 10:00 (India peak), 14:30 and 19:00 IST while we had 1-minute reels. Since the switch to 2–3 minute videos (27 Oct), each new long video takes about 1.5 h to make, so new ones go out at 10:00 and 19:00 IST (2 a day) and quality comes first.
+- **YouTube (since 27 Oct):** new 2–3 minute videos take the 19:30 IST Shorts slot; older 1-minute Shorts move to the 06:30 slots.
   - Caption starts with the keyword, max 5 hashtags.
   - Include alt text, a first-comment question and the AI label.
 - **YouTube:** 2 Shorts a day at 06:30 (US evening) and 19:30 IST. Full videos at 21:30 IST.
