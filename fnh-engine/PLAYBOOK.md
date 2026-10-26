@@ -1,139 +1,129 @@
-# FreshNestHub autonomous reel engine — PLAYBOOK (v3 "BODY FILES", 26 Oct 2026)
+# FreshNestHub autonomous reel engine — PLAYBOOK v4 "CHUBBY" (approved by owner 26 Oct 2026)
 
-Runs every 5 hours. Every run makes ONE new 45–62 s vertical reel for **FreshNestHub — BODY FILES**: surprising,
-genuinely interesting **health / human-body** explainers ("what really happens when…") for a worldwide English
-audience, and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** through Metricool.
+Runs every 5 hours. Every run makes ONE new 45–62 s vertical animated reel for **FreshNestHub** — fun, surprising
+**food + health facts** — and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** via Metricool.
 The owner (Ashish) is usually not watching: decide, build, verify, post, log. Never ask questions mid-run.
 
-**Owner feedback 26 Oct (episodes 01–04 were rejected):** he did NOT like the vibrant stick-figure sets, the
-Nessa character or the young voice, and found beauty-trivia topics boring. From episode 05 on:
-- **Look = clean white-paper medical explainer** (`kit/english/scripts/plates.py`), **no mascot / no stick figure**.
-- **Voice = mature British female narrator** (Kokoro `bf_emma`, `en-gb`), calm documentary pace — owner picked it.
-- **Topics = health / body, interesting and useful** (see topic_ideas.md UP NEXT).
+**Approved style = `template/` (episode 07 "carrots turn your skin orange", posted 26 Oct 18:00 IST). Copy its approach.**
+- Bright animated sets (studio engine: gradient stage + big colour circle, flat shaded props, punchy transitions,
+  screen shake on impacts), like the owner's OopsMyBusiness / NextBigNow reels — but with FreshNestHub's OWN mascot.
+- Mascot **"Chubby"** (`template/fnh_char.py`): round head with a hair curl, big round mint-green shirt belly,
+  stick arms + legs. NEVER use the OopsMyBusiness square-face guy (`guy()` from anim_base) or any other mascot.
+- Voice: energetic young male (studio `make_vo.py`: Kokoro am_eric/am_fenrir blend + Praat prosody). MrBeast-style
+  script: simple words, high energy, stakes, short sentences — but NOT rushed (speed 1.0, real pauses).
+- Topics: food + health facts that make people say "wait, what?" (see topic_ideas.md).
 
-**Benchmark/template: `episodes/05-knuckle-crack/`** — study its `render.py`, `voice.py`, `music.py`, `mix.py`
-before building anything. Copy it for every new episode. Ignore episodes 01–04 (old rejected style).
+Rejected (never go back): Nessa stick-girl + beauty trivia (ep 01–04), white-paper medical plates + British female
+voice (ep 05), OopsMyBusiness mascot (ep 06). Ignore episodes 01–06 except as history.
 
 ---------------------------------------------------------------------------------------------------
 ## 0. Setup (≈5 min)
 ```
-# repo is attached with add_repo(owner="AshishSnow", repo="nextbignow-videos", access="push")
+# repo attached with add_repo(owner="AshishSnow", repo="nextbignow-videos", access="push")
 git clone --depth 1 https://github.com/AshishSnow/nextbignow-videos /home/claude/nextbignow-videos
-bash /home/claude/nextbignow-videos/fnh-engine/setup.sh          # installs kit to /home/claude/reel-kit
-```
 ENG=/home/claude/nextbignow-videos/fnh-engine
+bash $ENG/setup.sh                      # studio engine -> /home/claude/studio (models, soundfont, fonts, python libs)
+```
+Never edit anything outside `fnh-engine/` (studio/ and oopsmybusiness/ belong to another channel).
 
-## 1. Claim a topic (avoid repeats and parallel-run collisions)
-1. `git pull` then read `topics_done.md` (past topics + openings) and `topic_ideas.md`.
-2. Take the FIRST topic in the "UP NEXT" list that is not yet in topics_done. If it fails verification, take the next.
-   When UP NEXT is empty, find new ones of the same kind (WebSearch recent health/body science, myths, case reports).
-3. Topic test — all must be true:
-   - About the viewer's own body/health, instantly clear, makes people say "wait, really?" and want to share it.
-   - Can be SHOWN inside the body: X-ray / MRI plates, textbook cross-sections, step-by-step process diagrams.
-   - Backed by ≥ 2 reputable sources (peer-reviewed journal, university, NIH/NHS/CDC/WHO/Mayo Clinic, major newsroom).
-4. Immediately append `CLAIMED <date-time IST> | NN-slug | working title` to `topics_done.md`, commit and push
-   (fetch + rebase first). NN = next number.
+## 1. Claim a topic
+1. `git pull`, read `topics_done.md` (titles + openings already used) and `topic_ideas.md`.
+2. Take the FIRST "UP NEXT" topic not in topics_done. If facts don't hold up → next. If the list is empty, find new
+   ones of the same kind (food science, everyday-body facts, food myths) with WebSearch.
+3. Topic test: instantly clear in 3 s, surprising, about food/the viewer's own body, can be SHOWN with Chubby + props,
+   ≥ 2 reputable sources (NIH/NHS/CDC/FDA/WHO/Mayo/Cleveland Clinic, universities, journals, major outlets).
+4. Append `CLAIMED <date time IST> | NN-slug | working title` to topics_done.md, commit, fetch+rebase, push.
 
 ## 2. Research (≈10 min)
-- WebSearch/WebFetch the primary sources. Write down every fact you will say, with its source URL.
-- Numbers must match the source. Contested science → "one study found…" / "scientists think…", or drop it.
-- NO dosing, treatment or diagnosis advice. Only safe general tips ("if it hurts or swells, talk to a doctor").
-  Include one honest nuance/catch when the evidence has one (like the 1990 grip study in episode 05).
-- No real private people; no brand names or logos.
+WebSearch/WebFetch the sources; write down every fact + URL. Numbers must match the source; contested → "scientists
+think…" or drop it. NO dosing, treatment or diagnosis advice; at most one safe general tip ("if X, see a doctor").
+No brand names/logos in visuals (generic "a can of cola" is fine), no real private people.
 
-## 3. Script — calm, clear, explained (45–62 s, 120–150 words, 12–15 lines)
-1. **INTRO QUESTION (0–3 s, mandatory):** "Do you know what really happens when…?" naming the topic. On screen at
-   the same moment: the topic visual (e.g. X-ray plate) + a two-row Anton headline with the key word in red.
-2. Bust the common belief or state the surprise (stamp "MYTH" / reveal).
-3. **Explain step by step** (5–7 lines), one diagram state per line: anatomy → what changes → the key moment.
-4. The evidence: a named study/scan/experiment with a plate and a small source line.
-5. One honest nuance + one safe tip card.
-6. **Loop ending:** the last line returns to the opening question/visual (no "follow us" in the VO).
-- Short sentences, everyday words, numbers as words in the voice text. Split a line into phrases only at real pauses.
+## 3. Script — `scripts/vo_lines.py` (13–16 lines, 140–165 words, 50–60 s of voice)
+Format: `(id, text, speed, pause_after, base_semitones, range_expand, [stressed words], ending)`; see template.
+- Speed 1.0 everywhere, pauses 0.30–0.45 s. Stressed words = 1–3 per line, copied exactly as written (with punctuation).
+- Line 1 (`i1`) = clear intro question inside 3 s: "Do you know…?" naming the food/body thing + the surprise.
+- Then: confirm/wow line → explain step by step (one idea per line, each will get its own shot) → a number/evidence
+  line → one honest catch or safe tip → a twist/bonus fact → CTA "Send this to the friend who …!" tied to the topic.
+- Numbers as words ("ten a day", "four milligrams"). Avoid words the TTS/ASR confuses (check the read-back).
 
-## 4. Build the episode
+## 4. Build
 ```
-cp -r $ENG/episodes/05-knuckle-crack $ENG/episodes/NN-slug
+P=$(bash $ENG/new_ep.sh NN-slug)          # project = studio template + FreshNestHub template (ep 07 files)
+# write $P/scripts/vo_lines.py, then:
+cd $P && python3 scripts/make_vo.py && python3 $ENG/engine/tools/asr_check.py $P   # every line must read back right
+python3 -c "import json;A=json.load(open('work/align.json'));[print(w['line'],w['w'],w['t']) for w in A['words']]"
 ```
-Rewrite inside `episodes/NN-slug/`:
-- `lines.py` — LINES = [(id, text)] exactly as spoken.
-- `voice.py` — only the PLAN list (moods: hook, calm, emph, soft, question, warm). Keep `bf_emma`, `en-gb` and the
-  MOOD table. Pauses: 0.3 s inside a line, 0.55–0.75 s between lines.
-- `timeline.py` — events via F(line_id, word); shot list ORDER/TRANS (slide, push, cut). 14–18 shots, 2.2–5.5 s each.
-- `render.py` — keep the camera / transitions / compose / main sections; rewrite the shot functions. Build new
-  diagrams in the same style (add reusable drawing functions to `kit/english/scripts/plates.py` and commit them):
-  * page = `paper()` + `header(f)`; headline(...) for 1–2 key moments per shot max; `fig_label` for diagrams.
-  * dark plates (`dark_plate_with`) for X-ray / MRI / scan imagery; light plates (`plate_light`) for colour diagrams.
-  * `leader()` draw-on labels in mono caps, `stamp()` for MYTH/CRACK moments, `badge()` for verdicts,
-    `tip_card()` for the tip, `arrow()`, `ring_pulse()`, icons (`clock_icon`, `hand_icon`, `gauge_icon`).
-  * Colours: ink black, red (#E22428) for the key word, blue for process labels, green for good verdicts,
-    textbook colours inside diagrams (ivory bone, blue cartilage, pink tissue, golden fluid).
-- `music.py` / `mix.py` — calm documentary piano score with a tension build into the key moment, hard stop on the
-  big question; SFX for every moment (pen scribble on labels, paper slide on transitions, stamp thud, ticks, dings).
-  Keep the `LG` line-gain dict (update ids) and BED; target VO/bed ≥ 15 dB on every line (printed by mix.py).
+Then write (read the template versions first — they are the reference):
+- `scripts/anim_props6.py` — NEW props for this topic (PIL supersampled, gradient `shape_grad`, soft shadows `_ov`,
+  ink outlines where needed, cache with `gcache`). Reuse existing props when they fit (list below).
+- `scripts/anim_shots.py` — SHOTLIST (16–20 shots, 1.5–4.5 s each, cut on word times `T(line, word)`), one
+  `shot_<ID>(t, n)` per shot, `IMPACTS` (shake on every big moment). Keep `ui_word/rays/slam/ring/rs/_bl/compose` as in
+  the template. Transitions vary: cut, whip, zoom, flash, punch, focus.
+- `scripts/music.py` — cues on every reveal. **New genre each video** (template = bouncy food-funk with marimba/slap
+  bass + 1940s march section; others: synth-pop, lo-fi hip hop, latin, orchestral pizzicato, surf rock, chiptune…).
+- `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
+  synthesized ones). Keep the bed level and loudnorm section. VO/bed must be ≥ 14 dB on every line (printed).
+
+### Chubby API (`fnh_char.py`)
+`chub(f, x, y, s, la, ra, ll, rl, mouth, blink, brow, look, expr, tint, hold, hold_off, hold_front, bob, op, lean, squash, sit, nose, cap)`
+- (x, y) = feet baseline; height ≈ 480·s; head centre ≈ (x, y − 420·s). Typical: s 0.8–1.15 at y 1440–1480.
+- arms (upper°, fore°) from straight down, + = outward: relaxed (20, 10); cheer (150, 170); point (70, 40);
+  scratch head (−150, −150); hand to mouth (148, −130) + `hold=carrot_side(...)`, `hold_front=True`; hold up (150, 175).
+- `expr`: n, wow, sus, smirk, sad, happy; `mouth`: 0, 1, 2, 3, "o" (`talk(t)` lip-syncs to the VO, `munch(t)` chews);
+  `brow`: n, up, sus, sad; `look=(−1..1, −1..1)`.
+- `tint` 0..1 turns skin orange (only when the story is a colour change); `nose=0..1` shows/tints a nose; `cap=True` pilot cap.
+- `chub_head_only(f, x, y, s, t, ...)` for big face close-ups; `logo_el()` = FreshNestHub logo with Chubby's head.
+Chubby appears in most shots, reacting to the fact (eating, shocked, pointing, cheering). Give him a different action
+in every video.
+
+### Reusable props (already loaded)
+anim_props: tag_el, bubble_el, magnifier_el, glow, steam, coin_el, phone_el · anim_props2: calendar_el(top, big),
+sign_el, phone2_el(msg1, msg2, pressed), check_el(r, ok), cash_el · anim_props3: stamp_el, vault_door_el, app_phone_el ·
+anim_props4: burst_el, readout_el, dial(f, x, y, s, "mph"|"g", v, txt), stopwatch_el, splash, eye_el, molar_el,
+forceps_el, weight_el, bscale_el, seat_el, wheel_el, belt_draw, bars2 (comparison bars), speed_lines, add_patch ·
+anim_props5: carrot_el, carrot_side, dots (pigment/particles), machine_el, capsule_el, gauge_tube, vessel (blood flow),
+skin_block (skin layers), palm_el, sole_el, eye2_el(sclera, skin), baby, bowl_el, spoon_el, plane_el, prop_disc,
+radar_screen, moon, zzz_moon, mirror_el.
 
 ### Visual rules (mandatory)
-- 1080×1920, 30 fps, white page. **All text centred at x = 540 (`CX`), width ≤ 840 px (`fit`).**
-- Safe zones: nothing important in top 250 px, bottom 420 px, right 120 px, left 60 px. Headlines start at y ≈ 372;
-  plates sit between y ≈ 560 and 1450. Labels inside x 60–960.
-- No mascot, no emoji, no persistent counters. Captions only at key moments (headline/stamp/badge/labels).
-- A new opening composition every video (check topics_done "opening" column).
+- 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.
+- Captions ONLY at key moments: `ui_word(f, lead, BIG, 470, …)` — small lead + one big word/number, centred x = 540,
+  ≤ 840 px wide; use `[word]` for an accent colour. No word-by-word subtitles, no emoji, no persistent counters.
+- First 3 s: strong visual action (Chubby doing something) + one short caption; never a giant text-only opener.
+- Change the stage scheme every shot (sky, yellow, purple, teal, red, emerald, orange, pink, cream); vibrant, never dull.
+- Source chip for key numbers: `chip("Source: …", INK, WHITE, 22)` at y 1462.
+- End: phone "SEND THIS" CTA with Chubby, then logo sting + "follow for more health facts".
+- New opening idea every video (check the topics_done "opening" column).
 
 ### Test before the full render (mandatory)
-```
-cp $ENG/episodes/NN-slug/lines.py /home/claude/reel-kit/english/scripts/vo_lines.py
-cd /tmp && python3 -I $ENG/episodes/NN-slug/voice.py
-python3 -I /home/claude/reel-kit/english/scripts/align_en.py /home/claude/reel-kit/english/work/take.wav 1.0
-python3 -I $ENG/episodes/NN-slug/timeline.py
-GUIDES=1 python3 -I $ENG/episodes/NN-slug/render.py /tmp/x.mp4 0,45,90,...   # 2 frames per shot + frame 0
-```
-Look at every frame (Read the images or a tiled sheet): text centred and inside the guides, nothing overlapping or
-clipped, diagrams readable. Fix and re-test until clean. Then:
-```
-bash $ENG/build_ep.sh NN-slug
-```
-Verify: 1080×1920, 45–62 s, I ≈ −14 LUFS, peak ≤ −1.4 dBTP; look at `/home/claude/outputs/NN-slug_sheet.jpg`.
+`python3 -I scripts/anim.py x <2 frames per shot>` → frames/r_NNNN.jpg; tile them with safe-zone guides:
+`python3 $ENG/engine/tools/sheet.py /tmp/sheet.jpg frames/r_*.jpg` and LOOK (Read the image). Fix overlaps, clipped
+props, text in unsafe zones, props hidden behind Chubby's head (use hold_front), unreadable diagrams. Re-test.
+Then: `SKIP_VO=1 bash $ENG/build_ep.sh NN-slug` (≈7 min) → /home/claude/outputs/NN-slug.mp4 + _sheet.jpg.
+QA: 1080×1920, 45–62 s, ≈ −11 LUFS, peak ≤ −1 dBFS; look at the sheet; facts on screen = sources.
 
 ## 5. Host + post
-```
-bash $ENG/host_video.sh NN-slug push        # prints RAW_URL=https://raw.githubusercontent.com/...
-```
-Metricool brand **Freshnesthub**: `blogId = 7643474`, timezone `Asia/Calcutta`. Schedule 10 minutes from now.
-TWO posts (each platform its own copy):
+`bash $ENG/host_video.sh NN-slug push` → RAW_URL. Metricool brand **Freshnesthub blogId 7643474**, tz Asia/Calcutta.
+Time: `getScheduledPosts` (7643474, last 24 h → next 2 days). Post at the later of (now + 10 min) and
+(latest FreshNestHub post + 4 h 30 min). TWO posts, same time:
+- Instagram: providers [instagram], media [RAW_URL], videoCoverMilliseconds = a frame with Chubby + the hook caption
+  (≈ 2500–3500), mediaAltText one sentence, instagramData {type REEL, showReelOnFeed true, collaborators [],
+  isAiGenerated true}. Caption: line 1 = the search question ("Can eating too many carrots turn your skin orange?"),
+  3–5 short lines of facts, question/CTA line, `Sources: …`, then ≤ 5 hashtags (2 topic, 1–2 niche like #healthfacts
+  #foodfacts #nutritionfacts, `#freshnesthub`). No emoji.
+- YouTube: providers [youtube], youtubeData {title keyword-first ≤ 60 chars, type short, privacy public, tags 8–12
+  phrases, category EDUCATION, madeForKids false, isAiGeneratedContent false}. Description: keyword sentence, 2–3 lines,
+  "Animated explainer. Narration voice is AI-generated.", Sources, 3 hashtags incl. #shorts.
+Check both returned media URLs start with https://static.metricool.com/, then `bash $ENG/host_video.sh NN-slug delete`
+(the session proxy usually refuses branch deletes — just note it in runs_log).
 
-Instagram (`providers:[{"network":"instagram"}]`):
-```
-{"autoPublish":true,"descendants":[],"draft":false,"firstCommentText":"","hasNotReadNotes":false,
- "media":["<RAW_URL>"],"videoCoverMilliseconds":<ms of the intro frame, ~1200-2000>,
- "mediaAltText":[],"providers":[{"network":"instagram"}],
- "publicationDate":{"dateTime":"YYYY-MM-DDTHH:MM:SS","timezone":"Asia/Calcutta"},
- "shortener":false,"smartLinkData":{"ids":[]},"text":"<IG caption>",
- "instagramData":{"type":"REEL","showReelOnFeed":true,"isAiGenerated":true}}
-```
-YouTube (`providers:[{"network":"youtube"}]`, no cover fields):
-```
- ... "text":"<YT description>",
- "youtubeData":{"title":"<title>","type":"short","privacy":"public","tags":[...8-12 tags],
-                "category":"EDUCATION","madeForKids":false,"isAiGeneratedContent":false}
-```
-AI disclosure: Instagram `isAiGenerated: true` (AI narrator voice). YouTube `isAiGeneratedContent: false`
-(clearly illustrated diagrams, not realistic footage).
-
-### SEO copy rules
-- IG caption: line 1 = the exact search phrase ("What really happens when you crack your knuckles"), 2–3 short
-  lines of facts, a share/comment question, `Sources: ...`, then **≤ 5 hashtags** (1 exact, 2 niche, 1 broad,
-  `#freshnesthub`).
-- YouTube title: keyword first, ≤ 60 chars. Description: keyword sentence, 2–3 lines, "Illustrated explainer.
-  Narration voice is AI-generated.", Sources line, 3 hashtags. Tags: 8–12 phrases. No emoji.
-After `createScheduledPost`, check each `media` URL starts with `https://static.metricool.com/`; then
-`bash $ENG/host_video.sh NN-slug delete` (if the proxy refuses, note it in runs_log.md).
-
-## 6. Log + commit (code only, never mp4 to main)
-Replace your CLAIMED line in `topics_done.md` with `| date IST | NN-slug | title | opening used | IG | YT |`,
-append a line to `runs_log.md`, commit `episodes/NN-slug/` + logs (+ any new reusable plates.py functions),
-fetch + rebase, push.
+## 6. Log + commit (code only — never commit mp4 to main)
+Replace your CLAIMED line in topics_done.md with `| date | NN-slug | title | opening used | IG planner | YT planner |`,
+append a runs_log.md line (duration, LUFS, peak, VO/bed min, shots, post time, links, sources), copy the project's
+scripts to `episodes/NN-slug/`, commit, fetch + rebase, push. Delete the project's work/ and frames/ after posting.
 
 ## 7. Failure policy
-- Facts can't be verified → next topic. Build fails → fix and retry (max 2 full renders).
-- Still failing → do NOT post. Log the reason in `runs_log.md`, mark the CLAIMED line `FAILED`, commit, end.
-- Never edit/delete published posts. Never touch other Metricool brands or other repo folders (studio/, oopsmybusiness/).
+Facts can't be verified → next topic. Build fails → fix and retry (max 2 full renders). Still failing → do NOT post;
+log the reason, mark the CLAIMED line FAILED, commit, end. Never edit/delete published posts. Never post to other
+Metricool brands (nextbignow 7639492, Oopsmybusiness 7643430).

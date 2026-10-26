@@ -6,12 +6,20 @@
 | 2026-10-25 | 02-carmine-lipstick | Your Red Lipstick Might Be Made of Bugs (Carmine / Cochineal) | lipstick twist-up on pink set, bugs pop out of the bullet at 'BUGS' | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-5158663081613310361 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-2175875813628886779 |
 | 2026-10-26 | 03-dandruff-fungus | A Fungus Is Eating Your Scalp Right Now (Malassezia and Dandruff) | snow globe holding Nessa's head with dandruff flakes swirling, camera dives through the glass into a scalp-hair forest with munching yeast | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=5703504703145198638 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-6226886078790352190 |
 | 2026-10-26 | 04-tattoo-ink-cells | Your Tattoo Is Being Eaten by Your Own Cells (Macrophages Hold Tattoo Ink) | magnifying-glass sweep over a tanned forearm with a bold star tattoo on a pink sunburst set, lens reveals ink-stuffed macrophages munching | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-1576454167435720679 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-3952398074412579697 |
+| 2026-10-26 | 07-carrots-orange-skin | Can Too Many Carrots Turn Your Skin Orange? (carotenemia + WWII radar twist) | Chubby munching carrots on a sky set, pile of carrots at his feet, he flashes ORANGE with sun rays + "ORANGE?!" burst | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-9136205762790406639 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=313161423065269986 |
 
 Earlier FreshNestHub reels (made before the engine; also do not repeat): whale vomit / ambergris in perfume (macro
 mystery + money counter opening), Kim Kardashian salmon-sperm (PDRN) facial (paparazzi flash opening),
 how much water by age (split-screen versus opening), radium beauty products, Botox, body fat, hair, blue light.
 
-Owner feedback 26 Oct (apply from episode 05 — overrides older notes): rejected the vibrant stick-figure look,
+Not posted (drafts, rejected for style): 05-knuckle-crack (white-paper style), 06-rocket-sled-46g (OopsMyBusiness mascot;
+topic itself is fine — remake with Chubby, see topic_ideas #14).
+
+Owner feedback 26 Oct evening (CURRENT — overrides everything below): approved episode 07 style = PLAYBOOK v4 "CHUBBY":
+bright animated studio sets like OopsMyBusiness/NextBigNow, FreshNestHub's own chubby stick mascot "Chubby",
+energetic young male voice, food + health fact topics.
+
+Older: Owner feedback 26 Oct (apply from episode 05 — overrides older notes): rejected the vibrant stick-figure look,
 the Nessa character, the young voice and the beauty-trivia topics. Now: BODY FILES white-paper medical explainer
 (plates.py, template episodes/05-knuckle-crack), mature British narrator (bf_emma), health/body topics.
 Owner feedback after episode 02 (apply from episode 03): it was too fast — make videos 45–60 s, slower clearer

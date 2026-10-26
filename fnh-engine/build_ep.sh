@@ -1,36 +1,22 @@
 #!/bin/bash
-# Build one episode end to end.
-# Usage: build_ep.sh <slug>      e.g. build_ep.sh 02-carmine-lipstick
-# episodes/<slug>/ must contain: lines.py voice.py timeline.py render.py music.py mix.py
-# Output: /home/claude/outputs/<slug>.mp4 (+ <slug>_sheet.jpg contact sheet)
+# Full build of an episode whose scripts are written:  bash build_ep.sh NN-slug
+# voice (+ASR read-back) -> score -> mix -> 2-part parallel render -> /home/claude/outputs/NN-slug.mp4 + sheet + checks
 set -e
-R=$(cd "$(dirname "$0")" && pwd)
-E=$R/episodes/$1
-K=/home/claude/reel-kit/english; S=$K/scripts; W=$K/work
-[ -d "$E" ] || { echo "no episode dir $E"; exit 1; }
-mkdir -p $W /home/claude/outputs
-cp $E/lines.py $S/vo_lines.py
-cd /tmp
-echo "== voice";    python3 -I $E/voice.py
-echo "== align";    python3 -I $S/align_en.py $W/take.wav 1.0 | tail -16
-echo "== timeline"; python3 -I $E/timeline.py
-echo "== music";    python3 -I $E/music.py
-echo "== mix";      python3 -I $E/mix.py
-N=$(python3 -c "import json;print(int(round(json.load(open('$W/timeline.json'))['END']*30)))"); H=$((N/2))
-echo "== render $N frames (2 parallel segments)"
-SEG_A=0 SEG_B=$H python3 -I $E/render.py $W/seg_a.mp4 > $W/seg_a.log 2>&1 &
-PA=$!
-SEG_A=$H SEG_B=999999 python3 -I $E/render.py $W/seg_b.mp4 > $W/seg_b.log 2>&1
-wait $PA
-grep -q "^done" $W/seg_a.log && grep -q "^done" $W/seg_b.log || { echo "RENDER FAILED"; tail -20 $W/seg_a.log $W/seg_b.log; exit 1; }
-printf "file '%s'\nfile '%s'\n" $W/seg_a.mp4 $W/seg_b.mp4 > $W/segs.txt
-ffmpeg -v error -y -f concat -safe 0 -i $W/segs.txt -c copy $W/video.mp4
-O=/home/claude/outputs/$1.mp4
-ffmpeg -v error -y -i $W/video.mp4 -i $W/mix.wav -map 0:v -map 1:a -c:v libx264 -preset slow -crf 18 -maxrate 9M -bufsize 18M \
-  -profile:v high -pix_fmt yuv420p -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv \
-  -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart $O
-echo "== verify"
-ffprobe -v error -show_entries stream=codec_name,width,height,r_frame_rate:format=duration,size -of compact $O
-ffmpeg -hide_banner -i $O -af ebur128=peak=true -f null - 2>&1 | grep -E "I:|Peak:" | tail -2
-python3 -I $S/contact_sheet.py $O /home/claude/outputs/$1_sheet.jpg 2.0
-echo "BUILD_OK $O"
+HERE=$(cd "$(dirname "$0")" && pwd)
+STUDIO=${STUDIO:-/home/claude/studio}; S=$1; P="$STUDIO/projects/$S"; O=/home/claude/outputs/$S.mp4
+cd "$P"
+[ "$SKIP_VO" = "1" ] || python3 scripts/make_vo.py 2>&1 | grep -v -i warn | tail -3
+python3 "$HERE/engine/tools/asr_check.py" "$P" 2>&1 | grep "|"
+python3 scripts/music.py 2>&1 | grep -v -i "warn\|mean\|ret =" | tail -1
+python3 scripts/mix.py 2>&1 | grep "VO/bed"
+rm -f frames/*.jpg
+bash scripts/render_all.sh > work/render.log 2>&1; tail -1 work/render.log
+cp work/final.mp4 "$O"
+SZ=$(stat -c %s "$O")
+if [ "$SZ" -gt 95000000 ]; then
+  ffmpeg -v error -y -i work/final.mp4 -c:v libx264 -preset slow -crf 16 -tune animation -pix_fmt yuv420p -c:a copy -movflags +faststart "$O"
+fi
+ffprobe -v error -show_entries stream=codec_name,width,height -show_entries format=duration,size -of compact "$O"
+ffmpeg -hide_banner -i "$O" -af ebur128=peak=true -f null - 2>&1 | grep -E "^\s+(I|Peak):"
+ffmpeg -v error -y -i "$O" -vf "fps=1/2,scale=270:-1,tile=6x5" -frames:v 1 /home/claude/outputs/${S}_sheet.jpg
+echo BUILD_OK "$O"

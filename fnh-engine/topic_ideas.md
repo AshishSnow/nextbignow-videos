@@ -1,29 +1,42 @@
-# BODY FILES topic list (health / human body — surprising, useful, shareable)
-Verify every fact with >= 2 reputable sources before using; skip any that don't hold up.
+# FreshNestHub topic list v4 — food + health facts with Chubby (verify every fact with >= 2 sources first)
 
 ## UP NEXT (take the first one not yet in topics_done.md)
-1. 06-awake-24-hours — Do you know what 24 hours without sleep does to your brain? (CDC: 24 h awake impairs you about like a 0.10% blood alcohol level)
-2. 07-holding-a-sneeze — Do you know why you should never hold in a sneeze? (pressure spike; rare injuries in BMJ Case Reports 2018 and 2023)
-3. 08-brain-freeze — Do you know what really happens in your head during brain freeze? (palate cooling, blood vessel response, referred pain)
-4. 09-swallowed-gum — Do you know what really happens when you swallow gum? (the 7-year myth vs what the gut actually does)
-5. 10-paper-cut — Do you know why a tiny paper cut hurts so much? (fingertip nerve density, shallow jagged cut)
-6. 11-hiccups — Do you know what actually happens when you hiccup? (diaphragm spasm + vocal cords snap shut = "hic")
-7. 12-one-heartbeat — Do you know what happens inside your heart in one single beat? (valves, chambers, the "lub-dub")
-8. 13-screen-blinking — Do you know you blink far less when you stare at a screen? (dry eye; AAO 20-20-20 rule)
-9. 14-stomach-acid — Do you know why your stomach acid doesn't digest your stomach? (mucus layer, constant lining renewal)
-10. 15-cold-water-shock — Do you know what happens to your body in the first minute in icy water? (cold shock response)
+1. 08-pineapple-eats-you — Do you know pineapple is eating you back while you eat it? (bromelain enzyme breaks down
+   proteins in your tongue/cheeks -> tingle; your mouth repairs fast; cooked/canned pineapple loses it). Chubby: tongue
+   close-up with tiny "scissors" enzymes.
+2. 09-spicy-food-burn — Do you know spicy food doesn't actually burn you? (capsaicin triggers TRPV1 heat sensors, brain
+   thinks "fire"; why milk (casein) helps more than water). Chubby breathes fire, then drinks milk.
+3. 10-honey-never-spoils — Do you know honey can last thousands of years? (very little water, acidic, glucose oxidase ->
+   hydrogen peroxide; honey reported in ancient Egyptian tombs; safe tip: never give honey to babies under 1 — CDC).
+4. 11-mint-feels-cold — Do you know mint tricks your brain into feeling cold? (menthol triggers TRPM8 cold sensors;
+   nothing actually gets colder). Pair visually opposite to the spicy video.
+5. 12-sugar-in-a-soda — Do you know how much sugar is in one can of soda? (≈ 39 g ≈ 9–10 teaspoons in a 12 oz cola;
+   WHO / AHA added-sugar guidance as context, no diet advice). Generic can, no brands.
+6. 13-onions-make-you-cry — Do you know why onions make you cry? (cutting releases enzymes -> syn-propanethial-S-oxide gas
+   -> tear glands; tips: chill the onion, sharp knife).
+7. 14-beet-pink-pee — Do you know beetroot can turn your pee pink? (beeturia, betalain pigment, harmless for most; red
+   urine without beets -> see a doctor).
+8. 15-asparagus-pee-smell — Do you know asparagus makes pee smell — but not everyone can smell it? (asparagusic acid ->
+   sulfur compounds; genetic smell difference; BMJ 2016 Harvard study).
+9. 16-bananas-radioactive — Do you know bananas are a tiny bit radioactive? (potassium-40; "banana equivalent dose";
+   totally harmless amount — get the numbers from reputable physics/health sources).
+10. 17-brain-freeze — Do you know what really causes brain freeze? (cold on the palate -> blood vessel change -> referred
+    pain; tip: press tongue to the roof of the mouth).
+11. 18-coffee-sleep-trick — Do you know caffeine doesn't give you energy — it blocks the "sleepy" signal? (adenosine
+    receptors; caffeine stays in the body for hours — no dosing advice).
+12. 19-stomach-growl — Do you know your stomach growls even when you're not hungry? (borborygmi, migrating motor complex).
+13. 20-swallowed-gum — Do you know swallowed gum doesn't stay 7 years? (passes through; myth origin).
+14. 21-rocket-sled-46g — remake of the approved-topic draft (episode 06 script + props exist) with Chubby as the rider:
+    the doctor who survived 46.2 G (Stapp, 1954) -> seat belts.
 
 ## Pool (verify first)
-- Contagious yawning — why seeing a yawn makes you yawn.
-- Goosebumps — tiny muscles at every hair follicle, a leftover reflex.
-- Why your stomach growls (borborygmi) even when not hungry.
-- What happens to your lungs in the first days after quitting smoking (CDC/AHA timeline).
-- Why you can't tickle yourself (the brain predicts your own touch).
-- Ice-cream headache vs migraine — how they differ (keep non-diagnostic).
-- Why your voice sounds weird on recordings (bone conduction).
-- What happens to your body when you hold your breath.
-- How long food really takes to pass through your body (Mayo Clinic).
-- Why we get "pins and needles" when a limb falls asleep.
-- Why fingers wrinkle in water — a nerve-controlled reflex, not water soaking in (grip hypothesis).
-- Grey hair: pigment stem cells get "stuck" and stop working (NYU, Nature 2023).
-- Microplastics found in human brain tissue (2025 study — contested, hedge carefully).
+- Why carrots are orange at all (Dutch orange-carrot story is a myth — check carefully before using).
+- Why you get hiccups after fizzy drinks.
+- Why cheese smells (bacteria) / why blue cheese mould is safe.
+- Why your mouth waters when you see food (cephalic phase).
+- Why chili is "hot" for humans but not for birds.
+- Eating ice-cold water vs warm water myths (only if solid sources).
+- Why popcorn pops (water inside the kernel turns to steam).
+- Why salt makes you thirsty (osmosis) — no diet/dose advice.
+- Why your fingers wrinkle in water (nerve reflex, grip).
+- Why yawning is contagious.
