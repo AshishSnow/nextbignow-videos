@@ -11,6 +11,18 @@ dl() { [ -s "$2" ] || { echo "downloading $(basename "$2")"; curl -sSL --retry 3
 dl https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx "$STUDIO/models/kokoro/kokoro-v1.0.onnx"
 dl https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin "$STUDIO/models/kokoro/voices-v1.0.bin"
 dl https://raw.githubusercontent.com/mrbumpy409/GeneralUser-GS/main/GeneralUser-GS.sf2 "$STUDIO/assets/sf/gugs/GeneralUser-GS.sf2"
+# naturalness scorer for voice A/B tests: UTMOS22 strong (MIT, tarepan/SpeechMOS) exported to ONNX -> runs on onnxruntime, no torch.
+# Hosted in this repo's `models` branch in <100 MB parts.
+U="$STUDIO/models/utmos/utmos22.onnx"
+if [ ! -s "$U" ]; then
+  mkdir -p "$STUDIO/models/utmos"
+  RAW=https://raw.githubusercontent.com/AshishSnow/nextbignow-videos/models
+  for i in 00 01 02 03 04; do dl "$RAW/utmos22.onnx.part$i" "$STUDIO/models/utmos/utmos22.onnx.part$i"; done
+  cat "$STUDIO"/models/utmos/utmos22.onnx.part0? > "$U.tmp"
+  if [ "$(sha256sum "$U.tmp" | cut -d' ' -f1)" = "e99bfcb15cd08aea5ee6fccfc274aeecf7d3dfd93690cd5cbfa9fdf74695f54d" ]; then
+    mv "$U.tmp" "$U"; rm -f "$STUDIO"/models/utmos/utmos22.onnx.part0?
+  else echo "WARNING: utmos22.onnx checksum mismatch -> voice_report.py will skip UTMOS"; rm -f "$U.tmp"; fi
+fi
 P=sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8
 if [ ! -s "$STUDIO/models/$P/encoder.int8.onnx" ]; then
   dl https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/$P.tar.bz2 "$STUDIO/models/$P.tar.bz2"
@@ -36,6 +48,7 @@ need soundfile || pipi soundfile
 need cv2 || pipi opencv-python-headless
 need PIL || pipi pillow
 need scipy || pipi scipy
+need onnxruntime || pipi onnxruntime
 for m in kokoro_onnx sherpa_onnx parselmouth pedalboard tinysoundfont num2words soundfile cv2 PIL scipy; do need $m || echo "MISSING python module: $m"; done
 [ -f /usr/share/fonts/opentype/inter/InterDisplay-Black.otf ] || echo "WARNING: Inter Display fonts missing (/usr/share/fonts/opentype/inter) — install fonts-inter"
 which ffmpeg >/dev/null || echo "WARNING: ffmpeg missing"

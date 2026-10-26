@@ -15,26 +15,29 @@ from parselmouth.praat import call
 SR = 48000; LEAD = 0.25
 k = Kokoro(f"{R}/models/kokoro/kokoro-v1.0.onnx", f"{R}/models/kokoro/voices-v1.0.bin"); V = k.get_voice_style
 import os
-EW = float(os.environ.get("EW", "0.75")); _GT = os.environ.get("GT", "165"); BS = float(os.environ.get("BS", "0.6"))
-_VS = os.environ.get("VOICES", "")   # e.g. "am_eric:0.75,am_fenrir:0.25" (overrides EW)
-if _VS:
-    VOICE = sum(float(w) * V(n) for n, w in (x.split(":") for x in _VS.split(",")))
-else:
-    VOICE = (1 - EW) * V("am_fenrir") + EW * V("am_eric")   # young, bright, energetic
+# Defaults = winner of the 26 Oct voice lab (studio/IMPROVEMENTS.md): warm blend, own register (no global pitch lift), calmer pace.
+EW = float(os.environ.get("EW", "0.75")); GT = float(os.environ.get("GT", "0")); BS = float(os.environ.get("BS", "0.6"))
+VOICE = (1 - EW) * V("am_fenrir") + EW * V("am_eric")   # young, bright, energetic
+# VMIX overrides the blend, e.g. VMIX="am_michael:0.4,am_onyx:0.2,am_fenrir:0.2,am_echo:0.2"
+VMIX = os.environ.get("VMIX", "am_michael:0.5,am_eric:0.3,am_fenrir:0.2")
+if VMIX:
+    VOICE = sum(float(w) * V(n) for n, w in (p.split(":") for p in VMIX.split(",")))
 CFG = {L[0]: L for L in LINES}
 
 import os, hashlib
-EXS = float(os.environ.get("EXS", "0.5")); BMP = float(os.environ.get("BMP", "0.8")); STR = float(os.environ.get("STR", "1.0"))
-_key = hashlib.md5(repr([L[:3] for L in LINES] + [EW, os.environ.get("VOICES", "")]).encode()).hexdigest()
+# SPD scales every line's speed, PZ scales every pause (PMIN = shortest pause, s) -> calmer, clearer pacing
+SPD = float(os.environ.get("SPD", "0.88")); PZ = float(os.environ.get("PZ", "1.6")); PMIN = float(os.environ.get("PMIN", "0.3")); EXS = float(os.environ.get("EXS", "1.0")); BMP = float(os.environ.get("BMP", "1.0")); STR = float(os.environ.get("STR", "1.0"))
+_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX]).encode()).hexdigest()   # pauses are baked into the cache too
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}
 t = LEAD
 for lid, text, sp, pause, *_ in ([] if os.path.exists(_cache) else LINES):
-    a, sr = k.create(text, voice=VOICE, speed=sp, lang="en-us", trim=True)
+    a, sr = k.create(text, voice=VOICE, speed=sp * SPD, lang="en-us", trim=True)
     a = signal.resample_poly(a.astype(np.float64), SR, sr).astype(np.float32)
     f = int(0.012 * SR); a[:f] *= np.linspace(0, 1, f); a[-f:] *= np.linspace(1, 0, f)
     lines[lid] = dict(start=round(t, 3), end=round(t + len(a) / SR, 3), text=text)
     pieces.append(a); t += len(a) / SR
+    pause = max(PMIN, pause * PZ) if pause > 0 else 0.0
     pieces.append(np.zeros(int(pause * SR), np.float32)); t += pause
 if os.path.exists(_cache):
     _z = np.load(_cache, allow_pickle=True); flat = _z["flat"]; lines = _z["lines"].item()
@@ -100,7 +103,7 @@ snd = parselmouth.Sound(flat.astype(np.float64), SR)
 pitch = snd.to_pitch_ac(0.01, 65, 15, False, 0.03, 0.45, 0.01, 0.35, 0.14, 400)
 f0 = pitch.selected_array["frequency"]; tf = pitch.xs(); vo_ = f0 > 0
 G = float(np.median(f0[vo_])); print("global median F0", round(G, 1))
-GT = G * float(_GT[4:] or 1) if _GT.startswith("auto") else float(_GT)   # "auto" = keep the voice's own register
+if GT <= 0: GT = G   # GT=0 -> keep the voice's own register (no global pitch shift = most natural)
 line_med = {}
 for lid, L in lines.items():
     m = vo_ & (tf >= L["start"]) & (tf <= L["end"])

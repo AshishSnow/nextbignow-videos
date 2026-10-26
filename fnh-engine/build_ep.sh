@@ -8,6 +8,7 @@ cd "$P"
 [ -f "$HERE/voice.env" ] && { set -a; . "$HERE/voice.env"; set +a; }
 [ "$SKIP_VO" = "1" ] || python3 scripts/make_vo.py 2>&1 | grep -v -i warn | tail -3
 python3 "$HERE/engine/tools/asr_check.py" "$P" 2>&1 | grep "|"
+python3 "$HERE/engine/tools/voice_report.py" "$P" 2>/dev/null | tr -d '\n' | sed 's/  */ /g'; echo
 python3 scripts/music.py 2>&1 | grep -v -i "warn\|mean\|ret =" | tail -1
 python3 scripts/mix.py 2>&1 | grep "VO/bed"
 rm -f frames/*.jpg

@@ -29,10 +29,10 @@ Never edit anything outside `fnh-engine/` (studio/ and oopsmybusiness/ belong to
 ## 1. Learn first (≈10 min) — mandatory, see improvements.md
 1. Read `improvements.md` (algorithm notes, protocol, backlog, learnings, changelog) and `performance.md`.
 2. Refresh performance.md from Metricool analytics (exact metric ids are in its header) and write 1–2 dated learnings.
-3. If the algorithm notes are older than 7 days, re-check (WebSearch: Instagram Reels + YouTube Shorts ranking news)
-   and update section A.
-4. Choose this video's upgrades: at least ONE voice + ONE visual/edit improvement (section C or your learnings).
-   Apply them in this episode and log them in section E at the end. Never ship a video identical in method to the last.
+3. EVERY DAY (first run of each IST day): re-check the algorithms (WebSearch: Instagram Reels + YouTube Shorts ranking
+   news, policy changes) and update section A; run the trend + topic scan (section A2) and refresh topic_ideas.md.
+4. Choose this video's upgrades: at least ONE voice + ONE visual/edit + ONE topic/script improvement (section C, the
+   daily scans or your learnings). Apply them and log them in section E. Never ship a video identical in method to the last.
 
 ## 2. Claim a topic
 1. `git pull`, read `topics_done.md` (titles + openings already used) and `topic_ideas.md`.
@@ -49,7 +49,7 @@ WebSearch/WebFetch the sources; write down every fact + URL. Numbers must match 
 think…" or drop it. NO dosing, treatment or diagnosis advice; at most one safe general tip ("if X, see a doctor").
 No brand names/logos in visuals (generic "a can of cola" is fine), no real private people.
 
-## 4. Script — `scripts/vo_lines.py` (12–15 lines, 125–150 words, 45–55 s of voice; longer only if data says it holds)
+## 4. Script — `scripts/vo_lines.py` (12–15 lines, 120–145 words, 45–55 s of voice at the calmer A pace; longer only if data says it holds)
 Format: `(id, text, speed, pause_after, base_semitones, range_expand, [stressed words], ending)`; see template.
 - Speed 1.0 everywhere, pauses 0.30–0.45 s. Stressed words = 1–3 per line, copied exactly as written (with punctuation).
 - Line 1 (`i1`) = clear intro question inside 3 s: "Do you know…?" naming the food/body thing + the surprise.
@@ -63,6 +63,7 @@ P=$(bash $ENG/new_ep.sh NN-slug)          # project = studio template + FreshNes
 # write $P/scripts/vo_lines.py, then:
 cd $P && (set -a; . $ENG/voice.env; set +a; python3 scripts/make_vo.py) && python3 $ENG/engine/tools/asr_check.py $P
 # every line must read back right. voice.env = the channel voice; voice upgrades are logged in improvements.md
+python3 $ENG/engine/tools/voice_report.py $P   # UTMOS (naturalness 1-5), pace, pitch range, ASR — gate in improvements.md B.2
 python3 -c "import json;A=json.load(open('work/align.json'));[print(w['line'],w['w'],w['t']) for w in A['words']]"
 ```
 Then write (read the template versions first — they are the reference):
