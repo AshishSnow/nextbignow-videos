@@ -4,6 +4,13 @@ One run = one finished, fact-checked, original Short/Reel, scheduled on the **Oo
 Follow every section. Quality beats speed: never post a broken, unchecked or unsourced video — if a step fails and
 can't be fixed, stop, schedule nothing, and report what failed.
 
+**Every video must be better than the last one** (owner's standing order). Before building, do the learning loop in
+`IMPROVEMENTS.md`: refresh `PERFORMANCE.md` from analytics, refresh `ALGORITHM.md` if older than 7 days, pick at least one
+voice upgrade and one visual/story upgrade, test them, keep only what measures better, and log it.
+
+**Time budget:** take your time — a good video takes 90–150 minutes. Don't rush any step. The only hard limit: be finished
+(scheduled, logged, pushed) about 30 minutes before the next run starts (runs fire every 5 hours).
+
 ## 0. Setup (fresh workspace)
 ```bash
 # repo is attached + cloned at /home/claude/nextbignow-videos (see run prompt)
@@ -18,7 +25,8 @@ Disk is limited (~8 GB free): delete `work/part*.mp4`, frames and old projects a
 - Brand names may be said and written as plain text (commentary). **Never draw a real logo, mascot, packaging or trade dress** (e.g. no green siren, no golden arches). Use generic props.
 
 ## 2. Topic (pick one, never repeat)
-- Read `studio/topics.md`; never repeat a topic or close variant. Also vary the *type*: hidden business model, pricing trick, psychology trick, loophole, surprising number, founder story.
+- Read `studio/topics.md` **and** the brand's last 90 days of posts in Metricool (owner also uploads manually); never repeat a topic or close variant.
+- Prefer topics with a broad, personal money hook (your money, your receipt, your subscription) — `PERFORMANCE.md` shows these reach the most people. Also vary the *type*: hidden business model, pricing trick, psychology trick, loophole, surprising number, founder story.
 - Must be instantly clear in 3 seconds and have a "wait, what?" twist. Prefer famous brands people use (global appeal).
 - Idea bank (each must be verified first, skip any you can't source): IKEA maze + cheap food at exit; printer ink vs champagne price per ml;
   cinema popcorn margins; gyms profiting from members who never come; airline loyalty/credit-card money; Nespresso/Gillette razor-and-blades;
@@ -36,10 +44,14 @@ Disk is limited (~8 GB free): delete `work/part*.mp4`, frames and old projects a
 
 ## 4. Script (`scripts/vo_lines.py`)
 Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words], ending)` — see `examples/*/vo_lines.py`.
-- 50–70 s total, 14–19 lines. MrBeast-style: simple words, high energy, stakes, short sentences.
+- 60–85 s total, 16–22 lines. MrBeast-style: simple words, stakes, short sentences — but **never rushed**: speed ≈ 1.0,
+  real pauses before reveals (0.35–0.6 s), one idea per line. If the story needs more time, take it; never pad.
 - Line 1 = an intro **question** inside 3 s that names the brand/topic and the surprising claim, so viewers instantly know what the video is about (e.g. "Do you know Starbucks is sitting on one point seven billion dollars… of your money?"). Vary the wording each video.
-- Middle: 3–4 clear beats (steps/secrets/reasons) — vary the structure from the previous video.
-- Payoff twist line, then CTA: "Send this to the friend who …!" (always tied to the topic).
+- Middle: 3–4 clear beats (steps/secrets/reasons) — vary the structure from the previous video. Explain each beat with a
+  concrete everyday example the viewer recognises (a receipt, a cup, a card swipe), not abstract numbers alone.
+- **Re-hook** around the middle (an open loop: "but the third trick is the sneakiest…") so people don't swipe at 40%.
+- Payoff twist line, a **takeaway the viewer can use** (worth saving), then CTA: "Send this to the friend who …!" (tied to the topic).
+- **Loop ending:** if possible the last line flows back into the first frame, so a rewatch feels seamless.
 - Line ids: hook `i*`, beats `a*`/`b*`/`c*`/`d*`, ending `e1`, CTA `e2` (the template's shots use these). Unique words help timing anchors.
 - Numbers: write them as words the TTS reads cleanly ("one point seven billion", "four ninety-nine"). Check abbreviations in the ASR read-back.
 
@@ -58,6 +70,9 @@ Clean, no hiss, natural. Output: `work/vo.wav`, `work/align.json` (word times us
 - Two-tier editorial captions **only at key moments** (`ui_word(f, lead, BIG, y≈470, t, t0, ...)`): one big word/number + small lead.
   No word-by-word subtitles, no emoji, no persistent counters/meters.
 - First 3 s: a strong visual (object + action) + one short caption with the brand/claim. No giant text-only opener.
+  **Frame 1 is already interesting** (the most surprising object of the video, mid-motion) — YouTube counts views from the
+  first frame and the seed audience decides in about 1–2 s whether to swipe.
+- At least 18 shots; the picture changes every 2–3 s (new prop, zoom, angle or set). Every claim in the VO gets its own visual.
 - Every shot: a real prop or diagram that shows the idea (props in `anim_props*.py`; write new ones per topic in a new `anim_props4.py`
   and add it to `anim.py`'s exec list). Big objects, movement on beat (pin/pop, flips, slams), screen shake on impacts (`IMPACTS`),
   transitions vary: cut, whip, focus, zoom, punch, flash.
@@ -83,6 +98,10 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
 1. Contact sheet of the final (1 frame / 2 s) — look at every frame: no broken layouts, nothing in unsafe zones, text spelled right, no logos.
 2. `ffprobe`: 1080×1920, h264 + aac; `ebur128`: about −11 LUFS, peak ≤ −1 dBTP.
 3. Facts on screen and in VO match the sources.
+4. `python3 studio/tools/voice_report.py $P work/vo.wav` — UTMOS ≥ 4.0, no ASR bad lines, pitch range ≥ 10 st. Put the numbers in the run log.
+5. Score the quality bar in `IMPROVEMENTS.md` (hook, clarity, pacing, voice, visual, audio, ending). Anything below 4 → fix it first.
+6. Originality: it must not look like the previous video with new text (YouTube treats "minor template changes" as unoriginal).
+   At least one new prop set, one new layout idea and a different music genre.
 
 ## 9. Host and post
 - Never commit MP4s to `main`. Host on a throwaway branch: `bash studio/host_video.sh push $P/work/final.mp4 <slug>` → prints
@@ -102,5 +121,8 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
   - `mediaAltText`: one sentence describing the video with the keyword.
 - Append the line to `studio/topics.md`, commit + push.
 
-## 10. Report
-Final message: title, scheduled time (IST), Metricool planner link, 1-line topic summary, sources. Clean up the project's work files.
+## 10. Learn, log, report
+- Add the run to `IMPROVEMENTS.md` log (upgrades tried, voice_report numbers, kept/dropped) and update `PERFORMANCE.md`.
+- Commit + push `studio/` changes (fetch + rebase first; another task shares this repo — only touch `studio/`).
+- Final message: title, scheduled time (IST), 1-line topic summary, what improved vs last video, what the data said, sources.
+  Clean up the project's work files.

@@ -3,7 +3,16 @@
 Never repeat a topic (or a close variant) from this list. Append one line per new video:
 `YYYY-MM-DD | Title | slug | Metricool post time (IST) | key sources`
 
+**Double check before choosing:** also pull the brand's posts from the last 90 days (Metricool `getAnalyticsDataByMetrics`
+Instagram reels `IGRE03` captions, and `getScheduledPosts` for the coming days) and make sure the topic is not there.
+The owner sometimes uploads videos manually, so this list alone is not enough.
+
 ## Already made before the autopilot
+- Starbucks is secretly a bank (posted 2026-10-20, then repeated by mistake 2026-10-25 — never again)
+- Google AI Overviews stopped sending customers to websites
+- Is AI killing Salesforce? (SaaSpocalypse)
+- Compaq copied IBM's BIOS (clean-room copy / "copying the app")
+- Whey protein boom
 - McDonald's is really a real-estate company
 - 4 tricks restaurants use on you (decoy steak, slow music, soda markup, no $ sign on menus)
 - 5 shipping traps
