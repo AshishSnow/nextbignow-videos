@@ -27,13 +27,19 @@ CFG = {L[0]: L for L in LINES}
 import os, hashlib
 # SPD scales every line's speed, PZ scales every pause (PMIN = shortest pause, s) -> calmer, clearer pacing
 SPD = float(os.environ.get("SPD", "0.88")); PZ = float(os.environ.get("PZ", "1.6")); PMIN = float(os.environ.get("PMIN", "0.3")); EXS = float(os.environ.get("EXS", "1.0")); BMP = float(os.environ.get("BMP", "1.0")); STR = float(os.environ.get("STR", "1.0"))
-_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX]).encode()).hexdigest()   # pauses are baked into the cache too
+SPLIT = float(os.environ.get("SPLIT", "0.12"))   # per-sentence Kokoro calls + 0.12 s gap: UTMOS 4.23 -> 4.38 (27 Oct A/B)
+_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX] + ([SPLIT] if SPLIT > 0 else [])).encode()).hexdigest()   # pauses are baked into the cache too
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}
 t = LEAD
 for lid, text, sp, pause, *_ in ([] if os.path.exists(_cache) else LINES):
-    a, sr = k.create(text, voice=VOICE, speed=sp * SPD, lang="en-us", trim=True)
-    a = signal.resample_poly(a.astype(np.float64), SR, sr).astype(np.float32)
+    parts = [q for q in re.split(r"(?<=[.?!…])\s+", text) if q.strip()] if SPLIT > 0 else [text]
+    segs = []
+    for qi, q in enumerate(parts):   # SPLIT>0: one Kokoro call per sentence + a short natural gap (long lines sound less rushed)
+        a, sr = k.create(q, voice=VOICE, speed=sp * SPD, lang="en-us", trim=True)
+        segs.append(signal.resample_poly(a.astype(np.float64), SR, sr).astype(np.float32))
+        if qi < len(parts) - 1: segs.append(np.zeros(int(SPLIT * SR), np.float32))
+    a = np.concatenate(segs)
     f = int(0.012 * SR); a[:f] *= np.linspace(0, 1, f); a[-f:] *= np.linspace(1, 0, f)
     lines[lid] = dict(start=round(t, 3), end=round(t + len(a) / SR, 3), text=text)
     pieces.append(a); t += len(a) / SR

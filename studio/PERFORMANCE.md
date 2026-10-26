@@ -9,30 +9,34 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
-## Instagram (snapshot 2026-10-26 21:50 IST)
+## Instagram (snapshot 2026-10-27 02:10 IST)
 | Date | Video | Style | Len | Views | Reach | Avg watch | 3-s view rate | Likes | Shares | Saves |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 10-25 | Starbucks is secretly a bank (2nd time!) | animated, energetic voice | 55 s | 241 | 199 | 15.4 s | 52.9% | 5 | 0 | 0 |
-| 10-25 | Costco $1.50 hot dog | animated, energetic voice | 68 s | 494 | 443 | 20.9 s | 58.9% | 21 | 0 | 1 |
-| 10-25 | 4 restaurant tricks | animated, calm voice | 75 s | 1,436 | 1,245 | 25.2 s | 67.6% | 29 | 4 | 5 |
-| 10-25 | McDonald's is a real-estate company | cut-out collage | ~60 s | 1,241 | 1,029 | 20.5 s | 65.6% | 26 | 1 | 3 |
-| 10-24 | Couple beat the lottery | AI footage | – | 37 | 21 | 11.0 s | 25.0% | 2 | 0 | 0 |
-| 10-24 | 7 online shopping traps | AI footage | – | 187 | 165 | 23.5 s | 61.7% | 5 | 0 | 1 |
-| 10-23 | 7 supermarket traps | AI footage | – | 2,814 | 2,623 | 2.8 s | 12.0% | 6 | 2 | 0 |
-| 10-23 | 5 shipping traps | AI footage | – | 3,964 | 3,583 | 12.2 s | 26.0% | 35 | 2 | 3 |
-| 10-22 | Whey protein boom | AI footage | – | 62 | 51 | 26.0 s | 11.5% | 3 | 0 | 1 |
-| 10-22 | Compaq clean-room copy | AI footage | – | 129 | 111 | 15.0 s | 40.2% | 4 | 1 | 1 |
-| 10-21 | Dubai chocolate boom | AI footage | – | 267 | 225 | 16.4 s | 39.8% | 4 | 0 | 1 |
-| 10-21 | $2 in China → $19.99 on Amazon | AI footage | – | 4,634 | 4,315 | 2.9 s | 13.1% | 6 | 1 | 4 |
-| 10-20 | Starbucks is secretly a bank (1st) | AI footage | – | 185 | 149 | 9.3 s | 33.8% | 5 | 0 | 0 |
-| 10-20 | Is AI killing Salesforce? | AI footage | – | 90 | 55 | 8.0 s | 20.3% | 3 | 0 | 1 |
+| 10-26 | Printer ink costs more than champagne (autopilot) | animated, calm voice | ~75 s | 1,366 | 1,187 | 21.5 s | **74.0%** | 20 | 0 | 0 |
+| 10-26 | Planet Fitness $15/month (autopilot) | animated, calm voice | ~75 s | 209 | 166 | 22.2 s | 64.0% | 4 | 0 | 0 |
+| 10-26 | Chick-fil-A closed Sundays (autopilot) | animated, calm voice | ~75 s | 176 | 143 | 18.3 s | 54.2% | 4 | 0 | 0 |
+| 10-26 | Amazon's money machine is AWS (autopilot) | animated, calm voice | ~70 s | 225 | 193 | 13.1 s | 50.0% | 6 | 0 | 1 |
+| 10-25 | Starbucks is secretly a bank (2nd time!) | animated, energetic voice | 55 s | 412 | 342 | 17.3 s | 61.6% | 14 | 2 | 0 |
+| 10-25 | Costco $1.50 hot dog | animated, energetic voice | 68 s | 1,225 | 1,066 | 23.0 s | 64.1% | 39 | 0 | 4 |
+| 10-25 | 4 restaurant tricks | animated, calm voice | 75 s | 1,466 | 1,264 | 25.1 s | 67.0% | 30 | 4 | 6 |
+| 10-25 | McDonald's is a real-estate company | cut-out collage | ~60 s | 1,281 | 1,069 | 20.3 s | 65.5% | 28 | 1 | 3 |
+| 10-24 | Couple beat the lottery | AI footage | – | 39 | 23 | 10.3 s | 23.1% | 2 | 0 | 0 |
+| 10-24 | 7 online shopping traps | AI footage | – | 190 | 167 | 23.1 s | 60.6% | 5 | 0 | 1 |
+| 10-23 | 7 supermarket traps | AI footage | – | 2,816 | 2,630 | 2.8 s | 12.1% | 6 | 2 | 0 |
+| 10-23 | 5 shipping traps | AI footage | – | 3,966 | 3,589 | 12.2 s | 26.0% | 35 | 2 | 3 |
+| 10-22 | Whey protein boom | AI footage | – | 64 | 53 | 25.2 s | 11.1% | 3 | 0 | 1 |
+| 10-22 | Compaq clean-room copy | AI footage | – | 130 | 112 | 14.9 s | 39.8% | 4 | 1 | 1 |
+| 10-21 | Dubai chocolate boom | AI footage | – | 270 | 227 | 16.2 s | 39.5% | 4 | 0 | 1 |
+| 10-21 | $2 in China → $19.99 on Amazon | AI footage | – | 4,636 | 4,315 | 2.9 s | 13.1% | 6 | 1 | 4 |
+| 10-20 | Starbucks is secretly a bank (1st) | AI footage | – | 186 | 150 | 9.3 s | 33.6% | 5 | 0 | 0 |
+| 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
-(Autopilot posts from 26 Oct onward: Amazon/AWS, Chick-fil-A, printer ink, Planet Fitness, cinema popcorn, Visa — add when their data arrives.)
+| 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(Cinema popcorn 10-27 00:00 and Visa 10-27 05:00: no data yet — add next run. YouTube numbers still null in Metricool on 27 Oct.)
 
-## Insights (rewrite each run)
-1. Our **animated explainers hold attention far better** (3-s view rate 53–68%, avg watch 15–25 s) than the older AI-footage reels (4–40%). Keep the animated format.
-2. **Reach** has been highest for broad money hooks with a personal number ("$2 in China, $19.99 on Amazon", "I shipped a $10,000 box") — but those lost people in 3 s. Goal: broad, personal money hook **+** animated clarity.
-3. Avg watch is only ~25–35% of the length → the middle loses people. Add a re-hook every ~10 s (open loop: "and the third one is the craziest"), change the picture every 2–3 s, keep sentences short, pay off at the very end.
-4. **Shares and saves are near zero** → end with a useful takeaway the viewer can act on, and a CTA naming a very specific friend.
-5. The calm, slower restaurant voice held best so far (25 s avg). Don't rush: slower, clearer delivery with real highs and lows (owner's request) — test it, don't assume.
-6. Repeating a topic (Starbucks twice) wastes a slot → always check the post history before choosing.
+## Insights (rewrite each run — 27 Oct 02:10 IST)
+1. **Everyday-object hooks win.** Printer ink vs champagne (a thing you buy, an absurd comparison) got the best 3-s view rate we have ever had (74%) and 1.4k views. The corporate-structure topics (AWS, Chick-fil-A franchise deal, Planet Fitness 10-K) held 50–64% and stayed under 250 views. → Pick topics about something in the viewer's hand/phone/receipt, framed as a "that can't be right" comparison or question.
+2. Animated explainers keep 50–74% past 3 s vs 4–40% for the old AI-footage reels; keep the format. Avg watch is stuck at ~13–23 s on 60–75 s videos → the middle still leaks. Re-hook card mid-video + a visual change every 2–3 s.
+3. **Shares and saves are still ~0** on every autopilot post. The only posts with real shares/saves (restaurant tricks, makhana) gave the viewer something to *use* → end with a concrete takeaway the viewer can apply to their own life, not just a fun fact.
+4. The calm voice did not lower retention (printer ink 21.5 s avg on the calm voice) → keep calm and natural.
+5. Repeating a topic wastes a slot → always check post history (incl. the owner's manual uploads).

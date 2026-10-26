@@ -137,3 +137,87 @@ def counter_el(label, col, w=420, h=300):
         d.text((w / 2 * sc, 45 * sc), label, font=font(F_BLACK, 40 * sc), fill=(255, 255, 255, 255), anchor="mm")
         return _done(im, w, h)
     return gcache(("counter", label, col, w, h), mk)
+
+
+# ---- generic data-viz props (from the Duolingo episode, 27 Oct 2026) ----
+
+def odometer(f, cx, cy, text, k=1.0, cell=(96, 150), col=YEL_, seed=0):
+    """rolling digit counter drawn straight on the frame; digits settle left-to-right as k goes 0..1"""
+    n_ = len(text); cw, ch = cell; gap = 10; x0 = cx - (n_ * cw + (n_ - 1) * gap) / 2
+    cv2.rectangle(f, (int(x0 - 26), int(cy - ch / 2 - 26)), (int(x0 + n_ * (cw + gap) - gap + 26), int(cy + ch / 2 + 26)), C(INK), -1, cv2.LINE_AA)
+    rng = np.random.default_rng(seed)
+    for i, c in enumerate(text):
+        x = x0 + i * (cw + gap)
+        if c in ",.":
+            el = ed_el("", c, "", big_col=col, big_size=110, fp_big=F_BLACK, maxw=200)
+            comp(f, el, x + cw / 2, cy + 8); continue
+        cv2.rectangle(f, (int(x), int(cy - ch / 2)), (int(x + cw), int(cy + ch / 2)), C((250, 248, 240)), -1, cv2.LINE_AA)
+        done = k >= (i + 1) / (n_ + 1)
+        d_ = c if done or not c.isdigit() else str(int(rng.integers(0, 10) + k * 97 + i * 3) % 10)
+        el = ed_el("", d_, "", big_col=INK, big_size=118, fp_big=F_BLACK, maxw=200)
+        comp(f, el, x + cw / 2, cy + 2)
+        cv2.line(f, (int(x), int(cy)), (int(x + cw), int(cy)), C((200, 200, 205)), 2)
+
+
+def cents_grid(f, cx, cy, lit, col, cell=44, gap=8, k=1.0, dim=(255, 255, 255)):
+    """10x10 grid = one dollar in cents; the first `lit` cells glow in col (k animates fill 0..1)"""
+    n_on = int(round(lit * clamp(k)))
+    s = cell + gap; x0 = cx - 5 * s + gap / 2; y0 = cy - 5 * s + gap / 2
+    cv2.rectangle(f, (int(x0 - 24), int(y0 - 24)), (int(x0 + 10 * s + 16), int(y0 + 10 * s + 16)), C(INK), -1, cv2.LINE_AA)
+    for i in range(100):
+        r_, c_ = divmod(i, 10); x = int(x0 + c_ * s); y = int(y0 + (9 - r_) * s)
+        on = i < n_on
+        cv2.rectangle(f, (x, y), (x + cell, y + cell), C(col if on else dim), -1, cv2.LINE_AA)
+
+
+def bars(f, x, base, w, hgt, col, k=1.0, label="", val=""):
+    h_ = int(hgt * eo(clamp(k)))
+    cv2.rectangle(f, (int(x - w / 2) + 8, base - h_ + 8), (int(x + w / 2) + 8, base), (0, 0, 0), -1, cv2.LINE_AA)
+    cv2.rectangle(f, (int(x - w / 2), base - h_), (int(x + w / 2), base), C(col), -1, cv2.LINE_AA)
+    cv2.rectangle(f, (int(x - w / 2), base - h_), (int(x + w / 2), base), C(INK), 6, cv2.LINE_AA)
+    if label: comp(f, ed_el("", label, "", big_col=INK, big_size=40, maxw=300), x, base + 50)
+    if val and k > 0.6: comp(f, ed_el("", val, "", big_col=INK, big_size=74, maxw=300), x, base - h_ - 60, op=clamp((k - 0.6) / 0.3))
+
+
+def loop_diagram(f, cx, cy, r, steps, k, t, cols):
+    """circular habit loop: arrow ring + step bubbles appearing in order as k goes 0..1"""
+    n = len(steps)
+    ang_end = -90 + 360 * clamp(k)
+    cv2.ellipse(f, (int(cx), int(cy)), (int(r), int(r)), 0, -90, ang_end, C(INK), 30, cv2.LINE_AA)
+    cv2.ellipse(f, (int(cx), int(cy)), (int(r), int(r)), 0, -90, ang_end, C(WHITE), 18, cv2.LINE_AA)
+    a = math.radians(ang_end); hx, hy = cx + r * math.cos(a), cy + r * math.sin(a)
+    tx, ty = -math.sin(a), math.cos(a)
+    tri = np.array([[hx + tx * 40, hy + ty * 40], [hx - tx * 6 + math.cos(a) * 34, hy - ty * 6 + math.sin(a) * 34],
+                    [hx - tx * 6 - math.cos(a) * 34, hy - ty * 6 - math.sin(a) * 34]], np.int32)
+    if k > 0.03: cv2.fillPoly(f, [tri], C(INK), cv2.LINE_AA)
+    for i, s in enumerate(steps):
+        q = i / n
+        if k < q + 0.02: continue
+        a = math.radians(-90 + 360 * q); x, y = cx + r * math.cos(a), cy + r * math.sin(a)
+        comp(f, chip(s, cols[i % len(cols)], WHITE if cols[i % len(cols)] != YEL_ else INK, 40), x, y, scale=pin(t, 0, 0.01) * (1.0 + 0.15 * math.exp(-(k - q) * 30)))
+
+
+def heatmap(f, cx, cy, k, cols=26, rows=14, cell=26, gap=5, col=(255, 120, 20), dim=(255, 255, 255)):
+    """year grid (364 days) filling column by column as k goes 0..1"""
+    n = cols * rows; on = int(round(n * clamp(k))); s = cell + gap
+    x0 = int(cx - cols * s / 2); y0 = int(cy - rows * s / 2)
+    cv2.rectangle(f, (x0 - 22, y0 - 22), (x0 + cols * s + 16, y0 + rows * s + 16), C(INK), -1, cv2.LINE_AA)
+    for i in range(n):
+        c_, r_ = divmod(i, rows); x = x0 + c_ * s; y = y0 + r_ * s
+        shade = 0.75 + 0.25 * ((i * 37) % 7) / 6
+        colr = tuple(min(255, int(v * shade)) for v in col) if i < on else (70, 70, 84)
+        cv2.rectangle(f, (x, y), (x + cell, y + cell), C(colr), -1, cv2.LINE_AA)
+
+
+def heart_line(f, x0, x1, y, t, k, col=(60, 230, 120), amp=90):
+    """ECG line drawn up to fraction k with a moving beat"""
+    pts = []
+    n = 160
+    for i in range(int(n * clamp(k)) + 1):
+        q = i / n; x = x0 + (x1 - x0) * q; ph = (q * 3 + 0.2) % 1.0
+        yy = y - amp * (math.exp(-((ph - 0.5) / 0.03) ** 2) - 0.45 * math.exp(-((ph - 0.56) / 0.03) ** 2) + 0.15 * math.exp(-((ph - 0.3) / 0.06) ** 2))
+        pts.append([x, yy])
+    if len(pts) > 1:
+        p = np.array(pts, np.int32)
+        cv2.polylines(f, [p], False, C(INK), 16, cv2.LINE_AA); cv2.polylines(f, [p], False, C(col), 9, cv2.LINE_AA)
+        cv2.circle(f, tuple(p[-1]), 14, C(WHITE), -1, cv2.LINE_AA)

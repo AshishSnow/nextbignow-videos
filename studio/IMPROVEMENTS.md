@@ -31,7 +31,10 @@ Understand the new algorithm. Do this without being told every time."
 ## Backlog (pick from here; strike through what's done, add new ideas)
 Voice / audio
 - ~~Slower, calmer pace with longer pauses (owner request)~~ — done 26 Oct: SPD 0.88, PZ 1.6 (214 → 183 wpm).
-- ~~A/B the Kokoro blend and pitch target~~ — done 26 Oct (new default blend, no pitch lift). Next: try am_puck mixes in a real video, per-sentence generation inside long lines, and a light de-esser.
+- ~~A/B the Kokoro blend and pitch target~~ — done 26 Oct (new default blend, no pitch lift).
+- ~~Per-sentence generation inside long lines~~ — done 27 Oct: `SPLIT=0.12` → UTMOS 4.23 → 4.38, range 17.7 → 18.5 st; now default.
+- ~~am_puck mix in a real video~~ — 27 Oct: puck .3/michael .4/eric .3 + SPLIT = 4.42 UTMOS but narrower (16.5 st), slower (169 wpm), +3 s; within noise of the default → not adopted. Re-test on a shorter script.
+- Next: a light de-esser pass check; per-word emphasis loudness (+1–2 dB) A/B; sentence-gap 0.08 vs 0.18.
 - Whisper-quiet "secret" lines and louder reveal lines (volume automation per line in mix.py).
 - Breath/room tone between lines so it doesn't sound stitched; tiny 40–80 ms crossfades.
 - Emphasis words get +1–2 dB and a slight stretch, not only pitch.
@@ -39,12 +42,14 @@ Voice / audio
 
 Visual / story
 - First frame = the most surprising visual of the whole video (no build-up), with the hook caption already on screen.
-- Mid-video re-hook card ("and the third trick is the sneakiest") around 45–55% of the runtime.
+- ~~Mid-video re-hook card~~ — done 27 Oct (envelope "wait for this number" at 47%); keep doing it, vary the prop.
 - Loop ending: last line leads back into the first frame.
 - New set designs: split screen, map, receipts, factory line, courtroom, vault, game board, timeline.
 - Character acting: mascot reacts (shocked, smug, counting money) on every reveal.
 - Number reveals with physical objects (stacks of cash, piles of cups) instead of text.
 - Custom cover frame (`videoCoverMilliseconds`) chosen deliberately: hook question + key object.
+- Keep the video near 60–75 s: the Duolingo script ran 93 s; cut one beat next time and compare avg watch % of length.
+- Takeaway the viewer can *use* in their own life (habit tip, money tip) — test whether it lifts saves/shares (still ~0).
 
 ## Voice benchmarks (same Starbucks test script unless noted; UTMOS 1–5, higher = more natural)
 | Setting | UTMOS | F0 median | Pitch range | Speaking pace | Pauses | Note |
@@ -67,9 +72,14 @@ Visual / story
 | puck .4 / eric .4 / michael .2, own register | 4.37 | 134 | 17.5 | 182 | 10% | good alternative |
 | same, EXS 1.0 BMP 1.0 | 4.34 | 136 | 18.3 | 182 | 10% | |
 | puck .3 / michael .4 / eric .3, EXS .9 | 4.39 | 131 | 16.7 | 179 | 10% | good alternative |
+| **Duolingo script, 27 Oct: default (A)** | 4.23 | 137 | 17.7 | 180 | 9% | 89 s |
+| **A + SPLIT 0.12 (B) → new default** | **4.38** | 139 | **18.5** | 176 | 9% | 91 s |
+| puck .3/michael .4/eric .3, EXS .9 (C) | 4.31 | 131 | 16.7 | 175 | 9% | 91 s |
+| C + SPLIT 0.12 (D) | 4.42 | 133 | 16.5 | 169 | 9% | 94 s, flatter |
 Lessons: (1) never shift the whole voice up — use the blend for brightness instead; (2) slower + longer pauses helps;
 (3) more am_fenrir lowers naturalness; (4) wider per-line range costs only ~0.03.
 
 ## Log
 - 2026-10-26 | system | Voice lab, 16 variants on the Starbucks script, scored with UTMOS + ASR + pitch range (table above) | new default: michael/eric/fenrir blend, own register, SPD .88, PZ 1.6, EXS 1.0 — UTMOS 4.12 → 4.36, 214 → 183 wpm | kept
 - 2026-10-26 | system | voice_report.py: UTMOS now runs on onnxruntime (model on the `models` branch, no torch), ASR check ignores number/abbreviation formatting | kept
+- 2026-10-27 | Duolingo streak (93 s, 21 shots) | Voice: per-sentence Kokoro generation (SPLIT 0.12) A/B vs default and vs puck blend — UTMOS 4.23 → 4.38, range 17.7 → 18.5 st, 176 wpm, ASR 0 bad lines → kept, now template default; puck+SPLIT 4.42 but flatter/slower → not adopted. Visual/story: mid-video re-hook prop (envelope 'wait for this number' at 47%), first frame = hook object + caption fully on screen, split-screen day 2 vs day 200, year heatmap, ECG revive, habit-loop diagram, takeaway the viewer can use (survive 7 days), chiptune score (new genre) → kept. Generic data-viz props (odometer, cents_grid, bars, loop_diagram, heatmap, heart_line) moved into template anim_props3. QA: 1080x1920, -11.5 LUFS / -1.3 dBTP, VO/bed 17–25 dB. Quality bar: hook 4, clarity 5, pacing 4, voice 4, visual 4, audio 4, ending 4. Lessons: shot 0 must contain the money reveal (first cut came before 'billion' — caught in test frames); tiny flame icons (<60 px) lose their fill → draw icons ≥ 60 px; 2 renders + 1 half re-render. | kept
