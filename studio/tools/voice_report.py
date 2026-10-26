@@ -7,13 +7,14 @@ wav = sys.argv[2] if len(sys.argv) > 2 else f"{P}/work/vo.wav"
 x, sr = sf.read(wav); x = x if x.ndim == 1 else x.mean(1)
 A = json.load(open(f"{P}/work/align.json")); L = A["lines"]; Wd = A["words"]
 rep = {}
-# naturalness (UTMOS22 strong) — optional
+# naturalness (UTMOS22 strong, ONNX; 1 = bad, 5 = excellent) — optional
 try:
-    sys.path.insert(0, f"{R}/lib/speechmos_pkg"); import torch
-    from speechmos.utmos22.strong.model import UTMOS22Strong
-    m = UTMOS22Strong(); m.load_state_dict(torch.load(f"{R}/models/utmos/utmos22_strong.pt", map_location="cpu")); m.eval(); torch.set_num_threads(2)
+    import onnxruntime as ort
     a16 = signal.resample_poly(x, 16000, sr).astype(np.float32)
-    with torch.no_grad(): rep["utmos"] = round(float(m(torch.from_numpy(a16)[None], 16000).item()), 3)
+    k_ = (len(a16) - 400) // 320 + 1; k_ -= k_ % 2; a16 = a16[: 400 + 320 * (k_ - 1)]   # even frame count (export has no padding)
+    so = ort.SessionOptions(); so.intra_op_num_threads = 2
+    sess = ort.InferenceSession(f"{R}/models/utmos/utmos22.onnx", so, providers=["CPUExecutionProvider"])
+    rep["utmos"] = round(float(sess.run(None, {"wave": a16[None]})[0].ravel()[0]), 3)
 except Exception as e:
     rep["utmos"] = None; rep["utmos_note"] = f"unavailable: {type(e).__name__}"
 # pitch
