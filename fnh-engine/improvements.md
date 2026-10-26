@@ -1,5 +1,9 @@
 # FreshNestHub — continuous improvement (read + update EVERY run)
 
+**Owner, 26 Oct 22:59: "It's not about views or post numbers — just learn new things and keep improving, every day,
+every run, voice AND visuals AND topics."** Numbers are only a compass; the goal is to get better at the craft every
+single run, and to never stop learning. Never write "nothing to improve".
+
 The owner's standing order (26 Oct 2026): "Don't settle. With every video improve: more natural voice, better video.
 Understand the new algorithm and act on it — I shouldn't have to tell you every time." Growth takes time; quality and
 learning beat speed. Every run must leave the channel a little better than it found it.
@@ -99,3 +103,48 @@ Script / packaging:
 | 26 Oct | A5 = A2 with GT 160 | 4.34 | 200 | 0.12 | 17.4 | 0 |
 | 26 Oct | A6 SPD 0.86 PZ 1.5 PMIN 0.35 | 4.31 | 193 | 0.12 | 17.4 | 0 |
 Note: the calmer pace makes the same script ~13 % longer — write 120–145 words to stay at 45–55 s.
+
+## G. Craft learning — one NEW skill every run (mandatory; this is the heart of improving)
+Every run: take the next unchecked skill below (or a better one you discover), research it for ~5 minutes
+(WebSearch: animation/motion-design/voice-over/sound-design/storytelling guides, breakdowns of great animated
+explainers), write 3–5 lines in the journal (what you learned + source), USE it in this video, and if it works,
+add it to `template/anim_fx.py` (or voice.env / make_vo / mix helpers) with a one-line note so every future
+video has it. Add newly discovered skills to the curriculum. Skills compound — the library must keep growing.
+
+### Curriculum (tick when learned + applied; add more as you discover them)
+Animation & visuals:
+- [x] Squash & stretch, slow in/out, overshoot, anticipation, smear trails, sparkles/confetti/dust (anim_fx.py seed, 26 Oct)
+- [ ] Staging: one clear focal point per shot; silhouette test for Chubby's poses
+- [ ] Follow-through & overlapping action (hair curl, belly jiggle, props settling with `settle()`)
+- [ ] Arcs: move props and limbs along curves, not straight lines
+- [ ] Timing & spacing: hold key poses 6–10 frames, fast in-betweens (snappy cartoon timing)
+- [ ] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take)
+- [ ] Character acting: eye direction leads action, blinks on cuts, reaction shots
+- [ ] Simple lip-sync visemes for Chubby when he talks (mouth shapes from the VO envelope + vowels)
+- [ ] Camera language: push-in on reveals, whip pans between ideas, low/high angles, rack focus (`cam_keys`, `push_in`)
+- [ ] Depth: parallax background layers, foreground elements passing the camera, atmospheric perspective
+- [ ] Lighting: rim light and soft ambient-occlusion shadows on props; light rays on reveals
+- [ ] Colour script: plan the colour arc of the video (calm -> tension -> payoff) instead of random schemes
+- [ ] Kinetic typography for key numbers (count-ups, slams, words that react to the action)
+- [ ] Match cuts and morph transitions (shape of one object becomes the next)
+- [ ] Texture & detail: gradients, highlights, subtle grain on the hero prop of each video
+- [ ] Inside-the-body worlds: cell/organ scenes with scale cues (Kurzgesagt-style clarity)
+Voice (always voice A — refine, never swap):
+- [x] Calmer pace + real pauses (A4, UTMOS 4.36)
+- [ ] Ear-writing: rhythm, short-long sentence contrast, rule of three, contractions
+- [ ] Pause before the payoff word; lift on questions; settle on statements
+- [ ] Per-line speed variety and stress placement tested with voice_report
+- [ ] Mic-like polish: gentle de-ess, presence EQ, no harshness (check with voice_report + spectrum)
+Sound:
+- [ ] Foley that matches the action (crunch, fizz, squelch, sizzle) synthesized per video
+- [ ] Music that follows the story (build -> drop on the reveal -> soft under explanations), stems ducking
+- [ ] A signature 1-second FreshNestHub audio logo
+Story & topics:
+- [ ] Curiosity gap + open loop in the first line, payoff placed at ~70 % of the video
+- [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
+- [ ] Concrete comparisons people can picture ("as heavy as…", "the size of…")
+- [ ] One-sentence takeaway people can use today
+
+### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-26 | Squash & stretch, anticipation, slow in/out, smear, particles | 12 principles of animation (Thomas & Johnston,
+  "The Illusion of Life") turned into code helpers | anim_fx.py seed, to be used from ep 09 | yes

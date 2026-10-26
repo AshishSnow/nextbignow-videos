@@ -33,6 +33,9 @@ Never edit anything outside `fnh-engine/` (studio/ and oopsmybusiness/ belong to
    news, policy changes) and update section A; run the trend + topic scan (section A2) and refresh topic_ideas.md.
 4. Choose this video's upgrades: at least ONE voice + ONE visual/edit + ONE topic/script improvement (section C, the
    daily scans or your learnings). Apply them and log them in section E. Never ship a video identical in method to the last.
+5. Learn ONE new craft skill (improvements.md section G): research it, apply it in this video, add it to the journal,
+   and if it works put it into `template/anim_fx.py` (craft library, loaded in every episode) or the voice/mix tools.
+   The goal is learning and getting better — not chasing view counts.
 
 ## 2. Claim a topic
 1. `git pull`, read `topics_done.md` (titles + openings already used) and `topic_ideas.md`.
@@ -66,7 +69,7 @@ cd $P && (set -a; . $ENG/voice.env; set +a; python3 scripts/make_vo.py) && pytho
 python3 $ENG/engine/tools/voice_report.py $P   # UTMOS (naturalness 1-5), pace, pitch range, ASR — gate in improvements.md B.2
 python3 -c "import json;A=json.load(open('work/align.json'));[print(w['line'],w['w'],w['t']) for w in A['words']]"
 ```
-Then write (read the template versions first — they are the reference):
+Then write (read the template versions first — they are the reference; use the craft helpers in `anim_fx.py`):
 - `scripts/anim_props6.py` — NEW props for this topic (PIL supersampled, gradient `shape_grad`, soft shadows `_ov`,
   ink outlines where needed, cache with `gcache`). Reuse existing props when they fit (list below).
 - `scripts/anim_shots.py` — SHOTLIST (16–20 shots, 1.5–4.5 s each, cut on word times `T(line, word)`), one

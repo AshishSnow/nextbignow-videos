@@ -1,7 +1,7 @@
 """FreshNestHub — carrots can turn your skin orange (fully animated). Usage: anim.py OUT.mp4 [frames|a:b]"""
 import sys, subprocess, os
 _D = os.path.dirname(os.path.abspath(__file__))
-for _p in ("anim_base.py", "anim_props.py", "anim_props2.py", "anim_props3.py", "anim_props4.py", "fnh_char.py", "anim_props5.py",
+for _p in ("anim_base.py", "anim_props.py", "anim_props2.py", "anim_props3.py", "anim_props4.py", "fnh_char.py", "anim_fx.py", "anim_props5.py",
            "anim_props6.py", "anim_shots.py"):
     if os.path.exists(f"{_D}/{_p}"): exec(open(f"{_D}/{_p}").read())
 
