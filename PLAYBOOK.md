@@ -130,6 +130,7 @@ Last updated: 26 Oct 2026.
 - **Explaining things:** use explanatory graphics with subtle 3D cards, such as size bars, comparison charts and icon grids, at the moments that need them.
 - **Captions:** two-tier and centred, at key moments only. The big-word baseline sits at y = 650.
 - **Look:** vibrant sets, foreground depth-of-field dust and fog, a sound effect for every moment, and screen shake on impacts.
+- **Sound under speech:** broadband noise effects (flush, crowd, waves, crash) go in the gaps between lines, not under words. The mix-alignment check catches it: words near a loud effect drift by more than 0.3 s.
 - **Loop:** the final scene flows back into the hook frame.
 - **Small caption line:** 30 characters or fewer. Longer lines run past the frame edges; put the detail in the voice, not the caption.
 - **Before rendering:**
@@ -176,7 +177,7 @@ Last updated: 26 Oct 2026.
 - [Instagram: 3-minute Reels shown to non-followers](https://creators.instagram.com/blog/the-latest-with-instagram?)
 - [Socialinsider: Reels length data 2026](https://socialinsider.io/blog/instagram-reels-length/)
 
-**Episode facts (27–29)**
+**Episode facts (27–31)**
 - [Sylacauga meteorite (Wikipedia)](https://en.wikipedia.org/wiki/Sylacauga_(meteorite))
 - [Encyclopedia of Alabama: Hodges meteorite strike](https://encyclopediaofalabama.org/article/hodges-meteorite-strike-sylacauga-aerolite/)
 - [ScienceAlert: first recorded human meteorite strike](https://www.sciencealert.com/first-recorded-human-meteorite-strike-still-a-wild-tale-70-years-on)
@@ -187,6 +188,11 @@ Last updated: 26 Oct 2026.
 - [Smithsonian: Charles Osborne, who hiccuped for 68 years](https://www.smithsonianmag.com/history/the-curious-case-of-charles-osborne-who-hiccuped-for-68-years-straight-180980232/)
 - [Howes 2012 (PMC): hiccups and the amphibian gill-ventilation hypothesis](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3504071/)
 - [Guinness World Records: the 68-year hiccup attack](https://www.guinnessworldrecords.com/news/2023/7/extreme-measures-person-with-68-year-attack-of-hiccups-took-to-try-and-stop-them-754877)
+- [Scientific American: does swallowed gum stay for seven years?](https://www.scientificamerican.com/article/fact-or-fiction-chewing-gum-takes-seven-years-to-digest/)
+- [PubMed: chewing gum bezoars (Milov et al., Pediatrics 1998)](https://pubmed.ncbi.nlm.nih.gov/9685468/)
+- [University of York: 5,700-year-old chewing gum DNA](https://www.york.ac.uk/news-and-events/news/2019/research/ancientchewinggumrevealsnewcluesaboutourancestors/)
+- [Guinness World Records: longest hair (female), Xie Qiuping](https://www.guinnessworldrecords.com/world-records/longest-hair-female)
+- [SYFY Wire: how long and strong can hair get (growth, 100 g per hair)](https://www.syfy.com/syfy-wire/rapunzel-hair-tangled-magical-science-possible)
 
 ## 8. Improvement log
 
@@ -200,3 +206,5 @@ Last updated: 26 Oct 2026.
 | 27 | What if a meteorite hit you? | Ann Hodges (1954). Crash animated in one continuous room set (roof → radio → hip) with camera push. Myth-buster beat (meteorites land cold) with a cross-section, then the frozen-mascot gag. Landlord/farmer twist ("space is not fair"). | pending |
 | 28 | What if you stepped into quicksand? | First myth-buster format (no single survivor). Old-film sepia parody with film grain and sprocket holes, microscope grain view of liquefaction, density bars, stretched-arms gag, "really lazy" escape payoff. | pending |
 | 29 | What if you never stopped hiccuping? | Charles Osborne (68 years). Weird-body science format. Synthesised "hic" sound effect synced to every on-screen jolt. Animated diaphragm and vocal-cord cutaway, odometer to 430 million, envelope avalanche, shotgun-scare and "I do" gags. First voice with even pacing. | pending |
+| 30 | What if you swallowed your gum? | Journey format: follow one piece of gum (mouth → stomach → gut → exit) with a gum mascot that has a face. Myth-buster with a real 1998 case and a 5,700-year-old birch-tar "gum" twist. Close-up inset card for the gum-on-shoe gag. | pending |
+| 31 | What if you never cut your hair? | Growth cycle shown on an animated follicle (grow, rest, fall, new). "100,000 tiny projects quitting" gag. Xie Qiuping record vs a giraffe. Strength twist: one hair holds an apple, a full head two elephants. Circus hair-hang and tower ending. | pending |
