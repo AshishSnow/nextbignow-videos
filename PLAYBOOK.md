@@ -73,18 +73,16 @@ Last updated: 26 Oct 2026.
 - **Format:** spell numbers out as words in the voice script.
 - **Ending:** close on an open question that flows back into the first frame.
 
-## 4. Voice (make_vo2.py)
+## 4. Voice (make_vo3.py, chosen 26 Oct: voice "C")
 
-- Kokoro voice blend `am_michael` 55% + `am_puck` 45%. This is the young male voice that was approved.
-- Each sentence is generated on its own, with speed set by type:
-  - Questions and punchlines slower; exclamations a little faster.
-  - A small human variation on every line.
-- Pauses are controlled: '...' beats, sentence gaps, paragraph gaps.
-- Praat PSOLA intonation expansion (×1.25) gives wider highs and lows. Harmonics-to-noise ratio is unchanged, so it adds no artifacts.
-- EQ and compression, mastered to −16 LUFS. Check every word with the forced aligner.
-- **Next to test:**
-  - Word-level emphasis.
-  - A more expressive model once its weights can be downloaded (the model hub is blocked from this workspace right now).
+- **Model:** Chatterbox Turbo, cloning the channel's approved young male voice from the reference clip `ref_voice.wav`. Same voice as before, more natural rhythm and intonation.
+- **Pacing:** one call per paragraph, and each '...' becomes its own beat with a controlled pause. Silence is trimmed and chunk loudness evened out.
+- **Mastering:** EQ, de-ess and compression to −16 LUFS. Every word is checked with the forced aligner; a missing or repeated word means regenerate with a new seed.
+- **Speed:** about 3 minutes per 40-second voiceover on this CPU.
+- **Earlier versions:**
+  - make_vo2.py: Kokoro with per-sentence pacing and PSOLA. Fallback only.
+  - make_vo.py: the original. Retired.
+- **Next to test:** emotion and laugh tags on punchlines, emphasis on key words, and a short A/B listening test each week.
 
 ## 5. Visual rules
 
@@ -107,4 +105,5 @@ Last updated: 26 Oct 2026.
 
 | # | Video | What changed | Result (fill in after 48 h) |
 |---|---|---|---|
-| 24 | What if a whale swallowed you? | New voice v2 (per-sentence pacing, wider intonation). 42 s instead of 61–84 s. 13 scenes, about 3 s per beat. Real story (Michael Packard, 2021). Loop ending. Subtle 3D cards. No yes/no comment bait. | pending |
+| 24 | What if a whale swallowed you? | 42 s instead of 61–84 s. 13 scenes, about 3 s per beat. Real story (Michael Packard, 2021). Loop ending. Subtle 3D cards. No yes/no comment bait. Re-voiced with voice C before publishing. | pending |
+| 25 | What if your elevator cable snapped? | Voice C from the start. Real story (Betty Lou Oliver, 1945). Depth-of-field foreground dust, drifting fog, speed lines. Camera follows the falling car. Warmer, more vibrant building palette. Physics moment (weightless float in the falling car). 3/4-view bomber. | pending |
