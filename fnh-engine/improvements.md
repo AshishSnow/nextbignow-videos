@@ -39,7 +39,9 @@ Socialync (2026), Android Headlines / TechCrunch (Jul 2026, YouTube monetization
 
 ## C. Backlog (take from the top; add new ideas as you find them)
 Voice (make it sound more like a real, excited young guy — never robotic):
-- [ ] Owner is choosing between voice options A/B/C/D (fnh_voice_options.mp3, 26 Oct). Default = A (voice.env).
+- [x] 26 Oct 22:19 IST: owner listened to options A/B/C/D and PICKED A (the current voice in voice.env). Keep A's character
+      (am_eric/am_fenrir blend, lifted ~165 Hz register, energetic young guy). Voice upgrades = refine A (pacing, stresses,
+      pauses, phrasing, cleanliness) — never swap to another blend or a deeper/older voice.
 - [ ] Per-line speed variety: questions/reveals 0.96–0.98, fast lists 1.04, punchlines slower; never all 1.0.
 - [ ] Write for the ear: contractions, short words, "you" talk; split lines > 14 words; punctuation for natural pauses.
 - [ ] Less audible pitch processing (EXS 0.4, BMP 0.7) if the voice sounds "processed"; keep stresses on 1–2 words/line.
