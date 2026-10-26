@@ -20,3 +20,4 @@ Never repeat a topic (or a close variant) from this list. Append one line per ne
 - 2026-10-26 | Chick-fil-A Closed Sundays Yet Still Wins | oopsmybusiness/04-chickfila-sundays.mp4 | 2026-10-26 10:00 | Chick-fil-A 2026 FDD via QSR + Restaurant Business, Fortune (Oct 2026), McDonald's FY2025 10-K, Fox News (Sep 2026), Forbes, Business Insider
 - 2026-10-26 | Why Printer Ink Costs More Than Champagne | oopsmybusiness/05-printer-ink.mp4 | 2026-10-26 15:00 | Which? press release (Sept 2022), HP Inc. FY2025 results 8-K (Nov 2025), CNBC/Lores via Ars Technica + PetaPixel (Jan 2024)
 - 2026-10-26 | How Planet Fitness Profits at $15 a Month | oopsmybusiness/06-planet-fitness.mp4 | 2026-10-26 19:30 | Planet Fitness FY2025 10-K + Q4 2025 results 8-K (Feb 2026), DellaVigna & Malmendier AER 2006 / NBER w10819
+- CLAIMED 2026-10-26 15:40 IST | Why Movie Theaters Really Make Money on Popcorn
