@@ -1,7 +1,7 @@
 # FreshNestHub topic list v4 — food + health facts with Chubby (verify every fact with >= 2 sources first)
 
 ## UP NEXT (take the first one not yet in topics_done.md)
-1. 08-pineapple-eats-you — Do you know pineapple is eating you back while you eat it? (bromelain enzyme breaks down
+1. (DONE) 08-pineapple-eats-you — Do you know pineapple is eating you back while you eat it? (bromelain enzyme breaks down
    proteins in your tongue/cheeks -> tingle; your mouth repairs fast; cooked/canned pineapple loses it). Chubby: tongue
    close-up with tiny "scissors" enzymes.
 2. 09-spicy-food-burn — Do you know spicy food doesn't actually burn you? (capsaicin triggers TRPV1 heat sensors, brain
