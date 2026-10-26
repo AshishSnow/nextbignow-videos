@@ -15,6 +15,16 @@ try:
     so = ort.SessionOptions(); so.intra_op_num_threads = 2
     sess = ort.InferenceSession(f"{R}/models/utmos/utmos22.onnx", so, providers=["CPUExecutionProvider"])
     rep["utmos"] = round(float(sess.run(None, {"wave": a16[None]})[0].ravel()[0]), 3)
+    # length-fair scores (ep 09): whole-file UTMOS drops for long files (a 94 s VO scored 0.13 lower than its own 20-s chunks),
+    # so the gate compares utmos_chunk20 (mean of 20-s chunks) and utmos_line_mean (mean of per-line scores) between episodes.
+    def _u(seg):
+        k2 = (len(seg) - 400) // 320 + 1; k2 -= k2 % 2
+        return float(sess.run(None, {"wave": seg[: 400 + 320 * (k2 - 1)][None]})[0].ravel()[0]) if k2 > 2 else None
+    _c = [_u(a16[i:i + 320000]) for i in range(0, max(1, len(a16) - 160000), 320000)]
+    rep["utmos_chunk20"] = round(float(np.mean([c for c in _c if c is not None])), 3)
+    x16 = signal.resample_poly(x, 16000, sr).astype(np.float32)
+    _l = [_u(x16[int((l["start"] - 0.05) * 16000):int((l["end"] + 0.1) * 16000)]) for l in L.values()]
+    rep["utmos_line_mean"] = round(float(np.mean([v_ for v_ in _l if v_ is not None])), 3)
 except Exception as e:
     rep["utmos"] = None; rep["utmos_note"] = f"unavailable: {type(e).__name__}"
 # pitch

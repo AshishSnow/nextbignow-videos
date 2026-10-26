@@ -122,3 +122,90 @@ def smear(f, el, x0, y0, x1, y1, steps=5, op=0.35):
 # --- soft contact shadow under any prop (grounding = solid drawing) ---
 def ground_shadow(f, x, y, w, op=0.28):
     contact(f, x, y, w, op)
+
+
+# ================= EXPLAINING (ep 09): Mayer's multimedia principles turned into helpers =================
+# Signalling = point the eye at what the voice is talking about (spotlight, arrows, pulses).
+# Spatial contiguity = put the label ON/BESIDE the part it names (label_at with a leader line), not in a far caption.
+# Temporal contiguity = start each picture on the word that names it (use T(line, word)).
+# Segmenting / pre-training = name the parts first (nerve, alarm, brain), then show the process step by step.
+# Coherence / redundancy = short labels only; the voice explains, the picture shows. (u.osu.edu/multimedialearning; Mayer 2020)
+def spotlight(f, x, y, r, amt=0.55, feather=90.0):
+    """signalling: dim everything except a soft circle (radius r) around the focus point."""
+    if amt <= 0.01: return
+    m = np.clip((np.hypot(_xx - x, _yy - y) - r) / feather, 0, 1) * amt
+    f *= (1 - m)[..., None]
+
+
+def path_point(pts, k):
+    """point at fraction k (0..1) along a polyline (by length)."""
+    P = np.asarray(pts, np.float32); seg = np.hypot(*(P[1:] - P[:-1]).T); L = float(seg.sum()) + 1e-6
+    d = clamp(k) * L
+    for i, s_ in enumerate(seg):
+        if d <= s_ or i == len(seg) - 1:
+            q = 0 if s_ < 1e-6 else min(1.0, d / s_); return float(P[i][0] + (P[i + 1][0] - P[i][0]) * q), float(P[i][1] + (P[i + 1][1] - P[i][1]) * q)
+        d -= s_
+
+
+def draw_arrow(f, x0, y0, x1, y1, k=1.0, col=INK, th=10, head=34, op=1.0):
+    """arrow that draws itself from (x0, y0) to (x1, y1); k 0..1 = drawn fraction (animate it with ramp())."""
+    if k <= 0.01 or op <= 0.01: return
+    ex, ey = x0 + (x1 - x0) * k, y0 + (y1 - y0) * k
+    g = f if op >= 0.999 else f.copy()
+    cv2.line(g, (int(x0), int(y0)), (int(ex), int(ey)), C(col), int(th), cv2.LINE_AA)
+    a = math.atan2(ey - y0, ex - x0)
+    P = np.array([[ex + head * 0.35 * math.cos(a), ey + head * 0.35 * math.sin(a)],
+                  [ex - head * math.cos(a - 0.5), ey - head * math.sin(a - 0.5)],
+                  [ex - head * math.cos(a + 0.5), ey - head * math.sin(a + 0.5)]], np.int32)
+    cv2.fillPoly(g, [P], C(col), cv2.LINE_AA)
+    if op < 0.999: f[:] = f * (1 - op) + g * op
+
+
+def label_at(f, text, x, y, t, t0, tx=None, ty=None, bg=INK, fg=WHITE, size=30, d=0.3):
+    """spatial contiguity: a label pill at (x, y) that pops in at t0, with a leader arrow to the part (tx, ty) it names."""
+    if t < t0: return
+    k = clamp((t - t0) / d)
+    if tx is not None: draw_arrow(f, x, y, tx, ty, eo(clamp((t - t0 - 0.08) / 0.3)), bg, 7, 24)
+    comp(f, chip(text, bg, fg, size), x, y, scale=0.85 + 0.15 * eback(k) if k < 1 else 1.0, op=clamp(k * 3))
+
+
+def pulse_path(f, pts, t, t0, dur=0.6, col=(255, 236, 110), r=20, n=1, gap=0.25, trail=7, wire=None):
+    """travelling signal pulse(s) along a polyline (nerve signals, flows), with a fading trail. wire = colour to light the path."""
+    if wire is not None and t >= t0:
+        cv2.polylines(f, [np.asarray(pts, np.int32)], False, C(wire), 10, cv2.LINE_AA)
+    for j in range(n):
+        k = (t - t0 - j * gap) / dur
+        if k < 0 or k > 1.15: continue
+        for i in range(trail, -1, -1):
+            kk = k - i * 0.025
+            if kk < 0 or kk > 1: continue
+            px, py = path_point(pts, kk); rr = r * (1 - i / (trail + 1))
+            cv2.circle(f, (int(px), int(py)), max(2, int(rr)), C(col), -1, cv2.LINE_AA)
+        if k <= 1:
+            px, py = path_point(pts, k); glow(f, px, py, r * 1.6, col, 0.5)
+
+
+def recap_steps(f, items, y, t, t0s, gap=330, size=1.0):
+    """visual recap: a row of icons (el, label) that build up one by one (1 -> 2 -> 3) with arrows between them."""
+    n = len(items); x0 = W / 2 - gap * (n - 1) / 2
+    for i, ((el, lab), ts) in enumerate(zip(items, t0s)):
+        if t < ts: continue
+        k = pin(t, ts, 0.3); x = x0 + i * gap
+        comp(f, el, x, y, scale=k * size)
+        comp(f, chip(lab, INK, WHITE, 28), x, y + 150 * size, op=clamp((t - ts) / 0.2))
+        if i > 0: draw_arrow(f, x - gap + 120 * size, y, x - 120 * size, y, eo(clamp((t - ts) / 0.25)), INK, 9, 26)
+
+
+def inset(f, cx, cy, r, draw, k=1.0, ring=WHITE, th=12):
+    """magnified close-up window (scale cue / zoom-in explanation): draw(g) paints the close-up on a frame copy,
+    shown only inside a circle of radius r*k at (cx, cy) with an outlined rim. (ep 09)"""
+    if k <= 0.01: return
+    g = f.copy(); draw(g)
+    m = np.zeros((H, W), np.float32); cv2.circle(m, (int(cx), int(cy)), int(r * k), 1.0, -1, cv2.LINE_AA)
+    f[:] = f * (1 - m[..., None]) + g * m[..., None]
+    cv2.circle(f, (int(cx), int(cy)), int(r * k), C(INK), th + 8, cv2.LINE_AA); cv2.circle(f, (int(cx), int(cy)), int(r * k), C(ring), th, cv2.LINE_AA)
+
+
+def count_up(t, t0, v1, dur=0.8):
+    """kinetic number: integer that counts up from 0 to v1 with ease-out (use as the BIG word of ui_word)."""
+    return int(round(v1 * eo(clamp((t - t0) / dur))))

@@ -9,8 +9,17 @@ Understand the new algorithm and act on it — I shouldn't have to tell you ever
 learning beat speed. Every run must leave the channel a little better than it found it.
 
 ## A. Algorithm notes (re-check EVERY DAY: the first run of each IST day, i.e. when "Last checked" is not today; record what changed)
-Last checked: 2026-10-26. Sources: Kompozy (Sep 2026, Mosseri signals), Creator Lane (2026), Gyre (2026),
-Socialync (2026), Android Headlines / TechCrunch (Jul 2026, YouTube monetization rules).
+Last checked: 2026-10-27 (02:00 IST run). Sources: Kompozy (Sep 2026, Mosseri signals), Creator Lane (2026), Gyre (2026),
+Socialync (2026), Android Headlines / TechCrunch (Jul 2026, YouTube monetization rules); 27 Oct: Les Gens d'Internet
+(2 Oct 2026, YouTube Shorts originality update), OutlierKit (YouTube Shorts algorithm in YouTube's words, 2026),
+SocialPilot (Instagram Reels algorithm changelog 2025-2026).
+27 Oct changes: (a) 1 Oct 2026 YouTube said Shorts will "further prioritize original content" and cut reach for
+re-uploads with nothing added; it rewards own voice/editing/storytelling -> our fully original animation + own narration
+is the right side of this; never reuse clips. (b) YouTube: "engaged views" (watched past the first seconds) became the
+qualifying metric (24 Aug 2026); Shorts can be grouped into series + custom thumbnails -> consider a "How your body
+reacts to food" series later. (c) Instagram: non-follower recommendations still capped at 3 min; keyword captions matter
+more since users can edit their "Your Algorithm" topics (topic matching) -> first caption line = exact search question
++ topic keywords (spicy food, capsaicin, milk). Auto-translation of captions/audio (EN/HI/PT/ES) helps Indian reach.
 1. **First 2–3 seconds decide distribution.** Instagram: watch time, likes per reach and **sends per reach** are the
    top signals (Mosseri); reels holding > 60 % of viewers past 3 s reportedly get several times the reach.
    YouTube Shorts: "viewed vs swiped away" in the feed, then completion/average % viewed decides how far it travels.
@@ -38,7 +47,8 @@ Socialync (2026), Android Headlines / TechCrunch (Jul 2026, YouTube monetization
   news about everyday foods/drinks, "why does…" questions). Add 3–5 fresh candidates to the TOP of topic_ideas.md
   UP NEXT (with the angle + 2 likely sources), ranked by: broad appeal (everyone eats/does it) > surprise > share-worthy
   takeaway > visual potential. Drop/stale-mark ideas that the data says are too niche. Record the date here:
-- Last trend scan: (none yet)
+- Last trend scan: 2026-10-27 — Halloween week (31 Oct: candy, sugar), Diwali (8 Nov: sweets, silver leaf), and
+  sequels to strong science hooks (mint = cold sensor, the twin of today's spicy video). Added to topic_ideas.md.
 
 ## B. Per-run improvement protocol (mandatory)
 1. Refresh performance.md (step 1 of PLAYBOOK). Compare the last 3–5 CHUBBY videos on 3-s hold, avg watch %, shares
@@ -58,7 +68,10 @@ Voice (make it sound more like a real, excited young guy — never robotic):
 - [x] 26 Oct 22:19 IST: owner listened to options A/B/C/D and PICKED A (the current voice in voice.env). Keep A's character
       (am_eric/am_fenrir blend, lifted ~165 Hz register, energetic young guy). Voice upgrades = refine A (pacing, stresses,
       pauses, phrasing, cleanliness) — never swap to another blend or a deeper/older voice.
-- [ ] Per-line speed variety: questions/reveals 0.96–0.98, fast lists 1.04, punchlines slower; never all 1.0.
+- [x] 27 Oct (ep 09): per-line speed variety (questions/reveals 0.96–0.97, quick facts 1.02–1.03) — same-script A/B:
+      UTMOS 4.06 (all 1.0) -> 4.19 / 4.28 (varied). Now the PLAYBOOK default (step 4).
+- [x] 27 Oct (ep 09): wh-questions still need the "q" rise in our pipeline: c1 "how do you put out a fake fire?" scored
+      3.96 without it vs 4.11–4.26 with it.
 - [ ] Write for the ear: contractions, short words, "you" talk; split lines > 14 words; punctuation for natural pauses.
 - [ ] Less audible pitch processing (EXS 0.4, BMP 0.7) if the voice sounds "processed"; keep stresses on 1–2 words/line.
 - [ ] Emphasis words: real stress (slightly louder + longer), not every line; question endings rise, statements settle.
@@ -84,11 +97,23 @@ Script / packaging:
 - [ ] Comment question in caption + firstCommentText.
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-27: first CHUBBY numbers (posts < 9 h old, judge again at 48 h): pineapple (food bites back at frame 0)
+  held 72.2 % past 3 s — our best hold ever, equal to the realistic Nessa-era tattoo reel (72.8 %); carrots held 58.3 %.
+  The difference: pineapple's hook had an absurd ACTION in the first second (the food attacks), carrots built up to
+  a colour change. => Keep a physical, surprising action at t < 1.5 s (ep 09: Chubby breathes fire).
+- 2026-10-27: avg watch is still short (pineapple 17.5 s of 56 s = 31 %, carrots 10.3 s of 57 s = 18 %); the Nessa
+  dandruff reel got 10 shares from 1.3k reach with a practical scalp takeaway. => ep 09 tests a re-hook every
+  20–30 s + a 5-s visual recap + a practical takeaway (milk beats water) to lift watch % and shares on a 1:36 video.
 - 2026-10-26: realistic-looking hooks held 60–71 % past 3 s vs 56–58 % for our first animated style and 5–16 % for
   static openings; ambergris (money stakes + story) had the longest avg watch (37.9 s). Broad "is your X fake / how
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 09 spicy (27 Oct, auto run, 1:36): VOICE per-line speed variety + wh-question rise (UTMOS chunk20 4.41 vs ep08 4.45,
+  same-script A/B +0.2 over flat) | VISUAL Mayer explaining kit (spotlight, label_at leader labels, inset magnifier,
+  pulse_path nerve signals, recap_steps, count_up) + Chubby breathes fire at t=1.4 s + full-tissue diagrams |
+  SCRIPT longer how-it-works (36 shots), key-in-a-lock analogy, re-hooks at 41 s (Nobel) / 66 s (birds), 5-s recap,
+  mariachi ranchera score with thin bed under explanations | metric: 3-s hold vs pineapple, avg watch %, shares/1k.
 - 26 Oct 23:25 (between runs): length cap removed — 45 s to 3 min, whatever gives full understanding; explaining skills
   added to the curriculum; build keeps files < 95 MB for long videos.
 - 26 Oct 22:50 (between runs): voice A pace refined (A4 above) + UTMOS gate added; daily algorithm + trend scans.
@@ -106,6 +131,12 @@ Script / packaging:
 | 26 Oct | **A4 SPD 0.88 PZ 1.6 PMIN 0.3 (adopted)** | **4.36** | 197 | 0.13 | 17.4 | 0 |
 | 26 Oct | A5 = A2 with GT 160 | 4.34 | 200 | 0.12 | 17.4 | 0 |
 | 26 Oct | A6 SPD 0.86 PZ 1.5 PMIN 0.35 | 4.31 | 193 | 0.12 | 17.4 | 0 |
+| 27 Oct | ep 08 pineapple script, A4 (reference re-render) | 4.407 (chunk20 4.448, line mean 4.374) | 176 | 0.14 | 17.7 | 0 |
+| 27 Oct | ep 09 spicy, A4, all lines speed 1.0 | 4.061 | 187 | 0.14 | 17.3 | 1 ("2021" norm) |
+| 27 Oct | **ep 09 spicy, A4 + per-line speed variety (shipped)** | **4.276 (chunk20 4.408, line mean 4.332)** | 183 | 0.13 | 17.1 | 0 |
+Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
+also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
+Per-line UTMOS has about ±0.1 run-to-run noise on single lines — judge on means, not one line.
 Note: the calmer pace makes the same script ~13 % longer (~155 words per minute). Length now follows the topic (45 s–3 min).
 
 ## G. Craft learning — one NEW skill every run (mandatory; this is the heart of improving)
@@ -129,7 +160,7 @@ Animation & visuals:
 - [ ] Depth: parallax background layers, foreground elements passing the camera, atmospheric perspective
 - [ ] Lighting: rim light and soft ambient-occlusion shadows on props; light rays on reveals
 - [ ] Colour script: plan the colour arc of the video (calm -> tension -> payoff) instead of random schemes
-- [ ] Kinetic typography for key numbers (count-ups, slams, words that react to the action)
+- [~] Kinetic typography for key numbers (count-ups, slams, words that react to the action)
 - [ ] Match cuts and morph transitions (shape of one object becomes the next)
 - [ ] Texture & detail: gradients, highlights, subtle grain on the hero prop of each video
 - [ ] Inside-the-body worlds: cell/organ scenes with scale cues (Kurzgesagt-style clarity)
@@ -144,14 +175,16 @@ Sound:
 - [ ] Music that follows the story (build -> drop on the reveal -> soft under explanations), stems ducking
 - [ ] A signature 1-second FreshNestHub audio logo
 Explaining (the owner's #1 priority — people must understand what they watch):
-- [ ] Mayer's multimedia principles: signalling (highlight what matters), segmenting (one step per shot), coherence
+- [x] Mayer's multimedia principles: signalling (highlight what matters), segmenting (one step per shot), coherence
       (no decoration that distracts), no redundant on-screen paragraphs (picture + short label, voice explains)
-- [ ] Analogies and visual metaphors for invisible things (enzymes as scissors, receptors as doorbells…)
-- [ ] Define-on-sight: every new term appears with its picture and a 2–4 word label the moment it is spoken
+- [x] Analogies and visual metaphors for invisible things (enzymes as scissors, receptors as doorbells…)
+- [x] Define-on-sight: every new term appears with its picture and a 2–4 word label the moment it is spoken
 - [ ] Step diagrams that build up piece by piece (1 -> 2 -> 3) and a 5-second visual recap at the end
 - [ ] Scale cues (hand, coin, Chubby next to the thing) so viewers know how big/small it is
-- [ ] Mute test: watch the test-frame sheet without audio — can you follow the story? If not, fix the visuals
+- [x] Mute test: watch the test-frame sheet without audio — can you follow the story? If not, fix the visuals
 - [ ] Structure for 2–3 min videos: chapters + re-hooks every 20–30 s + open loops paid off in order
+- [ ] Pre-training shot: a 3-second "cast of parts" (name the 2-3 parts with pictures) before any process explanation
+- [ ] Worked-example contrast: "what you feel vs what's really there" split screens for every illusion/myth topic
 Story & topics:
 - [ ] Curiosity gap + open loop in the first line, payoff placed at ~70 % of the video
 - [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
@@ -159,5 +192,12 @@ Story & topics:
 - [ ] One-sentence takeaway people can use today
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-27 | Mayer's multimedia principles (explaining) | 9 rules from Mayer's research (Ohio State multimedia-learning
+  guide, u.osu.edu/multimedialearning; Mayer 2020): signalling (arrows/highlights to what matters), segmenting (short
+  chunks), coherence (cut decoration + extra sound), redundancy (no on-screen text repeating narration), spatial
+  contiguity (labels ON the part), temporal contiguity (picture with the word), pre-training (name parts first),
+  personalization ("you"), voice. Turned into anim_fx helpers: spotlight(), label_at() with leader arrows,
+  pulse_path() for signals, inset() magnifier close-ups, recap_steps(), count_up(); music drops to bass+strum under
+  explanation lines | ep 09 (pre-trained: nerve -> alarm -> brain before the 'key in a lock' process) | yes
 - 2026-10-26 | Squash & stretch, anticipation, slow in/out, smear, particles | 12 principles of animation (Thomas & Johnston,
   "The Illusion of Life") turned into code helpers | anim_fx.py seed, to be used from ep 09 | yes

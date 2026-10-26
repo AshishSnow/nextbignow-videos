@@ -2,10 +2,20 @@
 
 ## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
 Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
+NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these first when timely:
+0a. sugar-rush-myth — Do you know the "sugar rush" in kids is mostly a myth? (double-blind studies found no behaviour
+    change; parents who THOUGHT kids had sugar rated them more hyper). Halloween-timely, very shareable. Verify: Wolraich
+    et al. JAMA 1995 meta-analysis; Hoover & Milich 1994 (parent expectation); plus a major outlet / university page.
+0b. mint-feels-cold — the twin of ep 09: menthol switches on the COLD alarm (TRPM8), nothing gets colder. Reuse the
+    alarm/key props with a blue alarm; Nobel 2021 press release names TRPM8 + menthol (source 1), find source 2.
+0c. diwali-silver-leaf — Do you know the shiny silver on Indian sweets is real metal you can eat? (vark/varq, thin
+    silver leaf; FSSAI rules on thickness/purity, no animal-gut beating). Verify with FSSAI + a major Indian outlet.
+0d. chocolate-and-dogs (Halloween) — why chocolate is dangerous for dogs (theobromine). Pet-health angle; FDA + ASPCA.
+    Lower priority (pets, not the viewer's own body).
 1. (DONE) 08-pineapple-eats-you — Do you know pineapple is eating you back while you eat it? (bromelain enzyme breaks down
    proteins in your tongue/cheeks -> tingle; your mouth repairs fast; cooked/canned pineapple loses it). Chubby: tongue
    close-up with tiny "scissors" enzymes.
-2. 09-spicy-food-burn — Do you know spicy food doesn't actually burn you? (capsaicin triggers TRPV1 heat sensors, brain
+2. (DONE) 09-spicy-food-burn — Do you know spicy food doesn't actually burn you? (capsaicin triggers TRPV1 heat sensors, brain
    thinks "fire"; why milk (casein) helps more than water). Chubby breathes fire, then drinks milk.
 3. (SKIP — honey already covered by the 20 Oct "fake honey / honey lasts 3,000 years" reel) honey-never-spoils
 4. 11-mint-feels-cold — Do you know mint tricks your brain into feeling cold? (menthol triggers TRPM8 cold sensors;

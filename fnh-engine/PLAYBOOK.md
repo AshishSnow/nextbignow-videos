@@ -63,7 +63,10 @@ that make people UNDERSTAND what they are watching matter the most."**
 - Longer videos need re-hooks every 20–30 s (a new question, "but here's the weird part…", a mini-reveal) so
   people keep watching; chapter-like beats: hook -> what it is -> how it works step by step -> proof/number -> twist -> takeaway.
 Format: `(id, text, speed, pause_after, base_semitones, range_expand, [stressed words], ending)`; see template.
-- Speed 1.0 everywhere, pauses 0.30–0.45 s. Stressed words = 1–3 per line, copied exactly as written (with punctuation).
+- Per-line speed variety (ep 09, +0.2 UTMOS vs all-1.0): questions/reveals 0.96–0.97, explanations 1.0, quick facts
+  1.02–1.03; "..." before payoff words; keep the "q" rise on questions (also wh-questions). Pauses 0.30–0.45 s.
+  Stressed words = 1–3 per line, copied exactly as written (with punctuation). Gate: voice_report utmos_chunk20 and
+  utmos_line_mean vs the last episode (whole-file utmos is length-biased).
 - Line 1 (`i1`) = clear intro question inside 3 s: "Do you know…?" naming the food/body thing + the surprise.
 - Then: confirm/wow line → explain step by step (one idea per line, each will get its own shot) → a number/evidence
   line → one honest catch or safe tip → a twist/bonus fact → CTA "Send this to the friend who …!" tied to the topic.
@@ -85,6 +88,9 @@ Then write (read the template versions first — they are the reference; use the
   the idea being said so a viewer understands even on mute; cut on word times `T(line, word)`), one
   `shot_<ID>(t, n)` per shot, `IMPACTS` (shake on every big moment). Keep `ui_word/rays/slam/ring/rs/_bl/compose` as in
   the template. Transitions vary: cut, whip, zoom, flash, punch, focus.
+- Explaining kit (anim_fx.py, Mayer's principles): name the parts first (pre-training), label parts with `label_at`
+  (leader arrow, not a far caption), `spotlight` the focus, `inset` magnified close-ups for tiny things, `pulse_path`
+  for signals/flows, `recap_steps` for a 1->2->3 visual recap before the CTA, `count_up` for key numbers.
 - `scripts/music.py` — cues on every reveal. **New genre each video** (template = bouncy food-funk with marimba/slap
   bass + 1940s march section; others: synth-pop, lo-fi hip hop, latin, orchestral pizzicato, surf rock, chiptune…).
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
@@ -109,7 +115,9 @@ anim_props4: burst_el, readout_el, dial(f, x, y, s, "mph"|"g", v, txt), stopwatc
 forceps_el, weight_el, bscale_el, seat_el, wheel_el, belt_draw, bars2 (comparison bars), speed_lines, add_patch ·
 anim_props5: carrot_el, carrot_side, dots (pigment/particles), machine_el, capsule_el, gauge_tube, vessel (blood flow),
 skin_block (skin layers), palm_el, sole_el, eye2_el(sclera, skin), baby, bowl_el, spoon_el, plane_el, prop_disc,
-radar_screen, moon, zzz_moon, mirror_el.
+radar_screen, moon, zzz_moon, mirror_el. · anim_props_lib09 (ep 09): chili_el(face, mood), chili_side, caps_el/caps (capsaicin key
+molecule), tongue_el, alarm_el/alarm(ring, key_in) (receptor = heat alarm), brain_el(face, mood, alarm_lit), teacup_el,
+medal_el, drink_el(kind), protein_el, bird_el, mouse_el, seeds, plant, padlock_el, key_el, fire_cone, flames_row, thermo, sweat.
 
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.
