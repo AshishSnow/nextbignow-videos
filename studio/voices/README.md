@@ -4,3 +4,5 @@
   plain sight. And once you see it… you can't unsee it." No real person's voice is involved.
 - `narrator_slow.cbcond.npz` — Chatterbox-Turbo speaker conditioning computed from that clip (so runs don't need the 1 GB speech encoder).
 Rebuild: `python3 -c "import sys; sys.path.insert(0,'$STUDIO/lib'); import cb_turbo; cb_turbo.Turbo('narrator_slow_ref24k.wav')"` (needs speech_encoder.onnx).
+- `narrator_flat_ref24k.wav` — 11 s of the same Kokoro narrator **without** PSOLA (SPD 0.88, Starbucks lines i1–i3), 24 kHz.
+  As a Chatterbox reference it gives a calmer, flatter take that leaves room for a light PSOLA layer (hybrid test, 27 Oct, RND.md).

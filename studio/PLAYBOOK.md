@@ -46,8 +46,11 @@ Disk is limited (~8 GB free) and RAM ~7 GB, 2 CPUs (full render ≈ 11 min): del
 
 ## 4. Script (`scripts/vo_lines.py`)
 Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words], ending)` — see `examples/*/vo_lines.py`.
-- 60–85 s total, 16–22 lines. MrBeast-style: simple words, stakes, short sentences — but **never rushed**: speed ≈ 1.0,
-  real pauses before reveals (0.35–0.6 s), one idea per line. If the story needs more time, take it; never pad.
+- Length = whatever the story needs for a viewer to fully understand it — usually 60–100 s, and up to ~3 min is fine (owner,
+  27 Oct: "no need to stick to 1 minute — 2–3 minutes is fine; what matters most is that viewers understand"). Never pad.
+  MrBeast-style: simple words, stakes, short sentences — but **never rushed**: speed ≈ 1.0, real pauses before reveals
+  (0.35–0.6 s; one longer 0.6–0.8 s beat before the biggest reveal), one idea per line, one focus word per sentence (VOICE.md).
+  Videos over ~75 s: a re-hook every 20–30 s.
 - Line 1 = an intro **question** inside 3 s that names the brand/topic and the surprising claim, so viewers instantly know what the video is about (e.g. "Do you know Starbucks is sitting on one point seven billion dollars… of your money?"). Vary the wording each video.
 - Middle: 3–4 clear beats (steps/secrets/reasons) — vary the structure from the previous video. Explain each beat with a
   concrete everyday example the viewer recognises (a receipt, a cup, a card swipe), not abstract numbers alone.

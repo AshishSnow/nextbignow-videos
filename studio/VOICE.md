@@ -25,6 +25,22 @@ Status 27 Oct 2026: **not yet met.** Kokoro (default) passes the numbers; Chatte
 and our format punishes. **Decision: Kokoro + PSOLA stays the default; Chatterbox is available as `ENGINE=chatterbox`**
 (e.g. as a fallback, or if a future test fixes its endings). Added `q_rise_st`/`low_fall_st` to the bake-off so this is measured.
 
+## Research basis (deep research 26–27 Oct 2026 — why these targets)
+| Dimension | Evidence-based target | Source |
+|---|---|---|
+| Pace | 165–185 wpm overall incl. pauses (recall best at 170–190; ≥ 210 overloads, ~150 feels slow). Hook a bit faster, the key-number sentence slower (~150) | Rodero 2015/2020; Smith & Shaffer 1995 |
+| Pauses | commas 150–250 ms, sentence ends 350–500 ms, **one 600–800 ms beat before each big reveal** (1–2 per video), never > 1 s | MacGregor et al. 2010 (pause before a word improves recall of it); Campione & Véronis 2002 |
+| Pitch | male median ~110–150 Hz; variation matters, level doesn't — wide range reads charismatic, but *medium* variation beats high (over-acted) and monotone | Niebuhr 2017; Rodero 2022; Yang 2024 (US male mean ~116 Hz) |
+| Melody | sentences start high, end low; statements fall, only real yes/no hooks rise (rising statements sound unsure) | Rodero, Potter & Prieto 2017; Levon & Yang 2019 |
+| Emphasis | one focus word per sentence (two max): +2–4 st, 20–30 % longer, +2–3 dB; over-emphasis hurts | Rodero 2021; Frontiers 2022 (stress cues) |
+| Timbre | warm, clean, audible "smile" on hook and payoff; no hiss/clicks (digital artefacts are the #1 AI-voice tell, then unnatural pauses, flat delivery) | Tartter 1979; Drahota 2008; Interspeech 2025 |
+| Accent | General American young-adult male is a sensible default (European listeners understand GA as well as RP; UK listeners spot synthetic British voices more often) | PLOS ONE 2020; Vocal Image 2026 |
+| Policy | label posts AI on Instagram (realistic audio); YouTube needs no label for a generic narrator over animation; never synthesise a real person | Meta AI-label rules; YouTube disclosure policy (blog.youtube) |
+Links: journalistsresource.org/media/radio-news-pace-words · frontiersin.org/journals/communication/articles/10.3389/fcomm.2022.869084 ·
+journals.sagepub.com/doi/10.1177/01461672952110006 · pub.dega-akustik.de/DAGA_2017/data/articles/000256.pdf ·
+journals.plos.org/plosone/article?id=10.1371/journal.pone.0231089 · isca-archive.org/interspeech_2025/srinivasavaradhan25_interspeech.pdf ·
+blog.youtube/news-and-events/disclosing-ai-generated-content
+
 ## Engines tested (dates = when we checked the licence / model card)
 | Engine | Licence (checked) | Runs here? | Result |
 |---|---|---|---|
@@ -34,6 +50,9 @@ and our format punishes. **Decision: Kokoro + PSOLA stays the default; Chatterbo
 | Qwen3-TTS 0.6B/1.7B (Jan 2026) | Apache 2.0 | needs torch; ~0.2× real time on an M4 → far too slow on 2 CPUs | no |
 | Magpie TTS Multilingual 357M (NVIDIA) | NVIDIA Open Model License (commercial OK) | needs NeMo/torch | candidate, untested |
 | Maya1 3B, Orpheus 3B, Dia 1.6B, Zonos | Apache 2.0 | GPU-class | no |
+| Ming-3.0-tts-0.5B (inclusionAI, Sep 2026) | MIT | untested on CPU (only GPU numbers published); highest open-licence score on the Artificial Analysis arena | R&D candidate |
+| NeuTTS Air (Neuphonic, 748M) / NeuTTS-2E, Nano | Air: Apache 2.0; **2E/Nano: free only under US$5M company revenue — avoid** | CPU-first, GGUF | R&D candidate (Air only) |
+| Qwen3-TTS 1.7B VoiceDesign as a *reference maker* (interactive test 27 Oct) | Apache 2.0 | bf16 on 2 CPUs: ~2 min per 13–15 s clip — fine for making a reference, not as an engine | "energetic young male" prompts came out 215–275 Hz (too high); a 168 Hz design gave Chatterbox only UTMOS 4.15; Qwen 0.6B "ryan" as engine 3.95 → not useful yet |
 | F5-TTS, XTTS-v2, Fish S2, IndexTTS-2.5, Spark-TTS, ChatTTS, OmniVoice | non-commercial / by agreement | — | never |
 | Supertonic 3 | OpenRAIL-M, repo archived Sep 2026 | — | no |
 Sources: yaps.ai local-TTS licence round-up (10 Oct 2026) https://www.yaps.ai/blog/best-local-tts-models ;

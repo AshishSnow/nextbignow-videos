@@ -34,6 +34,10 @@ Voice
 - Second synthetic reference with more smile/energy; paralinguistic `[chuckle]` at one funny line.
 - ~~Expressiveness metric: per-line final rise/fall~~ — done 27 Oct (`q_rise_st`, `low_fall_st` in tts_bakeoff.py).
 - Magpie TTS (NVIDIA Open Model License) if it can run without torch.
+- Ming-3.0-tts-0.5B (MIT; top open-licence arena score; free-text delivery instructions) — first CPU test. NeuTTS **Air** (Apache) as a
+  CPU fallback (not 2E/Nano: revenue-capped licence).
+- Misread lines with Chatterbox: instead of rephrasing, sample 2 extra takes (temp ~0.7) and keep the one that reads back exactly —
+  code ready in `lab/voice_engine/take_picker.py` (ASR exactness first, then UTMOS).
 Sound
 - A/B music bed level vs avg watch; sidechain ducking depth; SFX density per 10 s.
 Visuals / Story / Tooling
@@ -52,3 +56,13 @@ Visuals / Story / Tooling
   **Decision: not adopted as default** (gains are acoustic; it loses the landed endings our format needs). Kept as opt-in
   `ENGINE=chatterbox` in make_vo.py (+ `PROSODY` switch), lib/cb_turbo.py, voices/narrator_slow.*, setup downloads (q4).
   Smoke test (new tools/smoke_test.sh) passed on both engines. Next voice run: hybrid endings (see VOICE.md "Next").
+- 2026-10-27 | Voice (interactive session with the owner, in parallel with the R&D run) | Deep research → narrator spec with sources
+  (VOICE.md "Research basis"); 16-variant Kokoro lab (26 Oct: no global pitch lift, SPD .88/PZ 1.6 → the current default);
+  Chatterbox fp32/q8 bake-off with 5 references; Qwen3-TTS 0.6B as engine (3.95) and 1.7B VoiceDesign as reference maker (too
+  high-pitched); **hybrid lead:** Chatterbox with a *flat* Kokoro reference (`voices/narrator_flat_ref24k.wav`) + half-strength
+  PSOLA cost only −0.005 UTMOS (4.471 → 4.466) and raised range 13.6 → 16.2 st on the Starbucks script (full PSOLA: −0.10);
+  line-end melody (main's scorer, Starbucks script): Kokoro main default 4.345 / low_fall −4.3 / q_rise +0.9 / 18.2 st;
+  Chatterbox flat ref 4.471 / −0.6 / −1.3 / 13.6 st; + half PSOLA 4.466 / **−0.2** / −1.2 / 16.2 st; + full PSOLA 4.368 / −0.2 / 19.2 st;
+  best-of-3 takes 4.478 / +0.1. → **Half/full-strength PSOLA adds range but does NOT land the endings** (Chatterbox's last words
+  resist the generic ending curve). Confirms the R&D decision: Kokoro stays default. Endings need a targeted last-word move
+  (bigger, on the final stressed syllable only) or a reference whose sentences end low. | confirms Kokoro default; lead for hybrid
