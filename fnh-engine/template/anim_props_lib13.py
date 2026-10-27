@@ -514,7 +514,8 @@ def chopper(f, t, x=330, y=1470, s=1.0, period=0.5, t0=0.0, dull=False, ang=-6, 
     a1, a2 = arm_ik(sh, (gx, gy), 76 * s, 70 * s)
     chub(f, x, y, s, la=la, ra=(a1, a2), mouth=talk(t) if mouth is None else mouth, expr=expr, brow=brow, look=look)
     knife_at(f, gx, gy, ang, 0.7 * s, dull)
-    cv2.circle(f, (int(gx), int(gy)), int(19 * s), C(INK), -1, cv2.LINE_AA); cv2.circle(f, (int(gx), int(gy)), int(14 * s), C(CH_SKIN), -1, cv2.LINE_AA)
+    if "grip_hand" in globals(): grip_hand(f, gx, gy, s)
+    else: cv2.circle(f, (int(gx), int(gy)), int(19 * s), C(INK), -1, cv2.LINE_AA); cv2.circle(f, (int(gx), int(gy)), int(14 * s), C(CH_SKIN), -1, cv2.LINE_AA)
     return hit
 
 

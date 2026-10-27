@@ -4,6 +4,11 @@
 every run, voice AND visuals AND topics."** Numbers are only a compass; the goal is to get better at the craft every
 single run, and to never stop learning. Never write "nothing to improve".
 
+**Owner, 27 Oct 22:46-23:08 (with reference reels): "Improve the voice — more mature, more natural. Visuals: lighting,
+concepts... it's not about the character's face or dress, it's about COLOURS, looking more natural and 3D — change the
+style of clothes, more things."** -> v5 look (Chubby v2 3D shading + hoodie/jeans/sneakers, cinematic light + colour,
+real places, 3D titles) and the M2 voice. Keep pushing BOTH every run: never copy a reference character.
+
 The owner's standing order (26 Oct 2026): "Don't settle. With every video improve: more natural voice, better video.
 Understand the new algorithm and act on it — I shouldn't have to tell you every time." Growth takes time; quality and
 learning beat speed. Every run must leave the channel a little better than it found it.
@@ -65,17 +70,19 @@ more since users can edit their "Your Algorithm" topics (topic matching) -> firs
    (section C), the daily scans or the learnings. Prefer what most likely raises 3-s hold, watch % or shares.
    Keep each change small and testable. VOICE changes must pass `engine/tools/voice_report.py` on this episode:
    UTMOS not lower than the last episode's by > 0.05 (aim higher), no ASR bad lines, pitch range >= 15 st,
-   speaking pace 180–200 wpm. Record the voice_report numbers in section F.
+   speaking pace 165–195 wpm (M2 mature voice since 27 Oct; was 180–200 for the young voice A). Record the voice_report numbers in section F.
 3. Implement it; check it in the test frames / ASR read-back; if it's reusable, put it in fnh-engine/template/ or
    engine/ so all future videos get it (and note it in the PLAYBOOK if it changes the method).
 4. Log it in section E: `ep | change | why | metric to watch`. After 48 h, look at the metric; keep or revert
    (write the verdict next to the entry). Never repeat an idea that the data says hurt.
 
 ## C. Backlog (take from the top; add new ideas as you find them)
-Voice (make it sound more like a real, excited young guy — never robotic):
-- [x] 26 Oct 22:19 IST: owner listened to options A/B/C/D and PICKED A (the current voice in voice.env). Keep A's character
-      (am_eric/am_fenrir blend, lifted ~165 Hz register, energetic young guy). Voice upgrades = refine A (pacing, stresses,
-      pauses, phrasing, cleanliness) — never swap to another blend or a deeper/older voice.
+Voice (a mature, natural, warm guy — never robotic):
+- [x] 27 Oct 23:30 IST: owner asked for "more mature, more natural" -> voice lab on the onion lines (same text, 0 ASR errors):
+      A 4.450 / line mean 4.388 (173 Hz, 192 wpm) vs M2 am_michael .4 / am_puck .3 / am_eric .3, own register, EXS 0.9 / BMP 1.0
+      4.488 / 4.419 (135 Hz, 174 wpm) = most natural; M4 (michael/eric/fenrir) avoided = the OopsMyBusiness voice. M2 is the
+      voice.env default now; refine it (pace, pauses, stress, phrasing), keep it distinct from OopsMyBusiness.
+- [x] (superseded 27 Oct) 26 Oct 22:19 IST: owner picked A (am_eric/am_fenrir, ~165 Hz lift) over B/C/D.
 - [x] 27 Oct (ep 09): per-line speed variety (questions/reveals 0.96–0.97, quick facts 1.02–1.03) — same-script A/B:
       UTMOS 4.06 (all 1.0) -> 4.19 / 4.28 (varied). Now the PLAYBOOK default (step 4).
 - [x] 27 Oct (ep 09): wh-questions still need the "q" rise in our pipeline: c1 "how do you put out a fake fire?" scored
@@ -91,8 +98,18 @@ Voice (make it sound more like a real, excited young guy — never robotic):
 - [ ] Natural micro-pauses before the payoff word ("...it's eating you BACK").
 - [x] 26 Oct: calmer pacing for A (SPD 0.88, PZ 1.6, PMIN 0.3) — UTMOS 4.27 -> 4.36 (see F). Now default in voice.env.
 - [ ] Next voice ideas to lab-test with voice_report: per-line SPD variety, EXS 0.6, STR 1.2 on payoff words, shorter
-      lines (<= 12 words), commas for breath points. Keep the A blend + ~165 Hz lift.
+      lines (<= 12 words), commas for breath points. Keep the M2 blend (own register, no lift).
 Visual / edit:
+- [x] 27 Oct v5 look: Chubby v2 (fnh_char3d.py) + anim_cine.py (grade/bloom, kitchen/room/dusk places, god rays, mood,
+      title3d, light_wrap, counter_front) — demo zz-v2demo. Next steps below.
+- [ ] Places library: one new lit place per run when the topic needs it (bathroom mirror, supermarket aisle, gym, street
+      food stall, school canteen, hospital-free "lab") — same recipe: blurred bg + sharp fg + one light source + haze.
+- [ ] Fill empty foreground: the kitchen counter front is a plain brown block (y 1370-1920) — add a towel, drawer pulls,
+      fruit bowl / jars on the worktop edge, a soft reflection of the light on the worktop.
+- [ ] Chubby v2 acting: hair fringe that bounces, eyebrow shapes per expression, hoodie fold lines that follow the arms,
+      light_wrap of the place's colour on Chubby (he sits IN the light), contact shadow that matches the light direction.
+- [ ] Shade the hero props the same way as Chubby (_inflate from fnh_char3d: distance-transform normals) so props and
+      character share one lighting model; outlines warm-brown, not black.
 - [ ] Chubby is often small in a corner — make him the actor (big, in the middle of the action, interacting with props).
 - [ ] Break the "big circle + prop" sameness: full-bleed scenes, split screens, close-ups, top-down tables, inside-the-body
       worlds, camera push-ins/pans, parallax layers. No two consecutive shots with the same layout.
@@ -176,6 +193,10 @@ Script / packaging:
   hooked on caffeine nectar), lo-fi hip-hop cafe score with TAPE STOPS on the fake reveal + the crash; new foley (gulp, rip, rattle,
   buzz, tick, charge) | metric: reach at 48 h vs sugar rush / mint (does the pattern repeat?), avg watch s on 2:17, shares, comments
   on "what time is your last coffee or chai".
+- v5 look + M2 voice (27 Oct 23:30, interactive, owner request): Chubby v2 3D shading + hoodie/jeans/sneakers, anim_cine.py
+  (film grade + adaptive bloom on every frame, lit places, mood/god rays, 3D titles behind the hero), voice M2 (lab 4.488 vs
+  A 4.450). Demo = onion hook in the new look (zz-v2demo, 18 s, UTMOS 4.485 / line mean 4.442, 177 wpm, ASR clean). Metric to
+  watch from ep 15 (ep 14 coffee was still built in the v4 look): 3-s hold and avg watch vs eps 07-13 (judge at 48 h).
 - 13 onions make you cry (27 Oct, auto run, 2:02): VOICE lighter pitch processing EXS 0.4 / BMP 0.7 (A/B: chunk20 4.420 ->
   4.428, line mean 4.347 -> 4.350; now voice.env default) + 4 weakest lines split into short sentences (e3 3.90 -> 4.38, f1 4.08
   -> 4.41); ship 4.428 / 4.350 vs ep 12 4.412 / 4.339, 190 wpm, ASR clean | VISUAL progressive CHAIN MAP (anim_fx.chain_map):
@@ -252,6 +273,12 @@ Script / packaging:
 | 27 Oct | ep 13 onions, A4 + PGATE, first script (EXS 0.5 BMP 0.8) | 4.255* (chunk20 4.402, line mean 4.322) | 192 | 0.16 | 17.8 | 0 |
 | 27 Oct | ep 13 onions, + e3/f1/d3/e6 split into short sentences | 4.281* (chunk20 4.420, line mean 4.347) | 190 | 0.16 | 17.8 | 0 |
 | 27 Oct | **ep 13 onions, same + EXS 0.4 BMP 0.7 (shipped; now voice.env default)** | **4.321* (chunk20 4.428, line mean 4.350)** | 190 | 0.16 | 17.2 | 0 |
+| 27 Oct | voice lab, onion i1-b1 (35 s): A = current (eric/fenrir, 165 Hz) | 4.450 (line mean 4.388) | 192 | 0.16 | 17.7 | 0 |
+| 27 Oct | M1 michael .4/onyx .2/fenrir .2/echo .2, GT 0, SPD 0.94 (119 Hz) | 4.480 (4.415) | 175 | 0.15 | 16.2 | 0 |
+| 27 Oct | **M2 michael .4/puck .3/eric .3, GT 0, EXS 0.9 BMP 1.0 (135 Hz) — adopted** | **4.488 (4.419)** | 174 | 0.15 | 16.4 | 0 |
+| 27 Oct | M3 michael .6/onyx .2/eric .2, SPD 0.92 | 4.443 (4.365) | 168 | 0.14 | 15.1 | 0 |
+| 27 Oct | M4 michael .5/eric .3/fenrir .2 (= OopsMyBusiness voice, avoided) | 4.478 (4.416) | 179 | 0.15 | 17.9 | 0 |
+| 27 Oct | M2 demo, onion i1-a1 (zz-v2demo) | 4.485 (line mean 4.442) | 177 | 0.12 | 16.1 | 0 |
 | 28 Oct | ep 14 coffee, A4 + PGATE (EXS 0.4/BMP 0.7), first script | 4.249* (chunk20 4.383, line mean 4.326) | 198 | 0.15 | 16.8 | 1 (c4 'a loan' -> 'alone') |
 | 28 Oct | ep 14 coffee, + b1/a2/c4/e2/e3 rewrites | 4.339* (chunk20 4.424, line mean 4.357) | 200 | 0.15 | 16.9 | 0 |
 | 28 Oct | ep 14 coffee, same + EXS 0.3 / BMP 0.6 (A/B, rejected) | 4.345* (chunk20 4.421, line mean 4.345) | 199 | 0.15 | 16.5 | 0 |
@@ -280,14 +307,19 @@ Animation & visuals:
 - [ ] Character acting: eye direction leads action, blinks on cuts, reaction shots
 - [ ] Simple lip-sync visemes for Chubby when he talks (mouth shapes from the VO envelope + vowels)
 - [ ] Camera language: push-in on reveals, whip pans between ideas, low/high angles, rack focus (`cam_keys`, `push_in`)
-- [ ] Depth: parallax background layers, foreground elements passing the camera, atmospheric perspective
-- [ ] Lighting: rim light and soft ambient-occlusion shadows on props; light rays on reveals
+- [~] Depth: parallax background layers, foreground elements passing the camera, atmospheric perspective (27 Oct: blurred
+      places = depth of field, haze on far hills; still to do: parallax camera moves inside the places)
+- [x] Lighting: key/rim light, AO, god rays, lights-drop + red rim for danger, golden backlight for reveals (27 Oct anim_cine)
+- [x] Pseudo-3D shading of 2D shapes (distance-transform height field -> normals -> Lambert + Blinn + rim) (27 Oct fnh_char3d)
+- [x] Colour grading: split-tone (cool shadows / warm highlights), S-curve, bloom only where it is dark enough (27 Oct)
+- [~] Foreground layering: character BEHIND a counter/table (cooking-show framing) = instant depth (27 Oct counter_front)
+- [ ] Materials: glossy vs matte vs translucent (onion skin, glass, liquid) with the same light model
 - [x] Colour script: plan the colour arc of the video (ep 11: warm = real temperature, icy = what the brain feels)
 - [~] Kinetic typography for key numbers (count-ups, slams, words that react to the action)
 - [~] Match cuts and morph transitions (shape of one object becomes the next) (ep 12: iris_mix iris-in from a round object)
-- [ ] Texture & detail: gradients, highlights, subtle grain on the hero prop of each video
+- [~] Texture & detail: gradients, highlights, subtle grain on the hero prop of each video (27 Oct: Chubby v2 + film grain)
 - [ ] Inside-the-body worlds: cell/organ scenes with scale cues (Kurzgesagt-style clarity)
-Voice (always voice A — refine, never swap):
+Voice (M2 mature blend since 27 Oct — refine it):
 - [x] Calmer pace + real pauses (A4, UTMOS 4.36)
 - [x] Ear-writing: rhythm, short-long sentence contrast, rule of three, contractions (ep 10)
 - [~] Pause before the payoff word; lift on questions; settle on statements (ep 11 A/B: settle is UTMOS-neutral)
@@ -330,6 +362,15 @@ Story & topics:
   heads so a shot can ride Chubby's head on the 'now' point, add a 'HIDDEN' gap annotation or a '1/4 STILL THERE' arrow. Four
   graphs in ep 14 (sleepy keys piling up, real vs felt tiredness, the crash, caffeine halving to bedtime) | ep 14 (S5b, S14, S18,
   S21) | yes
+- 2026-10-27 23:30 (interactive) | Cinematic LIGHT + pseudo-3D characters (visual) | Studied the owner's references: cinematic AI
+  reels (golden-hour key light, shallow depth of field, a giant title tucked BEHIND the subject) and cel-shaded 3D cartoon reels
+  (warm interiors with one strong light source, soft shadows, rich but natural colours, everyday clothes). What makes them read
+  as "3D": (1) every surface has a light side, a shadow side and a rim — not one flat fill; (2) warm light vs cool shadow colour
+  instead of black shading; (3) backgrounds out of focus and hazier with distance; (4) the subject sits in a real place lit by
+  that place's light. Built: fnh_char3d._inflate (distance transform -> height -> normals -> wrapped Lambert + Blinn spec +
+  warm rim + edge AO; warm-brown outlines), Chubby v2 in a hoodie/jeans/sneakers, anim_cine (grade, adaptive bloom, places,
+  god rays, mood, title3d, light_wrap, counter_front). Lighting now carries emotion: lights drop + red rim for the TRAP, golden
+  backlight for the happy reveal | zz-v2demo (onion hook) | yes — default for all runs
 - 2026-10-27 | Progressive build-up diagram for a CHAIN REACTION (explaining) | A multi-step cause->effect process overloads
   viewers if each step is shown alone (they lose the thread) or all at once (too much). Reveal the figure in the ORDER of the
   process, colour-code each part to the same colour as its character, keep nothing else competing on screen, and keep the

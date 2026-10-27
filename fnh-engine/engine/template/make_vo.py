@@ -1,10 +1,11 @@
-"""(FreshNestHub copy, ep 12: ported SPLIT + PGATE from studio R&D 27 Oct) Local narrator voice (Kokoro blend) + expressive prosody (Praat PSOLA) -> natural, warm, clean VO + word timings.
+"""(FreshNestHub copy, synced with studio 27 Oct 23:00: SPLIT, PGATE, lighter chain, optional ENGINE) Local narrator voice (Kokoro blend) + expressive prosody (Praat PSOLA) -> natural, warm, clean VO + word timings.
 Outputs: work/vo_flat.wav (before prosody), work/vo_raw.wav (dry, expressive), work/vo.wav (processed 48 kHz), work/align.json"""
 import sys, json, re, difflib, numpy as np, soundfile as sf
 from scipy import signal
 import os
 R = os.environ.get("STUDIO", "/home/claude/studio"); B = os.environ.get("PROJ") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, f"{R}/lib"); sys.path.insert(0, f"{B}/scripts")
+from vo_lines import LINES
 # FreshNestHub: the channel voice lives in scripts/voice.env (copied by new_ep.sh); explicit env vars still win.
 _ve = os.path.join(B, "scripts", "voice.env")
 if os.path.exists(_ve):
@@ -12,7 +13,6 @@ if os.path.exists(_ve):
         _l = _l.strip()
         if _l and not _l.startswith("#") and "=" in _l:
             _k, _v = _l.split("=", 1); os.environ.setdefault(_k.strip(), _v.strip())
-from vo_lines import LINES
 from kokoro_onnx import Kokoro
 import voice_clean
 from num2words import num2words
@@ -260,13 +260,17 @@ def peq(f0, g, q):
 x = raw.astype(np.float64)
 x = signal.sosfilt(peq(160, 1.0, 0.8), x)          # body
 x = signal.sosfilt(peq(3100, 1.0, 1.0), x)         # presence / energy
-y = voice_clean.clean(x, 1.0, verbose=True).astype(np.float64)
+# chain knobs (27 Oct, De Beers run, lab/voice_chain/chain_ab.py on one fixed vo_raw): lighter de-esser (-8), a little less room (-27 dB)
+# and a gentler compressor (1.5:1) -> per-line UTMOS 4.396 -> 4.425, worst line 3.996 -> 4.063, 6 shortest lines 4.301 -> 4.344.
+# The 2.2:1 compressor was the main 'chain drop' on short lines (VOICE.md Next). Old chain: DEESS=-11 ROOM_DB=-21 COMP=2.2
+DEESS = float(os.environ.get("DEESS", "-8")); ROOM_DB = float(os.environ.get("ROOM_DB", "-27")); COMP = float(os.environ.get("COMP", "1.5"))
+y = voice_clean.clean(x, 1.0, deess_target=DEESS, verbose=True, ratio=COMP).astype(np.float64)
 rng = np.random.default_rng(5); n = int(0.32 * SR); tt = np.arange(n) / SR
 ir = rng.standard_normal(n) * np.exp(-tt / 0.07); ir[: int(0.006 * SR)] = 0
 for d_, g in ((0.009, 0.6), (0.014, 0.45), (0.021, 0.35), (0.029, 0.25)): ir[int(d_ * SR)] += g * 6
 ir = signal.sosfilt(signal.butter(2, [250, 5500], "band", fs=SR, output="sos"), ir); ir /= np.sqrt((ir ** 2).sum())
 wet = signal.fftconvolve(y, ir)[: len(y)]
-y = y + wet * (np.sqrt(np.mean(y ** 2)) / (np.sqrt(np.mean(wet ** 2)) + 1e-12)) * 10 ** (-21 / 20)
+y = y + wet * (np.sqrt(np.mean(y ** 2)) / (np.sqrt(np.mean(wet ** 2)) + 1e-12)) * 10 ** (ROOM_DB / 20)
 y = y / (np.abs(y).max() + 1e-9) * 10 ** (-1 / 20)
 sf.write(f"{B}/work/vo.wav", y.astype(np.float32), SR, subtype="FLOAT")
 

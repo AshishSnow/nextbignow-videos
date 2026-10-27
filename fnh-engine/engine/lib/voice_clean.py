@@ -54,7 +54,7 @@ def shelf_hi(f0, gain_db):
     return signal.tf2sos(np.array(b) / a[0], np.array(a) / a[0])
 
 
-def clean(x, tempo=1.0, deess_target=-11.0, verbose=True):
+def clean(x, tempo=1.0, deess_target=-11.0, verbose=True, ratio=2.2):
     if abs(tempo - 1) > 1e-3:
         import pedalboard
         x = pedalboard.time_stretch(x.astype(np.float32)[None, :], SR, stretch_factor=tempo, high_quality=True,
@@ -64,8 +64,8 @@ def clean(x, tempo=1.0, deess_target=-11.0, verbose=True):
     x = signal.sosfilt(peq(320, -1.5, 1.0), x)
     # 4. compressor (RMS 20 ms, thr = vowel level -8 dB, 2.2:1)
     e = env_rms(x, 20); thr = np.median(e[e > np.percentile(e, 70)]) * 10 ** (-8 / 20)
-    gc = np.where(e > thr, (e / thr) ** (1 / 2.2 - 1), 1.0)
-    x = x * smooth_gain(gc, 8, 140)
+    gc = np.where(e > thr, (e / thr) ** (1 / ratio - 1), 1.0)   # ratio 2.2 (default); <= 1 = off
+    if ratio > 1: x = x * smooth_gain(gc, 8, 140)
     # 5. split-band de-esser (linear-phase band so low + band sums back perfectly)
     taps = 511
     bp = signal.firwin(taps, [4200, 11000], pass_zero=False, fs=SR)

@@ -7,10 +7,15 @@ The owner (Ashish) is usually not watching: decide, build, verify, post, log. Ne
 **Approved style = `template/` (episode 07 "carrots turn your skin orange", posted 26 Oct 18:00 IST). Copy its approach.**
 - Bright animated sets (studio engine: gradient stage + big colour circle, flat shaded props, punchy transitions,
   screen shake on impacts), like the owner's OopsMyBusiness / NextBigNow reels — but with FreshNestHub's OWN mascot.
-- Mascot **"Chubby"** (`template/fnh_char.py`): round head with a hair curl, big round mint-green shirt belly,
-  stick arms + legs. NEVER use the OopsMyBusiness square-face guy (`guy()` from anim_base) or any other mascot.
-- Voice: energetic young male (studio `make_vo.py`: Kokoro am_eric/am_fenrir blend + Praat prosody). MrBeast-style
-  script: simple words, high energy, stakes, short sentences — but NOT rushed (speed 1.0, real pauses).
+- Mascot **"Chubby"** (`template/fnh_char.py` v1 shapes, overridden by `fnh_char3d.py` v2 look): round head, brown hair +
+  curl, round mint-green HOODIE belly, shaded sleeves, jeans, white sneakers. NEVER use the OopsMyBusiness square-face guy (`guy()` from anim_base) or any other mascot.
+- Voice (since 27 Oct 23:30, owner: "more mature, more natural"): a grown-up, warm, calm-confident guy — Kokoro
+  am_michael .4 / am_puck .3 / am_eric .3, own register (voice.env "M2"). Simple words, stakes, short sentences, real pauses.
+- **v5 LOOK (27 Oct, owner: "colours, more natural, 3D; change the clothes"; references = cinematic AI reels + cel-shaded
+  3D cartoons)**: Chubby v2 (`template/fnh_char3d.py`: 3D-shaded skin/hoodie/jeans/sneakers, warm-brown outlines, key
+  light from top-left + warm rim), cinematic light + colour on every frame (`template/anim_cine.py`), REAL PLACES with
+  light and depth for story moments (kitchen / room / golden-hour outdoors), big 3D words behind the hero. Worked example (how to
+  use places, counter_front, title3d, mood, finish looks): `episodes/v5-demo-onion-hook/anim_shots.py`. Never copy a reference character; never use any copyrighted character.
 - Topics: food + health facts that make people say "wait, what?" (see topic_ideas.md).
 
 Rejected (never go back): Nessa stick-girl + beauty trivia (ep 01–04), white-paper medical plates + British female
@@ -115,7 +120,7 @@ Then write (read the template versions first — they are the reference; use the
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
   synthesized ones). Keep the bed level and loudnorm section. VO/bed must be ≥ 14 dB on every line (printed).
 
-### Chubby API (`fnh_char.py`)
+### Chubby API (`fnh_char.py` + `fnh_char3d.py` — same API, v2 look loaded after v1)
 `chub(f, x, y, s, la, ra, ll, rl, mouth, blink, brow, look, expr, tint, hold, hold_off, hold_front, bob, op, lean, squash, sit, nose, cap)`
 - (x, y) = feet baseline; height ≈ 480·s; head centre ≈ (x, y − 420·s). Typical: s 0.8–1.15 at y 1440–1480.
 - arms (upper°, fore°) from straight down, + = outward: relaxed (20, 10); cheer (150, 170); point (70, 40);
@@ -124,6 +129,8 @@ Then write (read the template versions first — they are the reference; use the
   `brow`: n, up, sus, sad; `look=(−1..1, −1..1)`.
 - `tint` 0..1 turns skin orange (only when the story is a colour change); `nose=0..1` shows/tints a nose; `cap=True` pilot cap.
 - `chub_head_only(f, x, y, s, t, ...)` for big face close-ups; `logo_el()` = FreshNestHub logo with Chubby's head.
+- v2: `grip_hand(f, x, y, s)` draws a shaded hand OVER a held tool's handle (chopper uses it); shoulders at
+  (x ± 118·s, y − 261·s) so `arm_ik` helpers still fit; `shirt=` recolours the hoodie (white = lab coat look).
 Chubby appears in most shots, reacting to the fact (eating, shocked, pointing, cheering). Give him a different action
 in every video.
 
@@ -160,12 +167,31 @@ rot, lit)], dim, hgt) (cell with locks on top; returns keyhole points), key_pile
 bee_el(flap, mood), flower_el("coffee"|"lemon", glow), lemon_el, sun_icon, moon_icon, zzs, caf_dot; schemes "cafe", "latte", "neuro",
 "dusk", "honey". sfx_lib (ep 14): gulp, rip, rattle, buzz, tick, charge.
 
+### Cinematic kit (`anim_cine.py`, loaded after anim_fx — 27 Oct)
+- `finish(f, n, look="warm"|"golden"|"cool"|"night"|"fresh")` = colour grade (cool shadows, warm highlights, S-curve) +
+  adaptive bloom + vignette + grain. Every shot already calls finish(); pick the look that matches the shot's emotion.
+- Places: `set_kitchen(t)` (+ `counter_front(f, 1330)` AFTER Chubby -> he stands behind the worktop; props go on top at
+  y ≈ 1340), `set_room(t)` (bookshelf, wooden floor, rug), `set_dusk(t)` (golden-hour sun at (720, 980), hills, grass).
+  Backgrounds are pre-blurred = depth of field; `dof(f, sigma)` blurs more for close-ups.
+- Light: `god_rays(f, x, y, t, ...)`, `lamp_glow`, `haze`, `bokeh`, `dust_motes`, `light_leak`, `cast_shadow(f, x, y, w, h, skew)`,
+  `mood(f, col, amt)` (colour the edges: red = danger, green = gas, blue = cold), `spotlight(f, x, y, r, amt, feather)` (anim_fx),
+  `light_wrap(f, el, x, y, col)` (rim light from the scene on a hero prop).
+- `title3d(f, "WORD", y, t, t0, size, face, side)` = giant extruded 3D word, drawn BEFORE Chubby/the hero so they overlap it;
+  when a 3D title shows the key word, drop the ui_word caption for that moment (no duplicate text).
+
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.
 - Captions ONLY at key moments: `ui_word(f, lead, BIG, 470, …)` — small lead + one big word/number, centred x = 540,
   ≤ 840 px wide; use `[word]` for an accent colour. No word-by-word subtitles, no emoji, no persistent counters.
 - First 3 s: strong visual action (Chubby doing something) + one short caption; never a giant text-only opener.
-- Change the stage scheme every shot (sky, yellow, purple, teal, red, emerald, orange, pink, cream); vibrant, never dull.
+- Story moments (Chubby doing something, everyday situations, reveals) happen in a lit PLACE (set_kitchen / set_room /
+  set_dusk or a new place you build with the same recipe: blurred background + sharp foreground + one light source);
+  diagram / inside-the-body / molecule shots keep the colour-circle `stage()`. Change the look every shot (place, light,
+  grade, mood colour) — lights-drop + red rim for danger, golden backlight for the happy reveal, shallow focus for close-ups.
+- Every video: at least 3 shots in a lit place, at least 2 big 3D titles behind the hero, and one lighting beat that
+  carries the emotion (lights drop / spotlight / mood colour). Captions on dark/warm places: white with shadow.
+- Build ONE new place, light or material per run when the topic needs it (bathroom, supermarket, gym, street, lab...) and
+  add it to anim_cine.py for every future video.
 - Source chip for key numbers: `chip("Source: …", INK, WHITE, 22)` at y 1462.
 - End: phone "SEND THIS" CTA with Chubby, then logo sting + "follow for more health facts".
 - New opening idea every video (check the topics_done "opening" column).
