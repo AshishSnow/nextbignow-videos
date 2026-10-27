@@ -6,6 +6,7 @@ HERE=$(cd "$(dirname "$0")" && pwd)
 STUDIO=${STUDIO:-/home/claude/studio}
 mkdir -p "$STUDIO"/{models/kokoro,assets/sf/gugs,fonts,lib,projects}
 cp -f "$HERE"/lib/*.py "$STUDIO/lib/"
+mkdir -p "$STUDIO/voices" && cp -f "$HERE"/voices/*.npz "$HERE"/voices/*.wav "$STUDIO/voices/" 2>/dev/null || true
 mkdir -p "$STUDIO/models/utmos"
 
 dl() { [ -s "$2" ] || { echo "downloading $(basename "$2")"; curl -sSL --retry 3 -o "$2.part" "$1" && mv "$2.part" "$2"; }; }
@@ -29,6 +30,12 @@ if [ ! -s "$STUDIO/models/$P/encoder.int8.onnx" ]; then
   tar -xjf "$STUDIO/models/$P.tar.bz2" -C "$STUDIO/models" && rm -f "$STUDIO/models/$P.tar.bz2"
 fi
 
+# Chatterbox-Turbo (MIT, ResembleAI/chatterbox-turbo-ONNX): fp32 token embeddings + decoder, q4 language model (~1.2 GB).
+# Speaker conditioning ships precomputed in studio/voices/*.cbcond.npz, so the 1 GB speech encoder is not needed.
+CB="$STUDIO/models/cbturbo"; mkdir -p "$CB"; HF=https://huggingface.co/ResembleAI/chatterbox-turbo-ONNX/resolve/main
+for f in embed_tokens language_model_q4 conditional_decoder; do dl "$HF/onnx/$f.onnx" "$CB/$f.onnx"; dl "$HF/onnx/$f.onnx_data" "$CB/$f.onnx_data"; done
+dl "$HF/tokenizer.json" "$CB/tokenizer.json"
+
 # fonts (npm registry)
 font() { [ -d "$STUDIO/fonts/$1/package" ] || { mkdir -p "$STUDIO/fonts/$1"; (cd "$STUDIO/fonts/$1" && npm pack -s "$2" >/dev/null && tar -xzf *.tgz && rm -f *.tgz); }; }
 font lilita @fontsource/lilita-one@5.2.5
@@ -48,7 +55,8 @@ need soundfile || pipi soundfile
 need cv2 || pipi opencv-python-headless
 need PIL || pipi pillow
 need scipy || pipi scipy
-for m in kokoro_onnx sherpa_onnx parselmouth pedalboard tinysoundfont num2words soundfile cv2 PIL scipy; do need $m || echo "MISSING python module: $m"; done
+need tokenizers || pipi tokenizers
+for m in tokenizers kokoro_onnx sherpa_onnx parselmouth pedalboard tinysoundfont num2words soundfile cv2 PIL scipy; do need $m || echo "MISSING python module: $m"; done
 [ -s "$STUDIO/models/utmos/utmos22.onnx" ] || echo "NOTE: UTMOS model missing -> voice_report.py reports pitch/pace/ASR only"
 [ -f /usr/share/fonts/opentype/inter/InterDisplay-Black.otf ] || echo "WARNING: Inter Display fonts missing (/usr/share/fonts/opentype/inter) — install fonts-inter"
 which ffmpeg >/dev/null || echo "WARNING: ffmpeg missing"

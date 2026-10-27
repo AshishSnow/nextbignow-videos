@@ -65,6 +65,9 @@ pitch lift), Praat PSOLA prosody for per-line highs and lows, stressed words, qu
 multi-sentence lines sound less rushed (UTMOS 4.23 → 4.38 on the Duolingo script). Knobs (env, defaults = lab winner): `VMIX` blend, `SPD` 0.88 (speed multiplier), `PZ` 1.6 (pause multiplier), `PMIN` 0.3 s,
 `GT` 0 (= keep own pitch; **every global lift tested so far lowered naturalness**), `EXS` 1.0 (range expansion), `BMP` 1.0 (stress bumps), `STR` 1.0.
 Write line speeds 1.0–1.06 and pauses 0.2–0.45 in `vo_lines.py` as in the examples; SPD/PZ make them calm.
+Alternative engine (opt-in, see `VOICE.md`): `ENGINE=chatterbox python3 scripts/make_vo.py` — Chatterbox-Turbo (MIT) in our own
+synthetic narrator's voice, +0.06 UTMOS but flatter line endings; Kokoro stays the default. Its output is deterministic, so if a
+line reads back wrong, rephrase it (re-running gives the same audio).
 QA: `python3 /home/claude/nextbignow-videos/studio/tools/voice_report.py $P` → UTMOS ≥ 4.0 (aim ≥ 4.3), `asr_bad_lines` empty,
 pitch range ≥ 15 st, speaking pace 165–190 wpm. Fix spelling/phrasing and regenerate if a line reads back wrong.
 A/B voice variants **one at a time** (copy the project to `projects/<slug>_B` and run there): the box has ~7 GB RAM and two Kokoro or

@@ -28,11 +28,26 @@ import os, hashlib
 # SPD scales every line's speed, PZ scales every pause (PMIN = shortest pause, s) -> calmer, clearer pacing
 SPD = float(os.environ.get("SPD", "0.88")); PZ = float(os.environ.get("PZ", "1.6")); PMIN = float(os.environ.get("PMIN", "0.3")); EXS = float(os.environ.get("EXS", "1.0")); BMP = float(os.environ.get("BMP", "1.0")); STR = float(os.environ.get("STR", "1.0"))
 SPLIT = float(os.environ.get("SPLIT", "0.12"))   # per-sentence Kokoro calls + 0.12 s gap: UTMOS 4.23 -> 4.38 (27 Oct A/B)
-_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX] + ([SPLIT] if SPLIT > 0 else [])).encode()).hexdigest()   # pauses are baked into the cache too
+# ENGINE=chatterbox -> Chatterbox-Turbo (MIT, onnx q4) conditioned on our synthetic narrator (studio/voices/*.cbcond.npz);
+# it takes its pace and melody from the reference, so SPD/SPLIT don't apply (line pauses still do). See studio/VOICE.md.
+ENGINE = os.environ.get("ENGINE", "kokoro"); CBV = os.environ.get("CBV", "narrator_slow")
+_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX] + ([SPLIT] if SPLIT > 0 else []) + ([ENGINE, CBV] if ENGINE != "kokoro" else [])).encode()).hexdigest()   # pauses are baked into the cache too
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}
 t = LEAD
+if ENGINE == "chatterbox" and not os.path.exists(_cache):
+    import cb_turbo
+    _cbv = CBV if os.path.exists(CBV) else f"{R}/voices/{CBV}.cbcond.npz"
+    cb = cb_turbo.Turbo(_cbv)
 for lid, text, sp, pause, *_ in ([] if os.path.exists(_cache) else LINES):
+    if ENGINE == "chatterbox":
+        a = signal.resample_poly(cb.say(text), SR, cb_turbo.SR).astype(np.float32)
+        f = int(0.012 * SR); a[:f] *= np.linspace(0, 1, f); a[-f:] *= np.linspace(1, 0, f)
+        lines[lid] = dict(start=round(t, 3), end=round(t + len(a) / SR, 3), text=text)
+        pieces.append(a); t += len(a) / SR
+        pause = max(PMIN, pause * PZ) if pause > 0 else 0.0
+        pieces.append(np.zeros(int(pause * SR), np.float32)); t += pause
+        continue
     parts = [q for q in re.split(r"(?<=[.?!…])\s+", text) if q.strip()] if SPLIT > 0 else [text]
     segs = []
     for qi, q in enumerate(parts):   # SPLIT>0: one Kokoro call per sentence + a short natural gap (long lines sound less rushed)
@@ -99,7 +114,7 @@ def align(raw, lines):
 if os.path.exists(_cache): words0 = list(_z["words0"])
 else:
     words0 = align(flat, lines); np.savez(_cache, flat=flat, lines=np.array(lines, dtype=object), words0=np.array(words0, dtype=object))
-import copy; lines = copy.deepcopy(lines)
+import copy; lines_orig = copy.deepcopy(lines); lines = copy.deepcopy(lines)
 spans = []   # (line, word, start, end)
 for lid, L in lines.items():
     ws = [w for w in words0 if w["line"] == lid]
@@ -178,6 +193,10 @@ def tmap(t0):  # old time -> new time through the duration tier (linear interpol
 
 
 for lid, L in lines.items(): L["start"], L["end"] = round(tmap(L["start"]), 3), round(tmap(L["end"]), 3)
+# PROSODY=0 (default for chatterbox): keep the engine's own melody. PSOLA on Chatterbox output cost -0.23 UTMOS (4.54 -> 4.30) and
+# over-widened the range to 24.8 st (R&D 27 Oct); Chatterbox already gets its melody from the narrator reference.
+PROS = os.environ.get("PROSODY", "0" if ENGINE == "chatterbox" else "1") != "0"
+if not PROS: raw = flat.astype(np.float32).copy(); lines = lines_orig
 raw = raw / (np.abs(raw).max() + 1e-9) * 0.9
 sf.write(f"{B}/work/vo_raw.wav", raw, SR, subtype="FLOAT")
 
