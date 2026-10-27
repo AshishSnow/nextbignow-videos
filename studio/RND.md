@@ -14,7 +14,9 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 4. Never post, never touch Metricool beyond read-only analytics, never touch other brands or `fnh-engine/`, only change
    `studio/`. No MP4s or big media in git (narrator reference clips < 1 MB in `studio/voices/` only).
    Open-weight, commercial-use models only; never clone a real person; never ElevenLabs.
-5. Every run also: refresh `PERFORMANCE.md` (Metricool, last 21 days) and, if `ALGORITHM.md` is > 3 days old, research it.
+5. Every run also: refresh `PERFORMANCE.md` (Metricool, last 21 days); if `ALGORITHM.md` is > 3 days old, research it; if
+   `topic_bank.md` has fewer than 10 Ready topics, add verified ones first (owner, 27 Oct: "topics need to improve — something interesting").
+   Voice has had 3 runs in a row — give the other areas (Topics, Story, Visuals, Sound) their turn unless voice is broken.
 6. Finish within 2 h; don't push template changes near video runs (:05 past 00, 05, 10, 15, 20 UTC).
 
 ## Focus rotation
@@ -26,6 +28,7 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 | Story | hooks, re-hooks, structure, endings/takeaways, length | never |
 | Tooling | render speed, smoke tests, QA automation | never |
 | Analytics | what the numbers say, cover frames, captions, posting times | never (refreshed every run; YouTube numbers flowing since 27 Oct) |
+| Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-10-27 |
 
 ## Backlog (add ideas, strike when done)
 Voice

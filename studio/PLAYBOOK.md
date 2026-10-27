@@ -24,19 +24,34 @@ Disk is limited (~8 GB free) and RAM ~7 GB, 2 CPUs (full render ≈ 11 min): del
 - Faceless, fully animated: square-face stick-figure mascot (cream rounded-square head, black stick body, orange tie), bright designed sets.
 - Brand names may be said and written as plain text (commentary). **Never draw a real logo, mascot, packaging or trade dress** (e.g. no green siren, no golden arches). Use generic props.
 
-## 2. Topic (pick one, never repeat)
-- Read `studio/topics.md` **and** the brand's last 90 days of posts in Metricool (owner also uploads manually); never repeat a topic or close variant.
-- Prefer topics with a broad, personal money hook (your money, your receipt, your subscription) — `PERFORMANCE.md` shows these reach the most people.
-  Best so far: **an everyday object the viewer owns or uses + a "that can't be right" comparison/question** (printer ink vs champagne: 74% 3-s rate).
-  Company-structure topics (segment profits, franchise deals) held only 50–64% and stayed small. Also vary the *type*: hidden business model, pricing trick, psychology trick, loophole, surprising number, founder story.
-- Must be instantly clear in 3 seconds and have a "wait, what?" twist. Prefer famous brands people use (global appeal).
-- Idea bank (each must be verified first, skip any you can't source): IKEA maze + cheap food at exit; printer ink vs champagne price per ml;
-  cinema popcorn margins; gyms profiting from members who never come; airline loyalty/credit-card money; Nespresso/Gillette razor-and-blades;
-  Visa/Mastercard swipe fees; Amazon's profit coming mostly from AWS; Trader Joe's no-sales strategy; Aldi's coin cart; Rolex scarcity;
-  Hermès Birkin waitlist; De Beers "diamonds are forever"; Duolingo streak psychology; Uber surge pricing; Krispy Kreme hot light;
-  Chick-fil-A closed Sundays; Ferrari limited production; Disney parks pricing; Spotify royalties per stream; Netflix password sharing crackdown;
-  casinos without clocks; free-to-play games and "whales"; Apple's accessories margins; Domino's as a tech company; Red Bull as a media company.
-- Avoid: medical/health claims, politics, legal accusations, anything defamatory or speculative about named people.
+## 2. Topic — interesting first (pick one, never repeat)
+Owner, 27 Oct: "topics need to improve — something interesting." Twelve videos in a row used the same formula ("how company X
+really makes money"); it has become predictable. From now on the topic must pass the **interest test** and the **type mix**.
+
+**Where topics come from:** `studio/topic_bank.md` first — researched, fact-checked candidates with hooks, story beats and sources
+(re-check any number that could have changed). Also read `studio/topics.md` **and** the brand's last 90 days of posts in Metricool
+(owner also uploads manually); never repeat a topic or close variant. The R&D runs keep the bank stocked.
+
+**Interest test** (score 1–5 each; write the scores in the CLAIMED line of topics.md):
+1. *Wait-what* — would a friend say "no way" after the one-line hook? (Curiosity comes from a gap between what we know and what
+   we just learned — Loewenstein 1994; surprise and awe make people share — Berger & Milkman 2012.)
+2. *Story* — real people or a company, something at stake, a turn, an ending (a blunder, a gamble, a stunt, a rivalry, a comeback).
+3. *Your life* — it touches something in the viewer's hand, wallet, phone or street.
+4. *Picture* — the whole idea can be drawn as one cartoon in frame 1 (no real logos needed).
+5. *Fresh* — not one of the usual top-10 YouTube business explainers, and a different type from the last two videos.
+6. *Share/save* — a takeaway or "you won't believe this" fact people send to a friend.
+7. *Verifiable* — primary sources exist for every number.
+Pass = total ≥ 26 / 35, *Wait-what* ≥ 4 and *Verifiable* = 5. Otherwise pick another topic.
+
+**Type mix** — never two of the same type in a row; type F at most 1 in 3 videos:
+A. Wild true story (blunder, gamble, stunt, scandal with a twist) · B. Everyday object, absurd economics · C. Hidden giant (one
+company behind "competing" brands) · D. Origin twist (a famous company or product began as something absurd) · E. Psychology or
+pricing trick you can spot tomorrow · F. Hidden business model ("how X really makes money").
+
+**Hook:** concrete thing + impossible-sounding claim in ≤ 12 words, as a question ("Do you know a man tried to buy a fighter jet
+with Pepsi points?"). Best data so far: an everyday object + a "that can't be right" comparison (printer ink vs champagne: 74 % 3-s rate).
+- Avoid: medical/health claims, politics, legal accusations, anything defamatory or speculative about named people (court and
+  regulator findings, stated as such, are fine).
 
 ## 3. Research and fact rules (strict)
 - Use WebSearch/WebFetch. Every number in the script needs a primary source (SEC 10-K/10-Q/8-K, company release, government data such as FDIC/BLS)
