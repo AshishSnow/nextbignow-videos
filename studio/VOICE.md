@@ -127,7 +127,7 @@ Not adopted: a global pitch clip −7/+8 st (range fell to 15.0 st for the same 
 
 ## Next
 - **Chain drops on short lines:** airline a3 ("And Delta isn't the only one.") and gas d2 lose 0.1–0.2 in the EQ/de-ess/room chain,
-  not in PSOLA → score each line before/after `voice_clean` and the room IR; try gating the chain per line or a lighter de-esser.
+  not in PSOLA. Measured (airline a3): raw 4.263, +EQ 4.259, +voice_clean 4.217, +room 4.149 → A/B a lighter de-esser and a drier room.
 - Gate on the *chained* line (Duolingo a4 scored better raw at 0.6 but worse after the chain).
 - ~~Hybrid endings~~ — done 27 Oct (table above): low lines now land (−3.5…−4.0 st) at ≤ 0.01 per-line UTMOS cost.
 - **Chatterbox retakes for weak lines:** it's deterministic, so a weak line (per-line UTMOS < 4.3, e.g. Duolingo a2 3.91) can only

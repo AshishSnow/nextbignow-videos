@@ -30,7 +30,8 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 ## Backlog (add ideas, strike when done)
 Voice
 - ~~Kokoro weak lines~~ — done 27 Oct run 3: they come from our PSOLA; per-line prosody gate (`PGATE` 0.15, template) → worst line 3.98/4.05 → 4.25.
-- Chain drops on short lines (airline a3, gas d2 lose 0.1–0.2 in EQ/de-ess/room): per-line before/after the chain; lighter de-esser.
+- Chain drops on short lines: airline a3 raw 4.263 → +EQ 4.259 → +voice_clean 4.217 → +room 4.149; t3 4.327 → 4.263 at voice_clean
+  (de-ess cut up to −10.8 dB). EQ is neutral → A/B a lighter de-esser and a drier room (−24 dB vs −21) per line on 3 scripts.
 - ~~Chatterbox hybrid: last-word pitch move on low lines~~ — done 27 Oct run 2: `lib/end_contour.py`, low_fall −1.3 → −4.0 (gas), −1.0 → −3.5 (Costco) at ≤ 0.01 per-line UTMOS.
 - Chatterbox retakes for *weak* lines too (per-line UTMOS < 4.3, e.g. Duolingo a2 = 3.91 with uptalk): extend `lab/voice_engine/take_picker.py`
   (sampled takes) to also pick by per-line UTMOS and low_fall, then run end_contour on the winner; punctuation variants as a fallback.
