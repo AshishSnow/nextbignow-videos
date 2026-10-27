@@ -32,3 +32,4 @@ Owner feedback after episode 02 (apply from episode 03): it was too fast — mak
 voice (v2 MOOD table), 14–20 explaining scenes (step-by-step visuals), never rushed.
 Owner feedback to apply from episode 02 on: captions at true centre (x=540); open with a clear "Do you know…?"
 intro so viewers instantly know what the video is about.
+CLAIMED 2026-10-28 01:51 IST | 14-coffee-sleep-trick | Coffee Doesn't Give You Energy (caffeine blocks the adenosine 'sleepy' signal)
