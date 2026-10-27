@@ -105,6 +105,18 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 - 1080×1920, 24 fps. Safe zone: nothing important in top 250 px, bottom 420 px, right 120 px, left 60 px. Key visuals central.
 - Bright, vibrant, extra-saturated sets (`stage(scheme, sun_colour, x, y, R)` — big colour circle), beautiful background in every shot.
   Schemes: cream, sky, yellow, purple, teal, red, emerald, orange, pink. Change scheme every shot; match colour to the moment.
+- **Cinematic texture (owner's references, 27 Oct — top story reels):** real-looking light, depth and atmosphere, a film look, and a
+  giant 3D word tucked behind the hero object. `scripts/anim_cine.py` (on by default, `CINE=0` = old flat look) turns every
+  `stage()` into a lit world with depth (golden-hour skyline for orange/yellow, blue-sky skyline for sky, city night for
+  purple/teal, wooden desk for cream, lit studio for red/emerald/pink — or pick one: `world(kind, scheme, t)`), turns the colour
+  circle into a glowing disc, and turns `finish()` into a film grade (contrast curve, warm/teal split tone, bloom, halation,
+  lens fringe, film grain, vignette). Use per shot:
+  - `title3d(f, "WORD", y, t, t0)` — big extruded 3D word, centred, fits the safe zone; draw it BEFORE the hero so the hero
+    overlaps it. Use in the hook and on 1–2 big reveals (never on every shot; never the same word as the caption above it).
+  - `light_rays(f, x, y, col, strength)` for reveals, `bokeh(f, ...)` for magic/money moments, `dof(f, sigma)` to blur a
+    background layer before drawing the sharp hero, `light_wrap(...)` to rim-light a hero in its scene.
+  - Check test frames for haze: colours must stay vibrant (owner hates washed-out); if a shot looks foggy, lower `bloom` or the
+    disc `op`, or pick a darker scheme. Render cost ≈ +0.2 s/frame (a 2-min video renders ~4 min longer).
 - All on-screen text truly centred at x = 540 (keep `ui_word` default x; no off-centre captions), max width ~840 px.
 - Two-tier editorial captions **only at key moments** (`ui_word(f, lead, BIG, y≈470, t, t0, ...)`): one big word/number + small lead.
   No word-by-word subtitles, no emoji, no persistent counters/meters.

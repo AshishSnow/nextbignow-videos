@@ -1,7 +1,7 @@
 """OopsMyBusiness — 4 tricks restaurants use on you (fully animated). Usage: anim.py OUT.mp4 [frames|a:b]"""
 import sys, subprocess, os
 _D = os.path.dirname(os.path.abspath(__file__))
-for _p in ("anim_base.py", "anim_props.py", "anim_props2.py", "anim_props3.py", "anim_shots.py"):
+for _p in ("anim_base.py", "anim_cine.py", "anim_props.py", "anim_props2.py", "anim_props3.py", "anim_shots.py"):
     exec(open(f"{_D}/{_p}").read())
 
 N = int(round(END * FPS))

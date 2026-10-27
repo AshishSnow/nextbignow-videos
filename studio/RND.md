@@ -52,6 +52,11 @@ Sound
 Analytics
 - YouTube vs Instagram per topic: YT winners differ (Compaq 1,332 YT vs 130 IG) — pull YTVP06/08 every run and compare after 10 posts.
 Visuals / Story / Tooling
+- ~~Cinematic texture~~ — done 27 Oct (interactive): `template/scripts/anim_cine.py` (lit worlds with depth, glow disc, 3D titles behind the
+  hero, light rays, bokeh, DOF, film grade), default on. Next: prop **materials** (specular highlights, subtle texture on paper/metal/
+  wood props, soft contact shadows everywhere), mascot rim light + shadow, and speed (CA + grain cost ~0.2 s/frame).
+- Photoreal background plates from a local open image model (owner's reference reels use realistic AI imagery): check licence
+  (commercial use) + CPU speed at 1080×1920 on 2 cores; only for backgrounds behind our own mascot/props; label AI as we do now.
 - First-frame test sheet: render frame 0 of the last 5 videos side by side with safe-zone guides.
 - Smoke test that renders 2 s of video (not only VO) to catch empty-frame regressions.
 
@@ -114,3 +119,8 @@ Visuals / Story / Tooling
   >$20M), Nintendo love hotels, the 1899 Coke contract "freezing" the price, "Toblerone left Switzerland", cake-mix egg, Oakley 1996.
   Data: by type, B/E reels averaged ~68 % 3-s / 23 s / ~1,350 views vs F ~57 % / 17.7 s / ~255 (PERFORMANCE insight I) → pick order
   in topic_bank.md starts B → E → C → A → D. Analytics: Metricool still frozen (7th identical pull, IG + YT). ALGORITHM.md is 1 day old → not redone.
+- 2026-10-27 | Visuals (interactive; owner sent reference reels: cinematic AI story reels with golden light, depth of field, film
+  grain and a giant 3D title behind the hero) | Built `anim_cine.py`: same shot code, new look — measured on 3 past videos (De Beers,
+  gas station, airline miles): renders fine, colours kept vibrant after a second tuning pass (first pass was hazy: bloom 0.32 → 0.18,
+  contrast S-curve 0.18 → 0.42, saturation 1.08 → 1.16), cost +0.19 s/frame. Hook demo with `title3d("DIAMONDS")` behind the ring.
+  | kept (template default; CINE=0 to switch off)
