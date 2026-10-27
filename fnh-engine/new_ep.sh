@@ -7,8 +7,7 @@ STUDIO=${STUDIO:-/home/claude/studio}
 [ -n "$1" ] || { echo "usage: new_ep.sh NN-slug"; exit 1; }
 P="$STUDIO/projects/$1"
 mkdir -p "$P"/{scripts,work,frames}
-cp "$HERE"/engine/template/* "$P/scripts/"
-cp "$HERE"/template/* "$P/scripts/"
+find "$HERE"/engine/template "$HERE"/template -maxdepth 1 -type f -exec cp {} "$P/scripts/" \;   # files only (skip __pycache__)
 cp "$HERE/voice.env" "$P/scripts/voice.env"
 chmod +x "$P/scripts/render_all.sh"
 echo "$P"

@@ -338,3 +338,42 @@ def arm_ik(sh, tg, L1, L2):
     th = math.degrees(math.atan2(dx, dy)); al = math.degrees(math.acos(clamp((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d), -1, 1)))
     a1 = th - al; ex, ey = sh[0] + L1 * math.sin(math.radians(a1)), sh[1] + L1 * math.cos(math.radians(a1))
     return a1, math.degrees(math.atan2(tg[0] - ex, tg[1] - ey))
+
+
+# ================= PROGRESSIVE CHAIN MAP (ep 13): explain a chain reaction / multi-step process =================
+# Build-up diagram (progressive disclosure): a cause-and-effect chain is shown one link at a time, and a compact map of the
+# WHOLE chain stays on screen while the close-ups change, so the viewer always knows (1) which step we're on, (2) what came
+# before it and (3) how many steps are left. Past links stay but dim (they become context), the current link is ringed and
+# bigger (signalling), future links are empty slots (the open loop "there's more"). Colour-code each icon to match the
+# character in the main picture (Gestalt similarity). Then the same map lights up link by link as the 5-s recap.
+# Sources: Mayer's segmenting + signalling principles (Mayer 2020, Multimedia Learning); progressive-reveal of complex figures
+# (G. Fisk, "Progressive reveal animations for complex technical figures", 2025: reveal in the order of the process, colour-
+# coded labels linked to parts, nothing else competing on screen).
+def chain_map(f, items, cur, t, t_cur, y=1400, gap=146, r=50, slots=True, dim=0.55, panel=True):
+    """items = [(el, label), ...] (the whole chain); cur = index of the current link (-1 = none yet); t_cur = when it
+    became current (pop + arrow draw-in). Centred on x=540; keep y inside the safe zone (<= 1440)."""
+    n = len(items); x0 = W / 2 - gap * (n - 1) / 2
+    if panel:
+        g = f.copy(); cv2.rectangle(g, (int(x0 - r - 26), int(y - r - 22)), (int(x0 + gap * (n - 1) + r + 26), int(y + r + 52)), C(INK), -1, cv2.LINE_AA)
+        f[:] = f * 0.45 + g * 0.55
+    for i, (el, lab) in enumerate(items):
+        x = x0 + i * gap
+        if i > cur:
+            if slots:
+                cv2.circle(f, (int(x), int(y)), int(r * 0.55), C((255, 255, 255)), 3, cv2.LINE_AA)
+                comp(f, chip("?", (60, 60, 70), WHITE, 20), x, y)
+            continue
+        k = pin(t, t_cur, 0.3) if i == cur else 1.0
+        rr = r * (1.18 if i == cur else 0.9) * k
+        cv2.circle(f, (int(x), int(y)), int(rr) + 5, C(INK), -1, cv2.LINE_AA)
+        cv2.circle(f, (int(x), int(y)), int(rr), C(WHITE), -1, cv2.LINE_AA)
+        pm, a = el; s_ = (2 * rr * 0.78) / max(a.shape)
+        comp(f, scale_el(el, s_), x, y)
+        if i < cur and dim > 0:
+            g = f.copy(); cv2.circle(g, (int(x), int(y)), int(rr) + 5, C((40, 40, 50)), -1, cv2.LINE_AA)
+            m = np.zeros((H, W), np.float32); cv2.circle(m, (int(x), int(y)), int(rr) + 5, 1.0, -1, cv2.LINE_AA)
+            m *= (1 - dim) * 0.8; f[:] = f * (1 - m[..., None]) + g * m[..., None]
+        cv2.circle(f, (int(x), int(y)), int(rr), C(YEL_ if i == cur else (200, 200, 210)), 7 if i == cur else 3, cv2.LINE_AA)
+        comp(f, chip(lab, YEL_ if i == cur else WHITE, INK, 22 if i == cur else 18), x, y + r + 26, op=clamp((t - t_cur) / 0.2) if i == cur else 0.85)
+        if i > 0:
+            draw_arrow(f, x - gap + r * 0.95, y, x - rr - 6, y, 1.0 if i < cur else eo(clamp((t - t_cur) / 0.25)), WHITE, 6, 18)

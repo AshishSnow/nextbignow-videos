@@ -22,7 +22,7 @@ NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these f
    nothing actually gets colder). Pair visually opposite to the spicy video.
 5. 12-sugar-in-a-soda — Do you know how much sugar is in one can of soda? (≈ 39 g ≈ 9–10 teaspoons in a 12 oz cola;
    WHO / AHA added-sugar guidance as context, no diet advice). Generic can, no brands.
-6. 13-onions-make-you-cry — Do you know why onions make you cry? (cutting releases enzymes -> syn-propanethial-S-oxide gas
+6. (DONE ep 13) 13-onions-make-you-cry — Do you know why onions make you cry? (cutting releases enzymes -> syn-propanethial-S-oxide gas
    -> tear glands; tips: chill the onion, sharp knife).
 7. 14-beet-pink-pee — Do you know beetroot can turn your pee pink? (beeturia, betalain pigment, harmless for most; red
    urine without beets -> see a doctor).

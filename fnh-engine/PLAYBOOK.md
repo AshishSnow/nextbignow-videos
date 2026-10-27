@@ -102,6 +102,10 @@ Then write (read the template versions first — they are the reference; use the
   Processes (ep 12, pre-training): `cast_card(items=[(el, NAME, STATE)])` = a 2-3 s MEET THE CAST card naming the parts
   (and their states) BEFORE the process shots; `iris_mix` = "iris" transition (set `IRIS[shot] = (x, y)` on a round object
   in the previous shot) as a shape match cut; `arm_ik` (ep 12 anim_shots) when Chubby must hold a tool at a fixed point.
+  Chain reactions (ep 13, progressive build-up): `chain_map(items, cur, t, t_cur, y=1395)` = a persistent strip of the WHOLE
+  cause->effect chain at the bottom (past links dim, current ringed, future = '?' slots); advance `cur` on the word that names
+  each link, keep main pictures in y 600-1300 while it shows, then light it up link by link as the recap. `chopper()` (lib13)
+  = Chubby chopping with a knife held by IK at the grip; `knife_at(gx, gy, ang)` pivots a tool at its grip.
 - `scripts/music.py` — cues on every reveal. **New genre each video** (template = bouncy food-funk with marimba/slap
   bass + 1940s march section; others: synth-pop, lo-fi hip hop, latin, orchestral pizzicato, surf rock, chiptune…).
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
@@ -140,6 +144,12 @@ with crinkly silver leaf), barfi_el, plate_el/plate_of_sweets, diya_el/diya (oil
 fake=dull), lump_el, hammer_el + hammer_swing (arc swing), packet (beating stack, gut=True variant), detector (metal
 detector), kscale_el (kitchen scale readout), paper_el, elem_el (periodic tile: Ag/Al/Pb/Ni), rule_doc_el, colour_bottle_el,
 cow_el, hair_cross; schemes "festive", "saffron", "steel". sfx_lib (ep 12): clang, rustle, det_beep.
+anim_props_lib13 (ep 13): onion_el(face, mood, look, red), onion_half_el (cut rings), knife_el(dull) + knife_at + knife_tip,
+board_el, tiles (kitchen wall), onion_cell (two rooms, breakable walls), cell_grid (microscope cells), sulfur_el, enz_el(kind 1|2,
+open_, mood) + chomp(t) (enzyme pac-men), acid (live wobbly blob), gas_el/gas (gas ghost), wisps, drop_el, tears, tear_streams,
+droplets (spray with gravity + slow-motion), nerve_endings, bug_el, germ_el, helix (DNA with a gene, off), switch_el, pan_el,
+slowmo_ui (high-speed camera frame), mix_icon_el, acid_icon_el, sting_eye_el, chop_pose/chopper, board_onion, zz, shield_el,
+gland, ring_el; schemes "kitchen", "onion", "gas", "tear". sfx_lib (ep 13): chop, hiss, snip, plip, sizzle, squirt.
 
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.

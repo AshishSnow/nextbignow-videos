@@ -77,7 +77,8 @@ Voice (make it sound more like a real, excited young guy — never robotic):
 - [x] 27 Oct (ep 10): fix weak lines by re-ordering the sentence, not only speed: b2 "an organ behind your stomach wakes up.
       The pancreas." 3.99 -> "your pancreas wakes up. It's an organ behind your stomach." 4.35 (name first, then define).
       voice_report now prints utmos_lines (per-line) so weak lines can be found and rewritten.
-- [ ] Less audible pitch processing (EXS 0.4, BMP 0.7) if the voice sounds "processed"; keep stresses on 1–2 words/line.
+- [x] 27 Oct (ep 13): less audible pitch processing (EXS 0.4, BMP 0.7): A/B +0.008 chunk20 / +0.003 line mean / +0.04 first
+      100 s, f0 range 17.2 st -> adopted; keep stresses on 1–2 words/line.
 - [ ] Emphasis words: real stress (slightly louder + longer), not every line; question endings rise, statements settle.
 - [ ] Natural micro-pauses before the payoff word ("...it's eating you BACK").
 - [x] 26 Oct: calmer pacing for A (SPD 0.88, PZ 1.6, PMIN 0.3) — UTMOS 4.27 -> 4.36 (see F). Now default in voice.env.
@@ -101,6 +102,15 @@ Script / packaging:
 - [ ] Comment question in caption + firstCommentText.
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-27 21:00: analytics unchanged since 16:00 - spicy (posted 03:25, now 17.5 h old), sugar rush, mint and silver are
+  all PUBLISHED but still have no Metricool reel rows; carrots 133 / pineapple 86 reach are frozen; YouTube rows still end on
+  25 Oct. => the reel-analytics lag is now > 17 h, so the first real verdict on the long (1:36-2:05) CHUBBY videos comes on
+  28-29 Oct. Until then topic choice follows the reach data we do have: broad kitchen topics (honey 5.5k, water 4.7k) -> ep 13
+  is the most universal kitchen moment there is (cutting an onion) + a practical fix (sharp knife, slow cuts).
+- 2026-10-27 21:20 (voice A/B, same onion script): lighter pitch processing (EXS 0.4 / BMP 0.7 vs 0.5 / 0.8) scored chunk20
+  4.428 vs 4.420, line mean 4.350 vs 4.347, first-100 s 4.321 vs 4.281 at the same 190 wpm; f0 range 17.2 vs 17.8 st. Small but
+  every metric up -> adopted in voice.env, re-check on the next script. Rewriting the 4 weakest lines (e3 3.90, f1 4.08, d3
+  4.10, e6 4.18 -> 4.38 / 4.41 / 4.44 / 4.30) did more than the setting change: split long lines into 2-3 short sentences.
 - 2026-10-27 16:00: spicy (03:25), sugar rush (07:55) and mint (12:25) are PUBLISHED on Instagram but still absent from
   Metricool reel analytics 8-13 h later (pineapple showed up after ~7.5 h); carrots/pineapple numbers unchanged again
   (133 / 86 reach). YouTube rows still only go to 25 Oct (face mites, 1 view). => reel analytics lag grows with the
@@ -136,6 +146,17 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 13 onions make you cry (27 Oct, auto run, 2:02): VOICE lighter pitch processing EXS 0.4 / BMP 0.7 (A/B: chunk20 4.420 ->
+  4.428, line mean 4.347 -> 4.350; now voice.env default) + 4 weakest lines split into short sentences (e3 3.90 -> 4.38, f1 4.08
+  -> 4.41); ship 4.428 / 4.350 vs ep 12 4.412 / 4.339, 190 wpm, ASR clean | VISUAL progressive CHAIN MAP (anim_fx.chain_map):
+  CUT > MIX > ACID > GAS > NERVES > TEARS builds one link per shot at the bottom (past dim, current ringed, future '?'), lights
+  up whole in the recap; Chubby really chops (IK grip + knife pivot at the grip, lib13 chopper); cut-away onion cell with two
+  'rooms' whose walls crack; enzyme pac-men + wobbly live acid + gas ghost cast; high-speed-camera slow-motion look with
+  gravity droplets (Cornell study); dull-vs-sharp split panels; colour script kitchen warm / onion purple / gas green / tear
+  blue; prop lib13 + foley (chop, hiss, snip, plip, sizzle, squirt) | SCRIPT/TOPIC universal kitchen moment + 2 practical fixes
+  (sharp knife + slow cuts; cooked onions can't), the onion's 'booby trap' framing, open loop (tear-free onion) at 7 s paid at
+  72 s, 5 chapters, define-on-sight enzyme ('tiny helper' + in/out conveyor), orchestral caper score (pizzicato, bassoon,
+  clarinet, harpsichord, timpani) | metric: 3-s hold vs pineapple/spicy, avg watch % on 2:02, shares/1k (practical tip), saves.
 - 12 silver leaf on sweets (27 Oct, auto run, ~2:04): VOICE per-line prosody gate (PGATE 0.15) ported into the FNH make_vo
   + voice.env (SPLIT tested and rejected), weak lines rewritten (a1 name-first, a6 shorter); chunk20 4.412 / line mean
   4.339 (ep 11 4.427 / 4.359, within gate) | VISUAL pre-training cast card (MEET THE CAST: silver bits / thin sheets /
@@ -198,6 +219,9 @@ Script / packaging:
 | 27 Oct | ep 12 silver, SPLIT 0.06 + PGATE 0.15 + rewrites | 4.148* (chunk20 4.362, line mean 4.325) | 173 (fails pace) | 0.14 | 17.4 | 0 |
 | 27 Oct | **ep 12 silver, PGATE 0.15 + a1/a6 rewrites (shipped; now voice.env default)** | **4.245* (chunk20 4.412, line mean 4.339)** | 186 | 0.15 | 17.1 | 0 |
 | 27 Oct | ep 12 silver, same + a4 shortened (2nd take, not used) | 4.096* (chunk20 4.369, line mean 4.330) | 187 | 0.15 | 17.1 | 0 |
+| 27 Oct | ep 13 onions, A4 + PGATE, first script (EXS 0.5 BMP 0.8) | 4.255* (chunk20 4.402, line mean 4.322) | 192 | 0.16 | 17.8 | 0 |
+| 27 Oct | ep 13 onions, + e3/f1/d3/e6 split into short sentences | 4.281* (chunk20 4.420, line mean 4.347) | 190 | 0.16 | 17.8 | 0 |
+| 27 Oct | **ep 13 onions, same + EXS 0.4 BMP 0.7 (shipped; now voice.env default)** | **4.321* (chunk20 4.428, line mean 4.350)** | 190 | 0.16 | 17.2 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -245,7 +269,7 @@ Explaining (the owner's #1 priority — people must understand what they watch):
       (no decoration that distracts), no redundant on-screen paragraphs (picture + short label, voice explains)
 - [x] Analogies and visual metaphors for invisible things (enzymes as scissors, receptors as doorbells…)
 - [x] Define-on-sight: every new term appears with its picture and a 2–4 word label the moment it is spoken
-- [ ] Step diagrams that build up piece by piece (1 -> 2 -> 3) and a 5-second visual recap at the end
+- [x] Step diagrams that build up piece by piece (1 -> 2 -> 3) and a 5-second visual recap at the end (ep 13: chain_map)
 - [x] Scale cues: chained reference objects + powers-of-ten zoom + 'you are here' mini-map (ep 11: zoom_through, scale_ladder)
 - [x] Mute test: watch the test-frame sheet without audio — can you follow the story? If not, fix the visuals
 - [~] Structure for 2–3 min videos: chapters + re-hooks every 20–30 s + open loops paid off in order (ep 10: chapter_card PART 2/3)
@@ -257,8 +281,18 @@ Story & topics:
 - [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
 - [x] Concrete comparisons people can picture ("as heavy as…", "the size of…") (ep 12: 1 m2 paper 80 g vs silver leaf < 3 g)
 - [ ] One-sentence takeaway people can use today
+- [ ] Slow motion / speed ramps for things too fast to see (ep 13 first try: slowmo_ui + droplets(slow=...)) - make a helper
+- [ ] Visual metaphor for a whole system (ep 13: 'booby trap' / two rooms) - test which metaphors viewers repeat in comments
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-27 | Progressive build-up diagram for a CHAIN REACTION (explaining) | A multi-step cause->effect process overloads
+  viewers if each step is shown alone (they lose the thread) or all at once (too much). Reveal the figure in the ORDER of the
+  process, colour-code each part to the same colour as its character, keep nothing else competing on screen, and keep the
+  whole map visible so the viewer always sees where they are (G. Fisk, 'Progressive reveal animations for complex technical
+  figures', 2025; Mayer's segmenting + signalling principles). Turned into anim_fx.chain_map(items, cur, t, t_cur): a strip of
+  the whole chain (CUT > MIX > ACID > GAS > NERVES > TEARS) at the bottom, past links dimmed, the current one ringed + labelled
+  in yellow, future links as '?' slots (an honest open loop: 'there are 3 more steps'); it advances on the word that names the
+  link and lights up link by link in the recap | ep 13 (S8-S15, recap S29) | yes
 - 2026-10-27 | Pre-training (explaining a PROCESS) | Mayer's pre-training principle (Multimedia Learning, ch. 10; Cambridge
   UP): people learn more deeply from a fast narrated process when they already know the NAMES and possible STATES of its
   key parts (5 of 5 tests, median d = 0.85) - e.g. a brake-system animation preceded by a tour of piston, tubes and wheel

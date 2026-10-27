@@ -252,3 +252,51 @@ def det_beep(t0, t1, level=-25, f0=1900):
     tt = t0; k = 0
     while tt < t1:
         q = clamp((tt - t0) / max(0.1, t1 - t0)); add(beep(level, f0 + 700 * q, 0.06), tt); tt += 0.32 - 0.24 * q; k += 1
+
+
+
+# ---- ep 13 foley: chop (knife through onion onto a board), hiss (gas), snip (scissors), plip (water drop), sizzle (frying pan), squirt (juice spray) ----
+def _st(y, d=60): return np.stack([y, np.roll(y, d)], 1)
+
+
+def chop(level=-20):
+    """knife through an onion onto a board: wet crunch + a low wooden knock."""
+    n_ = int(0.25 * SR); t2 = np.arange(n_) / SR
+    cr = signal.sosfilt(signal.butter(2, [900, 6000], "band", fs=SR, output="sos"), rng.standard_normal(n_) * (rng.random(n_) < 0.3)) * np.exp(-t2 / 0.04)
+    kn = np.sin(2 * np.pi * 180 * t2) * np.exp(-t2 / 0.05) + 0.5 * np.sin(2 * np.pi * 420 * t2) * np.exp(-t2 / 0.02)
+    y = 0.7 * cr / (np.abs(cr).max() + 1e-9) + kn / np.abs(kn).max()
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def hiss(level=-24, dur=0.8):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    y = signal.sosfilt(signal.butter(2, [2500, 9000], "band", fs=SR, output="sos"), rng.standard_normal(n_)) * np.sin(np.pi * t2 / dur) ** 0.6
+    return _st(y / np.abs(y).max() * db(level), 200)
+
+
+def snip(level=-20):
+    out = np.zeros(int(0.2 * SR))
+    for k, f0 in ((0, 3800), (int(0.07 * SR), 4300)):
+        t2 = np.arange(int(0.05 * SR)) / SR; y = np.sin(2 * np.pi * f0 * t2) * np.exp(-t2 / 0.008) + 0.4 * rng.standard_normal(len(t2)) * np.exp(-t2 / 0.003)
+        out[k:k + len(y)] += y
+    return _st(out / np.abs(out).max() * db(level))
+
+
+def plip(level=-24, f0=900):
+    t2 = np.arange(int(0.12 * SR)) / SR; f = f0 + 1400 * np.exp(-t2 / 0.02)
+    y = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t2 / 0.03)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def sizzle(level=-26, dur=2.0):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    y = signal.sosfilt(signal.butter(2, [3000, 11000], "band", fs=SR, output="sos"), rng.standard_normal(n_)) * 0.4
+    cr = (rng.random(n_) < 0.0015) * rng.uniform(-1, 1, n_); y += signal.sosfilt(signal.butter(2, 2000, "high", fs=SR, output="sos"), cr) * 3
+    y *= np.minimum(1, np.minimum(t2 / 0.2, (dur - t2) / 0.3))
+    return _st(y / np.abs(y).max() * db(level), 300)
+
+
+def squirt(level=-24, dur=0.35):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    y = signal.sosfilt(signal.butter(2, [600, 4000], "band", fs=SR, output="sos"), rng.standard_normal(n_)) * np.exp(-t2 / 0.08)
+    return _st(y / np.abs(y).max() * db(level), 90)
