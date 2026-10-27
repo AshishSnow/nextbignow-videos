@@ -221,3 +221,73 @@ def heart_line(f, x0, x1, y, t, k, col=(60, 230, 120), amp=90):
         p = np.array(pts, np.int32)
         cv2.polylines(f, [p], False, C(INK), 16, cv2.LINE_AA); cv2.polylines(f, [p], False, C(col), 9, cv2.LINE_AA)
         cv2.circle(f, tuple(p[-1]), 14, C(WHITE), -1, cv2.LINE_AA)
+
+
+# ---- generic props from the gas-station video (27 Oct): receipt, coin pie, 100% stacked bar, cash pile, stage curtains ----
+def receipt_el(rows, w=470, h=600, stamp=None, title="RECEIPT"):
+    """paper receipt with zig-zag bottom; rows = [(left, right, bold)]"""
+    key = ("rcpt", tuple(rows), w, h, stamp, title)
+    def mk():
+        sc = 2; im, d = _canvas(w, h); S = lambda *v: [x * sc for x in v]
+        zz = [(0, 0), (w, 0), (w, h - 20)]
+        for i in range(int(w / 30), -1, -1): zz += [(i * 30 + 15, h), (i * 30, h - 20)]
+        _ov(im, lambda q: q.polygon([(x * sc + 12 * sc, y * sc + 14 * sc) for x, y in zz], fill=(0, 0, 0, 60)))
+        d.polygon([(x * sc, y * sc) for x, y in zz], fill=(255, 255, 252, 255), outline=(170, 170, 170, 255))
+        d.text((w / 2 * sc, 50 * sc), title, font=font(F_BLACK, 40 * sc), fill=INK + (255,), anchor="mm")
+        d.line(S(30, 90, w - 30, 90), fill=(150, 150, 150, 255), width=2 * sc)
+        for i, (l, r, b) in enumerate(rows):
+            y = 130 + i * 62; fn = font(F_BLACK if b else F_SEMI, (40 if b else 34) * sc)
+            d.text((36 * sc, y * sc), l, font=fn, fill=INK + (255,), anchor="lm")
+            d.text(((w - 36) * sc, y * sc), r, font=fn, fill=(GRN_ if b else INK) + (255,), anchor="rm")
+        return _done(im, w, h)
+    return gcache(key, mk)
+
+def curtain(f, k, col=(190, 20, 40)):
+    """stage curtains; k = 0 closed .. 1 fully open"""
+    half = int((W / 2) * (1 - eo(clamp(k))))
+    if half <= 2: return
+    for side in (0, 1):
+        x0, x1 = (0, half) if side == 0 else (W - half, W)
+        f[:, x0:x1] = np.array(C(col), np.float32)
+        for xx in range(x0, x1, 70):
+            cv2.line(f, (xx, 0), (xx, H), C((120, 8, 24)), 18, cv2.LINE_AA)
+        cv2.line(f, ((x1 if side == 0 else x0), 0), ((x1 if side == 0 else x0), H), C(GOLD), 10, cv2.LINE_AA)
+
+def pie_coin(f, cx, cy, r, frac, col, label, k=1.0, sub=""):
+    """gold coin with a coloured wedge = share of each dollar kept; label in the middle"""
+    if k <= 0.01: return
+    s = pin(k, 0.0, 1.0) if k < 1 else 1.0
+    rr = int(r * max(0.05, s))
+    cv2.circle(f, (cx + 8, cy + 14), rr, (0, 0, 0), -1, cv2.LINE_AA)
+    cv2.circle(f, (cx, cy), rr, C((250, 222, 140)), -1, cv2.LINE_AA)
+    ang = 360 * frac * eo(clamp(k * 1.4))
+    if ang > 0.5: cv2.ellipse(f, (cx, cy), (rr, rr), -90, 0, ang, C(col), -1, cv2.LINE_AA)
+    cv2.circle(f, (cx, cy), rr, C(INK), max(2, int(8 * s)), cv2.LINE_AA)
+    cv2.circle(f, (cx, cy), int(rr * 0.62), C((255, 248, 225)), -1, cv2.LINE_AA)
+    cv2.circle(f, (cx, cy), int(rr * 0.62), C(INK), max(2, int(5 * s)), cv2.LINE_AA)
+    if s > 0.6:
+        comp(f, ed_el("", label, "", big_col=INK, big_size=int(r * 0.5), maxw=int(r * 1.1)), cx, cy - 4, op=clamp((s - 0.6) / 0.3))
+        if sub: comp(f, ed_el(sub, "", lead_col=WHITE, lead_size=34), cx, cy + rr + 46, op=clamp((s - 0.6) / 0.3))
+
+def stack_bar(f, x, top, w, h, frac_a, k, col_a, col_b, lab_a, lab_b, title):
+    """100% stacked vertical bar: bottom part col_a (frac_a), top part col_b"""
+    kk = eo(clamp(k)); hh = int(h * kk)
+    cv2.rectangle(f, (x - w // 2 + 10, top + h - hh + 10), (x + w // 2 + 10, top + h + 10), (0, 0, 0), -1, cv2.LINE_AA)
+    ha = int(hh * frac_a)
+    cv2.rectangle(f, (x - w // 2, top + h - ha), (x + w // 2, top + h), C(col_a), -1, cv2.LINE_AA)
+    cv2.rectangle(f, (x - w // 2, top + h - hh), (x + w // 2, top + h - ha), C(col_b), -1, cv2.LINE_AA)
+    cv2.rectangle(f, (x - w // 2, top + h - hh), (x + w // 2, top + h), C(INK), 6, cv2.LINE_AA)
+    cv2.line(f, (x - w // 2, top + h - ha), (x + w // 2, top + h - ha), C(INK), 6, cv2.LINE_AA)
+    if kk > 0.7:
+        op = clamp((kk - 0.7) / 0.3)
+        comp(f, ed_el("", lab_a, "", big_col=WHITE, big_size=60, maxw=w - 20), x, top + h - ha / 2, op=op)
+        comp(f, ed_el("", lab_b, "", big_col=INK, big_size=60, maxw=w - 20), x, top + h - ha - (hh - ha) / 2, op=op)
+    comp(f, ed_el("", title, "", big_col=INK, big_size=46, maxw=w + 80), x, top + h + 52)
+
+def cash_pile(f, x, base, n_, k, s=0.7):
+    """pile of cash bundles that builds up as k goes 0 -> 1"""
+    m = int(round(n_ * clamp(k)))
+    for i in range(m):
+        r_, c_ = divmod(i, 3)
+        xx = x + (c_ - 1) * 110 * s + (55 * s if r_ % 2 else 0); yy = base - r_ * 52 * s
+        comp(f, scale_el(cash_el(1), s * 0.62), xx, yy)

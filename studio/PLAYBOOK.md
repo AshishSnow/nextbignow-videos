@@ -93,6 +93,9 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 - Plan the hook shot so the money reveal lands **inside** shot 0: cut to the next shot only after the line's key number
   (shot boundaries are word anchors — check them against `align.json` before rendering).
 - Try something new every video (new props, new layout idea such as split screen / map / chart / stamp / vault) — never clone the last video.
+- Captions live at y≈380–560: any tall prop (price sign, phone, bar) must start below y≈620 or it collides with the big word (caught in 27 Oct test frames).
+- Loop ending: let the last story line end on the exact composition of frame 1 (same set, scheme, prop positions) so a rewatch feels seamless.
+- Long source chips: keep ≤ ~60 characters at size ≥ 19, or they run edge to edge and can't be read on a phone.
 
 ## 7. Build and test
 ```bash
@@ -102,9 +105,10 @@ python3 -I scripts/anim.py x 2,40,100,...          # test frames -> frames/r_NNN
 python3 scripts/music.py && python3 scripts/mix.py # score (edit cues section) + mix (edit SFX section) -> work/mix.wav
 bash scripts/render_all.sh                         # -> work/final.mp4  (~10–15 min, run in background)
 ```
-- Music: new genre each video (funk, boom-bap, lounge jazz, synth-pop, orchestral pizzicato, latin, etc.) using GeneralUser GS GM programs;
+- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock; next try lounge jazz, reggae, disco, marching band, etc.) using GeneralUser GS GM programs;
   cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1 dBTP**; VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.
+- VO level automation (`LINE_DB` in mix.py, since 27 Oct): quiet intimate/"secret" lines −2 to −3 dB, lift reveal lines +1 dB; a −60 dB room tone fills the gaps so pauses don't drop to digital silence.
 - SFX per moment (`sfx_lib.py`: whoosh, boom, pop, ding, click, thud, chaching, clink, scratch, card_in, buzzer, creak, …).
 
 ## 8. QA before posting (all must pass)
@@ -117,6 +121,8 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
    At least one new prop set, one new layout idea and a different music genre.
 
 ## 9. Host and post
+- **GitHub rejects files over 100 MB** (pre-receive hook): the crf-14 master can be 115 MB at 80 s. Before hosting, re-encode:
+  `ffmpeg -i final.mp4 -c:v libx264 -preset medium -crf 18 -maxrate 9M -bufsize 18M -tune animation -pix_fmt yuv420p -c:a copy -movflags +faststart final_post.mp4` (≈24 MB, visually identical on a phone).
 - Never commit MP4s to `main`. Host on a throwaway branch: `bash studio/host_video.sh push $P/work/final.mp4 <slug>` → prints
   `RAW_URL=…` (public, 200). After `createScheduledPost` returns a `static.metricool.com` media URL, run
   `bash studio/host_video.sh delete <slug>`. If the returned media is NOT on static.metricool.com, keep the branch and say so in the report.

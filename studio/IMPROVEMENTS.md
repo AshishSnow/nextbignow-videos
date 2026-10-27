@@ -34,21 +34,22 @@ Voice / audio
 - ~~A/B the Kokoro blend and pitch target~~ — done 26 Oct (new default blend, no pitch lift).
 - ~~Per-sentence generation inside long lines~~ — done 27 Oct: `SPLIT=0.12` → UTMOS 4.23 → 4.38, range 17.7 → 18.5 st; now default.
 - ~~am_puck mix in a real video~~ — 27 Oct: puck .3/michael .4/eric .3 + SPLIT = 4.42 UTMOS but narrower (16.5 st), slower (169 wpm), +3 s; within noise of the default → not adopted. Re-test on a shorter script.
-- Next: a light de-esser pass check; per-word emphasis loudness (+1–2 dB) A/B; sentence-gap 0.08 vs 0.18.
-- Whisper-quiet "secret" lines and louder reveal lines (volume automation per line in mix.py).
-- Breath/room tone between lines so it doesn't sound stitched; tiny 40–80 ms crossfades.
+- ~~Sentence-gap 0.08 vs 0.18~~ — 27 Oct gas-station script: SPLIT 0.08 / 0.12 / 0.18 = UTMOS 4.30 / 4.30 / 4.31 → gap length doesn't matter; keep 0.12, stop testing it.
+- Next: a light de-esser pass check; per-word emphasis loudness (+1–2 dB) A/B; a slightly brighter blend via am_puck 0.1 on a ~75 s script.
+- ~~Whisper-quiet "secret" lines and louder reveal lines~~ — done 27 Oct: `LINE_DB` per-line dB in mix.py (now in template).
+- ~~Room tone between lines~~ — 27 Oct: −58 dB band-limited room tone, UTMOS 4.30 → 4.29 (within noise) → kept at −60 dB in mix (template). Still to try: real breath samples before long lines.
 - Emphasis words get +1–2 dB and a slight stretch, not only pitch.
 - Try a short laugh/"huh" interjection as a sound effect (not TTS) at a funny moment.
 
 Visual / story
 - First frame = the most surprising visual of the whole video (no build-up), with the hook caption already on screen.
 - ~~Mid-video re-hook card~~ — done 27 Oct (envelope "wait for this number" at 47%); keep doing it, vary the prop.
-- Loop ending: last line leads back into the first frame.
+- ~~Loop ending~~ — done 27 Oct: last line "…a snack shop with a giant price sign" lands on the exact frame-1 composition. Keep doing it.
 - New set designs: split screen, map, receipts, factory line, courtroom, vault, game board, timeline.
 - Character acting: mascot reacts (shocked, smug, counting money) on every reveal.
 - Number reveals with physical objects (stacks of cash, piles of cups) instead of text.
 - Custom cover frame (`videoCoverMilliseconds`) chosen deliberately: hook question + key object.
-- Keep the video near 60–75 s: the Duolingo script ran 93 s; cut one beat next time and compare avg watch % of length.
+- Keep the video near 60–75 s: Duolingo 93 s → gas station 80.6 s (first draft was 87 s, trimmed 4 lines). Compare avg watch % of length next run.
 - Takeaway the viewer can *use* in their own life (habit tip, money tip) — test whether it lifts saves/shares (still ~0).
 
 ## Voice benchmarks (same Starbucks test script unless noted; UTMOS 1–5, higher = more natural)
@@ -83,3 +84,4 @@ Lessons: (1) never shift the whole voice up — use the blend for brightness ins
 - 2026-10-26 | system | Voice lab, 16 variants on the Starbucks script, scored with UTMOS + ASR + pitch range (table above) | new default: michael/eric/fenrir blend, own register, SPD .88, PZ 1.6, EXS 1.0 — UTMOS 4.12 → 4.36, 214 → 183 wpm | kept
 - 2026-10-26 | system | voice_report.py: UTMOS now runs on onnxruntime (model on the `models` branch, no torch), ASR check ignores number/abbreviation formatting | kept
 - 2026-10-27 | Duolingo streak (93 s, 21 shots) | Voice: per-sentence Kokoro generation (SPLIT 0.12) A/B vs default and vs puck blend — UTMOS 4.23 → 4.38, range 17.7 → 18.5 st, 176 wpm, ASR 0 bad lines → kept, now template default; puck+SPLIT 4.42 but flatter/slower → not adopted. Visual/story: mid-video re-hook prop (envelope 'wait for this number' at 47%), first frame = hook object + caption fully on screen, split-screen day 2 vs day 200, year heatmap, ECG revive, habit-loop diagram, takeaway the viewer can use (survive 7 days), chiptune score (new genre) → kept. Generic data-viz props (odometer, cents_grid, bars, loop_diagram, heatmap, heart_line) moved into template anim_props3. QA: 1080x1920, -11.5 LUFS / -1.3 dBTP, VO/bed 17–25 dB. Quality bar: hook 4, clarity 5, pacing 4, voice 4, visual 4, audio 4, ending 4. Lessons: shot 0 must contain the money reveal (first cut came before 'billion' — caught in test frames); tiny flame icons (<60 px) lose their fill → draw icons ≥ 60 px; 2 renders + 1 half re-render. | kept
+- 2026-10-27 | Gas stations barely make money on gas (80.6 s, 20 shots) | Voice: sentence-gap A/B (SPLIT .08/.12/.18 → UTMOS 4.30/4.30/4.31, all 18.1–18.3 st, 0 ASR bad lines) → no effect, kept .12; room tone −58 dB → 4.29 (−0.01) → kept at −60 dB in the mix; per-line level automation (secret line −2.5 dB, reveals +1 dB) → kept, template. Final VO: UTMOS 4.30, 18.2 st, 170 wpm speaking, 0 ASR bad lines. Visual/story: everyday-object hook (pump + price sign in frame 1, caption on screen), loop ending back to frame 1, new forecourt prop set (pylon price sign, pump, car, store facade, pizza, fountain cup, receipt), coin-pie scoreboard (14¢ / 42¢ / 59¢), 100% stacked bars (sales vs profit), curtain re-hook, top-down store floor-plan path, usable takeaway (pay at the pump), surf-rock score (new genre) → kept; generic props moved to template anim_props3. QA: 1080x1920 h264/aac, −11.7 LUFS / −1.4 dBTP, VO/bed 14–20 dB. 1 full render + 1 half re-render (empty frames at 18 s and 29–31 s fixed by showing icons/empty coin first). Quality bar: hook 5, clarity 5, pacing 4, voice 4, visual 4, audio 4, ending 5. Lessons: tall props must start below y≈620 (caption zone); never leave a 2–3 s stretch where the main prop waits for its number — show it empty first, fill it on the word. | kept

@@ -20,6 +20,17 @@ g = np.zeros_like(env); prev = 0.0; aa, ar = np.exp(-1 / (0.03 * SR)), np.exp(-1
 for i in range(0, NS, 48):
     x = env[i]; a_ = aa if x > prev else ar; prev = a_ * prev + (1 - a_) * x; g[i:i + 48] = prev
 M = m * (1 - 0.7 * g)[:, None]
+# ---- VO level automation: per-line dB offsets (quiet "secret" lines ~-2.5, reveal lines ~+1) + -60 dB room tone in the gaps ----
+LINE_DB = {}   # e.g. {"c2": -2.5, "a4": +1.0}
+gl = np.zeros(NS, np.float32)
+for lid, L in LINES.items():
+    a0, a1 = int(L["start"] * SR), int(L["end"] * SR); gl[a0:a1] = LINE_DB.get(lid, 0.0)
+ramp = int(0.08 * SR); gl = np.convolve(gl, np.ones(ramp) / ramp, "same").astype(np.float32)
+vo = vo * 10 ** (gl / 20)
+_rt = np.random.default_rng(77).standard_normal(NS); _rt = signal.sosfilt(signal.butter(2, [120, 3500], "band", fs=SR, output="sos"), _rt)
+_rt = (_rt / np.sqrt(np.mean(_rt ** 2)) * 10 ** (-60 / 20)).astype(np.float32)
+vo = vo + _rt * (np.clip(np.arange(NS) / (0.3 * SR), 0, 1) * np.clip((NS - np.arange(NS)) / (0.8 * SR), 0, 1)).astype(np.float32)
+VO = np.stack([vo, vo], 1)
 exec(open(f"{_D}/sfx_lib.py").read())
 
 for i, s_ in enumerate(SHOTS[1:], 1):
