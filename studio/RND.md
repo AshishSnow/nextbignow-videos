@@ -28,7 +28,7 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 | Story | hooks, re-hooks, structure, endings/takeaways, length | never |
 | Tooling | render speed, smoke tests, QA automation | never |
 | Analytics | what the numbers say, cover frames, captions, posting times | never (refreshed every run; YouTube numbers flowing since 27 Oct) |
-| Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-10-27 |
+| Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-10-27 (R&D run 4: +7 → 23 Ready) |
 
 ## Backlog (add ideas, strike when done)
 Voice
@@ -102,3 +102,15 @@ Visuals / Story / Tooling
   16 Ready entries scored 26–32/35, with myths flagged (Pepsi jet price, Hoover "£100m", Nintendo love hotels, Kodak "hid it",
   "80% of eyewear", banana "extinction"). Hoover needs one more major outlet for the £48m before use. | kept — measure 3-s rate,
   avg watch, shares and saves by type in PERFORMANCE.md after ~5 new-type videos
+- 2026-10-27 (run 4) | Topics | Trigger: topic_bank.md had **0 Ready** topics (rule 5) and the owner asked for more interesting topics.
+  Hypothesis: non-F types (B everyday object, E trick, A wild story, C hidden giant, D origin twist) can be verified to primary-source
+  standard and score ≥ 26/35 on the §2 interest test, giving the video runs a 2-day queue that never repeats a type. Method: 4 parallel
+  research passes (12 candidates, primary sources: court opinions, DOJ, US Mint/Treasury, peer-reviewed papers, SEC, official
+  histories), myth hunt per topic, my own spot-checks (Pepsi opinion jet cost: UW copy "$23 million", another copy summarised as $28M →
+  VO says "over twenty million"; Common Cents Act dates conflict → "passed Congress in 2026"). **Result: 11 verified (27–30/35, all
+  verifiable = 5 when limited to the listed numbers), 1 near-ready (Hoover), 2 dropped as myths/thin (Pepsi Soviet navy, hot dogs
+  10 vs 8).** The interactive session had meanwhile pushed 16 Ready → merged: 5 overlapped (penny, Hoover, Pepsi jet, Nintendo,
+  glasses — my extra cautions/sources added to theirs), **7 new unique entries 17–23** → bank now **23 Ready**. Myths caught that a script would likely have repeated: McDonald's Monopoly "$24M" (court/DOJ: >$13M /
+  >$20M), Nintendo love hotels, the 1899 Coke contract "freezing" the price, "Toblerone left Switzerland", cake-mix egg, Oakley 1996.
+  Data: by type, B/E reels averaged ~68 % 3-s / 23 s / ~1,350 views vs F ~57 % / 17.7 s / ~255 (PERFORMANCE insight I) → pick order
+  in topic_bank.md starts B → E → C → A → D. Analytics: Metricool still frozen (7th identical pull, IG + YT). ALGORITHM.md is 1 day old → not redone.

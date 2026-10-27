@@ -33,6 +33,8 @@ Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** se
 | 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
 | 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(27 Oct 18:45 IST, R&D Topics run: **7th identical pull** on both platforms — popcorn still 5 views / reach 0, no rows for Visa,
+Duolingo, gas station, airline miles; YouTube rows identical too. Metricool analytics sync has now been stalled ~24 h; nothing new to learn.)
 (27 Oct 15:40 IST, De Beers run: **6th identical pull**, both platforms. getScheduledPosts shows Visa, Duolingo and gas station as
 PUBLISHED on Instagram + YouTube with live URLs, yet none of them has an analytics row → the Metricool analytics sync is stalled, not the posts.)
 (27 Oct 13:20 IST, R&D run 3: **5th identical pull**, still no rows for Visa, Duolingo or airline miles; popcorn still 5 views /
@@ -67,6 +69,16 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
 | 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (27 Oct 18:45 IST, R&D Topics run — by topic TYPE, PLAYBOOK §2; animated posts 25–26 Oct only, small n)
+I. **Types B (everyday object) and E (trick you can spot) hold attention best; F (corporate model) holds least.**
+   Instagram, animated era: B printer ink 74.0 % 3-s / 21.5 s / 1,366 views, B/F Costco hot dog 64.1 % / 23.0 s / 1,225;
+   E restaurant tricks 67.0 % / 25.1 s / 1,466 → B+E mean ≈ 68 % / 23 s / ~1,350 views.
+   F AWS 50.0 % / 13.1 s / 225, Chick-fil-A 54.2 % / 18.3 s / 176, Planet Fitness 64.0 % / 22.2 s / 209, Starbucks (repeat) 61.6 % / 17.3 s / 412
+   → F mean ≈ 57 % / 17.7 s / ~255 views (the one F winner, McDonald's real estate 65.5 % / 1,281, had a story: Kroc + Sonneborn).
+   YouTube agrees: E restaurant 1,007, B Costco 984 vs F AWS 326, Chick-fil-A 44, Starbucks 41. The best YT avg views are stories
+   with people and a turn (Compaq clean-room 30 s, A/D-like). → R&D stocked topic_bank.md with 11 verified non-F topics (B×3, E×2,
+   A×2, C×1, D×3). Next videos: B/E first, then A/C/D; F at most 1 in 3. Re-test this split once ≥ 3 posts per type have data.
 
 ## Insights (27 Oct 15:40 IST, De Beers run; earlier insights below still stand)
 F. Now YouTube has frozen too (every row identical to 13:20 IST) → no new performance signal this run; decisions rest on insights 1, 3 and C.

@@ -95,7 +95,7 @@ Europe to Candy for ~£106m ($170m); court cases ran until ~1998.
 Twist: a promotion to clear stock cost far more than the sales it brought — the parent sold the business. Takeaway: before offering
 anything "free", work out the cost if everyone says yes.
 Visuals: vacuum with wings; a queue with suitcases around a shop; plane tickets shooting out of a vacuum bag.
-Cautions: **find one more major outlet (BBC/Guardian) for the £48m before use**; "over £100m" is unsourced; Hoover did not go bust;
+Cautions: **find one more major outlet (BBC/Guardian) for the £48m before use** — or use the 1993 wire numbers instead (R&D run 4): Maytag took a "$30 million after-tax charge" and posted a Q1 1993 loss (UPI, 27 Apr 1993 https://www.upi.com/Archives/1993/04/27/Promotion-fiasco-leaves-Maytag-with-loss/6906735883200), three executives fired (TIME, 12 Apr 1993 https://time.com/archive/6722860/marketing-madness/); "over £100m" is unsourced; Hoover did not go bust;
 don't name the fired executives; don't call it fraud.
 Sources: Marketing Week 2 Jun 1995 https://www.marketingweek.com/candy-poised-to-buy-ailing-hoover-europe/ · Marketing Week (220,000 flew)
 https://www.marketingweek.com/hoover-fails-to-shake-off-free-flights-horror/ · Inc. Aug 2023 · Wikipedia (cites BBC 13 May 2004) https://en.wikipedia.org/wiki/Hoover_free_flights_promotion
@@ -109,7 +109,7 @@ mailed 15 points + a cheque for $700,008.50 (6,999,985 × $0.10 + $10 shipping) 
 Twist: Pepsi re-shot the ad with the jet at 700,000,000 points and "Just Kidding". Takeaway: if you write a joke price, check what
 it costs to actually pay it.
 Visuals: cartoon jump-jet over a school bike rack; mountain of plain bottle caps with a counter rolling to 7,000,000; a giant cheque that won't fit a mailbox.
-Cautions: jet price "about $23 million, the judge said"; don't call Leonard a scammer or say Pepsi "lied"/"settled"; no Pepsi logo/can design.
+Cautions: jet price "about $23 million, the judge said" (UW Law + Justia copies; one online copy was summarised as $28M — read the opinion itself, or say "over twenty million"); don't call Leonard a scammer or say Pepsi "lied"/"settled"; no Pepsi logo/can design.
 Sources: Leonard v. PepsiCo, 88 F. Supp. 2d 116 (1999) https://law.justia.com/cases/federal/district-courts/FSupp2/88/116/2579076/ ·
 2nd Cir. 210 F.3d 88 (2000) · Seattle Times 6 Aug 1999 · Netflix Tudum 2022
 
@@ -135,7 +135,7 @@ runs LensCrafters, Sunglass Hut, Pearle Vision, Target Optical (licence): 17,750
 Twist: the wall of "hundreds of brands" often leads back to one company. Takeaway: look inside the frame arm for the maker; compare
 with independent opticians.
 Visuals: one tree with many generic glasses hanging from it; mall shopfronts that turn out to be one building; a stretching price tag.
-Cautions: never "monopoly", "80% of the market" or "price-gouging" (unverified; an antitrust suit was dismissed Sep 2025 with leave
+Cautions: Oakley timing (R&D run 4, Forbes 3 Aug 2001 + SEC 8-K 2007): Luxottica cut Oakley orders in Aug 2001, months after buying Sunglass Hut (~19 % of Oakley sales), shares −35 % in a day; the 1996 order cut was Sunglass Hut while still independent — never "1999"; never "monopoly", "80% of the market" or "price-gouging" (unverified; an antitrust suit was dismissed Sep 2025 with leave
 to refile); attribute markup claims to 60 Minutes; no Wayfarer shapes; re-check licences.
 Sources: EssilorLuxottica 2025 Universal Registration Document · Vision Monday 21 Oct 2026 · CBS 60 Minutes 7 Oct 2012
 https://www.cbsnews.com/news/sticker-shock-why-are-glasses-so-expensive-07-10-2012/ · Snopes Sep 2016 (80% claim) · SEC filing Jun 2007 (Oakley)
@@ -225,16 +225,141 @@ Cautions: 578 is tradition; "bankrupt" is half true (the family lost control, th
 Sources: Teikoku Databank 27 Mar 2026 https://www.tdb.co.jp/report/economic/20260327_shinise2025/ · Long Now/BusinessWeek Apr 2007 ·
 NBER w16874 (via Freakonomics) · sedaily 17 Oct 2026 (TDB/Nikkei)
 
+## Ready — added by R&D run 4 (27 Oct 2026, scheduled run; 7 more verified topics, scored the same way)
+Format differs slightly (bulleted). **Only use numbers listed in the beats** — Cautions list the popular figures that did NOT verify.
+Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg vs F ~57 % / 18 s → good B/E picks: nickel Coke, $39 dress.
+
+### 17. The 73-year nickel Coke — type B (everyday object, absurd economics) · 30/35
+- **Interest:** wait-what 5 · story 4 · life 3 · picture 5 · fresh 4 · share 4 · verifiable 5 = **30/35**
+- **Hook:** "Why did a Coke cost five cents for seventy-three years?"
+- **Beats:** 1) A 6.5-oz Coke cost 5¢ from 1886 until 1959 — through two world wars and the Depression (Levy & Young 2004).
+  2) 1899: bottling rights sold for most of the US; bottlers could buy syrup at $0.92 a gallon "in perpetuity".
+  3) 1921: contract renegotiated ($1.17/gal + a sugar escalator) — the price was no longer locked, yet the nickel Coke stayed.
+  4) The 5¢ price was printed on almost every ad, and in 1950 most of Coke's ~400,000 vending machines took only a nickel —
+  the next coin up (a dime) meant doubling the price. 5) 1953: boss Robert Woodruff asked President Eisenhower for a 7½¢ coin;
+  Treasury officials "did not like the idea". 6) By 1955 prices varied 5–10¢ by area; the last nickel Cokes were gone in 1959.
+- **Twist:** The price wasn't held by a contract — it was trapped by a coin.
+- **Takeaway:** Prices that "never change" (a $1 menu, a $2 vending slot) usually change something else — check the size.
+- **Frame 1 / visuals:** generic glass soda bottle with a big "5¢" tag, calendar flipping 1886 → 1959, a coin slot shaped for one
+  nickel, cartoon executive holding an imaginary "7½¢" coin. No real logo, no contour bottle.
+- **Cautions:** "The 1899 contract froze the price until 1959" is a myth (renegotiated 1921). Paper calls the nickel-only machine
+  share "hard to say" → say "most". The 7½¢ coin was a request, never a law. Don't name the 1899 lawyers in VO.
+- **Sources:** [Levy & Young, J. Money, Credit & Banking 36(4), Aug 2004 (author PDF)](https://econ.biu.ac.il/sites/econ/files/shared/people/LevyDaniel/jmcb4.pdf) ·
+  [RePEc](https://ideas.repec.org/p/hal/journl/hal-02386914.html) · [Improbable Research, Apr 2012](https://improbable.com/2012/04/28/the-epic-endurance-of-nickel-a-bottle-coca-cola/)
+
+### 18. The $39 dress that beat the $34 dress — type E (pricing trick) · 29/35
+- **Interest:** wait-what 5 · story 3 · life 5 · picture 4 · fresh 3 · share 4 · verifiable 5 = **29/35** (only the numbers below)
+- **Hook:** "Why would the more expensive dress sell more?"
+- **Beats:** 1) MIT/Chicago researchers (Anderson & Simester) mailed versions of a women's clothing catalog with the same dress at
+  different prices. 2) Raising $34 to $39 "increased demand by a third" (authors, HBR Sep 2003). 3) Their paper (Quantitative
+  Marketing & Economics, 2003) ran three field experiments; the 9-ending lifted demand in all of them, most on new items, less
+  when a "Sale" sign was also shown. 4) Why: we read the left digit first — $2.99 feels cheaper than $3.00 only when the left
+  digit changes (Thomas & Morwitz, J. Consumer Research 2005). 5) A 9 has become a "this is a deal" signal, deal or not.
+- **Twist:** Customers paid $5 more and bought more — the 9 looked like a bargain.
+- **Takeaway:** Round every price up in your head ($39 = 40). A 9 next to "SALE" → check the real discount.
+- **Frame 1 / visuals:** three identical cartoon dresses on hangers, tags $34 / $39 / $44 — only the $39 rack empty; a price-gun.
+- **Cautions:** Do NOT quote any $44 result or exact % (paper tables unread) — "by a third" is the authors' HBR wording. The
+  "$44/$54 vs $49" version is a different test (Chicago Booth Review 1999). Left-digit effect is not universal ($3.59 vs $3.60: none).
+- **Sources:** [Anderson & Simester, QME 1(1):93–110, 2003](https://www.kellogg.northwestern.edu/academics-research/research/detail/2003/effects-of-9-price-endings-on-retail-sales-evidence/) ·
+  [HBR "Mind Your Pricing Cues", Sep 2003](https://hbr.org/2003/09/mind-your-pricing-cues) · [Thomas & Morwitz, JCR 32(1), 2005](https://ideas.repec.org/a/oup/jconrs/v32y2005i1p54-64.html) ·
+  [ScienceDaily, Jun 2005](https://www.sciencedaily.com/releases/2005/06/050607030351.htm)
+
+### 19. The security chief who rigged the burger game (McDonald's Monopoly) — type A (wild true story) · 28/35
+- **Interest:** wait-what 5 · story 5 · life 3 · picture 4 · fresh 2 · share 4 · verifiable 5 = **28/35** (court/DOJ numbers only)
+- **Hook:** "What if the man guarding the prizes was stealing them?"
+- **Beats:** 1) McDonald's game pieces were run by Simon Marketing; its director of security, Jerome Jacobson, was "responsible for
+  insuring the integrity" of the games (DOJ). 2) From as early as 1995 he took high-value winning pieces before they were
+  distributed; recruiters found fake "winners" who passed money back. 3) 21 Aug 2001, FBI "Operation Final Answer": 8 arrested,
+  "more than $13 million" in prizes (DOJ). 4) A 43-defendant indictment; by Aug 2002, 49 people had pleaded guilty and prosecutors
+  put it at "more than $20 million" (AP). 5) Jacobson pleaded guilty.
+- **Twist:** In 2004 the appeals court threw out the four trial convictions ("fatal variance": separate schemes linked only by
+  Jacobson, not one ring).
+- **Takeaway:** The biggest risk is the insider who holds the keys — "who audits the auditor?"
+- **Frame 1 / visuals:** gloved hands swapping a glowing "$1,000,000" peel-off game piece inside a briefcase; generic burger box.
+- **Cautions:** "$24 million" is press/HBO only → "more than $20 million". 37-month sentence and the 2000 tip are secondary → skip.
+  "Mob ties" are not court findings → never. Don't name the fake winners. US Monopoly returned Oct 2025.
+- **Sources:** [DOJ press release, 21 Aug 2001](https://www.justice.gov/archive/opa/pr/2001/August/422ag.htm) · [US v. Chandler, 11th Cir., Oct 2004](https://caselaw.findlaw.com/court/us-11th-circuit/1301966.html) ·
+  [AP via Deseret News, Aug 2002](https://www.deseret.com/2002/8/31/19674790/4-of-5-convicted-in-mcdonald-s-trial/) · [NBC/AP, 2004](https://www.nbcnews.com/id/wbna5467659)
+
+### 20. Why you love the wobbly shelf you built (the IKEA effect) — type E (psychology trick) · 28/35
+- **Interest:** wait-what 4 · story 3 · life 5 · picture 5 · fresh 2 · share 4 · verifiable 5 = **28/35**
+- **Hook:** "Why does the shelf you built yourself feel worth more?"
+- **Beats:** 1) Harvard/Duke researchers (Norton, Mochon & Ariely, J. Consumer Psychology 2012) gave people a plain IKEA storage
+  box. 2) Builders bid $0.78 for it vs $0.48 for a pre-built one — 63 % more. 3) Origami: makers valued their amateur frog almost
+  like an expert's; strangers bid 5¢. 4) Lego: build it and keep it → double the value; build it then take it apart → premium gone.
+  5) Stop two steps before finishing the box → no premium.
+- **Twist:** Effort alone isn't enough — you only overvalue what you **finish**.
+- **Takeaway:** Selling your DIY stuff? Ask what a stranger would pay. Facing a "build/customise your own" upsell? Ask if you'd pay
+  the same for it ready-made.
+- **Frame 1 / visuals:** a proud mascot beside a wonky flat-pack shelf; his thought bubble shows "$$$", the neighbour's shows "¢".
+- **Cautions:** Bids are cents → give ratios. The cake-mix "add an egg" story is mostly legend (Snopes; historian Laura Shapiro) —
+  only as a debunked myth. No Build-A-Bear experiment exists. Don't draw IKEA branding.
+- **Sources:** [Norton, Mochon & Ariely, JCP 2012 (HBS PDF)](https://www.hbs.edu/ris/Publication%20Files/norton%20mochon%20ariely_6f7b1134-06ef-4940-a2a5-ba1b3be7e47e.pdf) ·
+  [Snopes, 2008](https://www.snopes.com/fact-check/something-eggstra/) · [MNopedia (MN Historical Society)](https://www.mnhs.org/mnopedia/search/index/thing/betty-crocker-cake-mix)
+
+### 21. Play-Doh was wallpaper cleaner — type D (origin twist) · 28/35
+- **Interest:** wait-what 4 · story 4 · life 4 · picture 5 · fresh 2 · share 4 · verifiable 5 = **28/35**
+- **Hook:** "What was Play-Doh before kids got their hands on it?"
+- **Beats:** 1) 1930s Cincinnati: soap maker Kutol sells a putty that rolls coal soot off wallpaper. 2) 1950s: gas heat and washable
+  vinyl wallpaper — sales collapse. 3) Nursery-school teacher Kay Zufall (Joe McVicker's sister-in-law) uses it for modelling with
+  her class: "sell it as a toy" — and helps name it Play-Doh. 4) 1956 launch as a toy; TV host Bob Keeshan (Captain Kangaroo)
+  features it for 2 % of sales — "there was never a contract". 5) Today: billions of cans sold (Hasbro).
+- **Twist:** The toy was a rescue job for a dying cleaner — spotted by a teacher, not the chemist.
+- **Takeaway:** When your market dies, watch who's using your product "wrong" — they may be your next market.
+- **Frame 1 / visuals:** a cartoon hand rolls a dough ball down a sooty wall leaving a clean stripe; a kid squishes the same ball.
+- **Cautions:** Cans sold: Fortune 2016 ">3 billion", Strong Museum ">2 billion" → "billions". Patent filing year conflicts → don't
+  name it. Air frequency on TV disputed → skip. Don't show the yellow can or logo.
+- **Sources:** [Smithsonian, Nov 2019](https://www.smithsonianmag.com/innovation/accidental-invention-play-doh-180973527/) ·
+  [Strong National Museum of Play, Nov 2016](https://www.museumofplay.org/blog/the-history-of-play-doh-good-clean-fun/) · [Fortune, Feb 2016](https://fortune.com/2016/02/13/hasbro-play-doh-60-years/)
+
+### 22. Toblerone had to delete its mountain — type B (everyday object, absurd rules) · 27/35
+- **Interest:** wait-what 4 · story 3 · life 3 · picture 5 · fresh 3 · share 4 · verifiable 5 = **27/35**
+- **Hook:** "Why did a chocolate bar have to delete a mountain?"
+- **Beats:** 1) First sold in Bern in 1908, a Swiss mountain on the box. 2) Since 1 Jan 2017 Switzerland's "Swissness" law: food may
+  use Swiss symbols only if ≥ 80 % of raw materials are Swiss (milk 100 %) and the key processing is in Switzerland (cocoa exempt).
+  3) Mar 2023: owner Mondelēz moves some production to Bratislava, Slovakia, from end-2023. 4) So the Matterhorn goes: a generic
+  peak, and "Swiss" becomes "Established in Switzerland in 1908". 5) Bonus: the old mountain hid a bear (Bern's symbol).
+- **Twist:** A country can own the right to put a mountain on your box.
+- **Takeaway:** "Established in / Since / Inspired by" on a label usually means "not (only) made there" — read the wording.
+- **Frame 1 / visuals:** generic triangular chocolate bar; a judge's gavel peels a cartoon mountain off the box; a truck leaves a
+  CH factory for an SK one.
+- **Cautions:** Myth: "Toblerone left Switzerland" — Bern production continues. The 2016 "gappy bar" is unrelated cost-cutting.
+  "Shape inspired by the Matterhorn" is unverified lore. No real logo or bear artwork.
+- **Sources:** [Swiss IPI "Swissness" summary](https://www.ige.ch/fileadmin/user_upload/recht/national/e/swissness/Swissness_Most_important_changes.pdf) ·
+  [Fortune, 6 Mar 2023](https://fortune.com/2023/03/06/toblerone-forced-change-matterhorn-design-mondelez-swissness-switzerland) ·
+  [Bloomberg, 3 Mar 2023](https://www.bloomberg.com/news/articles/2023-03-03/toblerone-to-drop-matterhorn-from-packaging-due-to-swiss-rules) ·
+  [Slovak Spectator, Mar 2023](https://spectator.sme.sk/business/c/toblerone-to-drop-matterhorn-as-production-partially-moves-to-bratislava)
+
+### 23. Bubble Wrap was meant to be wallpaper — type D (origin twist) · 28/35
+- **Interest:** wait-what 4 · story 3 · life 5 · picture 5 · fresh 2 · share 4 · verifiable 5 = **28/35** (use as a D when Play-Doh is used)
+- **Hook:** "Why would anyone glue bubble wrap to their living-room wall?"
+- **Beats:** 1) 1957, New Jersey: Al Fielding and Marc Chavannes seal two plastic shower curtains into "textured wallpaper" — flop.
+  2) They brainstorm 400+ other uses; greenhouse insulation also fails. 3) 1960: they found Sealed Air; pitch it as packaging.
+  4) The break: IBM's new 1401 computer needed to ship safely — bubble film was the answer. 5) Apr 2026: Sealed Air taken private by
+  CD&R in a $10.3bn deal.
+- **Twist:** 2015's "iBubble" barely pops — after the outcry Sealed Air promised the poppable original "isn't going anywhere".
+- **Takeaway:** A flop + the right customer = a hit — "what else is this good for?" is worth 400 guesses.
+- **Frame 1 / visuals:** 1950s living room with bubbly plastic on the wall, confused couple; then a giant boxy computer gets wrapped.
+- **Cautions:** IBM shipping year (1960 vs 61) undated → no year. iBubble space saving disputed → no number. "Bubble Wrap" is a
+  trademark → generic bubble film on screen; don't call it Sealed Air's main business (3.6 % of revenue in 2015).
+- **Sources:** [Smithsonian, Jan 2019](https://www.smithsonianmag.com/innovation/accidental-invention-bubble-wrap-180971325/) · [Retail Brew, Jul 2022](https://www.retailbrew.com/stories/2022/07/22/tools-of-the-trade-how-bubble-wrap-became-a-pop-idol) ·
+  [Dezeen, Jul 2015](https://www.dezeen.com/2015/07/06/bubble-wrap-redesigned-pop-less-packaging-material-ibubble-sealed-air/) · [PlasticsToday, Jul 2015](https://www.plasticstoday.com/plastics-processing/bubble-wrap-loses-its-pop-ularity) ·
+  [CD&R release, 9 Apr 2026](https://www.cdr.com/news/sealed-air-announces-completion-of-acquisition-by-cd-and-r)
+
+## Checked and dropped (don't spend time again)
+- **Pepsi's Soviet "navy" (1989)** — the ships and Kendall's "disarming the Soviet Union" line trace to one NYT opinion column
+  (10 May 1989); naval historians can't identify the ships; "6th-largest navy" is false. Usable only as a myth-buster.
+- **10 hot dogs vs 8 buns** — explanation only in Mental Floss (2019) quoting an industry council; the "2015 Heinz treaty" is wrong
+  (Heinz Hot Dog Pact, Canada, Jul 2021). Overdone explainer.
+
 ## Ideas to research (not verified yet — verify before use; drop anything you can't source)
-A wild stories: Pepsi received Soviet warships in a 1989 barter deal (careful: "6th-largest navy" is a myth) · McDonald's Monopoly
-game fraud ("McMillions", court-documented) · Blockbuster passing on Netflix for $50m · New Coke 1985 · the man who "sold" the
+A wild stories: Blockbuster passing on Netflix for $50m · New Coke 1985 · the man who "sold" the
 Eiffel Tower (Lustig — legend vs record) · Dutch tulip mania (most of the famous story is exaggerated — the myth is the twist).
-B everyday objects: why airport water costs $6 (and airports with "street pricing" rules) · Heinz "57" (there were never exactly 57)
-· why every pack of hot dogs and buns don't match · Toblerone dropped its mountain (Swiss-made rules, 2023).
+B everyday objects: why airport water costs $6 (and airports with "street pricing" rules) · Heinz "57" (there were never exactly 57).
 C hidden giants: AB InBev's "craft" beers · ASML — the only maker of EUV chip machines · a few companies behind most store brands.
 D origin twists: Samsung began selling dried fish and noodles (1938) · Lamborghini made tractors (legend vs record) · Nokia made
 rubber boots and paper.
-E psychology tricks: the IKEA effect (Norton, Mochon & Ariely 2012) · the IKEA maze · Aldi's coin cart · Krispy Kreme "hot now" light.
+E psychology tricks: the IKEA maze · Aldi's coin cart · Krispy Kreme "hot now" light.
 F business models (max 1 in 3): Red Bull as a media company · Domino's as a tech company · Hermès Birkin waitlist · Rolex scarcity ·
 Spotify per-stream pay · Nespresso / Gillette razor-and-blades · free-to-play games and "whales" · Apple accessories margins ·
 Uber surge pricing · Disney parks pricing · Netflix password-sharing crackdown · Trader Joe's no-sales strategy.

@@ -47,6 +47,8 @@ Pass = total ≥ 26 / 35, *Wait-what* ≥ 4 and *Verifiable* = 5. Otherwise pick
 A. Wild true story (blunder, gamble, stunt, scandal with a twist) · B. Everyday object, absurd economics · C. Hidden giant (one
 company behind "competing" brands) · D. Origin twist (a famous company or product began as something absurd) · E. Psychology or
 pricing trick you can spot tomorrow · F. Hidden business model ("how X really makes money").
+Data (27 Oct, PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg vs F ~57 % / 18 s → prefer B/E/A/C/D;
+Each bank entry lists the only numbers that verified and the popular myths to avoid — keep to them.
 
 **Hook:** concrete thing + impossible-sounding claim in ≤ 12 words, as a question ("Do you know a man tried to buy a fighter jet
 with Pepsi points?"). Best data so far: an everyday object + a "that can't be right" comparison (printer ink vs champagne: 74 % 3-s rate).
