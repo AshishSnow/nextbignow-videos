@@ -91,6 +91,9 @@ moves is re-rendered with softer moves (it prints `prosody gate …` with the li
 Since 27 Oct the cleanup chain is lighter (`DEESS=-8`, `ROOM_DB=-27`, `COMP=1.5`; old: −11/−21/2.2): per-line UTMOS 4.396 → 4.425, worst line
 3.996 → 4.063 on the De Beers script (chain-only A/B on one fixed raw take, `lab/voice_chain/chain_ab.py`).
 Write line speeds 1.0–1.06 and pauses 0.2–0.45 in `vo_lines.py` as in the examples; SPD/PZ make them calm.
+Weak short reveal lines (per-line UTMOS < 4.2, e.g. "Her income? Zero." 4.14): first lengthen the text slightly ("Her income that year?
+Zero." → 4.29, 27 Oct Monopoly A/B) — 2–3-word lines are always the weakest. Yes/no hook questions get softened by the prosody gate
+(q_rise −1…−2 st): keep them short and put the key word last.
 Alternative engine (opt-in, see `VOICE.md`): `ENGINE=chatterbox python3 scripts/make_vo.py` — Chatterbox-Turbo (MIT) in our own
 synthetic narrator's voice, +0.06 UTMOS per line; since 27 Oct its `low` lines get a last-word fall (`lib/end_contour.py`, `ENDS=0` to
 disable, `END_ST` depth, default −4 st) so reveals land (−3.5…−4 st vs −1 before), but its questions still fall → Kokoro stays the default. Its output is deterministic, so if a
@@ -144,6 +147,12 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 - Generic props added 27 Oct (De Beers): `gem_el` (cut diamond, `cracked=`), `ring_el`, `pillow_el`, `hangtag_el` + `swing_tag` (hanging price tag),
   `bride_icon` (person icon array, lit/unlit), `sparkle`, `vault_wall` (drawer wall), `hourglass`, `minecart_el`, `poster_el` (vintage print ad, serif),
   `typewriter` (types text in sync with the VO), `medal_el`, `line_chart` (animated), `flask_el` (lab bell jar), `closed_sign_el`.
+- Generic props added 27 Oct (Monopoly origin): `board_el` (square game board, INVENTED street names, no colour bands/GO arrow — never real
+  game trade dress) + `board_xy` (square centres, for hopping pawns), `pawn_el`, `house_el`, `book_el` (rulebook cover, fist/hands icon),
+  `gamebox_el`, `census_el`, `gavel_el`, a **woman character** `lizzie`/`woman` (guy + dress + hair bun) and `hat` (fedora) for a second
+  man — history stories need more than one person. `poster_el(..., ring=False)` drops the De Beers ring drawing (it showed through the text).
+- Origin/history stories (type D/A): one person per era, a year card (split-flap `flapboard("1904")`) at every jump in time, and a
+  spotlight-alone shot for the "and what happened to her?" re-hook.
 - Real people's names in the VO: Kokoro/ASR mangle rare surnames ("Frances Gerety" → "Francis Jarity") — drop the name from the VO or put it on screen only.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
@@ -157,7 +166,7 @@ python3 -I scripts/anim.py x 2,40,100,...          # test frames -> frames/r_NNN
 python3 scripts/music.py && python3 scripts/mix.py # score (edit cues section) + mix (edit SFX section) -> work/mix.wav
 bash scripts/render_all.sh                         # -> work/final.mp4  (~10–15 min, run in background)
 ```
-- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz; next try reggae, disco, marching band, baroque harpsichord, etc.) using GeneralUser GS GM programs;
+- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano; next try reggae, disco, marching band, baroque harpsichord, etc.) using GeneralUser GS GM programs;
   cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1 dBTP**; VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.
 - VO level automation (`LINE_DB` in mix.py, since 27 Oct): quiet intimate/"secret" lines −2 to −3 dB, lift reveal lines +1 dB; a −60 dB room tone fills the gaps so pauses don't drop to digital silence.

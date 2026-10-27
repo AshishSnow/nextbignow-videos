@@ -7,23 +7,6 @@ Each Ready entry: type (A–F, PLAYBOOK §2) · interest score · hook · story 
 ## Ready (verified 27 Oct 2026 — research notes in RND.md log; pick the highest score whose type differs from the last 2 videos)
 Score = interest test (Wait-what / Story / Your life / Picture / Fresh / Share / Verifiable), PLAYBOOK §2.
 
-### 1. CLAIMED 2026-10-27 21:05 IST (video run) — Monopoly was invented to warn against monopolies — type D · 32/35 (5/5/4/5/4/4/5)
-Hook: "Do you know Monopoly was invented to teach people that monopolies are BAD?"
-Beats: Lizzie Magie (follower of economist Henry George) patents "The Landlord's Game", 5 Jan 1904 (US 748,626) → two rule sets:
-"monopolist" (crush everyone) vs "prosperity" (everyone gains) — to show the harm of hoarding wealth → for 30 years people make
-home-made copies (students, Atlantic City Quakers add local street names) → Charles Darrow copies a Quaker version, sells it to
-Parker Brothers in 1935 with a story that he invented it → the same year Magie sells her patent to them for $500 (~$10k today) →
-278,000 copies year 1, 1.75m+ year 2; rulebook tells Darrow's "became a millionaire" story → 1970s: professor Ralph Anspach,
-sued over "Anti-Monopoly", digs up Magie's patent and wins after ~10 years; in the 1940 census Magie listed her income as "0".
-Twist: a game made to warn against monopolies became the symbol of winning one. Takeaway: "lone genius" origin stories are often
-marketing — patents are public, check who came first.
-Visuals: plain square board with invented street names; two rulebooks (crown vs handshake); tiny $500 cheque beside a mountain of boxes.
-Cautions: no Hasbro trade dress (no mascot, coloured property bands, GO arrow, deed cards, logo). Say "copied a version and was
-credited as the inventor", never "stole". She got $500 once — no royalties found.
-Sources: National Archives DocsTeach (patent drawing 1/5/1904) https://www.docsteach.org/documents/document/drawing-game-board ·
-Smithsonian (Mary Pilon, Jan 2015) https://www.smithsonianmag.com/arts-culture/monopoly-was-designed-teach-99-about-income-inequality-180953630/ ·
-NPR/Pilon 2015 https://www.npr.org/transcripts/382662772 · History.com Sep 2024 https://www.history.com/articles/monopoly-game-inventor-elizabeth-magie
-
 ### 2. Almost every banana you buy is the same clone — type B · 32/35 (5/4/5/5/3/5/5)
 Hook: "Do you know almost every banana you buy is a copy of the same plant?"
 Beats: Cavendish ≈ half of world bananas and almost all exported ones → seedless genetic clones, so one disease can hit them all →
@@ -345,6 +328,25 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
 - **Sources:** [Smithsonian, Jan 2019](https://www.smithsonianmag.com/innovation/accidental-invention-bubble-wrap-180971325/) · [Retail Brew, Jul 2022](https://www.retailbrew.com/stories/2022/07/22/tools-of-the-trade-how-bubble-wrap-became-a-pop-idol) ·
   [Dezeen, Jul 2015](https://www.dezeen.com/2015/07/06/bubble-wrap-redesigned-pop-less-packaging-material-ibubble-sealed-air/) · [PlasticsToday, Jul 2015](https://www.plasticstoday.com/plastics-processing/bubble-wrap-loses-its-pop-ularity) ·
   [CD&R release, 9 Apr 2026](https://www.cdr.com/news/sealed-air-announces-completion-of-acquisition-by-cd-and-r)
+
+## Used (already made — never again)
+### USED 2026-10-27 (posted 28 Oct 05:00 IST) — Monopoly was invented to warn against monopolies — type D · 32/35 (5/5/4/5/4/4/5)
+Hook: "Do you know Monopoly was invented to teach people that monopolies are BAD?"
+Beats: Lizzie Magie (follower of economist Henry George) patents "The Landlord's Game", 5 Jan 1904 (US 748,626) → two rule sets:
+"monopolist" (crush everyone) vs "prosperity" (everyone gains) — to show the harm of hoarding wealth → for 30 years people make
+home-made copies (students, Atlantic City Quakers add local street names) → Charles Darrow copies a Quaker version, sells it to
+Parker Brothers in 1935 with a story that he invented it → the same year Magie sells her patent to them for $500 (~$10k today) →
+278,000 copies year 1, 1.75m+ year 2; rulebook tells Darrow's "became a millionaire" story → 1970s: professor Ralph Anspach,
+sued over "Anti-Monopoly", digs up Magie's patent and wins after ~10 years; in the 1940 census Magie listed her income as "0".
+Twist: a game made to warn against monopolies became the symbol of winning one. Takeaway: "lone genius" origin stories are often
+marketing — patents are public, check who came first.
+Visuals: plain square board with invented street names; two rulebooks (crown vs handshake); tiny $500 cheque beside a mountain of boxes.
+Note (video run): Anspach case ended in a settlement (Wikipedia) — say "about ten years in court", not "won". Cautions: no Hasbro trade dress (no mascot, coloured property bands, GO arrow, deed cards, logo). Say "copied a version and was
+credited as the inventor", never "stole". She got $500 once — no royalties found.
+Sources: National Archives DocsTeach (patent drawing 1/5/1904) https://www.docsteach.org/documents/document/drawing-game-board ·
+Smithsonian (Mary Pilon, Jan 2015) https://www.smithsonianmag.com/arts-culture/monopoly-was-designed-teach-99-about-income-inequality-180953630/ ·
+NPR/Pilon 2015 https://www.npr.org/transcripts/382662772 · History.com Sep 2024 https://www.history.com/articles/monopoly-game-inventor-elizabeth-magie
+
 
 ## Checked and dropped (don't spend time again)
 - **Pepsi's Soviet "navy" (1989)** — the ships and Kendall's "disarming the Soviet Union" line trace to one NYT opinion column

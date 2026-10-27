@@ -33,6 +33,9 @@ Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** se
 | 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
 | 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(27 Oct 21:00 IST, Monopoly run: **8th identical pull** on both platforms (IG + YT rows number-for-number the same as 15:40 IST; popcorn 5 views /
+reach 0; no rows for Visa, Duolingo, gas, airline). getScheduledPosts: Visa, Duolingo, gas, airline PUBLISHED with live URLs, De Beers pending 28 Oct 00:00.
+Metricool analytics sync stalled ~30 h → no new signal; the run leaned on insight I (types) and picked type D (Monopoly origin) to start the per-type test.)
 (27 Oct 18:45 IST, R&D Topics run: **7th identical pull** on both platforms — popcorn still 5 views / reach 0, no rows for Visa,
 Duolingo, gas station, airline miles; YouTube rows identical too. Metricool analytics sync has now been stalled ~24 h; nothing new to learn.)
 (27 Oct 15:40 IST, De Beers run: **6th identical pull**, both platforms. getScheduledPosts shows Visa, Duolingo and gas station as
@@ -69,6 +72,11 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
 | 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (27 Oct 21:00 IST, Monopoly run)
+J. Still no data after 26 Oct (8 identical pulls) → nothing new to conclude. Type log for the per-type test (fill when rows return):
+   Visa F, Duolingo F/E, gas station B, airline miles F, De Beers B/E, Monopoly D (first non-F/B/E type). Compare 3-s rate and avg-watch % of length
+   (Monopoly 133 s, De Beers 118 s vs 75–100 s) once ≥ 3 posts per type have rows.
 
 ## Insights (27 Oct 18:45 IST, R&D Topics run — by topic TYPE, PLAYBOOK §2; animated posts 25–26 Oct only, small n)
 I. **Types B (everyday object) and E (trick you can spot) hold attention best; F (corporate model) holds least.**
