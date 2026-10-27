@@ -101,6 +101,16 @@ Script / packaging:
 - [ ] Comment question in caption + firstCommentText.
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-27 16:00: spicy (03:25), sugar rush (07:55) and mint (12:25) are PUBLISHED on Instagram but still absent from
+  Metricool reel analytics 8-13 h later (pineapple showed up after ~7.5 h); carrots/pineapple numbers unchanged again
+  (133 / 86 reach). YouTube rows still only go to 25 Oct (face mites, 1 view). => reel analytics lag grows with the
+  number of fresh posts; never judge a video before its row exists, and keep the 48-h rule. The honey "label ka sach"
+  reel (Indian food purity, 5.5k reach) is still our biggest reach -> ep 12 tests an Indian-food-purity topic (silver
+  vark, Diwali-timely) in the CHUBBY style.
+- 2026-10-27 16:30 (voice A/B, same silver script): the per-line prosody gate (PGATE 0.15, ported from the studio R&D)
+  lifted the take from chunk20 4.350 / line mean 4.292 to 4.412 / 4.339 at the same 186 wpm; SPLIT (per-sentence TTS
+  calls) did not help our blend and slowed speech to 170-173 wpm. A second take of nearly the same script scored
+  4.369 / 4.330 -> the take-to-take noise is about +-0.04 on chunk20; render 2 takes when a take is near the gate.
 - 2026-10-27 11:00: Instagram numbers for carrots (133 reach / 155 views) and pineapple (86 / 127) are IDENTICAL to the
   06:00 snapshot — reach has fully stopped at 12–17 h; spicy (03:25) and sugar rush (07:55) are not in Metricool analytics
   yet. YouTube rows started flowing for the first time (only the 25 Oct face-mites row so far). => keep judging at 48 h;
@@ -126,6 +136,17 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 12 silver leaf on sweets (27 Oct, auto run, ~2:04): VOICE per-line prosody gate (PGATE 0.15) ported into the FNH make_vo
+  + voice.env (SPLIT tested and rejected), weak lines rewritten (a1 name-first, a6 shorter); chunk20 4.412 / line mean
+  4.339 (ep 11 4.427 / 4.359, within gate) | VISUAL pre-training cast card (MEET THE CAST: silver bits / thin sheets /
+  hammer with their states) before the process, iris match cuts from a round object into the next scene (sweet -> leaf,
+  scale -> hair close-up, leaf -> magnified specks), hammer swung on an arc with anticipation + 2-bone arm IK so Chubby
+  really holds it, metal-detector hook at frame 0, element tiles (Ag/Al/Pb/Ni) to define metals on sight, festive
+  colour script (festive warm / steel truth / dark secrets), prop lib12 + foley (clang, rustle, detector beeps) |
+  SCRIPT/TOPIC Diwali-timely Indian food-purity topic (like the 5.5k-reach honey reel), concrete comparison (1 m2 of
+  paper 80 g vs silver leaf < 3 g), open loop "some might not be silver" at 6 s paid at ~65 %, 5 chapters, honest
+  EFSA "not enough data" catch, Bollywood-festive score (dhol on taiko, sitar, shehnai) | metric: reach at 48 h vs
+  honey reel + CHUBBY eps, 3-s hold, shares/1k, comments on "peel it or eat it".
 - 11 mint feels cold (27 Oct, auto run, 2:05): VOICE weakest lines rewritten shorter (b2 4.11 -> 4.41, b3 4.13 -> 4.31),
   plain lines 1.02–1.03 to reach 181 wpm, statement-settle A/B (neutral, kept for naturalness); chunk20 4.427 / line mean
   4.359 (ep 10 4.366 / 4.356) | VISUAL scale cues: powers-of-ten zoom_through (Chubby's face -> tongue -> nerve ending) +
@@ -172,6 +193,11 @@ Script / packaging:
 | 27 Oct | **ep 10 sugar rush, + b2 reordered, i2 0.98, g2 0.97 (shipped)** | **4.225* (chunk20 4.366, line mean 4.356)** | 182 | 0.14 | 17.5 | 0 |
 | 27 Oct | ep 11 mint, A4 + 'settle' endings (A/B: old endings 4.407 / 4.351) | 4.191* (chunk20 4.410, line mean 4.350) | 180 | 0.15 | 17.5 | 0 |
 | 27 Oct | **ep 11 mint, + weak lines rewritten, plain lines 1.02–1.03 (shipped)** | **4.228* (chunk20 4.427, line mean 4.359)** | 182 | 0.15 | 17.5 | 0 |
+| 27 Oct | ep 12 silver, old make_vo (no gate), first script | 4.058* (chunk20 4.350, line mean 4.292) | 186 | 0.15 | 17.2 | 0 |
+| 27 Oct | ep 12 silver, SPLIT 0.12 + PGATE 0.15 | 4.136* (chunk20 4.365, line mean 4.315) | 170 (fails pace) | 0.14 | 17.4 | 0 |
+| 27 Oct | ep 12 silver, SPLIT 0.06 + PGATE 0.15 + rewrites | 4.148* (chunk20 4.362, line mean 4.325) | 173 (fails pace) | 0.14 | 17.4 | 0 |
+| 27 Oct | **ep 12 silver, PGATE 0.15 + a1/a6 rewrites (shipped; now voice.env default)** | **4.245* (chunk20 4.412, line mean 4.339)** | 186 | 0.15 | 17.1 | 0 |
+| 27 Oct | ep 12 silver, same + a4 shortened (2nd take, not used) | 4.096* (chunk20 4.369, line mean 4.330) | 187 | 0.15 | 17.1 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -190,7 +216,7 @@ Animation & visuals:
 - [x] Squash & stretch, slow in/out, overshoot, anticipation, smear trails, sparkles/confetti/dust (anim_fx.py seed, 26 Oct)
 - [ ] Staging: one clear focal point per shot; silhouette test for Chubby's poses
 - [ ] Follow-through & overlapping action (hair curl, belly jiggle, props settling with `settle()`)
-- [ ] Arcs: move props and limbs along curves, not straight lines
+- [~] Arcs: move props and limbs along curves, not straight lines (ep 12: hammer_swing on an arc + arm IK)
 - [ ] Timing & spacing: hold key poses 6–10 frames, fast in-betweens (snappy cartoon timing)
 - [ ] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take)
 - [ ] Character acting: eye direction leads action, blinks on cuts, reaction shots
@@ -200,7 +226,7 @@ Animation & visuals:
 - [ ] Lighting: rim light and soft ambient-occlusion shadows on props; light rays on reveals
 - [x] Colour script: plan the colour arc of the video (ep 11: warm = real temperature, icy = what the brain feels)
 - [~] Kinetic typography for key numbers (count-ups, slams, words that react to the action)
-- [ ] Match cuts and morph transitions (shape of one object becomes the next)
+- [~] Match cuts and morph transitions (shape of one object becomes the next) (ep 12: iris_mix iris-in from a round object)
 - [ ] Texture & detail: gradients, highlights, subtle grain on the hero prop of each video
 - [ ] Inside-the-body worlds: cell/organ scenes with scale cues (Kurzgesagt-style clarity)
 Voice (always voice A — refine, never swap):
@@ -223,16 +249,23 @@ Explaining (the owner's #1 priority — people must understand what they watch):
 - [x] Scale cues: chained reference objects + powers-of-ten zoom + 'you are here' mini-map (ep 11: zoom_through, scale_ladder)
 - [x] Mute test: watch the test-frame sheet without audio — can you follow the story? If not, fix the visuals
 - [~] Structure for 2–3 min videos: chapters + re-hooks every 20–30 s + open loops paid off in order (ep 10: chapter_card PART 2/3)
-- [ ] Pre-training shot: a 3-second "cast of parts" (name the 2-3 parts with pictures) before any process explanation
+- [x] Pre-training shot: a 3-second "cast of parts" (name the 2-3 parts with pictures) before any process explanation (ep 12: cast_card)
 - [x] Worked-example contrast: "what you feel vs what's really there" split screens for every illusion/myth topic (ep 10: split_contrast)
 - [x] Refutation structure for myth topics: state the myth, bust it on screen, then explain (ep 10: myth_tag)
 Story & topics:
 - [x] Curiosity gap + open loop in the first line, payoff placed at ~70 % of the video (ep 11: nose teaser at 5 s, paid at 85 s)
 - [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
-- [ ] Concrete comparisons people can picture ("as heavy as…", "the size of…")
+- [x] Concrete comparisons people can picture ("as heavy as…", "the size of…") (ep 12: 1 m2 paper 80 g vs silver leaf < 3 g)
 - [ ] One-sentence takeaway people can use today
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-27 | Pre-training (explaining a PROCESS) | Mayer's pre-training principle (Multimedia Learning, ch. 10; Cambridge
+  UP): people learn more deeply from a fast narrated process when they already know the NAMES and possible STATES of its
+  key parts (5 of 5 tests, median d = 0.85) - e.g. a brake-system animation preceded by a tour of piston, tubes and wheel
+  cylinders. Reason: the viewer otherwise has to build "what is each part" and "how they interact" at the same time.
+  Turned into anim_fx.cast_card(items=[(el, NAME, STATE)]): white panels pop in one by one under a MEET THE CAST chip,
+  each with its name and a state chip (LUMP > LEAF, HOLD IT, BEATS IT); the process shots after it never stop to name
+  parts. Also added iris_mix() (cartoon iris-in used as a shape match cut) | ep 12 (S6 before the hammering) | yes
 - 2026-10-27 | Scale cues (explaining tiny things) | Viewers can't picture "a nerve ending on your tongue" unless they
   travel there from something familiar. Explainers chain reference objects (you -> tongue -> nerve -> sensor), use one
   continuous "powers of ten" zoom with a magnification overlay, and keep a mini-map of the levels so nobody gets lost

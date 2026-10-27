@@ -1,0 +1,37 @@
+# (id, text, speed, pause_after, base_semitones, range_expand, stressed_words, ending)
+# FreshNestHub 12 — "Is the silver on Indian sweets real?" (vark: real 99.9 % silver, hammered thinner than a hair,
+# animal-gut past banned in 2016, 2005 market test found aluminium fakes, Europe's experts can't confirm it's safe yet)
+# Script upgrade (ep 12): pre-training "cast" (silver, hammer, sheets) before the process; concrete comparison
+# (a square metre of paper 80 g vs silver leaf < 3 g); open loop at 6 s (fakes) paid at ~65 %; 5 chapters.
+LINES = [
+    ("i1", "Do you know the shiny silver on Diwali sweets... is real metal?", 0.96, 0.30, +1.0, 1.45, ["silver", "metal?"], "q"),
+    ("i2", "Yep. Real silver. And you eat it!", 1.0, 0.40, +1.2, 1.5, ["Real", "eat"], None),
+    ("i3", "But stick around. Some of it might not be silver at all.", 0.98, 0.45, +1.0, 1.5, ["not"], None),
+    ("a1", "It's called vark. That's a thin sheet of real silver.", 1.02, 0.40, +0.8, 1.45, ["vark.", "real"], "low"),
+    ("a2", "And the rules say it must be pure. At least ninety-nine point nine percent.", 1.02, 0.40, +0.8, 1.45, ["pure.", "ninety-nine"], "low"),
+    ("a3", "So how do you turn a lump of silver into a sheet you can eat?", 0.97, 0.35, +1.0, 1.5, ["lump", "eat?"], "q"),
+    ("a4", "First, workers tuck small bits of silver between thin sheets.", 1.03, 0.35, +0.8, 1.45, ["First,", "between"], "low"),
+    ("a5", "Then they hammer it. Again and again, for hours.", 1.0, 0.40, +1.0, 1.5, ["hammer", "hours."], None),
+    ("a6", "With every hit, the silver spreads wider... and thinner.", 1.0, 0.45, +1.0, 1.5, ["wider...", "thinner."], "low"),
+    ("b1", "How thin? Take a square metre of normal paper. It weighs about eighty grams.", 1.02, 0.40, +0.8, 1.45, ["thin?", "eighty"], "low"),
+    ("b2", "The same size of silver leaf? Less than three grams!", 0.98, 0.40, +1.2, 1.5, ["three"], None),
+    ("b3", "That makes it hundreds of times thinner than a hair.", 1.0, 0.40, +1.0, 1.5, ["hundreds", "hair."], None),
+    ("b4", "So the silver on one sweet weighs just a few milligrams.", 1.02, 0.45, +0.8, 1.45, ["few"], "low"),
+    ("c1", "Now, the weird part. The hammering had a secret.", 0.98, 0.35, +1.0, 1.5, ["weird", "secret."], None),
+    ("c2", "For a long time, silver was beaten between layers of animal guts.", 1.02, 0.40, +0.8, 1.45, ["animal", "guts."], "low"),
+    ("c3", "So your vegetarian sweet... wasn't always vegetarian!", 0.97, 0.40, +1.2, 1.5, ["wasn't"], None),
+    ("c4", "In twenty sixteen, India's food regulator banned animal parts in making it.", 1.02, 0.40, +0.8, 1.45, ["banned"], "low"),
+    ("c5", "Now it's beaten between special paper or plastic sheets.", 1.03, 0.45, +0.8, 1.45, ["paper", "plastic"], "low"),
+    ("d1", "Now, the fake silver I promised.", 0.97, 0.35, +1.0, 1.5, ["fake"], None),
+    ("d2", "Scientists in Lucknow tested a hundred seventy-eight silver sheets from shops.", 1.02, 0.40, +0.8, 1.45, ["tested"], "low"),
+    ("d3", "About one in ten wasn't silver at all. It was aluminum!", 0.98, 0.40, +1.2, 1.5, ["ten", "aluminum!"], None),
+    ("d4", "And less than half were as pure as the rule says.", 1.02, 0.40, +0.8, 1.45, ["half"], "low"),
+    ("d5", "Many had tiny traces of other metals, like lead and nickel.", 1.02, 0.45, +0.8, 1.45, ["lead"], "low"),
+    ("e1", "And here's the twist. Europe allows silver as a food colour, too.", 0.98, 0.40, +1.0, 1.5, ["twist.", "Europe"], None),
+    ("e2", "But its food safety experts say they can't confirm it's safe yet.", 1.0, 0.40, +0.8, 1.45, ["can't"], "low"),
+    ("e3", "It's not proven harmful. There just isn't enough data.", 1.0, 0.45, +0.8, 1.45, ["harmful.", "data."], "low"),
+    ("f1", "So the silver is real. It's there for shine, not for health.", 0.98, 0.40, +0.8, 1.45, ["shine,", "health."], "low"),
+    ("f2", "Remember: real silver, hammered thinner than a hair, and sometimes fake.", 0.98, 0.40, +0.8, 1.45, ["hammered", "fake."], "low"),
+    ("f3", "Buy sweets from a shop you trust, and enjoy them as a treat.", 1.0, 0.40, +0.8, 1.45, ["trust,"], "low"),
+    ("f4", "Send this to the friend who always grabs the silver sweet first!", 0.97, 0.0, +1.2, 1.5, ["friend", "first!"], None),
+]

@@ -296,3 +296,45 @@ def scale_ladder(f, items, cur, t, t_cur, y=1400, gap=200, s=0.5):
         if i > 0:
             draw_arrow(f, x - gap + 80, y, x - 95, y, 1.0 if i < cur else eo(clamp((t - t_cur) / 0.25)), INK, 7, 20)
             if mag: comp(f, chip(mag, YEL_, INK, 20), x - gap / 2, y - 44, op=1.0 if i < cur else clamp((t - t_cur - 0.15) / 0.2))
+
+
+# ================= PRE-TRAINING + MATCH CUTS (ep 12) =================
+# Pre-training principle (Mayer, Multimedia Learning ch. 10; 5 of 5 tests, median d = 0.85): people follow a fast narrated
+# process far better when they already know the NAMES and the possible STATES of its parts. So before a process shot, show a
+# 2-3 s "cast" card: each part pops in with its name + its state change (LUMP -> LEAF), then the process can run uninterrupted.
+def cast_card(f, items, t, t0s, y=1000, gap=300, title="MEET THE CAST", t_title=None, panel=(255, 255, 255), size=1.0):
+    """pre-training cast: items = [(el, name, state_or_None), ...] pop in at t0s on white panels, centred on x=540."""
+    n = len(items); x0 = W / 2 - gap * (n - 1) / 2
+    if title and t >= (t_title if t_title is not None else t0s[0] - 0.15):
+        comp(f, chip(title, INK, YEL_, 34), W / 2, y - 250 * size, op=clamp((t - (t_title if t_title is not None else t0s[0] - 0.15)) / 0.2))
+    for i, ((el, name, state), ts) in enumerate(zip(items, t0s)):
+        if t < ts: continue
+        k = pin(t, ts, 0.3); x = x0 + i * gap
+        pw, ph = int(gap * 0.44 * size), int(180 * size)
+        g = f.copy()
+        cv2.rectangle(g, (int(x - pw), int(y - ph)), (int(x + pw), int(y + ph)), C(INK), -1, cv2.LINE_AA)
+        cv2.rectangle(g, (int(x - pw + 7), int(y - ph + 7)), (int(x + pw - 7), int(y + ph - 7)), C(panel), -1, cv2.LINE_AA)
+        a = clamp((t - ts) / 0.15); f[:] = f * (1 - a) + g * a
+        comp(f, el, x, y - 30 * size + 4 * math.sin(t * 3 + i), scale=k)
+        comp(f, chip(name, INK, WHITE, int(28 * size)), x, y + ph - 40 * size, op=a)
+        if state: comp(f, chip(state, YEL_, INK, int(22 * size)), x, y - ph + 34 * size, op=clamp((t - ts - 0.2) / 0.2))
+
+
+def iris_mix(prev, cur, p, cx, cy, ring=WHITE, th=12):
+    """match-cut iris: the new shot opens as a growing circle from (cx, cy) (put it on a round object that the next shot
+    is 'inside' of, e.g. a sweet -> its close-up). p 0..1. Classic cartoon 'iris in' used as a shape match cut. (ep 12)"""
+    r = (60 + math.hypot(W, H) * eio(clamp(p)))
+    m = np.zeros((H, W), np.float32); cv2.circle(m, (int(cx), int(cy)), int(r), 1.0, -1, cv2.LINE_AA)
+    out = prev * (1 - m[..., None]) + cur * m[..., None]
+    if p < 0.98:
+        cv2.circle(out, (int(cx), int(cy)), int(r), C(INK), th + 8, cv2.LINE_AA); cv2.circle(out, (int(cx), int(cy)), int(r), C(ring), th, cv2.LINE_AA)
+    return out
+
+
+# 2-bone IK (ep 12): make Chubby's right arm reach a fixed point (tool grip). shoulder for chub(x, y, s): (x + 118s, y - 215s - 46s).
+def arm_ik(sh, tg, L1, L2):
+    """2-bone IK for Chubby's right arm (chub angle convention: degrees from straight down, + outward)."""
+    dx, dy = tg[0] - sh[0], tg[1] - sh[1]; d = min(L1 + L2 - 1e-3, math.hypot(dx, dy))
+    th = math.degrees(math.atan2(dx, dy)); al = math.degrees(math.acos(clamp((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d), -1, 1)))
+    a1 = th - al; ex, ey = sh[0] + L1 * math.sin(math.radians(a1)), sh[1] + L1 * math.cos(math.radians(a1))
+    return a1, math.degrees(math.atan2(tg[0] - ex, tg[1] - ey))

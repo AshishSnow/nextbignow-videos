@@ -10,7 +10,7 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 - Only judge posts that are >= 48 h old (numbers keep growing for 2–3 days). Overwrite each row with fresh numbers.
 - Derived: hold = IGRE28 (share of viewers past 3 s); watch% = avg watch / video length; shares and saves per 1k reach.
 
-## Instagram reels (snapshot 27 Oct 2026 11:00 IST)
+## Instagram reels (snapshot 27 Oct 2026 16:00 IST — numbers identical to 11:00 for every row that exists)
 | posted (IST) | reel | len s | reach | views | avg watch s | 3-s hold % | likes | shares | saves | comments | style |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 10-20 07:03 | fake honey (10 of 13 brands) | ~45 | 5567 | 6164 | 3.8 | 16.3 | 21 | 9 | 5 | 0 | old static |
@@ -30,7 +30,8 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 | 10-26 22:30 | 08 pineapple eats you | 56 | 86 | 127 | 17.5 | 72.2 | 3 | 0 | 0 | 0 | CHUBBY v4, 7.5 h old, flat |
 | 10-27 03:25 | 09 spicy food burn | 96 | — | — | — | — | — | — | — | — | CHUBBY v4 + Mayer kit (still not in analytics at 11:00) |
 | 10-27 07:55 | 10 sugar rush myth | 118 | — | — | — | — | — | — | — | — | CHUBBY v4 + refutation kit, Halloween topic (not in analytics at 11:00) |
-| 10-27 12:25 (sched.) | 11 mint feels cold | 125 | — | — | — | — | — | — | — | — | CHUBBY v4 + scale cues + colour script, sequel to 09 |
+| 10-27 12:25 | 11 mint feels cold | 125 | — | — | — | — | — | — | — | — | CHUBBY v4 + scale cues + colour script, sequel to 09 (published, not in analytics at 16:00) |
+| 10-27 (sched.) | 12 silver leaf on sweets | 124 | — | — | — | — | — | — | — | — | CHUBBY v4 + pre-training cast + iris match cuts, Diwali / Indian food purity (like honey) |
 
 ## What the numbers say so far (update every run, keep it to the 5 most useful lines)
 - Best 3-second hold: realistic-looking openings (Kim K 70.6 %, ambergris 60.2 %); animated Nessa reels held 56–58 %;
@@ -39,7 +40,8 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 - Biggest reach came from broad, useful, "is your X fake / how much water" topics, even with weak hold — topic pull
   matters. Prefer topics everyone has (food in their kitchen, daily habits) over niche science.
 - Shares/saves are rare (max 9 shares) — make every video "send-worthy": a surprising fact + a practical takeaway.
-- YouTube numbers via Metricool: null until 27 Oct 06:00; at 11:00 the first row appeared (25 Oct face mites only). Keep checking.
+- YouTube numbers via Metricool: rows exist only up to 25 Oct (face mites 1 view; ambergris 2) at 16:00 on 27 Oct. Keep checking.
+- 27 Oct 16:00: eps 09-11 published on IG but still missing from reel analytics after 8-13 h -> analytics lag; judge at 48 h only.
 - 27 Oct 11:00: carrots/pineapple numbers identical to 06:00 — reach fully stopped at 12–17 h. Ep 11 tests a sequel/series hook.
 - 27 Oct: CHUBBY pineapple held 72.2 % past 3 s in its first hours (best with tattoo 72.8 %) — an absurd action in
   frame 0-1 s works. Judge reach/watch at 48 h (28 Oct 22:30 IST).

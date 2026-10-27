@@ -8,7 +8,7 @@ NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these f
     et al. JAMA 1995 meta-analysis; Hoover & Milich 1994 (parent expectation); plus a major outlet / university page.
 0b. (DONE ep 11) mint-feels-cold — the twin of ep 09: menthol switches on the COLD alarm (TRPM8), nothing gets colder. Reuse the
     alarm/key props with a blue alarm; Nobel 2021 press release names TRPM8 + menthol (source 1), find source 2.
-0c. diwali-silver-leaf — Do you know the shiny silver on Indian sweets is real metal you can eat? (vark/varq, thin
+0c. (DONE ep 12) diwali-silver-leaf — Do you know the shiny silver on Indian sweets is real metal you can eat? (vark/varq, thin
     silver leaf; FSSAI rules on thickness/purity, no animal-gut beating). Verify with FSSAI + a major Indian outlet.
 0d. chocolate-and-dogs (Halloween) — why chocolate is dangerous for dogs (theobromine). Pet-health angle; FDA + ASPCA.
     Lower priority (pets, not the viewer's own body).

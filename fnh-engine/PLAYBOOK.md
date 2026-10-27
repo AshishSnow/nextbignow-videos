@@ -78,6 +78,8 @@ P=$(bash $ENG/new_ep.sh NN-slug)          # project = studio template + FreshNes
 # write $P/scripts/vo_lines.py, then:
 cd $P && (set -a; . $ENG/voice.env; set +a; python3 scripts/make_vo.py) && python3 $ENG/engine/tools/asr_check.py $P
 # every line must read back right. voice.env = the channel voice; voice upgrades are logged in improvements.md
+# make_vo has the per-line prosody gate (PGATE 0.15, ep 12): lines our PSOLA hurts are re-rendered softer. Take-to-take
+# noise is ~+-0.04 UTMOS: if a take misses the gate by a hair, render a second take before rewriting.
 python3 $ENG/engine/tools/voice_report.py $P   # UTMOS (naturalness 1-5), pace, pitch range, ASR — gate in improvements.md B.2
 # utmos_lines = per-line scores: rewrite the weakest lines (name-then-define order, shorter) before shipping
 python3 -c "import json;A=json.load(open('work/align.json'));[print(w['line'],w['w'],w['t']) for w in A['words']]"
@@ -97,6 +99,9 @@ Then write (read the template versions first — they are the reference; use the
   Tiny things (ep 11, scale cues): `zoom_through(t, t0, dur, far, near, cx, cy)` = one continuous powers-of-ten push from
   something familiar into the close-up; `scale_ladder(items, cur, ...)` = "you are here" mini-map (YOU -> TONGUE x5 -> ...).
   Plan a COLOUR SCRIPT per video (ep 11: warm sets = real temperature, icy sets = what the brain feels).
+  Processes (ep 12, pre-training): `cast_card(items=[(el, NAME, STATE)])` = a 2-3 s MEET THE CAST card naming the parts
+  (and their states) BEFORE the process shots; `iris_mix` = "iris" transition (set `IRIS[shot] = (x, y)` on a round object
+  in the previous shot) as a shape match cut; `arm_ik` (ep 12 anim_shots) when Chubby must hold a tool at a fixed point.
 - `scripts/music.py` — cues on every reveal. **New genre each video** (template = bouncy food-funk with marimba/slap
   bass + 1940s march section; others: synth-pop, lo-fi hip hop, latin, orchestral pizzicato, surf rock, chiptune…).
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
@@ -130,7 +135,11 @@ tooth, test_card_el, head_pos(x,y,s), blindfold, mom(...) (Chubby-style mom: hai
 extra stage schemes "night" and "lime". · anim_props_lib11 (ep 11): mint_leaf_el(face, mood), gum_el, menthol_el/menthol (key molecule),
 calarm_el/calarm(ring, key_in, jumpy) (COLD alarm), ice_block, ice_cube_el, frost(amt), snow, breath, icicles, ice_glass_el,
 thermo_c (°C ticks + alarm trigger line), airmeter, ice_floor, nerve_icon_el, think_el (thought bubble); schemes "ice",
-"deepice", "mintg". sfx_lib (ep 11): ice_crack, sip, chatter, wind.
+"deepice", "mintg". sfx_lib (ep 11): ice_crack, sip, chatter, wind. · anim_props_lib12 (ep 12): kaju_el(silver, face, mood, fake) (kaju katli
+with crinkly silver leaf), barfi_el, plate_el/plate_of_sweets, diya_el/diya (oil lamp + flame), leaf_el (silver leaf sheet,
+fake=dull), lump_el, hammer_el + hammer_swing (arc swing), packet (beating stack, gut=True variant), detector (metal
+detector), kscale_el (kitchen scale readout), paper_el, elem_el (periodic tile: Ag/Al/Pb/Ni), rule_doc_el, colour_bottle_el,
+cow_el, hair_cross; schemes "festive", "saffron", "steel". sfx_lib (ep 12): clang, rustle, det_beep.
 
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.

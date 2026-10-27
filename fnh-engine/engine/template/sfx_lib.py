@@ -228,3 +228,27 @@ def wind(level=-27, dur=1.2):
         sos = signal.butter(2, [fc[i] * 0.8, fc[i] * 1.25], "band", fs=SR, output="sos"); y[i:i + 1024] = signal.sosfilt(sos, x[i:i + 1024])
     y *= np.sin(np.pi * t2 / dur) ** 1.2
     y = y / (np.abs(y).max() + 1e-9) * db(level); return np.stack([y, np.roll(y, 300)], 1)
+
+
+# ---- ep 12 (silver leaf): metal strike, paper rustle, metal-detector beeps ----
+def clang(level=-20, f0=1250, dur=0.5):
+    """metal strike: a few inharmonic partials (bar/plate modes) with fast attack + a click of noise."""
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR; y = np.zeros(n_)
+    for r, a, tau in ((1.0, 1.0, 0.18), (2.76, 0.6, 0.09), (5.4, 0.35, 0.05), (8.93, 0.2, 0.03)):
+        y += a * np.sin(2 * np.pi * f0 * r * t2 + rng.uniform(0, 6)) * np.exp(-t2 / tau)
+    y += 0.5 * signal.sosfilt(signal.butter(2, [2000, 9000], "band", fs=SR, output="sos"), rng.standard_normal(n_)) * np.exp(-t2 / 0.004)
+    y = y / np.abs(y).max() * db(level); return np.stack([y, np.roll(y, 40)], 1)
+
+
+def rustle(level=-26, dur=0.5):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    x = rng.standard_normal(n_) * (0.4 + 0.6 * (rng.random(n_) < 0.08))
+    y = signal.sosfilt(signal.butter(2, [1500, 7000], "band", fs=SR, output="sos"), x) * np.sin(np.pi * t2 / dur) ** 0.7
+    y = y / (np.abs(y).max() + 1e-9) * db(level); return np.stack([y, np.roll(y, 120)], 1)
+
+
+def det_beep(t0, t1, level=-25, f0=1900):
+    """metal detector: beeps that get faster and higher until t1."""
+    tt = t0; k = 0
+    while tt < t1:
+        q = clamp((tt - t0) / max(0.1, t1 - t0)); add(beep(level, f0 + 700 * q, 0.06), tt); tt += 0.32 - 0.24 * q; k += 1
