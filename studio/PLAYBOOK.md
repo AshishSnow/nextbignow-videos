@@ -71,12 +71,14 @@ multi-sentence lines sound less rushed (UTMOS 4.23 → 4.38 on the Duolingo scri
 `GT` 0 (= keep own pitch; **every global lift tested so far lowered naturalness**), `EXS` 1.0 (range expansion), `BMP` 1.0 (stress bumps), `STR` 1.0.
 Since 27 Oct (R&D run 3) make_vo has a **per-line prosody gate** (`PGATE=0.15`): any line that loses > 0.15 UTMOS to the PSOLA
 moves is re-rendered with softer moves (it prints `prosody gate …` with the lines it softened). Leave it on; `PGATE=0` only for A/B.
+Since 27 Oct the cleanup chain is lighter (`DEESS=-8`, `ROOM_DB=-27`, `COMP=1.5`; old: −11/−21/2.2): per-line UTMOS 4.396 → 4.425, worst line
+3.996 → 4.063 on the De Beers script (chain-only A/B on one fixed raw take, `lab/voice_chain/chain_ab.py`).
 Write line speeds 1.0–1.06 and pauses 0.2–0.45 in `vo_lines.py` as in the examples; SPD/PZ make them calm.
 Alternative engine (opt-in, see `VOICE.md`): `ENGINE=chatterbox python3 scripts/make_vo.py` — Chatterbox-Turbo (MIT) in our own
 synthetic narrator's voice, +0.06 UTMOS per line; since 27 Oct its `low` lines get a last-word fall (`lib/end_contour.py`, `ENDS=0` to
 disable, `END_ST` depth, default −4 st) so reveals land (−3.5…−4 st vs −1 before), but its questions still fall → Kokoro stays the default. Its output is deterministic, so if a
 line reads back wrong, rephrase it (re-running gives the same audio).
-QA: `python3 /home/claude/nextbignow-videos/studio/tools/voice_report.py $P` (years like "twenty twenty" and "ten and a half" are now normalised, 27 Oct) → UTMOS ≥ 4.0 (aim ≥ 4.3), `asr_bad_lines` empty,
+QA: `python3 /home/claude/nextbignow-videos/studio/tools/voice_report.py $P` (years like "twenty twenty", "ten and a half" and decades like "nineteen eighties" are normalised; since 27 Oct it also prints per-line UTMOS mean/min, weak lines < 4.2, q_rise/low_fall, and scores files > 80 s in ≤ 60 s chunks — a 117 s VO got OOM-killed as one piece) → UTMOS ≥ 4.0 (aim ≥ 4.3), `asr_bad_lines` empty,
 pitch range ≥ 15 st, speaking pace 165–190 wpm. Fix spelling/phrasing and regenerate if a line reads back wrong.
 A/B voice variants **one at a time** (copy the project to `projects/<slug>_B` and run there): the box has ~7 GB RAM and two Kokoro or
 UTMOS jobs in parallel get OOM-killed silently (log just stops).
@@ -110,6 +112,10 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 - Contrast (27 Oct test frames): the `wui` caption (white lead, yellow big word) is unreadable on the **cream** scheme, and
   `bars()` labels are ink, unreadable on dark schemes (emerald, purple). Data-viz shots → sky/orange/yellow (with `col=WHITE`
   for the big word on yellow); keep cream for ink captions only.
+- Generic props added 27 Oct (De Beers): `gem_el` (cut diamond, `cracked=`), `ring_el`, `pillow_el`, `hangtag_el` + `swing_tag` (hanging price tag),
+  `bride_icon` (person icon array, lit/unlit), `sparkle`, `vault_wall` (drawer wall), `hourglass`, `minecart_el`, `poster_el` (vintage print ad, serif),
+  `typewriter` (types text in sync with the VO), `medal_el`, `line_chart` (animated), `flask_el` (lab bell jar), `closed_sign_el`.
+- Real people's names in the VO: Kokoro/ASR mangle rare surnames ("Frances Gerety" → "Francis Jarity") — drop the name from the VO or put it on screen only.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
   `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.
@@ -122,7 +128,7 @@ python3 -I scripts/anim.py x 2,40,100,...          # test frames -> frames/r_NNN
 python3 scripts/music.py && python3 scripts/mix.py # score (edit cues section) + mix (edit SFX section) -> work/mix.wav
 bash scripts/render_all.sh                         # -> work/final.mp4  (~10–15 min, run in background)
 ```
-- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock; next try lounge jazz, reggae, disco, marching band, etc.) using GeneralUser GS GM programs;
+- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz; next try reggae, disco, marching band, baroque harpsichord, etc.) using GeneralUser GS GM programs;
   cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1 dBTP**; VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.
 - VO level automation (`LINE_DB` in mix.py, since 27 Oct): quiet intimate/"secret" lines −2 to −3 dB, lift reveal lines +1 dB; a −60 dB room tone fills the gaps so pauses don't drop to digital silence.

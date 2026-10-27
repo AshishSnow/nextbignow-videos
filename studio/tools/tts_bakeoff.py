@@ -168,6 +168,10 @@ def score(P, wav):
     def norm(s):
         s = s.lower().replace("%", " percent ").replace(" and a half", " point five")   # "ten and a half" == "10.5"
         # "$1.50" (ASR) == "a dollar fifty" / "one fifty" (script)
+        def _dec(m):
+            w = num2words(int(m.group(1)), to="year").split(); w[-1] = w[-1][:-1] + "ies" if w[-1].endswith("y") else w[-1] + "s"
+            return " " + " ".join(w) + " "
+        s = re.sub(r"\b((?:19|20)\d0)'?s\b", _dec, s)   # "1980s" == "nineteen eighties"
         s = re.sub(r"\$(\d+)\.(\d\d)\b", lambda m: " " + ("a" if m.group(1) == "1" else num2words(int(m.group(1)))) + " " + num2words(int(m.group(2))) + " ", s)
 
         def _w(m):

@@ -22,6 +22,8 @@ human *intonation* labels, NISQA/DNSMOS don't, audio-LLM judges mostly don't —
 So UTMOS is a guardrail (don't get worse), and melody is judged with pitch range, `q_rise_st`/`low_fall_st` and listening.
 Whole-file UTMOS on 80–90 s files moves ±0.1 for edits that change per-line scores by < 0.01 → trust the per-line mean.
 
+Status 27 Oct 2026 (De Beers video): **closer, not yet met.** Lighter chain lifts per-line mean to 4.43 and the worst line to 4.07; still short of
+"no line < 4.2" (the worst is always the shortest line).
 Status 27 Oct 2026 (3rd R&D run): **closer, not yet met.** Kokoro's weak lines came from our own PSOLA, not from Kokoro: a per-line
 prosody gate (below) lifts the worst line to 4.25 on gas and airline (was 3.98 / 4.05). Remaining gaps: questions (q_rise −2.8 on
 Duolingo's long hook), and lines the EQ/clean/room chain drops (airline a3 4.15–4.27, gas d2 4.23–4.26).
@@ -102,6 +104,24 @@ What we learned on the way (each cost a version):
    the line loses ≤ 0.05) keeps the good moves and skips those.
 5. +3…+4.5 st question rises on Chatterbox made q_rise *worse* (−1.8 → −2.1) and cost UTMOS → rises are off (`q=0`).
 
+## Lighter chain — 27 Oct 2026, De Beers video (`DEESS`/`ROOM_DB`/`COMP` in make_vo.py; lab/voice_chain/chain_ab.py)
+VOICE.md "Next" said short lines lose 0.1–0.2 in the EQ/de-ess/room chain. Tested chain-only on **one fixed vo_raw.wav** (so PSOLA/gate
+run-to-run noise is out): per-line UTMOS mean / min / mean of the 6 shortest lines, De Beers script (24 lines, 116 s).
+| Chain | line mean | min | 6 shortest |
+|---|---|---|---|
+| old: de-ess −11, room −21 dB, comp 2.2:1 | 4.396 | 3.996 | 4.301 |
+| de-ess −8 | 4.400 | 4.011 | 4.308 |
+| room −27 | 4.414 | 3.983 | 4.319 |
+| de-ess −8, room −27 | 4.417 | 4.000 | 4.326 |
+| room −33 / dry (no room) | 4.416 / 4.404 | 3.981 / 3.964 | 4.314 / 4.302 |
+| **de-ess −8, room −27, comp 1.5:1 (new default)** | **4.425** | **4.063** | **4.344** |
+| … comp off | 4.427 | 4.130 | 4.355 |
+Stage ablation on the weak short line a1 ("Move one. Control the supply."): flat 4.32 → PSOLA 4.22 → EQ 4.22 → voice_clean 3.96;
+inside voice_clean the **2.2:1 compressor** costs it 0.14 (no comp 4.10), the expander 0.05, tilt/320 Hz cut nothing.
+Kept 1.5:1 rather than off so line levels stay even under the music (mix LINE_DB still does the intentional moves).
+Shipped VO (make_vo with the new chain, gate re-run): whole 4.396 (chunked), per-line 4.426 (min 4.07), 18.2 st, low_fall −6.6 st,
+169.8 wpm, 0 ASR bad lines — vs the same script on the old chain 4.361 / 4.398 (min 4.02).
+
 ## Prosody gate — 27 Oct 2026, 3rd run (`PGATE`, default 0.15 in make_vo.py; lab/voice_gate/)
 Diagnosis on the gas script: every **flat** Kokoro line scores 4.43–4.52; after our PSOLA moves c1 falls to 3.93 (b2 4.26, a2 4.33).
 So the weak lines are ours. PSOLA is near-transparent only for moderate shifts (±6 st "safe" for TTS pitch moves, arXiv 2512.16519);
@@ -126,7 +146,8 @@ Not adopted: a global pitch clip −7/+8 st (range fell to 15.0 st for the same 
    On Kokoro the PSOLA step makes the weak lines (3rd run); soften moves per line, not globally.
 
 ## Next
-- **Chain drops on short lines:** airline a3 ("And Delta isn't the only one.") and gas d2 lose 0.1–0.2 in the EQ/de-ess/room chain,
+- ~~Chain drops on short lines~~ — 27 Oct: the compressor was the main cause → lighter chain is the default (table above). Next: confirm on 2 more scripts (gas, airline) with chain_ab.py.
+- Old note: **Chain drops on short lines:** airline a3 ("And Delta isn't the only one.") and gas d2 lose 0.1–0.2 in the EQ/de-ess/room chain,
   not in PSOLA. Measured (airline a3): raw 4.263, +EQ 4.259, +voice_clean 4.217, +room 4.149 → A/B a lighter de-esser and a drier room.
 - Gate on the *chained* line (Duolingo a4 scored better raw at 0.6 but worse after the chain).
 - ~~Hybrid endings~~ — done 27 Oct (table above): low lines now land (−3.5…−4.0 st) at ≤ 0.01 per-line UTMOS cost.

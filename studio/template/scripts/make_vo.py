@@ -253,13 +253,17 @@ def peq(f0, g, q):
 x = raw.astype(np.float64)
 x = signal.sosfilt(peq(160, 1.0, 0.8), x)          # body
 x = signal.sosfilt(peq(3100, 1.0, 1.0), x)         # presence / energy
-y = voice_clean.clean(x, 1.0, verbose=True).astype(np.float64)
+# chain knobs (27 Oct, De Beers run, lab/voice_chain/chain_ab.py on one fixed vo_raw): lighter de-esser (-8), a little less room (-27 dB)
+# and a gentler compressor (1.5:1) -> per-line UTMOS 4.396 -> 4.425, worst line 3.996 -> 4.063, 6 shortest lines 4.301 -> 4.344.
+# The 2.2:1 compressor was the main 'chain drop' on short lines (VOICE.md Next). Old chain: DEESS=-11 ROOM_DB=-21 COMP=2.2
+DEESS = float(os.environ.get("DEESS", "-8")); ROOM_DB = float(os.environ.get("ROOM_DB", "-27")); COMP = float(os.environ.get("COMP", "1.5"))
+y = voice_clean.clean(x, 1.0, deess_target=DEESS, verbose=True, ratio=COMP).astype(np.float64)
 rng = np.random.default_rng(5); n = int(0.32 * SR); tt = np.arange(n) / SR
 ir = rng.standard_normal(n) * np.exp(-tt / 0.07); ir[: int(0.006 * SR)] = 0
 for d_, g in ((0.009, 0.6), (0.014, 0.45), (0.021, 0.35), (0.029, 0.25)): ir[int(d_ * SR)] += g * 6
 ir = signal.sosfilt(signal.butter(2, [250, 5500], "band", fs=SR, output="sos"), ir); ir /= np.sqrt((ir ** 2).sum())
 wet = signal.fftconvolve(y, ir)[: len(y)]
-y = y + wet * (np.sqrt(np.mean(y ** 2)) / (np.sqrt(np.mean(wet ** 2)) + 1e-12)) * 10 ** (-21 / 20)
+y = y + wet * (np.sqrt(np.mean(y ** 2)) / (np.sqrt(np.mean(wet ** 2)) + 1e-12)) * 10 ** (ROOM_DB / 20)
 y = y / (np.abs(y).max() + 1e-9) * 10 ** (-1 / 20)
 sf.write(f"{B}/work/vo.wav", y.astype(np.float32), SR, subtype="FLOAT")
 
