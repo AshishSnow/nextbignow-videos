@@ -131,6 +131,10 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   and add it to `anim.py`'s exec list). Big objects, movement on beat (pin/pop, flips, slams), screen shake on impacts (`IMPACTS`),
   transitions vary: cut, whip, focus, zoom, punch, flash.
 - Mascot `guy(...)` appears in several shots with expressions (wow/sus/smirk), talking mouth `talk(t)`; holds props via `hold=`.
+  Since 27 Oct it is the **3D-look character** (`scripts/anim_mascot3d.py`, owner's request): same rounded-square face and orange
+  tie, now with shaded skin and hair, royal-blue suit, shirt, pocket square, cel-shaded limbs, hands with thumbs, shoes and a soft
+  ground shadow — same API, so old shot code works (`MASCOT3D=0` = old stick figure). Give him acting: lean, look at the prop,
+  react on every reveal. Never borrow other creators' characters or any franchise character (e.g. no Pokémon) — ours only.
 - On-screen source chip for key stats (`chip("Source: …", INK, WHITE, 24)` near y≈1430).
 - End: phone "SEND THIS" CTA scene, then the OopsMyBusiness logo sting ("follow for more business secrets").
 - Moving objects must stay inside x 140–940 (or fade out near the edges): camera shake/zoom uses BORDER_REFLECT, so anything

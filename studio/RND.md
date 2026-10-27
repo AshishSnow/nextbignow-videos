@@ -55,6 +55,10 @@ Visuals / Story / Tooling
 - ~~Cinematic texture~~ — done 27 Oct (interactive): `template/scripts/anim_cine.py` (lit worlds with depth, glow disc, 3D titles behind the
   hero, light rays, bokeh, DOF, film grade), default on. Next: prop **materials** (specular highlights, subtle texture on paper/metal/
   wood props, soft contact shadows everywhere), mascot rim light + shadow, and speed (CA + grain cost ~0.2 s/frame).
+- ~~Mascot upgrade~~ — done 27 Oct (interactive, owner's reference: 3D-look cartoon story reels): `anim_mascot3d.py`. Next: walk/run
+  cycles with arm swing, sitting at a desk, pointing poses, a second character (rival/customer) in the same style, head turns (3/4 view).
+- Story format from the owner's references (27 Oct): multi-part series ("Part 3") and audience choices ("comment A or B — you pick
+  what happens next") get 75–300 comments per reel vs our ~0 — test a two-part story with a choice CTA and compare comments/shares.
 - Photoreal background plates from a local open image model (owner's reference reels use realistic AI imagery): check licence
   (commercial use) + CPU speed at 1080×1920 on 2 cores; only for backgrounds behind our own mascot/props; label AI as we do now.
 - First-frame test sheet: render frame 0 of the last 5 videos side by side with safe-zone guides.
@@ -124,3 +128,8 @@ Visuals / Story / Tooling
   gas station, airline miles): renders fine, colours kept vibrant after a second tuning pass (first pass was hazy: bloom 0.32 → 0.18,
   contrast S-curve 0.18 → 0.42, saturation 1.08 → 1.16), cost +0.19 s/frame. Hook demo with `title3d("DIAMONDS")` behind the ring.
   | kept (template default; CINE=0 to switch off)
+- 2026-10-27 | Visuals (interactive; owner sent 3D-look cartoon story reels: "improve our character, not follow exactly, 3D, better colours")
+  | Built `anim_mascot3d.py`: same identity (square face, orange tie), new volume and colour (shaded head + hair, royal-blue suit,
+  shirt, tie, pocket square, cel-shaded limbs, hands with thumbs, shoes, ground shadow); same `guy()`/`head_el()` API → checked on
+  6 poses and 4 De Beers shots (holding props, expressions, edges). Fixed a blush bug (PIL draw punched holes in the face alpha —
+  also present in the old head). | kept (template default; MASCOT3D=0 to switch off)
