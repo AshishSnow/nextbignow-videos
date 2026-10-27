@@ -188,3 +188,43 @@ def lock_click(level=-15):
         x = (np.sin(2 * np.pi * f0 * t2) + 0.6 * signal.sosfilt(signal.butter(2, [1500, 9000], "band", fs=SR, output="sos"), rng.standard_normal(n_))) * np.exp(-t2 / 0.006)
         i = int(d0 * SR); out[i:i + n_] += np.stack([x, x], 1)
     return out / np.abs(out).max() * db(level)
+
+# ---- ep 11 foley: ice_crack (freeze-over), sip (slurp), chatter (teeth), wind (cold gust) ----
+def ice_crack(level=-16, dur=0.6):
+    """freeze-over: dense bright crackles that thin out + a low 'crunch' body (ice forming fast)."""
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    dens = 0.08 * np.exp(-t2 / 0.18) + 0.004
+    x = rng.standard_normal(n_) * (rng.random(n_) < dens)
+    x = signal.lfilter([1], [1, -0.85], x)
+    hi = signal.sosfilt(signal.butter(2, [1800, 12000], "band", fs=SR, output="sos"), x)
+    lo = signal.sosfilt(signal.butter(2, [120, 900], "band", fs=SR, output="sos"), rng.standard_normal(n_)) * np.exp(-t2 / 0.06)
+    y = hi / (np.abs(hi).max() + 1e-9) + 0.6 * lo / (np.abs(lo).max() + 1e-9)
+    y = y / np.abs(y).max() * db(level); return np.stack([y, np.roll(y, 70)], 1)
+
+
+def sip(level=-24, dur=0.35):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    x = rng.standard_normal(n_); fc = 900 + 1600 * t2 / dur
+    y = np.zeros(n_)
+    for i in range(0, n_, 512):
+        sos = signal.butter(2, [fc[i] * 0.7, fc[i] * 1.3], "band", fs=SR, output="sos"); y[i:i + 512] = signal.sosfilt(sos, x[i:i + 512])
+    y *= np.sin(np.pi * t2 / dur) ** 0.6 * (0.6 + 0.4 * np.sin(2 * np.pi * 18 * t2))
+    y = y / (np.abs(y).max() + 1e-9) * db(level); return np.stack([y, y], 1)
+
+
+def chatter(level=-26, dur=0.6, rate=16):
+    out = np.zeros(int(dur * SR))
+    for j in range(int(dur * rate)):
+        c = pop(level, 2200 + 300 * rng.random())[:, 0][: int(0.03 * SR)] * np.exp(-np.arange(int(0.03 * SR)) / SR / 0.006)
+        i = int(j / rate * SR); out[i:i + len(c)] += c[: len(out) - i]
+    return np.stack([out, out], 1)
+
+
+def wind(level=-27, dur=1.2):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    x = rng.standard_normal(n_); y = np.zeros(n_)
+    fc = 600 + 500 * np.sin(np.pi * t2 / dur) + 200 * np.sin(2 * np.pi * 1.3 * t2)
+    for i in range(0, n_, 1024):
+        sos = signal.butter(2, [fc[i] * 0.8, fc[i] * 1.25], "band", fs=SR, output="sos"); y[i:i + 1024] = signal.sosfilt(sos, x[i:i + 1024])
+    y *= np.sin(np.pi * t2 / dur) ** 1.2
+    y = y / (np.abs(y).max() + 1e-9) * db(level); return np.stack([y, np.roll(y, 300)], 1)

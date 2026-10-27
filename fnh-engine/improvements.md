@@ -101,6 +101,14 @@ Script / packaging:
 - [ ] Comment question in caption + firstCommentText.
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-27 11:00: Instagram numbers for carrots (133 reach / 155 views) and pineapple (86 / 127) are IDENTICAL to the
+  06:00 snapshot — reach has fully stopped at 12–17 h; spicy (03:25) and sugar rush (07:55) are not in Metricool analytics
+  yet. YouTube rows started flowing for the first time (only the 25 Oct face-mites row so far). => keep judging at 48 h;
+  ep 11 is a direct SEQUEL to the spicy video (series hook "same prize as our spicy video") to test whether a linked pair
+  lifts both. Watch spicy + mint reach together at 48 h.
+- 2026-10-27 11:00 (voice A/B, same script): ending every explaining statement with a "settle" (low) fall scored the same
+  as the old pattern (chunk20 4.410 vs 4.407, line mean 4.350 vs 4.351) — UTMOS does not reward intonation-only changes.
+  Rewriting the weakest lines DID move them (b2 4.11 -> 4.41, b3 4.13 -> 4.31). => rewrite > retune.
 - 2026-10-27 06:00: CHUBBY reach is flat after 8–12 h (carrots 133 reach / 155 views, pineapple 86 / 127) while 3-s hold
   stays high (58–72 %). The Nessa dandruff reel had 1.29k reach at a similar age. So the hook works for people who
   see it; the problem is how many get shown it (topic pull / non-follower distribution). => ep 10 tests a broad,
@@ -118,6 +126,15 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 11 mint feels cold (27 Oct, auto run, 2:05): VOICE weakest lines rewritten shorter (b2 4.11 -> 4.41, b3 4.13 -> 4.31),
+  plain lines 1.02–1.03 to reach 181 wpm, statement-settle A/B (neutral, kept for naturalness); chunk20 4.427 / line mean
+  4.359 (ep 10 4.366 / 4.356) | VISUAL scale cues: powers-of-ten zoom_through (Chubby's face -> tongue -> nerve ending) +
+  scale_ladder "you are here" mini-map (YOU -> TONGUE x5 -> NERVE x100 -> COLD ALARM x1000); a COLOUR SCRIPT (warm sets =
+  real temperature, icy sets = what the brain feels, flipping on the exact word); freeze-into-an-ice-block hook at 0.8 s;
+  new prop lib11 (menthol key-molecule with menthol's ring, cold alarm + jumpy mode, frost creep, snow, icicles, breath,
+  thermometer with an alarm trigger line that moves up) | SCRIPT/TOPIC sequel to ep 09 (same Nobel, heat alarm vs cold
+  alarm), open loop in the first 5 s ("it even fools your nose") paid off at 70 % (85 s), 4 chapters, cool-jazz score,
+  new foley (ice crack, sip, teeth chatter, wind) | metric: spicy+mint reach at 48 h, 3-s hold, avg watch % on 2:05.
 - 10 sugar rush (27 Oct, auto run, 1:58): VOICE ear-writing (<= 12-word lines, contractions) + rewrite weakest line by
   name-then-define order (b2 3.99 -> 4.35); chunk20 4.366 / line mean 4.356 | VISUAL refutation kit: myth_tag (MYTH ->
   red X + BUSTED), split_contrast panels (sugar vs sweetener, told-sugar vs told-no-sugar, "what moms saw vs what was
@@ -153,6 +170,8 @@ Script / packaging:
 | 27 Oct | **ep 09 spicy, A4 + per-line speed variety (shipped)** | **4.276 (chunk20 4.408, line mean 4.332)** | 183 | 0.13 | 17.1 | 0 |
 | 27 Oct | ep 10 sugar rush, A4 + ear-writing, first take | 4.135* (chunk20 4.337, line mean 4.342) | 182 | 0.14 | 17.5 | 0 (after year fix) |
 | 27 Oct | **ep 10 sugar rush, + b2 reordered, i2 0.98, g2 0.97 (shipped)** | **4.225* (chunk20 4.366, line mean 4.356)** | 182 | 0.14 | 17.5 | 0 |
+| 27 Oct | ep 11 mint, A4 + 'settle' endings (A/B: old endings 4.407 / 4.351) | 4.191* (chunk20 4.410, line mean 4.350) | 180 | 0.15 | 17.5 | 0 |
+| 27 Oct | **ep 11 mint, + weak lines rewritten, plain lines 1.02–1.03 (shipped)** | **4.228* (chunk20 4.427, line mean 4.359)** | 182 | 0.15 | 17.5 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -179,7 +198,7 @@ Animation & visuals:
 - [ ] Camera language: push-in on reveals, whip pans between ideas, low/high angles, rack focus (`cam_keys`, `push_in`)
 - [ ] Depth: parallax background layers, foreground elements passing the camera, atmospheric perspective
 - [ ] Lighting: rim light and soft ambient-occlusion shadows on props; light rays on reveals
-- [ ] Colour script: plan the colour arc of the video (calm -> tension -> payoff) instead of random schemes
+- [x] Colour script: plan the colour arc of the video (ep 11: warm = real temperature, icy = what the brain feels)
 - [~] Kinetic typography for key numbers (count-ups, slams, words that react to the action)
 - [ ] Match cuts and morph transitions (shape of one object becomes the next)
 - [ ] Texture & detail: gradients, highlights, subtle grain on the hero prop of each video
@@ -187,7 +206,7 @@ Animation & visuals:
 Voice (always voice A — refine, never swap):
 - [x] Calmer pace + real pauses (A4, UTMOS 4.36)
 - [x] Ear-writing: rhythm, short-long sentence contrast, rule of three, contractions (ep 10)
-- [ ] Pause before the payoff word; lift on questions; settle on statements
+- [~] Pause before the payoff word; lift on questions; settle on statements (ep 11 A/B: settle is UTMOS-neutral)
 - [x] Per-line speed variety and stress placement tested with voice_report (ep 09)
 - [x] Ear-writing + name-then-define sentence order for weak lines (ep 10, per-line UTMOS in voice_report)
 - [ ] Mic-like polish: gentle de-ess, presence EQ, no harshness (check with voice_report + spectrum)
@@ -201,19 +220,26 @@ Explaining (the owner's #1 priority — people must understand what they watch):
 - [x] Analogies and visual metaphors for invisible things (enzymes as scissors, receptors as doorbells…)
 - [x] Define-on-sight: every new term appears with its picture and a 2–4 word label the moment it is spoken
 - [ ] Step diagrams that build up piece by piece (1 -> 2 -> 3) and a 5-second visual recap at the end
-- [ ] Scale cues (hand, coin, Chubby next to the thing) so viewers know how big/small it is
+- [x] Scale cues: chained reference objects + powers-of-ten zoom + 'you are here' mini-map (ep 11: zoom_through, scale_ladder)
 - [x] Mute test: watch the test-frame sheet without audio — can you follow the story? If not, fix the visuals
 - [~] Structure for 2–3 min videos: chapters + re-hooks every 20–30 s + open loops paid off in order (ep 10: chapter_card PART 2/3)
 - [ ] Pre-training shot: a 3-second "cast of parts" (name the 2-3 parts with pictures) before any process explanation
 - [x] Worked-example contrast: "what you feel vs what's really there" split screens for every illusion/myth topic (ep 10: split_contrast)
 - [x] Refutation structure for myth topics: state the myth, bust it on screen, then explain (ep 10: myth_tag)
 Story & topics:
-- [ ] Curiosity gap + open loop in the first line, payoff placed at ~70 % of the video
+- [x] Curiosity gap + open loop in the first line, payoff placed at ~70 % of the video (ep 11: nose teaser at 5 s, paid at 85 s)
 - [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
 - [ ] Concrete comparisons people can picture ("as heavy as…", "the size of…")
 - [ ] One-sentence takeaway people can use today
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-27 | Scale cues (explaining tiny things) | Viewers can't picture "a nerve ending on your tongue" unless they
+  travel there from something familiar. Explainers chain reference objects (you -> tongue -> nerve -> sensor), use one
+  continuous "powers of ten" zoom with a magnification overlay, and keep a mini-map of the levels so nobody gets lost
+  (Eames, "Powers of Ten" 1977; advids.co "Visualizing scale and scope" guide: chained reference objects, continuous zoom
+  with a graphical scale overlay, comparative juxtaposition). Turned into anim_fx helpers: zoom_through(far, near, cx, cy)
+  (push into a point, hand over to the close-up) and scale_ladder(items, cur) (row of the levels with x5/x100/x1000 chips,
+  current level ringed). Paired with a colour script (warm = real, icy = felt) | ep 11 (S5 zoom + ladder S5/S6) | yes
 - 2026-10-27 | Refutation text + contrasting cases (explaining a MYTH) | A refutation text states the common misconception,
   refutes it explicitly, then explains the correct idea; because the myth and the fix are active in memory at the same
   time, the new idea can win (KReC framework; "Refutation texts..." Educ Psychol Rev 2021, link.springer.com/article/

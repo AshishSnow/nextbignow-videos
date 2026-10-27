@@ -6,7 +6,7 @@ NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these f
 0a. (DONE ep 10) sugar-rush-myth — Do you know the "sugar rush" in kids is mostly a myth? (double-blind studies found no behaviour
     change; parents who THOUGHT kids had sugar rated them more hyper). Halloween-timely, very shareable. Verify: Wolraich
     et al. JAMA 1995 meta-analysis; Hoover & Milich 1994 (parent expectation); plus a major outlet / university page.
-0b. mint-feels-cold — the twin of ep 09: menthol switches on the COLD alarm (TRPM8), nothing gets colder. Reuse the
+0b. (DONE ep 11) mint-feels-cold — the twin of ep 09: menthol switches on the COLD alarm (TRPM8), nothing gets colder. Reuse the
     alarm/key props with a blue alarm; Nobel 2021 press release names TRPM8 + menthol (source 1), find source 2.
 0c. diwali-silver-leaf — Do you know the shiny silver on Indian sweets is real metal you can eat? (vark/varq, thin
     silver leaf; FSSAI rules on thickness/purity, no animal-gut beating). Verify with FSSAI + a major Indian outlet.
@@ -18,7 +18,7 @@ NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these f
 2. (DONE) 09-spicy-food-burn — Do you know spicy food doesn't actually burn you? (capsaicin triggers TRPV1 heat sensors, brain
    thinks "fire"; why milk (casein) helps more than water). Chubby breathes fire, then drinks milk.
 3. (SKIP — honey already covered by the 20 Oct "fake honey / honey lasts 3,000 years" reel) honey-never-spoils
-4. 11-mint-feels-cold — Do you know mint tricks your brain into feeling cold? (menthol triggers TRPM8 cold sensors;
+4. (DONE ep 11) 11-mint-feels-cold — Do you know mint tricks your brain into feeling cold? (menthol triggers TRPM8 cold sensors;
    nothing actually gets colder). Pair visually opposite to the spicy video.
 5. 12-sugar-in-a-soda — Do you know how much sugar is in one can of soda? (≈ 39 g ≈ 9–10 teaspoons in a 12 oz cola;
    WHO / AHA added-sugar guidance as context, no diet advice). Generic can, no brands.

@@ -94,6 +94,9 @@ Then write (read the template versions first — they are the reference; use the
   for signals/flows, `recap_steps` for a 1->2->3 visual recap before the CTA, `count_up` for key numbers.
   Myth topics (ep 10, refutation text): `myth_tag` (MYTH -> red X + BUSTED) right after the myth is said, then explain;
   `split_contrast` panels for belief-vs-reality / A-vs-B tests (inside the safe zone); `chapter_card` PART n at re-hooks.
+  Tiny things (ep 11, scale cues): `zoom_through(t, t0, dur, far, near, cx, cy)` = one continuous powers-of-ten push from
+  something familiar into the close-up; `scale_ladder(items, cur, ...)` = "you are here" mini-map (YOU -> TONGUE x5 -> ...).
+  Plan a COLOUR SCRIPT per video (ep 11: warm sets = real temperature, icy sets = what the brain feels).
 - `scripts/music.py` — cues on every reveal. **New genre each video** (template = bouncy food-funk with marimba/slap
   bass + 1940s march section; others: synth-pop, lo-fi hip hop, latin, orchestral pizzicato, surf rock, chiptune…).
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
@@ -124,7 +127,10 @@ medal_el, drink_el(kind), protein_el, bird_el, mouse_el, seeds, plant, padlock_e
 packet_el, cup2_el(label), pancreas_el(awake), stomach_el, ikey_el (insulin key), cell_el(open_k, sugar_in) (cell with a door),
 sugar_gauge (dial with tight-range band), thermostat_el, rating_board, party_hat_el, witch_hat_el, balloon_el, ghost_el, clock_el,
 tooth, test_card_el, head_pos(x,y,s), blindfold, mom(...) (Chubby-style mom: hair + bun), scientist(...) (lab coat + goggles);
-extra stage schemes "night" and "lime".
+extra stage schemes "night" and "lime". · anim_props_lib11 (ep 11): mint_leaf_el(face, mood), gum_el, menthol_el/menthol (key molecule),
+calarm_el/calarm(ring, key_in, jumpy) (COLD alarm), ice_block, ice_cube_el, frost(amt), snow, breath, icicles, ice_glass_el,
+thermo_c (°C ticks + alarm trigger line), airmeter, ice_floor, nerve_icon_el, think_el (thought bubble); schemes "ice",
+"deepice", "mintg". sfx_lib (ep 11): ice_crack, sip, chatter, wind.
 
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.

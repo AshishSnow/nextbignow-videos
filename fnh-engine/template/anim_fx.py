@@ -257,3 +257,42 @@ def chapter_card(f, t, t0, num, title, y=1380, dur=1.6, col=YEL_):
     x = 540 - 600 * (1 - k)
     comp(f, chip(f"PART {num}", INK, col, 28), x, y - 52, op=out)
     comp(f, chip(title, col, INK, 40), x, y + 8, op=out)
+
+
+# ================= SCALE CUES (ep 11): show HOW SMALL something is before explaining it =================
+# Explainers make tiny things understandable with a chain of familiar reference objects (you -> tongue -> nerve ending ->
+# sensor), a continuous "powers of ten" zoom with a magnification readout, and a "you are here" mini-map (Eames,
+# "Powers of Ten" 1977; advids.co "Visualizing scale and scope" guide: chained reference objects, continuous zoom with
+# a graphical scale overlay). Use zoom_through() for the jump between levels and scale_ladder() to keep the viewer oriented.
+def zoom_through(t, t0, dur, far, near, cx, cy, zmax=6.0):
+    """continuous zoom: far() is pushed into the point (cx, cy) (which slides to the centre) up to zmax, then near()
+    takes over, settling from a slight over-zoom. far / near = callables returning full frames. Returns the frame."""
+    k = clamp((t - t0) / max(1e-3, dur))
+    if k <= 0: return far()
+    if k >= 1: return near()
+    e = eio(k)
+    if k < 0.55:
+        z = zmax ** (eio(k / 0.55) * 0.85)
+        q = eio(k / 0.55)
+        return cam(far(), z, cx, cy, (W / 2 - cx) * q, (H / 2 - cy) * q)
+    m = eio((k - 0.55) / 0.45)
+    a = cam(far(), zmax ** 0.85, cx, cy, W / 2 - cx, H / 2 - cy)
+    b = cam(near(), 1 + 0.5 * (1 - m))
+    return a * (1 - m) + b * m
+
+
+def scale_ladder(f, items, cur, t, t_cur, y=1400, gap=200, s=0.5):
+    """'you are here' mini-map: a row of the zoom levels so far (el, label), the current one ringed + bigger,
+    with 'x10'-style magnification chips on the arrows. items = [(el, label, mag_text_or_None), ...]; cur = index."""
+    n = cur + 1; x0 = W / 2 - gap * (n - 1) / 2
+    for i in range(n):
+        el, lab, mag = items[i]; x = x0 + i * gap
+        k = pin(t, t_cur, 0.3) if i == cur else 1.0
+        sc_ = s * (1.25 if i == cur else 0.9) * k
+        cv2.circle(f, (int(x), int(y)), int(70 * (1.25 if i == cur else 0.9) * k), C(WHITE), -1, cv2.LINE_AA)
+        comp(f, el, x, y, scale=sc_)
+        cv2.circle(f, (int(x), int(y)), int(70 * (1.25 if i == cur else 0.9) * k), C(YEL_ if i == cur else INK), 8 if i == cur else 5, cv2.LINE_AA)
+        comp(f, chip(lab, INK, WHITE, 22), x, y + 92, op=k)
+        if i > 0:
+            draw_arrow(f, x - gap + 80, y, x - 95, y, 1.0 if i < cur else eo(clamp((t - t_cur) / 0.25)), INK, 7, 20)
+            if mag: comp(f, chip(mag, YEL_, INK, 20), x - gap / 2, y - 44, op=1.0 if i < cur else clamp((t - t_cur - 0.15) / 0.2))
