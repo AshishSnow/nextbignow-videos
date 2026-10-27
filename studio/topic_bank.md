@@ -69,7 +69,7 @@ Sources: Restaurant Dive Dec 2018 https://www.restaurantdive.com/news/burger-kin
 Marketing Dive 7 Dec 2018 / 12 Feb 2019 https://www.marketingdive.com/news/burger-kings-whopper-detour-generated-15m-app-downloads/548203/ ·
 Adweek 19 Jun 2019 https://www.adweek.com/creativity/whopper-detour-burger-kings-masterpiece-of-trolling-wins-direct-grand-prix-at-cannes/
 
-### 6. A vacuum company gave away so many free flights it lost its European business — type A · 31/35 (5/5/3/5/5/4/4→5 once checked)
+### 6. CLAIMED 2026-10-28 (video run) — A vacuum company gave away so many free flights it lost its European business — type A · 31/35 (5/5/3/5/5/4/4→5 once checked)
 Hook: "Do you know a vacuum company gave away so many free flights it lost its whole European business?"
 Beats: Aug 1992 UK: spend £100+ on Hoover products → two free return flights to Europe; Nov 1992 adds New York/Florida (tickets
 worth ~£600) → cheapest qualifying product ~£119, so people bought vacuums just for tickets → Hoover planned for ~50,000
