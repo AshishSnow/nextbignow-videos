@@ -139,60 +139,95 @@ manip = call(snd, "To Manipulation", 0.01, 65, 400)
 ptier = call(manip, "Extract pitch tier")
 npts = call(ptier, "Get number of points")
 pts = np.array([[call(ptier, "Get time from index", i), call(ptier, "Get value at index", i)] for i in range(1, npts + 1)])
-newp = call("Create PitchTier", "new", 0, snd.duration)
-gain = np.zeros(len(flat)); dur_pts = []
-for (tt, fv) in pts:
-    lid = next((l for l, L in lines.items() if L["start"] - 0.05 <= tt <= L["end"] + 0.05), None)
-    if lid is None: call(newp, "Add point", tt, fv); continue
-    _, _, _, _, base, ex, stress, end = CFG[lid]
-    ref = line_med[lid]; s = 12 * np.log2(fv / ref)
-    s2 = s * (1 + (ex - 1) * EXS) + base * BS
-    for (l2, w, ws_, we_) in spans:
-        if l2 != lid: continue
-        for st_ in stress:
+# PGATE: per-line prosody gate (R&D 27 Oct run 3) = max UTMOS a line may lose to PSOLA vs its flat take; worse lines are re-rendered
+# with softer moves (PG_STEPS strengths). Lifted the worst line 3.92-4.05 -> 4.25 on 2 of 3 scripts at -0.1...-0.3 st range. 0 = off.
+PG = float(os.environ.get("PGATE", "0.15"))
+CLO = float(os.environ.get("CLIPLO", "-12")); CHI = float(os.environ.get("CLIPHI", "13"))   # pitch target limits, st vs global median
+PG_STEPS = [float(v) for v in os.environ.get("PG_STEPS", "1.0,0.6,0.3").split(",")]
+
+
+def prosody(gm):
+    """PSOLA resynthesis with per-line strength gm[lid] (1 = full moves, 0 = the engine's own melody). Returns raw, dur_pts."""
+    newp = call("Create PitchTier", "new", 0, snd.duration)
+    gain = np.zeros(len(flat)); dur_pts = []
+    for (tt, fv) in pts:
+        lid = next((l for l, L in lines.items() if L["start"] - 0.05 <= tt <= L["end"] + 0.05), None)
+        if lid is None: call(newp, "Add point", tt, fv); continue
+        _, _, _, _, base, ex, stress, end = CFG[lid]
+        ref = line_med[lid]; s = 12 * np.log2(fv / ref)
+        s2 = s * (1 + (ex - 1) * EXS) + base * BS
+        for (l2, w, ws_, we_) in spans:
+            if l2 != lid: continue
+            for st_ in stress:
+                name, _, mode = st_.partition(":")
+                if re.sub(r"\W", "", name.lower()) == re.sub(r"\W", "", w.lower()):
+                    ww = max(0.12, we_ - ws_)
+                    s2 += BMP * (-2.0 if mode == "dn" else 2.4) * rc(tt, ws_ + 0.4 * ww, 0.75 * ww)
+        ws_l = [sp for sp in spans if sp[0] == lid][-1]
+        if end == "q" and tt >= ws_l[2]: s2 += 4.5 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1) ** 1.3
+        if end == "low" and tt >= ws_l[2]: s2 -= 2.2 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1)
+        g_ = gm.get(lid, 1.0); s2 = s + g_ * (s2 - s)
+        rel = np.clip(12 * np.log2(ref / G) + s2, CLO, CHI)
+        call(newp, "Add point", tt, GT * 2 ** (rel / 12))
+    # loudness lift + length on stressed words
+    for (lid, w, ws_, we_) in spans:
+        g_ = gm.get(lid, 1.0)
+        for st_ in CFG[lid][6]:
             name, _, mode = st_.partition(":")
-            if re.sub(r"\W", "", name.lower()) == re.sub(r"\W", "", w.lower()):
-                ww = max(0.12, we_ - ws_)
-                s2 += BMP * (-2.0 if mode == "dn" else 2.4) * rc(tt, ws_ + 0.4 * ww, 0.75 * ww)
-    ws_l = [sp for sp in spans if sp[0] == lid][-1]
-    if end == "q" and tt >= ws_l[2]: s2 += 4.5 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1) ** 1.3
-    if end == "low" and tt >= ws_l[2]: s2 -= 2.2 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1)
-    rel = np.clip(12 * np.log2(ref / G) + s2, -12.0, 13.0)
-    call(newp, "Add point", tt, GT * 2 ** (rel / 12))
-# loudness lift + length on stressed words
-for (lid, w, ws_, we_) in spans:
-    for st_ in CFG[lid][6]:
-        name, _, mode = st_.partition(":")
-        if re.sub(r"\W", "", name.lower()) != re.sub(r"\W", "", w.lower()): continue
-        a0, a1 = int(ws_ * SR), int(we_ * SR); r_ = int(0.03 * SR)
-        env = np.zeros(len(flat)); env[a0:a1] = 1
-        env = np.convolve(env, np.ones(r_) / r_, "same")
-        gain += env * (1.0 if mode == "dn" else 2.2)
-        stretch = 1 + STR * (0.22 if mode == "dn" else 0.08)
-        dur_pts += [(ws_ - 0.012, 1.0), (ws_, stretch), (we_ - 0.02, stretch), (we_ - 0.008, 1.0)]
-x = flat * 10 ** (gain / 20)
-snd2 = parselmouth.Sound(x.astype(np.float64), SR)
-manip = call(snd2, "To Manipulation", 0.01, 65, 400)
-call([newp, manip], "Replace pitch tier")
-dtier = call("Create DurationTier", "dur", 0, snd.duration)
-call(dtier, "Add point", 0.0, 1.0)
-for tt, v in sorted(dur_pts): call(dtier, "Add point", max(0.001, tt), v)
-call(dtier, "Add point", snd.duration, 1.0)
-call([dtier, manip], "Replace duration tier")
-out = call(manip, "Get resynthesis (overlap-add)")
-raw = out.values[0].astype(np.float32)
+            if re.sub(r"\W", "", name.lower()) != re.sub(r"\W", "", w.lower()): continue
+            a0, a1 = int(ws_ * SR), int(we_ * SR); r_ = int(0.03 * SR)
+            env = np.zeros(len(flat)); env[a0:a1] = 1
+            env = np.convolve(env, np.ones(r_) / r_, "same")
+            gain += env * (1.0 if mode == "dn" else 2.2)
+            stretch = 1 + g_ * STR * (0.22 if mode == "dn" else 0.08)
+            dur_pts += [(ws_ - 0.012, 1.0), (ws_, stretch), (we_ - 0.02, stretch), (we_ - 0.008, 1.0)]
+    x = flat * 10 ** (gain / 20)
+    snd2 = parselmouth.Sound(x.astype(np.float64), SR)
+    manip = call(snd2, "To Manipulation", 0.01, 65, 400)
+    call([newp, manip], "Replace pitch tier")
+    dtier = call("Create DurationTier", "dur", 0, snd.duration)
+    call(dtier, "Add point", 0.0, 1.0)
+    for tt, v in sorted(dur_pts): call(dtier, "Add point", max(0.001, tt), v)
+    call(dtier, "Add point", snd.duration, 1.0)
+    call([dtier, manip], "Replace duration tier")
+    out = call(manip, "Get resynthesis (overlap-add)")
+    return out.values[0].astype(np.float32), dur_pts
 
 
-_dp = sorted([(0.0, 1.0)] + [(max(0.001, a), b) for a, b in dur_pts] + [(snd.duration, 1.0)])
-_g = np.arange(0, snd.duration + 0.001, 0.001); _dv = np.interp(_g, [p[0] for p in _dp], [p[1] for p in _dp])
-_cum = np.concatenate([[0], np.cumsum((_dv[1:] + _dv[:-1]) / 2 * 0.001)])
+def tmapper(dur_pts):  # old time -> new time through the duration tier (linear interpolation, as Praat does)
+    _dp = sorted([(0.0, 1.0)] + [(max(0.001, a), b) for a, b in dur_pts] + [(snd.duration, 1.0)])
+    _g = np.arange(0, snd.duration + 0.001, 0.001); _dv = np.interp(_g, [p[0] for p in _dp], [p[1] for p in _dp])
+    _cum = np.concatenate([[0], np.cumsum((_dv[1:] + _dv[:-1]) / 2 * 0.001)])
+    return lambda t0: float(np.interp(t0, _g, _cum))
 
 
-def tmap(t0):  # old time -> new time through the duration tier (linear interpolation, as Praat does)
-    return float(np.interp(t0, _g, _cum))
-
-
+gm = {lid: PG_STEPS[0] if PG > 0 else 1.0 for lid in lines}
+raw, dur_pts = prosody(gm)
+if PG > 0 and os.environ.get("PROSODY", "0" if ENGINE == "chatterbox" else "1") != "0":
+    # per-line gate (R&D 27 Oct run 3): PSOLA drops a few lines by 0.2-0.5 UTMOS (gas c1 4.45 -> 3.93); soften only those lines
+    sys.path.insert(0, f"{R}/lib"); import end_contour as _ec
+    seg = lambda y, L: y[max(0, int((L["start"] - 0.05) * SR)): int((L["end"] + 0.1) * SR)]
+    uf = {lid: _ec._utmos(seg(flat, L), SR) for lid, L in lines.items()}
+    tried = {lid: {} for lid in lines}
+    for step in range(len(PG_STEPS)):
+        tm = tmapper(dur_pts)
+        for lid, L in lines.items():
+            if gm[lid] in tried[lid]: continue
+            Lm = dict(start=tm(L["start"]), end=tm(L["end"])); tried[lid][gm[lid]] = _ec._utmos(seg(raw, Lm), SR)
+        bad = [lid for lid in lines if uf[lid] - tried[lid][gm[lid]] > PG and gm[lid] != PG_STEPS[-1]]
+        if not bad or step == len(PG_STEPS) - 1: break
+        for lid in bad: gm[lid] = PG_STEPS[PG_STEPS.index(gm[lid]) + 1]
+        raw, dur_pts = prosody(gm)
+    # each line: the strongest step within the gate, else the best-scoring step
+    fin = {}
+    for lid, tr in tried.items():
+        ok = [g_ for g_, u in tr.items() if uf[lid] - u <= PG]
+        fin[lid] = max(ok) if ok else max(tr, key=tr.get)
+    print("prosody gate (line: flat utmos, {strength: utmos}, kept):", {l: (round(uf[l], 3), {g_: round(u, 3) for g_, u in tried[l].items()}, fin[l]) for l in lines if len(tried[l]) > 1 or fin[l] != 1.0})
+    if fin != gm: gm = fin; raw, dur_pts = prosody(gm)
+tmap = tmapper(dur_pts)
 for lid, L in lines.items(): L["start"], L["end"] = round(tmap(L["start"]), 3), round(tmap(L["end"]), 3)
+
 # PROSODY=0 (default for chatterbox): keep the engine's own melody. PSOLA on Chatterbox output cost -0.23 UTMOS (4.54 -> 4.30) and
 # over-widened the range to 24.8 st (R&D 27 Oct); Chatterbox already gets its melody from the narrator reference.
 PROS = os.environ.get("PROSODY", "0" if ENGINE == "chatterbox" else "1") != "0"

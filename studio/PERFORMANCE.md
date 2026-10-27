@@ -9,7 +9,7 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
-## Instagram (snapshot 2026-10-27 11:00 IST — identical to 10:10; Metricool reel stats have not moved since 26 Oct)
+## Instagram (snapshot 2026-10-27 13:20 IST — identical to 05:45, 09:15, 10:10 and 11:00; Metricool reel stats have not moved since 26 Oct)
 | Date | Video | Style | Len | Views | Reach | Avg watch | 3-s view rate | Likes | Shares | Saves |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 10-27 | Movie theaters make money on popcorn (autopilot) | animated, calm voice | ~75 s | 5 | 0 | – | – | 1 | 0 | 0 |
@@ -33,6 +33,8 @@ Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** se
 | 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
 | 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(27 Oct 13:20 IST, R&D run 3: **5th identical pull**, still no rows for Visa, Duolingo or airline miles; popcorn still 5 views /
+reach 0 → the Instagram side of the Metricool sync is stuck, not our reels. YouTube *does* move: Google 56 → 127, makhana appears (1,230).)
 (27 Oct 10:10 IST, R&D run 2: **identical to the 05:45 and 09:15 IST pulls, number for number**, and no row at all yet for
 Visa (posted 27 Oct 05:00 IST) or the 27 Oct posts → Metricool's Instagram reel sync looks stalled since ~26 Oct evening IST;
 popcorn's "5 views / reach 0" is most likely a stale first snapshot, not a suppressed reel. Don't act on it until rows move.)
@@ -41,7 +43,7 @@ about 9 h after posting — slower than any earlier autopilot post at this age (
 lag or the reel got almost no test distribution; check it in the next run before reading anything into it. Visa (10-27 05:00 IST)
 and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP*` still not pulled — numbers were null on 26/27 Oct.)
 
-## YouTube Shorts (snapshot 2026-10-27 10:10 IST; first numbers ever — `YTVP06` views, `YTVP08` avg view duration s)
+## YouTube Shorts (snapshot 2026-10-27 13:20 IST; first numbers ever — `YTVP06` views, `YTVP08` avg view duration s)
 | Date | Video | Views | Avg view (s) | IG views same video |
 |---|---|---|---|---|
 | 10-26 | Chick-fil-A closed Sundays | 44 | 14 | 176 |
@@ -60,8 +62,14 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-21 | $2 China → $19.99 Amazon | 210 | 36 | 4,636 |
 | 10-20 | Salesforce SaaSpocalypse | 255 | 47 | 92 |
 | 10-20 | Starbucks bank (1st) | 16 | 13 | 186 |
-| 10-20 | Google stopped sending customers | 56 | 13 | 3,154 |
+| 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
+| 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (27 Oct 13:20 IST, R&D run 3; earlier insights below still stand)
+E. YouTube keeps updating while Metricool's Instagram reel stats stay frozen (5 identical pulls over ~8 h) → for posts after 26 Oct,
+   judge on YouTube numbers until Instagram rows move again. Makhana is the first topic that won on **both** platforms (IG 4,716 /
+   YT 1,230): money gap in the title ("Farmers Get $5. America Pays $160.") — supports insight C.
 
 ## Insights (27 Oct 11:30 IST, airline-miles run; A/B from R&D run 2 still stand)
 A. **New: YouTube is a second, independent signal.** Its winners differ from Instagram's: Compaq 1,332 vs 130 on IG, whey 940 vs 64,

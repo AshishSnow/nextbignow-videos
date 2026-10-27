@@ -22,6 +22,9 @@ human *intonation* labels, NISQA/DNSMOS don't, audio-LLM judges mostly don't —
 So UTMOS is a guardrail (don't get worse), and melody is judged with pitch range, `q_rise_st`/`low_fall_st` and listening.
 Whole-file UTMOS on 80–90 s files moves ±0.1 for edits that change per-line scores by < 0.01 → trust the per-line mean.
 
+Status 27 Oct 2026 (3rd R&D run): **closer, not yet met.** Kokoro's weak lines came from our own PSOLA, not from Kokoro: a per-line
+prosody gate (below) lifts the worst line to 4.25 on gas and airline (was 3.98 / 4.05). Remaining gaps: questions (q_rise −2.8 on
+Duolingo's long hook), and lines the EQ/clean/room chain drops (airline a3 4.15–4.27, gas d2 4.23–4.26).
 Status 27 Oct 2026 (2nd R&D run): **not yet met.** Hybrid endings (below) fix most of Chatterbox's statement endings, but its
 questions still fall (q_rise −1.8…−6.7 st) and it has occasional weak lines (Duolingo a2: 3.91). Kokoro stays default.
 Status 27 Oct 2026 (1st run): **not yet met.** Kokoro (default) passes the numbers; Chatterbox scores higher on UTMOS (+0.06 per line on
@@ -99,6 +102,19 @@ What we learned on the way (each cost a version):
    the line loses ≤ 0.05) keeps the good moves and skips those.
 5. +3…+4.5 st question rises on Chatterbox made q_rise *worse* (−1.8 → −2.1) and cost UTMOS → rises are off (`q=0`).
 
+## Prosody gate — 27 Oct 2026, 3rd run (`PGATE`, default 0.15 in make_vo.py; lab/voice_gate/)
+Diagnosis on the gas script: every **flat** Kokoro line scores 4.43–4.52; after our PSOLA moves c1 falls to 3.93 (b2 4.26, a2 4.33).
+So the weak lines are ours. PSOLA is near-transparent only for moderate shifts (±6 st "safe" for TTS pitch moves, arXiv 2512.16519);
+our moves stack range ×1.45 + base + stress +2.4 st + endings, clipped at −12/+13 st. Fix: score each line after PSOLA against its
+flat take; a line that lost > 0.15 is re-rendered at 0.6 (then 0.3) strength. UTMOS whole / per-line mean (min), range, low_fall:
+| Script | Before (template) | PGATE 0.15 (new default) |
+|---|---|---|
+| Gas (79 s) | 4.234 / 4.379 (3.98), 18.1 st, −4.8 | 4.373 / 4.411 (**4.25**), 17.8 st, −4.8 (a2, c1 softened) |
+| Duolingo (91.5 s) | 4.386 / 4.423 (4.37), 18.4 st, −6.8 | 4.421 / 4.421 (4.33), 18.3 st, −6.6 (a4 softened) |
+| Airline (100 s) | 4.394 / 4.390 (4.05), 18.4 st, −5.3 | 4.402 / 4.406 (**4.25**), 18.2 st, −5.0 (c1 softened) |
+Not adopted: a global pitch clip −7/+8 st (range fell to 15.0 st for the same gain); puck .1 blend as default (per-line mean equal
+±0.005 on 3 scripts, worst line better on gas, worse on airline). Line-level noise: ±0.06 between identical runs. Cost +~40 s per VO.
+
 ## Rules learned
 1. Never shift the whole voice up; use the blend for brightness (Kokoro lab, 26 Oct).
 2. Slower + longer pauses helps; per-sentence generation helps Kokoro (SPLIT 0.12).
@@ -106,8 +122,13 @@ What we learned on the way (each cost a version):
    time-stretch. Keep references synthetic, 8–12 s, the same narrator, calm and expressive.
 4. Chatterbox-Turbo on CPU: always the **q4** language model (q8 is 7× slower for the same score).
 5. UTMOS can't hear melody — never accept a change that only raises UTMOS by flattening the voice (Kokoro dry scores 4.52 at 12.5 st: flat).
+6. Check where a weak line is made before fixing it: score vo_flat, vo_raw and vo.wav per line (`lab/voice_gate/perline.py`).
+   On Kokoro the PSOLA step makes the weak lines (3rd run); soften moves per line, not globally.
 
 ## Next
+- **Chain drops on short lines:** airline a3 ("And Delta isn't the only one.") and gas d2 lose 0.1–0.2 in the EQ/de-ess/room chain,
+  not in PSOLA → score each line before/after `voice_clean` and the room IR; try gating the chain per line or a lighter de-esser.
+- Gate on the *chained* line (Duolingo a4 scored better raw at 0.6 but worse after the chain).
 - ~~Hybrid endings~~ — done 27 Oct (table above): low lines now land (−3.5…−4.0 st) at ≤ 0.01 per-line UTMOS cost.
 - **Chatterbox retakes for weak lines:** it's deterministic, so a weak line (per-line UTMOS < 4.3, e.g. Duolingo a2 3.91) can only
   change through its text: try 2–3 punctuation variants ("dollar." / "dollar…" / comma before the number) and keep the best.

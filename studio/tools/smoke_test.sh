@@ -18,6 +18,7 @@ fail=0
 for eng in kokoro chatterbox; do
   rm -f "$P"/work/*
   (cd "$P" && ENGINE=$eng python3 scripts/make_vo.py > work/make_vo.log 2>&1) || { echo "FAIL $eng: make_vo.py crashed"; tail -5 "$P/work/make_vo.log"; fail=1; continue; }
+  if [ $eng = kokoro ]; then grep -q "prosody gate" "$P/work/make_vo.log" || { echo "FAIL kokoro: prosody gate (PGATE) did not run"; fail=1; }; grep "prosody gate" "$P/work/make_vo.log"; fi
   if [ $eng = chatterbox ]; then grep -q "ending moves" "$P/work/make_vo.log" || { echo "FAIL chatterbox: end_contour (ENDS) did not run"; fail=1; }; grep "ending moves" "$P/work/make_vo.log"; fi
   for f in vo.wav align.json; do [ -s "$P/work/$f" ] || { echo "FAIL $eng: missing $f"; fail=1; }; done
   python3 "$HERE/tools/voice_report.py" "$P" > "$P/work/report_$eng.txt" 2>&1 || { echo "FAIL $eng: voice_report"; fail=1; continue; }
