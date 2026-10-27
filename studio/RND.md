@@ -95,3 +95,10 @@ Visuals / Story / Tooling
   low_fall unchanged (−4.8/−6.6/−5.0), ASR 0 bad lines. Not adopted: global clip −7/+8 st (range 15.0), puck .1 blend default (equal).
   **Decision: `PGATE=0.15` is the template default** (`PGATE=0` disables); smoke test checks it runs; passed. lab/voice_gate/.
   Analytics: Metricool Instagram reel stats identical for the 5th pull (frozen since 26 Oct); YouTube still updates.
+- 2026-10-27 | Topics (interactive session; owner: "topics need to improve — something interesting") | Hypothesis: 12 videos in a row
+  used one formula ("how company X really makes money"); fresh story types (wild true stories, everyday-object economics, hidden giants,
+  origin twists) will hold attention and get shared more. Built the interest test + type mix (PLAYBOOK §2) and `topic_bank.md`;
+  3 research agents verified 15 candidates against primary sources (court opinions, SEC/DOJ/Mint/FAO documents, company reports) →
+  16 Ready entries scored 26–32/35, with myths flagged (Pepsi jet price, Hoover "£100m", Nintendo love hotels, Kodak "hid it",
+  "80% of eyewear", banana "extinction"). Hoover needs one more major outlet for the £48m before use. | kept — measure 3-s rate,
+  avg watch, shares and saves by type in PERFORMANCE.md after ~5 new-type videos
