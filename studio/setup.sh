@@ -54,6 +54,8 @@ need num2words || pipi num2words
 need soundfile || pipi soundfile
 need cv2 || pipi opencv-python-headless
 need PIL || pipi pillow
+need pystoi || pipi pystoi          # mix_check.py (MIT)
+need pyloudnorm || pipi pyloudnorm  # mix_check.py (MIT)
 need scipy || pipi scipy
 need tokenizers || pipi tokenizers
 for m in tokenizers kokoro_onnx sherpa_onnx parselmouth pedalboard tinysoundfont num2words soundfile cv2 PIL scipy; do need $m || echo "MISSING python module: $m"; done

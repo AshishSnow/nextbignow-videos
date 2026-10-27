@@ -25,7 +25,7 @@ Understand the new algorithm. Do this without being told every time."
 | Pacing | No line rushed; the picture changes every 2–3 s; a re-hook roughly every 10 s |
 | Voice | Natural, warm, energetic, clear highs and lows; no robotic words; every word read back correctly by ASR |
 | Visual | Every claim drawn as a prop or diagram; vibrant set; nothing in unsafe zones; one new visual idea vs last video |
-| Audio | Voice on top, music lifts reveals, SFX on beats, −11 LUFS / −1 dBTP |
+| Audio | Voice on top, music lifts reveals, SFX on beats, −11 LUFS / −1.5 dBTP, mix_check LD p5 ≥ 10 LU |
 | Ending | Clear payoff + a takeaway worth saving + "send this to the friend who…" |
 
 ## Backlog (pick from here; strike through what's done, add new ideas)

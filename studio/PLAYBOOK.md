@@ -223,14 +223,18 @@ python3 scripts/music.py && python3 scripts/mix.py # score (edit cues section) +
 bash scripts/render_all.sh                         # -> work/final.mp4  (~10–15 min, run in background)
 ```
 - Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano, 90s British ska; next try disco, marching band, baroque harpsichord, sea shanty, etc.) using GeneralUser GS GM programs;
-  cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1 dBTP**; VO/bed ≥ 14 dB per line
+  cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1.5 dBTP**; VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.
+- Word guard (since 27 Oct R&D run 6, template default `GUARD=12`): mix.py keeps music + SFX ≥ 12 dB under every word on a phone
+  speaker, so SFX can sit right on the reveal word. Keep `bed = bed_carve.guard(...)` when you copy an older example's mix.py (examples
+  before 28 Oct don't have it). Check: `python3 /home/claude/nextbignow-videos/studio/tools/mix_check.py $P` → momentary LD p5 ≥ 10 LU,
+  no line < 10 LU, ESTOI phone ≥ 0.95; log the numbers. mix.py prints `loudnorm mode` (dynamic is expected for now — R&D backlog).
 - VO level automation (`LINE_DB` in mix.py, since 27 Oct): quiet intimate/"secret" lines −2 to −3 dB, lift reveal lines +1 dB; a −60 dB room tone fills the gaps so pauses don't drop to digital silence.
 - SFX per moment (`sfx_lib.py`: whoosh, boom, pop, ding, click, thud, chaching, clink, scratch, card_in, buzzer, creak, …).
 
 ## 8. QA before posting (all must pass)
 1. Contact sheet of the final (1 frame / 2 s) — look at every frame: no broken layouts, nothing in unsafe zones, text spelled right, no logos.
-2. `ffprobe`: 1080×1920, h264 + aac; `ebur128`: about −11 LUFS, peak ≤ −1 dBTP.
+2. `ffprobe`: 1080×1920, h264 + aac; `ebur128`: about −11 LUFS, peak ≤ −1 dBTP; `tools/mix_check.py`: LD p5 ≥ 10 LU, ESTOI phone ≥ 0.95.
 3. Facts on screen and in VO match the sources.
 4. `python3 studio/tools/voice_report.py $P work/vo.wav` — UTMOS ≥ 4.0 (aim ≥ 4.3), no ASR bad lines, pitch range ≥ 15 st, 165–190 wpm. Put the numbers in the run log.
 4b. `python3 studio/tools/story_check.py $P` — ≥ 6/7 story rules and R8 roadmap passed (it reads real times from `work/align.json`).

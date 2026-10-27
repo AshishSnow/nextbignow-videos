@@ -38,6 +38,9 @@ Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** se
 | 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
 | 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(28 Oct 04:40 IST, R&D Sound run 6: Instagram pull ≈ identical to 01:45 IST — restaurant 1,466 → 1,468, McDonald's 1,281 → 1,284, Compaq 130 → 132,
+shopping 190 → 193, others ±1; De Beers still 0 (posted 00:00 IST, same-day rows are normally empty). YouTube rows identical to 27 Oct (still no rows after
+Chick-fil-A) → nothing new to conclude; table above left as is.)
 (28 Oct 01:45 IST, Hoover run: Instagram rows moved for the first time since 26 Oct — Planet Fitness jumped 209 → 1,279 views, gas station 1,503 on day 1; YouTube rows still identical to 27 Oct (no rows after Chick-fil-A).)
 (27 Oct 23:30 IST, R&D Story run: **9th identical pull** on both platforms, every row number-for-number the same; still no rows for
 Visa, Duolingo, gas, airline, De Beers, Monopoly. Sync stalled ~33 h.)
@@ -80,6 +83,13 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
 | 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (28 Oct 04:40 IST, R&D Sound run 6)
+O. **By type, current Instagram rows (animated era):** B (gas, printer ink, Costco) mean 1,369 views / 68.2 % 3-s / 22.3 s avg watch;
+   E (restaurant tricks) 1,468 / 67.0 % / 25.2 s; F (8 posts) mean 331 / 54.2 % / 17.6 s, median ~184 views — and the only F above 450 views
+   is Planet Fitness ("your own gym habit", 1,279). A (Hoover) and D (Monopoly) have no rows yet. → Insight L stands: topics about the
+   viewer's own life (B/E or F framed that way) hold ~14 points more past 3 s and ~4.7 s more watch. Sound changed in this run (word
+   guard) — from the next video on, note "guard" in the run log so a retention change can be checked against it at n ≥ 5.
 
 ## Insights (28 Oct 01:45 IST, Hoover run — first fresh Instagram data in ~33 h)
 L. **Everyday-object (B) topics keep winning on day 1:** gas station 1,503 views / 66.9 % 3-s / 22.4 s, printer ink 1,376 / 73.7 %,

@@ -23,6 +23,20 @@ for eng in kokoro chatterbox; do
   if [ $eng = kokoro ]; then grep -q "prosody gate" "$P/work/make_vo.log" || { echo "FAIL kokoro: prosody gate (PGATE) did not run"; fail=1; }; grep "prosody gate" "$P/work/make_vo.log"; fi
   if [ $eng = chatterbox ]; then grep -q "ending moves" "$P/work/make_vo.log" || { echo "FAIL chatterbox: end_contour (ENDS) did not run"; fail=1; }; grep "ending moves" "$P/work/make_vo.log"; fi
   for f in vo.wav align.json; do [ -s "$P/work/$f" ] || { echo "FAIL $eng: missing $f"; fail=1; }; done
+  if [ $eng = kokoro ]; then  # mix word guard + mix_check on the real VO over a loud synthetic bed (music-like tones + SFX clicks)
+    python3 - "$P" "$HERE/lib" <<'EOF' && python3 "$HERE/tools/mix_check.py" "$P" > "$P/work/mix_check.txt" 2>&1 && python3 - "$P" <<'EOF2' || { echo "FAIL mix guard / mix_check"; fail=1; }
+import sys, numpy as np, soundfile as sf; sys.path.insert(0, sys.argv[2]); import bed_carve
+P = sys.argv[1]; v, sr = sf.read(f"{P}/work/vo.wav", dtype="float32"); v = v if v.ndim == 1 else v.mean(1); n = len(v); t = np.arange(n) / sr
+bed = 0.012 * (np.sin(2 * np.pi * 220 * t) + np.sin(2 * np.pi * 1760 * t) + np.sin(2 * np.pi * 3300 * t))
+for k in range(0, n, sr // 2): bed[k:k + 2400] += 0.06 * np.random.default_rng(k).standard_normal(min(2400, n - k))
+bed = np.stack([bed, bed], 1).astype(np.float32)
+g = bed_carve.guard(bed_carve.carve(bed, v), v)
+sf.write(f"{P}/work/stem_vo.wav", v, sr, subtype="FLOAT"); sf.write(f"{P}/work/stem_bed.wav", g, sr, subtype="FLOAT")
+EOF
+import json, sys; r = json.load(open(f"{sys.argv[1]}/work/mix_check.json"))
+ok = r["ld_m_p5"] >= 9.0; print(("ok  " if ok else "FAIL"), "mix guard: momentary LD p5", r["ld_m_p5"], "ESTOI phone", r["estoi"]); sys.exit(0 if ok else 1)
+EOF2
+  fi
   python3 "$HERE/tools/voice_report.py" "$P" > "$P/work/report_$eng.txt" 2>&1 || { echo "FAIL $eng: voice_report"; fail=1; continue; }
   python3 - "$P/work/voice_report.json" "$eng" <<'EOF' || fail=1
 import json, sys

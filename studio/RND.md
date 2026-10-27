@@ -23,7 +23,7 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 | Area | What it covers | Last worked |
 |---|---|---|
 | Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 (3×) |
-| Sound | music score, SFX, mix levels, loudness | never |
+| Sound | music score, SFX, mix levels, loudness | 2026-10-27 (run 6: word guard + `tools/mix_check.py`) |
 | Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | never |
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
 | Tooling | render speed, smoke tests, QA automation | never |
@@ -48,7 +48,16 @@ Voice
 - Misread lines with Chatterbox: instead of rephrasing, sample 2 extra takes (temp ~0.7) and keep the one that reads back exactly —
   code ready in `lab/voice_engine/take_picker.py` (ASR exactness first, then UTMOS).
 Sound
-- A/B music bed level vs avg watch; sidechain ducking depth; SFX density per 10 s.
+- A/B music bed level vs avg watch; ~~sidechain ducking depth~~ (done 27 Oct run 6: word guard); SFX density per 10 s.
+- **Mastering (found 27 Oct run 6): ffmpeg loudnorm never runs linear on our mixes** — pre-master PLR is 15–19 dB (printer −16.3 LUFS /
+  −1.0 dBTP, gas −17.1/−0.3, Hoover −19.5/−1.0) but −11 LUFS at −1.5 dBTP needs ≤ 9.5 dB, so loudnorm falls back to *dynamic* mode
+  (LRA squashed to ~2 LU; even a −14 target stays dynamic). A plain 4×-oversampled look-ahead limiter in front did not fix it (6 dB GR
+  on 25 % of samples, still dynamic). Next: an explicit chain — gentle bus compressor (2:1, slow) + true-peak limiter with ≤ 3 dB GR,
+  then a *linear* gain to −11 — and measure pumping (short-term loudness variance in gaps), LRA, phone ESTOI and UTMOS of the voice
+  stem through the master gain curve, vs today. YouTube turns anything above −14 LUFS down (Wikipedia/YouTube −14 reference), so the
+  extra 3 dB only matters on Instagram, whose normalisation is undocumented — keep −11 until measured.
+- Phone-speaker check of SFX *audibility*: guard keeps words clear, but are SFX in the gaps still heard on a phone (most SFX
+  energy below 300 Hz in boom/thud)? Measure phone-band SFX level vs bed; brighten booms with a 1–3 kHz click layer if needed.
 Analytics
 - YouTube vs Instagram per topic: YT winners differ (Compaq 1,332 YT vs 130 IG) — pull YTVP06/08 every run and compare after 10 posts.
 Story
@@ -164,3 +173,20 @@ Visuals / Story / Tooling
   Finding: the last 5 videos (Visa → Monopoly) all dropped the roadmap the older winners had. **Kept:** story_check in PLAYBOOK §4
   (+ QA 4b) and smoke test; R8 roadmap per type. Not validated on views yet (Metricool frozen, 9th identical pull) → prediction
   in PERFORMANCE K. ALGORITHM.md 1 day old → not redone. No template code changed.
+- 2026-10-27 (run 6) | Sound | Hypothesis: on a phone speaker, SFX hits and loud notes land on top of words more often than the
+  mix.py "VO/bed ≥ 14 dB" print suggests (it measures whole lines with a 150 Hz high-pass); a word guard that keeps the bed ≥ 12 dB under
+  the voice in the phone band (300 Hz–10 kHz, 50 ms bed windows vs 300 ms voice level, max dip 10 dB) lifts the worst moments to the
+  ≥ 10 LU commentary-over-music recommendation (Torcoli et al., JAES 67(12) 2019; non-experts prefer ~4 LU more) and raises
+  intelligibility, without changing loudness. Built `tools/mix_check.py` (per-line + 400 ms momentary loudness difference voice − bed,
+  K-weighted, phone band; phone + full-band ESTOI; I/TP/LRA) and `lab/sound/` (hook.py, soundlab.py). Same VO/music/SFX, rebuilt from
+  examples/ (Kokoro default VO): **printer ink** momentary LD p5 8.5 → 12.1 LU, windows < 10 LU 6.2 → 2.6 %, line min 12.7 → 15.3,
+  ESTOI phone 0.952 → 0.962 (full 0.947 → 0.959); **gas station** p5 7.5 → 12.0, < 10 LU 8.3 → 3.2 %, line min 8.3 (b2 under 10) → 12.5,
+  ESTOI 0.950 → 0.960 (0.946 → 0.956); **Hoover** p5 9.7 → 13.0, < 10 LU 5.3 → 2.1 %, line min 9.0 (d5) → 17.1, ESTOI 0.952 → 0.959
+  (0.940 → 0.950). I/TP unchanged (−11.7…−11.8 / −1.5). Cost: bed −1.6 LU during speech, −0.7 LU in gaps (gas); parakeet ASR on the
+  phone-filtered final mix: WER 0.119 → 0.114 (gas), 0.106 → 0.106 (Hoover; errors are number spellings) → no regression. Max dip 18 vs
+  10 dB: equal within 0.6 % → kept 10 (SFX keep punch). Guard 10 dB: weaker (p5 11.4). **Kept:** `bed_carve.guard()` default in
+  template mix.py (`GUARD=12`, 0 = off; lib == lab output to 1e-8), mix.py saves work/stem_vo.wav + stem_bed.wav and prints the
+  loudnorm mode; template TP −1.0 → −1.5 dBTP (examples since Hoover already used −1.5; template had drifted); smoke test now checks
+  the guard (synthetic bed: p5 5.1 → 10.6 LU); setup installs pystoi + pyloudnorm (MIT). Found, not fixed: loudnorm runs in dynamic mode
+  on every mix (backlog). Analytics: IG pull ≈ identical to 01:45 IST (±3 views), De Beers still 0 (same-day), YouTube rows frozen
+  since 27 Oct. ALGORITHM.md 1 day old → not redone.
