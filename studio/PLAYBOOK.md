@@ -51,6 +51,8 @@ Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words]
   MrBeast-style: simple words, stakes, short sentences — but **never rushed**: speed ≈ 1.0, real pauses before reveals
   (0.35–0.6 s; one longer 0.6–0.8 s beat before the biggest reveal), one idea per line, one focus word per sentence (VOICE.md).
   Videos over ~75 s: a re-hook every 20–30 s.
+- Hook questions: a *wh*-question ("Why would a credit card pay an airline eight billion dollars?") falls naturally — give it
+  ending `None` and stress the number; only yes/no hooks get `"q"` (VOICE.md research: rising statements sound unsure).
 - Line 1 = an intro **question** inside 3 s that names the brand/topic and the surprising claim, so viewers instantly know what the video is about (e.g. "Do you know Starbucks is sitting on one point seven billion dollars… of your money?"). Vary the wording each video.
 - Middle: 3–4 clear beats (steps/secrets/reasons) — vary the structure from the previous video. Explain each beat with a
   concrete everyday example the viewer recognises (a receipt, a cup, a card swipe), not abstract numbers alone.
@@ -72,7 +74,7 @@ Alternative engine (opt-in, see `VOICE.md`): `ENGINE=chatterbox python3 scripts/
 synthetic narrator's voice, +0.06 UTMOS per line; since 27 Oct its `low` lines get a last-word fall (`lib/end_contour.py`, `ENDS=0` to
 disable, `END_ST` depth, default −4 st) so reveals land (−3.5…−4 st vs −1 before), but its questions still fall → Kokoro stays the default. Its output is deterministic, so if a
 line reads back wrong, rephrase it (re-running gives the same audio).
-QA: `python3 /home/claude/nextbignow-videos/studio/tools/voice_report.py $P` → UTMOS ≥ 4.0 (aim ≥ 4.3), `asr_bad_lines` empty,
+QA: `python3 /home/claude/nextbignow-videos/studio/tools/voice_report.py $P` (years like "twenty twenty" and "ten and a half" are now normalised, 27 Oct) → UTMOS ≥ 4.0 (aim ≥ 4.3), `asr_bad_lines` empty,
 pitch range ≥ 15 st, speaking pace 165–190 wpm. Fix spelling/phrasing and regenerate if a line reads back wrong.
 A/B voice variants **one at a time** (copy the project to `projects/<slug>_B` and run there): the box has ~7 GB RAM and two Kokoro or
 UTMOS jobs in parallel get OOM-killed silently (log just stops).
@@ -103,6 +105,12 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 - Captions live at y≈380–560: any tall prop (price sign, phone, bar) must start below y≈620 or it collides with the big word (caught in 27 Oct test frames).
 - Loop ending: let the last story line end on the exact composition of frame 1 (same set, scheme, prop positions) so a rewatch feels seamless.
 - Long source chips: keep ≤ ~60 characters at size ≥ 19, or they run edge to edge and can't be read on a phone.
+- Contrast (27 Oct test frames): the `wui` caption (white lead, yellow big word) is unreadable on the **cream** scheme, and
+  `bars()` labels are ink, unreadable on dark schemes (emerald, purple). Data-viz shots → sky/orange/yellow (with `col=WHITE`
+  for the big word on yellow); keep cream for ink captions only.
+- Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
+  `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
+  `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.
 
 ## 7. Build and test
 ```bash
@@ -143,6 +151,8 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
   - `text`: line 1 = keyword sentence (brand + claim); 2–3 short lines of value; CTA line; "Follow for more business secrets.";
     "Sources: …"; then **exactly 5 hashtags** (topic/brand, niche, broad). No emoji. ≤ 2,000 characters.
   - `instagramData`: {type REEL, showReelOnFeed true, collaborators [], isAiGenerated true} (AI voice = realistic-sounding audio).
+  - YouTube title: keyword first **and the most surprising number + an open loop** ("Airline Miles: Why Amex Paid Delta $8.2B").
+    First YouTube data (27 Oct): number/tension titles got 740–1,360 views, flat statement titles 41–326.
   - `youtubeData`: {title ≤ 50 chars keyword-first, type short, privacy public, tags 5–8 search phrases, category EDUCATION,
     madeForKids false, isAiGeneratedContent false} (animation + generic narrator = no YouTube AI disclosure).
   - `mediaAltText`: one sentence describing the video with the keyword.

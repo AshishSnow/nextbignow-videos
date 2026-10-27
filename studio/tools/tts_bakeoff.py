@@ -166,10 +166,15 @@ def score(P, wav):
                                                         tokens=f"{d}/tokens.txt", model_type="nemo_transducer", num_threads=2)
 
     def norm(s):
-        s = s.lower().replace("%", " percent ")
+        s = s.lower().replace("%", " percent ").replace(" and a half", " point five")   # "ten and a half" == "10.5"
         # "$1.50" (ASR) == "a dollar fifty" / "one fifty" (script)
         s = re.sub(r"\$(\d+)\.(\d\d)\b", lambda m: " " + ("a" if m.group(1) == "1" else num2words(int(m.group(1)))) + " " + num2words(int(m.group(2))) + " ", s)
-        s = re.sub(r"\d[\d,]*(\.\d+)?", lambda m: " " + num2words(float(m.group(0).replace(",", "")) if "." in m.group(0) else int(m.group(0).replace(",", ""))) + " ", s)
+
+        def _w(m):
+            t = m.group(0).replace(",", "")
+            if re.fullmatch(r"(19|20)\d\d", t): return " " + num2words(int(t), to="year") + " "   # "2020" == "twenty twenty"
+            return " " + num2words(float(t) if "." in t else int(t)) + " "
+        s = re.sub(r"\d[\d,]*(\.\d+)?", _w, s)
         s = re.sub(r"[^a-z ]", " ", s.replace("-", " "))
         return [w for w in s.split() if w not in ("dollar", "dollars", "and")]
     errs = tot = 0; bad = []

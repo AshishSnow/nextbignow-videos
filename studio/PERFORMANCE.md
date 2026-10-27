@@ -9,7 +9,7 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
-## Instagram (snapshot 2026-10-27 10:10 IST)
+## Instagram (snapshot 2026-10-27 11:00 IST — identical to 10:10; Metricool reel stats have not moved since 26 Oct)
 | Date | Video | Style | Len | Views | Reach | Avg watch | 3-s view rate | Likes | Shares | Saves |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 10-27 | Movie theaters make money on popcorn (autopilot) | animated, calm voice | ~75 s | 5 | 0 | – | – | 1 | 0 | 0 |
@@ -63,12 +63,17 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Google stopped sending customers | 56 | 13 | 3,154 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
 
-## Insights (rewrite each run — 27 Oct 10:10 IST, R&D run 2)
+## Insights (27 Oct 11:30 IST, airline-miles run; A/B from R&D run 2 still stand)
 A. **New: YouTube is a second, independent signal.** Its winners differ from Instagram's: Compaq 1,332 vs 130 on IG, whey 940 vs 64,
    shopping traps 776 vs 190 — while the IG giants (makhana-style broad hooks, $2 China 4,636) did ~200 on YouTube. YouTube's
    avg view (13–47 s) is in seconds of a ~60–90 s Short; the animated autopilot videos sit at 14–22 s, same as on IG.
    → Judge a topic on both platforms; a "flop" on one is not a flop. Track YT views for every new post.
 B. Metricool's Instagram numbers were frozen for > 12 h (see note under the table) → never conclude "suppressed" from one pull.
+C. **YouTube finally reports numbers, and it disagrees with Instagram.** On YouTube most pre-autopilot Shorts got 740–1,360 views,
+   while the three autopilot Shorts with data got 41–326. The YouTube winners have a **concrete number + tension in the title**
+   ("I Went In for $1 Milk… and Paid $47", "Farmers Get $5. America Pays $160.") — our autopilot titles are flat statements
+   ("Chick-fil-A Closed Sundays Yet Still Wins"). → From this run: YouTube title = the most surprising number + an open loop, still ≤ 50 chars keyword-first.
+D. Metricool Instagram reel stats were still frozen at 11:00 IST (popcorn 5 views / reach 0; Visa and Duolingo absent) → re-check next run.
 1. **Everyday-object hooks win.** Printer ink vs champagne (a thing you buy, an absurd comparison) got the best 3-s view rate we have ever had (74%) and 1.4k views. The corporate-structure topics (AWS, Chick-fil-A franchise deal, Planet Fitness 10-K) held 50–64% and stayed under 250 views. → Pick topics about something in the viewer's hand/phone/receipt, framed as a "that can't be right" comparison or question.
 2. Animated explainers keep 50–74% past 3 s vs 4–40% for the old AI-footage reels; keep the format. Avg watch is stuck at ~13–23 s on 60–75 s videos → the middle still leaks. Re-hook card mid-video + a visual change every 2–3 s.
 3. **Shares and saves are still ~0** on every autopilot post. The only posts with real shares/saves (restaurant tricks, makhana) gave the viewer something to *use* → end with a concrete takeaway the viewer can apply to their own life, not just a fun fact.

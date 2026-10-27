@@ -37,7 +37,9 @@ try:
         _n2w = None
     def _num(m):
         t = m.group(0).replace(",", "")
-        try: return " " + (_n2w(float(t) if "." in t else int(t)) if _n2w else t) + " "
+        try:
+            if _n2w and re.fullmatch(r"(19|20)\d\d", t): return " " + _n2w(int(t), to="year") + " "   # "2020" == "twenty twenty"
+            return " " + (_n2w(float(t) if "." in t else int(t)) if _n2w else t) + " "
         except Exception: return " " + t + " "
     def _cents(m):
         a, b = m.group(1), m.group(2)
@@ -45,7 +47,7 @@ try:
         return " " + ("a" if a == "1" else w(a)) + " " + w(b) + " "
     def norm(s):
         # compare words, not formatting: "$1.7 billion" == "one point seven billion dollars", "Step 1." == "step one"
-        s = s.lower().replace("%", " percent ")
+        s = s.lower().replace("%", " percent ").replace(" and a half", " point five")   # "ten and a half" == "10.5"
         s = re.sub(r"\b((?:[a-z]\.){2,})", lambda m: m.group(1).replace(".", ""), s)   # "U.S." == "US"
         s = re.sub(r"\$(\d+)\.(\d\d)\b", _cents, s)   # "$1.50" (ASR) == "a dollar fifty" (script)
         s = re.sub(r"\d[\d,]*(\.\d+)?", _num, s)
