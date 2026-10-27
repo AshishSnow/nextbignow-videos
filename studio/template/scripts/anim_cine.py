@@ -214,39 +214,51 @@ def _ca_maps():
     return _CA
 
 
+_LUMK = None; _VIGC = {}; _GRC = {}
+
+
+def _lum(f):
+    global _LUMK
+    if _LUMK is None: _LUMK = LUMA.reshape(1, 3).astype(np.float32)
+    return cv2.transform(f, _LUMK)
+
+
 def cine_grade(f, n, warmth=0.45, bloom=0.18, grain=0.55, vig=0.32, ca=True, sat=1.16):
     f = np.clip(f, 0, 1.5).astype(np.float32)
-    lum = f @ LUMA
+    lum = _lum(f)
     # bloom + halation (warm glow around highlights) at quarter resolution
-    br = (np.clip((lum - 0.8) / 0.2, 0, 1)[..., None] * f)
-    sm = cv2.resize(br, (W // 4, H // 4), interpolation=cv2.INTER_AREA)
+    sm = cv2.resize(f, (W // 4, H // 4), interpolation=cv2.INTER_AREA)
+    sm = np.clip((_lum(sm) - 0.8) / 0.2, 0, 1)[..., None] * sm
     b1 = cv2.GaussianBlur(sm, (0, 0), 4); b2 = cv2.GaussianBlur(sm, (0, 0), 14)
-    bl = cv2.resize(b1 * 0.6 + b2 * 0.6, (W, H), interpolation=cv2.INTER_LINEAR)
-    f = f + bloom * bl * np.array([1.0, 0.9, 0.8], np.float32)
+    bl = cv2.resize((b1 + b2) * (0.6 * bloom) * np.array([1.0, 0.9, 0.8], np.float32), (W, H), interpolation=cv2.INTER_LINEAR)
+    f += bl
     # filmic tone curve (soft shoulder, slight S)
     f = f / (1 + 0.25 * f) * 1.25
     f = f + 0.42 * (f - f * f) * (f - 0.5)   # contrast S-curve: deep shadows, rich highlights
-    lum = f @ LUMA
+    lum = _lum(f)[..., None]
     # split tone: warm highlights, cool-teal shadows; vibrance kept
-    f = f + warmth * (lum[..., None] * np.array([0.035, 0.012, -0.03], np.float32) + (1 - lum[..., None]) * np.array([-0.018, 0.004, 0.03], np.float32))
-    f = lum[..., None] + (f - lum[..., None]) * sat
+    a_ = warmth * np.array([0.035, 0.012, -0.03], np.float32); b_ = warmth * np.array([-0.018, 0.004, 0.03], np.float32)
+    f += lum * (a_ - b_) + b_
+    f = lum + (f - lum) * sat
     if ca:
         (ax, ay), (bx, by) = _ca_maps()
-        f = np.dstack([cv2.remap(f[..., 0], ax, ay, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT), f[..., 1],
+        f = cv2.merge([cv2.remap(f[..., 0], ax, ay, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT), np.ascontiguousarray(f[..., 1]),
                        cv2.remap(f[..., 2], bx, by, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)])
-    f = f * (1 - vig * np.clip(_rr - 0.25, 0, 1.4))[..., None]
+    if vig not in _VIGC: _VIGC[vig] = (1 - vig * np.clip(_rr - 0.25, 0, 1.4)).astype(np.float32)[..., None]
+    f *= _VIGC[vig]
     # grain: stronger in the mid-tones, like film
-    lum = np.clip(f @ LUMA, 0, 1)
-    g = cv2.resize(GRAIN[(n + 3) % 6], (W, H), interpolation=cv2.INTER_LINEAR)
-    f = f + (g * grain * 1.6 * (0.35 + 2.6 * lum * (1 - lum)))[..., None]
+    lum = np.clip(_lum(f), 0, 1)
+    gi = (n + 3) % 6
+    if gi not in _GRC: _GRC[gi] = cv2.resize(GRAIN[gi], (W, H), interpolation=cv2.INTER_LINEAR).astype(np.float32)
+    f += (_GRC[gi] * (grain * 1.6) * (0.35 + 2.6 * lum * (1 - lum)))[..., None]
     return np.clip(f, 0, 1)
-
 
 if CINE:
     _stage_flat, _finish_flat = stage, finish
 
     def stage(scheme, sun=None, sx=540, sy=900, R=420, t=None, kind=None):   # noqa: F811 — same API as anim_base.stage
         tt = t if t is not None else (globals().get("_CINE_T", 0.0))
+        if "set_light" in globals(): set_light("day")          # characters lit for the open studio look
         f = world(kind, scheme, tt)
         if sun is not None and R > 4: glow_disc(f, sun, sx, sy, R)
         return f

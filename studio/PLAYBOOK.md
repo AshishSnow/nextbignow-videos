@@ -127,14 +127,33 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   **Frame 1 is already interesting** (the most surprising object of the video, mid-motion) — YouTube counts views from the
   first frame and the seed audience decides in about 1–2 s whether to swipe.
 - At least 18 shots; the picture changes every 2–3 s (new prop, zoom, angle or set). Every claim in the VO gets its own visual.
-- Every shot: a real prop or diagram that shows the idea (props in `anim_props*.py`; write new ones per topic in a new `anim_props4.py`
+- Every non-scene shot: a real prop or diagram that shows the idea (props in `anim_props*.py`; write new ones per topic in a new `anim_props4.py`
   and add it to `anim.py`'s exec list). Big objects, movement on beat (pin/pop, flips, slams), screen shake on impacts (`IMPACTS`),
   transitions vary: cut, whip, focus, zoom, punch, flash.
-- Mascot `guy(...)` appears in several shots with expressions (wow/sus/smirk), talking mouth `talk(t)`; holds props via `hold=`.
-  Since 27 Oct it is the **3D-look character** (`scripts/anim_mascot3d.py`, owner's request): same rounded-square face and orange
-  tie, now with shaded skin and hair, royal-blue suit, shirt, pocket square, cel-shaded limbs, hands with thumbs, shoes and a soft
-  ground shadow — same API, so old shot code works (`MASCOT3D=0` = old stick figure). Give him acting: lean, look at the prop,
-  react on every reveal. Never borrow other creators' characters or any franchise character (e.g. no Pokémon) — ours only.
+- **Story scenes, full frame (owner, 27 Oct: "it's using full frame and looks engaging… colours, more natural and 3D, change
+  the style of clothes").** At least half the shots are **character-driven full-frame scenes**, not a prop on a glow disc:
+  - Sets (`scripts/anim_sets.py`): `f = set_view(name, t, zoom, cx, cy, blur)` fills 1080x1920 edge to edge — `street`, `study`,
+    `parlor`, `office`, `store`, `dusk` (field at sunset, tree line, ground fog). It also sets the matching character light.
+    Write a new set per topic when none fits (factory, bank, kitchen…) in the same file style: perspective floor, texture,
+    occlusion, one light pool. Mood FX: `smoke(f, t)`, `embers(f, t)`, `glow_eyes(f, x, y)`.
+  - Cast (`scripts/anim_mascot3d.py`): `person(f, x, y, s, who, …)` = lit 2.5D characters (rounded volumes, key + ambient +
+    rim light, contact occlusion, cast shadow). Looks: `hero` (orange hoodie — our recurring narrator character), `friend` (tee),
+    `creator` (jacket), `exec` (suit), `inventor` (dress, bun), `lady` (long hair), `oldman` (cardigan, glasses), `worker`
+    (overalls, cap), `kid`, `mystery` (dark coat + hat, shadowed face). Re-dress anyone per story with a dict:
+    `who={"base": "exec", "top": (120, 30, 40), "hair": "curly"}`. Same pose args as `guy()` (`la/ra/ll/rl/lean/sit/mouth/
+    brow/expr/look/hold/sweat`) plus `back=True` for over-the-shoulder. `guy()` = the hero.
+  - Shot sizes: vary every 2–3 s — **wide** (s≈0.7–0.9, whole set), **medium two-shot** (s≈1.2–1.4, feet near y≈1900,
+    `set_view(..., zoom≈1.25, blur≈2.5)`), **close-up** (`person_head_at(f, 540, 860, 2.6, who)` + `blur≈6–7` on the set),
+    **over-the-shoulder** (`person(..., s≈2.5, back=True, shadow=False)` bottom-left + the other character mid-frame),
+    **foreground hand** (`fg_hand(f, x, y, s≈1.9)`, blurred, for "you" moments).
+  - Captions in scenes: `say(f, "HE GOT $500", y≈1300–1420)` — big white condensed text with a black stroke at lower-middle,
+    never over a face. Series badge: `part_badge(f, "PART 2", "THE REAL INVENTOR")`.
+  - HUD (pick 1–2 per video, only when they add tension): `hud_clock(f, "DAY 1", "6:14 AM", "PLACE")` (top-left),
+    `hud_rule(f, 1, "NEVER SELL THE PATENT", y)`, `hud_timer(f, secs, y=…)` (don't overlap the clock), `hud_choice(f,
+    "MOST OF YOU SAID", "DON'T SELL", y)` (series callbacks to comments).
+  - Data shots (numbers, charts) still use the prop/disc style, but cut back to a scene within one or two shots.
+  - Render cost: ≈0.1 s per character per frame at s≈1.3; scenes with 2–3 characters are fine.
+  Never borrow other creators' characters or any franchise character (e.g. no Pokémon) — ours only.
 - On-screen source chip for key stats (`chip("Source: …", INK, WHITE, 24)` near y≈1430).
 - End: phone "SEND THIS" CTA scene, then the OopsMyBusiness logo sting ("follow for more business secrets").
 - Moving objects must stay inside x 140–940 (or fade out near the edges): camera shake/zoom uses BORDER_REFLECT, so anything

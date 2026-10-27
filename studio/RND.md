@@ -54,9 +54,14 @@ Analytics
 Visuals / Story / Tooling
 - ~~Cinematic texture~~ — done 27 Oct (interactive): `template/scripts/anim_cine.py` (lit worlds with depth, glow disc, 3D titles behind the
   hero, light rays, bokeh, DOF, film grade), default on. Next: prop **materials** (specular highlights, subtle texture on paper/metal/
-  wood props, soft contact shadows everywhere), mascot rim light + shadow, and speed (CA + grain cost ~0.2 s/frame).
-- ~~Mascot upgrade~~ — done 27 Oct (interactive, owner's reference: 3D-look cartoon story reels): `anim_mascot3d.py`. Next: walk/run
-  cycles with arm swing, sitting at a desk, pointing poses, a second character (rival/customer) in the same style, head turns (3/4 view).
+  wood props, soft contact shadows everywhere), and speed (grade now ~0.22 s/frame after the 27 Oct cleanup; next: fuse the tone curve into a LUT).
+- ~~Mascot upgrade~~ — done 27 Oct; ~~full-frame scenes + lit cast~~ — done 27 Oct evening (interactive, owner's references:
+  "full frame… colours, more natural and 3D, change the style of clothes"): `anim_mascot3d.py` is now a lit 2.5D renderer
+  (per-part normals from distance fields, key/ambient/rim light presets, contact occlusion, cast shadows), 10 looks with real
+  clothes; `anim_sets.py` = full-frame sets (street/study/parlor/office/store/dusk), camera framing, foreground hand, smoke/embers/
+  eyes, captions, part badge, HUD (clock, rule pill, timer, audience choice). Next: walk/run cycles with arm swing, sitting at
+  a desk, 3/4 head turns, hands that grip props, more sets per topic (factory, bank, kitchen, night city), and a hair/fabric
+  texture pass. Measure: does avg watch % rise on scene-heavy videos vs the disc style (compare from the next 5 posts).
 - Story format from the owner's references (27 Oct): multi-part series ("Part 3") and audience choices ("comment A or B — you pick
   what happens next") get 75–300 comments per reel vs our ~0 — test a two-part story with a choice CTA and compare comments/shares.
 - Photoreal background plates from a local open image model (owner's reference reels use realistic AI imagery): check licence
@@ -133,3 +138,10 @@ Visuals / Story / Tooling
   shirt, tie, pocket square, cel-shaded limbs, hands with thumbs, shoes, ground shadow); same `guy()`/`head_el()` API → checked on
   6 poses and 4 De Beers shots (holding props, expressions, edges). Fixed a blush bug (PIL draw punched holes in the face alpha —
   also present in the old head). | kept (template default; MASCOT3D=0 to switch off)
+- 2026-10-27 | Visuals (interactive; owner: "it's using full frame and looks engaging", then "not about face or dress — colours,
+  more natural and 3D, change the style of clothes") | Rebuilt the cast as a lit 2.5D renderer (each part → mask → distance-field
+  height → normals; one lighting pass with key, coloured ambient, rim, specular, contact AO; soft cast shadow), 10 looks incl.
+  hoodie/tee/jacket/suit/dress/cardigan/overalls/coat; hero is now the orange-hoodie character. New `anim_sets.py`: 6 full-frame
+  sets, set_view camera (+ matching light), close-up/OTS/foreground-hand framing, smoke/embers/eyes, `say` captions, part badge,
+  HUD set. cine_grade 0.35 → 0.22 s/frame (same output, max diff 0.005). Old shots render unchanged in API (S1/S7 De Beers with
+  holds checked). Cost ≈0.1 s per character per frame. | kept (template default); PLAYBOOK §6 now asks for ≥50% scene shots
