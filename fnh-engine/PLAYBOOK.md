@@ -106,6 +106,10 @@ Then write (read the template versions first — they are the reference; use the
   cause->effect chain at the bottom (past links dim, current ringed, future = '?' slots); advance `cur` on the word that names
   each link, keep main pictures in y 600-1300 while it shows, then light it up link by link as the recap. `chopper()` (lib13)
   = Chubby chopping with a knife held by IK at the grip; `knife_at(gx, gy, ang)` pivots a tool at its grip.
+  Hidden quantities over time (ep 14, charts on video): `day_graph(f, t, now, lines, marks, title, ...)` = a graph of the day that
+  draws itself with the voice; title = the finding, direct labels at line ends (optional (dx, dy) per line), marks = icons on the
+  time axis; it returns X/Y mappers + line heads so Chubby's head can ride the 'now' point (`chub_head_only` at the head).
+  Chubby has `expr="sleepy"` (heavy lids + bags) for tiredness. Score trick: `tape_stop` in ep 14 music.py (varispeed slow-down).
 - `scripts/music.py` — cues on every reveal. **New genre each video** (template = bouncy food-funk with marimba/slap
   bass + 1940s march section; others: synth-pop, lo-fi hip hop, latin, orchestral pizzicato, surf rock, chiptune…).
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
@@ -150,6 +154,11 @@ open_, mood) + chomp(t) (enzyme pac-men), acid (live wobbly blob), gas_el/gas (g
 droplets (spray with gravity + slow-motion), nerve_endings, bug_el, germ_el, helix (DNA with a gene, off), switch_el, pan_el,
 slowmo_ui (high-speed camera frame), mix_icon_el, acid_icon_el, sting_eye_el, chop_pose/chopper, board_onion, zz, shield_el,
 gland, ring_el; schemes "kitchen", "onion", "gas", "tear". sfx_lib (ep 13): chop, hiss, snip, plip, sizzle, squirt.
+anim_props_lib14 (ep 14): mug_el(col, level), battery_el(level, txt) + sticker_el (peeling fake charge), skey_el(mood) (adenosine =
+sleepy key), ckey_el(mood) (caffeine = fake key, bean head), lock_el(lit) (receptor), brain_cell(f, cx, cy, w, t, locks=[(dx, key,
+rot, lit)], dim, hgt) (cell with locks on top; returns keyhole points), key_pile, mask_el (smile mask on a stick), bed_el + nightcap,
+bee_el(flap, mood), flower_el("coffee"|"lemon", glow), lemon_el, sun_icon, moon_icon, zzs, caf_dot; schemes "cafe", "latte", "neuro",
+"dusk", "honey". sfx_lib (ep 14): gulp, rip, rattle, buzz, tick, charge.
 
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.

@@ -377,3 +377,46 @@ def chain_map(f, items, cur, t, t_cur, y=1400, gap=146, r=50, slots=True, dim=0.
         comp(f, chip(lab, YEL_ if i == cur else WHITE, INK, 22 if i == cur else 18), x, y + r + 26, op=clamp((t - t_cur) / 0.2) if i == cur else 0.85)
         if i > 0:
             draw_arrow(f, x - gap + r * 0.95, y, x - rr - 6, y, 1.0 if i < cur else eo(clamp((t - t_cur) / 0.25)), WHITE, 6, 18)
+
+
+# ================= CHARTS ON VIDEO (ep 14): a graph of a HIDDEN quantity over time, drawn while you watch =================
+# Things you can't see (sleepy chemical piling up, caffeine leaving the body) become clear as a line that grows across the
+# day. Rules for charts in video (P. Bradshaw, Online Journalism Blog, 'Showing charts on video', Jun 2026; Knaflic,
+# Storytelling with Data): (1) remove to improve - few lines, no legend, no grid, no numbers the voice doesn't need; (2) the
+# title states the FINDING, not the variable; (3) direct labels at the end of each line instead of a legend; (4) wipe the line
+# left -> right in sync with the narration, reveal in stages; (5) one strong colour for the focus line, others grey;
+# (6) annotate the key moment with an icon + arrow; (7) a presenter interacting with the chart (Chubby rides the 'now' point).
+def day_graph(f, t, now, lines, x0=120, x1=960, y0=700, y1=1290, h0=7.0, h1=24.0, ticks=((8, "8 AM"), (14, "2 PM"), (20, "8 PM"), (24, "12")),
+              marks=(), title=None, op=1.0, panel=(255, 252, 244), ylab=None, label_k=1.0):
+    """lines = [(fn(hour)->0..1, col, label, start_hour[, (label_dx, label_dy)]), ...] drawn from start_hour to `now` (hours); marks = [(hour, el, text, t_show)].
+    Returns (X, Y) mapping functions hour->px and value->px so shots can annotate. Keep x0..x1 inside 60..960, y inside 250..1500."""
+    X = lambda h: x0 + (x1 - x0) * (h - h0) / (h1 - h0)
+    Y = lambda v: y1 - (y1 - y0) * clamp(v, -0.05, 1.08)
+    g = f if op >= 0.999 else f.copy()
+    if panel is not None:
+        cv2.rectangle(g, (x0 - 50, y0 - 70), (x1 + 40, y1 + 90), C(INK), -1, cv2.LINE_AA)
+        cv2.rectangle(g, (x0 - 44, y0 - 64), (x1 + 34, y1 + 84), C(panel), -1, cv2.LINE_AA)
+    cv2.line(g, (x0, y1), (x1, y1), C(INK), 6, cv2.LINE_AA); cv2.line(g, (x0, y0 - 20), (x0, y1), C(INK), 6, cv2.LINE_AA)
+    for h, lab in ticks:
+        cv2.line(g, (int(X(h)), y1), (int(X(h)), y1 + 14), C(INK), 5, cv2.LINE_AA)
+        comp(g, chip(lab, INK, WHITE, 24), X(h), y1 + 50)
+    if ylab: comp(g, chip(ylab, INK, YEL_, 20), x0 + 10 + len(ylab) * 6, y0 - 34)
+    for h, el, txt, ts in marks:
+        if t < ts: continue
+        k = pin(t, ts, 0.3); xm = int(X(h))
+        for yy in range(y0 - 10, y1, 26): cv2.line(g, (xm, yy), (xm, min(y1, yy + 13)), C((150, 150, 160)), 4, cv2.LINE_AA)
+        if el is not None: comp(g, el, xm, y0 - 10, scale=k)
+        if txt: comp(g, chip(txt, INK, YEL_, 20), xm, y0 + 48, op=clamp((t - ts) / 0.25))
+    heads = []
+    for ln in lines:
+        fn, col, lab, hs = ln[:4]; ldx, ldy = ln[4] if len(ln) > 4 else (0, -44)
+        if now <= hs: heads.append(None); continue
+        hh = np.linspace(hs, min(now, h1), max(2, int(80 * (min(now, h1) - hs) / (h1 - h0)) + 2))
+        P = np.array([[X(h), Y(fn(h))] for h in hh], np.int32)
+        cv2.polylines(g, [P], False, C(INK), 17, cv2.LINE_AA); cv2.polylines(g, [P], False, C(col), 10, cv2.LINE_AA)
+        hx, hy = P[-1]; cv2.circle(g, (int(hx), int(hy)), 15, C(INK), -1, cv2.LINE_AA); cv2.circle(g, (int(hx), int(hy)), 10, C(col), -1, cv2.LINE_AA)
+        heads.append((hx, hy))
+        if lab and label_k > 0: comp(g, chip(lab, col, WHITE if sum(col) < 500 else INK, 26), min(x1 - 60, max(x0 + 80, hx + ldx)), hy + ldy, op=label_k)
+    if title: comp(g, chip(title, INK, WHITE, 34), (x0 + x1) / 2, y0 - 112)
+    if op < 0.999: f[:] = f * (1 - op) + g * op
+    return X, Y, heads

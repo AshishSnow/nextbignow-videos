@@ -9,7 +9,12 @@ Understand the new algorithm and act on it — I shouldn't have to tell you ever
 learning beat speed. Every run must leave the channel a little better than it found it.
 
 ## A. Algorithm notes (re-check EVERY DAY: the first run of each IST day, i.e. when "Last checked" is not today; record what changed)
-Last checked: 2026-10-27 (02:00 IST run; 06:00 run = same IST day, no re-check needed). Sources: Kompozy (Sep 2026, Mosseri signals), Creator Lane (2026), Gyre (2026),
+Last checked: 2026-10-28 (02:00 IST run). 28 Oct: no new official Reels/Shorts ranking change found since 27 Oct (searched
+SocialPilot / Fanpage Karma / Ground News / Search Engine Journal / HighStyle). Re-confirmed: Mosseri's top 3 signals are watch time
+(average SECONDS watched per reach - absolute seconds, not %), likes per reach and sends per reach (sends weigh most for
+non-followers); YouTube Shorts freshness/recency reports are unconfirmed by YouTube (analyst data, SEJ). => our longer explainers
+help the absolute-seconds signal (sugar rush 38.9 s, mint 27.6 s avg watch = our two biggest CHUBBY reaches).
+Previous: 2026-10-27 (02:00 IST run). Sources: Kompozy (Sep 2026, Mosseri signals), Creator Lane (2026), Gyre (2026),
 Socialync (2026), Android Headlines / TechCrunch (Jul 2026, YouTube monetization rules); 27 Oct: Les Gens d'Internet
 (2 Oct 2026, YouTube Shorts originality update), OutlierKit (YouTube Shorts algorithm in YouTube's words, 2026),
 SocialPilot (Instagram Reels algorithm changelog 2025-2026).
@@ -47,7 +52,10 @@ more since users can edit their "Your Algorithm" topics (topic matching) -> firs
   news about everyday foods/drinks, "why does…" questions). Add 3–5 fresh candidates to the TOP of topic_ideas.md
   UP NEXT (with the angle + 2 likely sources), ranked by: broad appeal (everyone eats/does it) > surprise > share-worthy
   takeaway > visual potential. Drop/stale-mark ideas that the data says are too niche. Record the date here:
-- Last trend scan: 2026-10-27 — Halloween week (31 Oct: candy, sugar), Diwali (8 Nov: sweets, silver leaf), and
+- Last trend scan: 2026-10-28 — Halloween week (31 Oct) still live; daily-habit + myth-flip topics are what broke out (sugar rush
+  1.1k, mint 1.2k reach) -> added coffee/caffeine (done ep 14), chai vs coffee caffeine, chocolate melts in your mouth (cocoa butter
+  melts near body temperature), brain freeze, why popcorn pops to topic_ideas.md.
+- Previous trend scan: 2026-10-27 — Halloween week (31 Oct: candy, sugar), Diwali (8 Nov: sweets, silver leaf), and
   sequels to strong science hooks (mint = cold sensor, the twin of today's spicy video). Added to topic_ideas.md.
 
 ## B. Per-run improvement protocol (mandatory)
@@ -102,6 +110,17 @@ Script / packaging:
 - [ ] Comment question in caption + firstCommentText.
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-28 02:00: FIRST REAL CHUBBY BREAKOUTS. Sugar rush (Halloween myth) 1102 reach / 38.9 s avg watch (33 % of 1:58) / 4 shares /
+  3 comments, and mint (gum + ice water) 1206 reach / 27.6 s / 34 likes, while spicy (121), silver (119) and onions (126, 4 h old)
+  stayed at the usual ~120. 3-s hold is 62-69 % on ALL of them -> the hook and the style work; the TOPIC decides distribution.
+  The two winners share: (1) an everyday experience nearly everyone has had, (2) a belief the video flips ("sugar makes kids
+  hyper" / "mint is cold"). => ep 14 = coffee (daily habit of most adults) + a belief flip ("coffee gives you energy"). Keep
+  scoring every topic on "does it flip a belief people hold about something they do every week?".
+- 2026-10-28 03:00 (voice A/B, same coffee script after rewrites): EXS 0.3 / BMP 0.6 scored chunk20 4.421 / line mean 4.345 vs
+  EXS 0.4 / BMP 0.7 4.424 / 4.357 at the same 199 wpm, f0 range 16.5 vs 16.9 st -> lighter pitch processing has hit its floor;
+  keep 0.4 / 0.7. Rewrites did the real work again: chunk20 4.383 -> 4.424, line mean 4.326 -> 4.357 (b1 4.04 -> 4.40 by making
+  a 4-word line a natural 9-word one, a2 name-last with 2 short sentences, e2 split in two). ASR caught 'a loan' -> 'alone' and the
+  ear heard 'an hour less' as 'an hour or less' -> rewrote both ('lends you', 'lost over an hour of sleep').
 - 2026-10-27 21:00: analytics unchanged since 16:00 - spicy (posted 03:25, now 17.5 h old), sugar rush, mint and silver are
   all PUBLISHED but still have no Metricool reel rows; carrots 133 / pineapple 86 reach are frozen; YouTube rows still end on
   25 Oct. => the reel-analytics lag is now > 17 h, so the first real verdict on the long (1:36-2:05) CHUBBY videos comes on
@@ -146,6 +165,17 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 14 coffee doesn't give energy (28 Oct, auto run, ~2:17): VOICE 6 weakest/ambiguous lines rewritten (b1 4.04 -> 4.40, a2, e2 split,
+  e3, c4 'a loan' heard as 'alone', d5 'an hour less' heard as 'or less') + EXS 0.3 A/B (rejected, floor reached); ship chunk20 4.412 /
+  line mean 4.344 (ep 13 4.428 / 4.350, within gate), 199 wpm, ASR clean | VISUAL CHARTS ON VIDEO (anim_fx.day_graph): 4 self-drawing
+  graphs of the day (sleepy keys piling up; REAL tiredness vs WHAT YOU FEEL with the hidden gap; THE CRASH; caffeine halving to
+  bedtime) with finding-titles, direct labels and Chubby's head riding the 'now' point; new Chubby 'sleepy' expression (heavy lids +
+  bags); fake-battery-sticker hook at frame 0; running metaphor sleepy key / lock / fake key on brain cells (prop lib14); colour
+  script cafe / neuro / night / red crash / honey bees | SCRIPT/TOPIC everyday habit + belief flip (the breakout pattern), 'loan with
+  interest' open loop at 6 s paid at the crash (~45 %), 5 chapters + bonus, practical takeaway (last cup earlier), share twist (bees
+  hooked on caffeine nectar), lo-fi hip-hop cafe score with TAPE STOPS on the fake reveal + the crash; new foley (gulp, rip, rattle,
+  buzz, tick, charge) | metric: reach at 48 h vs sugar rush / mint (does the pattern repeat?), avg watch s on 2:17, shares, comments
+  on "what time is your last coffee or chai".
 - 13 onions make you cry (27 Oct, auto run, 2:02): VOICE lighter pitch processing EXS 0.4 / BMP 0.7 (A/B: chunk20 4.420 ->
   4.428, line mean 4.347 -> 4.350; now voice.env default) + 4 weakest lines split into short sentences (e3 3.90 -> 4.38, f1 4.08
   -> 4.41); ship 4.428 / 4.350 vs ep 12 4.412 / 4.339, 190 wpm, ASR clean | VISUAL progressive CHAIN MAP (anim_fx.chain_map):
@@ -222,6 +252,10 @@ Script / packaging:
 | 27 Oct | ep 13 onions, A4 + PGATE, first script (EXS 0.5 BMP 0.8) | 4.255* (chunk20 4.402, line mean 4.322) | 192 | 0.16 | 17.8 | 0 |
 | 27 Oct | ep 13 onions, + e3/f1/d3/e6 split into short sentences | 4.281* (chunk20 4.420, line mean 4.347) | 190 | 0.16 | 17.8 | 0 |
 | 27 Oct | **ep 13 onions, same + EXS 0.4 BMP 0.7 (shipped; now voice.env default)** | **4.321* (chunk20 4.428, line mean 4.350)** | 190 | 0.16 | 17.2 | 0 |
+| 28 Oct | ep 14 coffee, A4 + PGATE (EXS 0.4/BMP 0.7), first script | 4.249* (chunk20 4.383, line mean 4.326) | 198 | 0.15 | 16.8 | 1 (c4 'a loan' -> 'alone') |
+| 28 Oct | ep 14 coffee, + b1/a2/c4/e2/e3 rewrites | 4.339* (chunk20 4.424, line mean 4.357) | 200 | 0.15 | 16.9 | 0 |
+| 28 Oct | ep 14 coffee, same + EXS 0.3 / BMP 0.6 (A/B, rejected) | 4.345* (chunk20 4.421, line mean 4.345) | 199 | 0.15 | 16.5 | 0 |
+| 28 Oct | **ep 14 coffee, + d5 rewrite for meaning (shipped; full re-render = new take)** | **4.286* (chunk20 4.412, line mean 4.344)** | 199 | 0.15 | 17.2 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -281,10 +315,21 @@ Story & topics:
 - [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
 - [x] Concrete comparisons people can picture ("as heavy as…", "the size of…") (ep 12: 1 m2 paper 80 g vs silver leaf < 3 g)
 - [ ] One-sentence takeaway people can use today
+- [x] Charts on video: a self-drawing graph of a hidden quantity over time, finding-titles, direct labels, presenter rides the line (ep 14: day_graph)
+- [~] Character acting: tiredness you can SEE (ep 14: Chubby 'sleepy' heavy lids + bags, yawns) - next: double takes, eye leads
+- [x] Tape stop (varispeed slow-down of the score) as an audio 'crash' / 'fake' cue (ep 14 music.py tape_stop)
 - [ ] Slow motion / speed ramps for things too fast to see (ep 13 first try: slowmo_ui + droplets(slow=...)) - make a helper
 - [ ] Visual metaphor for a whole system (ep 13: 'booby trap' / two rooms) - test which metaphors viewers repeat in comments
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-28 | Charts on video (explaining a HIDDEN quantity that changes over time) | A chart in a video gets ~3 s of attention, so
+  'remove to improve': few lines, no legend (label each line at its end), no grid, title that states the FINDING ("HIDDEN, NOT
+  GONE"), one strong colour per line, reveal in stages, wipe the line left -> right in sync with the voice, annotate the key moment
+  (icon + arrow), and let a presenter interact with the chart (P. Bradshaw, Online Journalism Blog, 'Showing charts on video', Jun
+  2026; Knaflic, Storytelling with Data). Turned into anim_fx.day_graph(now, lines, marks, title, ...): returns X/Y mappers + line
+  heads so a shot can ride Chubby's head on the 'now' point, add a 'HIDDEN' gap annotation or a '1/4 STILL THERE' arrow. Four
+  graphs in ep 14 (sleepy keys piling up, real vs felt tiredness, the crash, caffeine halving to bedtime) | ep 14 (S5b, S14, S18,
+  S21) | yes
 - 2026-10-27 | Progressive build-up diagram for a CHAIN REACTION (explaining) | A multi-step cause->effect process overloads
   viewers if each step is shown alone (they lose the thread) or all at once (too much). Reveal the figure in the ORDER of the
   process, colour-code each part to the same colour as its character, keep nothing else competing on screen, and keep the

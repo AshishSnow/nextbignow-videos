@@ -2,6 +2,13 @@
 
 ## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
 Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
+NEW from the 28 Oct trend scan (data: myth-flip + everyday habit topics broke out: sugar rush 1.1k, mint 1.2k reach):
+0e. chocolate-melts-in-your-mouth (Halloween) — Do you know chocolate is designed to melt at almost exactly your body temperature?
+    (cocoa butter crystal form V melts ~34 C; tempering; why it melts in your mouth not your hand). Verify: a university food-science
+    page + a major outlet (e.g. Smithsonian / ACS Reactions).
+0f. chai-vs-coffee-caffeine — Do you know a cup of chai can have less than half the caffeine of coffee? (only if FDA/USDA or a
+    university gives numbers; sequel hook to ep 14's 'sleepy keys').
+0g. brain-freeze (see #10) — sensory + practical tip (tongue on the roof of the mouth); move up: sensory topics hold well.
 NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these first when timely:
 0a. (DONE ep 10) sugar-rush-myth — Do you know the "sugar rush" in kids is mostly a myth? (double-blind studies found no behaviour
     change; parents who THOUGHT kids had sugar rated them more hyper). Halloween-timely, very shareable. Verify: Wolraich
@@ -32,7 +39,7 @@ NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these f
    totally harmless amount — get the numbers from reputable physics/health sources).
 10. 17-brain-freeze — Do you know what really causes brain freeze? (cold on the palate -> blood vessel change -> referred
     pain; tip: press tongue to the roof of the mouth).
-11. 18-coffee-sleep-trick — Do you know caffeine doesn't give you energy — it blocks the "sleepy" signal? (adenosine
+11. (DONE ep 14) 18-coffee-sleep-trick — Do you know caffeine doesn't give you energy — it blocks the "sleepy" signal? (adenosine
     receptors; caffeine stays in the body for hours — no dosing advice).
 12. 19-stomach-growl — Do you know your stomach growls even when you're not hungry? (borborygmi, migrating motor complex).
 13. 20-swallowed-gum — Do you know swallowed gum doesn't stay 7 years? (passes through; myth origin).

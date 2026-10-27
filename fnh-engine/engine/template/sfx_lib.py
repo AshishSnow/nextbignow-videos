@@ -300,3 +300,44 @@ def squirt(level=-24, dur=0.35):
     n_ = int(dur * SR); t2 = np.arange(n_) / SR
     y = signal.sosfilt(signal.butter(2, [600, 4000], "band", fs=SR, output="sos"), rng.standard_normal(n_)) * np.exp(-t2 / 0.08)
     return _st(y / np.abs(y).max() * db(level), 90)
+
+
+# ---- ep 14 foley: gulp, rip (sticker peel), rattle (key jiggling in a lock), buzz (bee), tick (clock), charge (rising bleeps) ----
+def gulp(level=-20):
+    t2 = np.arange(int(0.22 * SR)) / SR; f = 420 * np.exp(-t2 / 0.08) + 120
+    y = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * t2 / 0.22) ** 0.5
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def rip(level=-20, dur=0.35):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    y = signal.sosfilt(signal.butter(2, [1200, 7000], "band", fs=SR, output="sos"), rng.standard_normal(n_) * (rng.random(n_) < 0.35)) * np.minimum(1, (dur - t2) / 0.1)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def rattle(level=-20, dur=0.6, rate=22):
+    out = np.zeros(int(dur * SR))
+    for k in range(int(dur * rate)):
+        t2 = np.arange(int(0.03 * SR)) / SR; f0 = 2600 + 400 * (k % 2)
+        y = np.sin(2 * np.pi * f0 * t2) * np.exp(-t2 / 0.006) + 0.5 * rng.standard_normal(len(t2)) * np.exp(-t2 / 0.002)
+        i0 = int(k / rate * SR); out[i0:i0 + len(y)] += y[: len(out) - i0]
+    return _st(out / np.abs(out).max() * db(level))
+
+
+def buzz(level=-26, dur=1.0, f0=230):
+    t2 = np.arange(int(dur * SR)) / SR; f = f0 + 12 * np.sin(2 * np.pi * 7 * t2)
+    y = signal.sawtooth(2 * np.pi * np.cumsum(f) / SR) * (0.7 + 0.3 * np.sin(2 * np.pi * 31 * t2))
+    y = signal.sosfilt(signal.butter(2, [200, 3000], "band", fs=SR, output="sos"), y) * np.minimum(1, np.minimum(t2 / 0.08, (dur - t2) / 0.15))
+    return _st(y / np.abs(y).max() * db(level), 120)
+
+
+def tick(level=-27):
+    t2 = np.arange(int(0.04 * SR)) / SR; y = np.sin(2 * np.pi * 3200 * t2) * np.exp(-t2 / 0.004)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def charge(t0, t1, level=-27):
+    k = 0; tt = t0
+    while tt < t1: add(beep(level, 900 + 160 * k, 0.05), tt); tt += 0.12; k += 1
+
+

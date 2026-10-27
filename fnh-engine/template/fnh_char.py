@@ -43,6 +43,11 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
         d.ellipse(S(px - pr, py - pr, px + pr, py + pr), fill=INK + (255,))
         d.ellipse(S(px - 3, py - pr + 2, px + 2, py - pr + 7), fill=(255, 255, 255, 255))
         if expr == "sus": d.rectangle(S(ex - rx - 2, ey - ry - 2, ex + rx + 2, ey - 4), fill=skin + (255,)); d.line(S(ex - rx, ey - 4, ex + rx, ey - 4), fill=INK + (255,), width=5 * sc)
+        if expr == "sleepy":   # ep 14: heavy drooping lids + tired bags (character acting: tiredness you can SEE)
+            d.chord(S(ex - rx - 3, ey - ry - 3, ex + rx + 3, ey + ry + 3), 180, 360, fill=skin + (255,))
+            d.rectangle(S(ex - rx - 3, ey - 2, ex + rx + 3, ey + 3), fill=skin + (255,))
+            d.arc(S(ex - rx - 1, ey - 8, ex + rx + 1, ey + 10), 180, 360, fill=INK + (255,), width=6 * sc)
+            d.arc(S(ex - rx + 2, ey + ry - 6, ex + rx - 2, ey + ry + 8), 20, 160, fill=(150, 110, 160, 255), width=4 * sc)
     # brows
     for i, ex in enumerate((86, 144)):
         if brow == "up": pts = [(ex - 16, 84), (ex + 14, 80)] if i == 0 else [(ex - 14, 80), (ex + 16, 84)]
