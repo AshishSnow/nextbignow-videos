@@ -6,6 +6,7 @@ Each Ready entry: type (A–F, PLAYBOOK §2) · interest score · hook · story 
 
 ## Ready (verified 27 Oct 2026 — research notes in RND.md log; pick the highest score whose type differs from the last 2 videos)
 Score = interest test (Wait-what / Story / Your life / Picture / Fresh / Share / Verifiable), PLAYBOOK §2.
+When scripting: turn the beats into a **roadmap** ("…in three moves", Move one/two/three, strongest last) and run `tools/story_check.py` (PLAYBOOK §4 story rules).
 
 ### 2. Almost every banana you buy is the same clone — type B · 32/35 (5/4/5/5/3/5/5)
 Hook: "Do you know almost every banana you buy is a copy of the same plant?"

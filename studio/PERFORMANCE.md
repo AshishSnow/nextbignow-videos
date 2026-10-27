@@ -33,6 +33,8 @@ Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** se
 | 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
 | 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(27 Oct 23:30 IST, R&D Story run: **9th identical pull** on both platforms, every row number-for-number the same; still no rows for
+Visa, Duolingo, gas, airline, De Beers, Monopoly. Sync stalled ~33 h.)
 (27 Oct 21:00 IST, Monopoly run: **8th identical pull** on both platforms (IG + YT rows number-for-number the same as 15:40 IST; popcorn 5 views /
 reach 0; no rows for Visa, Duolingo, gas, airline). getScheduledPosts: Visa, Duolingo, gas, airline PUBLISHED with live URLs, De Beers pending 28 Oct 00:00.
 Metricool analytics sync stalled ~30 h → no new signal; the run leaned on insight I (types) and picked type D (Monopoly origin) to start the per-type test.)
@@ -72,6 +74,16 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
 | 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (27 Oct 23:30 IST, R&D Story run — script structure vs retention; `tools/story_check.py`, `lab/story/`)
+K. **A roadmap in the script ("Step one… Step two", "four secrets, the last one is genius") goes with ~10 points more of the video
+   watched.** Avg watch as % of length, Instagram: with roadmap Costco 34 %, Starbucks #2 31 %, Planet Fitness 30 %, printer ink 29 %
+   (+ restaurant tricks 33 %) vs without Amazon 19 %, Chick-fil-A 24 %. Holds inside type F (Starbucks, Planet Fitness), so it is not
+   only insight I. Item labels rho +0.93 with avg-watch % (n = 6 — direction, not proof; labels also track the 3-s rate, so part is
+   "better videos overall"). Keyword "turns"/"but" counts ran the other way (rho −0.60/−0.72) → not used as rules.
+   **Prediction to check when rows return:** the five newest videos without a roadmap (Visa, Duolingo, gas station, airline miles,
+   Monopoly) hold < 25 % of their length; roadmap ones (De Beers, popcorn, and new videos following PLAYBOOK §4 R8) ≥ 28 %.
+   Track a `roadmap` yes/no column for every new post; re-run `python3 lab/story/corr.py` at n ≥ 10.
 
 ## Insights (27 Oct 21:00 IST, Monopoly run)
 J. Still no data after 26 Oct (8 identical pulls) → nothing new to conclude. Type log for the per-type test (fill when rows return):

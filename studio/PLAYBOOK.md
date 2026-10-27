@@ -79,6 +79,20 @@ Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words]
 - Line ids: hook `i*`, beats `a*`/`b*`/`c*`/`d*`, ending `e1`, CTA `e2` (the template's shots use these). Unique words help timing anchors.
 - Numbers: write them as words the TTS reads cleanly ("one point seven billion", "four ninety-nine"). Check abbreviations in the ASR read-back.
 
+**Story rules (R&D Story run, 27 Oct — evidence and numbers in `lab/story/NOTES.md`).** Before `make_vo.py`, run
+`python3 /home/claude/nextbignow-videos/studio/tools/story_check.py $P` and fix every flag (aim 7/7; log the score in the run log):
+- **R8 Roadmap (strongest signal in our data):** promise a count in the first 4 lines and label the items. Our 4 reels with
+  "Step one / Secret two…" held 29–34 % of their length on Instagram, the 2 without 19–24 % (n = 6; works for type F too).
+  The last 5 videos dropped it. Per type: A/D story → "…flipped in three moves. And the last one is the cruelest." (Move one /
+  Move two / Move three = eras or turns); B object → "three reasons…"; E trick → "N tricks, the last one is the sneakiest";
+  C hidden giant → "N brands you'd never guess". Save the strongest item for last (suspense: Ely et al. 2015).
+- **R2 Open loops:** a question, teaser ("so what did Lizzie get?", "here's the clever part") or item label at least every 25 s.
+- **R5 Load:** one figure per sentence, ≤ 18 words per sentence (split "278,000 in year one. Over 1.7 million in year two.").
+- **R6 No recap lines;** **R4 no "and then" chains** (link beats by cause: but/so/because — craft rule, don't overdo it: our data
+  did not reward sprinkling "but").
+- **R7 Ending:** twist → loop line → short takeaway → "Send this to the friend who…", ≤ 18 s from the twist to the end.
+- Write real good/bad swings (a win, then a blow) — emotional volatility and reversals predict engagement (Berger 2021, Knight 2024).
+
 ## 5. Voice (local, no ElevenLabs)
 `python3 scripts/make_vo.py` — Kokoro blend **am_michael 0.5 + am_eric 0.3 + am_fenrir 0.2** in its **own register** (no global
 pitch lift), Praat PSOLA prosody for per-line highs and lows, stressed words, question rises, low endings; calm, unhurried pace
@@ -200,6 +214,7 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
 2. `ffprobe`: 1080×1920, h264 + aac; `ebur128`: about −11 LUFS, peak ≤ −1 dBTP.
 3. Facts on screen and in VO match the sources.
 4. `python3 studio/tools/voice_report.py $P work/vo.wav` — UTMOS ≥ 4.0 (aim ≥ 4.3), no ASR bad lines, pitch range ≥ 15 st, 165–190 wpm. Put the numbers in the run log.
+4b. `python3 studio/tools/story_check.py $P` — ≥ 6/7 story rules and R8 roadmap passed (it reads real times from `work/align.json`).
 5. Score the quality bar in `IMPROVEMENTS.md` (hook, clarity, pacing, voice, visual, audio, ending). Anything below 4 → fix it first.
 6. Originality: it must not look like the previous video with new text (YouTube treats "minor template changes" as unoriginal).
    At least one new prop set, one new layout idea and a different music genre.

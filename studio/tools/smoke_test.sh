@@ -15,6 +15,8 @@ LINES = [
 ]
 EOF
 fail=0
+python3 "$HERE/tools/story_check.py" --all "$HERE/examples" > /dev/null && python3 "$HERE/tools/story_check.py" "$P" > /dev/null \
+  && echo "ok   story_check" || { echo "FAIL story_check.py crashed"; fail=1; }
 for eng in kokoro chatterbox; do
   rm -f "$P"/work/*
   (cd "$P" && ENGINE=$eng python3 scripts/make_vo.py > work/make_vo.log 2>&1) || { echo "FAIL $eng: make_vo.py crashed"; tail -5 "$P/work/make_vo.log"; fail=1; continue; }

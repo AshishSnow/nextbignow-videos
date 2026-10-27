@@ -25,7 +25,7 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 | Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 (3×) |
 | Sound | music score, SFX, mix levels, loudness | never |
 | Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | never |
-| Story | hooks, re-hooks, structure, endings/takeaways, length | never |
+| Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
 | Tooling | render speed, smoke tests, QA automation | never |
 | Analytics | what the numbers say, cover frames, captions, posting times | never (refreshed every run; YouTube numbers flowing since 27 Oct) |
 | Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-10-27 (R&D run 4: +7 → 23 Ready) |
@@ -51,6 +51,11 @@ Sound
 - A/B music bed level vs avg watch; sidechain ducking depth; SFX density per 10 s.
 Analytics
 - YouTube vs Instagram per topic: YT winners differ (Compaq 1,332 YT vs 130 IG) — pull YTVP06/08 every run and compare after 10 posts.
+Story
+- Validate R8 (roadmap) when Metricool rows return: tag roadmap yes/no per post, `python3 lab/story/corr.py` at n ≥ 10 (PERFORMANCE K).
+- Real reversal detection for story_check (good/bad polarity per line, e.g. a small lexicon or hand tags) — keyword "but" counts
+  did not track retention.
+- Comment test: one specific A/B question in the last line vs the friend CTA (comments ~0; owner's references 75–300 per reel).
 Visuals / Story / Tooling
 - ~~Cinematic texture~~ — done 27 Oct (interactive): `template/scripts/anim_cine.py` (lit worlds with depth, glow disc, 3D titles behind the
   hero, light rays, bokeh, DOF, film grade), default on. Next: prop **materials** (specular highlights, subtle texture on paper/metal/
@@ -145,3 +150,17 @@ Visuals / Story / Tooling
   sets, set_view camera (+ matching light), close-up/OTS/foreground-hand framing, smoke/embers/eyes, `say` captions, part badge,
   HUD set. cine_grade 0.35 → 0.22 s/frame (same output, max diff 0.005). Old shots render unchanged in API (S1/S7 De Beers with
   holds checked). Cost ≈0.1 s per character per frame. | kept (template default); PLAYBOOK §6 now asks for ≥50% scene shots
+- 2026-10-27 (run 5) | Story | Hypothesis: avg watch is stuck at 13–23 s at every length, so the middle leaks; measurable script
+  features (hook, open-loop gaps, reversals, connectors, figures per sentence, recaps, roadmap, ending) should line up with the
+  retention we have, and a script fixing the weak ones can be checked before any audio. Research (sub-agent, primary sources, in
+  lab/story/NOTES.md): curiosity gaps (Kang 2009), suspense model (Ely et al. 2015), emotional volatility/reversals (Berger, Kim &
+  Meyer 2021; Knight et al. 2024), story speed (Toubia et al. 2021 PNAS), causal coherence (Trabasso & van den Broek 1985), LC4MP
+  load; myths flagged: Zeigarnik memory effect (meta-analysis 2025: no effect), 8-second attention span. Built `tools/story_check.py`
+  (7 gates, no audio needed; real times from work/align.json) and ran it on 13 example scripts vs Instagram rows of 6 animated reels
+  (Spearman, n = 6): **item labels rho +0.93 with avg-watch % of length; roadmap 29–34 % (Costco, Starbucks, Planet Fitness, printer
+  ink; + restaurant 33 %) vs none 19–24 % (Amazon, Chick-fil-A)**; keyword reversal/"but" counts ran the other way (−0.60/−0.72) →
+  info only, not gates; hook length not punished (+0.77, confounded). Before/after on the same material (Monopoly, same facts):
+  4/7 → 6/7, longest stretch without a question/teaser 38 → 25 s, twist→end 22 → 17 s, roadmap none → "three moves" (+3 s).
+  Finding: the last 5 videos (Visa → Monopoly) all dropped the roadmap the older winners had. **Kept:** story_check in PLAYBOOK §4
+  (+ QA 4b) and smoke test; R8 roadmap per type. Not validated on views yet (Metricool frozen, 9th identical pull) → prediction
+  in PERFORMANCE K. ALGORITHM.md 1 day old → not redone. No template code changed.
