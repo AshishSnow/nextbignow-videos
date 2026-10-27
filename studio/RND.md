@@ -20,17 +20,20 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 ## Focus rotation
 | Area | What it covers | Last worked |
 |---|---|---|
-| Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 |
+| Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 (2×) |
 | Sound | music score, SFX, mix levels, loudness | never |
 | Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | never |
 | Story | hooks, re-hooks, structure, endings/takeaways, length | never |
 | Tooling | render speed, smoke tests, QA automation | never |
-| Analytics | what the numbers say, cover frames, captions, posting times | never (refreshed every run) |
+| Analytics | what the numbers say, cover frames, captions, posting times | never (refreshed every run; YouTube numbers flowing since 27 Oct) |
 
 ## Backlog (add ideas, strike when done)
 Voice
-- Chatterbox hybrid: last-word pitch move on q/low lines only (full PSOLA tested: −0.23 UTMOS) — target low_fall ≤ −4 st.
-- Shorter hook questions that actually rise (q_rise currently negative on long hooks, both engines).
+- ~~Chatterbox hybrid: last-word pitch move on low lines~~ — done 27 Oct run 2: `lib/end_contour.py`, low_fall −1.3 → −4.0 (gas), −1.0 → −3.5 (Costco) at ≤ 0.01 per-line UTMOS.
+- Chatterbox retakes for *weak* lines too (per-line UTMOS < 4.3, e.g. Duolingo a2 = 3.91 with uptalk): extend `lab/voice_engine/take_picker.py`
+  (sampled takes) to also pick by per-line UTMOS and low_fall, then run end_contour on the winner; punctuation variants as a fallback.
+- Second scorer that hears intonation: UTMOSv2 or Audiobox-Aesthetics CE/PQ (arXiv 2608.09930) — licence, onnx, RAM on 2 CPUs.
+- Shorter hook questions that actually rise (q_rise currently negative on long hooks, both engines; PSOLA rises on Chatterbox made it worse, 27 Oct).
 - Second synthetic reference with more smile/energy; paralinguistic `[chuckle]` at one funny line.
 - ~~Expressiveness metric: per-line final rise/fall~~ — done 27 Oct (`q_rise_st`, `low_fall_st` in tts_bakeoff.py).
 - Magpie TTS (NVIDIA Open Model License) if it can run without torch.
@@ -40,6 +43,8 @@ Voice
   code ready in `lab/voice_engine/take_picker.py` (ASR exactness first, then UTMOS).
 Sound
 - A/B music bed level vs avg watch; sidechain ducking depth; SFX density per 10 s.
+Analytics
+- YouTube vs Instagram per topic: YT winners differ (Compaq 1,332 YT vs 130 IG) — pull YTVP06/08 every run and compare after 10 posts.
 Visuals / Story / Tooling
 - First-frame test sheet: render frame 0 of the last 5 videos side by side with safe-zone guides.
 - Smoke test that renders 2 s of video (not only VO) to catch empty-frame regressions.
@@ -66,3 +71,13 @@ Visuals / Story / Tooling
   best-of-3 takes 4.478 / +0.1. → **Half/full-strength PSOLA adds range but does NOT land the endings** (Chatterbox's last words
   resist the generic ending curve). Confirms the R&D decision: Kokoro stays default. Endings need a targeted last-word move
   (bigger, on the final stressed syllable only) or a reference whose sentences end low. | confirms Kokoro default; lead for hybrid
+- 2026-10-27 (run 2) | Voice | Hypothesis: moving pitch only on the last word of `low` lines in a Chatterbox take (PSOLA on that slice,
+  cross-faded in) lands reveal lines at ≤ −4 st without global PSOLA's −0.23 UTMOS. 6 versions on gas/Costco/Duolingo (lab/voice_endings/).
+  Final (−4 st, start ≥ 0.5 s before last voiced frame, cap uptalk at line median, floor 85 Hz, per-line UTMOS gate 0.05):
+  gas low_fall −1.3 → **−4.0**, UTMOS 4.522/4.480 → 4.513/4.476; Costco −1.0 → **−3.5**, per-line 4.474 → 4.468 (whole 4.501 → 4.380,
+  whole-file score noise — per-line min 4.43 → 4.41); Duolingo −0.2 → −1.7 (moved lines −2…−3.5 each; its a2 line is a 3.91 uptalk
+  line the gate skipped). Kokoro shipped on the same scripts: 4.317/4.399, 4.321/4.402, 4.382/4.428; low_fall −4.8/−4.9/−7.1.
+  Question rises (+3…+4.5 st) on Chatterbox: q_rise worse (−1.8 → −2.1) → off. **Decision:** endings ON by default inside
+  `ENGINE=chatterbox` (`ENDS=0` to disable); Kokoro stays the default engine (Chatterbox still: falling questions, one weak line on
+  Duolingo). Also: ASR scorer now reads "$1.50" == "a dollar fifty" (Costco's 2 false "bad lines"); smoke test exercises a low line.
+  Analytics: Metricool IG reel stats frozen since ~26 Oct evening IST (identical 3 pulls); YouTube numbers arrive for the first time.

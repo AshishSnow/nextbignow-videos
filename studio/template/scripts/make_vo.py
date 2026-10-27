@@ -197,6 +197,13 @@ for lid, L in lines.items(): L["start"], L["end"] = round(tmap(L["start"]), 3), 
 # over-widened the range to 24.8 st (R&D 27 Oct); Chatterbox already gets its melody from the narrator reference.
 PROS = os.environ.get("PROSODY", "0" if ENGINE == "chatterbox" else "1") != "0"
 if not PROS: raw = flat.astype(np.float32).copy(); lines = lines_orig
+# ENDS (default on for chatterbox): land "low" lines with a -4 st fall on the last word only (lib/end_contour.py), each line kept
+# only if its UTMOS drops <= 0.05. Chatterbox's statements otherwise end flat or with uptalk (low_fall -1.3 -> -4.3 st, R&D 27 Oct).
+if not PROS and os.environ.get("ENDS", "1" if ENGINE == "chatterbox" else "0") != "0":
+    import end_contour
+    _lg = []
+    raw = end_contour.apply(raw.astype(np.float64), SR, lines, {L[0]: L[7] for L in LINES}, float(os.environ.get("END_ST", "-4")), 0.0, log=_lg).astype(np.float32)
+    print("ending moves (line, type, utmos before, after):", _lg)
 raw = raw / (np.abs(raw).max() + 1e-9) * 0.9
 sf.write(f"{B}/work/vo_raw.wav", raw, SR, subtype="FLOAT")
 

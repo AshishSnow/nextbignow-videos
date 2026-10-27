@@ -167,6 +167,8 @@ def score(P, wav):
 
     def norm(s):
         s = s.lower().replace("%", " percent ")
+        # "$1.50" (ASR) == "a dollar fifty" / "one fifty" (script)
+        s = re.sub(r"\$(\d+)\.(\d\d)\b", lambda m: " " + ("a" if m.group(1) == "1" else num2words(int(m.group(1)))) + " " + num2words(int(m.group(2))) + " ", s)
         s = re.sub(r"\d[\d,]*(\.\d+)?", lambda m: " " + num2words(float(m.group(0).replace(",", "")) if "." in m.group(0) else int(m.group(0).replace(",", ""))) + " ", s)
         s = re.sub(r"[^a-z ]", " ", s.replace("-", " "))
         return [w for w in s.split() if w not in ("dollar", "dollars", "and")]

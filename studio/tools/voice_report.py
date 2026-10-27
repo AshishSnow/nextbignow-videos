@@ -39,10 +39,15 @@ try:
         t = m.group(0).replace(",", "")
         try: return " " + (_n2w(float(t) if "." in t else int(t)) if _n2w else t) + " "
         except Exception: return " " + t + " "
+    def _cents(m):
+        a, b = m.group(1), m.group(2)
+        w = lambda v: _n2w(int(v)) if _n2w else v
+        return " " + ("a" if a == "1" else w(a)) + " " + w(b) + " "
     def norm(s):
         # compare words, not formatting: "$1.7 billion" == "one point seven billion dollars", "Step 1." == "step one"
         s = s.lower().replace("%", " percent ")
         s = re.sub(r"\b((?:[a-z]\.){2,})", lambda m: m.group(1).replace(".", ""), s)   # "U.S." == "US"
+        s = re.sub(r"\$(\d+)\.(\d\d)\b", _cents, s)   # "$1.50" (ASR) == "a dollar fifty" (script)
         s = re.sub(r"\d[\d,]*(\.\d+)?", _num, s)
         s = re.sub(r"[^a-z ]", " ", s.replace("-", " "))
         return [w for w in s.split() if w not in ("dollar", "dollars", "and")]

@@ -4,12 +4,12 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram reels fields: `IGRE02` date, `IGRE03` caption, `IGRE23` views, `IGRE11` reach, `IGRE24` avg watch time (s),
   `IGRE28` 3-second view rate (%), `IGRE21` shares, `IGRE12` saves, `IGRE10` likes, `IGRE07` comments.
 - YouTube fields: `YTVP02` date, `YTVP17` title, `YTVP06` views, `YTVP08` avg view duration, `YTVP09` likes, `YTVP12` shares.
-  As of 26 Oct these return titles but **null numbers**, and the "all videos" connector (`YTVV*`) returns nothing — Metricool
-  isn't getting YouTube analytics for this channel. Try once per run; until numbers appear, Instagram is the signal.
+  Numbers arrive since 27 Oct (views + avg view duration in s; likes/shares not checked yet). The "all videos" connector
+  (`YTVV*`) returned nothing on 26 Oct. Pull `YTVP02,YTVP17,YTVP06,YTVP08` every run into the YouTube table below.
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
-## Instagram (snapshot 2026-10-27 09:15 IST)
+## Instagram (snapshot 2026-10-27 10:10 IST)
 | Date | Video | Style | Len | Views | Reach | Avg watch | 3-s view rate | Likes | Shares | Saves |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 10-27 | Movie theaters make money on popcorn (autopilot) | animated, calm voice | ~75 s | 5 | 0 | – | – | 1 | 0 | 0 |
@@ -33,12 +33,42 @@ Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** se
 | 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
 | 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(27 Oct 10:10 IST, R&D run 2: **identical to the 05:45 and 09:15 IST pulls, number for number**, and no row at all yet for
+Visa (posted 27 Oct 05:00 IST) or the 27 Oct posts → Metricool's Instagram reel sync looks stalled since ~26 Oct evening IST;
+popcorn's "5 views / reach 0" is most likely a stale first snapshot, not a suppressed reel. Don't act on it until rows move.)
 (27 Oct 09:15 IST, R&D run: every 10-26 row is unchanged since 05:45 IST, and popcorn is still 5 views / reach 0 / no watch data
 about 9 h after posting — slower than any earlier autopilot post at this age (printer ink had >1k). Either Metricool's reel stats
 lag or the reel got almost no test distribution; check it in the next run before reading anything into it. Visa (10-27 05:00 IST)
 and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP*` still not pulled — numbers were null on 26/27 Oct.)
 
-## Insights (rewrite each run — 27 Oct 09:15 IST, R&D run: no new numbers since 05:45, insights stand)
+## YouTube Shorts (snapshot 2026-10-27 10:10 IST; first numbers ever — `YTVP06` views, `YTVP08` avg view duration s)
+| Date | Video | Views | Avg view (s) | IG views same video |
+|---|---|---|---|---|
+| 10-26 | Chick-fil-A closed Sundays | 44 | 14 | 176 |
+| 10-25/26 | Amazon AWS | 326 | 18 | 225 |
+| 10-25 | Starbucks is secretly a bank (2nd) | 41 | 19 | 412 |
+| 10-25 | Costco $1.50 hot dog | 984 | 14 | 1,225 |
+| 10-25 | 4 restaurant tricks | 1,007 | 22 | 1,466 |
+| 10-25 | McDonald's real estate | 1,361 | 17 | 1,281 |
+| 10-24 | Couple beat the lottery | 16 | 20 | 39 |
+| 10-24 | 7 online shopping traps | 776 | 19 | 190 |
+| 10-23 | 7 supermarket traps | 1,304 | 27 | 2,816 |
+| 10-23 | 5 shipping traps | 1,289 | 30 | 3,966 |
+| 10-22 | Whey protein | 940 | 22 | 64 |
+| 10-22 | Copying the app (Compaq) | 1,332 | 30 | 130 |
+| 10-21 | Dubai chocolate | 737 | 19 | 270 |
+| 10-21 | $2 China → $19.99 Amazon | 210 | 36 | 4,636 |
+| 10-20 | Salesforce SaaSpocalypse | 255 | 47 | 92 |
+| 10-20 | Starbucks bank (1st) | 16 | 13 | 186 |
+| 10-20 | Google stopped sending customers | 56 | 13 | 3,154 |
+(No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (rewrite each run — 27 Oct 10:10 IST, R&D run 2)
+A. **New: YouTube is a second, independent signal.** Its winners differ from Instagram's: Compaq 1,332 vs 130 on IG, whey 940 vs 64,
+   shopping traps 776 vs 190 — while the IG giants (makhana-style broad hooks, $2 China 4,636) did ~200 on YouTube. YouTube's
+   avg view (13–47 s) is in seconds of a ~60–90 s Short; the animated autopilot videos sit at 14–22 s, same as on IG.
+   → Judge a topic on both platforms; a "flop" on one is not a flop. Track YT views for every new post.
+B. Metricool's Instagram numbers were frozen for > 12 h (see note under the table) → never conclude "suppressed" from one pull.
 1. **Everyday-object hooks win.** Printer ink vs champagne (a thing you buy, an absurd comparison) got the best 3-s view rate we have ever had (74%) and 1.4k views. The corporate-structure topics (AWS, Chick-fil-A franchise deal, Planet Fitness 10-K) held 50–64% and stayed under 250 views. → Pick topics about something in the viewer's hand/phone/receipt, framed as a "that can't be right" comparison or question.
 2. Animated explainers keep 50–74% past 3 s vs 4–40% for the old AI-footage reels; keep the format. Avg watch is stuck at ~13–23 s on 60–75 s videos → the middle still leaks. Re-hook card mid-video + a visual change every 2–3 s.
 3. **Shares and saves are still ~0** on every autopilot post. The only posts with real shares/saves (restaurant tricks, makhana) gave the viewer something to *use* → end with a concrete takeaway the viewer can apply to their own life, not just a fun fact.

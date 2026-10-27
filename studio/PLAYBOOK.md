@@ -69,7 +69,8 @@ multi-sentence lines sound less rushed (UTMOS 4.23 → 4.38 on the Duolingo scri
 `GT` 0 (= keep own pitch; **every global lift tested so far lowered naturalness**), `EXS` 1.0 (range expansion), `BMP` 1.0 (stress bumps), `STR` 1.0.
 Write line speeds 1.0–1.06 and pauses 0.2–0.45 in `vo_lines.py` as in the examples; SPD/PZ make them calm.
 Alternative engine (opt-in, see `VOICE.md`): `ENGINE=chatterbox python3 scripts/make_vo.py` — Chatterbox-Turbo (MIT) in our own
-synthetic narrator's voice, +0.06 UTMOS but flatter line endings; Kokoro stays the default. Its output is deterministic, so if a
+synthetic narrator's voice, +0.06 UTMOS per line; since 27 Oct its `low` lines get a last-word fall (`lib/end_contour.py`, `ENDS=0` to
+disable, `END_ST` depth, default −4 st) so reveals land (−3.5…−4 st vs −1 before), but its questions still fall → Kokoro stays the default. Its output is deterministic, so if a
 line reads back wrong, rephrase it (re-running gives the same audio).
 QA: `python3 /home/claude/nextbignow-videos/studio/tools/voice_report.py $P` → UTMOS ≥ 4.0 (aim ≥ 4.3), `asr_bad_lines` empty,
 pitch range ≥ 15 st, speaking pace 165–190 wpm. Fix spelling/phrasing and regenerate if a line reads back wrong.

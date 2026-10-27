@@ -16,11 +16,15 @@ allows commercial use; never ElevenLabs; **never clone a real person** — any r
 | Feel | Curious friend letting you in on a secret — calm, warm, a smile in the voice; not a hype-man, not a newsreader | listen |
 | Cost | ≤ 5 min CPU (2 cores) for an 80 s VO | `rtf` × duration |
 
-**Known limit of our metric:** UTMOS-family predictors track acoustic signal quality, not intonation or expressiveness
-(arXiv 2608.09930, Aug 2026: no significant correlation with human ratings on intonation/expressiveness). So UTMOS is a
-guardrail (don't get worse), and melody/feel must be judged with pitch range, the question/reveal contours and listening.
+**Known limit of our metric:** our UTMOS22 tracks acoustic quality, not intonation. arXiv 2608.09930 (10 Aug 2026, re-read
+27 Oct): of the automatic judges, only UTMOSv2 (τ≈0.29), Audiobox-Aesthetics CE (τ≈0.37) and PQ (τ≈0.27) correlate at all with
+human *intonation* labels, NISQA/DNSMOS don't, audio-LLM judges mostly don't — and humans agree least on intonation (α 0.47).
+So UTMOS is a guardrail (don't get worse), and melody is judged with pitch range, `q_rise_st`/`low_fall_st` and listening.
+Whole-file UTMOS on 80–90 s files moves ±0.1 for edits that change per-line scores by < 0.01 → trust the per-line mean.
 
-Status 27 Oct 2026: **not yet met.** Kokoro (default) passes the numbers; Chatterbox scores higher on UTMOS (+0.06 per line on
+Status 27 Oct 2026 (2nd R&D run): **not yet met.** Hybrid endings (below) fix most of Chatterbox's statement endings, but its
+questions still fall (q_rise −1.8…−6.7 st) and it has occasional weak lines (Duolingo a2: 3.91). Kokoro stays default.
+Status 27 Oct 2026 (1st run): **not yet met.** Kokoro (default) passes the numbers; Chatterbox scores higher on UTMOS (+0.06 per line on
 4 scripts) but its reveal lines don't land low (low_fall −0.2…−2.5 st vs Kokoro −4…−7) — it sounds "evener", which UTMOS rewards
 and our format punishes. **Decision: Kokoro + PSOLA stays the default; Chatterbox is available as `ENGINE=chatterbox`**
 (e.g. as a fallback, or if a future test fixes its endings). Added `q_rise_st`/`low_fall_st` to the bake-off so this is measured.
@@ -45,7 +49,7 @@ blog.youtube/news-and-events/disclosing-ai-generated-content
 | Engine | Licence (checked) | Runs here? | Result |
 |---|---|---|---|
 | **Kokoro-82M v1.0** (onnx) — blend am_michael .5 / am_eric .3 / am_fenrir .2 + Praat PSOLA prosody | Apache 2.0 | yes, RTF ~0.5 | default 26 Oct–27 Oct; UTMOS 4.26–4.47 shipped, range ~18 st |
-| **Chatterbox-Turbo 350M** (ResembleAI/chatterbox-turbo-ONNX, Dec 2025) | MIT (27 Oct 2026); model card: outputs may carry an inaudible PerTh watermark — the ONNX path only adds it if you call perth, we don't | yes: q8 LM RTF 12.7 (too slow), **q4 LM RTF 1.8** | see bake-off below |
+| **Chatterbox-Turbo 350M** (ResembleAI/chatterbox-turbo-ONNX, Dec 2025) | MIT (27 Oct 2026); model card: outputs may carry an inaudible PerTh watermark — the ONNX path only adds it if you call perth, we don't | yes: q8 LM RTF 12.7 (too slow), **q4 LM RTF 1.5–1.8** | opt-in `ENGINE=chatterbox` + hybrid endings (27 Oct) |
 | Pocket TTS 100M (Kyutai) | CC BY 4.0 | HF repo is gated (needs login) → not tested; preset voices are real speakers → would need a synthetic reference anyway | later |
 | Qwen3-TTS 0.6B/1.7B (Jan 2026) | Apache 2.0 | needs torch; ~0.2× real time on an M4 → far too slow on 2 CPUs | no |
 | Magpie TTS Multilingual 357M (NVIDIA) | NVIDIA Open Model License (commercial OK) | needs NeMo/torch | candidate, untested |
@@ -75,6 +79,26 @@ SPD 0.78 with the PSOLA melody (synthetic, `voices/narrator_slow_ref24k.wav`). U
 PSOLA ref 4.528/4.478, 16.0 st, 187 wpm; slow PSOLA ref 4.542/4.49, 16.4 st, 165.5 wpm → **the reference sets pace and melody**.
 Pace-matching a fast take with a global PSOLA stretch (×1.12) cost −0.05 UTMOS → make the reference slow instead.
 
+## Hybrid endings — 27 Oct 2026, 2nd run (`lib/end_contour.py`, on by default under `ENGINE=chatterbox`)
+Hypothesis: a pitch move on only the last word of `low` lines (PSOLA on that slice, cross-faded into the untouched take) gets
+Chatterbox to low_fall ≤ −4 st without the −0.23 UTMOS cost of global PSOLA. Same 3 scripts, all through the shipped chain.
+UTMOS whole / per-line mean (min line), low_fall st. Kokoro = shipped default (make_vo).
+| Script | Kokoro shipped | Chatterbox q4 | Chatterbox + endings (−4 st, gate 0.05) |
+|---|---|---|---|
+| Gas station (80 s) | 4.317 / 4.399 (4.13), −4.8 | 4.522 / 4.480 (4.40), −1.3 | 4.513 / 4.476 (4.40), **−4.0** (7 of 8 lines moved) |
+| Costco (83 s) | 4.321 / 4.402 (4.30), −4.9 | 4.501 / 4.474 (4.43), −1.0 | 4.380 / 4.468 (4.41), **−3.5** (5 of 7) |
+| Duolingo (91 s) | 4.382 / 4.428 (4.38), −7.1 | 4.264 / 4.458 (3.91), −0.2 | 4.253 / 4.449 (3.91), −1.7 (5 of 6 moved: each −2…−3.5 st; a2 = the weak 3.91 line, ends in +5 st uptalk, gate skipped it) |
+What we learned on the way (each cost a version):
+1. v1 ramp to the end of the slice: barely moved anything — voicing ends 0.1–0.2 s before the line does, and parakeet's word
+   starts run ~0.2 s late. → the move starts ≥ 0.5 s before the last voiced frame and is complete by 45 % of the word (a nuclear fall, then hold).
+2. Chatterbox's "flat" endings are partly **uptalk** (gas e1 +4 st, c1 +1.2 st): a fall on top of a rise still ends high → cap the
+   last word at the line median first, then fall.
+3. Its endings already sit near 90–100 Hz; −5 st pushed some to ~70 Hz → creak, octave errors in the tracker (a4 read +7 st) and
+   −0.2 UTMOS. → never below 85 Hz (`END_FLOOR`).
+4. Some lines resist PSOLA (Duolingo a2 −0.16, gas b1 −0.16, Costco c2/e1 −0.27): a per-line UTMOS gate (keep the move only if
+   the line loses ≤ 0.05) keeps the good moves and skips those.
+5. +3…+4.5 st question rises on Chatterbox made q_rise *worse* (−1.8 → −2.1) and cost UTMOS → rises are off (`q=0`).
+
 ## Rules learned
 1. Never shift the whole voice up; use the blend for brightness (Kokoro lab, 26 Oct).
 2. Slower + longer pauses helps; per-sentence generation helps Kokoro (SPLIT 0.12).
@@ -84,8 +108,12 @@ Pace-matching a fast take with a global PSOLA stretch (×1.12) cost −0.05 UTMO
 5. UTMOS can't hear melody — never accept a change that only raises UTMOS by flattening the voice (Kokoro dry scores 4.52 at 12.5 st: flat).
 
 ## Next
-- **Hybrid endings:** Chatterbox take + a pitch move only on the last word of `q`/`low` lines (no global PSOLA, which costs −0.23),
-  or a second reference clip whose sentences end clearly low; goal: low_fall ≤ −4 st with UTMOS ≥ Kokoro + 0.05.
+- ~~Hybrid endings~~ — done 27 Oct (table above): low lines now land (−3.5…−4.0 st) at ≤ 0.01 per-line UTMOS cost.
+- **Chatterbox retakes for weak lines:** it's deterministic, so a weak line (per-line UTMOS < 4.3, e.g. Duolingo a2 3.91) can only
+  change through its text: try 2–3 punctuation variants ("dollar." / "dollar…" / comma before the number) and keep the best.
+  If that lifts min-line ≥ 4.3 on all 3 scripts, Chatterbox + endings beats Kokoro on everything except questions.
+- **Questions on Chatterbox:** shorter hook questions ending on the key word ("…makes money on gas?"), or a question reference clip.
+- Second scorer for intonation: UTMOSv2 or Audiobox-Aesthetics (both correlate with intonation, 2608.09930) — check licence/onnx/RAM.
 - Question lines: both engines often don't rise on long "Do you know … ?" hooks (q_rise −1 … −7 st) → test shorter hook questions.
 - Build a second synthetic reference with more smile/energy (Kokoro read with wider PSOLA, EXS 1.3) and compare.
 - Paralinguistic tags (`[chuckle]`, `[sigh]`) at one funny moment — check ASR doesn't count them as errors.
