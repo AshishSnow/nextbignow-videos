@@ -7,7 +7,7 @@ Each Ready entry: type (A–F, PLAYBOOK §2) · interest score · hook · story 
 ## Ready (verified 27 Oct 2026 — research notes in RND.md log; pick the highest score whose type differs from the last 2 videos)
 Score = interest test (Wait-what / Story / Your life / Picture / Fresh / Share / Verifiable), PLAYBOOK §2.
 
-### 1. Monopoly was invented to warn against monopolies — type D · 32/35 (5/5/4/5/4/4/5)
+### 1. CLAIMED 2026-10-27 21:05 IST (video run) — Monopoly was invented to warn against monopolies — type D · 32/35 (5/5/4/5/4/4/5)
 Hook: "Do you know Monopoly was invented to teach people that monopolies are BAD?"
 Beats: Lizzie Magie (follower of economist Henry George) patents "The Landlord's Game", 5 Jan 1904 (US 748,626) → two rule sets:
 "monopolist" (crush everyone) vs "prosperity" (everyone gains) — to show the harm of hoarding wealth → for 30 years people make
