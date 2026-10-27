@@ -3,7 +3,7 @@
 ## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
 Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
 NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these first when timely:
-0a. sugar-rush-myth — Do you know the "sugar rush" in kids is mostly a myth? (double-blind studies found no behaviour
+0a. (DONE ep 10) sugar-rush-myth — Do you know the "sugar rush" in kids is mostly a myth? (double-blind studies found no behaviour
     change; parents who THOUGHT kids had sugar rated them more hyper). Halloween-timely, very shareable. Verify: Wolraich
     et al. JAMA 1995 meta-analysis; Hoover & Milich 1994 (parent expectation); plus a major outlet / university page.
 0b. mint-feels-cold — the twin of ep 09: menthol switches on the COLD alarm (TRPM8), nothing gets colder. Reuse the

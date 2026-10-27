@@ -1,0 +1,32 @@
+# (id, text, speed, pause_after, base_semitones, range_expand, stressed_words, ending)
+# FreshNestHub 10 — "Is the sugar rush real?" (Halloween myth: insulin thermostat + blind tests + the parent-expectation twist)
+# Voice upgrade (ep 10): EAR-WRITING — lines kept to <= 12 words where possible, contractions, short-long rhythm,
+# one idea per line; per-line speed variety from ep 09 kept. Structure = refutation text (myth -> refute -> explain).
+LINES = [
+    ("i1", "Do you know the sugar rush... might be a myth?", 0.96, 0.30, +1.0, 1.45, ["sugar", "myth?"], "q"),
+    ("i2", "Candy makes kids bounce off the walls, right? Scientists tested it.", 0.98, 0.40, +1.2, 1.5, ["walls,", "tested"], None),
+    ("i3", "And the real reason kids go wild... is way weirder.", 0.97, 0.45, +1.0, 1.5, ["real", "weirder."], None),
+    ("a1", "Here's the myth. Sugar floods your blood... and boom, you're hyper.", 1.0, 0.40, +1.0, 1.5, ["myth.", "boom,", "hyper."], None),
+    ("a2", "But your body won't let that happen. Here's why.", 0.98, 0.40, +0.8, 1.45, ["won't", "why."], None),
+    ("b1", "Blood sugar is the sugar riding in your blood. It's fuel for your cells.", 1.02, 0.40, +0.8, 1.45, ["riding", "fuel"], None),
+    ("b2", "When it rises, your pancreas wakes up. It's an organ behind your stomach.", 1.0, 0.40, +0.8, 1.45, ["pancreas", "stomach."], None),
+    ("b3", "It sends out insulin. Think of insulin as a key.", 0.98, 0.35, +1.0, 1.5, ["insulin.", "key."], None),
+    ("b4", "It unlocks your cells, so the sugar moves in... to be used or stored.", 1.0, 0.40, +0.8, 1.45, ["unlocks", "stored."], None),
+    ("b5", "So in a healthy body, blood sugar stays in a tight range. Like a thermostat.", 1.0, 0.45, +0.8, 1.45, ["tight", "thermostat."], "low"),
+    ("c1", "But scientists didn't just trust the theory. They ran blind tests.", 1.0, 0.35, +1.0, 1.5, ["trust", "blind"], None),
+    ("c2", "Some kids got sugar. Others got a sweetener that tastes the same.", 1.02, 0.35, +0.8, 1.45, ["sugar.", "same."], None),
+    ("c3", "And nobody knew who got what. Not even the scientists.", 0.97, 0.40, +1.0, 1.5, ["nobody", "scientists."], None),
+    ("c4", "In nineteen ninety-five, researchers pooled twenty-three of these tests.", 1.0, 0.35, +0.8, 1.45, ["twenty-three"], None),
+    ("c5", "The result? Sugar didn't change how kids behaved... or how they thought.", 0.97, 0.45, +0.8, 1.45, ["didn't", "thought."], "low"),
+    ("d1", "So why do parents swear they see it? This next test is wild.", 0.98, 0.40, +1.0, 1.5, ["swear", "wild."], None),
+    ("d2", "Thirty-five boys got a sweet drink. Every single one was sugar-free.", 1.0, 0.40, +0.8, 1.45, ["Thirty-five", "sugar-free."], None),
+    ("d3", "But half the moms were told... their son just had a big dose of sugar.", 0.98, 0.40, +1.0, 1.5, ["told...", "sugar."], None),
+    ("d4", "Those moms rated their boys as more hyper. They stayed closer, and controlled them more.", 1.0, 0.40, +0.8, 1.45, ["hyper.", "closer,"], None),
+    ("d5", "Same drink. Different belief. The rush was in the grown-ups' heads!", 0.97, 0.45, +1.0, 1.5, ["Same", "Different", "heads!"], None),
+    ("e1", "So what really makes kids wild? Look at where the candy shows up.", 1.0, 0.35, +1.0, 1.5, ["really", "where"], None),
+    ("e2", "Parties. Halloween. Friends, costumes, staying up late. That's the real rush!", 1.02, 0.45, +1.2, 1.5, ["Halloween.", "real"], None),
+    ("f1", "One honest catch: scientists can't rule out a small effect in some kids.", 1.0, 0.35, +0.6, 1.45, ["honest", "small"], None),
+    ("f2", "And sugar is still rough on your teeth.", 1.0, 0.45, +0.6, 1.45, ["still", "teeth."], "low"),
+    ("g1", "So remember: insulin keeps sugar steady, blind tests found no rush, and the party does the rest.", 0.98, 0.45, +0.8, 1.45, ["steady,", "party"], "low"),
+    ("g2", "Send this to the friend who blames everything on candy!", 0.97, 0.0, +1.2, 1.5, ["friend", "candy!"], None),
+]

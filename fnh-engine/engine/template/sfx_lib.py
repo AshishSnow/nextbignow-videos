@@ -137,3 +137,54 @@ def bubbles(t0, n_=7, level=-26):
     for i in range(n_): add(pop(level - (i % 3), 1300 + 220 * (i % 4)), t0 + i * 0.11 + 0.03 * (i % 2))
 
 
+# ---- foley added by FreshNestHub ep 10 (sugar rush): vinyl record scratch, candy-wrapper crinkle, cartoon boing, key jingle, lock click ----
+def rec_scratch(level=-16):
+    """vinyl record scratch ('wikka'): two fast strokes = band-passed noise + a buzzy tone whose pitch follows the hand speed."""
+    out = []
+    for d, up in ((0.11, True), (0.16, False)):
+        n_ = int(d * SR); t2 = np.arange(n_) / SR; k = t2 / d
+        sp = np.sin(np.pi * k) if up else np.sin(np.pi * k) ** 0.7
+        fr = 120 + 1400 * sp
+        tone = signal.sawtooth(2 * np.pi * np.cumsum(fr) / SR) * 0.6
+        noi = rng.standard_normal(n_)
+        f_, t_, Z = signal.stft(noi, SR, nperseg=256)
+        fc = 400 + 3000 * np.interp(t_ / d, k, sp)
+        mask = np.exp(-0.5 * ((np.log2(np.maximum(f_, 20))[:, None] - np.log2(fc)[None]) / 0.6) ** 2)
+        _, w_ = signal.istft(Z * mask, SR, nperseg=256); w_ = w_[:n_]
+        x = (tone + 1.5 * w_ / (np.abs(w_).max() + 1e-9)) * sp
+        out.append(x)
+    x = np.concatenate(out); x = signal.sosfilt(signal.butter(2, [150, 6000], "band", fs=SR, output="sos"), x)
+    x = x / np.abs(x).max() * db(level); return np.stack([x, x * 0.9], 1)
+
+
+def crinkle(level=-24, dur=0.45):
+    """candy-wrapper crinkle: sparse bright crackles with a slow envelope."""
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    x = rng.standard_normal(n_) * (rng.random(n_) < 0.02)
+    x = signal.sosfilt(signal.butter(2, [2500, 11000], "band", fs=SR, output="sos"), x)
+    x = signal.lfilter([1], [1, -0.6], x) * np.sin(np.pi * t2 / dur)
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, np.roll(x, 90)], 1)
+
+
+def boing(level=-20, f0=220, dur=0.5):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    fr = f0 * (1 + 0.35 * np.sin(2 * np.pi * 14 * t2) * np.exp(-t2 / 0.25)) * (1 + 0.6 * np.exp(-t2 / 0.03))
+    x = np.sin(2 * np.pi * np.cumsum(fr) / SR) * np.exp(-t2 / 0.22) * np.minimum(1, t2 / 0.003)
+    x = x / np.abs(x).max() * db(level); return np.stack([x, x], 1)
+
+
+def jingle(level=-24):
+    out = np.zeros((int(0.55 * SR), 2), np.float32)
+    for j in range(5):
+        y = ding(level - 4, 3200 + 500 * rng.random())[: int(0.25 * SR)] * np.exp(-np.arange(int(0.25 * SR)) / SR / 0.05)[:, None]
+        i = int(j * 0.05 * SR); out[i:i + len(y)] += y
+    return out
+
+
+def lock_click(level=-15):
+    out = np.zeros((int(0.12 * SR), 2), np.float32)
+    for k, (d0, f0) in enumerate(((0.0, 3200), (0.045, 2400))):
+        n_ = int(0.05 * SR); t2 = np.arange(n_) / SR
+        x = (np.sin(2 * np.pi * f0 * t2) + 0.6 * signal.sosfilt(signal.butter(2, [1500, 9000], "band", fs=SR, output="sos"), rng.standard_normal(n_))) * np.exp(-t2 / 0.006)
+        i = int(d0 * SR); out[i:i + n_] += np.stack([x, x], 1)
+    return out / np.abs(out).max() * db(level)

@@ -9,6 +9,7 @@
 | 2026-10-26 | 07-carrots-orange-skin | Can Too Many Carrots Turn Your Skin Orange? (carotenemia + WWII radar twist) | Chubby munching carrots on a sky set, pile of carrots at his feet, he flashes ORANGE with sun rays + "ORANGE?!" burst | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-9136205762790406639 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=313161423065269986 |
 | 2026-10-26 | 08-pineapple-eats-you | Why Pineapple Makes Your Mouth Tingle (bromelain: pineapple eats you back) | Chubby munching a pineapple wedge on a sky set, the wedge sprouts angry eyes + teeth and chomps back at him ('BACK?!' + CHOMP! burst) | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-4620308068817352663 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-9173967346899989055 |
 | 2026-10-27 | 09-spicy-food-burn | Why Spicy Food Burns Your Mouth (capsaicin heat alarm trick + milk vs water + birds) | Chubby munching a chili on an orange set, at 'spicy food' he BREATHES FIRE (flame cone + sun rays, 'BURN YOU?') | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=8945173973334049946 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-9062762857996924210 |
+| 2026-10-27 | 10-sugar-rush-myth | Is the Sugar Rush Real? (Halloween myth: insulin keeps blood sugar steady, 1995 review of 23 blind tests, moms-told-sugar twist, the party is the real rush) | Chubby mid sugar-rush bouncing with candy flying on a night set, the frame FREEZES at 'myth?' (record scratch, desaturate, '?!' burst, Chubby looks at camera) | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=775621562201097956 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=2278836795284016946 |
 
 Earlier FreshNestHub reels (made before the engine; also do not repeat): whale vomit / ambergris in perfume (macro
 mystery + money counter opening), Kim Kardashian salmon-sperm (PDRN) facial (paparazzi flash opening),
@@ -28,4 +29,3 @@ Owner feedback after episode 02 (apply from episode 03): it was too fast — mak
 voice (v2 MOOD table), 14–20 explaining scenes (step-by-step visuals), never rushed.
 Owner feedback to apply from episode 02 on: captions at true centre (x=540); open with a clear "Do you know…?"
 intro so viewers instantly know what the video is about.
-CLAIMED 2026-10-27 05:55 IST | 10-sugar-rush-myth | Is the Sugar Rush Real? (Halloween: double-blind studies + the parent-expectation twist)

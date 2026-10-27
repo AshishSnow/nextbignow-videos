@@ -14,7 +14,10 @@ try:
     k_ = (len(a16) - 400) // 320 + 1; k_ -= k_ % 2; a16 = a16[: 400 + 320 * (k_ - 1)]   # even frame count (export has no padding)
     so = ort.SessionOptions(); so.intra_op_num_threads = 2
     sess = ort.InferenceSession(f"{R}/models/utmos/utmos22.onnx", so, providers=["CPUExecutionProvider"])
-    rep["utmos"] = round(float(sess.run(None, {"wave": a16[None]})[0].ravel()[0]), 3)
+    # ep 10: a whole-file pass on > 100 s of audio runs out of RAM (8 GB box killed it at 118 s) -> score the first 100 s only
+    _wf = a16[: 400 + 320 * (((min(len(a16), 1600000) - 400) // 320 + 1) // 2 * 2 - 1)]
+    rep["utmos"] = round(float(sess.run(None, {"wave": _wf[None]})[0].ravel()[0]), 3)
+    if len(a16) > 1600000: rep["utmos_note"] = "whole-file utmos = first 100 s (RAM); gate on chunk20 / line_mean"
     # length-fair scores (ep 09): whole-file UTMOS drops for long files (a 94 s VO scored 0.13 lower than its own 20-s chunks),
     # so the gate compares utmos_chunk20 (mean of 20-s chunks) and utmos_line_mean (mean of per-line scores) between episodes.
     def _u(seg):
@@ -25,6 +28,7 @@ try:
     x16 = signal.resample_poly(x, 16000, sr).astype(np.float32)
     _l = [_u(x16[int((l["start"] - 0.05) * 16000):int((l["end"] + 0.1) * 16000)]) for l in L.values()]
     rep["utmos_line_mean"] = round(float(np.mean([v_ for v_ in _l if v_ is not None])), 3)
+    rep["utmos_lines"] = {lid: (round(v_, 2) if v_ is not None else None) for lid, v_ in zip(L.keys(), _l)}   # ep 10: find weak lines
 except Exception as e:
     rep["utmos"] = None; rep["utmos_note"] = f"unavailable: {type(e).__name__}"
 # pitch
@@ -47,7 +51,10 @@ try:
         _n2w = None
     def _num(m):
         t = m.group(0).replace(",", "")
-        try: return " " + (_n2w(float(t) if "." in t else int(t)) if _n2w else t) + " "
+        try:
+            # ep 10: years are spoken "nineteen ninety-five", not "one thousand nine hundred..." (was a false ASR 'bad line')
+            if _n2w and "." not in t and not re.search(r"\d,\d", m.group(0)) and 1100 <= int(t) <= 2099: return " " + _n2w(int(t), to="year") + " "
+            return " " + (_n2w(float(t) if "." in t else int(t)) if _n2w else t) + " "
         except Exception: return " " + t + " "
     def norm(s):
         # compare words, not formatting: "$1.7 billion" == "one point seven billion dollars", "Step 1." == "step one"

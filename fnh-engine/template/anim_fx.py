@@ -209,3 +209,51 @@ def inset(f, cx, cy, r, draw, k=1.0, ring=WHITE, th=12):
 def count_up(t, t0, v1, dur=0.8):
     """kinetic number: integer that counts up from 0 to v1 with ease-out (use as the BIG word of ui_word)."""
     return int(round(v1 * eo(clamp((t - t0) / dur))))
+
+
+# ================= REFUTATION + CONTRAST (ep 10): myth -> refute -> explain =================
+# Refutation text (Tippett 2010; Kendeou's KReC framework, Educ Psychol Rev 2021): name the myth out loud, refute it
+# explicitly, then give the correct explanation, so the old idea and the new one are active at the same time and the new
+# one wins. Contrasting cases (Schwartz & Bransford 1998): show "what people think / what really happens" side by side.
+def myth_tag(f, x, y, t, t0, t_bust=None, size=56, word="MYTH"):
+    """red MYTH tag that pops in at t0; at t_bust a fat red X slashes across it + 'BUSTED' stamp slams."""
+    if t < t0: return
+    comp(f, tag_el(word, RED_, WHITE, size), x, y, scale=pin(t, t0, 0.3))
+    if t_bust is not None and t >= t_bust:
+        k = clamp((t - t_bust) / 0.18); L = 150 * size / 56
+        for sgn in (-1, 1):
+            p0 = (x - L, y - sgn * L * 0.55); p1 = (x - L + 2 * L * k, y - sgn * L * 0.55 + sgn * 1.1 * L * k)
+            cv2.line(f, (int(p0[0]), int(p0[1])), (int(p1[0]), int(p1[1])), C(INK), 34, cv2.LINE_AA)
+            cv2.line(f, (int(p0[0]), int(p0[1])), (int(p1[0]), int(p1[1])), C(RED_), 22, cv2.LINE_AA)
+        if t >= t_bust + 0.15: rot_comp(f, stamp_el("BUSTED", RED_, int(size * 0.9)), x, y + 110 * size / 56, -8,
+                                        1.5 - 0.5 * eo(clamp((t - t_bust - 0.15) / 0.18)), clamp((t - t_bust - 0.15) / 0.1), 0.3)
+
+
+def split_contrast(f, t, t0, draw_l, draw_r, title_l="WHAT YOU THINK", title_r="WHAT REALLY HAPPENS",
+                   col_l=(230, 60, 40), col_r=(20, 160, 110), y0=620, y1=1500, wipe=0.35, t_r=None, xl=120, xr=960):
+    """worked-example contrast: two tinted panels (left = myth / belief, right = reality) with a divider wiping in.
+    Panels span xl..540..xr (inside the safe zone, centred on x=540). draw_l(g) / draw_r(g) paint on full-frame copies
+    (left panel centre = (xl+540)/2, right = (540+xr)/2); t_r = when the right panel appears."""
+    if t < t0: return
+    k = eio(clamp((t - t0) / wipe)); xm = int(xl + (540 - xl) * k)
+    t_r = t0 if t_r is None else t_r
+    for side, draw, col, x0, x1, ts in ((0, draw_l, col_l, xl, 540, t0), (1, draw_r, col_r, 540, xr, t_r)):
+        if t < ts: continue
+        g = f.copy(); g[y0:y1, x0:x1] = g[y0:y1, x0:x1] * 0.72 + np.array(C(col), np.float32) * 0.28; draw(g)
+        m = np.zeros((H, W), np.float32)
+        if side == 0: m[y0:y1, xl:max(xl, xm)] = 1.0
+        else: m[y0:y1, 540:540 + int((xr - 540) * clamp((t - ts) / wipe))] = 1.0
+        f[:] = f * (1 - m[..., None]) + g * m[..., None]
+    cv2.line(f, (540, y0), (540, y1), C(INK), 8, cv2.LINE_AA)
+    cv2.rectangle(f, (xl, y0), (xr, y1), C(INK), 6, cv2.LINE_AA)
+    comp(f, chip(title_l, INK, WHITE, 26), (xl + 540) / 2, y0 + 44, op=clamp((t - t0) / 0.2))
+    if t >= t_r: comp(f, chip(title_r, INK, WHITE, 26), (540 + xr) / 2, y0 + 44, op=clamp((t - t_r) / 0.2))
+
+
+def chapter_card(f, t, t0, num, title, y=1380, dur=1.6, col=YEL_):
+    """signposting for 2-3 min videos: a small 'PART n' chip + title that slides in at a re-hook and leaves after dur."""
+    if t < t0 or t > t0 + dur: return
+    k = eo(clamp((t - t0) / 0.25)); out = clamp((t0 + dur - t) / 0.2)
+    x = 540 - 600 * (1 - k)
+    comp(f, chip(f"PART {num}", INK, col, 28), x, y - 52, op=out)
+    comp(f, chip(title, col, INK, 40), x, y + 8, op=out)

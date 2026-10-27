@@ -9,7 +9,7 @@ Understand the new algorithm and act on it — I shouldn't have to tell you ever
 learning beat speed. Every run must leave the channel a little better than it found it.
 
 ## A. Algorithm notes (re-check EVERY DAY: the first run of each IST day, i.e. when "Last checked" is not today; record what changed)
-Last checked: 2026-10-27 (02:00 IST run). Sources: Kompozy (Sep 2026, Mosseri signals), Creator Lane (2026), Gyre (2026),
+Last checked: 2026-10-27 (02:00 IST run; 06:00 run = same IST day, no re-check needed). Sources: Kompozy (Sep 2026, Mosseri signals), Creator Lane (2026), Gyre (2026),
 Socialync (2026), Android Headlines / TechCrunch (Jul 2026, YouTube monetization rules); 27 Oct: Les Gens d'Internet
 (2 Oct 2026, YouTube Shorts originality update), OutlierKit (YouTube Shorts algorithm in YouTube's words, 2026),
 SocialPilot (Instagram Reels algorithm changelog 2025-2026).
@@ -72,7 +72,11 @@ Voice (make it sound more like a real, excited young guy — never robotic):
       UTMOS 4.06 (all 1.0) -> 4.19 / 4.28 (varied). Now the PLAYBOOK default (step 4).
 - [x] 27 Oct (ep 09): wh-questions still need the "q" rise in our pipeline: c1 "how do you put out a fake fire?" scored
       3.96 without it vs 4.11–4.26 with it.
-- [ ] Write for the ear: contractions, short words, "you" talk; split lines > 14 words; punctuation for natural pauses.
+- [x] 27 Oct (ep 10): write for the ear: contractions, short words, "you" talk; lines <= 12 words where possible; punctuation
+      for natural pauses. Result on a 1:58 script: chunk20 4.366 / line mean 4.356 (ep 09 4.408 / 4.332), ASR clean.
+- [x] 27 Oct (ep 10): fix weak lines by re-ordering the sentence, not only speed: b2 "an organ behind your stomach wakes up.
+      The pancreas." 3.99 -> "your pancreas wakes up. It's an organ behind your stomach." 4.35 (name first, then define).
+      voice_report now prints utmos_lines (per-line) so weak lines can be found and rewritten.
 - [ ] Less audible pitch processing (EXS 0.4, BMP 0.7) if the voice sounds "processed"; keep stresses on 1–2 words/line.
 - [ ] Emphasis words: real stress (slightly louder + longer), not every line; question endings rise, statements settle.
 - [ ] Natural micro-pauses before the payoff word ("...it's eating you BACK").
@@ -97,6 +101,11 @@ Script / packaging:
 - [ ] Comment question in caption + firstCommentText.
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-27 06:00: CHUBBY reach is flat after 8–12 h (carrots 133 reach / 155 views, pineapple 86 / 127) while 3-s hold
+  stays high (58–72 %). The Nessa dandruff reel had 1.29k reach at a similar age. So the hook works for people who
+  see it; the problem is how many get shown it (topic pull / non-follower distribution). => ep 10 tests a broad,
+  timely topic everyone has an opinion on (Halloween sugar rush) + a debate-style comment question. Judge at 48 h.
+- 2026-10-27 06:00: YouTube analytics still null in Metricool (YTVP* for every video) — 3rd check in a row.
 - 2026-10-27: first CHUBBY numbers (posts < 9 h old, judge again at 48 h): pineapple (food bites back at frame 0)
   held 72.2 % past 3 s — our best hold ever, equal to the realistic Nessa-era tattoo reel (72.8 %); carrots held 58.3 %.
   The difference: pineapple's hook had an absurd ACTION in the first second (the food attacks), carrots built up to
@@ -109,6 +118,14 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 10 sugar rush (27 Oct, auto run, 1:58): VOICE ear-writing (<= 12-word lines, contractions) + rewrite weakest line by
+  name-then-define order (b2 3.99 -> 4.35); chunk20 4.366 / line mean 4.356 | VISUAL refutation kit: myth_tag (MYTH ->
+  red X + BUSTED), split_contrast panels (sugar vs sweetener, told-sugar vs told-no-sugar, "what moms saw vs what was
+  really there"), chapter_card PART 2 / PART 3 at the re-hooks; freeze-frame record-scratch opening; x-ray belly with
+  pancreas waking; cell with a locked door that the insulin key opens; new Chubby cast (mom with hair bun, scientist with
+  lab coat + goggles, blindfolds) | SCRIPT/TOPIC timely Halloween myth, refutation structure (myth -> busted -> how the
+  body works -> blind tests -> parent twist -> real cause -> honest catch -> recap), spooky surf-rock score, new foley
+  (record scratch, wrapper crinkle, boing, key jingle) | metric: reach at 48 h vs carrots/pineapple, comments, shares/1k.
 - 09 spicy (27 Oct, auto run, 1:36): VOICE per-line speed variety + wh-question rise (UTMOS chunk20 4.41 vs ep08 4.45,
   same-script A/B +0.2 over flat) | VISUAL Mayer explaining kit (spotlight, label_at leader labels, inset magnifier,
   pulse_path nerve signals, recap_steps, count_up) + Chubby breathes fire at t=1.4 s + full-tissue diagrams |
@@ -134,6 +151,9 @@ Script / packaging:
 | 27 Oct | ep 08 pineapple script, A4 (reference re-render) | 4.407 (chunk20 4.448, line mean 4.374) | 176 | 0.14 | 17.7 | 0 |
 | 27 Oct | ep 09 spicy, A4, all lines speed 1.0 | 4.061 | 187 | 0.14 | 17.3 | 1 ("2021" norm) |
 | 27 Oct | **ep 09 spicy, A4 + per-line speed variety (shipped)** | **4.276 (chunk20 4.408, line mean 4.332)** | 183 | 0.13 | 17.1 | 0 |
+| 27 Oct | ep 10 sugar rush, A4 + ear-writing, first take | 4.135* (chunk20 4.337, line mean 4.342) | 182 | 0.14 | 17.5 | 0 (after year fix) |
+| 27 Oct | **ep 10 sugar rush, + b2 reordered, i2 0.98, g2 0.97 (shipped)** | **4.225* (chunk20 4.366, line mean 4.356)** | 182 | 0.14 | 17.5 | 0 |
+*ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
 Per-line UTMOS has about ±0.1 run-to-run noise on single lines — judge on means, not one line.
@@ -166,12 +186,13 @@ Animation & visuals:
 - [ ] Inside-the-body worlds: cell/organ scenes with scale cues (Kurzgesagt-style clarity)
 Voice (always voice A — refine, never swap):
 - [x] Calmer pace + real pauses (A4, UTMOS 4.36)
-- [ ] Ear-writing: rhythm, short-long sentence contrast, rule of three, contractions
+- [x] Ear-writing: rhythm, short-long sentence contrast, rule of three, contractions (ep 10)
 - [ ] Pause before the payoff word; lift on questions; settle on statements
-- [ ] Per-line speed variety and stress placement tested with voice_report
+- [x] Per-line speed variety and stress placement tested with voice_report (ep 09)
+- [x] Ear-writing + name-then-define sentence order for weak lines (ep 10, per-line UTMOS in voice_report)
 - [ ] Mic-like polish: gentle de-ess, presence EQ, no harshness (check with voice_report + spectrum)
 Sound:
-- [ ] Foley that matches the action (crunch, fizz, squelch, sizzle) synthesized per video
+- [~] Foley that matches the action (crunch, fizz, squelch, sizzle) synthesized per video (ep 10: record scratch, wrapper crinkle, boing, key jingle)
 - [ ] Music that follows the story (build -> drop on the reveal -> soft under explanations), stems ducking
 - [ ] A signature 1-second FreshNestHub audio logo
 Explaining (the owner's #1 priority — people must understand what they watch):
@@ -182,9 +203,10 @@ Explaining (the owner's #1 priority — people must understand what they watch):
 - [ ] Step diagrams that build up piece by piece (1 -> 2 -> 3) and a 5-second visual recap at the end
 - [ ] Scale cues (hand, coin, Chubby next to the thing) so viewers know how big/small it is
 - [x] Mute test: watch the test-frame sheet without audio — can you follow the story? If not, fix the visuals
-- [ ] Structure for 2–3 min videos: chapters + re-hooks every 20–30 s + open loops paid off in order
+- [~] Structure for 2–3 min videos: chapters + re-hooks every 20–30 s + open loops paid off in order (ep 10: chapter_card PART 2/3)
 - [ ] Pre-training shot: a 3-second "cast of parts" (name the 2-3 parts with pictures) before any process explanation
-- [ ] Worked-example contrast: "what you feel vs what's really there" split screens for every illusion/myth topic
+- [x] Worked-example contrast: "what you feel vs what's really there" split screens for every illusion/myth topic (ep 10: split_contrast)
+- [x] Refutation structure for myth topics: state the myth, bust it on screen, then explain (ep 10: myth_tag)
 Story & topics:
 - [ ] Curiosity gap + open loop in the first line, payoff placed at ~70 % of the video
 - [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
@@ -192,6 +214,14 @@ Story & topics:
 - [ ] One-sentence takeaway people can use today
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-27 | Refutation text + contrasting cases (explaining a MYTH) | A refutation text states the common misconception,
+  refutes it explicitly, then explains the correct idea; because the myth and the fix are active in memory at the same
+  time, the new idea can win (KReC framework; "Refutation texts..." Educ Psychol Rev 2021, link.springer.com/article/
+  10.1007/s10648-021-09656-z). Misconceptions are suppressed, not erased, so repeat the fix in the recap. Contrasting
+  cases (Schwartz & Bransford 1998): side-by-side "belief vs reality" panels make the difference the thing you notice.
+  Turned into anim_fx helpers: myth_tag() (MYTH tag -> red X + BUSTED stamp), split_contrast() (two tinted panels inside
+  the safe zone, divider wipe, titled), chapter_card() (PART n signposting at re-hooks) | ep 10 (myth named at 12 s,
+  busted at 16 s, explained 19–43 s, tests 43–90 s, recap re-busts it at 113 s) | yes
 - 2026-10-27 | Mayer's multimedia principles (explaining) | 9 rules from Mayer's research (Ohio State multimedia-learning
   guide, u.osu.edu/multimedialearning; Mayer 2020): signalling (arrows/highlights to what matters), segmenting (short
   chunks), coherence (cut decoration + extra sound), redundancy (no on-screen text repeating narration), spatial

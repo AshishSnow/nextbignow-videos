@@ -79,6 +79,7 @@ P=$(bash $ENG/new_ep.sh NN-slug)          # project = studio template + FreshNes
 cd $P && (set -a; . $ENG/voice.env; set +a; python3 scripts/make_vo.py) && python3 $ENG/engine/tools/asr_check.py $P
 # every line must read back right. voice.env = the channel voice; voice upgrades are logged in improvements.md
 python3 $ENG/engine/tools/voice_report.py $P   # UTMOS (naturalness 1-5), pace, pitch range, ASR — gate in improvements.md B.2
+# utmos_lines = per-line scores: rewrite the weakest lines (name-then-define order, shorter) before shipping
 python3 -c "import json;A=json.load(open('work/align.json'));[print(w['line'],w['w'],w['t']) for w in A['words']]"
 ```
 Then write (read the template versions first — they are the reference; use the craft helpers in `anim_fx.py`):
@@ -91,6 +92,8 @@ Then write (read the template versions first — they are the reference; use the
 - Explaining kit (anim_fx.py, Mayer's principles): name the parts first (pre-training), label parts with `label_at`
   (leader arrow, not a far caption), `spotlight` the focus, `inset` magnified close-ups for tiny things, `pulse_path`
   for signals/flows, `recap_steps` for a 1->2->3 visual recap before the CTA, `count_up` for key numbers.
+  Myth topics (ep 10, refutation text): `myth_tag` (MYTH -> red X + BUSTED) right after the myth is said, then explain;
+  `split_contrast` panels for belief-vs-reality / A-vs-B tests (inside the safe zone); `chapter_card` PART n at re-hooks.
 - `scripts/music.py` — cues on every reveal. **New genre each video** (template = bouncy food-funk with marimba/slap
   bass + 1940s march section; others: synth-pop, lo-fi hip hop, latin, orchestral pizzicato, surf rock, chiptune…).
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
@@ -117,7 +120,11 @@ anim_props5: carrot_el, carrot_side, dots (pigment/particles), machine_el, capsu
 skin_block (skin layers), palm_el, sole_el, eye2_el(sclera, skin), baby, bowl_el, spoon_el, plane_el, prop_disc,
 radar_screen, moon, zzz_moon, mirror_el. · anim_props_lib09 (ep 09): chili_el(face, mood), chili_side, caps_el/caps (capsaicin key
 molecule), tongue_el, alarm_el/alarm(ring, key_in) (receptor = heat alarm), brain_el(face, mood, alarm_lit), teacup_el,
-medal_el, drink_el(kind), protein_el, bird_el, mouse_el, seeds, plant, padlock_el, key_el, fire_cone, flames_row, thermo, sweat.
+medal_el, drink_el(kind), protein_el, bird_el, mouse_el, seeds, plant, padlock_el, key_el, fire_cone, flames_row, thermo, sweat. · anim_props_lib10 (ep 10): candy_el(col), lollipop_el, bucket_el (pumpkin pail), sugar_el(mood) (glucose cube),
+packet_el, cup2_el(label), pancreas_el(awake), stomach_el, ikey_el (insulin key), cell_el(open_k, sugar_in) (cell with a door),
+sugar_gauge (dial with tight-range band), thermostat_el, rating_board, party_hat_el, witch_hat_el, balloon_el, ghost_el, clock_el,
+tooth, test_card_el, head_pos(x,y,s), blindfold, mom(...) (Chubby-style mom: hair + bun), scientist(...) (lab coat + goggles);
+extra stage schemes "night" and "lime".
 
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.
