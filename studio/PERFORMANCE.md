@@ -9,16 +9,21 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
-## Instagram (snapshot 2026-10-27 15:40 IST — identical to 05:45, 09:15, 10:10, 11:00 and 13:20; Metricool reel stats have not moved since 26 Oct)
+## Instagram (snapshot 2026-10-28 01:45 IST — **sync resumed**: first new numbers since 26 Oct; posts from 26–27 Oct now have rows)
 | Date | Video | Style | Len | Views | Reach | Avg watch | 3-s view rate | Likes | Shares | Saves |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 10-27 | Movie theaters make money on popcorn (autopilot) | animated, calm voice | ~75 s | 5 | 0 | – | – | 1 | 0 | 0 |
-| 10-26 | Printer ink costs more than champagne (autopilot) | animated, calm voice | ~75 s | 1,366 | 1,187 | 21.5 s | **74.0%** | 20 | 0 | 0 |
-| 10-26 | Planet Fitness $15/month (autopilot) | animated, calm voice | ~75 s | 209 | 166 | 22.2 s | 64.0% | 4 | 0 | 0 |
-| 10-26 | Chick-fil-A closed Sundays (autopilot) | animated, calm voice | ~75 s | 176 | 143 | 18.3 s | 54.2% | 4 | 0 | 0 |
-| 10-26 | Amazon's money machine is AWS (autopilot) | animated, calm voice | ~70 s | 225 | 193 | 13.1 s | 50.0% | 6 | 0 | 1 |
+| 10-28 | De Beers: 2 months' salary (autopilot, B/E, roadmap "three moves") | animated, calm voice | 118 s | 0 | 0 | – | – | 0 | 0 | 0 |
+| 10-27 | Airline miles: Amex paid Delta $8.2B (autopilot, F) | animated, calm voice | 101 s | 186 | 160 | 24.7 s | 64.8% | 6 | 0 | 1 |
+| 10-27 | Gas stations barely make money on gas (autopilot, B) | animated, calm voice | 81 s | **1,503** | 1,175 | 22.4 s | 66.9% | 28 | 1 | 0 |
+| 10-27 | Duolingo $1B from your streak (autopilot, F) | animated, calm voice | 93 s | 158 | 140 | 13.6 s | **24.8%** | 3 | 0 | 0 |
+| 10-27 | Visa never lends you a dollar (autopilot, F) | animated, calm voice | ~70 s | 59 | 52 | 15.0 s | 54.5% | 4 | 0 | 0 |
+| 10-27 | Movie theaters make money on popcorn (autopilot, F) | animated, calm voice | ~75 s | 145 | 122 | 12.7 s | 53.7% | 4 | 0 | 0 |
+| 10-26 | Printer ink costs more than champagne (autopilot, B) | animated, calm voice | ~75 s | 1,376 | 1,195 | 21.4 s | **73.7%** | 20 | 0 | 0 |
+| 10-26 | Planet Fitness $15/month (autopilot, F) | animated, calm voice | ~75 s | 1,279 | 1,085 | 26.2 s | 69.5% | 26 | 2 | 1 |
+| 10-26 | Chick-fil-A closed Sundays (autopilot, F) | animated, calm voice | ~75 s | 181 | 148 | 18.3 s | 54.4% | 4 | 0 | 0 |
+| 10-26 | Amazon's money machine is AWS (autopilot, F) | animated, calm voice | ~70 s | 231 | 200 | 12.8 s | 50.5% | 6 | 0 | 1 |
 | 10-25 | Starbucks is secretly a bank (2nd time!) | animated, energetic voice | 55 s | 412 | 342 | 17.3 s | 61.6% | 14 | 2 | 0 |
-| 10-25 | Costco $1.50 hot dog | animated, energetic voice | 68 s | 1,225 | 1,066 | 23.0 s | 64.1% | 39 | 0 | 4 |
+| 10-25 | Costco $1.50 hot dog | animated, energetic voice | 68 s | 1,227 | 1,069 | 23.0 s | 64.1% | 39 | 0 | 4 |
 | 10-25 | 4 restaurant tricks | animated, calm voice | 75 s | 1,466 | 1,264 | 25.1 s | 67.0% | 30 | 4 | 6 |
 | 10-25 | McDonald's is a real-estate company | cut-out collage | ~60 s | 1,281 | 1,069 | 20.3 s | 65.5% | 28 | 1 | 3 |
 | 10-24 | Couple beat the lottery | AI footage | – | 39 | 23 | 10.3 s | 23.1% | 2 | 0 | 0 |
@@ -33,6 +38,7 @@ Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** se
 | 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
 | 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(28 Oct 01:45 IST, Hoover run: Instagram rows moved for the first time since 26 Oct — Planet Fitness jumped 209 → 1,279 views, gas station 1,503 on day 1; YouTube rows still identical to 27 Oct (no rows after Chick-fil-A).)
 (27 Oct 23:30 IST, R&D Story run: **9th identical pull** on both platforms, every row number-for-number the same; still no rows for
 Visa, Duolingo, gas, airline, De Beers, Monopoly. Sync stalled ~33 h.)
 (27 Oct 21:00 IST, Monopoly run: **8th identical pull** on both platforms (IG + YT rows number-for-number the same as 15:40 IST; popcorn 5 views /
@@ -74,6 +80,21 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
 | 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (28 Oct 01:45 IST, Hoover run — first fresh Instagram data in ~33 h)
+L. **Everyday-object (B) topics keep winning on day 1:** gas station 1,503 views / 66.9 % 3-s / 22.4 s, printer ink 1,376 / 73.7 %,
+   Costco 1,227 / 64.1 % → B ≈ 1,370 views. Pure F business-model posts from 26–27 Oct: Visa 59, popcorn 145, Duolingo 158, airline
+   186, Chick-fil-A 181, AWS 231 views. **Exception:** Planet Fitness (F) grew late, 209 → 1,279 views, 69.5 % 3-s, 26.2 s (35 % of
+   length — our best hold) — an F topic about *your own* gym habit behaves like B/E. → Insight I still stands, refined: what wins is
+   "something in the viewer's own life", not the type letter.
+M. **Duolingo's 3-second rate collapsed to 24.8 %** (every other animated reel 50–74 %) with a normal topic → the first frame /
+   first line lost people, not the topic. Its hook was a slow statement over a phone prop. → Frame 1 must already be the surprising
+   object in motion with the question on screen (PLAYBOOK §6); this run's frame 1 = a vacuum cleaner with wings spraying plane tickets.
+N. **Roadmap prediction (insight K) — partly confirmed:** no-roadmap Duolingo 15 % of length, airline 24 %, Visa ~21 % (all < 25 %,
+   as predicted), but gas station 28 % without one and roadmap popcorn only ~17 % → roadmap helps but is not sufficient; hook and
+   topic matter more. Keep R8 (cheap) and judge again at n ≥ 10. De Beers (roadmap) and Monopoly have no data yet.
+   Avg watch as % of length so far: Planet Fitness 35 %, Costco 34 %, restaurant 33 %, printer 29 %, gas 28 %, airline 24 %,
+   AWS 18 %, popcorn 17 %, Duolingo 15 %.
 
 ## Insights (27 Oct 23:30 IST, R&D Story run — script structure vs retention; `tools/story_check.py`, `lab/story/`)
 K. **A roadmap in the script ("Step one… Step two", "four secrets, the last one is genius") goes with ~10 points more of the video

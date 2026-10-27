@@ -69,21 +69,6 @@ Sources: Restaurant Dive Dec 2018 https://www.restaurantdive.com/news/burger-kin
 Marketing Dive 7 Dec 2018 / 12 Feb 2019 https://www.marketingdive.com/news/burger-kings-whopper-detour-generated-15m-app-downloads/548203/ ·
 Adweek 19 Jun 2019 https://www.adweek.com/creativity/whopper-detour-burger-kings-masterpiece-of-trolling-wins-direct-grand-prix-at-cannes/
 
-### 6. CLAIMED 2026-10-28 (video run) — A vacuum company gave away so many free flights it lost its European business — type A · 31/35 (5/5/3/5/5/4/4→5 once checked)
-Hook: "Do you know a vacuum company gave away so many free flights it lost its whole European business?"
-Beats: Aug 1992 UK: spend £100+ on Hoover products → two free return flights to Europe; Nov 1992 adds New York/Florida (tickets
-worth ~£600) → cheapest qualifying product ~£119, so people bought vacuums just for tickets → Hoover planned for ~50,000
-applications; several hundred thousand qualified → deadlines and rejected dates left many without flights; customers formed a
-pressure group → ~220,000 people flew → three senior executives fired; trade press: £48m cost by June 1995 → 1995 Maytag sold Hoover
-Europe to Candy for ~£106m ($170m); court cases ran until ~1998.
-Twist: a promotion to clear stock cost far more than the sales it brought — the parent sold the business. Takeaway: before offering
-anything "free", work out the cost if everyone says yes.
-Visuals: vacuum with wings; a queue with suitcases around a shop; plane tickets shooting out of a vacuum bag.
-Cautions: **find one more major outlet (BBC/Guardian) for the £48m before use** — or use the 1993 wire numbers instead (R&D run 4): Maytag took a "$30 million after-tax charge" and posted a Q1 1993 loss (UPI, 27 Apr 1993 https://www.upi.com/Archives/1993/04/27/Promotion-fiasco-leaves-Maytag-with-loss/6906735883200), three executives fired (TIME, 12 Apr 1993 https://time.com/archive/6722860/marketing-madness/); "over £100m" is unsourced; Hoover did not go bust;
-don't name the fired executives; don't call it fraud.
-Sources: Marketing Week 2 Jun 1995 https://www.marketingweek.com/candy-poised-to-buy-ailing-hoover-europe/ · Marketing Week (220,000 flew)
-https://www.marketingweek.com/hoover-fails-to-shake-off-free-flights-horror/ · Inc. Aug 2023 · Wikipedia (cites BBC 13 May 2004) https://en.wikipedia.org/wiki/Hoover_free_flights_promotion
-
 ### 7. A man tried to buy a fighter jet with Pepsi points — type A · 30/35 (5/5/3/5/3/4/5)
 Hook: "Do you know a college kid tried to buy a real fighter jet with soda points?"
 Beats: 1995–96 "Pepsi Stuff" ad ends with a teen landing a Harrier at school: "HARRIER FIGHTER 7,000,000 PEPSI POINTS" → catalog
@@ -331,6 +316,28 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
   [CD&R release, 9 Apr 2026](https://www.cdr.com/news/sealed-air-announces-completion-of-acquisition-by-cd-and-r)
 
 ## Used (already made — never again)
+### USED 2026-10-28 (posted 28 Oct 10:00 IST) — Hoover's free flights: three mistakes, three bosses fired, European business sold — type A · 31/35 (5/5/3/5/5/4/5)
+Hook: "Do you know a vacuum company gave away so many free flights it lost its whole European business?"
+Beats: Aug 1992 UK: spend £100+ on Hoover products → two free return flights to Europe; Nov 1992 adds New York/Florida (tickets
+worth ~£600) → cheapest qualifying product ~£119, so people bought vacuums just for tickets → Hoover planned for ~50,000
+applications; several hundred thousand qualified → deadlines and rejected dates left many without flights; customers formed a
+pressure group → ~220,000 people flew → three senior executives fired; trade press: £48m cost by June 1995 → 1995 Maytag sold Hoover
+Europe to Candy for ~£106m ($170m); court cases ran until ~1998.
+Twist: a promotion to clear stock cost far more than the sales it brought — the parent sold the business. Takeaway: before offering
+anything "free", work out the cost if everyone says yes.
+Visuals: vacuum with wings; a queue with suitcases around a shop; plane tickets shooting out of a vacuum bag.
+Cautions: **find one more major outlet (BBC/Guardian) for the £48m before use** — or use the 1993 wire numbers instead (R&D run 4): Maytag took a "$30 million after-tax charge" and posted a Q1 1993 loss (UPI, 27 Apr 1993 https://www.upi.com/Archives/1993/04/27/Promotion-fiasco-leaves-Maytag-with-loss/6906735883200), three executives fired (TIME, 12 Apr 1993 https://time.com/archive/6722860/marketing-madness/); "over £100m" is unsourced; Hoover did not go bust;
+don't name the fired executives; don't call it fraud.
+Sources: Marketing Week 2 Jun 1995 https://www.marketingweek.com/candy-poised-to-buy-ailing-hoover-europe/ · Marketing Week (220,000 flew)
+https://www.marketingweek.com/hoover-fails-to-shake-off-free-flights-horror/ · Inc. Aug 2023 · Wikipedia (cites BBC 13 May 2004) https://en.wikipedia.org/wiki/Hoover_free_flights_promotion
+Verified in the video run (28 Oct): $30M after-tax charge (UPI 27 Apr 1993 + TIME 12 Apr 1993); 3 executives fired (TIME, Funding Universe);
+~220,000 flew (Marketing Week + Chief Marketer 2005 + Funding Universe); £48M (Marketing Week 2 Jun 1995 + Campaign + Management Today);
+June 1995 sale of the European operations for $164.3M cash, after-tax loss $135.4M (Maytag 1995 annual report, SEC EDGAR 0000063541-96-000006);
+buyer Candy (BBC2 Ceefax 30 May 1995, Marketing Week, Funding Universe); 80,000 extra appliances Dec–Jan = promotion experts' estimate (UPI).
+Hook used as a wh-question ("What happens when a vacuum company gives away free flights, and everyone says yes?") — avoids claiming the
+promotion alone caused the sale (Hoover Europe was already loss-making; say the facts in order). Not verified → left out: "expected 50,000",
+"£100m+", market share −90 %, the van-hostage story (single source), Royal Warrant withdrawal.
+
 ### USED 2026-10-27 (posted 28 Oct 05:00 IST) — Monopoly was invented to warn against monopolies — type D · 32/35 (5/5/4/5/4/4/5)
 Hook: "Do you know Monopoly was invented to teach people that monopolies are BAD?"
 Beats: Lizzie Magie (follower of economist Henry George) patents "The Landlord's Game", 5 Jan 1904 (US 748,626) → two rule sets:

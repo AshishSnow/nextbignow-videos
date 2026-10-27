@@ -137,3 +137,16 @@ def bubbles(t0, n_=7, level=-26):
     for i in range(n_): add(pop(level - (i % 3), 1300 + 220 * (i % 4)), t0 + i * 0.11 + 0.03 * (i % 2))
 
 
+# motor whirr (vacuum, drill, fan) + jet fly-by — added 28 Oct 2026 (Hoover video); stereo like the others
+def whirr(dur=1.2, level=-28, f0=180.0):
+    tt = np.arange(int(dur * SR)) / SR; env = np.clip(tt / 0.25, 0, 1) * np.clip((dur - tt) / 0.3, 0, 1)
+    tone = sum(np.sin(2 * np.pi * f0 * h * tt * (1 + 0.04 * np.sin(2 * np.pi * 3 * tt))) / h for h in (1, 2, 3, 5))
+    noise = signal.sosfilt(signal.butter(2, [600, 5000], "band", fs=SR, output="sos"), np.random.default_rng(3).standard_normal(len(tt)))
+    x = (0.6 * tone / 2 + 0.4 * noise) * env; x = (x / (np.abs(x).max() + 1e-9) * db(level)).astype(np.float32); return np.stack([x, x], 1)
+
+
+def jet(dur=2.2, level=-24):
+    tt = np.arange(int(dur * SR)) / SR; env = np.exp(-((tt - dur * 0.55) / (dur * 0.28)) ** 2)
+    nz = np.random.default_rng(9).standard_normal(len(tt))
+    lo = signal.sosfilt(signal.butter(2, [200, 2400], "band", fs=SR, output="sos"), nz)
+    x = lo * env; x = (x / (np.abs(x).max() + 1e-9) * db(level)).astype(np.float32); p = np.linspace(0, 1, len(x)); return np.stack([x * (1 - 0.6 * p), x * (0.4 + 0.6 * p)], 1)

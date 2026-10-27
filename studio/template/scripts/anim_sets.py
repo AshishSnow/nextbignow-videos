@@ -4,7 +4,7 @@
 #   f = set_view("study", t, zoom=1.0, cx=540, cy=960, blur=0)   -> full-frame background (cached base, camera move, DOF blur)
 #   say(f, "YOU TOLD OAK", y=1240)      -> big punchy caption (white, thick black stroke), centred, fits the safe width
 #   part_badge(f, "PART 1", "HOW MONOPOLY BEGAN")  -> series badge + title bar (top right, inside the safe zone)
-# Sets: street, study, parlor, office, store, dusk (set_view also sets the matching character light).
+# Sets: street, study, parlor, office, store, dusk, airport (set_view also sets the matching character light).
 # FX: smoke(f, t), embers(f, t), glow_eyes(f, x, y). Framing: fg_hand(f, x, y, s) = big blurred foreground hand.
 # HUD: hud_clock(f, "DAY 1", "6:14 AM", "ROUTE 2"), hud_rule(f, 1, "NEVER SELL THE PATENT", y), hud_timer(f, secs),
 #      hud_choice(f, "MOST OF YOU SAID", "SELL IT", y). Characters: person(...) in anim_mascot3d.py (guy() = the hero).
@@ -153,14 +153,16 @@ def _set_base(name):
     elif name == "dusk":
         _dusk(f)
         return np.clip(f, 0, 1).astype(np.float32)
+    elif name == "airport":
+        return _airport_base()
     _atmos(f, name)
     # soft room light falloff + corner occlusion
     f *= (0.9 + 0.16 * np.exp(-(((_xx - W / 2) / 700) ** 2 + ((_yy - 800) / 900) ** 2)))[..., None]
     return np.clip(f, 0, 1).astype(np.float32)
 
 
-_FLOOR = dict(street=1150, study=1280, parlor=1240, office=1250, store=1200, dusk=1250)
-SET_LIGHT = dict(street="day", study="warm", parlor="warm", office="cool", store="day", dusk="dusk")
+_FLOOR = dict(street=1150, study=1280, parlor=1240, office=1250, store=1200, dusk=1250, airport=1180)
+SET_LIGHT = dict(street="day", study="warm", parlor="warm", office="cool", store="day", dusk="dusk", airport="day")
 SETS = tuple(_FLOOR)
 
 
@@ -407,3 +409,26 @@ def hud_choice(f, label="MOST OF YOU SAID", choice="SELL IT", y=1480, col=(36, 1
         if k <= 0: return
         s *= 0.8 + 0.2 * eback(k)
     comp(f, el, 540, y, scale=s, op=op)
+
+
+# ---------------- airport departure hall (Hoover video, 28 Oct 2026): glass wall + parked jet, apron, check-in desks ----------------
+def _airport_base():
+    f = np.zeros((H, W, 3), np.float32)
+    _srect(f, 0, 0, W, 1180, (150, 196, 240), (230, 236, 246))                 # sky through the glass wall
+    m, win = _skyline(17, 60, 170)
+    city = _c((150, 176, 210)); mm = (cv2.GaussianBlur(m, (0, 0), 2) * (_yy < 900) * (_yy > 600))[..., None]
+    f[:] = _mix(f, city, mm * 0.6)
+    _srect(f, 0, 860, W, 980, (120, 124, 134), (96, 100, 110))                   # apron
+    for x in range(-40, W, 160): cv2.line(f, (x, 930), (x + 90, 930), _scv((250, 220, 80)), 5, cv2.LINE_AA)
+    comp(f, plane_el(980), 560, 760)
+    for x in range(0, W + 1, 270): cv2.line(f, (x, 0), (x, 1180), _scv((60, 66, 78)), 16, cv2.LINE_AA)   # mullions
+    for y in (300, 620): cv2.line(f, (0, y), (W, y), _scv((60, 66, 78)), 10, cv2.LINE_AA)
+    _srect(f, 0, 980, W, 1180, (226, 222, 214), (206, 200, 190), (90, 90, 96), 2)  # check-in desks
+    for x0 in (40, 400, 760):
+        _srect(f, x0, 1000, x0 + 280, 1180, (64, 92, 150), (44, 66, 116), (30, 30, 40), 3)
+        _srect(f, x0 + 30, 1030, x0 + 250, 1070, (250, 250, 246), (230, 230, 224))
+    f[1180:] = 0; _sfloor(f, 1180, 540, (236, 236, 240), (176, 180, 190), line_col=(160, 164, 176))
+    _sglow(f, 540, 400, 700, (255, 250, 236), 0.2)
+    _atmos(f, "airport")
+    f *= (0.9 + 0.16 * np.exp(-(((_xx - W / 2) / 700) ** 2 + ((_yy - 800) / 900) ** 2)))[..., None]
+    return np.clip(f, 0, 1).astype(np.float32)

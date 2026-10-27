@@ -105,6 +105,12 @@ moves is re-rendered with softer moves (it prints `prosody gate …` with the li
 Since 27 Oct the cleanup chain is lighter (`DEESS=-8`, `ROOM_DB=-27`, `COMP=1.5`; old: −11/−21/2.2): per-line UTMOS 4.396 → 4.425, worst line
 3.996 → 4.063 on the De Beers script (chain-only A/B on one fixed raw take, `lab/voice_chain/chain_ab.py`).
 Write line speeds 1.0–1.06 and pauses 0.2–0.45 in `vo_lines.py` as in the examples; SPD/PZ make them calm.
+Pace check (28 Oct, Hoover): line speeds of 1.0–1.02 with the default SPD 0.88 gave only 152 wpm speaking (target 165–190). If
+`voice_report` says < 165 wpm, re-run with `SPD=0.96` (Hoover: 152 → 160 wpm, per-line UTMOS 4.439 → 4.423, range 18.0 → 17.7 st,
+ASR clean) — or write line speeds 1.02–1.06 from the start. **Compare takes on per-line UTMOS (mean/min), not the chunked whole-file
+number:** two Hoover takes that differed in only two lines scored 4.44 vs 4.31 chunked but 4.421 vs 4.423 per-line.
+Run voice_report only after make_vo has fully exited (it reads `work/align.json`, written last; a report on a fresh vo.wav with the
+old align.json gives wrong per-line numbers).
 Weak short reveal lines (per-line UTMOS < 4.2, e.g. "Her income? Zero." 4.14): first lengthen the text slightly ("Her income that year?
 Zero." → 4.29, 27 Oct Monopoly A/B) — 2–3-word lines are always the weakest. Yes/no hook questions get softened by the prosody gate
 (q_rise −1…−2 st): keep them short and put the key word last.
@@ -188,9 +194,22 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   game trade dress) + `board_xy` (square centres, for hopping pawns), `pawn_el`, `house_el`, `book_el` (rulebook cover, fist/hands icon),
   `gamebox_el`, `census_el`, `gavel_el`, a **woman character** `lizzie`/`woman` (guy + dress + hair bun) and `hat` (fedora) for a second
   man — history stories need more than one person. `poster_el(..., ring=False)` drops the De Beers ring drawing (it showed through the text).
+- Wild-story structure that worked (28 Oct, Hoover): stakes first ("three bosses fired, European business sold"), then the roadmap
+  "three mistakes, the last one the cruelest", each mistake opened with a `MISTAKE #n` chip + `say()` label, a recurring cast (the boss,
+  the family, the travel agent) across sets, and the loop line that repeats the hook question ("what happens when everyone says yes?").
 - Origin/history stories (type D/A): one person per era, a year card (split-flap `flapboard("1904")`) at every jump in time, and a
   spotlight-alone shot for the "and what happened to her?" re-hook.
 - Real people's names in the VO: Kokoro/ASR mangle rare surnames ("Frances Gerety" → "Francis Jarity") — drop the name from the VO or put it on screen only.
+- Generic props added 28 Oct (Hoover free flights): `vacuum_el` (generic upright vacuum), `wing_el` + `winged_vacuum` (flapping
+  feathered wings on any object), `sky_bg` (open sky, no ground — for flying objects), `ticket_el` (paper airline ticket, any destination),
+  `carton_el` (appliance box with a plain label), `ad_poster_el` (1990s shop promo with starburst + "*conditions apply"), `form_el`
+  (claim form), `pin_el` (map pin + label), `atlantic` (ocean map with flight arc); `cheque_el(..., year=)`; full-frame set `airport`;
+  SFX `whirr` (motor) and `jet` (fly-by) in sfx_lib.
+- **Captions on light full-frame sets** (store, office, parlor, airport, street): `ui_word` with a white/yellow lead disappears on light
+  walls (caught 28 Oct) → use `say()` (white/yellow with black stroke) or a coloured `chip()`; keep `ui_word` for prop shots on stage().
+  Scene captions go at y≈520–830 when characters fill the lower half (faces sit at y≈1250–1400 for s≈0.7–0.9).
+- Things held overhead (boxes, placards): centre them at `feet_y − 520·s − 90` so they sit above the head, not over the face; keep
+  placards inside x 250–830 or their text runs off the frame.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
   `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.
@@ -203,7 +222,7 @@ python3 -I scripts/anim.py x 2,40,100,...          # test frames -> frames/r_NNN
 python3 scripts/music.py && python3 scripts/mix.py # score (edit cues section) + mix (edit SFX section) -> work/mix.wav
 bash scripts/render_all.sh                         # -> work/final.mp4  (~10–15 min, run in background)
 ```
-- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano; next try reggae, disco, marching band, baroque harpsichord, etc.) using GeneralUser GS GM programs;
+- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano, 90s British ska; next try disco, marching band, baroque harpsichord, sea shanty, etc.) using GeneralUser GS GM programs;
   cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1 dBTP**; VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.
 - VO level automation (`LINE_DB` in mix.py, since 27 Oct): quiet intimate/"secret" lines −2 to −3 dB, lift reveal lines +1 dB; a −60 dB room tone fills the gaps so pauses don't drop to digital silence.
