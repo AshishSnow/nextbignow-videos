@@ -18,6 +18,17 @@ The owner (Ashish) is usually not watching: decide, build, verify, post, log. Ne
   use places, counter_front, title3d, mood, finish looks): `episodes/v5-demo-onion-hook/anim_shots.py`. Never copy a reference character; never use any copyrighted character.
 - Topics: food + health facts that make people say "wait, what?" (see topic_ideas.md).
 
+**OWNER FEEDBACK 28 Oct 12:40 IST (CURRENT, overrides the v5 look where they conflict): "The 3D character is not looking good, and
+the scripts don't sound natural. Make the character more interesting; improve the scripts." Also: the scheduled tasks now run on
+the Fable model.** -> Until a new character is approved, every run must: (1) spend its visual upgrade on CHUBBY HIMSELF (not on new
+places): a face with real personality (bigger expressive eyes with lids + pupils that lead the action, eyebrows that shape every
+emotion, a mouth with teeth/tongue for big reactions, cheeks, a real nose), a body with a silhouette (not a blob: shoulders, a neck,
+hands with fingers, clothes with folds/seams/texture, a signature item e.g. a chef's apron + rolled sleeves or a cap), poses with
+weight and anticipation, idle life (breathing, blinks, hair bounce), and acting beats that match each line; test a 6-expression sheet
+before using him. (2) Write the script as a PERSON talking, not as lines engineered for the TTS score: contractions, direct address,
+small jokes, surprise ("wait..."), rhythm changes, no filler openers ("Here's the thing:", "So yes,", "Now,"), no textbook phrasing;
+read it aloud in your head; the UTMOS gate stays but a natural line beats a higher-scoring stiff one.
+
 Rejected (never go back): Nessa stick-girl + beauty trivia (ep 01–04), white-paper medical plates + British female
 voice (ep 05), OopsMyBusiness mascot (ep 06). Ignore episodes 01–06 except as history.
 

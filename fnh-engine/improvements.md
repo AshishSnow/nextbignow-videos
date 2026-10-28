@@ -9,6 +9,13 @@ concepts... it's not about the character's face or dress, it's about COLOURS, lo
 style of clothes, more things."** -> v5 look (Chubby v2 3D shading + hoodie/jeans/sneakers, cinematic light + colour,
 real places, 3D titles) and the M2 voice. Keep pushing BOTH every run: never copy a reference character.
 
+**Owner, 28 Oct 12:40 IST: "The 3D character is not looking good, scripts don't sound natural. Make the character more interesting,
+improve the scripts." Tasks switched to the Fable model.** -> Priority for the next runs: a Chubby v3 with a real face, silhouette,
+hands, clothes with texture and acting (see PLAYBOOK top), and scripts written as a person talking (no filler openers, no textbook
+sentences). Honest self-review of eps 15-16: the face is three dots and a line, the body is a blob with tube arms, the hoodie is a flat
+mint shape, poses are symmetrical and stiff; lines like "Here's the thing:" / "So yes, the chewy part stays in one piece" were written
+to please the UTMOS gate, not a listener.
+
 The owner's standing order (26 Oct 2026): "Don't settle. With every video improve: more natural voice, better video.
 Understand the new algorithm and act on it — I shouldn't have to tell you every time." Growth takes time; quality and
 learning beat speed. Every run must leave the channel a little better than it found it.
@@ -100,6 +107,9 @@ Voice (a mature, natural, warm guy — never robotic):
 - [ ] Next voice ideas to lab-test with voice_report: per-line SPD variety, EXS 0.6, STR 1.2 on payoff words, shorter
       lines (<= 12 words), commas for breath points. Keep the M2 blend (own register, no lift).
 Visual / edit:
+- [ ] 28 Oct OWNER: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
+      real silhouette (neck, shoulders, fingers), textured clothes with folds + a signature item (apron/cap), weighty poses, idle life.
+      Build + review a 6-expression / 6-pose sheet first, then use in the next episode. Keep him clearly FreshNestHub (mint).
 - [x] 27 Oct v5 look: Chubby v2 (fnh_char3d.py) + anim_cine.py (grade/bloom, kitchen/room/dusk places, god rays, mood,
       title3d, light_wrap, counter_front) — demo zz-v2demo. Next steps below.
 - [~] Places library (ep 15: set_chocolatier + marble_front, set_fridge_night; ep 16: set_gut inside-the-body tunnel): one new lit place per run when the topic needs it (bathroom mirror, supermarket aisle, gym, street
@@ -122,6 +132,8 @@ Topic:
 - [ ] Prefer universal kitchen/daily-habit topics (biggest reach so far); use the daily trend scan for timely ones.
 - [ ] Every topic must have a "wait, what?" fact in the first line + a takeaway people can use today.
 Script / packaging:
+- [ ] 28 Oct OWNER: scripts must sound like a person talking — ban filler openers ("Here's the thing", "So yes", "Now,"), use
+      surprise + small jokes + rhythm changes, read aloud test; natural beats UTMOS-optimised.
 - [ ] Hook with stakes in < 2 s; tease the best fact early; loop the last line into the first.
 - [ ] Practical takeaway line in every video (what to do with this fact) — boosts saves/shares.
 - [ ] Comment question in caption + firstCommentText.
