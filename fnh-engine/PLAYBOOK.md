@@ -88,6 +88,23 @@ Format: `(id, text, speed, pause_after, base_semitones, range_expand, [stressed 
   line → one honest catch or safe tip → a twist/bonus fact → CTA "Send this to the friend who …!" tied to the topic.
 - Numbers as words ("ten a day", "four milligrams"). Avoid words the TTS/ASR confuses (check the read-back).
 
+### Script voice (28 Oct, owner: "scripts don't sound natural") — write it as a PERSON talking
+Before any line goes to the voice engine, it must pass this: would a real person say it to a friend across a table?
+- NO filler openers: "Here's the thing:", "So yes,", "Now,", "Scientists call it", "Experts say" as a sentence start, "It's called X."
+  as its own flat line. Name things inside a real sentence: "That squeeze has a name: peristalsis. Fancy word, simple move."
+- Talk TO the viewer: "you", "your", questions you'd really ask ("Ever wondered where it goes?"), small reactions ("wait...",
+  "yeah, really", "I know."). One small joke per 30 s. Vary rhythm: a 3-word line after a 15-word one.
+- Say it the easy way: "it comes out whole", not "it exits the body intact". Numbers as feelings: "that's sixty-one THOUSAND hours"
+  with a beat before the big number. Explain, then confirm: "...so it just rides along. Like a passenger."
+- Read every line aloud in your head. If it sounds like a textbook or a caption, rewrite it. The UTMOS gate still applies, but a
+  natural line always beats a stiffer line that scores 0.02 higher. Reduce stressed-word markup; let the sentence carry the stress.
+Sample rewrite (ep 16, same facts):
+  OLD: "Here's the thing: your gut doesn't have to digest something to move it."   -> NEW: "And that's the part everyone gets wrong. Your gut doesn't need to digest something to move it along."
+  OLD: "So yes, the chewy part stays in one piece, all the way through."           -> NEW: "So the chewy bit? Yeah, it really does stay in one piece. All the way through."
+  OLD: "That squeeze rolls along like a wave. It's called peristalsis."             -> NEW: "The squeeze travels down the tube like a wave. There's a name for that: peristalsis."
+  OLD: "Scientists call it a housekeeping wave."                                     -> NEW: "Doctors actually call it the housekeeping wave. It's sweeping the floor between meals."
+  OLD: "Seven years would be over sixty thousand hours. The real number? About forty." -> NEW: "Seven years is... sixty-one thousand hours. The real number is about forty. Forty!"
+
 ## 5. Build
 ```
 P=$(bash $ENG/new_ep.sh NN-slug)          # project = studio template + FreshNestHub template (ep 07 files)
@@ -131,7 +148,16 @@ Then write (read the template versions first — they are the reference; use the
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
   synthesized ones). Keep the bed level and loudnorm section. VO/bed must be ≥ 14 dB on every line (printed).
 
-### Chubby API (`fnh_char.py` + `fnh_char3d.py` — same API, v2 look loaded after v1)
+### Chubby v3 (28 Oct, `template/fnh_char_v3.py`, loaded after fnh_char3d.py — the CURRENT character)
+Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
+and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with
+fingers that point along the forearm, jeans with turn-ups, sneakers. Same `chub(...)` API as below, plus `t=` for idle life
+(breathing + automatic blinks) — pass `t=t` in every shot. `lean` now also tilts the head. Expressions: n, happy (smile-eyes),
+wow, sus, sad, smirk (one brow up), sleepy; `mouth=3` with expr="happy" = a laugh with closed eyes. Review sheet:
+/home/claude/outputs/chubby_v3_sheet.jpg (regenerate with the sheet script in improvements.md G). Make him ACT: a different
+pose, look and expression per shot, hands doing something, and a reaction shot on every reveal.
+
+### Chubby API (`fnh_char.py` + `fnh_char3d.py` — same API, v2 look loaded after v1; v3 overrides both)
 `chub(f, x, y, s, la, ra, ll, rl, mouth, blink, brow, look, expr, tint, hold, hold_off, hold_front, bob, op, lean, squash, sit, nose, cap)`
 - (x, y) = feet baseline; height ≈ 480·s; head centre ≈ (x, y − 420·s). Typical: s 0.8–1.15 at y 1440–1480.
 - arms (upper°, fore°) from straight down, + = outward: relaxed (20, 10); cheer (150, 170); point (70, 40);

@@ -107,7 +107,7 @@ Voice (a mature, natural, warm guy — never robotic):
 - [ ] Next voice ideas to lab-test with voice_report: per-line SPD variety, EXS 0.6, STR 1.2 on payoff words, shorter
       lines (<= 12 words), commas for breath points. Keep the M2 blend (own register, no lift).
 Visual / edit:
-- [ ] 28 Oct OWNER: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
+- [~] 28 Oct OWNER: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
       real silhouette (neck, shoulders, fingers), textured clothes with folds + a signature item (apron/cap), weighty poses, idle life.
       Build + review a 6-expression / 6-pose sheet first, then use in the next episode. Keep him clearly FreshNestHub (mint).
 - [x] 27 Oct v5 look: Chubby v2 (fnh_char3d.py) + anim_cine.py (grade/bloom, kitchen/room/dusk places, god rays, mood,
@@ -132,7 +132,7 @@ Topic:
 - [ ] Prefer universal kitchen/daily-habit topics (biggest reach so far); use the daily trend scan for timely ones.
 - [ ] Every topic must have a "wait, what?" fact in the first line + a takeaway people can use today.
 Script / packaging:
-- [ ] 28 Oct OWNER: scripts must sound like a person talking — ban filler openers ("Here's the thing", "So yes", "Now,"), use
+- [~] 28 Oct OWNER (guide + sample now in PLAYBOOK step 4): scripts must sound like a person talking — ban filler openers ("Here's the thing", "So yes", "Now,"), use
       surprise + small jokes + rhythm changes, read aloud test; natural beats UTMOS-optimised.
 - [ ] Hook with stakes in < 2 s; tease the best fact early; loop the last line into the first.
 - [ ] Practical takeaway line in every video (what to do with this fact) — boosts saves/shares.
@@ -417,6 +417,13 @@ Story & topics:
 - [ ] Translucency / subsurface look for skin close-ups and fruit (reuse the set_gut rim-glow idea on Chubby's ears and on props)
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-28 13:30 (interactive, owner feedback) | CHARACTER DESIGN: appeal (visual) | What makes a cartoon kid read as a character
+  instead of a blob: (1) the eyes carry everything - big, slightly lidded, an iris with a dark ring + two catchlights, lashes thicker at
+  the outer corner, and lids that move per emotion (cheeks push the lower lid up in a real smile); (2) eyebrows are thick tapered SHAPES,
+  asymmetric for suspicion/smirk; (3) a nose, blush and freckles give the face a middle; (4) the mouth needs teeth + a tongue to read
+  from a phone; (5) a silhouette: neck, shoulders, a signature item (chef's apron), hands with fingers turned along the arm; (6) idle life
+  (breathing, blinks). Built template/fnh_char_v3.py (same chub() API, t= for idle). Sheet: outputs/chubby_v3_sheet.jpg | v3 approved
+  direction 'Pixar-style kid' by owner; first episode = next run | yes
 - 2026-10-28 11:30 | INSIDE-THE-BODY WORLDS (explaining + 3D look) | What makes an inside-the-body scene read as soft, wet, LIVING tissue
   instead of flat red paint: subsurface scattering - translucent things look soft, light bleeds through thin parts and into the shadows,
   and the effect is strongest when the light is BEHIND the surface (Jensen et al., UCSD graphics, 'subsurface scattering' examples:
