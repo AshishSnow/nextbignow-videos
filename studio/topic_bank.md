@@ -77,7 +77,7 @@ no Mario/characters/branding.
 Sources: Nintendo corporate history https://www.nintendo.co.jp/corporate/en/history/ · the-shashi (Nikkei Business) https://the-shashi.com/tse/7974/decisions/diversification-1961/ ·
 Automaton Jul 2026 (love-hotel myth)
 
-### 9. Your glasses, the shop and your eye insurance can be one company — type C · 30/35 (5/3/5/4/4/5/4→5 with careful wording)
+### 9. CLAIMED 2026-10-28 10:40 IST — Your glasses, the shop and your eye insurance can be one company — type C · 30/35 (5/3/5/4/4/5/4→5 with careful wording)
 Hook: "Do you know your sunglasses, the shop that sold them and your eye insurance can all belong to one company?"
 Beats: EssilorLuxottica owns Ray-Ban, Oakley, Persol, Oliver Peoples, Vogue Eyewear, Arnette, Costa, Foster Grant → makes frames
 under licence for Chanel, Prada, Armani, Burberry, Versace, Dolce&Gabbana, Michael Kors, Ralph Lauren, Coach, Tiffany, Swarovski →
