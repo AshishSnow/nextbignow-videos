@@ -128,7 +128,7 @@ Last updated: 26 Oct 2026.
 
 - **Scene length:** about 4–7 s per scene in 2–3 minute videos. Slower camera moves give the viewer time to absorb each idea.
 - **Explaining things:** use explanatory graphics with subtle 3D cards, such as size bars, comparison charts and icon grids, at the moments that need them.
-- **Captions:** two-tier and centred, at key moments only. The big-word baseline sits at y = 650.
+- **Captions:** two-tier and centred, at key moments only. The big-word baseline sat at y = 650 in the stick-figure look; from episode 33, see 5b.
 - **Look:** vibrant sets, foreground depth-of-field dust and fog, a sound effect for every moment, and screen shake on impacts.
 - **Sound under speech:** broadband noise effects (flush, crowd, waves, crash) go in the gaps between lines, not under words. The mix-alignment check catches it: words near a loud effect drift by more than 0.3 s.
 - **Loop:** the final scene flows back into the hook frame.
@@ -139,6 +139,26 @@ Last updated: 26 Oct 2026.
   - Check that the mix still lines up: align `mix16.wav` against the script and compare with the voice-only timings (mean drift should be under 0.05 s).
   - Look at a contact sheet of the rendered video.
 - **Format variety:** YouTube's July 2026 rule penalises mass-produced, templated videos. Rotate formats: survivor story (24–27), myth-buster explainer (28), and keep new sets, props and gags per episode.
+
+## 5b. The v3 look (from episode 33, approved 28 Oct)
+
+The user asked for richer colour, a more natural 3D feel and new clothes (reference: the "yourtrainerarc" reels). Episode 33 is the first one in this look, and it replaces the stick mascot from now on.
+
+- **Mascot ("Nova", `hero.py`):** painted 3D-look boy with a big head, spiky brown locks, thick brows, blush, real hands with fingers, and the **varsity outfit** (user picked B on 28 Oct): navy body, cream sleeves with a soft sheen, red and cream ribbed collar, cuffs and hem, a chenille "N" patch, snaps, a black tee, blue jeans, red high-tops and a watch. The other outfits stay in `OUTFITS` (`explorer`, `puffer`) for special episodes. It uses the same pose tuples as `toon.POSES`, so old scene code ports over.
+- **Lighting:** every part goes through `shade()` (soft form shadow multiplied by the scene's ambient tint, a key highlight, a rim light in the scene's colour, and a self-coloured outline) plus cast shadows and ground contact shadows. Each set has its own `Light` (`L_DUSK`, `L_NIGHT`, `L_LAVA`, `L_WATER`…) with an `amb` exposure multiplier, so the character sits *in* the scene, not on top of it.
+- **Hands:** never point with one raised finger. From the front it can read as a rude gesture. Point with the sideways finger-gun (`'point'`, thumb out) or use open hands.
+- **Accessories:** `acc='shades' | 'sleepmask' | 'snorkel'`, and `arm_over` draws an arm in front of the face.
+- **Sets (`cine.py`, `mcprops.py`):**
+  - Layered parallax landscapes (sky, glowing Moon, three tree rows with haze between them, a textured field with clumped grass, and near grass drawn *in front of* the feet).
+  - Depth-of-field blur on far rows and close-up backgrounds, plus bokeh, fireflies, dust, light rays and drifting cloud streaks.
+  - A realistic procedural Moon and Io.
+  - Space with nebulae; lunar surface; observatory; coastal city with a rising sea; underwater room; moonlit bedroom; ground cross-section; volcano land; Roche-limit ring debris.
+- **Post (`engine3.Episode3`):** world, then camera and transitions (`punch`, `whip`, `flash`, `dip`), then grade + bloom + vignette + film grain (per-scene grade matrix), then a **crisp UI overlay** (captions and cards drawn after the grade), then the watermark.
+- **Captions v3:** Anton condensed, white with a thick black stroke and a soft shadow, the key word in yellow, popping in. Rows: y 400/560 (top) or 1290/1450 (bottom). Info pills sit at y 345, under the watermark. Anton has no "×" or "≈", so write "X" and "~".
+- **First frame:** no fade from black. The question text is on screen from frame 0 (YouTube decides "viewed vs swiped" on the first frame).
+- **Anchors:** `ph()` returns the first match, so repeated phrases ("bring the Moon ten…") need `after=`. Print the scene table and check t0 < t1 for every scene.
+- **File size:** film grain changes every frame, so a CRF 14 master comes out about 9 Mbps (186 MB for 2:50) and GitHub rejects anything over 100 MB. Deliver the master to the user, and host a 2-pass 4.2 Mbps copy for Metricool (94 MB, 47.9 dB PSNR against the master, so it looks identical). Next time try lighter grain (alpha about 0.03).
+- **Cost:** about 1.3–2 s per frame per process. Render the two halves as **two separate background commands** (each has its own 2-hour limit); a 2:50 video takes about 70 minutes.
 
 ## 6. Posting
 
@@ -196,6 +216,15 @@ Last updated: 26 Oct 2026.
 - [José Salvador Alvarenga (Wikipedia)](https://en.wikipedia.org/wiki/Jos%C3%A9_Salvador_Alvarenga)
 - [CNN via WTVR: real-life castaway survived 438 days lost at sea](https://www.wtvr.com/2016/01/08/real-life-castaway-survived-438-days-lost-at-sea)
 
+### Episode facts (33)
+- Moon recedes about 3.8 cm (1.5 in) a year, measured with the Apollo 11 retroreflector since 1969 (accuracy ~2 cm): [NASA JPL](https://www.jpl.nasa.gov/news/apollo-11-experiment-continues-to-return-valuable-data/)
+- A day lasted just over 18 hours 1.4 billion years ago (Meyers & Malinverno, PNAS, 2018): [UW–Madison](https://news.wisc.edu/thank-the-moon-for-earths-lengthening-day)
+- Earth–Moon Roche limit about 19,900 km; inside it a moon breaks up into a ring: [Sky at Night](https://www.skyatnightmagazine.com/space-science/roche-limit)
+- Half the distance gives about 8x the tides (inverse cube), so 10x closer gives about 1000x the tidal pull; more quakes and volcanoes (Neil Comins, Jazmin Scarlett): [Space.com](https://www.space.com/what-if-moon-closer-to-earth)
+- Phobos moves ~2 m closer to Mars per century and should break into a ring in ~20–40 million years (Mittal & Black, Nature Geoscience, 2015): [Space.com](https://www.space.com/31195-mars-may-get-rings-like-saturn.html)
+- Solid ground rises and falls about 20 cm a day from Earth tides: [Old Farmer's Almanac](https://www.almanac.com/what-are-earth-tides-moons-surprising-pull-solid-earth)
+- Supermoon up to 14% bigger and 30% brighter than at apogee (context): [Royal Museums Greenwich](https://www.rmg.co.uk/stories/space-astronomy/what-supermoon)
+
 ## 7b. Topic backlog (researched, not yet made)
 
 - **What if you never stopped sneezing?** Donna Griffiths (UK) started sneezing on 13 Jan 1981 and had her first sneeze-free day on 16 Sep 1983, the 977th day. Guinness estimates about a million sneezes in the first year. Myth-busters: a measured sneeze peaks around 4.5 m/s (about 10 mph), not 100 mph (Tang et al. 2013). The photic sneeze reflex (the "ACHOO" syndrome) affects roughly 10–35% of people. Sources: [Guinness record](https://www.guinnessworldrecords.com/world-records/67595-longest-sneezing-fit), [PopSci on sneeze speed](https://www.popsci.com/science/article/2013-08/fyi-how-forceful-sneeze/), [PBS on the photic sneeze reflex](https://www.pbs.org/newshour/science/does-the-sun-make-you-sneeze). It is too close in format to the hiccups episode (29), so space it at least a week apart.
@@ -216,3 +245,4 @@ Last updated: 26 Oct 2026.
 | 30 | What if you swallowed your gum? | Journey format: follow one piece of gum (mouth → stomach → gut → exit) with a gum mascot that has a face. Myth-buster with a real 1998 case and a 5,700-year-old birch-tar "gum" twist. Close-up inset card for the gum-on-shoe gag. | pending |
 | 31 | What if you never cut your hair? | Growth cycle shown on an animated follicle (grow, rest, fall, new). "100,000 tiny projects quitting" gag. Xie Qiuping record vs a giraffe. Strength twist: one hair holds an apple, a full head two elephants. Circus hair-hang and tower ending. | pending |
 | 32 | What if you got lost at sea? | Salvador Alvarenga, 438 days adrift. Ocean set with bobbing skiff and a beard that grows across the episode. Map of the Pacific drift, seawater "debt" explainer with an IOU-stack gag, turtle-blood vs smoothie, quiet night scene for the sad beat (no gag), island arrival "HOLA!" gag. | pending |
+| 33 | What if the Moon came 10x closer? | **First v3 look**: painted 3D varsity mascot, cinematic dusk/night sets, DOF, bloom, grade and grain, crisp overlay captions. Real anchor: the Apollo 11 mirror panel (1969) and lunar laser ranging (Moon recedes 3.8 cm a year). Explainers: 10x wider and 100x brighter (10x10 grid of moons), 1000x tides (10x10x10 card), ground tides 20 cm, Io, Roche limit (~20,000 km) with the Moon shattering into a ring, Phobos, 18-hour days 1.4 billion years ago. Gags: sunglasses at midnight, sleep mask, snorkel in the beach house, Earth as a stress ball, sneaky Moon, fingernail speed. 2:50, 144 wpm. Mix drift 0.010 s. | pending |
