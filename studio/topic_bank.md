@@ -8,7 +8,7 @@ Each Ready entry: type (A–F, PLAYBOOK §2) · interest score · hook · story 
 Score = interest test (Wait-what / Story / Your life / Picture / Fresh / Share / Verifiable), PLAYBOOK §2.
 When scripting: turn the beats into a **roadmap** ("…in three moves", Move one/two/three, strongest last) and run `tools/story_check.py` (PLAYBOOK §4 story rules).
 
-### 2. Almost every banana you buy is the same clone — type B · 32/35 (5/4/5/5/3/5/5)
+### 2. CLAIMED 28 Oct 05:45 IST — Almost every banana you buy is the same clone — type B · 32/35 (5/4/5/5/3/5/5)
 Hook: "Do you know almost every banana you buy is a copy of the same plant?"
 Beats: Cavendish ≈ half of world bananas and almost all exported ones → seedless genetic clones, so one disease can hit them all →
 the old favourite Gros Michel was wiped out commercially by Fusarium wilt (Panama disease): Honduras alone lost 30,000 ha in
