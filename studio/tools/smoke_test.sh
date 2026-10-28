@@ -15,6 +15,24 @@ LINES = [
 ]
 EOF
 fail=0
+# video path (R&D Visuals run, 28 Oct): template + the Hoover example's shots with fake timings -> layout_check renders frames
+# (captions inside the UI safe area, frame 0 not empty) and anim.py encodes 1 s of real video. ~2 min.
+PV="$STUDIO/projects/_smoke_video"; rm -rf "$PV"; mkdir -p "$PV"/{scripts,work,frames}
+cp "$HERE"/template/scripts/* "$PV/scripts/"; cp "$HERE"/examples/hoover/* "$PV/scripts/"
+if python3 "$HERE/tools/layout_check.py" "$PV" --fake-align --step 30 --no-sheet --json "$PV/work/layout.json" > "$PV/work/layout.txt" 2>&1 \
+   && (cd "$PV" && python3 scripts/anim.py work/smoke.mp4 0:24 > work/anim.log 2>&1) && python3 - "$PV" <<'EOF'
+import json, subprocess, sys
+P = sys.argv[1]; r = json.load(open(f"{P}/work/layout.json")); s = r["summary"]
+early = [x for x in r["rows"] if x["t"] <= 3 and x["bad_px"] > 150]
+n = subprocess.run(["ffprobe", "-v", "error", "-count_frames", "-select_streams", "v:0", "-show_entries", "stream=nb_read_frames,width,height",
+                    "-of", "csv=p=0", f"{P}/work/smoke.mp4"], capture_output=True, text=True).stdout.strip()
+ok = not early and s["f0_core_detail"] >= 0.005 and s["caption_frames"] > 0 and n == "1080,1920,24"
+print(("ok  " if ok else "FAIL"), "video: layout first 3 s violations", len(early), "| frame-0 detail", s["f0_core_detail"],
+      "| caption frames", s["caption_frames"], "| encoded", n)
+sys.exit(0 if ok else 1)
+EOF
+then :; else echo "FAIL video path (layout_check / anim.py)"; tail -5 "$PV/work/layout.txt" "$PV/work/anim.log" 2>/dev/null; fail=1; fi
+rm -rf "$PV"
 python3 "$HERE/tools/story_check.py" --all "$HERE/examples" > /dev/null && python3 "$HERE/tools/story_check.py" "$P" > /dev/null \
   && echo "ok   story_check" || { echo "FAIL story_check.py crashed"; fail=1; }
 for eng in kokoro chatterbox; do

@@ -184,6 +184,10 @@ def ed_el(lead="", big="", tail="", big_col=INK, acc=RED_, lead_col=INK, big_siz
         if bw / sc <= maxw or big_size <= 50: break
         big_size -= 6
     fl = font(F_SEMI, lead_size * sc); ft = font(F_BOLD, tail_size * sc)
+    while lead and fl.getlength(lead) / sc > maxw and lead_size > 24:   # long leads ran into the right-hand UI (28 Oct)
+        lead_size -= 2; fl = font(F_SEMI, lead_size * sc)
+    while tail and ft.getlength(tail) / sc > maxw and tail_size > 22:
+        tail_size -= 2; ft = font(F_BOLD, tail_size * sc)
     lw = fl.getlength(lead) if lead else 0; tw = ft.getlength(tail) if tail else 0
     w = int(max(bw, lw, tw) + 120 * sc)
     hl = lead_size * 1.25 * sc if lead else 0; hb = big_size * 1.02 * sc if big else 0; ht = tail_size * 1.3 * sc if tail else 0
@@ -220,17 +224,53 @@ def ed_show(f, el, x, y, t, t0, d=0.36, out=None, scale=1.0):
     if t < t0: return
     k = (t - t0) / d
     op = clamp(k * 4) * (clamp((out - t) / 0.15) if out is not None else 1.0)
-    comp(f, rise_el(el, k), x, y, op=op, scale=scale * (1.0 + 0.025 * math.exp(-max(0, t - t0 - d) * 6)))
+    sc_ = scale * (1.0 + 0.025 * math.exp(-max(0, t - t0 - d) * 6)); x, y = safe_xy(el, x, y, scale * 1.025)
+    comp(f, rise_el(el, k), x, y, op=op, scale=sc_)
 
 
-def chip(text, bg=INK, fg=WHITE, size=26):
+def chip(text, bg=INK, fg=WHITE, size=26, max_w=800):
     def mk():
-        fn = font(F_BOLD, size * 2); tw = fn.getlength(text) / 2; w, h = int(tw + 44), int(size * 1.7)
+        sz = size; fn = font(F_BOLD, sz * 2)
+        while fn.getlength(text) / 2 + 44 > max_w and sz > 14: sz -= 1; fn = font(F_BOLD, sz * 2)   # long source chips ran edge to edge
+        tw = fn.getlength(text) / 2; w, h = int(tw + 44), int(sz * 1.7)
         im = Image.new("RGBA", (w * 2, h * 2), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
         d.rounded_rectangle([0, 0, w * 2 - 1, h * 2 - 1], h, fill=tuple(bg) + (235,))
         d.text((w, h), text, font=fn, fill=tuple(fg) + (255,), anchor="mm")
         return el_from(im.resize((w, h), Image.LANCZOS))
-    return gcache(("chip", text, bg, fg, size), mk)
+    el = gcache(("chip", text, bg, fg, size, max_w), mk); _SAFE_IDS[id(el[1])] = el[1]   # (keeps a reference, so the id is never reused) chips/source chips: comp() keeps them in the safe area
+    return el
+
+
+# ---------------- platform-UI safe area for captions (R&D Visuals run, 28 Oct 2026; tools/layout_check.py) ----------------
+# Instagram/YouTube draw their UI over these bands (PLAYBOOK §6): top 250, bottom 420, left 60, right 120 px. Caption helpers
+# (ed_show/ui_word, say, title3d, hud_rule, hud_choice) nudge a caption back inside when it pokes out by < 220 px; bigger offsets
+# are treated as deliberate (slide-ins, off-screen moves) and left alone. SAFE=0 switches this off for A/B.
+SAFE = os.environ.get("SAFE", "1") != "0"
+SAFE_T, SAFE_B, SAFE_L, SAFE_R = 250, H - 420, 60, W - 120
+
+
+def safe_xy(el, x, y, scale=1.0, m=10, reach=220):
+    if not SAFE or el is None: return x, y
+    a = el[1]; cols = np.nonzero(a.max(0) > 0.08)[0]; rows = np.nonzero(a.max(1) > 0.08)[0]
+    if not len(cols): return x, y
+    h, w = a.shape
+    x0, x1 = x + (cols[0] - w / 2) * scale, x + (cols[-1] - w / 2) * scale
+    y0, y1 = y + (rows[0] - h / 2) * scale, y + (rows[-1] - h / 2) * scale
+    def fix(lo, hi, zlo, zhi):
+        if hi - lo > zhi - zlo - 2 * m: return 0.0
+        if lo < zlo + m and zlo + m - lo < reach: return zlo + m - lo
+        if hi > zhi - m and hi - (zhi - m) < reach: return zhi - m - hi
+        return 0.0
+    return x + fix(x0, x1, SAFE_L, SAFE_R), y + fix(y0, y1, SAFE_T, SAFE_B)
+
+
+_SAFE_IDS = {}         # alpha arrays of cached caption elements (chips) that comp() should keep inside the safe area
+_comp_raw = comp
+
+
+def comp(frame, el, cx, cy, scale=1.0, op=1.0, anchor="c"):   # noqa: F811  (gfx.comp + safe area for chips)
+    if SAFE and el is not None and anchor == "c" and id(el[1]) in _SAFE_IDS: cx, cy = safe_xy(el, cx, cy, scale)
+    return _comp_raw(frame, el, cx, cy, scale=scale, op=op, anchor=anchor)
 
 
 # ---------------- the square-face mascot ----------------

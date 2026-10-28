@@ -272,9 +272,12 @@ def title3d(f, text, y, t=0.0, t0=-1.0, size=260, face=(255, 214, 60), side=(120
     """giant 3D word centred at x=540 (safe zone: fits in max_w px), popping in at t0 and floating gently.
     Draw it BEFORE the hero object so the object overlaps it (the 'tucked behind' look)."""
     el = text3d_el(text, size, face=face, side=side, depth=depth)
-    w = el[1].shape[1] - 2 * (depth * 2 + 60)          # visible text width (without padding)
+    a_ = el[1]; cols = np.nonzero(a_.max(0) > 0.08)[0]; Wd = a_.shape[1]
+    w = (cols[-1] - cols[0] + 1) if len(cols) else Wd  # visible width INCLUDING extrusion + cast shadow (28 Oct: HOOVER hit the UI)
     s = min(1.0, max_w / max(1, w))
+    xc = 540 - ((cols[0] + cols[-1]) / 2 - Wd / 2) * s if len(cols) else 540   # centre the visible mass, not the padded box
     k = clamp((t - t0) / 0.35) if t0 >= 0 else 1.0
     if k <= 0: return
     s *= (0.86 + 0.14 * eback(k)) if k < 1 else 1.0
-    comp(f, el, 540, y + 4 * math.sin(t * 1.4), scale=s * (1 + 0.006 * math.sin(t * 0.9)), op=op * min(1.0, k * 2))
+    _, y = safe_xy(el, xc, y, s)
+    comp(f, el, xc, y + 4 * math.sin(t * 1.4), scale=s * (1 + 0.006 * math.sin(t * 0.9)), op=op * min(1.0, k * 2))

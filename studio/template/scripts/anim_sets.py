@@ -271,7 +271,7 @@ def set_view(name, t=0.0, zoom=1.0, cx=W / 2, cy=H / 2, blur=0.0, drift=4.0):
     return cv2.GaussianBlur(f, (0, 0), blur) if blur > 0.3 else f
 
 
-def say(f, text, y=1240, size=150, col=(255, 255, 255), t=None, t0=None, max_w=860):
+def say(f, text, y=1240, size=150, col=(255, 255, 255), t=None, t0=None, max_w=800):
     """big punchy caption (condensed, white, thick black stroke + soft shadow) centred at x=540"""
     def mk():
         fn = font(F_ANTON, size); tw = fn.getlength(text); sw = max(6, size // 13)
@@ -288,7 +288,8 @@ def say(f, text, y=1240, size=150, col=(255, 255, 255), t=None, t0=None, max_w=8
         k = clamp((t - t0) / 0.18)
         if k <= 0: return
         s *= 1.25 - 0.25 * eo(k)
-    comp(f, el, 540, y, scale=s)
+    x_, y = safe_xy(el, 540, y, min(1.0, max_w / el[1].shape[1]))
+    comp(f, el, x_, y, scale=s)
 
 
 def part_badge(f, part="PART 1", title=None, x=760, y=330):
@@ -307,7 +308,8 @@ def _badge_el(part):
 
 
 def _title_el(title):
-    fn = font(F_ANTON, 40); tw = fn.getlength(title); w, h = int(min(760, tw + 50)), 64
+    fn = font(F_ANTON, 40); tw = fn.getlength(title); w, h = int(min(600, tw + 50)), 64   # centred at x 640: stays left of the UI (x < 940)
+    while tw + 50 > w and fn.size > 24: fn = font(F_ANTON, fn.size - 2); tw = fn.getlength(title)
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     d.rounded_rectangle([0, 0, w - 1, h - 1], 14, fill=(18, 18, 24, 230), outline=(90, 90, 100, 255), width=2)
     d.text((w // 2, h // 2), title, font=fn, fill=(255, 255, 255, 255), anchor="mm")
@@ -343,7 +345,7 @@ def _stxt_el(text, size, col=(255, 255, 255), fpath=None, stroke=0, scol=(10, 10
     return im
 
 
-def hud_clock(f, top="DAY 1", mid="6:14 AM", sub=None, x=72, y=262, op=1.0):
+def hud_clock(f, top="DAY 1", mid="6:14 AM", sub=None, x=72, y=272, op=1.0):
     """top-left story clock panel (inside the safe zone)"""
     def mk():
         a = _stxt_el(top, 46, (255, 206, 60)); b = _stxt_el(mid, 86); c = _stxt_el(sub, 40, (210, 214, 224)) if sub else None
@@ -375,7 +377,8 @@ def hud_rule(f, n, text, y=430, op=1.0, t=None, t0=None):
         k = clamp((t - t0) / 0.2)
         if k <= 0: return
         s = 0.85 + 0.15 * eback(k)
-    comp(f, el, 540, y, scale=s, op=op)
+    x_, y = safe_xy(el, 540, y, 1.0)
+    comp(f, el, x_, y, scale=s, op=op)
 
 
 def hud_timer(f, secs, x=540, y=330, col=(255, 44, 44), op=1.0):
@@ -392,7 +395,7 @@ def hud_timer(f, secs, x=540, y=330, col=(255, 44, 44), op=1.0):
     comp(f, gcache(("htimer", txt, col), mk), x, y, op=op)
 
 
-def hud_choice(f, label="MOST OF YOU SAID", choice="SELL IT", y=1480, col=(36, 186, 88), op=1.0, t=None, t0=None):
+def hud_choice(f, label="MOST OF YOU SAID", choice="SELL IT", y=1420, col=(36, 186, 88), op=1.0, t=None, t0=None):
     """audience-choice callback: small caps label + coloured pill (series / comments loop)"""
     def mk():
         a = _stxt_el(label, 54, stroke=5); b = _stxt_el(choice, 76)
@@ -403,12 +406,12 @@ def hud_choice(f, label="MOST OF YOU SAID", choice="SELL IT", y=1480, col=(36, 1
         x0 = (w - wb) // 2; d.rounded_rectangle([x0, a.size[1], x0 + wb, a.size[1] + hb], hb // 2, fill=tuple(col) + (255,), outline=(255, 255, 255, 255), width=4)
         im.alpha_composite(b, (x0 + 35, a.size[1] + 3))
         return el_from(im)
-    el = gcache(("hchoice", label, choice, col), mk); s = min(1.0, 900 / el[1].shape[1])
+    el = gcache(("hchoice", label, choice, col), mk); s = min(1.0, 800 / el[1].shape[1]); x_, y = safe_xy(el, 540, y, s)
     if t is not None and t0 is not None:
         k = clamp((t - t0) / 0.22)
         if k <= 0: return
         s *= 0.8 + 0.2 * eback(k)
-    comp(f, el, 540, y, scale=s, op=op)
+    comp(f, el, x_, y, scale=s, op=op)
 
 
 # ---------------- airport departure hall (Hoover video, 28 Oct 2026): glass wall + parked jet, apron, check-in desks ----------------

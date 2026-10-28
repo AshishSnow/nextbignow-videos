@@ -126,6 +126,15 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 
 ## 6. Visual style (non-negotiable)
 - 1080×1920, 24 fps. Safe zone: nothing important in top 250 px, bottom 420 px, right 120 px, left 60 px. Key visuals central.
+  (Measured app UI, Sep 2026: IG Reels top 250 / bottom 319 / left 86 / right 119; YT Shorts ~288 top, ~288 bottom + long titles,
+  ~140 right — our zone is the safe union except YT's right buttons; keep text ≤ 800 px wide, centred.) Since 28 Oct (R&D Visuals
+  run) the caption helpers enforce it: leads/tails shrink to `maxw`, `say` max 800 px, `title3d` fits its extrusion + shadow,
+  chips shrink to ≤ 800 px, and `ed_show`/`ui_word`/`say`/`title3d`/`hud_*`/chips are nudged back inside when they poke out by
+  < 220 px (`SAFE=0` disables). Props, map labels and text you draw yourself are NOT nudged — check them with layout_check.
+  **Check:** `python3 /home/claude/nextbignow-videos/studio/tools/layout_check.py $P` (after make_vo; `--fake-align` works before
+  any audio) → renders every 3 s + the first 3 s twice (with/without captions), prints frames whose caption pixels fall in a UI zone
+  and writes `frames/layout_sheet.jpg` (red = UI, magenta = caption in UI). Fix every settled violation (whip/blur transition
+  frames that span the full width are fine). Source chips: centre y ≤ 1465.
 - Bright, vibrant, extra-saturated sets (`stage(scheme, sun_colour, x, y, R)` — big colour circle), beautiful background in every shot.
   Schemes: cream, sky, yellow, purple, teal, red, emerald, orange, pink. Change scheme every shot; match colour to the moment.
 - **Cinematic texture (owner's references, 27 Oct — top story reels):** real-looking light, depth and atmosphere, a film look, and a
@@ -145,7 +154,9 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   No word-by-word subtitles, no emoji, no persistent counters/meters.
 - First 3 s: a strong visual (object + action) + one short caption with the brand/claim. No giant text-only opener.
   **Frame 1 is already interesting** (the most surprising object of the video, mid-motion) — YouTube counts views from the
-  first frame and the seed audience decides in about 1–2 s whether to swipe.
+  first frame and the seed audience decides in about 1–2 s whether to swipe. (Data check, 28 Oct, PERFORMANCE Q: on our 9 posted
+  reels no first-3-s visual feature predicted the 3-s rate — 5 opened on an empty disc and did about as well as the rest; the
+  topic and the hook *line* decide. Keep frame 1 alive because it is cheap, but spend the effort on the topic and line 1.)
 - At least 18 shots; the picture changes every 2–3 s (new prop, zoom, angle or set). Every claim in the VO gets its own visual.
 - Every non-scene shot: a real prop or diagram that shows the idea (props in `anim_props*.py`; write new ones per topic in a new `anim_props4.py`
   and add it to `anim.py`'s exec list). Big objects, movement on beat (pin/pop, flips, slams), screen shake on impacts (`IMPACTS`),
@@ -244,6 +255,7 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
 
 ## 8. QA before posting (all must pass)
 1. Contact sheet of the final (1 frame / 2 s) — look at every frame: no broken layouts, nothing in unsafe zones, text spelled right, no logos.
+   `tools/layout_check.py $P`: 0 settled caption violations, frame 0 not empty (no WARN). Log "layout N viol" in the run log.
 2. `ffprobe`: 1080×1920, h264 + aac; `ebur128`: about −11 LUFS, peak ≤ −1 dBTP; `tools/mix_check.py`: LD p5 ≥ 10 LU, ESTOI phone ≥ 0.95.
 3. Facts on screen and in VO match the sources.
 4. `python3 studio/tools/voice_report.py $P work/vo.wav` — UTMOS ≥ 4.0 (aim ≥ 4.3), no ASR bad lines, pitch range ≥ 15 st, 165–190 wpm. Put the numbers in the run log.

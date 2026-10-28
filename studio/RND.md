@@ -24,9 +24,9 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 |---|---|---|
 | Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 (3×) |
 | Sound | music score, SFX, mix levels, loudness | 2026-10-27 (run 6: word guard + `tools/mix_check.py`) |
-| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | never |
+| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-10-28 (run 7: `tools/layout_check.py`, safe-area captions) |
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
-| Tooling | render speed, smoke tests, QA automation | never |
+| Tooling | render speed, smoke tests, QA automation | never (run 7 added a video path to smoke_test.sh as a side task) |
 | Analytics | what the numbers say, cover frames, captions, posting times | never (refreshed every run; YouTube numbers flowing since 27 Oct) |
 | Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-10-27 (R&D run 4: +7 → 23 Ready) |
 
@@ -80,8 +80,14 @@ Visuals / Story / Tooling
   what happens next") get 75–300 comments per reel vs our ~0 — test a two-part story with a choice CTA and compare comments/shares.
 - Photoreal background plates from a local open image model (owner's reference reels use realistic AI imagery): check licence
   (commercial use) + CPU speed at 1080×1920 on 2 cores; only for backgrounds behind our own mascot/props; label AI as we do now.
-- First-frame test sheet: render frame 0 of the last 5 videos side by side with safe-zone guides.
-- Smoke test that renders 2 s of video (not only VO) to catch empty-frame regressions.
+- ~~First-frame test sheet~~ — done 28 Oct run 7 (first 3 s of the 14 posted MP4s, `lab/visuals/`; no feature predicts the 3-s rate, n = 9).
+- ~~Smoke test that renders video~~ — done 28 Oct run 7 (layout_check + 1 s anim.py encode of the Hoover shots).
+- Props/labels that draw their own text (map pins, price signs, source chips placed by hand at y > 1465) are not nudged by the safe area:
+  banana's chips still touch the bottom zone by ≤ 9 px; an optional `layout_check --strict` could flag prop text too (OCR-free: render
+  with props on/off is not possible generically — needs per-prop text tagging).
+- Retention per shot type: once Metricool returns per-second retention (not available now), compare scene vs disc shots.
+- `_CINE_T` (window twinkle time) is set by the *previous* frame's finish() — harmless off-by-one in sequential renders, but parallel
+  part renders start each part with t = 0 for the first frame's windows; set it at the top of compose() if a flicker is ever seen.
 
 ## Log
 - 2026-10-27 | Voice | Hypothesis: an LLM-style open TTS (Chatterbox-Turbo, MIT) conditioned on our own synthetic narrator gives more
@@ -190,3 +196,22 @@ Visuals / Story / Tooling
   the guard (synthetic bed: p5 5.1 → 10.6 LU); setup installs pystoi + pyloudnorm (MIT). Found, not fixed: loudnorm runs in dynamic mode
   on every mix (backlog). Analytics: IG pull ≈ identical to 01:45 IST (±3 views), De Beers still 0 (same-day), YouTube rows frozen
   since 27 Oct. ALGORITHM.md 1 day old → not redone.
+- 2026-10-28 (run 7) | Visuals | Bank had 20 Ready → not Topics; Visuals/Tooling never worked → Visuals. Hypothesis A (data): something
+  measurable in the first 3 s (frame-0 content, caption timing, motion, cuts, colour) explains why some reels lose viewers at 3 s (Duolingo
+  24.8 % vs printer 73.7 %). Hypothesis B (craft): captions land in the platform UI (IG/YT overlays) more often than PLAYBOOK §6 assumes,
+  and the caption helpers can keep them out automatically without changing the look. Research: measured app safe zones (adchecklab,
+  verified 28 Sep 2026: IG organic 250/319/86/119 px; Meta ads 14 %/35 %/6 %), ClipSpeed (Sep 2026: YT ~288/288/140), Reap (7 Sep 2026: no
+  official organic specs exist). **A — rejected:** `lab/visuals/first3s_features.py` on the 14 posted MP4s (hosting branches) vs IG 3-s rate,
+  n = 9: every feature |rho| ≤ 0.27 (≤ 0.58 without Duolingo, none p < 0.1); 5 reels opened on an empty disc (mean 3-s 56.5 %) vs 4 with
+  object + caption (57.6 %; 68.5 % without Duolingo, whose first 3 s look like gas station's) → topic/hook line decide (PERFORMANCE Q).
+  **B — kept:** built `tools/layout_check.py` (renders each sampled frame twice, captions on/off, diff = exact caption pixels; zones = PLAYBOOK;
+  `--fake-align` needs no audio) and ran it on all 15 examples rebuilt with the template (590 frames, every 3 s + first 3 s ×9). Before → after
+  the template fix, same shots and timings: frames with captions in a UI zone **51 → 17** (settled, excluding full-width whip blurs 47 → 13),
+  **in the first 3 s 16 → 2** (Hoover 9 → 0: the 3D "HOOVER" title's extrusion reached x 975; gas station 4 → 0: unclamped lead line to x 981),
+  right-edge hits 16 → 3, bottom 17 → 8 (banana source chips at y ≈ 1550 now stop at 1505–1509), De Beers 4 → 0, airline 2 → 0. Remaining:
+  ≤ 231-px anti-alias specks (Chick-fil-A, Costco), Hoover t = 39/87 s hairlines, whip transitions. Render cost 1.25 s/frame both ways.
+  Template: ed_el lead/tail fit `maxw`; `safe_xy()` + `SAFE` switch in anim_base; ed_show/say/title3d/hud_rule/hud_choice + every chip nudge
+  inside (< 220 px intrusions only); say max_w 860 → 800; title3d fits visible width incl. extrusion/shadow and centres the visible mass;
+  chip max 800 px; part_badge title ≤ 600 px; hud_choice y 1480 → 1420, width 900 → 800; hud_clock y 262 → 272. Smoke test now renders video
+  (layout_check on the Hoover shots + 1 s anim.py encode); passed. PLAYBOOK §6/§8 updated. Analytics: IG + YT pulls identical to 06:00 IST
+  (no rows for Monopoly/Hoover/banana yet). ALGORITHM.md 2 days old → not redone.
