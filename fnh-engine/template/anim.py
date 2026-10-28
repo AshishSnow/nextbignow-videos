@@ -1,7 +1,7 @@
 """FreshNestHub — carrots can turn your skin orange (fully animated). Usage: anim.py OUT.mp4 [frames|a:b]"""
 import sys, subprocess, os
 _D = os.path.dirname(os.path.abspath(__file__))
-for _p in ("anim_base.py", "anim_props.py", "anim_props2.py", "anim_props3.py", "anim_props4.py", "fnh_char.py", "fnh_char3d.py", "fnh_char_v3.py", "anim_fx.py", "anim_cine.py", "anim_props5.py", "anim_props_lib09.py", "anim_props_lib10.py", "anim_props_lib11.py", "anim_props_lib12.py", "anim_props_lib13.py", "anim_props_lib14.py", "anim_props_lib15.py", "anim_props_lib16.py",
+for _p in ("anim_base.py", "anim_props.py", "anim_props2.py", "anim_props3.py", "anim_props4.py", "fnh_char.py", "fnh_char3d.py", "fnh_char_v3.py", "fnh_char_ink.py", "anim_fx.py", "anim_cine.py", "anim_props5.py", "anim_props_lib09.py", "anim_props_lib10.py", "anim_props_lib11.py", "anim_props_lib12.py", "anim_props_lib13.py", "anim_props_lib14.py", "anim_props_lib15.py", "anim_props_lib16.py",
            "anim_props6.py", "anim_shots.py"):
     if os.path.exists(f"{_D}/{_p}"): exec(open(f"{_D}/{_p}").read())
 

@@ -148,7 +148,20 @@ Then write (read the template versions first — they are the reference; use the
 - `scripts/mix.py` — an SFX for every moment (crunch, pop, ding, boing, whoosh, thud, buzzer, ping, drone… or new
   synthesized ones). Keep the bed level and loudnorm section. VO/bed must be ≥ 14 dB on every line (printed).
 
-### Chubby v3 (28 Oct, `template/fnh_char_v3.py`, loaded after fnh_char3d.py — the CURRENT character)
+### Chubby INK (28 Oct 14:00, OWNER-APPROVED — `template/fnh_char_ink.py`, loaded last, the CURRENT character)
+Owner's reference: hand-drawn round-head ink cartoon people (scribble hair, outlined clothes, thin limbs). Chubby INK is an ORIGINAL
+character in that language: one wobbly warm-ink outline, scribble hair with a cowlick, dot eyes + brow strokes + mouth curve that do
+all the acting, outlined mint hoodie + cream chef's apron with a pocket, rolled cuffs, ink hands with fingers, denim legs, sneakers.
+COLOUR (owner chose option C): ink lines in warm dark brown (never pure black); flat fills (skin, mint, cream, denim); a soft shadow
+side + light diagonal hatching; paper grain on every frame (anim_cine.finish applies it via INK_PAPER). Backgrounds: keep the lit
+places but soften them 10-15 % toward paper cream so the inked character pops; ONE topic accent colour per video (gum = pink,
+carrots = orange...) used on the hero prop, the 3D titles and the chips; everything else stays in the 5-colour palette (paper, ink,
+mint, skin, accent). New hero props should be drawn in the same ink language: INKC outline with a fixed wobble (_wob), flat fill,
+hatch on the shadow side (see _hatch) — not the glossy 3D shading of lib15/16 (keep those for old episodes only).
+Same `chub(...)` API; `t=` gives breathing + blinks; `lean` tilts the head. Modes: INK_MODE = "wash" (default) | "flat" | "mono".
+Sheet: /home/claude/outputs/chubby_ink_colour_options.jpg. v3 (Pixar kid) stays in the repo as a fallback (fnh_char_v3.py), not used.
+
+### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with
 fingers that point along the forearm, jeans with turn-ups, sneakers. Same `chub(...)` API as below, plus `t=` for idle life

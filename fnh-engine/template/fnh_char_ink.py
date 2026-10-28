@@ -4,7 +4,8 @@
 # ink (not pure black) with a hand-drawn wobble that is FIXED per element (no boiling between frames).
 # Colour: INK_MODE = "mono" (ink on paper + the mint accent only), "flat" (ink + flat fills), "wash" (ink + flat fills + a soft
 # shadow side + hatching + paper texture). Same chub() API as v2/v3; loaded after them, overrides them.
-INK_MODE = "wash"
+INK_MODE = "wash"            # owner-approved 28 Oct (option C)
+INK_PAPER = 0.06             # paper grain applied by anim_cine.finish on every frame (0 = off)
 INKC = (46, 32, 26)                                  # warm ink
 PAPER = (247, 241, 228)
 INK_SKIN = (250, 222, 196); INK_SKIN_S = (226, 184, 152)

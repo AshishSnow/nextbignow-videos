@@ -107,7 +107,7 @@ Voice (a mature, natural, warm guy — never robotic):
 - [ ] Next voice ideas to lab-test with voice_report: per-line SPD variety, EXS 0.6, STR 1.2 on payoff words, shorter
       lines (<= 12 words), commas for breath points. Keep the M2 blend (own register, no lift).
 Visual / edit:
-- [~] 28 Oct OWNER: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
+- [x] 28 Oct OWNER: character redesign -> Chubby INK approved (fnh_char_ink.py, colour mode C); v3 kept as fallback. Was: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
       real silhouette (neck, shoulders, fingers), textured clothes with folds + a signature item (apron/cap), weighty poses, idle life.
       Build + review a 6-expression / 6-pose sheet first, then use in the next episode. Keep him clearly FreshNestHub (mint).
 - [x] 27 Oct v5 look: Chubby v2 (fnh_char3d.py) + anim_cine.py (grade/bloom, kitchen/room/dusk places, god rays, mood,
@@ -417,6 +417,12 @@ Story & topics:
 - [ ] Translucency / subsurface look for skin close-ups and fruit (reuse the set_gut rim-glow idea on Chubby's ears and on props)
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-28 14:00 (interactive, owner reference image) | INK-LINE CHARACTER + COLOUR PLAN (visual) | Owner showed hand-drawn round-head
+  ink cartoon people and asked for that language with a real colour plan. What makes that style work: a single confident outline with a
+  slight hand wobble (fixed per element so it doesn't boil), scribble hair as texture, faces from 3-4 strokes (dots, brow angle, mouth
+  curve), clothes as outlined shapes with a few fold strokes. Colour: tested A mono / B flat / C flat + shadow side + hatching + paper
+  grain; owner picked C. Rules now in PLAYBOOK (5-colour palette + one accent per topic, softened places, ink-style props). Built
+  template/fnh_char_ink.py (same chub API) + paper() in finish | first episode = next run | yes (owner-approved)
 - 2026-10-28 13:30 (interactive, owner feedback) | CHARACTER DESIGN: appeal (visual) | What makes a cartoon kid read as a character
   instead of a blob: (1) the eyes carry everything - big, slightly lidded, an iris with a dark ring + two catchlights, lashes thicker at
   the outer corner, and lids that move per emotion (cheeks push the lower lid up in a real smile); (2) eyebrows are thick tapered SHAPES,

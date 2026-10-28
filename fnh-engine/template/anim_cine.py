@@ -47,6 +47,7 @@ def finish(f, n, vig=0.24, grain=0.40, look=None, bloom_amt=0.26):
     bloom_amt *= clamp((0.80 - float(f[::8, ::8].mean())) / 0.25)      # bright flat stages would wash out -> less bloom
     if bloom_amt > 0.01: f = bloom(f, amt=bloom_amt)
     f = cv2.multiply(f, _vig3(round(vig, 3)))
+    if globals().get("INK_PAPER", 0) and "paper" in globals(): f = paper(np.ascontiguousarray(f), INK_PAPER)   # ink look: paper grain
     return np.clip(add_grain(np.clip(f, 0, 1), n, grain), 0, 1)
 
 
