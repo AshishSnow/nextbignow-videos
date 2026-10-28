@@ -102,7 +102,7 @@ Voice (a mature, natural, warm guy — never robotic):
 Visual / edit:
 - [x] 27 Oct v5 look: Chubby v2 (fnh_char3d.py) + anim_cine.py (grade/bloom, kitchen/room/dusk places, god rays, mood,
       title3d, light_wrap, counter_front) — demo zz-v2demo. Next steps below.
-- [~] Places library (ep 15: set_chocolatier + marble_front, set_fridge_night): one new lit place per run when the topic needs it (bathroom mirror, supermarket aisle, gym, street
+- [~] Places library (ep 15: set_chocolatier + marble_front, set_fridge_night; ep 16: set_gut inside-the-body tunnel): one new lit place per run when the topic needs it (bathroom mirror, supermarket aisle, gym, street
       food stall, school canteen, hospital-free "lab") — same recipe: blurred bg + sharp fg + one light source + haze.
 - [ ] Fill empty foreground: the kitchen counter front is a plain brown block (y 1370-1920) — add a towel, drawer pulls,
       fruit bowl / jars on the worktop edge, a soft reflection of the light on the worktop.
@@ -127,6 +127,16 @@ Script / packaging:
 - [ ] Comment question in caption + firstCommentText.
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-28 10:55: Metricool reel numbers at 10:50 are IDENTICAL to the 02:00 and 05:50 snapshots (sugar rush 1102 / mint 1206 /
+  onions 126 / silver 119) and coffee (03:20) + chocolate (07:50) still have no rows -> the Instagram reel rows froze ~9 h ago; this is a
+  Metricool sync stall, not a reach plateau. YouTube rows still end on 25 Oct. No post is 48 h old with fresh data yet -> no verdicts.
+  Topic pick follows the only pattern the data supports (everyday habit + belief flip): the '7-year gum' myth, skipping chai-vs-coffee
+  (a numbers comparison, no belief to flip).
+- 2026-10-28 11:40 (voice): the mic chain is at its plateau - a same-take A/B of 4 chain variants (drier room -33 dB, +2 dB body / -0.5 dB
+  presence, lighter compressor 1.2:1) all scored chunk20 4.496-4.499 / line mean 4.452-4.453 vs 4.499 / 4.453 -> chain unchanged.
+  Rewrites again did the work: 6 weakest lines rewritten longer + more natural ('So why doesn't it get stuck?' 4.38 -> 'So if your body
+  can't break it down, why doesn't it get stuck inside you?' 4.47) + plain lines 1.02 -> 1.03: line mean 4.453 -> 4.464, chunk20
+  4.499 -> 4.502 (new best). ASR heard 'gum base' as 'gumbase' -> rewrote to 'the chewy part'.
 - 2026-10-28 06:00: Metricool numbers at 05:50 are IDENTICAL to the 02:00 snapshot for every reel (sugar rush 1102 / mint 1206 /
   onions 126) and coffee (03:20) has no row yet -> overnight IST the reel rows don't refresh; refresh analytics on the daytime runs.
   No post is 48 h old yet (oldest CHUBBY = carrots, 37 h), so no verdicts this run. Topic pick kept the breakout pattern
@@ -190,6 +200,18 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 16 swallowed gum (28 Oct, auto run, 2:49): VOICE mic-chain A/B on one fixed take (4 variants, all neutral -> plateau, chain kept) +
+  6 weakest lines rewritten longer/natural + plain lines 1.03 -> chunk20 4.502 / line mean 4.464 (ep 15 4.499 / 4.459; best so far),
+  169 wpm, ASR clean | VISUAL INSIDE-THE-BODY WORLD (new place anim_cine.set_gut: a living tunnel lit from deep inside, backlit
+  translucent folds with glowing thin rims, warm shadows, wet specular highlights, depth fog + blur on far folds, floating particles;
+  the peristalsis squeeze = a ring travelling toward camera), side-view squeeze/relax tube (anim_cine.peri_tube), METRO-MAP route of the
+  gum through an x-ray Chubby with hour stamps 0 h -> ~40 h (anim_fx.route_map), museum open-loop set (spotlight + glass case),
+  Stone-Age golden dusk with birch trees, 11 big 3D titles (GULP!, 7 YEARS?, 6,000 YEARS, MADE OF?, GUM BASE, ONE PIECE, STUCK?,
+  PERISTALSIS, HOUSEKEEPING, GRRR!, 40 HOURS, BIN IT, 5,700 YEARS, STUCK AROUND), prop lib16 + foley (bubble_pop, squelch, stretch,
+  growl, spit) | SCRIPT/TOPIC everyday habit + belief flip (7-year gum myth) in refutation order, define-on-sight enzyme + peristalsis,
+  toothpaste analogy, a number you can feel (61,320 h vs 40 h), share bonus (why your stomach growls), open loop at 9 s paid at 135 s
+  (80 %), 4 chapters, practical tip + one safe doctor line, bubblegum SKA score (new genre) | metric: reach at 48 h vs sugar rush /
+  mint (myth pattern), 3-s hold of a bubble-pop hook, avg watch s on 2:49 (our longest), comments on 'did you believe the 7-year rule'.
 - 15 chocolate melts in your mouth (28 Oct, auto run, 2:25): VOICE first full episode in the mature M2 voice (chunk20 4.499 / line mean
   4.459 vs ep 14 4.412 / 4.344), STR 1.15 stress A/B rejected (neutral), c6 rewritten for ASR | VISUAL first full v5-look episode +
   MATERIALS skill (anim_cine.mat_shade: tempered chocolate GLOSS with a crisp window reflection, untempered MATTE, bloomed CHALKY with
@@ -306,6 +328,10 @@ Script / packaging:
 | 28 Oct | ep 15 chocolate, M2 voice (first full episode), first script | 4.458* (chunk20 4.470, line mean 4.453) | 172 | 0.12 | 16.5 | 1 (c6 'copies' -> 'cop is') |
 | 28 Oct | ep 15 chocolate, M2 + c6 rewrite + STR 1.15 (A/B, rejected: neutral) | 4.471* (chunk20 4.497, line mean 4.456) | 172 | 0.12 | 16.8 | 0 |
 | 28 Oct | **ep 15 chocolate, M2 + c6 rewrite, STR 1.0 (shipped)** | **4.471* (chunk20 4.499, line mean 4.459)** | 172 | 0.12 | 16.6 | 0 |
+| 28 Oct | ep 16 gum, M2, first script | 4.465* (chunk20 4.499, line mean 4.453) | 168 | 0.11 | 15.9 | 0 |
+| 28 Oct | ep 16 gum, same take, chain A/B: room -33 / body +2 pres -0.5 / comp 1.2 | 4.496-4.498 / 4.452-4.453 (all neutral) | 168 | 0.11 | 15.9 | 0 |
+| 28 Oct | ep 16 gum, + 5 weak lines rewritten, plain lines 1.03 | (chunk20 4.498, line mean 4.460) | 169 | 0.11 | 15.9 | 1 ('gum base' -> 'gumbase') |
+| 28 Oct | **ep 16 gum, + a6 'the chewy part', b2 'Here's the thing' (shipped)** | **4.476* (chunk20 4.502, line mean 4.464)** | 169 | 0.11 | 15.9 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -341,14 +367,14 @@ Animation & visuals:
 - [~] Kinetic typography for key numbers (count-ups, slams, words that react to the action)
 - [~] Match cuts and morph transitions (shape of one object becomes the next) (ep 12: iris_mix iris-in from a round object)
 - [~] Texture & detail: gradients, highlights, subtle grain on the hero prop of each video (27 Oct: Chubby v2 + film grain)
-- [ ] Inside-the-body worlds: cell/organ scenes with scale cues (Kurzgesagt-style clarity)
+- [x] Inside-the-body worlds: a lit gut tunnel with backlit translucent folds, wet highlights, depth fog (ep 16: anim_cine.set_gut, peri_tube)
 Voice (M2 mature blend since 27 Oct — refine it):
 - [x] Calmer pace + real pauses (A4, UTMOS 4.36)
 - [x] Ear-writing: rhythm, short-long sentence contrast, rule of three, contractions (ep 10)
 - [~] Pause before the payoff word; lift on questions; settle on statements (ep 11 A/B: settle is UTMOS-neutral)
 - [x] Per-line speed variety and stress placement tested with voice_report (ep 09)
 - [x] Ear-writing + name-then-define sentence order for weak lines (ep 10, per-line UTMOS in voice_report)
-- [ ] Mic-like polish: gentle de-ess, presence EQ, no harshness (check with voice_report + spectrum)
+- [x] Mic-like polish: de-ess / presence / body / room / compressor A/B on one fixed take (ep 16: all UTMOS-neutral -> chain at plateau)
 Sound:
 - [~] Foley that matches the action (crunch, fizz, squelch, sizzle) synthesized per video (ep 10: record scratch, wrapper crinkle, boing, key jingle)
 - [ ] Music that follows the story (build -> drop on the reveal -> soft under explanations), stems ducking
@@ -375,8 +401,20 @@ Story & topics:
 - [x] Tape stop (varispeed slow-down of the score) as an audio 'crash' / 'fake' cue (ep 14 music.py tape_stop)
 - [ ] Slow motion / speed ramps for things too fast to see (ep 13 first try: slowmo_ui + droplets(slow=...)) - make a helper
 - [ ] Visual metaphor for a whole system (ep 13: 'booby trap' / two rooms) - test which metaphors viewers repeat in comments
+- [x] Route / metro map for a journey through a system with time stamps (ep 16: anim_fx.route_map)
+- [ ] Translucency / subsurface look for skin close-ups and fruit (reuse the set_gut rim-glow idea on Chubby's ears and on props)
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-28 11:30 | INSIDE-THE-BODY WORLDS (explaining + 3D look) | What makes an inside-the-body scene read as soft, wet, LIVING tissue
+  instead of flat red paint: subsurface scattering - translucent things look soft, light bleeds through thin parts and into the shadows,
+  and the effect is strongest when the light is BEHIND the surface (Jensen et al., UCSD graphics, 'subsurface scattering' examples:
+  marble backlit vs front-lit, milk vs white paint); Kurzgesagt's house style keeps such worlds readable: rounded forms, a few bold
+  saturated colours, nothing cluttered (UMich Arts at Michigan, 'Simple, Bright, Beautiful: the work of Kurzgesagt'). Built
+  anim_cine.set_gut: the light source sits deep in the tunnel (backlight), each fold is a wobbly ring whose thin edge glows warm,
+  shadows stay magenta not black, near folds get small sharp wet highlights, far folds are smaller, hazier and blurred (depth of field),
+  floating particles give scale; the top band is darker so captions read. First test looked like a flat target (perfect ellipses, too
+  bright, too many rings) -> organic wobble + 9 rings + darker walls fixed it. Paired with peri_tube (side view: squeeze behind = red
+  muscle, relax in front = wider) so the viewer sees peristalsis from inside AND outside | ep 16 (S8, S10, S12b, S14, S18, S23) | yes
 - 2026-10-28 06:30 | MATERIALS: glossy vs matte vs chalky on ONE light model (visual / 3D look) | What tells the eye what a surface is
   made of is how it treats light: GLOSS = a small, sharp, very bright highlight plus a crisp mirror image of the light source (window
   bars with hard edges), deep darks and a bright Fresnel rim; SATIN = a broader, softer highlight; MATTE = no reflection, wide soft

@@ -189,6 +189,17 @@ bee_el(flap, mood), flower_el("coffee"|"lemon", glow), lemon_el, sun_icon, moon_
   N ways = crystal forms / structure), temp_gauge (marks), temper_chart, pot_el, pool, cake_el, jar_el (glass), mould_el, spatula_el,
   sugar_xtal; schemes cocoa, butter, crystal, chalk, frost. sfx_lib (ep 15): snap, melt, clack, fridge_hum, suction.
 
+### Inside-the-body world + routes (ep 16, `anim_cine.py` + `anim_fx.py` + `anim_props_lib16.py`)
+- `set_gut(t, squeeze=None|0..1, bend, pal)` = looking down a living intestine lit from deep inside (backlit glowing fold rims, wet
+  highlights, depth fog + blur, particles); `squeeze` = depth of a travelling peristalsis ring (animate 0.9 -> 0.05 = it rushes at camera).
+  Darker top band leaves room for white captions. Use it for ANY inside-the-gut / blood-vessel / airway moment (recolour with `pal`).
+- `peri_tube(f, x0, x1, y, r0, xs, t, sq, cargo=el)` = side view of a gut segment: squeeze behind (red muscle) + relax in front, pushes
+  `cargo`; `route_map(f, stops, k, t, token=el, times=[...])` = metro map of a journey (visited stops filled, current ringed, hour chips);
+  `body_route_pts()` + `ROUTE_NAMES` (lib16) = mouth -> food pipe -> stomach -> small intestine -> large intestine -> out inside an x-ray
+  Chubby (`chub(..., op=0.28)` on the "xray" scheme). lib16 props: gum_wad_el, bubble_el, splat, toothpaste_el + paste_ribbon, corn_el,
+  seed_el, tar_el, stomach3_el (3D-shaded, cut-away), broom_el, bin_el(open_), birch(), pedestal() + glass_case() (museum set for open
+  loops), stone_woman(); schemes flesh, gumpink, xray. sfx_lib (ep 16): bubble_pop, squelch, stretch, growl, spit.
+
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.
 - Captions ONLY at key moments: `ui_word(f, lead, BIG, 470, …)` — small lead + one big word/number, centred x = 540,

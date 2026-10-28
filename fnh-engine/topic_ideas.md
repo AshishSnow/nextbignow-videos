@@ -41,8 +41,9 @@ NEW from the 27 Oct trend scan (Halloween 31 Oct, Diwali 8 Nov) — take these f
     pain; tip: press tongue to the roof of the mouth).
 11. (DONE ep 14) 18-coffee-sleep-trick — Do you know caffeine doesn't give you energy — it blocks the "sleepy" signal? (adenosine
     receptors; caffeine stays in the body for hours — no dosing advice).
-12. 19-stomach-growl — Do you know your stomach growls even when you're not hungry? (borborygmi, migrating motor complex).
-13. 20-swallowed-gum — Do you know swallowed gum doesn't stay 7 years? (passes through; myth origin).
+12. 19-stomach-growl — Do you know your stomach growls even when you're not hungry? (borborygmi, migrating motor complex). NOTE ep 16 used
+    the growl as a one-line bonus (MMC sources: Colorado State VIVO) -> a full episode can reuse set_gut + peri_tube.
+13. (DONE ep 16) 20-swallowed-gum — Do you know swallowed gum doesn't stay 7 years? (passes through; myth origin).
 14. 21-rocket-sled-46g — remake of the approved-topic draft (episode 06 script + props exist) with Chubby as the rider:
     the doctor who survived 46.2 G (Stapp, 1954) -> seat belts.
 

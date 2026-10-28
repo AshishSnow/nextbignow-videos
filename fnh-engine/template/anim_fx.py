@@ -420,3 +420,35 @@ def day_graph(f, t, now, lines, x0=120, x1=960, y0=700, y1=1290, h0=7.0, h1=24.0
     if title: comp(g, chip(title, INK, WHITE, 34), (x0 + x1) / 2, y0 - 112)
     if op < 0.999: f[:] = f * (1 - op) + g * op
     return X, Y, heads
+
+
+# ---------------- ep 16: ROUTE MAP — a journey through a system drawn like a metro map (explaining a path + time) ----------------
+def route_map(f, stops, k, t, token=None, pts=None, col=(255, 210, 90), line_col=(255, 255, 255), times=None, lab_side=None, dim=0.45):
+    """stops = [(x, y, NAME)] along a route; k = progress 0..len(stops)-1 (float) of the travelling token (an element).
+    visited stops are filled + labelled, the current one is ringed, future ones are hollow; times = optional chip per stop.
+    The track is drawn from stop to stop with rounded corners; the travelled part glows in `col`. Returns token (x, y)."""
+    P = pts or [(x, y) for x, y, _ in stops]
+    seg = [math.hypot(P[i + 1][0] - P[i][0], P[i + 1][1] - P[i][1]) for i in range(len(P) - 1)]
+    for i in range(len(P) - 1):
+        cv2.line(f, (int(P[i][0]), int(P[i][1])), (int(P[i + 1][0]), int(P[i + 1][1])), C(OUT3), 30, cv2.LINE_AA)
+        cv2.line(f, (int(P[i][0]), int(P[i][1])), (int(P[i + 1][0]), int(P[i + 1][1])), C(tuple(int(c * dim + 40 * (1 - dim)) for c in line_col)), 18, cv2.LINE_AA)
+    kk = clamp(k, 0, len(P) - 1); i0 = min(int(kk), len(P) - 2); fr = kk - i0
+    tx = P[i0][0] + (P[i0 + 1][0] - P[i0][0]) * fr; ty = P[i0][1] + (P[i0 + 1][1] - P[i0][1]) * fr
+    for i in range(i0 + 1):
+        q = P[i + 1] if i < i0 else (tx, ty)
+        cv2.line(f, (int(P[i][0]), int(P[i][1])), (int(q[0]), int(q[1])), C(col), 18, cv2.LINE_AA)
+    for i, (x, y, name) in enumerate(stops):
+        vis = kk >= i - 0.02; cur = abs(kk - i) < 0.5
+        if not name: continue                                                   # bend point, not a stop
+        cv2.circle(f, (int(x), int(y)), 30, C(OUT3), -1, cv2.LINE_AA)
+        cv2.circle(f, (int(x), int(y)), 22, C(col if vis else (90, 80, 90)), -1, cv2.LINE_AA)
+        if not vis: cv2.circle(f, (int(x), int(y)), 12, C(OUT3), -1, cv2.LINE_AA)
+        if cur: cv2.circle(f, (int(x), int(y)), int(42 + 4 * math.sin(t * 8)), C(WHITE), 5, cv2.LINE_AA)
+        side = (lab_side[i] if lab_side else (1 if x < 540 else -1))
+        if vis or cur:
+            el = chip(name, INK if vis else (70, 64, 70), WHITE, 28)
+            comp(f, el, x + side * (60 + el[1].shape[1] / 2), y)
+            if times and times[i]:
+                el2 = chip(times[i], col, INK, 24); comp(f, el2, x + side * (60 + el2[1].shape[1] / 2), y + 44)
+    if token is not None: comp(f, token, tx, ty)
+    return tx, ty

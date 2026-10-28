@@ -419,3 +419,99 @@ def set_fridge_night(t=0.0, door=1.0, blur=5):
     god_rays(f, 640, 1040, t, (170, 214, 255), 0.25 * door, 9, 1300, 1.3, math.pi, 7)
     haze(f, 700, 1500, (120, 170, 230), 0.10 * door)
     return f
+
+
+# ================= ep 16 (28 Oct): INSIDE-THE-BODY WORLD — a lit gut tunnel with depth, translucent backlit folds, wet highlights ==========
+# Craft skill (ep 16): what makes an inside-the-body scene read as soft, wet, living tissue instead of flat red paint
+# (Jensen et al., subsurface scattering, UCSD graphics: translucent things look SOFT, light BLEEDS through thin parts and into
+# the shadows, and the effect is strongest when the light is BEHIND the surface; Kurzgesagt house style: rounded forms, few
+# bold saturated colours, uncluttered). Recipe used here: (1) BACKLIGHT from deep in the tunnel so every fold's thin rim glows
+# orange-pink (light bleeding through), (2) shadows stay warm (deep magenta, never black), (3) small, sharp, cool-white WET
+# highlights on the near folds (moist surface = specular), (4) DEPTH: far folds smaller, hazier (fog toward the glow) and
+# blurred, near folds big and sharp; floating particles in front = scale + parallax; (5) the peristalsis squeeze is a ring that
+# narrows the tunnel and travels toward the camera.
+GUT_PAL = dict(deep=(52, 6, 26), wall=(178, 40, 72), wall_d=(96, 14, 42), rim=(255, 150, 120), glow=(255, 176, 140), spec=(255, 244, 236))
+
+
+def set_gut(t=0.0, squeeze=None, bend=(60, -40), n=9, rot=0.0, pal=None, particles=True, cx=540, cy=900):
+    """looking down a living intestine. squeeze = depth 0..1 (0 = at camera, 1 = far) of a travelling peristalsis ring (None = off).
+    bend = how far the tunnel curves away (px at the far end). Draw story props/characters AFTER it."""
+    P = dict(GUT_PAL, **(pal or {}))
+    gx, gy = cx + bend[0], cy + bend[1]
+    d = np.clip(np.hypot(_xx - gx, (_yy - gy) * 0.9) / 1000, 0, 1)[..., None]          # tunnel wall: glowing far end -> dark rim
+    g_ = (1 - d) ** 7
+    f = (np.array(C(P["glow"]), np.float32) * g_ + (np.array(C(P["wall"]), np.float32) * (1 - d) + np.array(C(P["deep"]), np.float32) * d) * (1 - g_)).astype(np.float32)
+    far = f.copy(); split = False
+    for i in range(n):
+        z = 1.0 - i / (n - 1)                                                  # 1 = far .. 0 = near
+        ph = (t * 0.35) % 1.0
+        zz = 0.10 + 2.6 * (clamp(z - ph / (n - 1), 0, 1)) ** 1.5
+        r = 700 / (zz + 0.3)
+        sq = 0.42 * math.exp(-((z - squeeze) / 0.08) ** 2) if squeeze is not None else 0.0
+        r *= (1 - sq) * (1 + 0.02 * math.sin(t * 2.2 + i))
+        x = cx + bend[0] * z ** 1.3 + 14 * math.sin(t * 0.7 + i * 0.6); y = cy + bend[1] * z ** 1.3
+        if not split and z < 0.45:                                             # hand-over: blur the far layers (depth of field)
+            f[:] = cv2.GaussianBlur(f, (0, 0), 4); split = True
+        fog = clamp(z * 0.9)
+        wc = tuple(int(a + (b - a) * fog) for a, b in zip(P["wall"], P["glow"]))
+        dc = tuple(int(a + (b - a) * fog * 0.8) for a, b in zip(P["wall_d"], P["wall"]))
+        th = max(6, int(r * 0.2))                                              # fold thickness
+        ax = (r * 1.05, r * 0.92)
+        def ring(rx, ry, dy=0.0, a0=0, a1=360):
+            aa = np.radians(np.arange(a0, a1 + 1, 4))
+            wob = 1 + 0.045 * np.sin(aa * 3 + i * 1.7 + t * 0.8) + 0.03 * np.sin(aa * 5 - i)
+            return np.stack([x + rx * wob * np.cos(aa), y + dy + ry * wob * np.sin(aa)], 1).astype(np.int32)
+        cv2.polylines(f, [ring(ax[0] + th, ax[1] + th, th * 0.3)], True, C(dc), th, cv2.LINE_AA)          # shadowed back of the fold
+        cv2.polylines(f, [ring(ax[0] + th / 2, ax[1] + th / 2)], True, C(wc), max(3, int(th * 0.7)), cv2.LINE_AA)
+        rimc = tuple(int(a + (b - a) * (0.25 + 0.6 * sq)) for a, b in zip(P["rim"], (255, 110, 110)))
+        cv2.polylines(f, [ring(*ax)], True, C(rimc), max(2, int(th * 0.13)), cv2.LINE_AA)                 # thin edge glows (light bleeds through)
+        cv2.polylines(f, [ring(*ax, 0, 190, 350)], False, C(P["glow"]), max(2, int(th * 0.1)), cv2.LINE_AA)
+        ax = (int(ax[0]), int(ax[1]))
+        if z < 0.6:                                                             # wet highlights on near folds
+            for j in range(4):
+                a_ = math.radians(200 + 32 * j + 6 * math.sin(t + i))
+                hx, hy = x + (ax[0] + th * 0.3) * math.cos(a_), y + (ax[1] + th * 0.3) * math.sin(a_)
+                cv2.ellipse(f, (int(hx), int(hy)), (max(2, int(th * 0.28)), max(1, int(th * 0.08))), math.degrees(a_) + 90, 0, 360, C(P["spec"]), -1, cv2.LINE_AA)
+        if sq > 0.05:
+            cv2.ellipse(f, (int(x), int(y)), (ax[0] + th // 2, ax[1] + th // 2), rot, 0, 360, C((255, 80, 90)), max(3, int(th * 0.9 * sq / 0.42)), cv2.LINE_AA)
+    haze(f, 300, 1500, P["glow"], 0.05)
+    glow(f, gx, gy, 260, (255, 230, 200), 0.22)
+    f *= (0.62 + 0.38 * np.clip((_yy[..., None] - 250) / 650, 0, 1))         # darker top band: the tunnel's far wall in shadow (+ caption room)
+    if particles:
+        bokeh(f, t, 16, 23, 260, 1700, 10, 46, cols=((255, 200, 170), (255, 150, 150), (255, 230, 210)), amt=0.2)
+    return f
+
+
+def peri_tube(f, x0, x1, y, r0, xs, t=0.0, sq=0.55, wall=46, label=True, cargo=None, cargo_dx=110, pal=None, relax=0.25):
+    """SIDE VIEW of a gut segment (horizontal) with a peristalsis squeeze at x = xs: the muscle BEHIND the food contracts
+    (narrow, red-hot) and the muscle IN FRONT relaxes (wider). cargo = element pushed just ahead of the squeeze.
+    Returns the cargo position."""
+    P = dict(GUT_PAL, **(pal or {}))
+    xs_ = np.linspace(x0, x1, 120)
+    def rad(x):
+        g1 = math.exp(-((x - xs) / 70) ** 2); g2 = math.exp(-((x - xs - cargo_dx) / 120) ** 2)
+        return r0 * (1 - sq * g1 + relax * g2 + 0.03 * math.sin(x / 40 + t * 3))
+    top = [(x, y - rad(x)) for x in xs_]; bot = [(x, y + rad(x)) for x in xs_]
+    outer_t = [(x, yy - wall) for x, yy in top]; outer_b = [(x, yy + wall) for x, yy in bot]
+    for band_in, band_out in ((top, outer_t), (bot, outer_b)):
+        poly = np.array(band_in + band_out[::-1], np.int32)
+        cv2.fillPoly(f, [poly], C(OUT3), cv2.LINE_AA)
+        inner = np.array([(x, yy + (3 if band_in is top else -3)) for x, yy in band_in] + [(x, yy + (-3 if band_in is top else 3)) for x, yy in band_out[::-1]], np.int32)
+        cv2.fillPoly(f, [inner], C(P["wall"]), cv2.LINE_AA)
+        for k in range(0, len(xs_), 6):                                        # muscle ring stripes
+            x = xs_[k]; g1 = math.exp(-((x - xs) / 70) ** 2)
+            col = tuple(int(a + (b - a) * g1) for a, b in zip(P["wall_d"], (255, 70, 70)))
+            ya, yb = band_in[k][1], band_out[k][1]
+            cv2.line(f, (int(x), int(ya)), (int(x), int(yb)), C(col), 5 + int(4 * g1), cv2.LINE_AA)
+        cv2.polylines(f, [np.array(band_in, np.int32)], False, C(P["rim"]), 5, cv2.LINE_AA)       # wet inner lining
+    lum = np.array(top + bot[::-1], np.int32)
+    ov = f.copy(); cv2.fillPoly(ov, [lum], C((120, 30, 50)), cv2.LINE_AA); f[:] = f * 0.55 + ov * 0.45
+    cx_ = xs + cargo_dx
+    if cargo is not None and x0 < cx_ < x1: comp(f, cargo, cx_, y)
+    if label:
+        lx = xs
+        if x0 + 60 < lx < x1 - 60:
+            comp(f, chip("SQUEEZE", (200, 40, 50), WHITE, 28), lx, y - r0 - wall - 60)
+        if x0 + 60 < lx + cargo_dx + 130 < x1 - 40:
+            comp(f, chip("RELAX", (60, 130, 200), WHITE, 28), lx + cargo_dx + 130, y + r0 + wall + 62)
+    return cx_, y

@@ -379,3 +379,46 @@ def suction(level=-22):
     y = signal.sosfilt(signal.butter(2, [300, 2500], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.05)
     y += np.sin(2 * np.pi * (180 + 600 * t2) * t2) * np.exp(-t2 / 0.06)
     return _st(y / np.abs(y).max() * db(level))
+
+
+# ---- ep 16 foley: bubble-gum pop, wet gut squelch, rubbery stretch creak, stomach growl, spit ----
+def bubble_pop(level=-14):
+    t2 = np.arange(int(0.25 * SR)) / SR
+    thump = np.sin(2 * np.pi * (140 * np.exp(-t2 / 0.05) + 60) * t2) * np.exp(-t2 / 0.05)
+    snap_ = np.sin(2 * np.pi * np.cumsum(1400 * np.exp(-t2 / 0.02) + 300) / SR) * np.exp(-t2 / 0.025)
+    air = signal.sosfilt(signal.butter(2, [1500, 8000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.01)
+    y = thump + 0.7 * snap_ + 0.5 * air
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def squelch(level=-22, dur=0.6):
+    t2 = np.arange(int(dur * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [200, 1800], "band", fs=SR, output="sos"), rng.standard_normal(len(t2)))
+    y *= (0.6 + 0.4 * np.sin(2 * np.pi * 9 * t2)) * np.sin(np.pi * np.clip(t2 / dur, 0, 1))
+    y += 0.6 * np.sin(2 * np.pi * np.cumsum(220 * np.exp(-t2 / 0.3) + 70) / SR) * np.sin(np.pi * np.clip(t2 / dur, 0, 1))
+    return _st(y / np.abs(y).max() * db(level), 120)
+
+
+def stretch(level=-24, dur=0.7, up=True):
+    t2 = np.arange(int(dur * SR)) / SR
+    f = (180 + 220 * t2 / dur) if up else (400 - 220 * t2 / dur)
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    y = (np.sin(ph) + 0.5 * np.sin(2 * ph) + 0.3 * np.sin(3 * ph)) * (0.7 + 0.3 * np.sin(2 * np.pi * 23 * t2)) * np.sin(np.pi * np.clip(t2 / dur, 0, 1))
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def growl(level=-16, dur=1.2):
+    t2 = np.arange(int(dur * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, 220, "low", fs=SR, output="sos"), rng.standard_normal(len(t2))) * 2
+    y += np.sin(2 * np.pi * np.cumsum(70 + 20 * np.sin(2 * np.pi * 3 * t2)) / SR)
+    y *= (0.5 + 0.5 * np.abs(np.sin(2 * np.pi * 5 * t2))) * np.minimum(1, np.minimum(t2 / 0.1, (dur - t2) / 0.3))
+    return _st(y / np.abs(y).max() * db(level), 200)
+
+
+def spit(level=-18):
+    t2 = np.arange(int(0.2 * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [800, 6000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.04)
+    y[: int(0.01 * SR)] += np.sin(2 * np.pi * 300 * t2[: int(0.01 * SR)]) * 2
+    return _st(y / np.abs(y).max() * db(level))
+
+
