@@ -211,6 +211,8 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 - Origin/history stories (type D/A): one person per era, a year card (split-flap `flapboard("1904")`) at every jump in time, and a
   spotlight-alone shot for the "and what happened to her?" re-hook.
 - Real people's names in the VO: Kokoro/ASR mangle rare surnames ("Frances Gerety" → "Francis Jarity") — drop the name from the VO or put it on screen only.
+  Same for rare company/brand names (28 Oct: "EssilorLuxottica" → "Essiler Luxotica", "Varilux" → "Var Relux", "LensCrafters" → "Lens Crafters"
+  = a false ASR flag): say a descriptive name in the VO ("the frame giant"), write the real name on screen; split CamelCase brands ("Lens Crafters").
 - Generic props added 28 Oct (Hoover free flights): `vacuum_el` (generic upright vacuum), `wing_el` + `winged_vacuum` (flapping
   feathered wings on any object), `sky_bg` (open sky, no ground — for flying objects), `ticket_el` (paper airline ticket, any destination),
   `carton_el` (appliance box with a plain label), `ad_poster_el` (1990s shop promo with starburst + "*conditions apply"), `form_el`
@@ -231,6 +233,15 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   (e.g. straw hat `hair="hat"`, white shirt, brown overalls) and check every new outfit for franchise look-alikes.
 - Spread-over-time stories: a map with year pins popping on the VO words (one `blight` + pin per place) explains "it is moving" faster
   than any text; keep pin labels short (year in the pin, country in an offset chip) — country names on pins overlapped at 80 px apart.
+- Generic props added 28 Oct (glasses / hidden giant): `glasses_el` (round, oval, cat, sport shield, thin rect; `clear=` optical,
+  `smart=`+`led=` AI glasses — never Wayfarer-like shapes), `glasses_tree` (one trunk, many branches ending in different glasses = "one
+  owner" frame 1), `door_el` (numbered roadmap door that swings open on light), `shopfront`/`shopfront_el` (plain-text sign), `lens_el`,
+  `plan_card_el` (insurance card), `rx_el`, `eyechart_el`, `hub_map` (one centre node, spokes pop on the VO words), `stock_crash`; full-frame
+  sets `mall` and `optician` (`set_view("mall"|"optician", ...)` + `mall_dressing`/`optician_dressing`).
+- **Hidden-giant (type C) structure that worked (28 Oct, glasses):** frame 1 = one object that visibly holds all the "rival" things (tree
+  of glasses + a shop sign + an insurance card); roadmap as physical doors ("four doors to your eyes, the fourth is the sneakiest") with a
+  `DOOR #n` chip + door swinging open per item; one mini-story with a rival (Oakley 2001 → bought 2007) as the mid-video re-hook; the twist
+  as a hub diagram whose spokes pop on each word; loop back to the frame-1 tree. Name the giant on screen, not in the VO, if ASR mangles it.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
   `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.

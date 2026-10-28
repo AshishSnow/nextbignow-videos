@@ -77,21 +77,6 @@ no Mario/characters/branding.
 Sources: Nintendo corporate history https://www.nintendo.co.jp/corporate/en/history/ · the-shashi (Nikkei Business) https://the-shashi.com/tse/7974/decisions/diversification-1961/ ·
 Automaton Jul 2026 (love-hotel myth)
 
-### 9. CLAIMED 2026-10-28 10:40 IST — Your glasses, the shop and your eye insurance can be one company — type C · 30/35 (5/3/5/4/4/5/4→5 with careful wording)
-Hook: "Do you know your sunglasses, the shop that sold them and your eye insurance can all belong to one company?"
-Beats: EssilorLuxottica owns Ray-Ban, Oakley, Persol, Oliver Peoples, Vogue Eyewear, Arnette, Costa, Foster Grant → makes frames
-under licence for Chanel, Prada, Armani, Burberry, Versace, Dolce&Gabbana, Michael Kors, Ralph Lauren, Coach, Tiffany, Swarovski →
-runs LensCrafters, Sunglass Hut, Pearle Vision, Target Optical (licence): 17,750 stores end-2025, 19,709 by 30 Sep 2026 → owns EyeMed
-(US vision insurance) → revenue €28.49bn in 2025 → 60 Minutes (2012) reported designer frames can sell for up to 20× their cost
-(Luxottica disputed the segment) → per 60 Minutes, Luxottica dropped Oakley from its stores during a pricing fight; then bought Oakley (~$2.1bn, 2007).
-Twist: the wall of "hundreds of brands" often leads back to one company. Takeaway: look inside the frame arm for the maker; compare
-with independent opticians.
-Visuals: one tree with many generic glasses hanging from it; mall shopfronts that turn out to be one building; a stretching price tag.
-Cautions: Oakley timing (R&D run 4, Forbes 3 Aug 2001 + SEC 8-K 2007): Luxottica cut Oakley orders in Aug 2001, months after buying Sunglass Hut (~19 % of Oakley sales), shares −35 % in a day; the 1996 order cut was Sunglass Hut while still independent — never "1999"; never "monopoly", "80% of the market" or "price-gouging" (unverified; an antitrust suit was dismissed Sep 2025 with leave
-to refile); attribute markup claims to 60 Minutes; no Wayfarer shapes; re-check licences.
-Sources: EssilorLuxottica 2025 Universal Registration Document · Vision Monday 21 Oct 2026 · CBS 60 Minutes 7 Oct 2012
-https://www.cbsnews.com/news/sticker-shock-why-are-glasses-so-expensive-07-10-2012/ · Snopes Sep 2016 (80% claim) · SEC filing Jun 2007 (Oakley)
-
 ### 10. The ice-cream machine isn't broken — it's cooking itself — type E · 29/35 (4/4/5/5/3/4/4→5 with careful wording)
 Hook: "Do you know the McDonald's ice-cream machine usually isn't broken — it's busy cooking itself?"
 Beats: McBroken tries to order a sundae at each store every 30 min → ~15% down in Sep–Oct 2024; ~10% average over six years (Jul
@@ -299,6 +284,33 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
   [CD&R release, 9 Apr 2026](https://www.cdr.com/news/sealed-air-announces-completion-of-acquisition-by-cd-and-r)
 
 ## Used (already made — never again)
+### USED 2026-10-28 (scheduled 28 Oct 19:30 IST) — Your glasses, the shop and your eye insurance can be one company — type C · 30/35 (5/3/5/4/4/5/4→5 with careful wording)
+Hook: "Do you know your sunglasses, the shop that sold them and your eye insurance can all belong to one company?"
+Beats: EssilorLuxottica owns Ray-Ban, Oakley, Persol, Oliver Peoples, Vogue Eyewear, Arnette, Costa, Foster Grant → makes frames
+under licence for Chanel, Prada, Armani, Burberry, Versace, Dolce&Gabbana, Michael Kors, Ralph Lauren, Coach, Tiffany, Swarovski →
+runs LensCrafters, Sunglass Hut, Pearle Vision, Target Optical (licence): 17,750 stores end-2025, 19,709 by 30 Sep 2026 → owns EyeMed
+(US vision insurance) → revenue €28.49bn in 2025 → 60 Minutes (2012) reported designer frames can sell for up to 20× their cost
+(Luxottica disputed the segment) → per 60 Minutes, Luxottica dropped Oakley from its stores during a pricing fight; then bought Oakley (~$2.1bn, 2007).
+Twist: the wall of "hundreds of brands" often leads back to one company. Takeaway: look inside the frame arm for the maker; compare
+with independent opticians.
+Visuals: one tree with many generic glasses hanging from it; mall shopfronts that turn out to be one building; a stretching price tag.
+Cautions: Oakley timing (R&D run 4, Forbes 3 Aug 2001 + SEC 8-K 2007): Luxottica cut Oakley orders in Aug 2001, months after buying Sunglass Hut (~19 % of Oakley sales), shares −35 % in a day; the 1996 order cut was Sunglass Hut while still independent — never "1999"; never "monopoly", "80% of the market" or "price-gouging" (unverified; an antitrust suit was dismissed Sep 2025 with leave
+to refile); attribute markup claims to 60 Minutes; no Wayfarer shapes; re-check licences.
+Sources: EssilorLuxottica 2025 Universal Registration Document · Vision Monday 21 Oct 2026 · CBS 60 Minutes 7 Oct 2012
+https://www.cbsnews.com/news/sticker-shock-why-are-glasses-so-expensive-07-10-2012/ · Snopes Sep 2016 (80% claim) · SEC filing Jun 2007 (Oakley)
+Verified in the video run (28 Oct): FY2025 revenue EUR 28.49bn, 17,750 stores end-2025 (EssilorLuxottica FY2025 release, Modaes/FashionUnited);
+19,709 stores at 30 Sep 2026 + banners Sunglass Hut / LensCrafters / Target Optical + lens brands Varilux / Transitions (Q3 2026 revenue
+release, 21 Oct 2026); licences Chanel / Prada / Miu Miu (company 2026 releases), Prada renewal (AOP Jan 2025), Armani (FashionUnited Sep
+2022), Michael Kors (Feb 2024), Versace (WWD); Essilor + Luxottica = EssilorLuxottica 1 Oct 2018; **Oakley 2001** (the bank's dates are
+right): Luxottica bought Sunglass Hut Apr 2001, told Oakley early Aug it would order ~1/6 of what Oakley expected, Sunglass Hut = 19 % of
+Oakley sales, shares −35 % on 2 Aug 2001 (Forbes 3 Aug 2001 "Oakley Sees Red", FundingUniverse; OCBJ 20 Jun 2007: Oakley sued, settled late
+2001) — Wikipedia's "1996 Luxottica dropped Oakley" is the Sunglass Hut order cancellation of Dec 1996, before Luxottica owned it; Oakley
+bought for $2.1bn (announced Jun 2007, closed Nov 2007; OCBJ, mr-mag); EyeMed's parent = EssilorLuxottica, 68M+ members (EyeMed, Oct 2022);
+Meta bought nearly 3 % (~EUR 3bn), Jul 2025 (Reuters via TechCentral, Benzinga); FTC Eyeglass Rule: free copy of your prescription right
+after the exam (FTC consumer alert, Jun 2024) = usable takeaway. Left out: 60 Minutes "20x markup" (CBS page unreachable here; disputed),
+"monopoly"/market-share claims. VO: the company name, "Varilux" and "LensCrafters" (one word) failed ASR read-back → name on screen only,
+VO says "the frame giant" / "a lens giant" / "Lens Crafters".
+
 ### USED 2026-10-28 (posted 28 Oct 15:00 IST) — Almost every banana you buy is the same clone — type B · 32/35 (5/4/5/5/3/5/5)
 Hook: "Do you know almost every banana you buy is a copy of the same plant?"
 Beats: Cavendish ≈ half of world bananas and almost all exported ones → seedless genetic clones, so one disease can hit them all →

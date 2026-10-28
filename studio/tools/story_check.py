@@ -29,10 +29,10 @@ NUMW = set("zero one two three four five six seven eight nine ten eleven twelve 
            "point percent half quarter oh dozen cents cent dollars dollar pounds".split())
 NUM_CORE = NUMW - {"point", "percent", "cents", "cent", "dollars", "dollar", "pounds", "oh"}
 TURN_RE = re.compile(r"\b(but|yet|instead|until|except|however|turns out|actually|still|only|never|even|wrong|backfire\w*|flipped|twist|isn't|wasn't|real)\b", re.I)
-TEASE_RE = re.compile(r"(\?|here's|guess|wait|the twist|sneakiest|the real|what happened|the catch|watch|the problem|plot twist|that's when|here are|the last one|(secret|trick|step|reason|rule|move) (one|two|three|four|five))", re.I)
+TEASE_RE = re.compile(r"(\?|here's|guess|wait|the twist|sneakiest|the real|what happened|the catch|watch|the problem|plot twist|that's when|here are|the last one|(secret|trick|step|reason|rule|move|door|layer) (one|two|three|four|five))", re.I)
 CAUSAL_START = re.compile(r"^(but|so|because|that's why|which means|therefore|yet|instead|until|except|still|now|except)\b", re.I)
 ANDTHEN_START = re.compile(r"^(and then|then|next|after that)\b", re.I)
-LABEL_RE = re.compile(r"^(and\s+)?(step|secret|trick|move|reason|rule|trap|clue|mistake|moment|lie)\s+(one|two|three|four|five|\d)\b", re.I)
+LABEL_RE = re.compile(r"^(and\s+)?(step|secret|trick|move|reason|rule|trap|clue|mistake|moment|lie|door|layer)\s+(one|two|three|four|five|\d)\b", re.I)
 STOP = set("the a an and or but so of to in on at for with is was are were be it its it's this that he she they you your we our his her "
            "their them as by from not no do did does just than then there here what who how why when which one".split())
 
@@ -192,7 +192,7 @@ def check(path, target_len=None):
     # ("Step one", "Secret one") — 27 Oct data: roadmap scripts held 29–34 % of their length on Instagram (Costco, printer
     # ink, Planet Fitness, Starbucks, + restaurant tricks), the two without one 19–24 % (Amazon, Chick-fil-A)
     head = " ".join(l[1] for l in lines[:4]).lower()
-    count_promise = bool(re.search(r"\b(two|three|four|five|seven|\d)\s+(\w+\s+)?(secrets|steps|tricks|moves|reasons|rules|traps|things|mistakes|moments|clues|lies|times)\b", head))
+    count_promise = bool(re.search(r"\b(two|three|four|five|seven|\d)\s+(\w+\s+)?(secrets|steps|tricks|moves|reasons|rules|traps|things|mistakes|moments|clues|lies|times|doors|layers)\b", head))
     labels = sum(1 for l in lines if LABEL_RE.match(l[1].strip()))
     R["count_promise"] = count_promise
     R["item_labels"] = labels

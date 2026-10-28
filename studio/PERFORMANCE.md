@@ -9,7 +9,7 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
-## Instagram (snapshot 2026-10-28 01:45 IST — **sync resumed**: first new numbers since 26 Oct; posts from 26–27 Oct now have rows)
+## Instagram (snapshot 2026-10-28 01:45 IST — re-pulled 10:40 IST, unchanged — **sync resumed**: first new numbers since 26 Oct; posts from 26–27 Oct now have rows)
 | Date | Video | Style | Len | Views | Reach | Avg watch | 3-s view rate | Likes | Shares | Saves |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 10-28 | De Beers: 2 months' salary (autopilot, B/E, roadmap "three moves") | animated, calm voice | 118 s | 0 | 0 | – | – | 0 | 0 | 0 |
@@ -88,6 +88,13 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
 | 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (28 Oct 10:40 IST, glasses run — type C)
+R. 10th near-identical pull: IG rows unchanged since 01:45 IST (gas 1,503, printer 1,376, restaurant 1,468, McDonald's 1,284; De Beers
+   still 0 views 10 h after posting — same-day/next-morning rows stay empty); still no rows for Monopoly (D), Hoover (A), banana (B);
+   YouTube rows identical to 27 Oct (nothing after Chick-fil-A). → No new signal; the run follows insights L/O (viewer's own life) with the
+   first **type C** (hidden giant) — "your glasses, the shop and your insurance", a topic on the viewer's face. Type log: De Beers B/E,
+   Monopoly D, Hoover A, banana B, glasses C. Next run: check De Beers (118 s) and Monopoly (135 s) avg-watch % of length when rows land.
 
 ## Insights (28 Oct 08:35 IST, R&D Visuals run 7 — first 3 s of the *posted* MP4s vs 3-s rate; `lab/visuals/`)
 Q. **Nothing we can measure in the first 3 seconds explains the 3-s rate (n = 9 animated reels with data).** Measured on the actual
