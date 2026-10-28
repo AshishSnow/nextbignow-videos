@@ -8,23 +8,6 @@ Each Ready entry: type (A–F, PLAYBOOK §2) · interest score · hook · story 
 Score = interest test (Wait-what / Story / Your life / Picture / Fresh / Share / Verifiable), PLAYBOOK §2.
 When scripting: turn the beats into a **roadmap** ("…in three moves", Move one/two/three, strongest last) and run `tools/story_check.py` (PLAYBOOK §4 story rules).
 
-### 2. CLAIMED 28 Oct 05:45 IST — Almost every banana you buy is the same clone — type B · 32/35 (5/4/5/5/3/5/5)
-Hook: "Do you know almost every banana you buy is a copy of the same plant?"
-Beats: Cavendish ≈ half of world bananas and almost all exported ones → seedless genetic clones, so one disease can hit them all →
-the old favourite Gros Michel was wiped out commercially by Fusarium wilt (Panama disease): Honduras alone lost 30,000 ha in
-1940–60, ~$400m losses by 1960 → exporters switched to Cavendish from the late 1950s → a new strain, TR4, kills Cavendish; no cure,
-spores live in soil for decades → Colombia 2019, Peru 2021, Venezuela 2023 → Ecuador, the world's top exporter, confirmed it
-18 Dec 2025 (emergency), second farm Jul 2026 → why the industry can't just switch: bananas are hard to breed, Cavendish ships well;
-gene-edited QCAV-4 approved in Australia 2024 only as a backup.
-Twist: the industry is repeating the Gros Michel mistake with a new single variety. Takeaway: putting everything on one bet is a
-business risk, not just a farming one.
-Visuals: conveyor of identical bananas with photocopier flashes; fungus spreading like ink across a map; banana "twins" with matching barcodes.
-Cautions: bananas are NOT going extinct (hundreds of varieties); Gros Michel still grown on small farms; skip "fake banana flavour"
-myth; TR4 not in Central America yet (Oct 2025).
-Sources: FAO TR4 https://www.fao.org/tr4gn/tr4-basics/en/ · FAO Jun 2025 https://www.fao.org/transboundary-plant-pests-diseases/news/detail/fighting-the-deadly-disease-that-is-killing-the-world-s-most-exported-fruit/en ·
-Ploetz/APSnet 2005 https://www.apsnet.org/edcenter/apsnetfeatures/Documents/2005/PanamaDisease1.pdf · USDA APHIS DA-2023-07 ·
-Vistazo 18 Dec 2025 https://www.vistazo.com/actualidad/2025-12-18-agrocalidad-emergencia-hongo-fusarium-r4t-el-oro-GM10582631 · FreshFruitPortal Jul 2026
-
 ### 3. America paid 3 cents to make a 1-cent coin — then stopped — type B · 31/35 (5/3/5/5/4/4/5)
 Hook: "Do you know America paid 3 cents to make every 1-cent coin?"
 Beats: each penny cost 3.69¢ to make and ship in FY2024, 3.02¢ in FY2025 (1.42¢ ten years earlier) → pennies lost $95.6m in FY2025;
@@ -316,6 +299,29 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
   [CD&R release, 9 Apr 2026](https://www.cdr.com/news/sealed-air-announces-completion-of-acquisition-by-cd-and-r)
 
 ## Used (already made — never again)
+### USED 2026-10-28 (posted 28 Oct 15:00 IST) — Almost every banana you buy is the same clone — type B · 32/35 (5/4/5/5/3/5/5)
+Hook: "Do you know almost every banana you buy is a copy of the same plant?"
+Beats: Cavendish ≈ half of world bananas and almost all exported ones → seedless genetic clones, so one disease can hit them all →
+the old favourite Gros Michel was wiped out commercially by Fusarium wilt (Panama disease): Honduras alone lost 30,000 ha in
+1940–60, ~$400m losses by 1960 → exporters switched to Cavendish from the late 1950s → a new strain, TR4, kills Cavendish; no cure,
+spores live in soil for decades → Colombia 2019, Peru 2021, Venezuela 2023 → Ecuador, the world's top exporter, confirmed it
+18 Dec 2025 (emergency), second farm Jul 2026 → why the industry can't just switch: bananas are hard to breed, Cavendish ships well;
+gene-edited QCAV-4 approved in Australia 2024 only as a backup.
+Twist: the industry is repeating the Gros Michel mistake with a new single variety. Takeaway: putting everything on one bet is a
+business risk, not just a farming one.
+Visuals: conveyor of identical bananas with photocopier flashes; fungus spreading like ink across a map; banana "twins" with matching barcodes.
+Cautions: bananas are NOT going extinct (hundreds of varieties); Gros Michel still grown on small farms; skip "fake banana flavour"
+myth; TR4 not in Central America yet (Oct 2025).
+Sources: FAO TR4 https://www.fao.org/tr4gn/tr4-basics/en/ · FAO Jun 2025 https://www.fao.org/transboundary-plant-pests-diseases/news/detail/fighting-the-deadly-disease-that-is-killing-the-world-s-most-exported-fruit/en ·
+Ploetz/APSnet 2005 https://www.apsnet.org/edcenter/apsnetfeatures/Documents/2005/PanamaDisease1.pdf · USDA APHIS DA-2023-07 ·
+Vistazo 18 Dec 2025 https://www.vistazo.com/actualidad/2025-12-18-agrocalidad-emergencia-hongo-fusarium-r4t-el-oro-GM10582631 · FreshFruitPortal Jul 2026
+Verified in the video run (28 Oct): Cavendish ~47 % of world production (FAO y5102e04, FoodNavigator 2019, Guinness), ~99 % of exports to
+developed countries (The Conversation); TR4 no cure / decades in soil (Atlas Obscura/Bioversity, FreshPlaza Feb 2026, FAO 3 Sep 2026);
+Colombia ICA 8 Aug 2019, Peru Apr 2021 (IPPC/SENASA), Venezuela IPPC 25 Jan 2023, Ecuador 18 Dec 2025 (Vistazo, Portal Fruticola, El Diario)
++ 2nd case Jul 2026 (FreshFruitPortal); Ecuador world's largest exporter (FreshPlaza). Left out (not verified or not needed): Honduras
+"30,000 ha 1940–60" (only Wikipedia, no primary), "$400m losses", QCAV-4 (it is GM/transgenic, not gene-edited — say "genetically
+modified" if used; FSANZ 16 Feb 2024, no plans for large-scale growing). Gros Michel named on screen only (ASR risk).
+
 ### USED 2026-10-28 (posted 28 Oct 10:00 IST) — Hoover's free flights: three mistakes, three bosses fired, European business sold — type A · 31/35 (5/5/3/5/5/4/5)
 Hook: "Do you know a vacuum company gave away so many free flights it lost its whole European business?"
 Beats: Aug 1992 UK: spend £100+ on Hoover products → two free return flights to Europe; Nov 1992 adds New York/Florida (tickets

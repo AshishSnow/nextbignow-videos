@@ -38,6 +38,9 @@ Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** se
 | 10-20 | Is AI killing Salesforce? | AI footage | – | 92 | 55 | 7.9 s | 21.3% | 3 | 0 | 1 |
 | 10-20 | Google stopped sending you customers | AI footage | – | 3,154 | 2,976 | 1.3 s | 4.4% | 6 | 1 | 0 |
 | 10-19 | Makhana: farmers $5, US $160 | AI footage | – | 4,716 | 4,425 | 3.5 s | 17.3% | 24 | 11 | 10 |
+(28 Oct 06:00 IST, banana run: IG pull ≈ identical again (restaurant 1,468, McDonald's 1,284, Compaq 132, shopping 193; De Beers still 0 —
+posted 00:00 IST; Monopoly 05:00 IST not in the data yet); YouTube rows identical to 27 Oct (no rows after Chick-fil-A) → no new signal.
+getScheduledPosts: De Beers + Monopoly PUBLISHED, Hoover pending 10:00 IST. Type log: De Beers B/E, Monopoly D, Hoover A, banana B.)
 (28 Oct 04:40 IST, R&D Sound run 6: Instagram pull ≈ identical to 01:45 IST — restaurant 1,466 → 1,468, McDonald's 1,281 → 1,284, Compaq 130 → 132,
 shopping 190 → 193, others ±1; De Beers still 0 (posted 00:00 IST, same-day rows are normally empty). YouTube rows identical to 27 Oct (still no rows after
 Chick-fil-A) → nothing new to conclude; table above left as is.)
@@ -83,6 +86,11 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
 | 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
 (No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+
+## Insights (28 Oct 06:00 IST, banana run)
+P. No new rows since 01:45 IST (same-day posts are always empty) → decisions still rest on insights L/O: the banana video is a type-B
+   everyday object with a "that can't be right" hook, after two story types (D, A). First test of a **map timeline** (spread year by
+   year) and a 1950s sepia flashback inside a B video — compare its avg-watch % of length (130 s) with gas (28 %) and printer ink (29 %).
 
 ## Insights (28 Oct 04:40 IST, R&D Sound run 6)
 O. **By type, current Instagram rows (animated era):** B (gas, printer ink, Costco) mean 1,369 views / 68.2 % 3-s / 22.3 s avg watch;

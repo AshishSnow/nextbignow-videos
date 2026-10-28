@@ -210,6 +210,16 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   Scene captions go at y≈520–830 when characters fill the lower half (faces sit at y≈1250–1400 for s≈0.7–0.9).
 - Things held overhead (boxes, placards): centre them at `feet_y − 520·s − 90` so they sit above the head, not over the face; keep
   placards inside x 250–830 or their text runs off the frame.
+- Generic props added 28 Oct (banana clones): `banana_el` (generic curved banana, `brown=` dying, `label=` sticker), `bunch_el`, `slice_el`
+  (cross-section), `copier_el` (office photocopier — "clones" visual), `plant_el` (banana plant, `sick=` 0..1 droop/brown), full-frame
+  `plantation_view(t, zoom, cx, cy, blur, sick=)` and `soil_view` (+ `spores`, `hyphae`), a **Latin America map** (`map_view` →
+  `(frame, cam)`, `map_pt(lon, lat, cam)`, `blight` spreading blob, `map_pin`; `sepia=True` for history), `sepia_tone(f, k)` for
+  flashbacks, `spray_el`, `helix` (DNA), `basket_el`, `numcard_el` (roadmap cards, `down=True` = "?"), `stand_el` (market stand).
+  Map shapes are hand-simplified lon/lat polygons (MAP_SA, MAP_CA, …) — add regions the same way.
+- **The template `worker` look (red cap, red shirt, blue overalls) reads as a famous game plumber** (caught 28 Oct) — always re-dress it
+  (e.g. straw hat `hair="hat"`, white shirt, brown overalls) and check every new outfit for franchise look-alikes.
+- Spread-over-time stories: a map with year pins popping on the VO words (one `blight` + pin per place) explains "it is moving" faster
+  than any text; keep pin labels short (year in the pin, country in an offset chip) — country names on pins overlapped at 80 px apart.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
   `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.
@@ -222,7 +232,7 @@ python3 -I scripts/anim.py x 2,40,100,...          # test frames -> frames/r_NNN
 python3 scripts/music.py && python3 scripts/mix.py # score (edit cues section) + mix (edit SFX section) -> work/mix.wav
 bash scripts/render_all.sh                         # -> work/final.mp4  (~10–15 min, run in background)
 ```
-- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano, 90s British ska; next try disco, marching band, baroque harpsichord, sea shanty, etc.) using GeneralUser GS GM programs;
+- Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano, 90s British ska, calypso steel band (+ mento flashback); next try disco, marching band, baroque harpsichord, sea shanty, etc.) using GeneralUser GS GM programs;
   cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1.5 dBTP**; VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.
 - Word guard (since 27 Oct R&D run 6, template default `GUARD=12`): mix.py keeps music + SFX ≥ 12 dB under every word on a phone
