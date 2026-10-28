@@ -3,7 +3,7 @@
 ## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
 Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
 NEW from the 28 Oct trend scan (data: myth-flip + everyday habit topics broke out: sugar rush 1.1k, mint 1.2k reach):
-0e. chocolate-melts-in-your-mouth (Halloween) — Do you know chocolate is designed to melt at almost exactly your body temperature?
+0e. (DONE ep 15) chocolate-melts-in-your-mouth (Halloween) — Do you know chocolate is designed to melt at almost exactly your body temperature?
     (cocoa butter crystal form V melts ~34 C; tempering; why it melts in your mouth not your hand). Verify: a university food-science
     page + a major outlet (e.g. Smithsonian / ACS Reactions).
 0f. chai-vs-coffee-caffeine — Do you know a cup of chai can have less than half the caffeine of coffee? (only if FDA/USDA or a

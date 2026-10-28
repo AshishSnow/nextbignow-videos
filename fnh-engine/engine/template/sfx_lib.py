@@ -341,3 +341,41 @@ def charge(t0, t1, level=-27):
     while tt < t1: add(beep(level, 900 + 160 * k, 0.05), tt); tt += 0.12; k += 1
 
 
+# ---- ep 15 foley: chocolate snap, gooey melt, crystal-brick clack, fridge hum, fridge door suction ----
+def snap(level=-14):
+    t2 = np.arange(int(0.18 * SR)) / SR
+    crack = rng.standard_normal(len(t2)) * np.exp(-t2 / 0.006)
+    crack = signal.sosfilt(signal.butter(2, [1800, 12000], "band", fs=SR, output="sos"), crack)
+    ring = (np.sin(2 * np.pi * 3100 * t2) + 0.6 * np.sin(2 * np.pi * 4700 * t2)) * np.exp(-t2 / 0.02) * 0.35
+    body = np.sin(2 * np.pi * 420 * t2) * np.exp(-t2 / 0.015) * 0.5
+    y = crack + ring + body
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def melt(level=-24, dur=0.9):
+    t2 = np.arange(int(dur * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, 700, "low", fs=SR, output="sos"), rng.standard_normal(len(t2)))
+    f = 320 * np.exp(-t2 / 0.4) + 90
+    y = y * 0.6 + np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.5
+    y *= np.sin(np.pi * np.clip(t2 / dur, 0, 1)) ** 1.5
+    return _st(y / np.abs(y).max() * db(level), 90)
+
+
+def clack(level=-24, f0=1900):
+    t2 = np.arange(int(0.06 * SR)) / SR
+    y = np.sin(2 * np.pi * f0 * t2) * np.exp(-t2 / 0.008) + 0.4 * rng.standard_normal(len(t2)) * np.exp(-t2 / 0.003)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def fridge_hum(level=-30, dur=2.0):
+    t2 = np.arange(int(dur * SR)) / SR
+    y = 0.6 * np.sin(2 * np.pi * 100 * t2) + 0.3 * np.sin(2 * np.pi * 200 * t2) + 0.08 * np.sin(2 * np.pi * 1260 * t2) * (1 + 0.3 * np.sin(2 * np.pi * 3 * t2))
+    y *= np.minimum(1, np.minimum(t2 / 0.2, (dur - t2) / 0.3))
+    return _st(y / np.abs(y).max() * db(level), 200)
+
+
+def suction(level=-22):
+    t2 = np.arange(int(0.25 * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [300, 2500], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.05)
+    y += np.sin(2 * np.pi * (180 + 600 * t2) * t2) * np.exp(-t2 / 0.06)
+    return _st(y / np.abs(y).max() * db(level))

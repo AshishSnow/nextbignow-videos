@@ -102,14 +102,14 @@ Voice (a mature, natural, warm guy — never robotic):
 Visual / edit:
 - [x] 27 Oct v5 look: Chubby v2 (fnh_char3d.py) + anim_cine.py (grade/bloom, kitchen/room/dusk places, god rays, mood,
       title3d, light_wrap, counter_front) — demo zz-v2demo. Next steps below.
-- [ ] Places library: one new lit place per run when the topic needs it (bathroom mirror, supermarket aisle, gym, street
+- [~] Places library (ep 15: set_chocolatier + marble_front, set_fridge_night): one new lit place per run when the topic needs it (bathroom mirror, supermarket aisle, gym, street
       food stall, school canteen, hospital-free "lab") — same recipe: blurred bg + sharp fg + one light source + haze.
 - [ ] Fill empty foreground: the kitchen counter front is a plain brown block (y 1370-1920) — add a towel, drawer pulls,
       fruit bowl / jars on the worktop edge, a soft reflection of the light on the worktop.
 - [ ] Chubby v2 acting: hair fringe that bounces, eyebrow shapes per expression, hoodie fold lines that follow the arms,
       light_wrap of the place's colour on Chubby (he sits IN the light), contact shadow that matches the light direction.
-- [ ] Shade the hero props the same way as Chubby (_inflate from fnh_char3d: distance-transform normals) so props and
-      character share one lighting model; outlines warm-brown, not black.
+- [x] Shade the hero props the same way as Chubby (ep 15: anim_cine.mat_shade on _inflate + material presets; use it for every
+      new hero prop) so props and character share one lighting model; outlines warm-brown, not black.
 - [ ] Chubby is often small in a corner — make him the actor (big, in the middle of the action, interacting with props).
 - [ ] Break the "big circle + prop" sameness: full-bleed scenes, split screens, close-ups, top-down tables, inside-the-body
       worlds, camera push-ins/pans, parallax layers. No two consecutive shots with the same layout.
@@ -127,6 +127,14 @@ Script / packaging:
 - [ ] Comment question in caption + firstCommentText.
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-28 06:00: Metricool numbers at 05:50 are IDENTICAL to the 02:00 snapshot for every reel (sugar rush 1102 / mint 1206 /
+  onions 126) and coffee (03:20) has no row yet -> overnight IST the reel rows don't refresh; refresh analytics on the daytime runs.
+  No post is 48 h old yet (oldest CHUBBY = carrots, 37 h), so no verdicts this run. Topic pick kept the breakout pattern
+  (everyday food + belief flip): 'white stuff on chocolate = mould' -> bloom, safe; plus a Halloween hook (candy bags).
+- 2026-10-28 06:20 (voice, first full M2 episode): the mature blend scored chunk20 4.499 / line mean 4.459 vs the A voice on ep 14
+  (4.412 / 4.344) at 172 wpm, f0 range 16.6 st -> the owner's 'more mature, more natural' change is also the biggest UTMOS jump we
+  have measured (+0.09 / +0.12). STR 1.15 (louder + longer stressed words) A/B on the same text: 4.497 / 4.456 vs 4.499 / 4.459 =
+  neutral -> kept STR 1.0 (UTMOS doesn't reward stress changes, like 'settle' endings). ASR caught 'copies' heard as 'cop is'.
 - 2026-10-28 02:00: FIRST REAL CHUBBY BREAKOUTS. Sugar rush (Halloween myth) 1102 reach / 38.9 s avg watch (33 % of 1:58) / 4 shares /
   3 comments, and mint (gum + ice water) 1206 reach / 27.6 s / 34 likes, while spicy (121), silver (119) and onions (126, 4 h old)
   stayed at the usual ~120. 3-s hold is 62-69 % on ALL of them -> the hook and the style work; the TOPIC decides distribution.
@@ -182,6 +190,18 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 15 chocolate melts in your mouth (28 Oct, auto run, 2:25): VOICE first full episode in the mature M2 voice (chunk20 4.499 / line mean
+  4.459 vs ep 14 4.412 / 4.344), STR 1.15 stress A/B rejected (neutral), c6 rewritten for ASR | VISUAL first full v5-look episode +
+  MATERIALS skill (anim_cine.mat_shade: tempered chocolate GLOSS with a crisp window reflection, untempered MATTE, bloomed CHALKY with
+  powdery speckle, on Chubby's light model; the gloss -> chalky morph IS the explanation of bloom), 2 new lit places (set_chocolatier
+  with a polished marble slab + marble_front; set_fridge_night lit only by the open fridge), cocoa-butter crystal forms as the SAME 12
+  bricks built 6 ways (morphing layouts; shape 5 = golden running bond, 6 = tighter + greyer), 8 big 3D titles (MELT, MOULD?, TALENT?,
+  WINNER, SOLID, TEMPERING, SURVIVES, BLOOM, SAFE, CAKE!), lighting beats (lights drop for the old bar, golden god rays for the winner,
+  cold fridge light), prop lib15 + foley (snap, melt, clack, fridge_hum, suction) | SCRIPT/TOPIC Halloween-timely everyday food +
+  belief flip (white dust = mould? -> bloom, safe), one concrete analogy, numbers you can feel (34 vs 37, +3 degrees), open loop at
+  10 s paid at 89 s, 3 chapters, 2 takeaways (cool + dry not the fridge; bake bloomed bars), musette-waltz score with varispeed
+  ritardando | metric: reach at 48 h vs sugar rush / mint (pattern repeat?), 3-s hold (first v5-look reel), avg watch s on 2:25,
+  comments on 'fridge or cupboard'.
 - 14 coffee doesn't give energy (28 Oct, auto run, ~2:17): VOICE 6 weakest/ambiguous lines rewritten (b1 4.04 -> 4.40, a2, e2 split,
   e3, c4 'a loan' heard as 'alone', d5 'an hour less' heard as 'or less') + EXS 0.3 A/B (rejected, floor reached); ship chunk20 4.412 /
   line mean 4.344 (ep 13 4.428 / 4.350, within gate), 199 wpm, ASR clean | VISUAL CHARTS ON VIDEO (anim_fx.day_graph): 4 self-drawing
@@ -283,6 +303,9 @@ Script / packaging:
 | 28 Oct | ep 14 coffee, + b1/a2/c4/e2/e3 rewrites | 4.339* (chunk20 4.424, line mean 4.357) | 200 | 0.15 | 16.9 | 0 |
 | 28 Oct | ep 14 coffee, same + EXS 0.3 / BMP 0.6 (A/B, rejected) | 4.345* (chunk20 4.421, line mean 4.345) | 199 | 0.15 | 16.5 | 0 |
 | 28 Oct | **ep 14 coffee, + d5 rewrite for meaning (shipped; full re-render = new take)** | **4.286* (chunk20 4.412, line mean 4.344)** | 199 | 0.15 | 17.2 | 0 |
+| 28 Oct | ep 15 chocolate, M2 voice (first full episode), first script | 4.458* (chunk20 4.470, line mean 4.453) | 172 | 0.12 | 16.5 | 1 (c6 'copies' -> 'cop is') |
+| 28 Oct | ep 15 chocolate, M2 + c6 rewrite + STR 1.15 (A/B, rejected: neutral) | 4.471* (chunk20 4.497, line mean 4.456) | 172 | 0.12 | 16.8 | 0 |
+| 28 Oct | **ep 15 chocolate, M2 + c6 rewrite, STR 1.0 (shipped)** | **4.471* (chunk20 4.499, line mean 4.459)** | 172 | 0.12 | 16.6 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -313,7 +336,7 @@ Animation & visuals:
 - [x] Pseudo-3D shading of 2D shapes (distance-transform height field -> normals -> Lambert + Blinn + rim) (27 Oct fnh_char3d)
 - [x] Colour grading: split-tone (cool shadows / warm highlights), S-curve, bloom only where it is dark enough (27 Oct)
 - [~] Foreground layering: character BEHIND a counter/table (cooking-show framing) = instant depth (27 Oct counter_front)
-- [ ] Materials: glossy vs matte vs translucent (onion skin, glass, liquid) with the same light model
+- [x] Materials: glossy vs matte vs chalky (+ glass jar Fresnel edge) with the same light model (ep 15: anim_cine.mat_shade / mat_put)
 - [x] Colour script: plan the colour arc of the video (ep 11: warm = real temperature, icy = what the brain feels)
 - [~] Kinetic typography for key numbers (count-ups, slams, words that react to the action)
 - [~] Match cuts and morph transitions (shape of one object becomes the next) (ep 12: iris_mix iris-in from a round object)
@@ -354,6 +377,15 @@ Story & topics:
 - [ ] Visual metaphor for a whole system (ep 13: 'booby trap' / two rooms) - test which metaphors viewers repeat in comments
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-28 06:30 | MATERIALS: glossy vs matte vs chalky on ONE light model (visual / 3D look) | What tells the eye what a surface is
+  made of is how it treats light: GLOSS = a small, sharp, very bright highlight plus a crisp mirror image of the light source (window
+  bars with hard edges), deep darks and a bright Fresnel rim; SATIN = a broader, softer highlight; MATTE = no reflection, wide soft
+  light wrap, low contrast; a dusty/CHALKY surface = lifted, desaturated blacks with a powdery speckle on top; GLASS = clear middle,
+  bright edges (Fresnel) (Proko, 'What makes materials look different' + 'Painting materials: matte, ceramics'; ctrlpaint 'Studying
+  glossiness'). Built anim_cine.mat_shade(mask, base, shadow, hi, kind) on fnh_char3d._inflate with MATS presets + a crisp two-bar
+  window reflection for gloss, and mat_put() for _Cv canvases. In ep 15 the material IS the science: tempered shape-5 chocolate is
+  gloss, untempered is matte, bloomed is chalky, and the gloss -> chalky morph shows bloom happening | ep 15 (bars, pieces, pot,
+  cake, jar, spatula; S9 shiny close-up, S20b / S21b bloom morphs) | yes
 - 2026-10-28 | Charts on video (explaining a HIDDEN quantity that changes over time) | A chart in a video gets ~3 s of attention, so
   'remove to improve': few lines, no legend (label each line at its end), no grid, title that states the FINDING ("HIDDEN, NOT
   GONE"), one strong colour per line, reveal in stages, wipe the line left -> right in sync with the voice, annotate the key moment

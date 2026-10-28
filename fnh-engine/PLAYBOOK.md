@@ -179,6 +179,16 @@ bee_el(flap, mood), flower_el("coffee"|"lemon", glow), lemon_el, sun_icon, moon_
 - `title3d(f, "WORD", y, t, t0, size, face, side)` = giant extruded 3D word, drawn BEFORE Chubby/the hero so they overlap it;
   when a 3D title shows the key word, drop the ui_word caption for that moment (no duplicate text).
 
+### Materials + new places (ep 15, `anim_cine.py` + `anim_props_lib15.py`)
+- `mat_shade(mask, base, shadow, hi, kind)` / `mat_put(cv, m, ...)` (kind = gloss | satin | matte | chalky) shade a prop on Chubby's
+  light model: gloss = sharp highlight + crisp window reflection, matte = soft and flat, chalky = lifted + powdery. Use it for every
+  new HERO prop (build it on a `_Cv` canvas from fnh_char3d) and let the material carry meaning (fresh vs old, real vs fake).
+- Places: `set_chocolatier(t)` + `marble_front(f, 1330)` (shop workroom, marble slab), `set_fridge_night(t)` (dark kitchen lit only
+  by an open fridge = cold blue key light). lib15 props: choc_bar_el(kind, snap, bite), choc_piece_el, melting_piece, puddle,
+  wrapped_bar_el, pod_el(open_), bean_el, butter_el, brick_el/brick_layout/lerp_layout/draw_bricks/form_stack (same bricks built
+  N ways = crystal forms / structure), temp_gauge (marks), temper_chart, pot_el, pool, cake_el, jar_el (glass), mould_el, spatula_el,
+  sugar_xtal; schemes cocoa, butter, crystal, chalk, frost. sfx_lib (ep 15): snap, melt, clack, fridge_hum, suction.
+
 ### Visual rules (mandatory)
 - 1080×1920, 24 fps. Safe zones: nothing important in top 250 px, bottom 420 px (y > 1500), right 120 px, left 60 px.
 - Captions ONLY at key moments: `ui_word(f, lead, BIG, 470, …)` — small lead + one big word/number, centred x = 540,

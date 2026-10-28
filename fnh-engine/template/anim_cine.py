@@ -287,3 +287,135 @@ def light_wrap(f, el, x, y, col, strength=0.25):
     pm, a = el
     edge = np.clip(a - cv2.erode(a, np.ones((5, 5), np.uint8), iterations=2), 0, 1)
     comp(f, ((_c(col)[None, None] * edge[..., None] * strength).astype(np.float32), edge * strength), x, y)
+
+
+# ================= ep 15 (27-28 Oct): MATERIALS on the Chubby v2 light model + two new lit places =================
+BLOOMW = (236, 228, 214)
+# ---------------- MATERIALS (ep 15 craft skill): what makes a surface read as glossy, satin, matte or chalky ----------------
+# Gloss = a SMALL, SHARP, bright highlight + a crisp mirror image of the light source (window bars with hard edges) + deep
+# darks + a bright Fresnel rim; satin = a broader, softer highlight; matte = no reflection, wide soft light wrap, low contrast;
+# chalky (bloom) = lifted, desaturated blacks + a powdery speckle and streaks on top (Proko 'What makes materials look
+# different'; ctrlpaint 'Studying glossiness'). Same key light (LIGHT3) as Chubby so props and character share one light.
+MATS = {"gloss": dict(spec=0.70, shin=70, wrap=0.12, rim=0.40, ao=0.26, refl=0.85, lift=0.0, speck=0.0, squeeze=1.0),
+        "satin": dict(spec=0.26, shin=16, wrap=0.30, rim=0.26, ao=0.20, refl=0.0, lift=0.0, speck=0.0, squeeze=1.0),
+        "matte": dict(spec=0.02, shin=6, wrap=0.65, rim=0.10, ao=0.12, refl=0.0, lift=0.07, speck=0.0, squeeze=0.72),
+        "chalky": dict(spec=0.0, shin=4, wrap=0.75, rim=0.05, ao=0.08, refl=0.0, lift=0.34, speck=0.9, squeeze=0.6)}
+
+
+def mat_shade(mask, base, shadow, hi=None, kind="gloss", flat=0.95, light=LIGHT3, seed=0, lift_col=BLOOMW):
+    """shade a flat mask (supersampled float 0..1) as a material. Returns rgb (h, w, 3)."""
+    p = MATS[kind]
+    col = _inflate(mask, base, shadow, hi, light=light, flat=flat, spec=p["spec"], shin=p["shin"], wrap=p["wrap"], rim_amt=p["rim"], ao=p["ao"])
+    m = (mask > 0.5).astype(np.uint8)
+    if m.sum() == 0: return col
+    ys, xs = np.nonzero(m); x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max(); bw, bh = max(1, x1 - x0), max(1, y1 - y0)
+    if p["squeeze"] < 1:
+        mu = col[m > 0].mean(0); col = mu + (col - mu) * p["squeeze"]
+    if p["refl"] > 0:                                     # crisp window reflection = the strongest 'gloss' cue
+        R = np.zeros(mask.shape, np.float32)
+        for off, wd in ((0.16, 0.08), (0.30, 0.035)):
+            pts = np.array([[x0 + bw * off, y0], [x0 + bw * (off + wd), y0], [x0 + bw * (off + wd) - bh * 0.45, y1], [x0 + bw * off - bh * 0.45, y1]], np.int32)
+            cv2.fillPoly(R, [pts], 1.0, cv2.LINE_AA)
+        k = max(3, int(min(bw, bh) * 0.07) | 1)
+        inner = cv2.erode(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))).astype(np.float32)
+        yy = np.arange(mask.shape[0], dtype=np.float32)[:, None]
+        R *= inner * np.clip(1.15 - (yy - y0) / bh, 0, 1) * p["refl"]
+        col = col + R[..., None] * (1 - col)
+    if p["lift"] > 0:
+        l_ = col.mean(2, keepdims=True); col = col * 0.6 + l_ * 0.4
+        col = col * (1 - p["lift"]) + _n01(lift_col)[None, None] * p["lift"]
+    if p["speck"] > 0:
+        rng = np.random.default_rng(seed + 11)
+        nz = rng.random((max(2, mask.shape[0] // 6), max(2, mask.shape[1] // 6))).astype(np.float32)
+        nz = cv2.resize(nz, (mask.shape[1], mask.shape[0]), interpolation=cv2.INTER_LINEAR)
+        streak = cv2.GaussianBlur(rng.random((max(2, mask.shape[0] // 40), max(2, mask.shape[1] // 40))).astype(np.float32), (0, 0), 0.8)
+        streak = cv2.resize(streak, (mask.shape[1], mask.shape[0]), interpolation=cv2.INTER_CUBIC)
+        a = np.clip((nz - 0.55) * 3, 0, 1) * 0.55 + np.clip((streak - 0.5) * 2.5, 0, 1) * 0.5
+        col = col * (1 - (a * p["speck"])[..., None]) + _n01((250, 246, 238))[None, None] * (a * p["speck"])[..., None]
+    return np.clip(col, 0, 1)
+
+
+def mat_put(cv, m, base, shadow, hi=None, kind="gloss", outline=5, flat=0.95, seed=0):
+    if outline: cv.outline(m, outline)
+    cv.put(mat_shade(m, base, shadow, hi, kind, flat, seed=seed), np.clip(m, 0, 1))
+
+
+# ---------------- places (ep 15): chocolatier workroom with a marble slab; night kitchen lit by an open fridge ----------------
+def _marble_el(y0=1330):
+    def mk():
+        h = H - y0; rgb = np.zeros((h, W, 3), np.float32)
+        g = np.clip(np.arange(h, dtype=np.float32) / h, 0, 1)[:, None, None]
+        rgb[:] = np.array(C((236, 232, 226)), np.float32) * (1 - g) + np.array(C((196, 190, 184)), np.float32) * g
+        rng = np.random.default_rng(12)
+        for i in range(14):                                     # veins
+            x = rng.uniform(-100, W); pts = [(x, 0)]
+            for k in range(16): x += rng.uniform(-14, 40); pts.append((x, (k + 1) * h / 16))
+            cv2.polylines(rgb, [np.array(pts, np.int32)], False, C((200, 194, 196)), int(rng.uniform(2, 4)), cv2.LINE_AA)
+        rgb = cv2.GaussianBlur(rgb, (0, 0), 2.2)
+        rgb[:14] = np.array(C((250, 248, 244)), np.float32)   # polished front edge catches the light
+        rgb[14:22] *= 0.82
+        glow_ = np.exp(-((np.arange(W) - 360) / 260.0) ** 2)[None, :, None] * np.exp(-np.arange(h) / 90.0)[:, None, None]
+        rgb = np.clip(rgb + glow_ * 0.18, 0, 1)                 # soft reflection of the lamp on the polished stone
+        return rgb.astype(np.float32), np.ones((h, W), np.float32)
+    return gcache(("marble", y0), mk)
+
+
+def marble_front(f, y0=1330):
+    comp(f, _marble_el(y0), W / 2, y0 + (H - y0) / 2)
+
+
+def set_chocolatier(t=0.0, blur=6, y0=1330):
+    """chocolate-shop workroom: dark walnut wall, shelves of bars in coloured wrappers, copper pots, warm pendant lamps,
+    white marble slab in front (draw marble_front AFTER Chubby to stand him behind it)."""
+    def mk():
+        f = _vgrad((70, 42, 30), (110, 70, 48), 0, y0)
+        for k in range(0, W, 90): cv2.line(f, (k, 0), (k, y0), C((60, 36, 26)), 4, cv2.LINE_AA)   # wood panels
+        rng = np.random.default_rng(21)
+        for r_ in range(3):
+            ys = 420 + r_ * 230; cv2.rectangle(f, (30, ys + 120), (1050, ys + 140), C((140, 92, 58)), -1, cv2.LINE_AA)
+            x = 50
+            while x < 1020:
+                bw = int(rng.uniform(60, 90)); bh = int(rng.uniform(90, 118))
+                c = [(200, 40, 50), (40, 120, 90), (230, 180, 60), (60, 80, 150), (240, 230, 210), (150, 60, 110)][int(rng.integers(0, 6))]
+                cv2.rectangle(f, (x, ys + 120 - bh), (x + bw, ys + 120), C(c), -1, cv2.LINE_AA)
+                cv2.rectangle(f, (x + 6, int(ys + 120 - bh * 0.6)), (x + bw - 6, int(ys + 120 - bh * 0.45)), C((255, 230, 170)), -1, cv2.LINE_AA)
+                x += bw + int(rng.uniform(8, 20))
+        for px in (150, 900):                                    # copper pots on the top shelf
+            cv2.ellipse(f, (px, 300), (90, 70), 0, 0, 360, C((200, 110, 60)), -1, cv2.LINE_AA)
+            cv2.ellipse(f, (px - 30, 280), (24, 40), 0, 0, 360, C((255, 190, 140)), -1, cv2.LINE_AA)
+        f = _soft(f, blur)
+        comp(f, _marble_el(y0), W / 2, y0 + (H - y0) / 2)
+        return np.clip(f, 0, 1).astype(np.float32)
+    f = gcache(("set_choco", blur, y0), mk).copy()
+    for lx in (300, 780):
+        cv2.line(f, (lx, 0), (lx, 150), C((30, 20, 16)), 4, cv2.LINE_AA)
+        cv2.ellipse(f, (lx, 170), (60, 34), 0, 180, 360, C((40, 30, 24)), -1, cv2.LINE_AA)
+        lamp_glow(f, lx, 200, 260, (255, 200, 130), 0.45)
+    bokeh(f, t, 10, 15, 300, 1200, 18, 46, amt=0.16)
+    dust_motes(f, t, 100, 400, 980, 1300, 18, 8, 0.35)
+    return f
+
+
+def set_fridge_night(t=0.0, door=1.0, blur=5):
+    """dark kitchen at night lit ONLY by an open fridge on the right (cold blue key light, warm practical in the back)."""
+    def mk():
+        f = _vgrad((14, 18, 36), (26, 32, 54), 0, H)
+        for r_ in range(0, 22):
+            y = 560 + r_ * 44
+            if y > 1330: break
+            cv2.line(f, (0, y), (620, y), C((30, 36, 58)), 3, cv2.LINE_AA)
+        cv2.rectangle(f, (0, 1330), (W, H), C((20, 22, 36)), -1)
+        # fridge body + bright interior
+        cv2.rectangle(f, (600, 600), (1060, 1480), C((200, 214, 230)), -1, cv2.LINE_AA)
+        cv2.rectangle(f, (630, 630), (1030, 1450), C((214, 238, 255)), -1, cv2.LINE_AA)
+        for k, y in enumerate((840, 1040, 1260)):
+            cv2.rectangle(f, (630, y), (1030, y + 12), C((170, 200, 230)), -1, cv2.LINE_AA)
+        for (x, y, c) in ((690, 800, (240, 120, 90)), (800, 790, (120, 200, 120)), (920, 1000, (250, 220, 120)), (720, 1220, (230, 230, 240)), (930, 1420, (200, 80, 90))):
+            cv2.rectangle(f, (x - 40, y - 80), (x + 40, y + 36), C(c), -1, cv2.LINE_AA)
+        f = _soft(f, blur)
+        return np.clip(f, 0, 1).astype(np.float32)
+    f = gcache(("set_fridge", blur), mk).copy()
+    glow(f, 830, 1040, 400, (170, 220, 255), 0.55 * door)
+    god_rays(f, 640, 1040, t, (170, 214, 255), 0.25 * door, 9, 1300, 1.3, math.pi, 7)
+    haze(f, 700, 1500, (120, 170, 230), 0.10 * door)
+    return f

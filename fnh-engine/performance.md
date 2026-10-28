@@ -33,8 +33,11 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 | 10-27 12:25 | 11 mint feels cold | 125 | 1206 | 1394 | 27.6 | 68.9 | 34 | 1 | 0 | 1 | CHUBBY v4 + scale cues, everyday habit (gum + water), 14 h old - BREAKOUT |
 | 10-27 17:25 | 12 silver leaf on sweets | 124 | 119 | 129 | 18.8 | 62.8 | 4 | 0 | 0 | 1 | CHUBBY v4 + cast card, Indian food purity, 9 h old |
 | 10-27 22:30 | 13 onions make you cry | 122 | 126 | 143 | 15.5 | 63.1 | 1 | 0 | 0 | 1 | CHUBBY v4 + chain map, 4 h old |
-| 10-28 (sched.) | 14 coffee doesn't give energy | ~137 | — | — | — | — | — | — | — | — | CHUBBY v4 + day graphs (charts on video), everyday habit + myth-flip |
+| 10-28 03:20 | 14 coffee doesn't give energy | ~137 | — | — | — | — | — | — | — | — | CHUBBY v4 + day graphs (charts on video), everyday habit + myth-flip |
+| 10-28 (sched. 07:50) | 15 chocolate melts in your mouth | 145 | — | — | — | — | — | — | — | — | FIRST v5 LOOK (Chubby v2 3D, lit places, materials) + M2 mature voice, Halloween everyday food + belief flip (bloom isn't mould) |
 ## What the numbers say so far (update every run, keep it to the 5 most useful lines)
+- 28 Oct 05:50: all rows identical to the 02:00 snapshot; coffee (03:20) not in analytics yet -> refresh on daytime runs; ep 15 is the
+  first v5-look + M2-voice reel: compare its 3-s hold / avg watch with eps 09-14 at 48 h (30 Oct 07:50).
 - 28 Oct 02:00: two CHUBBY videos BROKE OUT: sugar rush (1102 reach, 38.9 s avg watch = 33 % of 1:58, 4 shares, 3 comments) and
   mint (1206 reach, 27.6 s, 34 likes). Both = an everyday experience everyone has had + a "you were wrong" twist (myth / brain trick).
   Spicy/silver/onions (~120 reach) were niche or explained a mechanism without a belief to flip. Hold is 62-69 % for ALL of them,
