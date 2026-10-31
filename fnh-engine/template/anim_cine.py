@@ -642,3 +642,112 @@ def set_stove(t=0.0, blur=4, hob_y=1300, on=1.0, flame_w=300):
     god_rays(f, 900, 450, t, (255, 226, 170), 0.12, 7, 1400, 0.6, 2.4, 6)
     flames(f, 540, hob_y - 2, t, flame_w, 11, on)
     return inkify(f)
+
+
+# ================= ep 19 (31 Oct): INK 3D TITLES + the LUNCH TABLE place =================
+def text_ink_el(text, size=230, face=(240, 150, 150), side=(150, 26, 34), depth=18, ink=None, font_path=None, tilt=0.5, wob=2.0, seed=1):
+    """hand-lettered block title in the ink language: flat face fill, an extruded side in a darker flat colour with diagonal hatch lines,
+    ONE wobbly warm-ink outline round the whole letter block (no gloss, no gradient) — replaces the glossy text3d_el face for ink episodes."""
+    ink = ink or globals().get("INKC", (46, 32, 26))
+    key = ("tink", text, size, face, side, depth, ink, font_path, tilt, wob, seed)
+    def mk():
+        fnt = font(font_path or F_BLACK, size)
+        bb = ImageDraw.Draw(Image.new("L", (10, 10))).textbbox((0, 0), text, font=fnt)
+        tw, th = bb[2] - bb[0], bb[3] - bb[1]; pad = depth * 2 + 50
+        Wd, Hd = tw + 2 * pad, th + 2 * pad
+        m = Image.new("L", (Wd, Hd), 0); ImageDraw.Draw(m).text((pad - bb[0], pad - bb[1]), text, font=fnt, fill=255)
+        m = np.asarray(m, np.float32) / 255
+        # hand wobble: a fixed low-frequency warp of the whole mask
+        rng = np.random.default_rng(seed)
+        yy, xx = np.mgrid[0:Hd, 0:Wd].astype(np.float32)
+        dx = wob * (np.sin(yy / 17 + rng.uniform(0, 6)) + 0.5 * np.sin(yy / 7 + rng.uniform(0, 6)))
+        dy = wob * (np.sin(xx / 23 + rng.uniform(0, 6)) + 0.5 * np.sin(xx / 9 + rng.uniform(0, 6)))
+        m = cv2.remap(m, (xx + dx).astype(np.float32), (yy + dy).astype(np.float32), cv2.INTER_LINEAR)
+        face_m = (m > 0.5).astype(np.float32)
+        side_m = np.zeros_like(m)
+        for i in range(1, depth + 1): side_m = np.maximum(side_m, np.roll(np.roll(face_m, i, 0), int(i * tilt), 1))
+        side_only = np.clip(side_m - face_m, 0, 1)
+        allm = np.maximum(face_m, side_m)
+        rgb = np.zeros((Hd, Wd, 3), np.float32)
+        rgb += _c(side)[None, None] * side_only[..., None]
+        # hatch lines on the side (diagonal, ink, semi-transparent)
+        hatch = ((xx + yy) % 9 < 2.2).astype(np.float32) * side_only * 0.35
+        rgb = rgb * (1 - hatch[..., None]) + _c(ink)[None, None] * hatch[..., None]
+        rgb = rgb * (1 - face_m[..., None]) + _c(face)[None, None] * face_m[..., None]
+        # one ink outline round the whole block + a thin line where the face meets the side
+        k = np.ones((5, 5), np.uint8)
+        outline = np.clip(cv2.dilate(allm, k, iterations=2) - allm, 0, 1)
+        inner = np.clip(cv2.dilate(face_m, k, iterations=1) - face_m, 0, 1) * side_only
+        al = np.maximum(allm, outline)
+        rgb = rgb * (1 - outline[..., None]) + _c(ink)[None, None] * outline[..., None]
+        rgb = rgb * (1 - inner[..., None] * 0.9) + _c(ink)[None, None] * inner[..., None] * 0.9
+        # a soft paper shadow under the block
+        sh = np.roll(np.roll(cv2.GaussianBlur(allm, (0, 0), 10), 14, 0), 10, 1) * 0.35
+        al2 = np.maximum(al, sh)
+        rgb = rgb * (al[..., None] > 0) + _c((60, 40, 30))[None, None] * np.clip(sh - al, 0, 1)[..., None]
+        return rgb.astype(np.float32), al2.astype(np.float32)
+    return gcache(key, mk)
+
+
+def title_ink(f, text, y, t=0.0, t0=-1.0, size=260, face=(240, 150, 150), side=(150, 26, 34), depth=18, max_w=860, op=1.0, x=540, frames=4):
+    """ink 3D title: SNAPS in (4 frames, timing & spacing kit) at t0 and holds with a tiny drift. Draw it BEFORE Chubby / the hero prop."""
+    el = text_ink_el(text, size, face=face, side=side, depth=depth)
+    w = el[1].shape[1] - 2 * (depth * 2 + 50)
+    sc = min(1.0, max_w / max(1, w))
+    k = clamp((t - t0) / max(1e-3, frames / FPS)) if t0 >= 0 else 1.0
+    if k <= 0: return
+    sc *= (0.7 + 0.3 * ease_out_back(k, 2.2)) if k < 1 else 1.0
+    comp(f, el, x, y + 3 * math.sin(t * 1.1), scale=sc, op=op * min(1.0, k * 3))
+
+
+def _cloth_el(top_y=1330):
+    """checked tablecloth layer covering y >= top_y (paper cream + faint accent checks + an ink edge)."""
+    def mk():
+        h = H - top_y; rgb = np.zeros((h, W, 3), np.float32)
+        rgb[:] = np.array(C((250, 244, 228)), np.float32)
+        acc = globals().get("ACC", (214, 48, 54))
+        for x in range(-40, W + 80, 120):
+            cv2.rectangle(rgb, (x, 0), (x + 40, h), C(tuple(int(a * 0.25 + b * 0.75) for a, b in zip(acc, (250, 244, 228)))), -1)
+        for y in range(10, h, 120):
+            cv2.rectangle(rgb, (0, y), (W, y + 40), C(tuple(int(a * 0.25 + b * 0.75) for a, b in zip(acc, (250, 244, 228)))), -1)
+        g = np.clip(np.arange(h, dtype=np.float32) / h, 0, 1)[:, None, None]
+        rgb = rgb * (1 - 0.18 * g)
+        cv2.line(rgb, (0, 2), (W, 2), C((46, 32, 26)), 5, cv2.LINE_AA)
+        return rgb.astype(np.float32), np.ones((h, W), np.float32)
+    return gcache(("cloth19", top_y), mk)
+
+
+def cloth_front(f, top_y=1330):
+    """draw the table cloth IN FRONT of Chubby -> he sits behind the table (props on it at y ~ top_y + 10)."""
+    comp(f, _cloth_el(top_y), W / 2, top_y + (H - top_y) / 2)
+
+
+def set_lunch(t=0.0, blur=4, top_y=1330):
+    """the LUNCH TABLE: a breakfast table by a sunny window (cream wall, a big window with a curtain, a shelf with a fruit bowl, a wall
+    clock), checked cloth from top_y; morning light from the window on the right; paper-softened (ink look)."""
+    def mk():
+        f = _vgrad((240, 226, 196), (222, 204, 170), 0, top_y)
+        cv2.rectangle(f, (560, 300), (1000, 1000), C((120, 90, 62)), -1, cv2.LINE_AA)                          # window frame
+        f[330:970, 590:970] = _vgrad((214, 236, 250), (250, 240, 214), 330, 970)[330:970, 590:970]
+        cv2.line(f, (780, 330), (780, 970), C((120, 90, 62)), 14, cv2.LINE_AA); cv2.line(f, (590, 650), (970, 650), C((120, 90, 62)), 14, cv2.LINE_AA)
+        cv2.circle(f, (690, 450), 50, C((255, 246, 200)), -1, cv2.LINE_AA)                                        # sun in the window
+        for yy in range(1010, 1160, 30): cv2.ellipse(f, (780, yy), (230, 12), 0, 0, 180, C((90, 150, 110)), 3, cv2.LINE_AA)   # plants on the sill
+        cv2.rectangle(f, (560, 1000), (1000, 1030), C((150, 112, 78)), -1, cv2.LINE_AA)
+        # curtain (left of the window)
+        pts = np.array([(540, 280), (600, 280), (640, 1040), (520, 1040)], np.int32); cv2.fillPoly(f, [pts], C((214, 90, 86)), cv2.LINE_AA)
+        for k in range(4): cv2.line(f, (548 + k * 14, 290), (538 + k * 28, 1030), C((190, 70, 70)), 3, cv2.LINE_AA)
+        # shelf + fruit bowl on the left, a wall clock
+        cv2.rectangle(f, (40, 700), (420, 724), C((150, 112, 78)), -1, cv2.LINE_AA)
+        cv2.ellipse(f, (230, 690), (150, 40), 0, 0, 180, C((110, 150, 130)), -1, cv2.LINE_AA)
+        for (x, y, c) in ((160, 650, (214, 48, 54)), (230, 636, (240, 190, 60)), (300, 650, (120, 170, 80)), (200, 616, (214, 48, 54))):
+            cv2.circle(f, (x, y), 34, C(c), -1, cv2.LINE_AA)
+        cv2.circle(f, (240, 420), 90, C((80, 60, 44)), -1, cv2.LINE_AA); cv2.circle(f, (240, 420), 78, C((250, 246, 236)), -1, cv2.LINE_AA)
+        cv2.line(f, (240, 420), (240, 370), C((60, 40, 30)), 6, cv2.LINE_AA); cv2.line(f, (240, 420), (280, 440), C((60, 40, 30)), 5, cv2.LINE_AA)
+        f = _soft(f, blur)
+        comp(f, _cloth_el(top_y), W / 2, top_y + (H - top_y) / 2)
+        return np.clip(f, 0, 1).astype(np.float32)
+    f = gcache(("set_lunch", blur, top_y), mk).copy()
+    god_rays(f, 700, 440, t, (255, 236, 190), 0.16, 7, 1500, 0.7, 1.9, 8)
+    glow(f, 700, 450, 320, (255, 240, 200), 0.3)
+    dust_motes(f, t, 400, 400, 1000, 1200, 18, 11, 0.4)
+    return inkify(f)

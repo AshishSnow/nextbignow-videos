@@ -526,3 +526,56 @@ def knob(level=-24):
     return _st(y / np.abs(y).max() * db(level))
 
 
+
+
+# ---- ep 19 (31 Oct): creep (browning spreading), machine_whir (the PPO enzyme machine), dunk (slice into water), squeeze (lemon), shimmer (cold sparkle) ----
+def creep(level=-26, dur=2.0):
+    """the browning spreading: a soft granular crackle whose grains get denser and lower as it goes."""
+    t2 = np.arange(int(dur * SR)) / SR; y = np.zeros(len(t2))
+    for k in range(int(dur * 60)):
+        i = int((rng.uniform(0, 1) ** 0.6) * (dur - 0.05) * SR); seg = t2[: int(0.02 * SR)]; f0 = rng.uniform(1800, 4200) * (1 - 0.5 * i / len(t2))
+        y[i:i + len(seg)] += np.sin(2 * np.pi * f0 * seg) * np.exp(-seg / 0.004) * rng.uniform(0.3, 1.0)
+    drone = signal.sosfilt(signal.butter(2, [90, 260], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * (t2 / dur) ** 1.5 * 0.5
+    y = y + drone
+    y *= np.sin(np.pi * np.clip(t2 / dur, 0, 1)) ** 0.4
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level), 90)
+
+
+def machine_whir(level=-26, dur=0.6, f0=140):
+    """PPO the tiny machine: a motor whir (buzzy saw at f0 rising) + a little click at the end."""
+    t2 = np.arange(int(dur * SR)) / SR
+    ph = 2 * np.pi * np.cumsum(f0 * (1 + 0.6 * t2 / dur)) / SR
+    y = (signal.sawtooth(ph) * 0.5 + np.sin(ph * 2) * 0.3) * np.exp(-t2 / (dur * 0.6))
+    y = signal.sosfilt(signal.butter(2, 2200, "low", fs=SR, output="sos"), y)
+    i = int((dur - 0.05) * SR); seg = t2[: int(0.03 * SR)]
+    y[i:i + len(seg)] += signal.sosfilt(signal.butter(2, [2000, 6000], "band", fs=SR, output="sos"), rng.standard_normal(len(seg))) * np.exp(-seg / 0.004) * 0.8
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def dunk(level=-20, dur=0.7):
+    """a slice dropped into water: a plop (pitched blip down) + a slosh (band-passed noise swell)."""
+    t2 = np.arange(int(dur * SR)) / SR
+    y = np.sin(2 * np.pi * np.cumsum(420 * (1 + 1.5 * np.exp(-t2 / 0.02))) / SR) * np.exp(-t2 / 0.05) * 1.2
+    sl = signal.sosfilt(signal.butter(2, [300, 2600], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-((t2 - 0.14) / 0.12) ** 2) * 0.7
+    y = y + sl
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level), 70)
+
+
+def squeeze(level=-24, dur=0.8):
+    """a lemon squeezed: a wet squirt + three drips."""
+    t2 = np.arange(int(dur * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [900, 5000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.12) * (0.5 + 0.5 * np.abs(np.sin(2 * np.pi * 23 * t2)))
+    for k in range(3):
+        i = int((0.25 + 0.16 * k) * SR); seg = t2[: int(0.06 * SR)]
+        y[i:i + len(seg)] += np.sin(2 * np.pi * np.cumsum((1500 + 300 * k) * (1 + 0.8 * np.exp(-seg / 0.008))) / SR) * np.exp(-seg / 0.015) * 0.8
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def shimmer(level=-26, dur=1.2):
+    """a cold high sparkle (the Arctic apple): detuned high sines with a slow flutter."""
+    t2 = np.arange(int(dur * SR)) / SR; y = np.zeros(len(t2))
+    for k, f0 in enumerate((2637, 3136, 3951, 5274)):
+        y += np.sin(2 * np.pi * f0 * (1 + 0.002 * np.sin(2 * np.pi * (5 + k) * t2)) * t2) * np.exp(-t2 / (0.5 + 0.1 * k)) * (0.5 + 0.5 * np.sin(2 * np.pi * (3 + k) * t2)) / (k + 1)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level), 110)
+
+

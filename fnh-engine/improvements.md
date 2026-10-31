@@ -120,9 +120,9 @@ Voice (a mature, natural, warm guy — never robotic):
 - [ ] Next voice ideas to lab-test with voice_report: per-line SPD variety, EXS 0.6, STR 1.2 on payoff words, shorter
       lines (<= 12 words), commas for breath points. Keep the M2 blend (own register, no lift).
 Visual / edit:
-- [~] Chubby INK next steps: hand poses per action DONE ep 18 (grip / pinch / point / open: chub(hand_r=...), grip_hand(kind)); still to do: a
-      side/three-quarter head turn, a walk cycle in ink, ink-style 3D titles (hand-lettered block letters with hatch sides) instead of the glossy title3d face.
-- [ ] Let Chubby stand INSIDE the diagram shots (next to the tooth / inside the city) instead of cutting away to prop-only frames.
+- [~] Chubby INK next steps: hand poses per action DONE ep 18; ink-style 3D titles DONE ep 19 (anim_cine.title_ink); still to do: a
+      side/three-quarter head turn, a walk cycle in ink, a jaw-drop mouth state for the take.
+- [~] Let Chubby stand INSIDE the diagram shots (ep 19: he stands beside the cell room and points at it in 9 shots; next: let him walk into it).
 - [x] 28 Oct OWNER: character redesign -> Chubby INK approved (fnh_char_ink.py, colour mode C); v3 kept as fallback. Was: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
       real silhouette (neck, shoulders, fingers), textured clothes with folds + a signature item (apron/cap), weighty poses, idle life.
       Build + review a 6-expression / 6-pose sheet first, then use in the next episode. Keep him clearly FreshNestHub (mint).
@@ -148,17 +148,28 @@ Visual / edit:
 - [~] Sound design: a signature 1-s FreshNestHub sting (still to do); foley that matches the action (ep 18: simmer, foam_rise, spill_sizzle,
       pop_bubble, knob in sfx_lib).
 Topic:
-- [ ] Prefer universal kitchen/daily-habit topics (biggest reach so far); use the daily trend scan for timely ones.
+- [~] Prefer universal kitchen/daily-habit topics (biggest reach so far); use the daily trend scan for timely ones. (ep 19: a hook that ties the food to the viewer's own body - 'the same melanin as a tan' - test whether body-link hooks hold better)
 - [ ] Every topic must have a "wait, what?" fact in the first line + a takeaway people can use today.
 Script / packaging:
 - [~] 28 Oct OWNER (guide + sample now in PLAYBOOK step 4): scripts must sound like a person talking — ban filler openers ("Here's the thing", "So yes", "Now,"), use
       surprise + small jokes + rhythm changes, read aloud test; natural beats UTMOS-optimised.
-- [ ] Hook with stakes in < 2 s; tease the best fact early; loop the last line into the first.
+- [~] Hook with stakes in < 2 s; tease the best fact early; loop the last line into the first. (ep 19: a GUESS beat with a held comic pause at 29 % - watch YES / NO comments)
 - [x] Practical takeaway line in every video (31 Oct data: onions, with 2 practical fixes, got 13 shares + 6 saves = our best; ep 17 has a
       4-step 'plan for tonight').
 - [x] Comment question in caption + firstCommentText (every episode since 10).
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-31 21:40 (third run of the day): Metricool reel rows STILL identical to the 10:50 snapshot (chocolate 1280 / onions 1178 / mint 1211 /
+  sugar rush 1108 / gum 121 / coffee 126) and eps 17 (12:15) + 18 (17:15) have no rows yet (9.5 h / 4.5 h old) -> no new verdicts; judge both
+  at 48 h (2 Nov). Topic pick kept the 'food in your hand this week' rule: a cut apple going brown (lunchboxes, fruit bowls, every kitchen) with
+  a belief flip (brown = going bad? no) and a tested, cheap fix (lemon / honey water), plus a hook that ties the food to the viewer's own body
+  (the same melanin as a tan).
+- 2026-10-31 (voice, ep 19): PACE is the new constraint on long scripts. Take 1 (446 words, flat 0.96-1.03 speeds, 0.55-s 'comic' pauses) ran
+  3:07 at only 157 wpm: every full stop inside a line is a Kokoro pause, and this script had 3-4 short sentences per line. Fixes that worked:
+  join short sentences with commas, raise explanation lines to 1.04-1.09 (x SPD 0.88 = still calm), cut 15 words, pauses 0.55 -> 0.4. Take 3
+  (164.7 wpm) cost UTMOS (chunk20 4.472); take 4 with +0.01-0.04 more speed and b2 rewritten as one sentence ('...and that guest is oxygen')
+  came back UP to 4.498 / 4.469 at 167.5 wpm -> speed per se does not cost naturalness, choppy sentences do. Weakest line all 4 takes = the
+  one-word payoff sentence ('Oxygen.' 4.31-4.40): a single-word sentence with drop-stress scores worst; fold the payoff into the sentence.
 - 2026-10-31 16:00 (second run of the day): Metricool reel rows are IDENTICAL to the 10:50 snapshot (chocolate 1280 / onions 1178 / mint 1211 /
   sugar rush 1108 / gum 121 / coffee 126) and ep 17 (published 12:15) has no row yet (3.5 h old; the lag is usually 7-17 h) -> no new verdicts.
   Topic pick follows the 'food in your hand this week' rule from the 10:50 verdicts: ep 18 = milk boiling over (the daily chai / doodh moment in
@@ -255,6 +266,23 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 19 why do cut apples turn brown (31 Oct, auto run, 2:51): VOICE comic-timing pauses per beat (0.4 after a joke / reveal / the guess, 0.25-0.3
+  before a continuation) + pace rescue on a 437-word script (commas instead of full stops, explanation lines 1.04-1.09; 4 takes: 157 -> 162 ->
+  164.7 -> 167.5 wpm) + 3 rewrites (b2 one-sentence payoff, c3 'Quick guess, then:', g1 'that makes brown melanin' for ASR) -> chunk20 4.498 /
+  line mean 4.469 (ep 18 4.509 / 4.479, within gate), 167.5 wpm, f0 17.2 st, ASR clean | VISUAL TIMING & SPACING kit (anim_fx.snap / keyed /
+  pose_keys / moving_hold / take: 4-frame pose snaps with long moving holds, a real cartoon take on 'tan' and 'melanin'), INK 3D TITLES
+  (anim_cine.title_ink: flat hatched block letters with one wobbly outline, 7 of them: A TAN? / MELANIN x2 / OXYGEN / DEFENCE / ON PURPOSE /
+  ARCTIC), new lit place set_lunch (sunny breakfast table, live wall clock = time-lapse cue) + cloth_front, Chubby INSIDE the cell diagrams
+  (he points at the room beside him in 9 shots), lib19 ink props (apple whole / cut half with creeping browning / Arctic white, the cell as a
+  room with a divider, PPO the mint enzyme machine with 6 moods, polyphenol beads, O2, the colourless -> brown melanin blob, ink knife, board,
+  lemon half, honey jar, bowl, lunchbox, ink sun, 6 foods browning), one accent (apple red) + sepia browning + mint fixes, 41 shots, 5 new foley
+  (creep, machine_whir, dunk, squeeze, shimmer), APPLE-ORCHARD BLUEGRASS score (new genre: banjo rolls, boom-chick guitar, fiddle, harmonica,
+  dulcimer; the guess beat drops to one fiddle note + a clock tick) | SCRIPT/TOPIC the hook ties the food to the viewer's body ('for the same
+  reason you get a tan'), a GUESS beat with a held pause ('is the brown bit going bad?' -> NOPE), the cell-as-a-room metaphor with a divider
+  wall (define-on-sight PPO = 'a tiny machine with one job'), a three-rule fix map (keep oxygen out / slow it / switch it off) so every fix has
+  a reason, re-hooks at 29 % (guess) and 66 % (on purpose), the Arctic apple twist + 'never blushes' joke, 3 chapters, safe 'brown is fine'
+  takeaway | metric: reach at 48 h vs chocolate / onions (in-your-hand pattern), 3-s hold of a time-lapse + take hook, comments on the guess
+  (YES / NO), shares on the lemon / honey dip.
 - 18 why does milk boil over (31 Oct, auto run, 2:51): VOICE drop-stress markup 'word:dn' (lower + longer payoff words) A/B neutral (4.502/4.465
   vs 4.494/4.468, kept) + 3 rewrites (b4, c1, hook) -> chunk20 4.509 / line mean 4.479 (ep 17 4.508 / 4.465; best so far), 169.7 wpm, f0 17.3 st,
   ASR clean | VISUAL FOLLOW-THROUGH + DRAG kit (anim_fx.drag / follow / jump_back; Chubby INK hair=(dx, dy) lag on every jump-back and double take,
@@ -420,6 +448,10 @@ Script / packaging:
 | 31 Oct | ep 18 milk, same take, normal lift-stress (A; A/B = neutral) | 4.416* (chunk20 4.494, line mean 4.468) | 170 | 0.10 | 17.3 | 0 |
 | 31 Oct | ep 18 milk, + b4 / c1 rewritten as full sentences (new take) | 4.313* (chunk20 4.469, line mean 4.476) | 170 | 0.10 | 17.3 | 0 |
 | 31 Oct | **ep 18 milk, + hook question in one breath ('never, ever does?') (shipped)** | **4.498* (chunk20 4.509, line mean 4.479)** | 170 | 0.10 | 17.3 | 0 |
+| 31 Oct | ep 19 apples, M2, first script (446 words, 3:07 - too long, 157 wpm), comic pauses 0.55 | 4.248* (chunk20 4.491, line mean 4.470) | 157 (fails pace) | 0.09 | 17.4 | 0 |
+| 31 Oct | ep 19 apples, trimmed 431 words, speeds +0.03, pauses 0.4, b2/c3/g1 rewrites | 4.449* (chunk20 4.502, line mean 4.472) | 162 (fails pace) | 0.08 | 17.0 | 1 (g1 'melanin' -> 'melon in') |
+| 31 Oct | ep 19 apples, speeds +0.01-0.03, commas for full stops, g1 'brown melanin' | 4.253* (chunk20 4.472, line mean 4.468) | 164.7 (just under) | 0.07 | 17.1 | 0 |
+| 31 Oct | **ep 19 apples, + b2 one-sentence payoff, +0.01-0.04 speed (shipped)** | **4.473* (chunk20 4.498, line mean 4.469)** | 167.5 | 0.08 | 17.2 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -439,8 +471,8 @@ Animation & visuals:
 - [x] Staging: one clear focal point per shot; silhouette test for Chubby's poses (ep 17: engine/tools/ink_sheet.py + anim_fx POSE / double_take / flinch)
 - [x] Follow-through & overlapping action (ep 18: anim_fx.drag / follow / jump_back; Chubby INK hair lag, foam overshoot, dropped spoon bounce)
 - [~] Arcs: move props and limbs along curves, not straight lines (ep 12: hammer_swing on an arc + arm IK)
-- [ ] Timing & spacing: hold key poses 6–10 frames, fast in-betweens (snappy cartoon timing)
-- [~] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take) (ep 17: double_take + flinch helpers; next: a jaw-drop mouth state)
+- [x] Timing & spacing: hold key poses, fast 4-frame in-betweens, moving holds, the cartoon take (ep 19: anim_fx.snap / keyed / pose_keys / moving_hold / take)
+- [~] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take) (ep 17: double_take + flinch; ep 19: take() with a 2-frame snap + held extreme; next: a jaw-drop mouth state)
 - [~] Character acting: eye direction leads action, blinks on cuts, reaction shots (ep 18: hand poses per action - grip / pinch / point; a reaction shot on every boil-over)
 - [ ] Simple lip-sync visemes for Chubby when he talks (mouth shapes from the VO envelope + vowels)
 - [ ] Camera language: push-in on reveals, whip pans between ideas, low/high angles, rack focus (`cam_keys`, `push_in`)
@@ -493,6 +525,18 @@ Story & topics:
 - [ ] Translucency / subsurface look for skin close-ups and fruit (reuse the set_gut rim-glow idea on Chubby's ears and on props)
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-31 (run 3) | TIMING & SPACING (animation principle 7) | Timing = how many frames an action takes, spacing = how far it moves per frame
+  (Binus DKV 'Timing and spacing: why every frame matters' / 'Frame by frame', Nov 2025: 6 frames at 24 fps = 0.25 s feels very fast, 24 frames
+  feels heavy; few in-betweens = snappy, many = floaty; ease = big spacing then small near the stop). Practical numbers (playbooks 'timing
+  mastery'): a 6-frame action feels snappy, a 24-frame one deliberate; a long anticipation + an instant move = 'snap'; fix RUSHED by holding the
+  key pose 2-4 frames longer, not by adding in-betweens; blink 2-4 frames, quick gesture 6-8, emotional reaction 8-12 + hold, heavy impact 2
+  frames contact + 12 settle. The moving hold (Shawn Kelly, Animation Mentor 2009): 'a frozen character instantly appears dead' - hold a pose
+  for seconds with tiny chest / head drift, eyes alive, a small overshoot a couple of frames after the real pose, ease in. The take (Brian
+  LeMay, 'Take Keys'): anticipation back, the extreme held ~3 frames, settle with a small forward 'shock absorber', drop in-betweens that slow
+  it. Turned into anim_fx.snap (4-frame move with overshoot), keyed / pose_keys (key poses that snap on word times and HOLD), moving_hold
+  (lean / look / bob drift), take (3-frame anticipation down + squash, 2-frame snap up + stretch + wide eyes, held extreme, 6-frame settle);
+  title_ink also snaps in over 4 frames | ep 19 (S0 hook pose keys + take on 'tan', S8b take on 'brown', every ink title, 11 snap-ins of
+  props, moving holds on the guess and the lunchbox shots) | yes
 - 2026-10-31 (run 2) | FOLLOW-THROUGH, OVERLAPPING ACTION + DRAG (animation principle 5) | Walt Disney: "Things don't come to a stop all at once
   guys; first there's one part and then another" (Thomas & Johnston, The Illusion of Life, via Wikipedia 'Follow through and overlapping action'):
   loose parts (hair, cloth, ears, jowls, liquids) keep moving after the body stops, different parts move at different speeds, the completion of an

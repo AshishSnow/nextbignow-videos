@@ -198,6 +198,25 @@ Sheet: /home/claude/outputs/chubby_ink_colour_options.jpg. v3 (Pixar kid) stays 
 - Voice markup: `"word:dn"` in the stressed-words list = DROP-STRESS (the word is lowered 2 st and lengthened, not lifted) for deadpan payoffs
   ('and pop. Gone.', 'no lid.', 'you check your phone.'); A/B on ep 18 was UTMOS-neutral (+0.008 chunk20), kept for the grown-up delivery.
 
+### Ep 19 (31 Oct, third ink episode): TIMING & SPACING kit, ink 3D titles, the LUNCH TABLE place, the apple props (`anim_fx.py`, `anim_cine.py`, `anim_props_lib19.py`)
+- TIMING (anim_fx): `snap(t, t0, frames=4)` = a 4-frame pose change with overshoot (snappy, not floaty); `keyed(t, [(t0, value), ...])` /
+  `pose_keys(t, [(t0, POSE), ...])` = key poses that SNAP on word times and HOLD in between; `moving_hold(t, seed)` -> dict(lean, look, bob) so a
+  held pose never freezes; `take(t, t0)` = a cartoon take (3-frame anticipation down, 2-frame snap up with wide eyes, held extreme, 6-frame
+  settle) -> dict(dy, squash, lean, expr, brow, look) — use it on every surprise instead of a smooth ease. Rule: few in-betweens, long holds;
+  fix 'rushed' by holding the key pose longer, not by adding frames.
+- `anim_cine.title_ink(f, text, y, t, t0, size, face, side)` = hand-lettered ink block title (flat face, hatched flat side, one wobbly ink outline,
+  paper shadow) that snaps in; use it instead of the glossy title3d in ink episodes. When it shows the key word, the caption's big word is dropped.
+- Place: `set_lunch(t)` (breakfast table by a sunny window, curtain, shelf with a fruit bowl, a wall clock at (240, 420) you can animate with a
+  live hand) + `cloth_front(f, 1330)` AFTER Chubby -> he sits behind the checked cloth; props on it at y ~ 1270-1400.
+- lib19 ink props: apple_el(brown, cut, mood, look, seed, white, flesh), slice_el (= a small cut half: the side-view wedge read as a BOWL in the
+  test frames - a cut face with its seed star reads as apple instantly), cell_el(broken) (a cell as a room with a divider), ppo_el(mood) (the
+  enzyme machine), phenol_el, o2_el, melanin_el(k) (colourless -> brown), knife_ink_el / knife_ink_at, board_ink_el, lemon_ink_el(half),
+  honey_jar_el, bowl_el(level, tint), lunchbox(), sun_ink_el, food_el(kind, brown), tan_patch. Foley (sfx_lib): creep, machine_whir, dunk,
+  squeeze, shimmer.
+- Script devices that worked: a GUESS beat ('Quick guess, then: ...' + a held comic pause, the band drops to one fiddle note + a clock tick),
+  a metaphor paid twice (the tan), a three-rule map before the fixes. Pace lesson: many short sentences inside one line slow Kokoro below the
+  165-wpm gate; join them with commas or raise that line's speed.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

@@ -1,0 +1,47 @@
+{
+ "utmos": 4.473,
+ "utmos_note": "whole-file utmos = first 100 s (RAM); gate on chunk20 / line_mean",
+ "utmos_chunk20": 4.498,
+ "utmos_line_mean": 4.469,
+ "utmos_lines": {
+  "i1": 4.48,
+  "i2": 4.44,
+  "i3": 4.45,
+  "a1": 4.5,
+  "a2": 4.5,
+  "a3": 4.46,
+  "b1": 4.46,
+  "b2": 4.39,
+  "b3": 4.46,
+  "b4": 4.41,
+  "c1": 4.49,
+  "c2": 4.45,
+  "c3": 4.44,
+  "c4": 4.49,
+  "d1": 4.49,
+  "d2": 4.48,
+  "d3": 4.49,
+  "d4": 4.49,
+  "e1": 4.47,
+  "e2": 4.5,
+  "e3": 4.47,
+  "f1": 4.49,
+  "f2": 4.48,
+  "g1": 4.5,
+  "g2": 4.46
+ },
+ "f0_median_hz": 128.2,
+ "f0_range_st": 17.2,
+ "words": 437,
+ "duration_s": 169.2,
+ "wpm_overall": 155.0,
+ "wpm_speaking": 167.5,
+ "pause_ratio": 0.075,
+ "asr_word_error_approx": 0.021,
+ "asr_bad_lines": [
+  [
+   "a3",
+   "In the other corner, polyphenols, the apples own flavor chemicals, fine as long as the two never meet."
+  ]
+ ]
+}

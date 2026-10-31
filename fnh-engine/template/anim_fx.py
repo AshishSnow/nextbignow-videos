@@ -500,3 +500,68 @@ def jump_back(t, t0, dist=140.0, dur=0.28):
     """a recoil jump away from something hot: x offset that eases out with a small overshoot, then holds (moving hold)."""
     k = clamp((t - t0) / dur)
     return dist * (ease_out_back(k) if k < 1 else 1.0)
+
+
+# ================= ep 19 (31 Oct): TIMING & SPACING — snappy cartoon timing (timing = how many frames an action takes; spacing = how far it
+# moves per frame). Rules learned: a 6-frame action feels snappy, a 24-frame one deliberate; a long anticipation followed by an instant
+# move creates 'snap'; fix 'rushed' by HOLDING the key pose longer, not by adding in-betweens; a hold must never freeze (the moving hold:
+# tiny drift + eyes alive, 'a frozen character instantly appears dead' - Shawn Kelly, Animation Mentor); heavy impact = ~2 frames of
+# contact then 12+ frames of settle; blinks 2-4 frames; a take: anticipation back, extreme pose held ~3 frames, settle with a small
+# 'shock absorber' forward move (Brian LeMay, Take Keys). =================
+def snap(t, t0, frames=4, over=1.7):
+    """0..1 in `frames` frames with a small overshoot: a snappy pose change (use instead of a slow ease for arms / head / props)."""
+    k = clamp((t - t0) / max(1e-3, frames / FPS))
+    return ease_out_back(k, over) if k < 1 else 1.0
+
+
+def keyed(t, keys, frames=4, over=1.7):
+    """step through key values on their times with snap transitions and HOLDS in between: keys = [(t0, value), ...] (values = numbers
+    or tuples of numbers, e.g. arm angles). Before the first key = first value. Snappy timing: 4-frame moves, long holds."""
+    if t <= keys[0][0]: return keys[0][1]
+    cur = keys[0][1]
+    for (ta, va), (tb, vb) in zip(keys, keys[1:]):
+        if t < tb:
+            k = snap(t, ta, frames, over)
+            return tuple(a + (b - a) * k for a, b in zip(cur, va)) if isinstance(va, (tuple, list)) else cur + (va - cur) * k
+        cur = va
+    ta, va = keys[-1]; prev = keys[-2][1] if len(keys) > 1 else va
+    k = snap(t, ta, frames, over)
+    return tuple(a + (b - a) * k for a, b in zip(prev, va)) if isinstance(va, (tuple, list)) else prev + (va - prev) * k
+
+
+def pose_mix(a, b, k):
+    """blend two POSE dicts (la, ra, lean) by k 0..1."""
+    out = {}
+    for key in set(a) | set(b):
+        va, vb = a.get(key, (0, 0) if key != "lean" else 0.0), b.get(key, (0, 0) if key != "lean" else 0.0)
+        out[key] = tuple(x + (y - x) * k for x, y in zip(va, vb)) if isinstance(va, (tuple, list)) else va + (vb - va) * k
+    return out
+
+
+def pose_keys(t, keys, frames=4):
+    """snappy pose changes with holds: keys = [(t0, POSE_dict), ...] -> a POSE dict for chub(**pose)."""
+    if t <= keys[0][0]: return dict(keys[0][1])
+    cur = keys[0][1]
+    for (ta, pa), (tb, pb) in zip(keys, keys[1:]):
+        if t < tb: return pose_mix(cur, pa, snap(t, ta, frames))
+        cur = pa
+    prev = keys[-2][1] if len(keys) > 1 else keys[-1][1]
+    return pose_mix(prev, keys[-1][1], snap(t, keys[-1][0], frames))
+
+
+def moving_hold(t, seed=0, amp=1.0):
+    """idle drift during a held pose so it never freezes: returns dict(lean, look, bob) to add to a pose (tiny, slow, out of phase)."""
+    return dict(lean=1.6 * amp * math.sin(t * 0.9 + seed), look=(0.12 * amp * math.sin(t * 0.7 + seed * 2.1), 0.08 * amp * math.cos(t * 0.5 + seed)),
+                bob=2.0 * amp * math.sin(t * 1.3 + seed * 0.7))
+
+
+def take(t, t0, amp=1.0, hold=8):
+    """a cartoon TAKE on a surprise at t0: 3 frames anticipation (down + squash), a 2-frame snap up (stretch + wide eyes), a `hold`-frame
+    extreme held (moving), then a 6-frame settle with a small forward 'shock absorber'. Returns dict(dy, squash, lean, expr, brow, look)."""
+    q = (t - t0) * FPS
+    if q < 0: return dict(dy=0.0, squash=0.0, lean=0.0, expr="n", brow="n", look=(0, 0))
+    if q < 3: k = q / 3; return dict(dy=10 * amp * k, squash=0.45 * amp * k, lean=-3 * amp * k, expr="n", brow="n", look=(0, 0.3))
+    if q < 5: k = (q - 3) / 2; return dict(dy=-22 * amp * k, squash=-0.4 * amp * k, lean=6 * amp * k, expr="wow", brow="up", look=(0, -0.4))
+    if q < 5 + hold: k = (q - 5) / hold; return dict(dy=-22 * amp + 2 * math.sin(k * 6), squash=-0.4 * amp * (1 - 0.3 * k), lean=6 * amp, expr="wow", brow="up", look=(0, -0.3))
+    k = clamp((q - 5 - hold) / 6); s_ = math.sin(math.pi * k)
+    return dict(dy=-22 * amp * (1 - k), squash=-0.4 * amp * (1 - k) + 0.12 * amp * s_, lean=6 * amp * (1 - k) + 3 * amp * s_, expr="wow" if k < 0.6 else "happy", brow="up", look=(0, -0.2 * (1 - k)))

@@ -9,7 +9,7 @@ candy, gum + ice water, onions, chocolate — and shares/saves follow a practica
 0i. (DONE ep 18) milk-boils-over — Do you know why milk boils over but water never does? (the daily chai/doodh moment in every Indian kitchen: proteins
     + fat make a skin, steam gets trapped under it and lifts the foam; tip: wooden spoon / wide pan / lower heat at the first rise).
     Verify: a university food-science page (e.g. UC Davis / Penn State) + a major outlet (BBC Science Focus / Scientific American).
-0j. cut-apples-turn-brown — Do you know a cut apple 'rusts'? (polyphenol oxidase + oxygen; lemon juice slows it; not spoiled). Very
+0j. (DONE ep 19) cut-apples-turn-brown — Do you know a cut apple goes brown for the same reason you get a tan? (melanin; (polyphenol oxidase + oxygen; lemon juice slows it; not spoiled). Very
     visual (Chubby + a browning apple time-lapse). Verify: Scientific American 'Why do apples turn brown' + a university extension page.
 0k. rice-in-the-fridge — Do you know leftover rice goes hard in the fridge and soft again when you heat it? (starch retrogradation;
     plus the safe part: cool rice fast, eat within a day, reheat hot — NHS 'reheating rice'). Everyday Indian kitchen; practical takeaway.
