@@ -166,7 +166,7 @@ NBER w16874 (via Freakonomics) · sedaily 17 Oct 2026 (TDB/Nikkei)
 Format differs slightly (bulleted). **Only use numbers listed in the beats** — Cautions list the popular figures that did NOT verify.
 Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg vs F ~57 % / 18 s → good B/E picks: nickel Coke, $39 dress.
 
-### 17. The 73-year nickel Coke — type B (everyday object, absurd economics) · 30/35
+### 17. The 73-year nickel Coke — type B (everyday object, absurd economics) · 30/35 — **QUEUED 31 Oct as YOUR MOVE EP 2 (episodes/queue/04-nickel-coke; new research: Treasury 'did not like the idea' via Coin World, the empty-ninth-bottle memo via NPR ep. 416, 1920 court record 'permanent and perpetual'; myth: 1899 contract froze the price)**
 - **Interest:** wait-what 5 · story 4 · life 3 · picture 5 · fresh 4 · share 4 · verifiable 5 = **30/35**
 - **Hook:** "Why did a Coke cost five cents for seventy-three years?"
 - **Beats:** 1) A 6.5-oz Coke cost 5¢ from 1886 until 1959 — through two world wars and the Depression (Levy & Young 2004).
@@ -218,7 +218,7 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
 - **Sources:** [DOJ press release, 21 Aug 2001](https://www.justice.gov/archive/opa/pr/2001/August/422ag.htm) · [US v. Chandler, 11th Cir., Oct 2004](https://caselaw.findlaw.com/court/us-11th-circuit/1301966.html) ·
   [AP via Deseret News, Aug 2002](https://www.deseret.com/2002/8/31/19674790/4-of-5-convicted-in-mcdonald-s-trial/) · [NBC/AP, 2004](https://www.nbcnews.com/id/wbna5467659)
 
-### 20. Why you love the wobbly shelf you built (the IKEA effect) — type E (psychology trick) · 28/35
+### 20. Why you love the wobbly shelf you built (the IKEA effect) — type E (psychology trick) · 28/35 — **QUEUED 31 Oct inside SPOT THE TRICK #1 (episodes/queue/03-ikea-maze: the maze (Penn/UCL 2011), bulla bulla bins (New Yorker 2011), the restaurant ('hungry customers buy less', ikea.com), the IKEA effect as trick #4; twist: no-maze stores closed, Fortune 2023)**
 - **Interest:** wait-what 4 · story 3 · life 5 · picture 5 · fresh 2 · share 4 · verifiable 5 = **28/35**
 - **Hook:** "Why does the shelf you built yourself feel worth more?"
 - **Beats:** 1) Harvard/Duke researchers (Norton, Mochon & Ariely, J. Consumer Psychology 2012) gave people a plain IKEA storage
@@ -387,7 +387,7 @@ B everyday objects: why airport water costs $6 (and airports with "street pricin
 C hidden giants: AB InBev's "craft" beers · ASML — the only maker of EUV chip machines · a few companies behind most store brands.
 D origin twists: Samsung began selling dried fish and noodles (1938) · Lamborghini made tractors (legend vs record) · Nokia made
 rubber boots and paper.
-E psychology tricks: the IKEA maze · Aldi's coin cart · Krispy Kreme "hot now" light.
+E psychology tricks: ~~the IKEA maze~~ (queued, SPOT THE TRICK #1) · Aldi's coin cart · Krispy Kreme "hot now" light · the airport (walk-through duty-free, $6 water + 'street pricing' airports, currency-exchange spreads, 'pay in your home currency' DCC) — a strong SPOT THE TRICK #2 candidate for holiday travel.
 F business models (max 1 in 3): Red Bull as a media company · Domino's as a tech company · Hermès Birkin waitlist · Rolex scarcity ·
 Spotify per-stream pay · Nespresso / Gillette razor-and-blades · free-to-play games and "whales" · Apple accessories margins ·
 Uber surge pricing · Disney parks pricing · Netflix password-sharing crackdown · Trader Joe's no-sales strategy.

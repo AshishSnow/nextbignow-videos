@@ -9,14 +9,17 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
-## Instagram (snapshot 2026-10-28 01:45 IST — re-pulled 10:40 IST, unchanged — **sync resumed**: first new numbers since 26 Oct; posts from 26–27 Oct now have rows)
+## Instagram (snapshot 2026-10-31 ~14:30 IST, R&D writers' room run — first pull with rows for De Beers, Monopoly, Hoover, banana; comments column = IGRE07, 0 everywhere)
 | Date | Video | Style | Len | Views | Reach | Avg watch | 3-s view rate | Likes | Shares | Saves |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 10-28 | De Beers: 2 months' salary (autopilot, B/E, roadmap "three moves") | animated, calm voice | 118 s | 0 | 0 | – | – | 0 | 0 | 0 |
-| 10-27 | Airline miles: Amex paid Delta $8.2B (autopilot, F) | animated, calm voice | 101 s | 186 | 160 | 24.7 s | 64.8% | 6 | 0 | 1 |
-| 10-27 | Gas stations barely make money on gas (autopilot, B) | animated, calm voice | 81 s | **1,503** | 1,175 | 22.4 s | 66.9% | 28 | 1 | 0 |
-| 10-27 | Duolingo $1B from your streak (autopilot, F) | animated, calm voice | 93 s | 158 | 140 | 13.6 s | **24.8%** | 3 | 0 | 0 |
-| 10-27 | Visa never lends you a dollar (autopilot, F) | animated, calm voice | ~70 s | 59 | 52 | 15.0 s | 54.5% | 4 | 0 | 0 |
+| 10-28 | Banana clones (autopilot, B, map timeline) | animated, calm voice | 132 s | 132 | 116 | 24.4 s (18 %) | 60.9% | 3 | 0 | 0 |
+| 10-28 | Hoover free flights (autopilot, A, "three mistakes") | animated, calm voice | ~100 s | 143 | 125 | 16.3 s | 48.0% | 2 | 0 | 0 |
+| 10-28 | Monopoly's real inventor (autopilot, D) | animated, calm voice | 135 s | 186 | 161 | **31.2 s** (23 %) | 61.5% | 3 | 0 | 0 |
+| 10-28 | De Beers: 2 months' salary (autopilot, B/E, roadmap "three moves") | animated, calm voice | 118 s | 162 | 146 | 17.5 s (15 %) | 48.6% | 2 | 1 | 0 |
+| 10-27 | Airline miles: Amex paid Delta $8.2B (autopilot, F) | animated, calm voice | 101 s | 587 | 537 | 28.4 s (28 %) | 63.9% | 15 | 0 | 1 |
+| 10-27 | Gas stations barely make money on gas (autopilot, B) | animated, calm voice | 81 s | **1,522** | 1,185 | 22.3 s | 66.7% | 28 | 1 | 0 |
+| 10-27 | Duolingo $1B from your streak (autopilot, F) | animated, calm voice | 93 s | 164 | 146 | 13.1 s | **23.8%** | 3 | 0 | 0 |
+| 10-27 | Visa never lends you a dollar (autopilot, F) | animated, calm voice | ~70 s | 65 | 57 | 14.6 s | 53.3% | 4 | 0 | 0 |
 | 10-27 | Movie theaters make money on popcorn (autopilot, F) | animated, calm voice | ~75 s | 145 | 122 | 12.7 s | 53.7% | 4 | 0 | 0 |
 | 10-26 | Printer ink costs more than champagne (autopilot, B) | animated, calm voice | ~75 s | 1,376 | 1,195 | 21.4 s | **73.7%** | 20 | 0 | 0 |
 | 10-26 | Planet Fitness $15/month (autopilot, F) | animated, calm voice | ~75 s | 1,279 | 1,085 | 26.2 s | 69.5% | 26 | 2 | 1 |
@@ -66,15 +69,25 @@ about 9 h after posting — slower than any earlier autopilot post at this age (
 lag or the reel got almost no test distribution; check it in the next run before reading anything into it. Visa (10-27 05:00 IST)
 and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP*` still not pulled — numbers were null on 26/27 Oct.)
 
-## YouTube Shorts (snapshot 2026-10-27 15:40 IST — identical to 13:20; `YTVP06` views, `YTVP08` avg view duration s, `YTVP09` likes, `YTVP12` shares)
+## YouTube Shorts (snapshot 2026-10-31 ~14:30 IST; `YTVP06` views, `YTVP08` avg view duration s, likes `YTVP09`; rows now exist for every post through 28 Oct)
 | Date | Video | Views | Avg view (s) | IG views same video |
 |---|---|---|---|---|
-| 10-26 | Chick-fil-A closed Sundays | 44 | 14 | 176 |
-| 10-25/26 | Amazon AWS | 326 | 18 | 225 |
-| 10-25 | Starbucks is secretly a bank (2nd) | 41 | 19 | 412 |
-| 10-25 | Costco $1.50 hot dog | 984 | 14 | 1,225 |
-| 10-25 | 4 restaurant tricks | 1,007 | 22 | 1,466 |
-| 10-25 | McDonald's real estate | 1,361 | 17 | 1,281 |
+| 10-28 | Hoover free flights | 98 | 21 | 143 |
+| 10-28 | Monopoly's real inventor | 255 | 32 | 186 |
+| 10-28 | De Beers 2 months' salary | 196 | 32 | 162 |
+| 10-27 | Airline miles | 394 | 30 | 587 |
+| 10-27 | Gas stations | 527 | 13 | 1,522 |
+| 10-27 | Duolingo streak | **609** | **6** | 164 |
+| 10-27 | Visa | 1 | 0 | 65 |
+| 10-27 | Popcorn | 153 | 14 | 145 |
+| 10-26 | Planet Fitness | 678 | 17 | 1,280 |
+| 10-26 | Printer ink | 728 | 16 | 1,376 |
+| 10-26 | Chick-fil-A closed Sundays | 1,001 (was 44 on 27 Oct) | 22 | 181 |
+| 10-25/26 | Amazon AWS | 724 (was 326) | 17 | 231 |
+| 10-25 | Starbucks is secretly a bank (2nd) | 135 | 17 | 412 |
+| 10-25 | Costco $1.50 hot dog | 1,081 | 14 | 1,229 |
+| 10-25 | 4 restaurant tricks | 1,059 | 22 | 1,468 |
+| 10-25 | McDonald's real estate | 1,415 | 17 | 1,292 |
 | 10-24 | Couple beat the lottery | 16 | 20 | 39 |
 | 10-24 | 7 online shopping traps | 776 | 19 | 190 |
 | 10-23 | 7 supermarket traps | 1,304 | 27 | 2,816 |
@@ -87,7 +100,26 @@ and Duolingo (10-27 10:00 IST, scheduled) are not in the data yet. YouTube `YTVP
 | 10-20 | Starbucks bank (1st) | 16 | 13 | 186 |
 | 10-20 | Google stopped sending customers | 127 | 13 | 3,154 |
 | 10-19 | Makhana: farmers $5, America $160 | 1,230 | 14 | 4,716 |
-(No YouTube rows yet for printer ink, Planet Fitness, popcorn or anything newer — same sync lag as Instagram, or not yet processed.)
+(YouTube rows keep growing for days — Chick-fil-A 44 → 1,001, AWS 326 → 724 in four days — so judge a Short after ≥ 72 h, not on day 1.)
+
+## Insights (31 Oct ~14:30 IST, R&D writers' room run — first rows for the four story-type videos; media-kit numbers for BRAND.md)
+S. **The story types did not fix reach, and nothing fixes reactions yet.** Instagram day-3 rows: Monopoly (D) 186 views / 31.2 s avg (channel
+   best in seconds, but 23 % of its 135 s), Hoover (A) 143 / 16.3 s / 48 % 3-s, De Beers (B/E) 162 / 17.5 s / 48.6 %, banana (B) 132 / 24.4 s
+   / 60.9 %. Every post since 27 Oct 15:00 IST sits at 65–190 views except airline (587) and gas (1,522) → the fall is account-wide and
+   by *time*, not by type: 5 posts a day on 26–27 Oct split the non-follower test audience, and the long (118–135 s) story videos hold only
+   15–23 % of their length. Shares + saves + comments across the last 10 reels: 4 + 2 + 0 on 3,681 reach = **1.6 reactions per 1,000 reach**;
+   comments = 0 on all 29 posts ever. → This is the baseline the YOUR MOVE / SPOT THE TRICK format must beat (BRAND.md §5): the
+   choice CTA + firstCommentText is the first thing we have ever built for comments.
+T. **Media-kit numbers (BRAND.md §5), 31 Oct:** avg views of the last 10 Instagram reels **439** (median 164); avg 3-s rate 57 %; avg watch
+   21.5 s; reactions 1.6 / 1,000 reach; YouTube last 10 Shorts avg **302** views (median 196; Duolingo 609 views but a 6-s average view =
+   the title drew clicks the video lost in the first seconds — a title/hook mismatch to avoid). Follower growth: not in these pulls (add
+   `IGFO*`/brandSummary next run). Audience countries: not pulled yet (demographic connector) — needed for the media kit.
+U. **Length vs hold:** the three videos over 115 s hold 15–23 % of their length; the 70–100 s ones 28–35 % (airline 28 %, Planet Fitness 35 %,
+   Costco 34 %). Avg watch in *seconds* is flat (16–31 s) whatever the length → the first ~25 s decide, and a 2-minute script is paid
+   for in completion rate. The two new episodes are written at ~120–125 s with a re-hook every ≤ 20 s and the roadmap labels; if their hold
+   stays < 25 %, cut SPOT THE TRICK to 3 tricks / ≤ 95 s and YOUR MOVE singles to ≤ 100 s.
+V. **YouTube numbers arrive late and keep rising:** Chick-fil-A 44 → 1,001 and AWS 326 → 724 between 27 and 31 Oct, Monopoly and De Beers
+   32-s average views (their best metric on either platform) → the story videos *do* hold on YouTube; judge every Short at ≥ 72 h.
 
 ## Insights (28 Oct 10:40 IST, glasses run — type C)
 R. 10th near-identical pull: IG rows unchanged since 01:45 IST (gas 1,503, printer 1,376, restaurant 1,468, McDonald's 1,284; De Beers

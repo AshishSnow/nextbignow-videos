@@ -1,0 +1,39 @@
+# Sources — YOUR MOVE EP 2 (the nickel Coke, 1886–1959). Checked 31 Oct 2026 (R&D writers' room run + research subagent); the
+episode run re-verifies before building. **Access note:** the Levy & Young JMCB 2004 PDF (econ.biu.ac.il, MPRA, NBER, EconStor, HAL,
+SSRN copies) was blocked from this sandbox; figures were verified against the paper's abstract (RePEc), the authors' follow-up working
+paper (Young & Levy, Bar-Ilan WP 2013-06, same archival material), 1920/1983 federal court records, Coca-Cola's own history pages,
+NPR Planet Money, Emory Report and Coin World. The build run should try the paper itself again.
+
+| Claim in the script | Source (what it says) |
+|---|---|
+| A 6.5-oz Coke cost 5¢ from 1886 until 1959; "more than 70 years" | Levy & Young, "The Real Thing: Nominal Price Rigidity of the Nickel Coke, 1886–1959", J. Money, Credit & Banking 36(4), Aug 2004 — abstract: "the price of a 6.5oz Coke was 5¢ from 1886 until 1959" … "a nominal price rigidity that lasted more than 70 years!" https://ideas.repec.org/p/pra/mprapa/1046.html ; author PDF https://econ.biu.ac.il/sites/econ/files/shared/people/LevyDaniel/jmcb4.pdf |
+| 1886: "five cents a glass" at Jacobs' Pharmacy, Atlanta | The Coca-Cola Company history: "placed on sale for five cents a glass as a soda fountain drink" (8 May 1886) https://www.coca-colacompany.com/about-us/history/the-birth-of-a-refreshing-idea |
+| "Sixty-four years" (1886–1950) · "Two world wars" · 1941 "5 cents… wherever he is" | arithmetic; Coca-Cola Company: Woodruff's 1941 order that "every man in uniform gets a bottle of Coca-Cola for 5 cents, wherever he is and whatever it costs the Company" https://www.coca-colacompany.com/about-us/history/the-chronicle-of-coca-cola-a-symbol-of-friendship |
+| "Your costs keep rising" (1950) | Young & Levy, "Explicit Evidence on an Implicit Contract", Bar-Ilan WP 2013-06 https://econ.biu.ac.il/sites/econ/files/working-papers/2013-06.pdf — the 1950 "Price Study" (Woodruff Papers, Emory) and Woodruff: "the maintenance of the 5¢ price has not been devoid of difficulty" (pp. 22–27); the 1921 sugar escalator shows sugar costs were the pressure point |
+| Trap 1 — "5¢. Everywhere." ad (1908); "a hundred and sixty thousand billboards" | Young & Levy WP 2013-06 pp. 18–21: 1908 Life ad "5¢. Everywhere."; ~160,000 billboards by the 1930s; NPR Planet Money, 15 Nov 2012 (Levy: "it was hard for anyone to increase the price") https://www.npr.org/sections/money/2012/11/15/165143816/why-coke-cost-a-nickel-for-70-years |
+| Trap 2 — "Eleven hundred independent bottlers" set the shop price; only 125 had raised it by 1950 | Young & Levy WP pp. 9–10: by 1950 only 125 of 1,100 bottlers had raised retail prices; the retail price was never a contract term (1983 case: no explicit clause requiring sale at 5¢ a bottle https://law.justia.com/cases/federal/district-courts/FSupp/563/1122/1591128/) |
+| 1899 contract "never expires" | Coca-Cola Bottling Co. v. Coca-Cola Co. (D. Del. 1920): the 1899 contract (Benjamin Thomas & Joseph Whitehead, 21 Jul 1899) is "permanent and perpetual in its nature"; the Company tried to end it in 1920 and lost https://www.courtlistener.com/opinion/8833674/coca-cola-bottling-co-v-coca-cola-co/ ; renegotiated 1921 ($1.17½/gal + 6¢ per 1¢ rise in sugar above 7¢ — Young & Levy WP p. 26; 1983 case) — **the VO never says the contract froze the retail price** |
+| "Tell them what to charge, up or down, and regulators may call it price-fixing" | Young & Levy WP pp. 26–27: 1947 legal memo on the FTC Kodak price-maintenance case; Fortune, Jan 1951: "Coke has been charged with coercing its bottlers to stay at the 80-cent case price" — VO says "may call it", a risk, not a finding |
+| Trap 3 — ~400,000 nickel-only machines (1950; owned by bottlers/operators → VO "machines sell your Coke"); next coin = a dime (ten cents) = double | NPR Planet Money ep. 416 (transcript): ~460,000 US vending machines in 1950, ~400,000 Coca-Cola's https://www.npr.org/transcripts/456410327 ; Emory Report, 23 Jul 2001: "more than 400,000 coin-operated machines sold Coke for a nickel" https://emory.edu/EMORY_REPORT/erarchive/2001/July/erJuly.23/7_23_01coke.html ; Improbable Research, 28 Apr 2012 (quoting the paper): "an installed base of vending machines with nickel-only capability"; the smallest single-coin increase "a 100 percent jump" https://improbable.com/2012/04/28/the-epic-endurance-of-nickel-a-bottle-coca-cola/ |
+| 1953: Woodruff asked his friend President Eisenhower for a 7½¢ coin; Treasury "did not like the idea" (quote card credits **Coin World**, which reports the paper — the paper itself was not read) | Levy & Young 2004 (citing Kahn 1969 p. 133; Allen 1994), as reported by Coin World, "The Coke coin": "Eisenhower forwarded the request to the Treasury Department officials, who did not like the idea." https://www.coinworld.com/voices/the_coke_coin.html ; Emory Report 2001: Woodruff "asked his friend Dwight Eisenhower… Eisenhower complied, but the Treasury declined"; NPR 2012: "The two were hunting buddies." **No letter text exists — never quote one; say "in 1953".** |
+| Dec 1950 New York goes to 6¢; 1955 6¢/7¢/10¢ by area; 1959 last nickel Coke | Young & Levy WP pp. 9–10: Time, Dec 1950 — NYC Coke "broke loose from its nickel moorings and for the first time went to 6¢"; Business Week 1955: "sells for 6¢, 7¢ or even 10¢ depending on the area"; "By 1959 the last of the nickel cokes was gone"; NPR ep. 416: "some time in 1959" |
+| Twist — the "official blank": every ninth vending bottle empty, average ≈ 5.6¢, never implemented | NPR Planet Money ep. 416 (Levy, from company memos): the empty-ninth-bottle scheme ("official blank"); 8 nickels per 9 bottles… the buyer inserts a second nickel; average ≈ 5.6¢; never implemented https://www.npr.org/transcripts/456410327 ; Wikipedia "Fixed price of Coca-Cola from 1886 to 1959" (summary) |
+| (on screen, optional) today's scale | Coca-Cola 10-K FY2024: "at a rate of 2.2 billion servings each day" https://www.sec.gov/Archives/edgar/data/21344/000002134425000011/ko-20241231.htm |
+
+Fresh-eyes review (31 Oct, independent subagent): verdict 'ready after must-fixes' — all 7 must-fixes applied (New York 6¢ moved before the 1953 ask;
+price-fixing 'up or down'; 'a dime: ten cents'; the decision posed in d5 before the outcome; Coin World credited on the Treasury quote; 'Every Coke'
+not 'every bottle' for 1886; stressed-word tags fixed) plus the should-fixes ('ask' not 'beg', 'the coin in your pocket', 125 bottlers as a numbered
+stake, memo idea 'never left the memo', takeaway 'check the size', machines 'sell your Coke', no DAY 1 clock, no year on the frame-1 label,
+neutral bottle colour).
+
+**Did not verify — not in the script:** "the 1899 contract froze the price until 1959" (myth: it fixed the *syrup* price and was renegotiated
+in 1921); "92 cents a gallon from 1899" (the 1899 text says $1.00; 92¢ came by amendment); "Treasury rejected it as impractical / minting
+complexities" (embellishment); the text or date of a Woodruff letter; "machines that took a nickel plus a penny"; "Candler never collected
+the $1" (lore); exact sugar/wage cost figures for 1950.
+
+Cautions: no Coca-Cola trade dress (contour bottle, script logo, red disc); the President and Treasury officials are generic cast with
+role labels (no likeness, no names needed in VO); curious-not-cruel — the company is not mocked; the empty-bottle memo is told as an
+idea that "never happened". The choice DIME / COIN is honestly debatable: a dime doubles the price (and in 1955 many areas went to 10¢),
+a new coin was a long shot the Treasury disliked.
+Post "Sources:" line: Levy & Young, J. Money, Credit & Banking (2004); Young & Levy, Bar-Ilan WP (2013); Coca-Cola Bottling Co. v. Coca-Cola Co.
+(D. Del. 1920); NPR Planet Money (2012, 2015); Emory Report (2001); Coin World; The Coca-Cola Company history.

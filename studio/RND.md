@@ -30,8 +30,8 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 | Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-10-28 (run 7: `tools/layout_check.py`, safe-area captions) |
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
 | Tooling | render speed, smoke tests, QA automation | never (run 7 added a video path to smoke_test.sh as a side task) |
-| Analytics | what the numbers say, cover frames, captions, posting times | never (refreshed every run; YouTube numbers flowing since 27 Oct) |
-| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-10-31 (interactive: pilot YOUR MOVE EP 1, Parts 1–2) |
+| Analytics | what the numbers say, cover frames, captions, posting times | never as a focus (refreshed every run; 31 Oct: first rows for the 4 story-type videos, media-kit baseline in BRAND.md §5) |
+| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-10-31 (scheduled run 8: SPOT THE TRICK #1 IKEA maze + YOUR MOVE EP 2 nickel Coke, both REVIEWED → queue = 4) |
 | Brand | BRAND.md readiness: media-kit numbers, brand-safety rules, sponsor formats, disclosure templates, community | 2026-10-31 (interactive: BRAND.md) |
 | Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-10-27 (R&D run 4: +7 → 23 Ready) |
 
@@ -64,8 +64,14 @@ Sound
 - Phone-speaker check of SFX *audibility*: guard keeps words clear, but are SFX in the gaps still heard on a phone (most SFX
   energy below 300 Hz in boom/thud)? Measure phone-band SFX level vs bed; brighten booms with a 1–3 kHz click layer if needed.
 Analytics
+- Pull follower growth (brandSummary / IGFO*) and audience countries (demographic connector) next run — the media kit needs both (BRAND.md §5).
 - YouTube vs Instagram per topic: YT winners differ (Compaq 1,332 YT vs 130 IG) — pull YTVP06/08 every run and compare after 10 posts.
 Story
+- story_check estimates 0.40 s/word: a 4-trick SPOT THE TRICK lands at ~125 s and a YOUR MOVE single at ~120 s. If the first two episodes hold < 25 % of
+  their length (PERFORMANCE U), add a length gate (SPOT THE TRICK ≤ 3 tricks / ≤ 95 s; YOUR MOVE single ≤ 100 s).
+- Writers' room next: SPOT THE TRICK #2 = the airport (walk-through duty-free, $6 water vs 'street pricing' airports, currency kiosks, 'pay in home currency');
+  WHO REALLY OWNS IT #1 candidates: AB InBev 'craft' beers, store brands; YOUR MOVE EP 3 candidates: Burger King Whopper Detour (A, seat = the CMO:
+  TROLL / PLAY SAFE), Knight Capital (A, seat = the CTO at 9:30: HALT / TRADE), frozen-chicken tax / Ford vans (A: BOLT SEATS / PAY 25 %), LEGO 2004 (SELL PARKS / KEEP).
 - Validate R8 (roadmap) when Metricool rows return: tag roadmap yes/no per post, `python3 lab/story/corr.py` at n ≥ 10 (PERFORMANCE K).
 - Real reversal detection for story_check (good/bad polarity per line, e.g. a small lexicon or hand tags) — keyword "but" counts
   did not track retention.
@@ -220,6 +226,25 @@ Visuals / Story / Tooling
   chip max 800 px; part_badge title ≤ 600 px; hud_choice y 1480 → 1420, width 900 → 800; hud_clock y 262 → 272. Smoke test now renders video
   (layout_check on the Hoover shots + 1 s anim.py encode); passed. PLAYBOOK §6/§8 updated. Analytics: IG + YT pulls identical to 06:00 IST
   (no rows for Monopoly/Hoover/banana yet). ALGORITHM.md 2 days old → not redone.
+- 2026-10-31 (run 8, scheduled 08:41 UTC) | Writers' room (rule 0: queue held 2 REVIEWED < 3) | Hypothesis: two complete episodes in the new
+  format — a SPOT THE TRICK set in one store with the strongest trick happening *after* the viewer leaves, and a YOUR MOVE with a CEO seat
+  and a coin-shaped dilemma — pass story_check 7/7 + 6/6 and an independent fresh-eyes review, and give the next two video runs something
+  that can be *sent* and *answered* (PERFORMANCE S: reactions 1.6 / 1,000 reach, comments 0 on all 29 posts). Research: 2 research
+  subagents (primary sources: Inter IKEA FY25 release, Norton/Mochon/Ariely 2012 PDF, UCL lecture listing, IKEA history page, Ingka
+  newsroom, Fortune 2023; Levy & Young abstract + Young & Levy WP 2013-06, 1920 and 1983 court records, Coca-Cola history pages, NPR
+  Planet Money, Emory Report, Coin World) + my own spot checks of the IKEA FY25 page and the IKEA-effect PDF. Myths caught and kept out:
+  "60 % unplanned" as a study (it is Penn's estimate), "Harvard and Duke", "the 1899 contract froze the price until 1959", "92¢ from
+  1899", a quoted Woodruff letter (none exists), "nickel-plus-penny machines", "30 % come just to eat". Built: `episodes/queue/03-ikea-maze`
+  (SPOT THE TRICK #1, type E, 7/7 + 6/6, ~125 s est.) and `episodes/queue/04-nickel-coke` (YOUR MOVE EP 2, type B, single part, 7/7 + 6/6,
+  ~120 s est.), each with vo_lines.py + shots.md + SOURCES.md. Fresh-eyes reviews (two independent subagents, given only STORY/BRAND +
+  the three files): both "ready after must-fixes" — 7 + 7 must-fixes applied (IKEA: yellow-bag trade dress, unsupported "every store",
+  attribution beyond sources, "sells you the work" framing, a missing Beat-it, verbless takeaway; Coke: New York 6¢ was Dec 1950 = before
+  the 1953 ask (chronology), price-fixing cuts both ways, "a dime" undefined for UK/EU ears, the decision never posed before the outcome,
+  Treasury quote credited to the wrong source, 1886 was a fountain glass, stressed-word tags) + most should-fixes. Result: queue = 4
+  REVIEWED (pilot P1/P2 + #3 + #4), types A/A/E/B, series mix 3 YOUR MOVE : 1 SPOT THE TRICK. Analytics: first Instagram rows for the
+  four story-type videos (PERFORMANCE S–V; media-kit baseline into BRAND.md §5); ALGORITHM.md refreshed (Mosseri 16/23 Oct on sends,
+  AI content and scheduling; YouTube AI-label rules 27 May 2026; Shorts originality 1 Oct 2026). No template code changed; no render.
+  | kept — measure: sends + saves + comments per 1,000 reach and comment count on #3/#4 vs the 1.6 baseline; hold % of length vs 15–23 %
 - 2026-10-31 | Story + Brand (interactive; owner 30 Oct: "story line and everything need to be good, and topic… later I will get brand deals")
   | Data (Metricool 31 Oct 00:30 IST, 16 animated reels): story-shaped videos hold longest (Monopoly 31.2 s avg = channel best) but
   sends/saves/comments ≈ 0 and reach per reel fell ~1,300 → ~150 (27–28 Oct); Instagram ranks on watch time + sends per reach.

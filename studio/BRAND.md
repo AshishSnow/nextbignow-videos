@@ -65,6 +65,9 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
 - **Track from today** (PERFORMANCE.md, every run): avg views of the last 10 reels/Shorts, avg watch time and %, **sends + saves +
   comments per 1,000 reach**, follower growth per week, top 3 videos, audience countries (IG demographics / YT analytics) — these are
   the media-kit numbers.
+  **Baseline 31 Oct 2026 (before the first episode of the new format):** Instagram last 10 reels avg 439 views (median 164), 3-s rate 57 %,
+  avg watch 21.5 s, **1.6 reactions (shares + saves + comments) per 1,000 reach, comments 0**; YouTube last 10 Shorts avg 302 views
+  (median 196). Top 3 (IG): gas station 1,522, Planet Fitness 1,280, printer ink 1,376. Follower growth and audience countries: not pulled yet.
 - **Community:** pin a comment on each post restating the choice ("FIGHT or FOLD — what would you do?"); reply to early comments within
   the first hour when a run is live (the post copy's firstCommentText); Part 2 may quote real comment counts only.
 - **Owned channel:** bio link to oopsmybusiness.com (later: an email list / newsletter "The Oops Weekly") so the audience isn't only rented.
