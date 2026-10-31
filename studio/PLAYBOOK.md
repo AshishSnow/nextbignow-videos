@@ -261,12 +261,19 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 
 ## 7. Build and test
 ```bash
+python3 /home/claude/nextbignow-videos/studio/tools/board_check.py studio/episodes/queue/<NN-slug>   # pre-flight + BUILD BRIEF (31 Oct)
 cd $P && python3 scripts/make_vo.py              # voice + timings
 # write scripts/anim_shots.py (SHOTLIST + shot functions + IMPACTS) — start from template/examples
 python3 -I scripts/anim.py x 2,40,100,...          # test frames -> frames/r_NNNN.jpg ; LOOK at them with safe-zone guides
 python3 scripts/music.py && python3 scripts/mix.py # score (edit cues section) + mix (edit SFX section) -> work/mix.wav
 bash scripts/render_all.sh                         # -> work/final.mp4  (~10–15 min, run in background)
 ```
+- **Board pre-flight (R&D Tooling run, 31 Oct):** `tools/board_check.py <episode folder>` reads the queued `vo_lines.py` + `shots.md` and
+  prints the **BUILD BRIEF** — every set / prop / cast look the storyboard names that does not exist in `template/scripts` (write those
+  first, in `anim_story.py` style, then re-run with `--strict` until it passes) — plus rows↔lines, `say()` captions that would shrink
+  below 60 % (the helper fits text into 800 px: "BEAT IT: ASK FOR THE SHORTCUT" renders 69 px tall — split or shorten), long chips,
+  quote cards over 5 lines, rows of ≥ 4 s with no visible change, and the signature beats (badge, cold open, one Oops, series end card).
+  Found on the first run (31 Oct): 13 of 31 captions on the two new boards would have rendered at 42–57 %; 16 assets to write.
 - Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano, 90s British ska, calypso steel band (+ mento flashback); next try disco, marching band, baroque harpsichord, sea shanty, etc.) using GeneralUser GS GM programs;
   cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1.5 dBTP**; VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.

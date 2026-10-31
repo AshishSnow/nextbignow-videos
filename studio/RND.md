@@ -29,7 +29,7 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 | Sound | music score, SFX, mix levels, loudness | 2026-10-27 (run 6: word guard + `tools/mix_check.py`) |
 | Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-10-28 (run 7: `tools/layout_check.py`, safe-area captions) |
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
-| Tooling | render speed, smoke tests, QA automation | never (run 7 added a video path to smoke_test.sh as a side task) |
+| Tooling | render speed, smoke tests, QA automation | 2026-10-31 (run 9: `tools/board_check.py` storyboard pre-flight + build brief, in smoke_test.sh) |
 | Analytics | what the numbers say, cover frames, captions, posting times | never as a focus (refreshed every run; 31 Oct: first rows for the 4 story-type videos, media-kit baseline in BRAND.md §5) |
 | Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-10-31 (scheduled run 8: SPOT THE TRICK #1 IKEA maze + YOUR MOVE EP 2 nickel Coke, both REVIEWED → queue = 4) |
 | Brand | BRAND.md readiness: media-kit numbers, brand-safety rules, sponsor formats, disclosure templates, community | 2026-10-31 (interactive: BRAND.md) |
@@ -77,6 +77,11 @@ Story
   did not track retention.
 - Comment test: one specific A/B question in the last line vs the friend CTA (comments ~0; owner's references 75–300 per reel).
 Visuals / Story / Tooling
+- Tooling next: (a) `say()` could wrap to two lines itself when a caption would shrink below ~60 % (today it only scales down — the
+  board_check B3 warnings are the measure: 13 of 31 captions on the two new boards); (b) board_check B4 (static rows) is a verb
+  heuristic — replace it with real shot counts once anim_shots.py exists (parse SHOTLIST, compare with align.json: ≥ 1 visual change
+  per 3 s); (c) a `US`/`EU`/`UK` map polygon set for `map_view` (the nickel-Coke board needs a US map); (d) render-speed profile of
+  one full episode (anim_cine grade + mascot3d per frame) — never measured as a focus.
 - ~~Cinematic texture~~ — done 27 Oct (interactive): `template/scripts/anim_cine.py` (lit worlds with depth, glow disc, 3D titles behind the
   hero, light rays, bokeh, DOF, film grade), default on. Next: prop **materials** (specular highlights, subtle texture on paper/metal/
   wood props, soft contact shadows everywhere), and speed (grade now ~0.22 s/frame after the 27 Oct cleanup; next: fuse the tone curve into a LUT).
@@ -255,6 +260,25 @@ Visuals / Story / Tooling
   both 7/7 R + 6/6 S), PLAYBOOK gates (seat + choice, brand-safe) + posting (2 a day at 00:00/05:00 IST, firstCommentText = choice).
   Scheduled tasks: episodes 16:05 + 21:05 UTC; R&D → writers' room 3×/day. | kept; measure: sends + comments per 1,000 reach on the
   first 5 episodes vs the 16 animated reels before (≈ 0)
+- 2026-10-31 (run 9, scheduled 08:41 UTC) | Tooling (rule 0: queue = 4 REVIEWED ≥ 3; bank 16 Ready ≥ 10; Tooling "never" worked) |
+  Hypothesis: the four queued storyboards contain defects a build run would only meet at render time (assets that do not exist in the
+  template, captions that the `say()` helper shrinks until they are unreadable, rows that do not match the script, missing signature
+  beats), and a pre-flight that parses `vo_lines.py` + `shots.md` against the template's registry can find them in < 1 s and hand the
+  build run a BUILD BRIEF. Built `tools/board_check.py` (B1 rows↔lines/order, B2 sets/props/looks vs `def`/`_FLOOR`/`LOOKS` registry,
+  B3 caption widths with the real Anton/Inter/Playfair fonts — say < 60 %, chip < 19 px, quote > 5 lines, hud_rule > 560 px — B4 rows
+  ≥ 4 s without a visible change, B5 badge/cold-open/one-Oops/series end card; `--all`, `--strict`, `--json`; 0.1 s for 4 boards).
+  **Before (4 boards, hand-written headers):** 0 failures, **13 of 31 `say()` captions on the two new boards would have rendered at
+  42–57 % (63–85 px tall)**, 2 header-listed props never used in a row (IKEA `arrow_floor`, `tray_el`), 2 rows naming a set that does
+  not exist ("bedroom" vs `bedroom90s`), 1 reuse claim that is false (nickel Coke "US map" — `map_view` is Latin America only), 16
+  assets to write (IKEA 8, Coke 8). Negative test: a copy of the pilot with a dropped row, a duplicated row, no badge and no end card →
+  5 FAILs, exit 1. **After** the board fixes (captions split into two `say()` lines or shortened, set names corrected, the two props
+  placed in rows, the US-map gap written into the board + README): 0 failures, 0 caption warnings, 9 static-row warnings left
+  (heuristic, info). Kept: tool + a `board_check` line in smoke_test.sh (all queue boards parse; the pilot passes `--strict`, so the
+  story kit must stay complete), rules in PLAYBOOK §7, STORY §7, episodes/README. Not changed: template code. Analytics: Metricool
+  pull identical to 31 Oct 14:30 IST (no post since 28 Oct); first account-level numbers: 57 followers (53 → 57 over 24–29 Oct),
+  account reach 3,076 (25 Oct) → 436 (28 Oct) → 8 (30 Oct) with nothing posted; IG country demographics return no rows (< 100
+  followers). ALGORITHM.md dated today → not redone. | kept — measure: the build run's time-to-first-test-frame and whether any
+  "missing asset" surprises survive the brief; caption readability on the rendered #3/#4 contact sheets
   Follow-up (same session): story kit `template/scripts/anim_story.py` (cold_open, series_badge, oops_beat, quote_card, choice_card,
   set_front occluder; sets bedroom90s / schoolyard / courtroom; props jumpjet_el, crt_tv_el, catalog_el, coupon_el, mailbox_el), part_badge
   subtitle right-aligned (never meets the cold-open card); pilot storyboard rendered (`lab/story_kit/`); fresh-eyes review of the pilot →

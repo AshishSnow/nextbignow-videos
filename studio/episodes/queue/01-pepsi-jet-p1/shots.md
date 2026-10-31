@@ -15,8 +15,8 @@ insignia (grey, two swivel nozzles, bubble canopy). New template assets this epi
 | a1 "Pepsi lets you swap points from its packs for T-shirts, jackets, sunglasses." | TV CU → items pop out of the screen one by one | — | T-shirt / jacket / shades icons with point tags (no numbers needed) | pop pop pop |
 | a2 "Its last scene? A teenager lands a fighter jet at school." | schoolyard WIDE (inside the TV frame edge) | a kid look in the cockpit, papers flying | — | jet roar, screen shake |
 | a3 "The price… seven million Pepsi points." | TV CU | — | `hud_rule(f, 1, "7,000,000 POINTS = 1 JET")` | rule "ding" |
-| a4 "You want that jet. But three problems stand in your way." | bedroom MEDIUM, hero stands up | determined, `look=(1,0)` | three locked padlocks labelled 1 2 3 (roadmap) | lock clicks |
-| b1 "Problem one… drinking an ocean of Pepsi." | bedroom WIDE: hero buried in a mountain of generic cans | `sweat=True`, `expr="sad"` | lock 1 pops; `say("PROBLEM 1")` | can avalanche |
+| a4 "You want that jet. But three problems stand in your way." | bedroom90s MEDIUM, hero stands up | determined, `look=(1,0)` | three locked padlocks labelled 1 2 3 (roadmap) | lock clicks |
+| b1 "Problem one… drinking an ocean of Pepsi." | bedroom90s WIDE: hero buried in a mountain of generic cans | `sweat=True`, `expr="sad"` | lock 1 pops; `say("PROBLEM 1")` | can avalanche |
 | b2 "So you read the small print." | catalog CU (generic "PRIZE CATALOG") | hero leaning in, magnifier | — | page flip |
 | b3 "fifteen real points… buy the rest. Ten cents each." | catalog CU, small print highlighted | — | highlight the rule; `say("10¢ PER POINT")` | marker squeak |
 | b4 "Seven million points? That's seven hundred thousand dollars." | hero CU (`person_head_at`, parlor-style blur bg) | `expr="smirk"`, calculator in hand | `say("$700,000")` | calculator beeps |

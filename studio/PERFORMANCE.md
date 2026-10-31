@@ -9,6 +9,12 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+(31 Oct 14:15 IST, R&D Tooling run 9: IG + YT pulls identical to the 14:30 IST pull below, number for number — nothing posted since 28 Oct, the
+glasses video is still unposted. First **account-level** pull (IGEV connector): followers 53 (24 Oct) → 54 (25) → **57** (26–29 Oct);
+account reach per day 3,076 (25 Oct, 106 accounts engaged) → 2,788 (26) → 1,895 (27) → 436 (28) → 10 (29) → 8 (30) — reach lives
+~1 day after a post and the account has no baseline audience of its own; `IGEV43/44` followers gained/lost = 0 rows; IG country
+demographics (IGDP01/02) return nothing — Instagram only reports them from ~100 followers, so the media kit's audience-country line
+waits for that. Pull IGEV01 + IGEV06 every run from now on (follower growth per week is a media-kit number).)
 ## Instagram (snapshot 2026-10-31 ~14:30 IST, R&D writers' room run — first pull with rows for De Beers, Monopoly, Hoover, banana; comments column = IGRE07, 0 everywhere)
 | Date | Video | Style | Len | Views | Reach | Avg watch | 3-s view rate | Likes | Shares | Saves |
 |---|---|---|---|---|---|---|---|---|---|---|

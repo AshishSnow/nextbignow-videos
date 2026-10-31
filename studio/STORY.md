@@ -98,6 +98,8 @@ DOOR #1…#N, each opens to the same owner → the twist (scale/number) → what
 ## 7. Checklist before `make_vo.py`
 - `SERIES = "YOUR MOVE"` (or `"SPOT THE TRICK"` / `"WHO REALLY OWNS IT"`), `PART = 0/1/2`, `EP = n` at the top of `vo_lines.py`.
 - `python3 studio/tools/story_check.py $P` → 7/7 R-gates **and** all S-gates (seat, stakes, choice/save CTA, Oops ≤ 1, part logic).
+- `python3 studio/tools/board_check.py episodes/queue/<NN-slug>` → 0 failures (rows ↔ lines, signature beats), no `say()` caption
+  below 60 % size, and its BUILD BRIEF read: every missing set/prop/look is written before the first test frame (`--strict` must pass).
 - Storyboard: one frame per beat rendered with safe-zone guides and looked at; the mute test passes.
 - Facts: every number re-verified today (PLAYBOOK §3); every quote has a document behind it.
 

@@ -35,6 +35,11 @@ then :; else echo "FAIL video path (layout_check / anim.py)"; tail -5 "$PV/work/
 rm -rf "$PV"
 python3 "$HERE/tools/story_check.py" --all "$HERE/examples" > /dev/null && python3 "$HERE/tools/story_check.py" "$P" > /dev/null \
   && echo "ok   story_check" || { echo "FAIL story_check.py crashed"; fail=1; }
+# writers' room pre-flight (R&D Tooling run, 31 Oct): every queued board parses; the pilot's story-kit assets all exist (--strict)
+python3 "$HERE/tools/board_check.py" --all "$HERE/episodes/queue" --no-brief > "$STUDIO/projects/_board.txt" 2>&1 \
+  && python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/01-pepsi-jet-p1" --strict --no-brief > /dev/null 2>&1 \
+  && echo "ok   board_check $(tail -1 "$STUDIO/projects/_board.txt")" || { echo "FAIL board_check (queue boards or the pilot's assets)"; tail -3 "$STUDIO/projects/_board.txt"; fail=1; }
+rm -f "$STUDIO/projects/_board.txt"
 for eng in kokoro chatterbox; do
   rm -f "$P"/work/*
   (cd "$P" && ENGINE=$eng python3 scripts/make_vo.py > work/make_vo.log 2>&1) || { echo "FAIL $eng: make_vo.py crashed"; tail -5 "$P/work/make_vo.log"; fail=1; continue; }
