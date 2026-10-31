@@ -174,6 +174,7 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
 - Every non-scene shot: a real prop or diagram that shows the idea (props in `anim_props*.py`; write new ones per topic in a new `anim_props4.py`
   and add it to `anim.py`'s exec list). Big objects, movement on beat (pin/pop, flips, slams), screen shake on impacts (`IMPACTS`),
   transitions vary: cut, whip, focus, zoom, punch, flash.
+- **Cast look (owner, 31 Oct): colourful stick men and girls** — `anim_stick.py` (default on; STORY.md §2b). Mix men and girls every episode.
 - **Story scenes, full frame (owner, 27 Oct: "it's using full frame and looks engaging… colours, more natural and 3D, change
   the style of clothes").** At least half the shots are **character-driven full-frame scenes**, not a prop on a glow disc:
   - Sets (`scripts/anim_sets.py`): `f = set_view(name, t, zoom, cx, cy, blur)` fills 1080x1920 edge to edge — `street`, `study`,

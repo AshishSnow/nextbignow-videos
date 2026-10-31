@@ -214,7 +214,7 @@ def check(path, target_len=None):
     meta = getattr(load_lines, "meta", {}) or {}
     series = (meta.get("SERIES") or "").upper(); part = meta.get("PART") or 0
     S = {}
-    S["S0_series"] = series in ("YOUR MOVE", "SPOT THE TRICK", "WHO REALLY OWNS IT")
+    S["S0_series"] = series in ("YOUR MOVE", "SPOT THE TRICK", "WHO REALLY OWNS IT", "HOW TO START")
     if not S["S0_series"]: flags.append("S0 set SERIES = 'YOUR MOVE' | 'SPOT THE TRICK' | 'WHO REALLY OWNS IT' (and PART, EP) in vo_lines.py")
     first3 = " ".join(l[1] for l in lines[:3]).lower()
     S["S1_seat"] = bool(re.search(r"\byou('re| are|'ve| have| walk| open| run| own| work| want| need| just| mailed| raised| bought| sold| sent)\b", first3))
@@ -228,6 +228,9 @@ def check(path, target_len=None):
     if series == "YOUR MOVE":
         S["S3_ending"] = bool(re.search(r"[Cc]omment\s+([A-Z][A-Z'!]+)\s+or\s+([A-Z][A-Z'!.?]+)", tail3))
         if not S["S3_ending"]: flags.append("S3 YOUR MOVE must end on a two-option comment prompt in the last 3 lines: 'Comment JET or DROP.' (caps words)")
+    elif series == "HOW TO START":
+        S["S3_ending"] = bool(re.search(r"\bsave this\b", tail3, re.I)) and bool(re.search(r"\b(comment|tag)\b", tail3, re.I))
+        if not S["S3_ending"]: flags.append("S3 HOW TO START must end with 'Save this…' and a comment prompt in the last 3 lines")
     elif series == "SPOT THE TRICK":
         S["S3_ending"] = bool(re.search(r"\bsave this\b", tail3, re.I))
         if not S["S3_ending"]: flags.append("S3 SPOT THE TRICK must ask to 'Save this before …' in the last 3 lines")

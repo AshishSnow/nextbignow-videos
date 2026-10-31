@@ -35,11 +35,19 @@ Instagram/YouTube bio line: `True business stories. You make the call. New episo
      `oops_beat(f, t, t0)` stamp + one sting SFX. It is the hero's reaction, never the narrator's verdict on a real company. **Max once per video**, only where a real blunder exists (it's the channel name — keep it special).
   3. **"Your move" end card** — `choice_card(f, "YOUR MOVE", "FIGHT", "FOLD")`: the question + two pills. Same look every episode.
 
+## 2b. Look (owner, 31 Oct 2026: "Visual not good, use colourful stick men and girls")
+The cast is **colourful stick men and girls** (`template/scripts/anim_stick.py`, default on): one bright colour per character, big
+round head with white eyes, thick rounded limbs, dark outline, one or two accessories (hair, bow, cap, hard hat, tie, glasses,
+dress for girls). The hero stays **orange** (spiky hair) — the channel's face. Looks: hero, friend, girl, girl2, lady, inventor,
+exec, creator, worker, oldman, kid, mystery, judge; re-colour anyone with `who={"base": "girl", "col": (0, 190, 120)}`.
+Mix men and girls in every episode. Sets stay full-frame and colourful (anim_sets / anim_story).
+
 ## 3. Series — every video belongs to exactly one (badge + title + CTA)
 | Series | Share of videos | What it is | Types (PLAYBOOK §2) | Ends with |
 |---|---|---|---|---|
-| **YOUR MOVE** (flagship) | ~60 % | POV true story at a decision point | A, D, C (any story with a person deciding) | a two-option question: "Comment FIGHT or FOLD IT" |
-| **SPOT THE TRICK** | ~30 % | the hero walks into an everyday place (shop, app, airport, cinema) and catches the tricks one by one | E, B, F | "Save this before your next …" + share line |
+| **YOUR MOVE** (flagship) | ~35 % | POV true story at a decision point | A, D, C (any story with a person deciding) | a two-option question: "Comment FIGHT or FOLD IT" |
+| **SPOT THE TRICK** | ~15 % | the hero walks into an everyday place (shop, app, airport, cinema) and catches the tricks one by one | E, B, F | "Save this before your next …" + share line |
+| **HOW TO START** (new, owner 31 Oct: "informative, like how to start a drone business") | ~40 % | a practical, verified step-by-step guide to starting a real small business (drone services, food truck, vending machines, print-on-demand…): what it is, licences/rules, gear + startup cost, what clients pay, first customers, the mistake that sinks beginners | E / F (how-to) | "Save this before you start" + "Comment your city/question" |
 | **WHO REALLY OWNS IT** | ~10 % | follow the money through doors to the hidden giant | C | "Tag someone who buys from them" |
 
 - Badge: `part_badge(f, "YOUR MOVE", "EP 7 · THE PEPSI JET")` style, top right, first 2 s and on the end card.
@@ -66,6 +74,14 @@ Instagram/YouTube bio line: `True business stories. You make the call. New episo
 pay. The last one is the sneakiest." → TRICK #1…#N (`hud_rule`-style pills): show it happening to the hero → why it works (one
 study or filing, source chip) → how to beat it (one concrete action) → strongest trick last → "Save this before your next shop" +
 "Send this to the friend who …". The hero is the shopper; the store staff/system are the antagonist (generic, no real logos).
+
+**HOW TO START beat sheet (75–120 s):** cold open: the hero doing the job with money landing (frame 1) + hook question ("Could you
+start a drone business with one drone?") → "Here's the whole plan in N steps — step N is where beginners lose money" → STEP 1…N
+(`cold_open(f, "STEP 1", "GET LICENSED", "PART 107")` card each): rule/licence with its real cost and source; gear + total startup
+cost; what clients really pay (source chip); how to get the first 3 clients; the costly mistake → realistic takeaway (no income
+promises: "typical rates", "can", never "you will make") → "Save this before you start. Comment your country and I'll…" (no promises
+we can't keep — "comment your question"). A girl character as the expert/mentor and the hero as the beginner works well.
+Brand note: this series is the most sponsor-friendly (tools, insurance, website builders, courses) — keep it neutral, no affiliate claims.
 
 **WHO REALLY OWNS IT beat sheet:** cold open on a street of "competing" shops → "You think you're choosing. Count the doors." →
 DOOR #1…#N, each opens to the same owner → the twist (scale/number) → what it means for your wallet → "Tag someone who…".
