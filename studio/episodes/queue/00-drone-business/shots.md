@@ -4,20 +4,32 @@
 # Music: upbeat lo-fi/electro-pop (new genre). Every step card = `cold_open(f, "STEP n", "<TITLE>", "<detail>")`.
 | Line | Set / shot | Cast + acting | HUD / props / caption | SFX |
 |---|---|---|---|---|
-| i1 | street (homes) WIDE, drone hovering at roof height, frame 1 already moving | hero flying (arms forward), girl pointing up | `series_badge("HOW TO START", "EP 1 · DRONE BUSINESS")` | rotor buzz |
-| i2 | aerial view of a house (house_el big, top-down) → cash pops | girl: "$300?" pose | `say("~$300 PER SHOOT")` | cash register |
-| i3 | five numbered padlocks / step pills in a row, #5 red | hero gulps | pills 1–5 | dings |
-| a1–a4 | office = testing center: desk, `form_el("PART 107 TEST")`, clock | hero sweating at desk, girl as proctor | `cold_open("STEP 1","GET LICENSED","FAA PART 107")`; `say("AGE 16+")`, `say("60 QUESTIONS")`, `say("~$175")` | pencil scratch |
-| a5 | laptop with a calendar flipping 2 years | hero thumbs up | `say("FREE REFRESHER")` | — |
-| a6 | split card: UK / EU flags-free map shapes | girl2 waves | small caption "UK/EU: register + online test" | — |
-| b1–b3 | drone on a table, `$5` tag, 3-year calendar, a glowing "REMOTE ID" plate on the drone | hero sticks a plate on it | `cold_open("STEP 2","REGISTER IT","$5 · 3 YEARS")` | sticker slap |
-| c1–c2 | shop shelf with generic drones (no logos); a "NEW MODELS: NOT AVAILABLE" sign | hero confused, girl explains | `cold_open("STEP 3","PICK YOUR GEAR","RULES AS OF LATE 2026")` | buzzer |
-| c3 | insurance shield appears around the drone | — | `say("INSURANCE")` + "often < $1,200/yr" chip | shield whoosh |
-| d1–d3 | street: agent (exec), roofer (worker), event planner (girl2) each with a speech pill of the price | hero pitching | `cold_open("STEP 4","FIRST CLIENTS","")`; price pills "~$300 shoot" / "~$250 roof" | coins |
-| d4 | hero flying 3 free samples, photos stacking into a portfolio | — | `hud_rule(f, 4, "SHOOT 3 FREE SAMPLES")` | camera clicks |
-| d5–t1 | dusk field: drone drifts toward a red no-fly zone circle (airport/stadium shape) | hero panics (sweat) | `cold_open("STEP 5","THE BIG MISTAKE","")`; `say("UP TO $75,000 FINE")` | alarm, shake |
-| t2 | phone with an airspace map app (generic), green check | girl tapping phone | `say("CHECK FIRST")` | ping |
-| e1–e3 | end card: hero + girl high-five, drone overhead | both to camera | `choice_card(f, "WHICH STEP SCARES YOU?", "STEP 1", "STEP 5")`; "SAVE THIS" pill | whoosh |
+| i1 | street WIDE, `drone_el` hovering at roof height, already moving in frame 1 | hero flying (arms forward), girl pointing up | `cold_open(f, "EP 1", "DRONE BUSINESS", "HOW TO START")` + `series_badge` | rotor buzz |
+| i2 | push in on a house (`house_el` big) seen from the drone, cash pops out | girl `mouth=2`, hero wow | `say("~$300 PER SHOOT")` (y≈1000) | cash register |
+| i3 | five step pills appear one by one, #5 turns red; camera slides right | hero gulps (`sweat=True`) | pills 1–5 | dings |
+| a1 | office = testing center, door opens | hero walks in | `cold_open(f, "STEP 1", "GET LICENSED", "FAA PART 107")` | door |
+| a2 | CU `form_el("PART 107 TEST")` on the desk | girl as proctor points | `say("PART 107")` | — |
+| a3 | hero at desk, clock on wall, 60 ticks filling a bar | hero `brow="sus"` | `say("AGE 16+")` → `say("60 QUESTIONS")` | pencil scratch |
+| a4 | price tag drops on the form | hero `expr="wow"` | `say("~$175")` | ka-ching |
+| a5 | laptop, a calendar flips 2 years, green check | hero thumbs up | `say("FREE REFRESHER")` | ping |
+| a6 | two-panel card UK / EU (outline shapes, no flags) | girl2 waves | caption "UK/EU: register + online test" | whoosh |
+| b1 | drone on a workbench | hero lifts it | `cold_open(f, "STEP 2", "REGISTER IT", "$5 · 3 YEARS")` | — |
+| b2 | `$5` tag sticks on; 3-year calendar pages flip | — | `say("$5 · 3 YEARS")` | sticker slap |
+| b3 | glowing "REMOTE ID" plate snaps onto the drone | hero proud | small caption "like a digital licence plate" | beep |
+| c1 | shop shelf of generic drones (no logos) | hero browsing | `cold_open(f, "STEP 3", "PICK YOUR GEAR", "RULES AS OF LATE 2026")` | — |
+| c2 | a "NEW MODELS: NOT IN US STORES" sign drops; the hero's own drone still flies (green check) | hero confused, girl explains | source chip "FCC Covered List, Dec 2025" | buzzer then ding |
+| c3 | insurance shield appears around the drone | — | `say("INSURANCE")` + chip "often < $1,200/yr" | shield whoosh |
+| d1 | street, three clients wave from doors | hero pitching | `cold_open(f, "STEP 4", "FIRST CLIENTS", "")` | — |
+| d2 | exec (agent), worker (roofer), girl2 (planner) in a row | each nods | role labels | — |
+| d3 | price pills above agent and roofer | hero writes notes | pills "~$300 SHOOT" / "~$250 ROOF"; chip "TheDroneU, 2026" | coins |
+| d4 | hero flies 3 free samples; photos stack into a portfolio | — | `hud_rule(f, 4, "SHOOT 3 FREE SAMPLES")` | camera clicks |
+| d5 | dusk field, drone drifts toward a red no-fly circle | hero panics | `cold_open(f, "STEP 5", "THE BIG MISTAKE", "")` | alarm |
+| t1 | red circle flashes, fine stamp | hero `sweat=True` | `say("UP TO $75,000")`; chip "FAA, 2026" | thud + shake |
+| t2 | phone with a generic airspace map, green zone check | girl taps the phone | `say("CHECK FIRST")` | ping |
+| e1 | hero + girl high-five, drone overhead | both to camera | "SAVE THIS" pill | whoosh |
+| e2 | end card | hero points at camera | `choice_card(f, "WHICH STEP SCARES YOU?", "STEP 1", "STEP 5")` | choice whoosh |
+| e3 | end card holds, drone flies out | girl waves | `series_badge` | rotor fade |
+
 Source chips: "FAA (2026)", "FAA enforcement, Feb 2026", "TheDroneU rates guide, May 2026", "FCC Covered List, Dec 2025".
 Post: first line "How to start a drone business in 5 steps (US rules, 2026)." · "How to Start · Ep 1" · firstCommentText "Which step scares you most?" ·
 YouTube title "How to Start a Drone Business | 5 Steps" · hashtags #dronebusiness #part107 #sidehustle #smallbusiness #howtostart

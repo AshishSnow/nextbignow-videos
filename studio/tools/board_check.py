@@ -53,7 +53,7 @@ def registry():
         for m in re.finditer(r"_FLOOR\.update\(([^)]*)\)", src): sets.update(re.findall(r"([a-z][a-z0-9_]*)\s*=", m.group(1)))
         for m in re.finditer(r"SET_LIGHT\.update\(([^)]*)\)", src): sets.update(re.findall(r"([a-z][a-z0-9_]*)\s*=", m.group(1)))
         for m in re.finditer(r"_STORY_SETS\s*=\s*\{([^}]*)\}", src): sets.update(re.findall(r"\"([a-z][a-z0-9_]*)\"", m.group(1)))
-        m = re.search(r"^LOOKS\s*=\s*\{(.*?)^\}", src, re.M | re.S)
+        m = re.search(r"^(?:STICK_)?LOOKS\s*=\s*\{(.*?)^\}", src, re.M | re.S)
         if m: looks.update(re.findall(r"^\s*\"([a-z][a-z0-9_]*)\"\s*:", m.group(1), re.M))
     return funcs, sets, looks
 
