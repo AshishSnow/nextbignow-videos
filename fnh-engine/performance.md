@@ -10,7 +10,7 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 - Only judge posts that are >= 48 h old (numbers keep growing for 2–3 days). Overwrite each row with fresh numbers.
 - Derived: hold = IGRE28 (share of viewers past 3 s); watch% = avg watch / video length; shares and saves per 1k reach.
 
-## Instagram reels (snapshot 28 Oct 2026 02:00 IST — first rows for eps 09-13)
+## Instagram reels (snapshot 31 Oct 2026 10:50 IST — every CHUBBY post is now >= 48 h old; eps 14-16 rows arrived)
 | posted (IST) | reel | len s | reach | views | avg watch s | 3-s hold % | likes | shares | saves | comments | style |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 10-20 07:03 | fake honey (10 of 13 brands) | ~45 | 5567 | 6164 | 3.8 | 16.3 | 21 | 9 | 5 | 0 | old static |
@@ -26,17 +26,26 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 | 10-25 15:47 | 02 carmine lipstick | 35 | 117 | 132 | 8.0 | 55.7 | 2 | 0 | 0 | 0 | Nessa (rejected) |
 | 10-26 02:24 | 03 dandruff | 50 | 1294 | 1554 | 15.6 | 67.8 | 23 | 10 | 4 | 0 | Nessa (rejected) |
 | 10-26 06:22 | 04 tattoo ink | 51 | 1048 | 1262 | 18.0 | 72.8 | 27 | 1 | 1 | 0 | Nessa (rejected) |
-| 10-26 18:00 | 07 carrots orange skin | 57 | 137 | 159 | 10.2 | 58.5 | 3 | 0 | 0 | 0 | CHUBBY v4 (approved), 2 days old |
-| 10-26 22:30 | 08 pineapple eats you | 56 | 113 | 131 | 17.3 | 60.7 | 3 | 0 | 0 | 0 | CHUBBY v4, 2 days old |
-| 10-27 03:25 | 09 spicy food burn | 96 | 121 | 133 | 16.5 | 62.0 | 6 | 0 | 0 | 1 | CHUBBY v4 + Mayer kit, 23 h old |
-| 10-27 07:55 | 10 sugar rush myth | 118 | 1102 | 1279 | 38.9 | 67.8 | 26 | 4 | 0 | 3 | CHUBBY v4 + refutation kit, Halloween myth, 18.5 h old - BREAKOUT |
-| 10-27 12:25 | 11 mint feels cold | 125 | 1206 | 1394 | 27.6 | 68.9 | 34 | 1 | 0 | 1 | CHUBBY v4 + scale cues, everyday habit (gum + water), 14 h old - BREAKOUT |
-| 10-27 17:25 | 12 silver leaf on sweets | 124 | 119 | 129 | 18.8 | 62.8 | 4 | 0 | 0 | 1 | CHUBBY v4 + cast card, Indian food purity, 9 h old |
-| 10-27 22:30 | 13 onions make you cry | 122 | 126 | 143 | 15.5 | 63.1 | 1 | 0 | 0 | 1 | CHUBBY v4 + chain map, 4 h old |
-| 10-28 03:20 | 14 coffee doesn't give energy | ~137 | — | — | — | — | — | — | — | — | CHUBBY v4 + day graphs (charts on video), everyday habit + myth-flip |
-| 10-28 (sched. 07:50) | 15 chocolate melts in your mouth | 145 | — | — | — | — | — | — | — | — | FIRST v5 LOOK (Chubby v2 3D, lit places, materials) + M2 mature voice, Halloween everyday food + belief flip (bloom isn't mould) |
-| 10-28 (sched. 12:30) | 16 swallowed gum (7-year myth) | 169 | — | — | — | — | — | — | — | — | v5 look + INSIDE-THE-GUT world (set_gut) + route map, M2 voice best UTMOS, myth-flip everyday habit, ska score |
+| 10-26 18:00 | 07 carrots orange skin | 57 | 137 | 159 | 10.2 | 58.5 | 3 | 0 | 0 | 0 | CHUBBY v4 (approved) — FINAL (5 days) |
+| 10-26 22:30 | 08 pineapple eats you | 56 | 113 | 131 | 17.3 | 60.7 | 3 | 0 | 0 | 0 | CHUBBY v4 — FINAL |
+| 10-27 03:25 | 09 spicy food burn | 96 | 123 | 135 | 16.3 | 61.8 | 6 | 0 | 0 | 1 | CHUBBY v4 + Mayer kit — FINAL |
+| 10-27 07:55 | 10 sugar rush myth | 118 | 1108 | 1294 | 38.7 | 67.7 | 26 | 4 | 0 | 3 | CHUBBY v4 + refutation kit, Halloween myth — BREAKOUT (final) |
+| 10-27 12:25 | 11 mint feels cold | 125 | 1211 | 1401 | 27.6 | 68.8 | 34 | 1 | 0 | 1 | CHUBBY v4 + scale cues, everyday habit — BREAKOUT (final) |
+| 10-27 17:25 | 12 silver leaf on sweets | 124 | 120 | 129 | 18.8 | 62.8 | 4 | 0 | 0 | 1 | CHUBBY v4 + cast card, Indian food purity — FINAL |
+| 10-27 22:30 | 13 onions make you cry | 122 | 1178 | 1370 | 30.6 | 65.4 | 40 | 13 | 6 | 1 | CHUBBY v4 + chain map, universal kitchen moment + 2 practical fixes — BREAKOUT (final; most shares + saves ever) |
+| 10-28 03:20 | 14 coffee doesn't give energy | ~137 | 126 | 141 | 15.2 | 56.3 | 5 | 0 | 0 | 1 | CHUBBY v4 + day graphs, daily habit + belief flip — did NOT break out |
+| 10-28 07:52 | 15 chocolate melts in your mouth | 145 | 1280 | 1484 | 38.7 | 74.9 | 35 | 5 | 3 | 1 | FIRST v5 LOOK + M2 voice, Halloween everyday food — BREAKOUT, best 3-s hold ever (74.9 %) |
+| 10-28 12:35 | 16 swallowed gum (7-year myth) | 169 | 121 | 136 | 21.8 | 61.3 | 5 | 0 | 0 | 1 | v5 look + INSIDE-THE-GUT world, myth flip, longest video — did NOT break out |
+| 10-31 (sched. 11:45) | 17 does sugar rot your teeth | 166 | — | — | — | — | — | — | — | — | FIRST Chubby INK episode (hand-drawn ink + paper), first 'person talking' script, Halloween-day candy + teeth, swing score |
 ## What the numbers say so far (update every run, keep it to the 5 most useful lines)
+- 31 Oct 10:50 (first fresh snapshot since 28 Oct; all posts >= 48 h): FOUR breakouts now — sugar rush 1108, mint 1211, onions 1178 (13 shares,
+  6 saves = our best share/save numbers ever), chocolate 1280 (74.9 % hold = best ever, 38.7 s avg watch on 2:25). Coffee (126), gum (121),
+  silver (120), spicy (123) stayed at the ~120 floor. The 'belief flip' alone does NOT predict reach (coffee + gum were belief flips and
+  stalled); what the 4 winners share is a FOOD-IN-YOUR-HAND moment everyone has had THIS WEEK (candy, gum + ice water, cutting onions,
+  chocolate) and a short, concrete title question. Shares/saves follow a PRACTICAL fix (onions: sharp knife + slow cuts). Hold is 56-75 % on
+  all of them, so the hook works; the v5 look + M2 voice (chocolate) got the best hold.
+- 31 Oct: YouTube rows now flow (up to 28 Oct) but every Short has 0-3 views (silver 3, 27 s avg) — the YT channel has no distribution yet;
+  keep posting (originality + SEO titles) and judge YT monthly, not per video.
 - 28 Oct 10:50: reel rows IDENTICAL to 02:00 and 05:50 (3rd identical snapshot); coffee + chocolate still missing -> Metricool's Instagram
   sync is stalled ~9 h; YouTube rows still end 25 Oct. No new verdicts possible; judge eps 14-16 once rows refresh (48 h rule).
 - 28 Oct 05:50: all rows identical to the 02:00 snapshot; coffee (03:20) not in analytics yet -> refresh on daytime runs; ep 15 is the

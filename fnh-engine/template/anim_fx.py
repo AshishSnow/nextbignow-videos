@@ -452,3 +452,28 @@ def route_map(f, stops, k, t, token=None, pts=None, col=(255, 210, 90), line_col
                 el2 = chip(times[i], col, INK, 24); comp(f, el2, x + side * (60 + el2[1].shape[1] / 2), y + 44)
     if token is not None: comp(f, token, tx, ty)
     return tx, ty
+
+
+# ================= ep 17 (31 Oct): ACTING KIT — staging + silhouette (Thomas & Johnston, 'The Illusion of Life': staging = present an idea so it is
+# unmistakably clear; a pose reads only if its SILHOUETTE reads). Check poses with engine/tools/ink_sheet.py (black-shape row). =================
+POSE = {"idle": dict(la=(28, 14), ra=(22, 12)), "point": dict(la=(20, 10), ra=(72, 42), lean=4), "present": dict(la=(90, 120), ra=(90, 120)),
+        "cheer": dict(la=(150, 170), ra=(150, 170)), "shock": dict(la=(112, 160), ra=(112, 160), lean=8), "think": dict(la=(-160, -115), ra=(30, 16), lean=-6),
+        "whisper": dict(la=(20, 10), ra=(140, -140), lean=6), "cheek": dict(la=(150, -120), ra=(26, 12), lean=-8), "shrug": dict(la=(80, 150), ra=(80, 150)),
+        "hold_up": dict(la=(40, 30), ra=(150, 175), lean=5), "arms_out": dict(la=(96, 60), ra=(96, 60)), "tada": dict(la=(120, 150), ra=(160, 150), lean=6)}
+
+
+def double_take(t, t0, d=0.55):
+    """look away -> snap back -> wide eyes: returns (look, lean, expr, brow) for the 0.55 s after t0 (ep 17 acting kit)."""
+    q = t - t0
+    if q < 0: return (0.6, 0), 0.0, "n", "n"
+    if q < d * 0.3: return (0.6, 0), 0.0, "n", "n"
+    if q < d * 0.45: return (-0.8, -0.2), -6.0, "sus", "sus"
+    k = clamp((q - d * 0.45) / (d * 0.3))
+    return (-0.9, -0.3), -10.0 * (1 + 0.6 * math.sin(k * math.pi)), "wow", "up"
+
+
+def flinch(t, t0, amp=1.0):
+    """a quick recoil (lean + squash) after a hit at t0."""
+    q = t - t0
+    if q < 0: return 0.0, 0.0
+    return -12 * amp * math.exp(-q * 5) * math.cos(q * 18), 0.35 * amp * math.exp(-q * 6)

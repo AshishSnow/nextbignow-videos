@@ -2,6 +2,21 @@
 
 ## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
 Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
+NEW from the 31 Oct trend scan (Halloween day; Diwali 8 Nov; data: the 4 breakouts are all 'a food in your hand this week' moments —
+candy, gum + ice water, onions, chocolate — and shares/saves follow a practical fix, see performance.md):
+0h. (DONE ep 17) sugar-rot-teeth — Do you know sugar doesn't rot your teeth? (bacteria make acid; 30-60 min acid timer; how often > how much;
+    candy ranking: chewy/sour worst, chocolate washes off). Sources used: NIDCR (NIH), Temple University (Newswise), CDA, NHS.
+0i. milk-boils-over — Do you know why milk boils over but water never does? (the daily chai/doodh moment in every Indian kitchen: proteins
+    + fat make a skin, steam gets trapped under it and lifts the foam; tip: wooden spoon / wide pan / lower heat at the first rise).
+    Verify: a university food-science page (e.g. UC Davis / Penn State) + a major outlet (BBC Science Focus / Scientific American).
+0j. cut-apples-turn-brown — Do you know a cut apple 'rusts'? (polyphenol oxidase + oxygen; lemon juice slows it; not spoiled). Very
+    visual (Chubby + a browning apple time-lapse). Verify: Scientific American 'Why do apples turn brown' + a university extension page.
+0k. rice-in-the-fridge — Do you know leftover rice goes hard in the fridge and soft again when you heat it? (starch retrogradation;
+    plus the safe part: cool rice fast, eat within a day, reheat hot — NHS 'reheating rice'). Everyday Indian kitchen; practical takeaway.
+    Verify: NHS + a food-science page (Serious Eats / a university extension).
+0l. bread-in-the-fridge (belief flip) — Do you know the fridge makes bread go stale FASTER? (retrogradation is fastest just above
+    freezing; freezer is fine). Verify: a university food-science page + a major outlet (NYT / BBC Good Food).
+0m. diwali-ghee-smell (Diwali 8 Nov) — Why does ghee smell so good when it's heated? (Maillard + browned milk solids). Verify first.
 NEW from the 28 Oct trend scan (data: myth-flip + everyday habit topics broke out: sugar rush 1.1k, mint 1.2k reach):
 0e. (DONE ep 15) chocolate-melts-in-your-mouth (Halloween) — Do you know chocolate is designed to melt at almost exactly your body temperature?
     (cocoa butter crystal form V melts ~34 C; tempering; why it melts in your mouth not your hand). Verify: a university food-science

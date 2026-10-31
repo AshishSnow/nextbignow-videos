@@ -21,7 +21,12 @@ Understand the new algorithm and act on it — I shouldn't have to tell you ever
 learning beat speed. Every run must leave the channel a little better than it found it.
 
 ## A. Algorithm notes (re-check EVERY DAY: the first run of each IST day, i.e. when "Last checked" is not today; record what changed)
-Last checked: 2026-10-28 (02:00 IST run). 28 Oct: no new official Reels/Shorts ranking change found since 27 Oct (searched
+Last checked: 2026-10-31 (10:50 IST run, first run since 28 Oct). 31 Oct: WebSearch (SocialPilot Sep/Oct 2026 changelog, Fanpage Karma 2026,
+Ground News 27 Oct summary of the TechCrunch 'Your Algorithm' piece, OutlierKit / tunepocket / Android Headlines for Shorts): NO new official
+ranking or policy change after 28 Oct. Still current: Mosseri's 3 signals (watch seconds, likes/reach, sends/reach), IG 'Your Algorithm'
+topic editing (keyword captions), YouTube Shorts originality push (1 Oct) + 'engaged views'. Acting on it today: Halloween-day timely topic,
+exact search question as the first caption line, an original hand-drawn look (Chubby INK) that no re-upload farm can copy.
+Previous: 2026-10-28 (02:00 IST run). 28 Oct: no new official Reels/Shorts ranking change found since 27 Oct (searched
 SocialPilot / Fanpage Karma / Ground News / Search Engine Journal / HighStyle). Re-confirmed: Mosseri's top 3 signals are watch time
 (average SECONDS watched per reach - absolute seconds, not %), likes per reach and sends per reach (sends weigh most for
 non-followers); YouTube Shorts freshness/recency reports are unconfirmed by YouTube (analyst data, SEJ). => our longer explainers
@@ -64,7 +69,12 @@ more since users can edit their "Your Algorithm" topics (topic matching) -> firs
   news about everyday foods/drinks, "why does…" questions). Add 3–5 fresh candidates to the TOP of topic_ideas.md
   UP NEXT (with the angle + 2 likely sources), ranked by: broad appeal (everyone eats/does it) > surprise > share-worthy
   takeaway > visual potential. Drop/stale-mark ideas that the data says are too niche. Record the date here:
-- Last trend scan: 2026-10-28 — Halloween week (31 Oct) still live; daily-habit + myth-flip topics are what broke out (sugar rush
+- Last trend scan: 2026-10-31 — Halloween DAY (candy in every hand -> 'does sugar rot your teeth', done as ep 17) and Diwali in 8 days; the
+  31 Oct analytics say the winners are 'a food in your hand this week' moments (candy, gum + ice water, onions, chocolate) with a practical
+  fix -> added to topic_ideas.md UP NEXT: milk boils over (daily chai), cut apples turn brown, leftover rice in the fridge, bread goes stale
+  faster in the fridge (belief flip), Diwali ghee smell. Web trend search itself was thin (generic 'food myths' results), so the scan leaned
+  on our own data + the calendar.
+- Previous trend scan: 2026-10-28 — Halloween week (31 Oct) still live; daily-habit + myth-flip topics are what broke out (sugar rush
   1.1k, mint 1.2k reach) -> added coffee/caffeine (done ep 14), chai vs coffee caffeine, chocolate melts in your mouth (cocoa butter
   melts near body temperature), brain freeze, why popcorn pops to topic_ideas.md.
 - Previous trend scan: 2026-10-27 — Halloween week (31 Oct: candy, sugar), Diwali (8 Nov: sweets, silver leaf), and
@@ -102,11 +112,16 @@ Voice (a mature, natural, warm guy — never robotic):
 - [x] 27 Oct (ep 13): less audible pitch processing (EXS 0.4, BMP 0.7): A/B +0.008 chunk20 / +0.003 line mean / +0.04 first
       100 s, f0 range 17.2 st -> adopted; keep stresses on 1–2 words/line.
 - [ ] Emphasis words: real stress (slightly louder + longer), not every line; question endings rise, statements settle.
-- [ ] Natural micro-pauses before the payoff word ("...it's eating you BACK").
+- [x] 31 Oct (ep 17): conversational REGISTERS per beat — confiding/aside lines at base -0.6 st + speed 0.95, reveals +1.2, explanations +0.4,
+      '...' micro-pause before payoff words. Same-take A/B vs uniform +0.8: chunk20 4.508 vs 4.507, line mean 4.465 vs 4.461, the two aside lines
+      +0.10 / +0.02 -> adopted as the script-writing default (PLAYBOOK step 4). Micro-pauses before the payoff word used too ('...is acid').
 - [x] 26 Oct: calmer pacing for A (SPD 0.88, PZ 1.6, PMIN 0.3) — UTMOS 4.27 -> 4.36 (see F). Now default in voice.env.
 - [ ] Next voice ideas to lab-test with voice_report: per-line SPD variety, EXS 0.6, STR 1.2 on payoff words, shorter
       lines (<= 12 words), commas for breath points. Keep the M2 blend (own register, no lift).
 Visual / edit:
+- [ ] Chubby INK next steps (ep 18+): hand poses per action (grip, pinch, open palm), a side/three-quarter head turn, a walk cycle in ink,
+      ink-style 3D titles (hand-lettered block letters with hatch sides) instead of the glossy title3d face.
+- [ ] Let Chubby stand INSIDE the diagram shots (next to the tooth / inside the city) instead of cutting away to prop-only frames.
 - [x] 28 Oct OWNER: character redesign -> Chubby INK approved (fnh_char_ink.py, colour mode C); v3 kept as fallback. Was: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
       real silhouette (neck, shoulders, fingers), textured clothes with folds + a signature item (apron/cap), weighty poses, idle life.
       Build + review a 6-expression / 6-pose sheet first, then use in the next episode. Keep him clearly FreshNestHub (mint).
@@ -120,10 +135,11 @@ Visual / edit:
       light_wrap of the place's colour on Chubby (he sits IN the light), contact shadow that matches the light direction.
 - [x] Shade the hero props the same way as Chubby (ep 15: anim_cine.mat_shade on _inflate + material presets; use it for every
       new hero prop) so props and character share one lighting model; outlines warm-brown, not black.
-- [ ] Chubby is often small in a corner — make him the actor (big, in the middle of the action, interacting with props).
+- [~] Chubby is often small in a corner — make him the actor (ep 17: he bites, flinches, double-takes, whispers, holds the pail / brush / glass,
+      brushes with IK; still small in the diagram shots — next: let him stand IN the diagrams).
 - [ ] Break the "big circle + prop" sameness: full-bleed scenes, split screens, close-ups, top-down tables, inside-the-body
       worlds, camera push-ins/pans, parallax layers. No two consecutive shots with the same layout.
-- [ ] Frame 0 hook: motion already happening at t=0 (no pop-in from empty), cover frame = Chubby + object + question.
+- [x] Frame 0 hook: motion already happening at t=0 (ep 16 bubble, ep 17 candy to mouth + tooth); cover frame = Chubby + object + question.
 - [ ] Secondary motion everywhere (bob, squash on impacts, blinking, props wobble) so nothing is static > 2 s.
 - [ ] Kinetic numbers: count-ups / slams for key numbers; consistent sources chip.
 - [ ] Better diagrams: more detail and texture (highlights, rim light, subtle 3D shadows) on the main prop each video.
@@ -135,10 +151,22 @@ Script / packaging:
 - [~] 28 Oct OWNER (guide + sample now in PLAYBOOK step 4): scripts must sound like a person talking — ban filler openers ("Here's the thing", "So yes", "Now,"), use
       surprise + small jokes + rhythm changes, read aloud test; natural beats UTMOS-optimised.
 - [ ] Hook with stakes in < 2 s; tease the best fact early; loop the last line into the first.
-- [ ] Practical takeaway line in every video (what to do with this fact) — boosts saves/shares.
-- [ ] Comment question in caption + firstCommentText.
+- [x] Practical takeaway line in every video (31 Oct data: onions, with 2 practical fixes, got 13 shares + 6 saves = our best; ep 17 has a
+      4-step 'plan for tonight').
+- [x] Comment question in caption + firstCommentText (every episode since 10).
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-31 10:50 (first fresh analytics since 28 Oct; all CHUBBY posts >= 48 h, so these are verdicts): 4 breakouts — sugar rush 1108, mint
+  1211, onions 1178 (13 shares, 6 saves), chocolate 1280 (74.9 % 3-s hold, 38.7 s avg watch on 2:25) — vs ~120 reach for carrots, pineapple,
+  spicy, silver, coffee and gum. VERDICTS: (1) the 'belief flip' is not the predictor (coffee + gum flipped beliefs and stalled); the 4
+  winners are all a food people had IN THEIR HAND that week + a 6-8 word title question; (2) practical fixes drive shares/saves (onions);
+  (3) the v5 look + M2 voice did not hurt hold — chocolate is our best hold ever — and length (2:25) did not hurt watch time; (4) gum at
+  2:49 held 61 % and averaged 21.8 s: the longest video is not the problem, the topic pull is. => ep 17 = Halloween-day candy (in every
+  hand today) + a timer people can feel + a 4-step plan; next topics follow 'in your hand this week' (chai boiling over, cut apples, rice).
+- 2026-10-31 (voice, ep 17): the new mature voice keeps climbing with rewrites, not settings: 4 weakest/ASR lines rewritten more naturally
+  ('Your spit. Seriously.' heard as 'You're spat' -> 'It's your spit. No, really.' 4.24 -> 4.43; 'Okay, the candy ranking.' -> 'Okay. Time
+  for the candy ranking.' 4.34 -> 4.41) lifted chunk20 4.501 -> 4.508 / line mean 4.450 -> 4.465 (new best). Register variety (asides at
+  -0.6 st) is slightly positive and sounds more like a person leaning in -> keep. 403 words = 2:44 at 169.6 wpm.
 - 2026-10-28 10:55: Metricool reel numbers at 10:50 are IDENTICAL to the 02:00 and 05:50 snapshots (sugar rush 1102 / mint 1206 /
   onions 126 / silver 119) and coffee (03:20) + chocolate (07:50) still have no rows -> the Instagram reel rows froze ~9 h ago; this is a
   Metricool sync stall, not a reach plateau. YouTube rows still end on 25 Oct. No post is 48 h old with fresh data yet -> no verdicts.
@@ -212,6 +240,19 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 17 does sugar rot your teeth (31 Oct, auto run, 2:46): VOICE conversational registers per beat (asides -0.6 st / 0.95, reveals +1.2, '...'
+  micro-pauses) A/B vs uniform (4.508/4.465 vs 4.507/4.461, kept) + 4 weak/ASR lines rewritten -> chunk20 4.508 / line mean 4.465 (ep 16
+  4.502 / 4.464; best so far), 169.6 wpm, f0 16.5 st, ASR clean | VISUAL FIRST CHUBBY INK EPISODE: ink prop toolkit (lib17: _ink_poly /
+  _ink_ell / _shade / _hatch_in / _face) and 20 ink props (molar with a face + film/crack/hole/spot/soft states, bacteria citizens with moods,
+  6 candies, Halloween pail, acid drops/pool, saliva wave + 'spit hero', brush/paste/glass/plate, timer dial, podium + cloth, ink magnifier),
+  2 new ink-softened places (set_porch Halloween doorstep, set_bathroom mirror) + inkify() for every lit place, ONE accent colour (violet =
+  sugar/bacteria/acid) + mint = saliva/repair, ACTING kit (POSE dict of silhouette-tested poses, double_take, flinch; Chubby bites, flinches,
+  double-takes, whispers, holds the pail/brush/glass, brushes with arm IK), day-strip timeline (acid blocks joining), 13 3D titles, 46 shots,
+  new foley (crunch, fizz, nibble, tooth_crack, wash, scrub, squeak) | SCRIPT/TOPIC first script written under the 28 Oct 'person talking'
+  guide (no filler openers, 'It's your spit. No, really.', 'Told you.'), Halloween-day candy topic, open loop at 6 s (kindest candy) paid at
+  ~71 % (chocolate), a timer you can feel (1 sweet = 1 hour; 1 an hour = acid all day), 4 chapters, candy ranking, 4-step plan + one safe
+  dentist line, haunted-house SWING score (new genre) with a doorbell-organ opener | metric: reach at 48 h vs chocolate/onions ('in your
+  hand this week' pattern), 3-s hold of the ink look vs chocolate's 74.9 %, shares/saves on a 4-step plan, comments on 'what's in your bowl'.
 - 16 swallowed gum (28 Oct, auto run, 2:49): VOICE mic-chain A/B on one fixed take (4 variants, all neutral -> plateau, chain kept) +
   6 weakest lines rewritten longer/natural + plain lines 1.03 -> chunk20 4.502 / line mean 4.464 (ep 15 4.499 / 4.459; best so far),
   169 wpm, ASR clean | VISUAL INSIDE-THE-BODY WORLD (new place anim_cine.set_gut: a living tunnel lit from deep inside, backlit
@@ -344,6 +385,9 @@ Script / packaging:
 | 28 Oct | ep 16 gum, same take, chain A/B: room -33 / body +2 pres -0.5 / comp 1.2 | 4.496-4.498 / 4.452-4.453 (all neutral) | 168 | 0.11 | 15.9 | 0 |
 | 28 Oct | ep 16 gum, + 5 weak lines rewritten, plain lines 1.03 | (chunk20 4.498, line mean 4.460) | 169 | 0.11 | 15.9 | 1 ('gum base' -> 'gumbase') |
 | 28 Oct | **ep 16 gum, + a6 'the chewy part', b2 'Here's the thing' (shipped)** | **4.476* (chunk20 4.502, line mean 4.464)** | 169 | 0.11 | 15.9 | 0 |
+| 31 Oct | ep 17 teeth, M2, first script (registers per beat) | 4.482* (chunk20 4.501, line mean 4.450) | 169 | 0.11 | 16.6 | 1 (b2 'Your spit' -> 'You're spat') |
+| 31 Oct | ep 17 teeth, uniform +0.8 base on the aside lines (A/B, rejected) | 4.493* (chunk20 4.507, line mean 4.461) | 170 | 0.11 | 16.6 | 0 |
+| 31 Oct | **ep 17 teeth, + a3/a4/b2/d1 rewrites, registers kept (shipped)** | **4.493* (chunk20 4.508, line mean 4.465)** | 170 | 0.11 | 16.5 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -360,11 +404,11 @@ video has it. Add newly discovered skills to the curriculum. Skills compound —
 ### Curriculum (tick when learned + applied; add more as you discover them)
 Animation & visuals:
 - [x] Squash & stretch, slow in/out, overshoot, anticipation, smear trails, sparkles/confetti/dust (anim_fx.py seed, 26 Oct)
-- [ ] Staging: one clear focal point per shot; silhouette test for Chubby's poses
+- [x] Staging: one clear focal point per shot; silhouette test for Chubby's poses (ep 17: engine/tools/ink_sheet.py + anim_fx POSE / double_take / flinch)
 - [ ] Follow-through & overlapping action (hair curl, belly jiggle, props settling with `settle()`)
 - [~] Arcs: move props and limbs along curves, not straight lines (ep 12: hammer_swing on an arc + arm IK)
 - [ ] Timing & spacing: hold key poses 6–10 frames, fast in-betweens (snappy cartoon timing)
-- [ ] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take)
+- [~] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take) (ep 17: double_take + flinch helpers; next: a jaw-drop mouth state)
 - [ ] Character acting: eye direction leads action, blinks on cuts, reaction shots
 - [ ] Simple lip-sync visemes for Chubby when he talks (mouth shapes from the VO envelope + vowels)
 - [ ] Camera language: push-in on reveals, whip pans between ideas, low/high angles, rack focus (`cam_keys`, `push_in`)
@@ -417,6 +461,15 @@ Story & topics:
 - [ ] Translucency / subsurface look for skin close-ups and fruit (reuse the set_gut rim-glow idea on Chubby's ears and on props)
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-31 | STAGING + the SILHOUETTE TEST (visual / character acting) | Staging (Thomas & Johnston, 'The Illusion of Life', principle 5): present
+  one idea at a time so it is unmistakably clear - one focal point per shot, the eye led by light, contrast and position, nothing else competing
+  at that moment. The Disney drawing-class test for a pose: fill the character solid black - if the SILHOUETTE still tells you what he is doing,
+  the pose reads from a phone; if not, no amount of face detail saves it (3dsense 'What is staging in animation'; Bloop Animation '12
+  principles'). Rendered 8 Chubby INK poses as black shapes (outputs/ink_pose_sheet.jpg): 'idle', 'scratch head', 'hand to mouth' and 'tired'
+  were the SAME blob - arms hugging the body - while 'cheer', 'point', 'shock', 'hold-up' read instantly. Rules adopted: arms clear of the
+  torso, asymmetry (one arm up, one out), a head lean, and one prop per hand; confiding lines get a lights-drop + spotlight so the focal point
+  is only Chubby. Turned into anim_fx POSE (silhouette-tested poses), double_take(), flinch() and engine/tools/ink_sheet.py | ep 17 (every
+  Chubby shot; S9 double take, S14 whisper under a spotlight, S0/S8/S22 flinches) | yes
 - 2026-10-28 14:00 (interactive, owner reference image) | INK-LINE CHARACTER + COLOUR PLAN (visual) | Owner showed hand-drawn round-head
   ink cartoon people and asked for that language with a real colour plan. What makes that style work: a single confident outline with a
   slight hand wobble (fixed per element so it doesn't boil), scribble hair as texture, faces from 3-4 strokes (dots, brow angle, mouth

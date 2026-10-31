@@ -4,6 +4,9 @@ Runs every 5 hours. Every run makes ONE new vertical animated reel (45 s–3 min
 **food + health facts** — and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** via Metricool.
 The owner (Ashish) is usually not watching: decide, build, verify, post, log. Never ask questions mid-run.
 
+**CURRENT character + look = Chubby INK (28 Oct, owner-approved; first full episode = 17, 31 Oct). Reference episode for the ink look:
+`episodes/17-sugar-rot-teeth/` (props, places, acting, script registers). Older notes below describe v4/v5; follow them only where they don't conflict.**
+
 **Approved style = `template/` (episode 07 "carrots turn your skin orange", posted 26 Oct 18:00 IST). Copy its approach.**
 - Bright animated sets (studio engine: gradient stage + big colour circle, flat shaded props, punchy transitions,
   screen shake on impacts), like the owner's OopsMyBusiness / NextBigNow reels — but with FreshNestHub's OWN mascot.
@@ -160,6 +163,22 @@ mint, skin, accent). New hero props should be drawn in the same ink language: IN
 hatch on the shadow side (see _hatch) — not the glossy 3D shading of lib15/16 (keep those for old episodes only).
 Same `chub(...)` API; `t=` gives breathing + blinks; `lean` tilts the head. Modes: INK_MODE = "wash" (default) | "flat" | "mono".
 Sheet: /home/claude/outputs/chubby_ink_colour_options.jpg. v3 (Pixar kid) stays in the repo as a fallback (fnh_char_v3.py), not used.
+
+### Ink prop toolkit + ink places + acting kit (ep 17, 31 Oct — the first Chubby INK episode; `anim_props_lib17.py`, `anim_cine.py`, `anim_fx.py`)
+- Draw every new hero prop with the lib17 toolkit so it matches Chubby: `_cv(w, h)` (supersampled canvas -> im, d, S), `_ink_poly(d, pts, fill,
+  seed)` / `_ink_ell(d, cx, cy, rx, ry, fill, seed)` (flat fill + ONE wobbly warm-ink outline, fixed per seed), `_shade(im, mask_fn, shade_fn, col)`
+  (shadow side), `_hatch_in(im, box, mask_fn)` (diagonal hatching), `_face(d, S, cx, cy, s, mood, look)` (3-stroke face: n, happy, sad, ouch,
+  wow, angry, love, hungry, munch), then `_done(im, w, h)`. Palette: PAPER / INKC / INK_MINT / INK_SKIN + ONE accent per video (ep 17: ACC violet
+  = sugar, bacteria, acid; mint = saliva / repair). Reusable lib17 props: tooth_el(mood, film, crack, hole, spot, soft, look), teeth_row,
+  bug_el / bug_crowd (bacteria citizens), candy_el(wrap|gummy|caramel|sour|choc|lolly), pail_el, acid_drop_el / acid_pool, saliva_wave,
+  minerals, spit_hero_el, brush_el, paste_el, glass_el, plate_el, timer_el(k, label), podium / cloth, magnifier_ink_el.
+- Places (anim_cine): `set_porch(t)` (Halloween doorstep at night, lamp), `set_bathroom(t)` (round mirror, sink at y 1330), `ink_set(scheme)` =
+  a stage() softened toward paper, and `inkify(f, amt=0.13)` — call it on EVERY lit place (set_kitchen etc.) in the ink look.
+- Acting (anim_fx): `POSE["point"|"present"|"cheer"|"shock"|"think"|"whisper"|"cheek"|"shrug"|"hold_up"|"arms_out"|"tada"]` = silhouette-tested
+  poses (`chub(..., **POSE["shock"])`), `double_take(t, t0)` -> (look, lean, expr, brow), `flinch(t, t0)` -> (lean, squash). Check new poses
+  with `python3 engine/tools/ink_sheet.py <project> out.jpg` (bottom row = black silhouettes: if the shape doesn't read, change the pose).
+- Script registers (voice.env note, ep 17): asides / confiding lines base -0.6 st + speed 0.95, reveals +1.2, explanations +0.4; '...' before
+  the payoff word. One-sentence jokes ('It's your spit. No, really.') score fine when they are a full natural sentence.
 
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth

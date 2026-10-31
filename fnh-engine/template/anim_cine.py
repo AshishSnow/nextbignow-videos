@@ -516,3 +516,75 @@ def peri_tube(f, x0, x1, y, r0, xs, t=0.0, sq=0.55, wall=46, label=True, cargo=N
         if x0 + 60 < lx + cargo_dx + 130 < x1 - 40:
             comp(f, chip("RELAX", (60, 130, 200), WHITE, 28), lx + cargo_dx + 130, y + r0 + wall + 62)
     return cx_, y
+
+
+# ================= ep 17 (31 Oct): INK PLACES — lit scenes softened toward paper cream so the inked character pops (PLAYBOOK Chubby INK) =========
+INK_SOFTEN = 0.13
+
+
+def inkify(f, amt=INK_SOFTEN):
+    """soften any lit place 10-15 % toward paper cream (the owner-approved ink look) and lift the blacks."""
+    f[:] = f * (1 - amt) + np.array(C(PAPER), np.float32) * amt
+    return f
+
+
+def set_porch(t=0.0, blur=4):
+    """Halloween doorstep at night: a front door with a lit lamp, two steps, a jack-o-lantern on the step, soft violet sky
+    (kept light enough for the ink look), paper-softened."""
+    def mk():
+        f = _vgrad((70, 48, 110), (150, 110, 180), 0, 1180)
+        f[1180:] = _vgrad((190, 176, 160), (140, 124, 108), 1180, H)[1180:]
+        cv2.rectangle(f, (120, 250), (960, 1180), C((120, 90, 70)), -1, cv2.LINE_AA)                         # house wall
+        for yy in range(260, 1180, 44):
+            cv2.line(f, (120, yy), (960, yy), C((104, 76, 60)), 2, cv2.LINE_AA)
+            off = 0 if (yy // 44) % 2 else 70
+            for xx in range(120 + off, 960, 140): cv2.line(f, (xx, yy), (xx, yy + 44), C((104, 76, 60)), 2, cv2.LINE_AA)
+        cv2.rectangle(f, (360, 420), (720, 1180), C((60, 90, 110)), -1, cv2.LINE_AA)                          # door
+        cv2.rectangle(f, (400, 470), (680, 760), C((80, 112, 136)), -1, cv2.LINE_AA)
+        cv2.rectangle(f, (400, 800), (680, 1120), C((80, 112, 136)), -1, cv2.LINE_AA)
+        cv2.circle(f, (660, 900), 14, C((230, 200, 120)), -1, cv2.LINE_AA)                                    # knob
+        cv2.rectangle(f, (210, 520), (310, 600), C((255, 226, 160)), -1, cv2.LINE_AA)                         # lamp
+        cv2.rectangle(f, (200, 510), (320, 530), C((50, 40, 40)), -1, cv2.LINE_AA)
+        cv2.rectangle(f, (40, 1180), (1040, 1260), C((190, 176, 160)), -1, cv2.LINE_AA)                       # steps
+        cv2.rectangle(f, (0, 1260), (W, 1340), C((170, 156, 140)), -1, cv2.LINE_AA)
+        f = _soft(f, blur)
+        return np.clip(f, 0, 1).astype(np.float32)
+    f = gcache(("set_porch", blur), mk).copy()
+    lamp_glow(f, 260, 560, 360, (255, 214, 150), 0.5)
+    god_rays(f, 260, 560, t, (255, 220, 170), 0.14, 7, 1300, 0.9, 1.1, 3)
+    bokeh(f, t, 8, 11, 260, 1100, 16, 40, cols=((255, 220, 170), (200, 170, 240)), amt=0.14)
+    return inkify(f)
+
+
+def set_bathroom(t=0.0, blur=4):
+    """bathroom mirror: white tiles, a round mirror with a shelf, a sink below (y ~ 1330), soft window light from the right."""
+    def mk():
+        f = _vgrad((214, 226, 232), (190, 206, 214), 0, H)
+        for yy in range(300, 1330, 60):
+            cv2.line(f, (0, yy), (W, yy), C((176, 192, 202)), 3, cv2.LINE_AA)
+            off = 0 if (yy // 60) % 2 else 60
+            for xx in range(off, W, 120): cv2.line(f, (xx, yy), (xx, yy + 60), C((176, 192, 202)), 3, cv2.LINE_AA)
+        cv2.circle(f, (540, 720), 300, C((120, 100, 80)), -1, cv2.LINE_AA)                                    # mirror frame
+        cv2.circle(f, (540, 720), 276, C((226, 238, 246)), -1, cv2.LINE_AA)
+        cv2.ellipse(f, (470, 640), (80, 150), -30, 0, 360, C((244, 250, 254)), -1, cv2.LINE_AA)
+        cv2.rectangle(f, (160, 1040), (920, 1070), C((226, 226, 232)), -1, cv2.LINE_AA)                       # shelf
+        for i, c in enumerate(((60, 170, 130), (240, 160, 80), (230, 230, 240))):
+            cv2.rectangle(f, (300 + i * 150, 950), (340 + i * 150, 1040), C(c), -1, cv2.LINE_AA)
+        cv2.ellipse(f, (540, 1360), (330, 90), 0, 0, 360, C((236, 240, 244)), -1, cv2.LINE_AA)                  # sink basin
+        cv2.ellipse(f, (540, 1340), (250, 50), 0, 0, 360, C((200, 212, 220)), -1, cv2.LINE_AA)
+        cv2.rectangle(f, (0, 1400), (W, H), C((190, 196, 206)), -1, cv2.LINE_AA)
+        cv2.rectangle(f, (520, 1180), (560, 1300), C((200, 200, 210)), -1, cv2.LINE_AA)                        # tap
+        cv2.ellipse(f, (540, 1180), (60, 24), 0, 180, 360, C((210, 210, 220)), -1, cv2.LINE_AA)
+        f = _soft(f, blur)
+        return np.clip(f, 0, 1).astype(np.float32)
+    f = gcache(("set_bath", blur), mk).copy()
+    glow(f, 1000, 500, 420, (255, 240, 210), 0.35)
+    god_rays(f, 1060, 420, t, (255, 236, 200), 0.14, 7, 1500, 0.6, 2.6, 4)
+    return inkify(f)
+
+
+def ink_set(scheme, sun=None, sx=540, sy=900, R=420):
+    """a stage() (colour circle set) softened toward paper, for diagram shots in the ink look."""
+    return inkify(stage(scheme, sun, sx, sy, R), 0.18)
+
+

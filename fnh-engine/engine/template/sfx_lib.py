@@ -422,3 +422,56 @@ def spit(level=-18):
     return _st(y / np.abs(y).max() * db(level))
 
 
+
+
+# ---------------- ep 17 (31 Oct) foley: crunch (candy bite), fizz (sour sweet), nibble (tiny munching), tooth_crack, wash (saliva wave), scrub (toothbrush), squeak ----------------
+def crunch(level=-16):
+    t2 = np.arange(int(0.22 * SR)) / SR
+    nz = signal.sosfilt(signal.butter(2, [900, 7000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2)))
+    envl = np.exp(-t2 / 0.03) + 0.7 * np.exp(-((t2 - 0.09) / 0.02) ** 2)
+    knock = np.sin(2 * np.pi * 160 * t2) * np.exp(-t2 / 0.03)
+    y = nz * envl + 0.6 * knock
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def fizz(level=-24, dur=0.8):
+    t2 = np.arange(int(dur * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [2500, 9000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.sin(np.pi * np.clip(t2 / dur, 0, 1)) ** 0.5
+    for k in rng.integers(0, len(t2) - 400, 40): y[k:k + 300] += np.sin(2 * np.pi * rng.uniform(1500, 4000) * t2[:300]) * np.exp(-t2[:300] / 0.004) * 1.5
+    return _st(y / np.abs(y).max() * db(level), 90)
+
+
+def nibble(level=-26, dur=0.5, rate=14):
+    t2 = np.arange(int(dur * SR)) / SR
+    y = np.zeros(len(t2))
+    for k in range(int(dur * rate)):
+        i = int(k / rate * SR); seg = t2[: int(0.02 * SR)]
+        y[i:i + len(seg)] += signal.sosfilt(signal.butter(2, [1200, 5000], "band", fs=SR, output="sos"), rng.standard_normal(len(seg))) * np.exp(-seg / 0.004)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level), 70)
+
+
+def tooth_crack(level=-14):
+    t2 = np.arange(int(0.6 * SR)) / SR
+    sn = signal.sosfilt(signal.butter(2, [1800, 9000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.012)
+    cr = signal.sosfilt(signal.butter(2, [300, 2500], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * (0.5 + 0.5 * signal.square(2 * np.pi * 38 * t2)) * np.exp(-t2 / 0.18)
+    y = sn * 2 + cr * 0.8 + np.sin(2 * np.pi * 90 * t2) * np.exp(-t2 / 0.05)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def wash(level=-22, dur=1.0):
+    t2 = np.arange(int(dur * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [300, 3000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.sin(np.pi * np.clip(t2 / dur, 0, 1))
+    y += 0.5 * np.sin(2 * np.pi * np.cumsum(180 + 60 * np.sin(2 * np.pi * 7 * t2)) / SR) * np.sin(np.pi * np.clip(t2 / dur, 0, 1)) ** 2
+    return _st(y / np.abs(y).max() * db(level), 150)
+
+
+def scrub(level=-26, dur=1.2, rate=5.5):
+    t2 = np.arange(int(dur * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [1500, 7000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * (0.25 + 0.75 * np.abs(np.sin(np.pi * rate * t2))) * np.sin(np.pi * np.clip(t2 / dur, 0, 1)) ** 0.4
+    return _st(y / np.abs(y).max() * db(level), 60)
+
+
+def squeak(level=-22):
+    t2 = np.arange(int(0.3 * SR)) / SR
+    y = np.sin(2 * np.pi * np.cumsum(1800 + 1400 * t2 / 0.3) / SR) * np.sin(np.pi * np.clip(t2 / 0.3, 0, 1)) ** 0.6
+    return _st(y / np.abs(y).max() * db(level))
