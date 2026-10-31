@@ -150,3 +150,25 @@ def jet(dur=2.2, level=-24):
     nz = np.random.default_rng(9).standard_normal(len(tt))
     lo = signal.sosfilt(signal.butter(2, [200, 2400], "band", fs=SR, output="sos"), nz)
     x = lo * env; x = (x / (np.abs(x).max() + 1e-9) * db(level)).astype(np.float32); p = np.linspace(0, 1, len(x)); return np.stack([x * (1 - 0.6 * p), x * (0.4 + 0.6 * p)], 1)
+
+
+def rotor(dur=1.5, level=-30, f0=210.0):
+    """small quadcopter buzz: 4 detuned saw-ish rotors + band noise, slow flutter (drone episodes, 1 Nov 2026)"""
+    n_ = int(dur * SR); t_ = np.arange(n_) / SR; x = np.zeros(n_, np.float32)
+    for i, df in enumerate((0.0, 3.1, -2.4, 5.2)):
+        ph = 2 * np.pi * (f0 + df) * t_; x += (np.sin(ph) + 0.5 * np.sin(2 * ph) + 0.25 * np.sin(3 * ph)).astype(np.float32)
+    nz = signal.sosfilt(signal.butter(2, [800, 5000], "band", fs=SR, output="sos"), rng.standard_normal(n_)).astype(np.float32)
+    x = x / (np.abs(x).max() + 1e-9) + 0.35 * nz / (np.abs(nz).max() + 1e-9)
+    x *= (1 + 0.15 * np.sin(2 * np.pi * 7 * t_)).astype(np.float32)
+    e = np.minimum(1, np.minimum(t_ / 0.15, (dur - t_) / 0.3)).clip(0, 1).astype(np.float32)
+    x = x * e; x = x / (np.sqrt(np.mean(x ** 2)) + 1e-9) * 10 ** (level / 20)
+    return np.stack([x, x], 1)
+
+
+def shutter(level=-22):
+    """camera shutter: two quick filtered clicks"""
+    n_ = int(0.09 * SR); a = rng.standard_normal(n_).astype(np.float32) * np.exp(-np.arange(n_) / (0.006 * SR)).astype(np.float32)
+    a = signal.sosfilt(signal.butter(2, [1500, 7000], "band", fs=SR, output="sos"), a).astype(np.float32)
+    x = np.zeros(int(0.14 * SR), np.float32); x[:n_] += a; x[int(0.05 * SR):int(0.05 * SR) + n_] += 0.7 * a
+    x = x / (np.abs(x).max() + 1e-9) * 10 ** ((level + 8) / 20)
+    return np.stack([x, x], 1)

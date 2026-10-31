@@ -83,6 +83,8 @@ try:
         s = re.sub(r"\b((?:[a-z]\.){2,})", lambda m: m.group(1).replace(".", ""), s)   # "U.S." == "US"
         s = re.sub(r"\$(\d+)\.(\d\d)\b", _cents, s)   # "$1.50" (ASR) == "a dollar fifty" (script)
         s = re.sub(r"\b((?:19|20)\d0)'?s\b", _decade, s)   # "1980s" == "nineteen eighties"
+        _teen = {w: i for i, w in enumerate("eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(), 11)}
+        s = re.sub(r"\b(" + "|".join(_teen) + r") hundred\b", lambda m: " " + str(_teen[m.group(1)] * 100) + " ", s)   # "twelve hundred" == "$1,200" (1 Nov)
         s = re.sub(r"\d[\d,]*(\.\d+)?", _num, s)
         s = re.sub(r"[^a-z ]", " ", s.replace("-", " "))
         return [w for w in s.split() if w not in ("dollar", "dollars", "and")]

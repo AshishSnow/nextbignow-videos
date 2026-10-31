@@ -9,6 +9,28 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-01 ~02:45 IST (episode run: HOW TO START ep 1, drone business)
+Instagram (IGRE, last 21 days) — new row + changes since 31 Oct 14:30:
+| Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 10-31 | Glasses: one company (first WHO-REALLY-OWNS-IT-style episode, ~7 h old) | 145 s | 43 | 33 | 13.1 s | **35.3 %** | 2 | 0 | 0 | 1 (= our own first comment) |
+| 10-28 | Banana clones | 132 s | 138 (+6) | 119 | 24.4 s | 59.7 % | 3 | 0 | 0 | 0 |
+| 10-28 | Hoover free flights | ~136 s | 150 (+7) | 129 | 15.6 s | 45.8 % | 2 | 0 | 0 | 0 |
+| 10-28 | Monopoly's real inventor | 135 s | 187 | 162 | 31.0 s | 61.1 % | 3 | 0 | 0 | 0 |
+YouTube (YTVP, views / avg view duration s / likes / shares): banana **674** / 33 / 9 / 0 · Hoover 321 / 38 / 8 / 0 · Monopoly 491 / **40** / 10 / 3 ·
+De Beers 346 / 35 / 6 / 3 · airline miles 563 / 33 · gas 550 / 13 · Duolingo 612 / 7 · Planet Fitness 687 / 16 · printer ink 738 / 16 · glasses: no row yet.
+**Media-kit numbers (1 Nov):** IG last 10 reels avg **317 views** (median 157), avg 3-s rate 51 %, avg watch 19.2 s, reactions (shares + saves +
+comments, excl. our own first comment) **1.1 per 1,000 reach**; YT last 10 Shorts avg **440 views** (median 521). Followers: no new IGEV pull this run.
+**Insights (1 Nov):**
+S. **YouTube now carries the long story episodes, Instagram doesn't.** The four 130–145 s story videos sit at 321–674 YT views with 33–40 s average
+   view duration (our best on YouTube), but 138–187 IG views. On IG, reach per reel has settled at ~120–160 (no follower base to seed it).
+   → Keep the stories ≤ ~2 min, keep the first 2 s strong for IG; judge episodes on both platforms (YT is the healthier signal right now).
+T. The first new-format episode (glasses, 145 s) opened at a 35 % 3-s rate on IG — second-worst ever (Duolingo 24 %), after 7 h. Its frame 1 was a
+   "tree of glasses" with a long question. Too early to judge (posts move for ~24 h), but it supports insight Q: the hook line + a readable
+   object in frame 1 decide. → This episode: frame 1 = a drone already flying over a house for sale, 5-word caption on screen from frame 0,
+   wh-question hook in 2.3 s; length cut to ~113 s.
+U. Saves/shares are still ~0 on every reel. HOW TO START is the first format built to be *saved* (a checklist with real costs) — watch saves on it.
+
 (31 Oct ~18:50 IST, R&D Visuals run 10: IG + YT pulls identical to 14:30 IST, number for number — nothing posted since 28 Oct; the glasses reel
 (post 412018960) is still PENDING for 19:30 IST. No new signal; the first story-format episode (Pepsi jet P1) is built by the 16:05 UTC run.)
 (31 Oct 14:15 IST, R&D Tooling run 9: IG + YT pulls identical to the 14:30 IST pull below, number for number — nothing posted since 28 Oct, the

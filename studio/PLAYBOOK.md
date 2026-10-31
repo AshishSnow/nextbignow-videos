@@ -127,6 +127,10 @@ old align.json gives wrong per-line numbers).
 Weak short reveal lines (per-line UTMOS < 4.2, e.g. "Her income? Zero." 4.14): first lengthen the text slightly ("Her income that year?
 Zero." → 4.29, 27 Oct Monopoly A/B) — 2–3-word lines are always the weakest. Yes/no hook questions get softened by the prosody gate
 (q_rise −1…−2 st): keep them short and put the key word last.
+**Since 1 Nov (drone episode, 2nd script after glasses): `EXS` default 1.15** (template make_vo) — A/B on the same text at SPD 1.0: EXS 1.0
+per-line UTMOS 4.407 (min 4.28), 18.1 st, low_fall −6.0 st vs **EXS 1.15 4.407 (min 4.31), 18.8 st, low_fall −6.3 st**, 168 wpm, 0 ASR bad lines.
+Line speeds 1.0–1.04 need `SPD=1.0` to reach ≥ 165 wpm (SPD 0.96 gave 163 wpm on the same script). voice_report's ASR normaliser now reads
+"twelve hundred" = "$1,200" (it was a false bad line).
 Alternative engine (opt-in, see `VOICE.md`): `ENGINE=chatterbox python3 scripts/make_vo.py` — Chatterbox-Turbo (MIT) in our own
 synthetic narrator's voice, +0.06 UTMOS per line; since 27 Oct its `low` lines get a last-word fall (`lib/end_contour.py`, `ENDS=0` to
 disable, `END_ST` depth, default −4 st) so reveals land (−3.5…−4 st vs −1 before), but its questions still fall → Kokoro stays the default. Its output is deterministic, so if a
@@ -262,6 +266,18 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   (box → wobbly shelf), `tray_el`, `shortcut_door_el(open_=)`, `exit_sign_el(mirror=)`, `list_el("LAMP")`, `turnstile_el`, `heart_el(cracked=)`.
   Lab frames: `lab/story_kit/storyboard_ikea_st1.jpg`. Pattern for new kits: one file per world, sets registered via `_STORY_SETS.update` +
   `_FLOOR.update` + `SET_LIGHT.update`, added to anim.py's exec list, checked with `board_check --strict` and a 10–12-row lab render with guides.
+- **Props kit 4 (1 Nov, HOW TO START drone episode, `template/scripts/anim_props4.py`, in anim.py's exec list):** `home_el(w, sign="FOR SALE")`
+  (suburban house), `aerial_view(t, zoom, cx, cy, rot)` (full-frame top-down "seen from the drone" yard: hip roof, pool, trees, drive, street) +
+  `viewfinder(f, t, alt)` (drone-camera HUD: brackets, blinking REC, altitude), `route_map(f, t, k, n_red, labels, t_pop=)` (the step roadmap as
+  a dotted flight route with 5 numbered waypoint cards; the drone flies to waypoint k), `remote_id_el` + `waves(f, x, y, t)` (broadcast rings),
+  `shield_el(text)` (insurance), `airspace_phone_el(ok)` (generic map: red NO FLY ring, green zone, status bar), `nofly_ring(f, x, y, rx, t)`,
+  `photo_el("home"|"roof"|"party", w)` (aerial print), `pc_el(w, k, label)` (exam monitor + progress bar), `controller_el`, `uk_eu_card_el`
+  (outline-only region cards, no flags). Drone prop: `drone_el(w, t)` in anim_stick.py. SFX `rotor(dur, level, f0)` (quadcopter buzz) and
+  `shutter()` in sfx_lib.
+- **HOW TO START step pattern (1 Nov):** each step opens on a full-frame set with the cast + `cold_open(f, "STEP n OF 5", "HOW TO START", detail)`
+  + one big `say(TITLE)` at **y ≈ 700** — at y 560 the caption collided with the cold-open card (caught in test frames). Then 2–4 prop shots
+  (one per fact: price tag drop, stamp, calendar, chip with the source), back to a scene within ≤ 2 shots. Show the waypoint cards from the
+  shot start (an empty disc waited ~1 s for the word "five").
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
   `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.
