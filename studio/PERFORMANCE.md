@@ -9,6 +9,8 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+(31 Oct ~18:50 IST, R&D Visuals run 10: IG + YT pulls identical to 14:30 IST, number for number — nothing posted since 28 Oct; the glasses reel
+(post 412018960) is still PENDING for 19:30 IST. No new signal; the first story-format episode (Pepsi jet P1) is built by the 16:05 UTC run.)
 (31 Oct 14:15 IST, R&D Tooling run 9: IG + YT pulls identical to the 14:30 IST pull below, number for number — nothing posted since 28 Oct, the
 glasses video is still unposted. First **account-level** pull (IGEV connector): followers 53 (24 Oct) → 54 (25) → **57** (26–29 Oct);
 account reach per day 3,076 (25 Oct, 106 accounts engaged) → 2,788 (26) → 1,895 (27) → 436 (28) → 10 (29) → 8 (30) — reach lives

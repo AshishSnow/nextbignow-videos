@@ -27,7 +27,7 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 |---|---|---|
 | Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 (3×) |
 | Sound | music score, SFX, mix levels, loudness | 2026-10-27 (run 6: word guard + `tools/mix_check.py`) |
-| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-10-28 (run 7: `tools/layout_check.py`, safe-area captions) |
+| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-10-31 (run 10: story kit 2 — the IKEA board's 3 sets + 9 props, `anim_story2.py`) |
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
 | Tooling | render speed, smoke tests, QA automation | 2026-10-31 (run 9: `tools/board_check.py` storyboard pre-flight + build brief, in smoke_test.sh) |
 | Analytics | what the numbers say, cover frames, captions, posting times | never as a focus (refreshed every run; 31 Oct: first rows for the 4 story-type videos, media-kit baseline in BRAND.md §5) |
@@ -77,6 +77,10 @@ Story
   did not track retention.
 - Comment test: one specific A/B question in the last line vs the friend CTA (comments ~0; owner's references 75–300 per reel).
 Visuals / Story / Tooling
+- **Story-kit assets still missing for queued boards (write before their build run, `board_check --strict` tells you):** `04-nickel-coke` needs
+  sets office1950, oval_office, soda_fountain + props billboard_el, bottle_el, contract_el, memo_el, vending_el + a `MAP_US` polygon for
+  `map_view` — 8 assets, ≈ 1 R&D run (the IKEA kit took one run for 3 sets + 9 props, `template/scripts/anim_story2.py` is the pattern).
+  Next after that: WHO REALLY OWNS IT #1 will need a "street of shopfronts" set (shopfront_el exists) and a hub/door kit (door_el, hub_map exist).
 - Tooling next: (a) `say()` could wrap to two lines itself when a caption would shrink below ~60 % (today it only scales down — the
   board_check B3 warnings are the measure: 13 of 31 captions on the two new boards); (b) board_check B4 (static rows) is a verb
   heuristic — replace it with real shot counts once anim_shots.py exists (parse SHOTLIST, compare with align.json: ≥ 1 visual change
@@ -284,3 +288,21 @@ Visuals / Story / Tooling
   subtitle right-aligned (never meets the cold-open card); pilot storyboard rendered (`lab/story_kit/`); fresh-eyes review of the pilot →
   7 must-fixes applied (chronology: PepsiCo sued first; cheque returned; 1996 ad change ≠ admission; FIGHT/FOLD + JOKE/DEAL choices;
   "put up" not "lend"; Statute of Frauds wording). smoke_test PASSED (video path loads the kit).
+- 2026-10-31 (run 10, scheduled 12:41 UTC) | Visuals (rule 0: queue = 4 REVIEWED ≥ 3; bank 16 Ready ≥ 10; rotation: Sound/Story/Topics/Visuals
+  all 27–28 Oct — Visuals chosen because the 21:05 UTC build is `03-ikea-maze` and its BUILD BRIEF listed 8 assets that did not exist, which
+  the build run would otherwise have to write inside its own 90–150 min) | Hypothesis: the IKEA board's missing sets/props can be written in the
+  story-kit style (lit, generic, no trade dress) so that `board_check --strict` passes and every storyboard row renders readably inside the
+  safe zone with the existing cast, at ≤ 0.5 s draw cost per frame. Built `template/scripts/anim_story2.py` (loaded by anim.py after
+  anim_story.py): sets `maze_store` (one-way path: dashed snaking line + perspective `arrow_floor` decals, room-set alcoves, far EXIT sign),
+  `market_hall` (dark high ceiling, racks of cardboard boxes, SELF-SERVE sign), `store_cafe` (windows, MENU board, counter with heat lamps, long
+  tables); props `bin_el` (4 item kinds), `arrow_floor`, `flatpack_el(built)`, `tray_el`, `shortcut_door_el(open_)`, + `exit_sign_el(mirror)`,
+  `list_el`, `turnstile_el`, `heart_el` the rows also need. **Before → after on the same board:** `board_check 03-ikea-maze --strict` FAIL
+  (8 missing) → PASS (0 missing, 0 failures); queue total 16 → 8 missing assets (all nickel-Coke). Lab render of 12 rows with safe-zone guides
+  (`lab/story_kit/storyboard_ikea_st1.py` + `.jpg`): every caption inside the zones, hero/cast/props read on a phone-size thumbnail; three
+  look fixes after the first sheet (arrows were invisible on the pale floor → darker + a snaking dashed path; candle pile read as blank blocks →
+  shaded cylinders with wicks; flat box too thin → real box with top/side faces). Draw cost 0.07–0.52 s per frame before the grade (sets are
+  cached after the first frame). smoke_test PASSED twice (video path loads the new kit; board_check now also runs `--strict` on the IKEA board
+  so the kit must stay complete). Kept: anim_story2.py, anim.py exec list, smoke_test line, 4 shot-placement notes in the IKEA shots.md header
+  (BEAT IT captions at y≈700/830, bin CU placement, one-word pills, staff re-dress dict). Analytics: Metricool IG + YT pulls identical to
+  31 Oct 14:30 IST (nothing posted since 28 Oct; glasses reel still PENDING for 19:30 IST). ALGORITHM.md dated today → not redone.
+  | kept — measure: the 21:05 UTC build's time-to-first-test-frame and whether it needs any asset beyond the kit; caption readability on its contact sheet

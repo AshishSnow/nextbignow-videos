@@ -38,7 +38,8 @@ python3 "$HERE/tools/story_check.py" --all "$HERE/examples" > /dev/null && pytho
 # writers' room pre-flight (R&D Tooling run, 31 Oct): every queued board parses; the pilot's story-kit assets all exist (--strict)
 python3 "$HERE/tools/board_check.py" --all "$HERE/episodes/queue" --no-brief > "$STUDIO/projects/_board.txt" 2>&1 \
   && python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/01-pepsi-jet-p1" --strict --no-brief > /dev/null 2>&1 \
-  && echo "ok   board_check $(tail -1 "$STUDIO/projects/_board.txt")" || { echo "FAIL board_check (queue boards or the pilot's assets)"; tail -3 "$STUDIO/projects/_board.txt"; fail=1; }
+  && { [ ! -d "$HERE/episodes/queue/03-ikea-maze" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/03-ikea-maze" --strict --no-brief > /dev/null 2>&1; } \
+  && echo "ok   board_check $(tail -1 "$STUDIO/projects/_board.txt")" || { echo "FAIL board_check (queue boards, the pilot's or the IKEA board's assets)"; tail -3 "$STUDIO/projects/_board.txt"; fail=1; }
 rm -f "$STUDIO/projects/_board.txt"
 for eng in kokoro chatterbox; do
   rm -f "$P"/work/*

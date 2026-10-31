@@ -255,6 +255,12 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   of glasses + a shop sign + an insurance card); roadmap as physical doors ("four doors to your eyes, the fourth is the sneakiest") with a
   `DOOR #n` chip + door swinging open per item; one mini-story with a rival (Oakley 2001 → bought 2007) as the mid-video re-hook; the twist
   as a hub diagram whose spokes pop on each word; loop back to the frame-1 tree. Name the giant on screen, not in the VO, if ASR mangles it.
+- **Story kit 2 (31 Oct, `template/scripts/anim_story2.py`, SPOT THE TRICK store world):** full-frame sets `maze_store` (one-way showroom
+  path with grey floor arrows + a far EXIT sign), `market_hall` (racks of cardboard boxes), `store_cafe` (canteen); props `bin_el(item=)`
+  (cardboard "bulla bulla" tub), `arrow_floor(f, x, y, s, ang)` (floor decal drawn on the frame; 90 = towards the camera), `flatpack_el(built=0..1)`
+  (box → wobbly shelf), `tray_el`, `shortcut_door_el(open_=)`, `exit_sign_el(mirror=)`, `list_el("LAMP")`, `turnstile_el`, `heart_el(cracked=)`.
+  Lab frames: `lab/story_kit/storyboard_ikea_st1.jpg`. Pattern for new kits: one file per world, sets registered via `_STORY_SETS.update` +
+  `_FLOOR.update` + `SET_LIGHT.update`, added to anim.py's exec list, checked with `board_check --strict` and a 10–12-row lab render with guides.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
   `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.

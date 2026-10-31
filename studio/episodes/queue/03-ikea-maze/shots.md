@@ -4,13 +4,21 @@ Every frame graded via finish(). Music: **marching-band / brass oompah** (new ge
 clicks on each TRICK chip; no "Oops" sting (no blunder in this episode). **No IKEA logo, no blue-and-yellow trade dress, no product
 names**: the store is "the flat-pack giant" on screen (plain white sign "FLAT-PACK STORE"), arrows on the floor are grey, bins are
 plain cardboard, the hot dog is a generic hot dog. "IKEA" appears only as plain text in the hook caption and source chips.
-New assets this episode needs (write in `template/anim_story.py` style, add to the story kit): set `maze_store` (top-down-ish
-showroom path: white floor with grey arrows, room sets left and right, a far EXIT sign always behind the camera), set
-`market_hall` (tall shelves + cardboard bins), set `store_cafe` (long canteen tables, serving counter), prop `bin_el` (cardboard tub
-piled with one item: candles / cushions / plastic plants), prop `arrow_floor` (floor arrow decal), prop `flatpack_el` (flat box →
-assembled wobbly shelf, `built=0..1`), `hotdog_el` exists (anim_props), `tray_el` (meatballs + lingonberry blob), `shortcut_door_el`
-(plain grey door with a small "SHORTCUT" sign). Reuse: `door_el`, `numcard_el` (roadmap cards 1–4), `tag_el`, `shelf_el`, `lamp_el`,
-`copier_el` (no), `quote_card`, `series_badge`, `choice_card` (use for the save/share end card with "SAVE" / "SEND" pills).
+**Assets — ALL WRITTEN (R&D Visuals run, 31 Oct, `template/scripts/anim_story2.py`, loaded by anim.py after anim_story.py; `board_check --strict` passes):**
+sets `maze_store` (floor 1180, one-way showroom path with a dashed snaking line + grey `arrow_floor` decals, living-room / kitchen alcoves,
+far EXIT sign at the end of the corridor), `market_hall` (floor 1200, dark high ceiling, tall racks of cardboard boxes, "SELF-SERVE" sign),
+`store_cafe` (floor 1200, three windows, "MENU" board, stainless counter with heat lamps, long birch tables with trays); props
+`bin_el(item="candles"|"cushions"|"plants"|"mugs", w, label=None)`, `arrow_floor(f, x, y, s, ang, col, op)` (draws on the frame, 90 = towards camera),
+`flatpack_el(built=0..1)` (lying box → wobbly tilted shelf, planks appear with `built`), `tray_el()`, `shortcut_door_el(open_=0..1)`,
+plus `exit_sign_el(mirror=True)` for the "slides backwards" beat, `list_el("LAMP", ticked=, extra=)` for the paper list, `turnstile_el()`
+for the entrance, `heart_el(cracked=)` for d2/d5. Reuse: `door_el`, `numcard_el`, `tag_el`, `shelf_el`, `lamp_el`, `hotdog_el`, `basket_el`,
+`quote_card`, `series_badge`, `choice_card`. Lab render of 12 rows with safe-zone guides: `lab/story_kit/storyboard_ikea_st1.jpg`
+(script `storyboard_ikea_st1.py`, 0.1–0.5 s draw per frame). **What the lab frames showed (fix in anim_shots.py):** (1) a5 — the two green
+"BEAT IT" lines at y≈1180/1310 land on the characters' heads when the staff + hero stand at s≈1.0–1.1 → put them at y≈700/830 (same for c5/d8/b4);
+(2) b2 CU — `bin_el("candles", 900)` at y 1500 runs off the bottom; centre it at y≈1350 or use w 760; (3) e1 — the two-word pills
+"MAZE · BINS" / "FOOD · SHELF" shrink the whole choice card to fit 860 px (readable, but STORY.md §5 rule 7 wants one word per pill — consider
+"MAZE" / "SHELF" with the four TRICK chips around the hero carrying the other two); (4) the hero's grey `worker` re-dress for staff:
+`{"base": "worker", "top": (150,152,156), "trim": (150,152,156), "pants": (60,62,70), "hair": "slick", "cap": None}` reads as plain staff, no plumber look.
 
 | Line | Set / shot | Cast + acting | HUD / props / caption | SFX / camera |
 |---|---|---|---|---|
