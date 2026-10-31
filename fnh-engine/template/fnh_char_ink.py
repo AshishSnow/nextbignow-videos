@@ -49,6 +49,7 @@ def _fillcol(c): return c if INK_MODE != "mono" else PAPER
 def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0, nose=None, cap=False, hair=(0, 0)):
     """hair = (dx, dy) px offset of the scribble hair (ep 18 follow-through: the hair lags the head by a few frames)."""
     tint = round(clamp(tint) * 10) / 10
+    if not isinstance(hair, (tuple, list)): hair = (hair, 0)          # a bare number = horizontal drag
     hair = (int(round(clamp(hair[0], -16, 16) / 2)) * 2, int(round(clamp(hair[1], -12, 12) / 2)) * 2)
     key = ("chead_ink", INK_MODE, mouth, blink, brow, lx, ly, expr, tint, nose, cap, hair)
     if key in _gc: return _gc[key]
