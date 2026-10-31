@@ -4,6 +4,9 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 `PLAYBOOK.md`/`VOICE.md`; this file holds the rules, the rotation, the backlog and the log of experiments.
 
 ## Rules
+0. **Writers' room first (since 31 Oct, STORY.md §8):** if `episodes/queue/` holds fewer than 3 REVIEWED episodes, this run writes
+   1–2 complete episodes (vo_lines.py + shots.md + SOURCES, story_check 7/7 + all S-gates, a fresh-eyes subagent review) and marks
+   them REVIEWED in `episodes/README.md`. Only when the queue is full does the rotation below apply. Runs: 02:41, 08:41, 12:41 UTC.
 1. One focus area per run. Pick the one with the oldest "last worked" date, unless something is broken or the data
    clearly says otherwise. **Voice has priority until the narrator clearly meets `VOICE.md`'s spec.**
 2. Write the hypothesis before building. Research first (primary sources, dated), then experiment in
@@ -17,7 +20,7 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 5. Every run also: refresh `PERFORMANCE.md` (Metricool, last 21 days); if `ALGORITHM.md` is > 3 days old, research it; if
    `topic_bank.md` has fewer than 10 Ready topics, add verified ones first (owner, 27 Oct: "topics need to improve — something interesting").
    Voice has had 3 runs in a row — give the other areas (Topics, Story, Visuals, Sound) their turn unless voice is broken.
-6. Finish within 2 h; don't push template changes near video runs (:05 past 00, 05, 10, 15, 20 UTC).
+6. Finish within 2 h; don't push template changes near episode runs (16:05 and 21:05 UTC).
 
 ## Focus rotation
 | Area | What it covers | Last worked |
@@ -28,6 +31,8 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
 | Tooling | render speed, smoke tests, QA automation | never (run 7 added a video path to smoke_test.sh as a side task) |
 | Analytics | what the numbers say, cover frames, captions, posting times | never (refreshed every run; YouTube numbers flowing since 27 Oct) |
+| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-10-31 (interactive: pilot YOUR MOVE EP 1, Parts 1–2) |
+| Brand | BRAND.md readiness: media-kit numbers, brand-safety rules, sponsor formats, disclosure templates, community | 2026-10-31 (interactive: BRAND.md) |
 | Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-10-27 (R&D run 4: +7 → 23 Ready) |
 
 ## Backlog (add ideas, strike when done)
@@ -215,3 +220,13 @@ Visuals / Story / Tooling
   chip max 800 px; part_badge title ≤ 600 px; hud_choice y 1480 → 1420, width 900 → 800; hud_clock y 262 → 272. Smoke test now renders video
   (layout_check on the Hoover shots + 1 s anim.py encode); passed. PLAYBOOK §6/§8 updated. Analytics: IG + YT pulls identical to 06:00 IST
   (no rows for Monopoly/Hoover/banana yet). ALGORITHM.md 2 days old → not redone.
+- 2026-10-31 | Story + Brand (interactive; owner 30 Oct: "story line and everything need to be good, and topic… later I will get brand deals")
+  | Data (Metricool 31 Oct 00:30 IST, 16 animated reels): story-shaped videos hold longest (Monopoly 31.2 s avg = channel best) but
+  sends/saves/comments ≈ 0 and reach per reel fell ~1,300 → ~150 (27–28 Oct); Instagram ranks on watch time + sends per reach.
+  Built: STORY.md (hero = "you", three series YOUR MOVE / SPOT THE TRICK / WHO REALLY OWNS IT, beat sheets, writing rules, signature
+  beats incl. one "Oops."), BRAND.md (what sponsors buy, YPP/creator-marketplace eligibility, brand-safety rules, sponsor formats,
+  disclosure, media-kit metrics, cadence), story_check S-gates (series, seat, stakes ≤ 15 s, series ending, Oops ≤ 1, part logic;
+  "problem"/"question" now count as roadmap labels), writers' room `episodes/` with the pilot YOUR MOVE EP 1 Parts 1–2 (Pepsi jet;
+  both 7/7 R + 6/6 S), PLAYBOOK gates (seat + choice, brand-safe) + posting (2 a day at 00:00/05:00 IST, firstCommentText = choice).
+  Scheduled tasks: episodes 16:05 + 21:05 UTC; R&D → writers' room 3×/day. | kept; measure: sends + comments per 1,000 reach on the
+  first 5 episodes vs the 16 animated reels before (≈ 0)

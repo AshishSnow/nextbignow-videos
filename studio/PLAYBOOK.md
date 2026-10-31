@@ -8,8 +8,13 @@ can't be fixed, stop, schedule nothing, and report what failed.
 `IMPROVEMENTS.md`: refresh `PERFORMANCE.md` from analytics, refresh `ALGORITHM.md` if older than 7 days, pick at least one
 voice upgrade and one visual/story upgrade, test them, keep only what measures better, and log it.
 
-**Time budget:** take your time — a good video takes 90–150 minutes. Don't rush any step. The only hard limit: be finished
-(scheduled, logged, pushed) about 30 minutes before the next run starts (runs fire every 5 hours).
+**Since 30 Oct every video is an EPISODE of a series** (owner: "the storyline and everything need to be good… keep in mind that later
+I will get brand deals"). **Read STORY.md (what we tell and how: hero = "you", series, beat sheets, writing rules) and BRAND.md
+(brand-safety rules, sponsor-readiness metrics) before this file's craft sections.** Scripts come from the writers' room queue
+(`studio/episodes/`), already story-checked and reviewed; the build run re-verifies the facts and makes it beautiful.
+
+**Time budget:** take your time — a good episode takes 90–150 minutes. Don't rush any step. The only hard limit: be finished
+(scheduled, logged, pushed) about 30 minutes before the next run starts (episode runs fire at 16:05 and 21:05 UTC).
 
 ## 0. Setup (fresh workspace)
 ```bash
@@ -42,6 +47,11 @@ really makes money"); it has become predictable. From now on the topic must pass
 6. *Share/save* — a takeaway or "you won't believe this" fact people send to a friend.
 7. *Verifiable* — primary sources exist for every number.
 Pass = total ≥ 26 / 35, *Wait-what* ≥ 4 and *Verifiable* = 5. Otherwise pick another topic.
+**Plus two gates (30 Oct, STORY.md §6, BRAND.md §3) — both must be yes:**
+- *Seat + choice:* there is a real person's seat the viewer can sit in at a moment of decision, and an honestly debatable two-option
+  question (YOUR MOVE) — or ≥ 3 tricks the viewer can spot tomorrow (SPOT THE TRICK) — or ≥ 3 "doors" to one owner (WHO REALLY OWNS IT).
+- *Brand-safe:* none of the skip topics (deaths/tragedy as the core, violence, crime glorification, politics, religion, health
+  claims, gambling, crypto, investment tips) and it can be told curious-not-cruel.
 
 **Type mix** — never two of the same type in a row; type F at most 1 in 3 videos:
 A. Wild true story (blunder, gamble, stunt, scandal with a twist) · B. Everyday object, absurd economics · C. Hidden giant (one
@@ -62,6 +72,9 @@ with Pepsi points?"). Best data so far: an everyday object + a "that can't be ri
 - Keep a list of sources; put a short "Sources:" line in the post text and a small source chip on screen for key stats.
 
 ## 4. Script (`scripts/vo_lines.py`)
+**Structure comes from STORY.md** (§4 beat sheet for the series, §5 writing rules): second person present tense, the viewer in the
+seat by line 3, stakes by 15 s, one "Oops." at most, the series ending (YOUR MOVE: "Comment JET or DROP"). Put `SERIES`, `PART`, `EP`
+at the top of vo_lines.py; `tools/story_check.py` must pass 7/7 R-gates and all S-gates. The rules below are the craft details.
 Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words], ending)` — see `examples/*/vo_lines.py`.
 - Length = whatever the story needs for a viewer to fully understand it — usually 60–100 s, and up to ~3 min is fine (owner,
   27 Oct: "no need to stick to 1 minute — 2–3 minutes is fine; what matters most is that viewers understand"). Never pad.
@@ -283,14 +296,19 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
   `bash studio/host_video.sh delete <slug>`. If the returned media is NOT on static.metricool.com, keep the branch and say so in the report.
   (As of 27 Oct, branch deletes from the cloud sandbox fail with HTTP 403 — leftover `omb-*` branches are harmless; list them in the report so the owner can delete them. Push each host attempt under a new slug: re-pushing an existing branch is rejected.)
 - Metricool: brand **Oopsmybusiness, blogId `7643430`**, timezone `Asia/Calcutta`. Never post to other brands.
-- Time: fixed daily slots (IST): **00:00, 05:00, 10:00, 15:00, 19:30** (gaps 5/5/5/4.5/4.5 h). `getScheduledPosts` for 7643430
-  (next 3 days) and use the earliest slot that is ≥ now + 20 min AND ≥ 4.5 h after the latest scheduled post and has no post yet.
-  **Owner's safety rule: one reel/short per 4–5 hours — never two posts less than 4.5 h apart.**
+- Time (since 31 Oct, BRAND.md §5): **two episodes a day, slots 00:00 and 05:00 IST** (18:30 / 23:30 UTC = UK evening and US
+  evening). `getScheduledPosts` for 7643430 (next 3 days) and use the earliest of those slots that is ≥ now + 20 min AND ≥ 4.5 h
+  after the latest scheduled post and has no post yet; a Part 2 takes the same slot as its Part 1, one day later.
+  **Owner's safety rule: never two posts less than 4.5 h apart.**
 - `createScheduledPost` (see the Starbucks post in topics.md for a working example):
   - providers: instagram + youtube; `media`: [raw URL]; `videoCoverMilliseconds`: a frame with the hook caption visible.
   - `text`: line 1 = keyword sentence (brand + claim); 2–3 short lines of value; CTA line; "Follow for more business secrets.";
     "Sources: …"; then **exactly 5 hashtags** (topic/brand, niche, broad). No emoji. ≤ 2,000 characters.
-  - `instagramData`: {type REEL, showReelOnFeed true, collaborators [], isAiGenerated true} (AI voice = realistic-sounding audio).
+  - `instagramData`: {type REEL, showReelOnFeed true, collaborators [], isAiGenerated true} (AI voice = realistic-sounding audio);
+    `firstCommentText` = the episode's question in one line ("JET or DROP — what would you do?") so the comment thread starts there.
+  - Series line in the text after the first line ("Your Move · Ep 1 · Part 1"); the CTA line repeats the choice ("Comment JET or DROP").
+  - Sponsored episodes (only when a real deal exists): BRAND.md §4 disclosure — on-screen "Ad · Paid partnership with X" from the
+    first second, said in the first 5 s, text starts with "Ad:", Instagram paid-partnership label, YouTube paid-promotion box, "(Ad)" in the title.
   - YouTube title: keyword first **and the most surprising number + an open loop** ("Airline Miles: Why Amex Paid Delta $8.2B").
     First YouTube data (27 Oct): number/tension titles got 740–1,360 views, flat statement titles 41–326.
   - `youtubeData`: {title ≤ 50 chars keyword-first, type short, privacy public, tags 5–8 search phrases, category EDUCATION,

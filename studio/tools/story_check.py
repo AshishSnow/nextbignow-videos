@@ -9,6 +9,10 @@ Reads LINES from scripts/vo_lines.py (same tuple format as the template). If the
 times are used; otherwise times are estimated (0.40 s per word incl. pauses — fits the 27 Oct VOs within ±5 %:
 gas 80.6 s, airline 100.9 s, De Beers 117.7 s, Monopoly 133 s) and scaled to --len if given.
 
+Format gates S0–S5 (STORY.md, 30 Oct 2026): series declared, viewer in the seat (\"You're…\") in the first 3 lines, stakes
+(number + win/lose/pay) by 15 s, the series ending (YOUR MOVE: \"Comment JET or DROP\"; SPOT THE TRICK: \"Save this…\";
+WHO REALLY OWNS IT: tag/comment), \"Oops\" at most once, part logic (Part 1 promises Part two; Part 2 says it in the hook).
+
 Rules (7 gates; evidence + our own data in lab/story/NOTES.md and PLAYBOOK §4 "Story rules"; R&D Story run 27 Oct 2026):
   R1 hook      i1 ≤ 16 words and a question; the core claim (number or question) lands by ~6.5 s
   R2 loops     a question / teaser / turn / item label at least every 25 s — curiosity gaps (Loewenstein 1994; Kang 2009)
@@ -29,10 +33,10 @@ NUMW = set("zero one two three four five six seven eight nine ten eleven twelve 
            "point percent half quarter oh dozen cents cent dollars dollar pounds".split())
 NUM_CORE = NUMW - {"point", "percent", "cents", "cent", "dollars", "dollar", "pounds", "oh"}
 TURN_RE = re.compile(r"\b(but|yet|instead|until|except|however|turns out|actually|still|only|never|even|wrong|backfire\w*|flipped|twist|isn't|wasn't|real)\b", re.I)
-TEASE_RE = re.compile(r"(\?|here's|guess|wait|the twist|sneakiest|the real|what happened|the catch|watch|the problem|plot twist|that's when|here are|the last one|(secret|trick|step|reason|rule|move|door|layer) (one|two|three|four|five))", re.I)
+TEASE_RE = re.compile(r"(\?|here's|guess|wait|the twist|sneakiest|the real|what happened|the catch|watch|the problem|plot twist|that's when|here are|the last one|(secret|trick|step|reason|rule|move|door|layer|problem|question) (one|two|three|four|five))", re.I)
 CAUSAL_START = re.compile(r"^(but|so|because|that's why|which means|therefore|yet|instead|until|except|still|now|except)\b", re.I)
 ANDTHEN_START = re.compile(r"^(and then|then|next|after that)\b", re.I)
-LABEL_RE = re.compile(r"^(and\s+)?(step|secret|trick|move|reason|rule|trap|clue|mistake|moment|lie|door|layer)\s+(one|two|three|four|five|\d)\b", re.I)
+LABEL_RE = re.compile(r"^(and\s+)?(step|secret|trick|move|reason|rule|trap|clue|mistake|moment|lie|door|layer|problem|question|clue|round)\s+(one|two|three|four|five|\d)\b", re.I)
 STOP = set("the a an and or but so of to in on at for with is was are were be it its it's this that he she they you your we our his her "
            "their them as by from not no do did does just than then there here what who how why when which one".split())
 
@@ -43,7 +47,9 @@ def load_lines(path):
             if os.path.exists(os.path.join(path, c)):
                 return load_lines(os.path.join(path, c))
         raise SystemExit(f"no vo_lines.py in {path}")
-    return runpy.run_path(path)["LINES"], os.path.dirname(os.path.dirname(os.path.abspath(path)))
+    g = runpy.run_path(path)
+    load_lines.meta = {k: g.get(k) for k in ("SERIES", "PART", "EP")}
+    return g["LINES"], os.path.dirname(os.path.dirname(os.path.abspath(path)))
 
 
 def words(t):
@@ -192,7 +198,7 @@ def check(path, target_len=None):
     # ("Step one", "Secret one") — 27 Oct data: roadmap scripts held 29–34 % of their length on Instagram (Costco, printer
     # ink, Planet Fitness, Starbucks, + restaurant tricks), the two without one 19–24 % (Amazon, Chick-fil-A)
     head = " ".join(l[1] for l in lines[:4]).lower()
-    count_promise = bool(re.search(r"\b(two|three|four|five|seven|\d)\s+(\w+\s+)?(secrets|steps|tricks|moves|reasons|rules|traps|things|mistakes|moments|clues|lies|times|doors|layers)\b", head))
+    count_promise = bool(re.search(r"\b(two|three|four|five|seven|\d)\s+(\w+\s+)?(secrets|steps|tricks|moves|reasons|rules|traps|things|mistakes|moments|clues|lies|times|doors|layers|problems|questions)\b", head))
     labels = sum(1 for l in lines if LABEL_RE.match(l[1].strip()))
     R["count_promise"] = count_promise
     R["item_labels"] = labels
@@ -203,6 +209,47 @@ def check(path, target_len=None):
     R["length_s"] = round(total, 1)
     R["timing"] = src
     R["rules_passed"] = sum(1 for k, v in R.items() if k.startswith("R") and k[1].isdigit() and v)
+
+    # ---- S-gates: story format (STORY.md, 30 Oct 2026) — series, seat, stakes, the ending the series asks for, Oops, parts ----
+    meta = getattr(load_lines, "meta", {}) or {}
+    series = (meta.get("SERIES") or "").upper(); part = meta.get("PART") or 0
+    S = {}
+    S["S0_series"] = series in ("YOUR MOVE", "SPOT THE TRICK", "WHO REALLY OWNS IT")
+    if not S["S0_series"]: flags.append("S0 set SERIES = 'YOUR MOVE' | 'SPOT THE TRICK' | 'WHO REALLY OWNS IT' (and PART, EP) in vo_lines.py")
+    first3 = " ".join(l[1] for l in lines[:3]).lower()
+    S["S1_seat"] = bool(re.search(r"\byou('re| are|'ve| have| walk| open| run| own| work| want| need| just| mailed| raised| bought| sold| sent)\b", first3))
+    if not S["S1_seat"]: flags.append("S1 put the viewer in the seat within the first 3 lines (\"You're twenty one…\", \"You walk into…\")")
+    stake_k = [k for k, l in enumerate(lines) if tl[k][0] <= 15.0 and count_numbers(l[1]) >= 1
+               and re.search(r"\b(want|need|win|lose|lost|risk|bet|owe|pay|paid|cost|costs|save|buy|sell|money|worth|price)\b", l[1], re.I)]
+    S["S2_stakes_by_15s"] = bool(stake_k) or any(re.search(r"\b(want|win|lose|risk|bet)\b", lines[k][1], re.I) for k in range(len(lines)) if tl[k][0] <= 15.0) and \
+        any(count_numbers(lines[k][1]) for k in range(len(lines)) if tl[k][0] <= 15.0)
+    if not S["S2_stakes_by_15s"]: flags.append("S2 no stakes by 15 s: a line with a number AND what you can win/lose/pay")
+    tail3 = " ".join(l[1] for l in lines[-3:])
+    if series == "YOUR MOVE":
+        S["S3_ending"] = bool(re.search(r"[Cc]omment\s+([A-Z][A-Z'!]+)\s+or\s+([A-Z][A-Z'!.?]+)", tail3))
+        if not S["S3_ending"]: flags.append("S3 YOUR MOVE must end on a two-option comment prompt in the last 3 lines: 'Comment JET or DROP.' (caps words)")
+    elif series == "SPOT THE TRICK":
+        S["S3_ending"] = bool(re.search(r"\bsave this\b", tail3, re.I))
+        if not S["S3_ending"]: flags.append("S3 SPOT THE TRICK must ask to 'Save this before …' in the last 3 lines")
+    elif series == "WHO REALLY OWNS IT":
+        S["S3_ending"] = bool(re.search(r"\b(tag|comment)\b", tail3, re.I))
+        if not S["S3_ending"]: flags.append("S3 WHO REALLY OWNS IT must ask to tag/comment in the last 3 lines")
+    else:
+        S["S3_ending"] = False
+    oops = sum(len(re.findall(r"\boops\b", l[1], re.I)) for l in lines)
+    S["S4_oops_once"] = oops <= 1
+    if oops > 1: flags.append(f"S4 'Oops' {oops}x — the signature beat is once per video at most")
+    if part == 1:
+        S["S5_parts"] = bool(re.search(r"part two", tail3, re.I))
+        if not S["S5_parts"]: flags.append("S5 PART 1 must promise 'Part two tomorrow' in the last 3 lines")
+    elif part == 2:
+        S["S5_parts"] = bool(re.search(r"part two", lines[0][1], re.I)) and bool(re.search(r"most of you said", " ".join(l[1] for l in lines), re.I)) is False
+        if not S["S5_parts"]: flags.append("S5 PART 2: say 'Part two' in the hook; never 'most of you said' in the script (only with real counts, added by hand)")
+    else:
+        S["S5_parts"] = True
+    R.update(S)
+    R["format_passed"] = sum(1 for v in S.values() if v)
+    R["format_total"] = len(S)
     return R, flags
 
 
@@ -234,6 +281,7 @@ def main():
     for k, v in R.items():
         print(f"{k:24s} {v}")
     print(f"\n{R['rules_passed']}/7 story rules passed (R1 R2 R4 R5 R6 R7 R8)")
+    print(f"{R['format_passed']}/{R['format_total']} story-format gates passed (S0 series, S1 seat, S2 stakes, S3 ending, S4 oops, S5 parts) — STORY.md")
     for f in flags:
         print(" -", f)
 
