@@ -4,8 +4,8 @@ Runs every 5 hours. Every run makes ONE new vertical animated reel (45 s–3 min
 **food + health facts** — and posts it to **Instagram @fnhtruths** and **YouTube Shorts (@FreshnestHub)** via Metricool.
 The owner (Ashish) is usually not watching: decide, build, verify, post, log. Never ask questions mid-run.
 
-**CURRENT character + look = Chubby INK (28 Oct, owner-approved; first full episode = 17, 31 Oct). Reference episode for the ink look:
-`episodes/17-sugar-rot-teeth/` (props, places, acting, script registers). Older notes below describe v4/v5; follow them only where they don't conflict.**
+**CURRENT character + look = Chubby INK (28 Oct, owner-approved; first full episode = 17, 31 Oct). Reference episodes for the ink look:
+`episodes/17-sugar-rot-teeth/` (props, places, acting, script registers) and `episodes/18-milk-boils-over/` (stove place, hand poses, follow-through, cut-away pot). Older notes below describe v4/v5; follow them only where they don't conflict.**
 
 **Approved style = `template/` (episode 07 "carrots turn your skin orange", posted 26 Oct 18:00 IST). Copy its approach.**
 - Bright animated sets (studio engine: gradient stage + big colour circle, flat shaded props, punchy transitions,
@@ -179,6 +179,24 @@ Sheet: /home/claude/outputs/chubby_ink_colour_options.jpg. v3 (Pixar kid) stays 
   with `python3 engine/tools/ink_sheet.py <project> out.jpg` (bottom row = black silhouettes: if the shape doesn't read, change the pose).
 - Script registers (voice.env note, ep 17): asides / confiding lines base -0.6 st + speed 0.95, reveals +1.2, explanations +0.4; '...' before
   the payoff word. One-sentence jokes ('It's your spit. No, really.') score fine when they are a full natural sentence.
+
+### Ep 18 (31 Oct, second ink episode): the STOVE place, hand poses, follow-through, the cut-away pot (`anim_cine.py`, `fnh_char_ink.py`, `anim_fx.py`, `anim_props_lib18.py`)
+- Place: `set_stove(t, on=1.0, flame_w=300)` = a gas hob from the front (tiled wall + window behind, dark steel hob top at y 1300 with a cast-iron
+  grate, knobs, LIVE FLAMES that flicker; `on` 0..1 = flame height, so 'turn the heat down' is one number). Pot centre for `pot_el("steel")` =
+  (x, 1300 - 225 + 8); `side_flames(f, x, 1298, t, pot_w)` AFTER the pot draws flames licking up both sides; `flames(f, x, y, t, w, n, on)` anywhere.
+- Chubby INK hands now have POSES: `chub(..., hand_r="grip"|"pinch"|"point"|"open", hand_l=...)` and `grip_hand(f, x, y, s, kind="grip", rot)` draws a
+  fist OVER a tool handle (use with arm_ik: `spoon_at(f, gx, gy, ang)` pivots the spoon at its handle end). Pick the hand per action (grip a spoon,
+  pinch a drop, point at the thing).
+- FOLLOW-THROUGH (anim_fx): `drag(t, fn, frames=3, gain)` = the lagging offset of an appendage behind a motion fn(t) -> `chub(..., hair=(dx, 0))`
+  shifts the scribble hair + cowlick (the hair lags the head on every jump / double take); `follow(t, t0, amp)` = overshoot + settle after the main
+  part stops (used on the foam, liquids drag most); `jump_back(t, t0, dist)` = the recoil from something hot. Rule: core -> limbs -> extremities ->
+  hair/cloth/liquid last; vary the lag by weight (uniform delays look robotic).
+- lib18 props (ink): `pot_el(kind="steel"|"wide"|"water"|"pasta", level, foam, skin, spill)` = a CUT-AWAY pot (you see the liquid, the foam dome
+  climbing above the rim, drips down the outside, an amber skin), `pot_geom(cx, cy, s, kind, level)` -> interior box + surface y for drawing things
+  inside it, `bubble_el(r, jacket, mood)` (a steam bubble with an optional bead 'jacket'), `rising_bubbles(...)` (rise and pop at a surface),
+  `pop_star`, `steam_wisps`, `protein_el`, `fat_el`, `sugar_cube_el`, `soap_el` / `soap_drop_el`, `spoon_el` / `spoon_at`, `butter_el`.
+- Voice markup: `"word:dn"` in the stressed-words list = DROP-STRESS (the word is lowered 2 st and lengthened, not lifted) for deadpan payoffs
+  ('and pop. Gone.', 'no lid.', 'you check your phone.'); A/B on ep 18 was UTMOS-neutral (+0.008 chunk20), kept for the grown-up delivery.
 
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth

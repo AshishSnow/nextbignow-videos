@@ -6,7 +6,7 @@ NEW from the 31 Oct trend scan (Halloween day; Diwali 8 Nov; data: the 4 breakou
 candy, gum + ice water, onions, chocolate — and shares/saves follow a practical fix, see performance.md):
 0h. (DONE ep 17) sugar-rot-teeth — Do you know sugar doesn't rot your teeth? (bacteria make acid; 30-60 min acid timer; how often > how much;
     candy ranking: chewy/sour worst, chocolate washes off). Sources used: NIDCR (NIH), Temple University (Newswise), CDA, NHS.
-0i. milk-boils-over — Do you know why milk boils over but water never does? (the daily chai/doodh moment in every Indian kitchen: proteins
+0i. (DONE ep 18) milk-boils-over — Do you know why milk boils over but water never does? (the daily chai/doodh moment in every Indian kitchen: proteins
     + fat make a skin, steam gets trapped under it and lifts the foam; tip: wooden spoon / wide pan / lower heat at the first rise).
     Verify: a university food-science page (e.g. UC Davis / Penn State) + a major outlet (BBC Science Focus / Scientific American).
 0j. cut-apples-turn-brown — Do you know a cut apple 'rusts'? (polyphenol oxidase + oxygen; lemon juice slows it; not spoiled). Very

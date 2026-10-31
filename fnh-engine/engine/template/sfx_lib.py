@@ -475,3 +475,54 @@ def squeak(level=-22):
     t2 = np.arange(int(0.3 * SR)) / SR
     y = np.sin(2 * np.pi * np.cumsum(1800 + 1400 * t2 / 0.3) / SR) * np.sin(np.pi * np.clip(t2 / 0.3, 0, 1)) ** 0.6
     return _st(y / np.abs(y).max() * db(level))
+
+
+# ---------------- ep 18 (milk boils over): kitchen boil foley ----------------
+def simmer(level=-28, dur=2.0, rate=9):
+    """a rolling boil: random low plips over a soft rumble."""
+    t2 = np.arange(int(dur * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [80, 400], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * 0.25
+    for k in range(int(dur * rate)):
+        i = int(rng.uniform(0, dur - 0.08) * SR); seg = t2[: int(0.07 * SR)]; f0 = rng.uniform(300, 900)
+        y[i:i + len(seg)] += np.sin(2 * np.pi * np.cumsum(f0 * (1 + 0.8 * np.exp(-seg / 0.01))) / SR) * np.exp(-seg / 0.02) * rng.uniform(0.4, 1.0)
+    y *= np.sin(np.pi * np.clip(t2 / dur, 0, 1)) ** 0.3
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level), 120)
+
+
+def foam_rise(level=-22, dur=1.6):
+    """the foam climbing: a band-passed noise swell rising in pitch and loudness, with little pops on top."""
+    t2 = np.arange(int(dur * SR)) / SR; x = t2 / dur
+    nz = rng.standard_normal(len(t2))
+    f_, tt_, Z = signal.stft(nz, SR, nperseg=1024); fc = 400 * (3000 / 400) ** (tt_ / dur)
+    mask = np.exp(-0.5 * ((np.log2(np.maximum(f_, 20))[:, None] - np.log2(fc)[None]) / 0.9) ** 2)
+    _, y = signal.istft(Z * mask, SR, nperseg=1024); y = y[: len(t2)] * (0.15 + 0.85 * x ** 1.6)
+    for k in range(18):
+        i = int(rng.uniform(0.2, dur - 0.05) * SR); seg = t2[: int(0.03 * SR)]
+        y[i:i + len(seg)] += np.sin(2 * np.pi * rng.uniform(900, 2200) * seg) * np.exp(-seg / 0.006) * 0.8
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level), 100)
+
+
+def spill_sizzle(level=-16, dur=1.4):
+    """milk hitting the flame: a sharp sizzle burst + a steam hiss that decays."""
+    t2 = np.arange(int(dur * SR)) / SR
+    sz = signal.sosfilt(signal.butter(2, [2000, 9000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * (0.6 + 0.4 * np.abs(np.sin(2 * np.pi * 37 * t2)))
+    hs = signal.sosfilt(signal.butter(2, [800, 4000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2)))
+    y = sz * np.exp(-t2 / 0.35) * 1.2 + hs * np.exp(-t2 / 0.9) * 0.6 + np.sin(2 * np.pi * 70 * t2) * np.exp(-t2 / 0.06)
+    return _st(y / np.abs(y).max() * db(level), 80)
+
+
+def pop_bubble(level=-24, f0=1200):
+    t2 = np.arange(int(0.08 * SR)) / SR
+    y = np.sin(2 * np.pi * np.cumsum(f0 * (1 + 2.0 * np.exp(-t2 / 0.006))) / SR) * np.exp(-t2 / 0.014)
+    y += signal.sosfilt(signal.butter(2, [2500, 8000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.004) * 0.6
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def knob(level=-24):
+    """gas knob: a click + a short gas whoosh."""
+    t2 = np.arange(int(0.5 * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [1500, 6000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.005) * 2
+    y += signal.sosfilt(signal.butter(2, [300, 2000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-((t2 - 0.12) / 0.08) ** 2) * 0.5
+    return _st(y / np.abs(y).max() * db(level))
+
+

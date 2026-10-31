@@ -477,3 +477,26 @@ def flinch(t, t0, amp=1.0):
     q = t - t0
     if q < 0: return 0.0, 0.0
     return -12 * amp * math.exp(-q * 5) * math.cos(q * 18), 0.35 * amp * math.exp(-q * 6)
+
+
+# ================= ep 18 (31 Oct): FOLLOW-THROUGH, OVERLAPPING ACTION + DRAG (Thomas & Johnston principle 5; "things don't come to a
+# stop all at once - first one part and then another"). Motion flows core -> limbs -> extremities -> appendages: hair lags the head
+# by 2-4 frames and keeps moving 4-8 frames after the head stops; liquids show the most follow-through (RebusFarm 'Follow through
+# and overlapping action', Aug 2026; Wikipedia / The Illusion of Life). =================
+def drag(t, fn, frames=3, gain=1.0):
+    """DRAG: the appendage follows the main motion `fn(t)` (a number or a tuple) a few frames late -> returns the offset to add to the
+    appendage = gain * (fn(t - frames/FPS) - fn(t)). Use it for Chubby's hair (chub(..., hair=drag(t, head_x))), an apron hem, a tail."""
+    a, b = fn(t - frames / FPS), fn(t)
+    if isinstance(b, (tuple, list)): return tuple(gain * (x - y) for x, y in zip(a, b))
+    return gain * (a - b)
+
+
+def follow(t, t0, amp=1.0, frames_lag=3, freq=14.0, decay=7.0):
+    """FOLLOW-THROUGH after the main part stops at t0: the loose part overshoots and settles (damped wobble that starts frames_lag late)."""
+    return settle(t, t0 + frames_lag / FPS, amp, freq, decay)
+
+
+def jump_back(t, t0, dist=140.0, dur=0.28):
+    """a recoil jump away from something hot: x offset that eases out with a small overshoot, then holds (moving hold)."""
+    k = clamp((t - t0) / dur)
+    return dist * (ease_out_back(k) if k < 1 else 1.0)

@@ -1,0 +1,51 @@
+{
+ "utmos": 4.498,
+ "utmos_note": "whole-file utmos = first 100 s (RAM); gate on chunk20 / line_mean",
+ "utmos_chunk20": 4.509,
+ "utmos_line_mean": 4.479,
+ "utmos_lines": {
+  "i1": 4.41,
+  "i2": 4.51,
+  "i3": 4.48,
+  "a1": 4.49,
+  "a2": 4.44,
+  "b1": 4.5,
+  "b2": 4.49,
+  "b3": 4.51,
+  "b4": 4.5,
+  "c1": 4.48,
+  "c2": 4.49,
+  "c3": 4.5,
+  "c4": 4.47,
+  "c5": 4.5,
+  "d1": 4.48,
+  "d2": 4.43,
+  "e1": 4.46,
+  "e2": 4.49,
+  "e3": 4.48,
+  "e4": 4.47,
+  "e5": 4.48,
+  "e6": 4.48,
+  "f1": 4.51,
+  "g1": 4.49,
+  "g2": 4.48
+ },
+ "f0_median_hz": 128.9,
+ "f0_range_st": 17.3,
+ "words": 432,
+ "duration_s": 169.0,
+ "wpm_overall": 153.3,
+ "wpm_speaking": 169.7,
+ "pause_ratio": 0.097,
+ "asr_word_error_approx": 0.012,
+ "asr_bad_lines": [
+  [
+   "b1",
+   "Milk looks like water. It's about ninety per cent water. But that last ten percent changes everything."
+  ],
+  [
+   "e3",
+   "The one that worked every time, a big, wide pot, way bigger than feels right. About four liters of pot for half a liter of milk."
+  ]
+ ]
+}

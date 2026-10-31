@@ -588,3 +588,57 @@ def ink_set(scheme, sun=None, sx=540, sy=900, R=420):
     return inkify(stage(scheme, sun, sx, sy, R), 0.18)
 
 
+
+
+# ================= ep 18 (31 Oct): THE STOVE — a gas hob seen from the front (the chai moment in every Indian kitchen) =================
+def flames(f, x, y, t, w=300, n=11, on=1.0, col_in=(90, 150, 255), col_out=(255, 170, 60)):
+    """a ring of gas flames under a pot: blue cones with warm tips, flickering (draw AFTER the hob, BEFORE the pot)."""
+    if on <= 0.02: return
+    for i in range(n):
+        px = x - w / 2 + i * w / (n - 1); ph = math.sin(t * 23 + i * 1.9) * 0.5 + 0.5
+        h_ = (34 + 30 * ph) * on; hw = 11 + 3 * ph
+        pts = np.array([[px - hw, y], [px, y - h_], [px + hw, y]], np.int32)
+        cv2.fillPoly(f, [pts], C(col_out), cv2.LINE_AA)
+        pts2 = np.array([[px - hw * 0.6, y], [px, y - h_ * 0.62], [px + hw * 0.6, y]], np.int32)
+        cv2.fillPoly(f, [pts2], C(col_in), cv2.LINE_AA)
+    glow(f, x, y - 10, w * 0.6, (255, 190, 90), 0.22 * on)
+
+
+def set_stove(t=0.0, blur=4, hob_y=1300, on=1.0, flame_w=300):
+    """a gas hob from the front: tiled wall + window light behind (blurred), a dark steel hob top in perspective at hob_y, a cast-iron
+    burner grate at (540, hob_y), live flames, knobs on the hob front; paper-softened (inkify). Put the pot at (540, hob_y - 10)."""
+    def mk():
+        f = _vgrad((222, 206, 182), (204, 182, 156), 0, hob_y - 160)
+        for r_ in range(0, 30):                                                                              # tiles
+            y = 420 + r_ * 44
+            if y > hob_y - 160: break
+            cv2.line(f, (0, y), (W, y), C((190, 166, 140)), 3, cv2.LINE_AA)
+            off = 0 if r_ % 2 else 60
+            for x in range(-off, W, 120): cv2.line(f, (x, y), (x, y + 44), C((190, 166, 140)), 3, cv2.LINE_AA)
+        cv2.rectangle(f, (700, 430), (1040, 900), C((110, 76, 52)), -1, cv2.LINE_AA)                          # window on the right
+        f[450:880, 720:1020] = _vgrad((255, 222, 160), (255, 244, 220), 450, 880)[450:880, 720:1020]
+        cv2.line(f, (870, 450), (870, 880), C((110, 76, 52)), 12, cv2.LINE_AA); cv2.line(f, (720, 665), (1020, 665), C((110, 76, 52)), 12, cv2.LINE_AA)
+        cv2.rectangle(f, (40, 760), (420, 780), C((130, 88, 56)), -1, cv2.LINE_AA)                             # shelf with tins
+        for i, c in enumerate(((200, 120, 60), (90, 150, 110), (230, 190, 90))):
+            x = 80 + i * 110; cv2.rectangle(f, (x, 660), (x + 70, 760), C(c), -1, cv2.LINE_AA)
+        f = _soft(f, blur)
+        # hob top (dark steel, slight perspective) + front with knobs
+        cv2.rectangle(f, (0, hob_y - 160), (W, H), C((54, 56, 62)), -1, cv2.LINE_AA)
+        f[hob_y - 160:hob_y + 40] = _vgrad((96, 100, 108), (62, 64, 72), hob_y - 160, hob_y + 40)[hob_y - 160:hob_y + 40]
+        cv2.line(f, (0, hob_y - 160), (W, hob_y - 160), C((150, 154, 160)), 4, cv2.LINE_AA)
+        cv2.line(f, (0, hob_y + 40), (W, hob_y + 40), C((30, 30, 36)), 8, cv2.LINE_AA)
+        for kx in (300, 540, 780):                                                                              # knobs
+            cv2.circle(f, (kx, hob_y + 200), 40, C((30, 30, 34)), -1, cv2.LINE_AA); cv2.circle(f, (kx, hob_y + 200), 32, C((84, 86, 94)), -1, cv2.LINE_AA)
+            cv2.line(f, (kx, hob_y + 176), (kx, hob_y + 200), C((200, 200, 210)), 5, cv2.LINE_AA)
+        # burner grate (cast iron): a ring + 4 bars
+        cv2.ellipse(f, (540, hob_y), (int(flame_w * 0.62), 34), 0, 0, 360, C((28, 28, 32)), -1, cv2.LINE_AA)
+        cv2.ellipse(f, (540, hob_y), (int(flame_w * 0.62), 34), 0, 0, 360, C((70, 70, 76)), 5, cv2.LINE_AA)
+        for a in (20, 70, 110, 160):
+            ax = int(540 + flame_w * 0.75 * math.cos(math.radians(a))); ay = int(hob_y + 40 * math.sin(math.radians(a)))
+            cv2.line(f, (540, hob_y - 6), (ax, ay - 6), C((40, 40, 46)), 12, cv2.LINE_AA)
+            cv2.line(f, (540, hob_y - 6), (ax, ay - 6), C((64, 64, 70)), 6, cv2.LINE_AA)
+        return np.clip(f, 0, 1).astype(np.float32)
+    f = gcache(("set_stove", blur, hob_y, flame_w), mk).copy()
+    god_rays(f, 900, 450, t, (255, 226, 170), 0.12, 7, 1400, 0.6, 2.4, 6)
+    flames(f, 540, hob_y - 2, t, flame_w, 11, on)
+    return inkify(f)

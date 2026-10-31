@@ -46,9 +46,11 @@ def _hatch(im, S, box, ang=-35, gap=7, col=(0, 0, 0, 60), w=2):
 def _fillcol(c): return c if INK_MODE != "mono" else PAPER
 
 
-def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0, nose=None, cap=False):
+def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0, nose=None, cap=False, hair=(0, 0)):
+    """hair = (dx, dy) px offset of the scribble hair (ep 18 follow-through: the hair lags the head by a few frames)."""
     tint = round(clamp(tint) * 10) / 10
-    key = ("chead_ink", INK_MODE, mouth, blink, brow, lx, ly, expr, tint, nose, cap)
+    hair = (int(round(clamp(hair[0], -16, 16) / 2)) * 2, int(round(clamp(hair[1], -12, 12) / 2)) * 2)
+    key = ("chead_ink", INK_MODE, mouth, blink, brow, lx, ly, expr, tint, nose, cap, hair)
     if key in _gc: return _gc[key]
     W_, H_, sc = 240, 250, 3
     im = Image.new("RGBA", (W_ * sc, H_ * sc), (0, 0, 0, 0)); d = ImageDraw.Draw(im); S = lambda *v: [x * sc for x in v]
@@ -68,18 +70,19 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
     for sgn in (-1, 1):
         ex = cx + sgn * (R + 4)
         d.ellipse(S(ex - 13, cy - 12, ex + 13, cy + 18), fill=skin + (255,), outline=INKC + (255,), width=INK_W * sc - 3)
-    # hair: a scribble of loops along the top (fixed seed), drawn as thick ink
+    # hair: a scribble of loops along the top (fixed seed), drawn as thick ink; the whole scribble shifts by `hair` (drag)
+    hx_, hy_ = hair
     rng = np.random.default_rng(3)
+    d.chord(S(cx - R + 8 + hx_ * 0.5, cy - R + 2 + hy_ * 0.5, cx + R - 8 + hx_ * 0.5, cy + 6 + hy_ * 0.5), 190, 350, fill=INK_HAIR + (255,))         # solid cap under the scribble
     for k in range(26):
         a = -160 + k * 5.4; r0 = R - 6 + rng.uniform(-4, 8); lp = rng.uniform(12, 24)
-        px, py = cx + r0 * math.cos(math.radians(a)), cy - 8 + r0 * math.sin(math.radians(a))
+        px, py = cx + r0 * math.cos(math.radians(a)) + hx_, cy - 8 + r0 * math.sin(math.radians(a)) + hy_
         d.ellipse(S(px - lp / 2, py - lp / 2 - 8, px + lp / 2, py + lp / 2 - 8), outline=INK_HAIR + (255,), width=4 * sc)
     for k in range(10):
         a = -150 + k * 13; r0 = R - 20 + rng.uniform(-6, 6)
-        px, py = cx + r0 * math.cos(math.radians(a)), cy - 10 + r0 * math.sin(math.radians(a))
-        d.line(S(px, py, px + rng.uniform(-10, 10), py - rng.uniform(10, 24)), fill=INK_HAIR + (255,), width=4 * sc)
-    d.chord(S(cx - R + 8, cy - R + 2, cx + R - 8, cy + 6), 190, 350, fill=INK_HAIR + (255,))         # solid cap under the scribble
-    for k in range(3): d.line(S(cx + 12 + k * 10, cy - R - 4, cx + 20 + k * 12, cy - R - 22 + k * 4), fill=INK_HAIR + (255,), width=4 * sc)   # cowlick
+        px, py = cx + r0 * math.cos(math.radians(a)) + hx_, cy - 10 + r0 * math.sin(math.radians(a)) + hy_
+        d.line(S(px, py, px + rng.uniform(-10, 10) + hx_ * 0.6, py - rng.uniform(10, 24) + hy_ * 0.6), fill=INK_HAIR + (255,), width=4 * sc)
+    for k in range(3): d.line(S(cx + 12 + k * 10 + hx_, cy - R - 4 + hy_, cx + 20 + k * 12 + hx_ * 1.8, cy - R - 22 + k * 4 + hy_ * 1.6), fill=INK_HAIR + (255,), width=4 * sc)   # cowlick (drags most)
     # eyes: ink dots with a little white glint; expression changes shape
     ox, oy = lx * 6, ly * 5; ey = 134
     for i, sgn in enumerate((-1, 1)):
@@ -179,21 +182,47 @@ def chub_body_el(shirt=HOOD3, logo=True):
     return gcache(("cbody_ink", INK_MODE, tuple(shirt), logo), mk)
 
 
-def _hand_ink_el(tint=0.0, side=1):
+def _hand_ink_el(tint=0.0, side=1, kind="open"):
+    """ink hand. kind = 'open' (fingers spread), 'grip' (fist around a handle, drawn OVER the tool), 'pinch' (thumb + index tips
+    together, for a drop / a pinch of salt), 'point' (index out, rest curled). (ep 18: hand poses per action, PLAYBOOK Chubby INK next steps)"""
     def mk():
         W_, H_, sc = 100, 110, 3
         im = Image.new("RGBA", (W_ * sc, H_ * sc), (0, 0, 0, 0)); d = ImageDraw.Draw(im); S = lambda *v: [x * sc for x in v]
         skin = _mix3(INK_SKIN, (255, 160, 70), round(clamp(tint) * 10) / 10) if INK_MODE != "mono" else PAPER
-        for fx, fy, fh in ((34, 18, 40), (48, 10, 48), (62, 14, 44), (74, 26, 36)):
-            d.rounded_rectangle(S(fx - 7, fy, fx + 7, fy + fh), 7 * sc, fill=skin + (255,), outline=INKC + (255,), width=(INK_W - 3) * sc)
-        d.rounded_rectangle(S(24, 42, 84, 100), 20 * sc, fill=skin + (255,), outline=INKC + (255,), width=(INK_W - 2) * sc)
-        d.rounded_rectangle(S(4, 54, 36, 72), 8 * sc, fill=skin + (255,), outline=INKC + (255,), width=(INK_W - 3) * sc)
-        d.line(S(26, 58, 36, 62), fill=skin + (255,), width=10 * sc)
-        for fx in (41, 55, 69): d.line(S(fx, 44, fx, 52), fill=INKC + (255,), width=2 * sc)
+        ow = (INK_W - 3) * sc
+        if kind == "open":
+            for fx, fy, fh in ((34, 18, 40), (48, 10, 48), (62, 14, 44), (74, 26, 36)):
+                d.rounded_rectangle(S(fx - 7, fy, fx + 7, fy + fh), 7 * sc, fill=skin + (255,), outline=INKC + (255,), width=ow)
+            d.rounded_rectangle(S(24, 42, 84, 100), 20 * sc, fill=skin + (255,), outline=INKC + (255,), width=(INK_W - 2) * sc)
+            d.rounded_rectangle(S(4, 54, 36, 72), 8 * sc, fill=skin + (255,), outline=INKC + (255,), width=ow)
+            d.line(S(26, 58, 36, 62), fill=skin + (255,), width=10 * sc)
+            for fx in (41, 55, 69): d.line(S(fx, 44, fx, 52), fill=INKC + (255,), width=2 * sc)
+        elif kind == "grip":                                                         # fist: palm block + 4 knuckle bumps + thumb across
+            d.rounded_rectangle(S(24, 34, 84, 100), 18 * sc, fill=skin + (255,), outline=INKC + (255,), width=(INK_W - 2) * sc)
+            for i, fx in enumerate((34, 48, 62, 76)):
+                d.ellipse(S(fx - 8, 26 + (0 if i in (1, 2) else 4), fx + 8, 44 + (0 if i in (1, 2) else 4)), fill=skin + (255,), outline=INKC + (255,), width=ow)
+            d.rectangle(S(28, 40, 82, 50), fill=skin + (255,))
+            for fx in (41, 55, 69): d.line(S(fx, 44, fx, 60), fill=INKC + (200,), width=2 * sc)
+            d.rounded_rectangle(S(18, 52, 70, 72), 10 * sc, fill=skin + (255,), outline=INKC + (255,), width=ow)   # thumb across the front
+        elif kind == "pinch":                                                        # thumb + index tips meet; 3 fingers curled
+            d.rounded_rectangle(S(24, 46, 84, 100), 18 * sc, fill=skin + (255,), outline=INKC + (255,), width=(INK_W - 2) * sc)
+            for i, fx in enumerate((56, 68, 78)):
+                d.ellipse(S(fx - 7, 40 + i * 2, fx + 7, 58 + i * 2), fill=skin + (255,), outline=INKC + (255,), width=ow)
+            d.rectangle(S(52, 48, 82, 60), fill=skin + (255,))
+            d.line(S(40, 50, 30, 14), fill=INKC + (255,), width=(ow + 14 * sc)); d.line(S(40, 50, 30, 14), fill=skin + (255,), width=12 * sc)    # index
+            d.line(S(26, 60, 24, 20), fill=INKC + (255,), width=(ow + 12 * sc)); d.line(S(26, 60, 24, 20), fill=skin + (255,), width=10 * sc)    # thumb
+            d.ellipse(S(22, 8, 36, 22), fill=skin + (255,), outline=INKC + (255,), width=ow)                                                   # the pinch point
+        else:                                                                        # point
+            d.rounded_rectangle(S(24, 44, 84, 100), 18 * sc, fill=skin + (255,), outline=INKC + (255,), width=(INK_W - 2) * sc)
+            for i, fx in enumerate((56, 68, 78)):
+                d.ellipse(S(fx - 7, 38 + i * 2, fx + 7, 56 + i * 2), fill=skin + (255,), outline=INKC + (255,), width=ow)
+            d.rectangle(S(52, 46, 82, 58), fill=skin + (255,))
+            d.line(S(40, 52, 40, 8), fill=INKC + (255,), width=(ow + 14 * sc)); d.line(S(40, 52, 40, 8), fill=skin + (255,), width=12 * sc)
+            d.rounded_rectangle(S(6, 56, 34, 72), 8 * sc, fill=skin + (255,), outline=INKC + (255,), width=ow)
         el = _done(im, W_, H_)
         if side < 0: el = (np.ascontiguousarray(el[0][:, ::-1]), np.ascontiguousarray(el[1][:, ::-1]))
         return el
-    return gcache(("hand_ink", INK_MODE, round(clamp(tint) * 10) / 10, side), mk)
+    return gcache(("hand_ink", INK_MODE, round(clamp(tint) * 10) / 10, side, kind), mk)
 
 
 def _mitt_el(tint=0.0): return _hand_ink_el(tint, 1)
@@ -226,7 +255,7 @@ def _ink_limb(f, pts, w, fill, shade, s, seed):
 
 def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=False, brow="n", look=(0, 0), expr="n", tint=0.0,
          hold=None, hold_off=(0, 0), hold_l=None, bob=0.0, op=1.0, shirt=HOOD3, shadow=True, lean=0.0, squash=0.0, sit=False, nose=None, cap=False,
-         hold_front=False, t=None):
+         hold_front=False, t=None, hand_r="open", hand_l="open", hair=(0, 0)):
     g = f if op >= 0.999 else f.copy()
     if t is not None:
         bob = bob + 3.0 * math.sin(t * 2.4)
@@ -261,7 +290,7 @@ def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=Fa
         cv2.circle(g, (int(c0[0]), int(c0[1])), int(15 * s), C(INKC), -1, cv2.LINE_AA); cv2.circle(g, (int(c0[0]), int(c0[1])), int(12 * s), C(_fillcol(INK_MINT_S)), -1, cv2.LINE_AA)
         hands[side] = hd; fore[side] = math.degrees(math.atan2(hd[1] - e[1], hd[0] - e[0]))
     def hand_at(side):
-        comp(g, _rot_el(scale_el(_hand_ink_el(tint, side), s), -(fore[side] + 90)), hands[side][0], hands[side][1])
+        comp(g, _rot_el(scale_el(_hand_ink_el(tint, side, hand_r if side > 0 else hand_l), s), -(fore[side] + 90)), hands[side][0], hands[side][1])
     if hold is not None and not hold_front:
         hx, hy = hands[1]; comp(g, hold, hx + hold_off[0] * s, hy + hold_off[1] * s)
     if hold_l is not None:
@@ -269,7 +298,7 @@ def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=Fa
     hand_at(-1); hand_at(1)
     hxc, hyc = bcx + 14 * s * math.sin(lr), bcy - 214 * s / sq + bob * s
     _ink_limb(g, ((bcx, bcy - 100 * s), (hxc, hyc + 70 * s)), 30 * s, INK_SKIN, INK_SKIN_S, s, 70)       # neck
-    hel = scale_el(chub_head_el(mouth, blink, brow, look[0], look[1], expr, tint, nose, cap), s)
+    hel = scale_el(chub_head_el(mouth, blink, brow, look[0], look[1], expr, tint, nose, cap, hair), s)
     if abs(lean) > 0.5: hel = _rot_el(hel, -lean * 0.6)
     comp(g, hel, hxc, hyc)
     if hold is not None and hold_front:
@@ -278,14 +307,15 @@ def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=Fa
     return hands
 
 
-def chub_head_only(f, x, y, s, t=0.0, mouth=None, expr="n", brow="n", look=(0, 0), tint=0.0, blink=None, nose=None, cap=False, op=1.0):
+def chub_head_only(f, x, y, s, t=0.0, mouth=None, expr="n", brow="n", look=(0, 0), tint=0.0, blink=None, nose=None, cap=False, op=1.0, hair=(0, 0)):
     m = talk(t) if mouth is None else mouth
     b = blink_at(t, 1) if blink is None else blink
-    comp(f, scale_el(chub_head_el(m, b, brow, look[0], look[1], expr, tint, nose, cap), s), x, y, op=op)
+    comp(f, scale_el(chub_head_el(m, b, brow, look[0], look[1], expr, tint, nose, cap, hair), s), x, y, op=op)
 
 
-def grip_hand(f, x, y, s=1.0, tint=0.0):
-    comp(f, scale_el(_hand_ink_el(tint, 1), s * 0.95), x, y)
+def grip_hand(f, x, y, s=1.0, tint=0.0, kind="grip", rot=0.0):
+    """a hand drawn OVER a tool handle at (x, y) (ep 18: default = a real fist)."""
+    comp(f, _rot_el(scale_el(_hand_ink_el(tint, 1, kind), s * 0.95), rot) if rot else scale_el(_hand_ink_el(tint, 1, kind), s * 0.95), x, y)
 
 
 _PAPER = {}

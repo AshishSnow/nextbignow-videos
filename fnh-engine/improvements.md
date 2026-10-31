@@ -111,7 +111,8 @@ Voice (a mature, natural, warm guy — never robotic):
       voice_report now prints utmos_lines (per-line) so weak lines can be found and rewritten.
 - [x] 27 Oct (ep 13): less audible pitch processing (EXS 0.4, BMP 0.7): A/B +0.008 chunk20 / +0.003 line mean / +0.04 first
       100 s, f0 range 17.2 st -> adopted; keep stresses on 1–2 words/line.
-- [ ] Emphasis words: real stress (slightly louder + longer), not every line; question endings rise, statements settle.
+- [~] Emphasis words: real stress (slightly louder + longer), not every line; question endings rise, statements settle. (ep 18: DROP-stress
+      'word:dn' = lower + longer on deadpan payoffs, UTMOS-neutral +0.008 chunk20, kept as a script tool for the grown-up register)
 - [x] 31 Oct (ep 17): conversational REGISTERS per beat — confiding/aside lines at base -0.6 st + speed 0.95, reveals +1.2, explanations +0.4,
       '...' micro-pause before payoff words. Same-take A/B vs uniform +0.8: chunk20 4.508 vs 4.507, line mean 4.465 vs 4.461, the two aside lines
       +0.10 / +0.02 -> adopted as the script-writing default (PLAYBOOK step 4). Micro-pauses before the payoff word used too ('...is acid').
@@ -119,8 +120,8 @@ Voice (a mature, natural, warm guy — never robotic):
 - [ ] Next voice ideas to lab-test with voice_report: per-line SPD variety, EXS 0.6, STR 1.2 on payoff words, shorter
       lines (<= 12 words), commas for breath points. Keep the M2 blend (own register, no lift).
 Visual / edit:
-- [ ] Chubby INK next steps (ep 18+): hand poses per action (grip, pinch, open palm), a side/three-quarter head turn, a walk cycle in ink,
-      ink-style 3D titles (hand-lettered block letters with hatch sides) instead of the glossy title3d face.
+- [~] Chubby INK next steps: hand poses per action DONE ep 18 (grip / pinch / point / open: chub(hand_r=...), grip_hand(kind)); still to do: a
+      side/three-quarter head turn, a walk cycle in ink, ink-style 3D titles (hand-lettered block letters with hatch sides) instead of the glossy title3d face.
 - [ ] Let Chubby stand INSIDE the diagram shots (next to the tooth / inside the city) instead of cutting away to prop-only frames.
 - [x] 28 Oct OWNER: character redesign -> Chubby INK approved (fnh_char_ink.py, colour mode C); v3 kept as fallback. Was: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
       real silhouette (neck, shoulders, fingers), textured clothes with folds + a signature item (apron/cap), weighty poses, idle life.
@@ -140,10 +141,12 @@ Visual / edit:
 - [ ] Break the "big circle + prop" sameness: full-bleed scenes, split screens, close-ups, top-down tables, inside-the-body
       worlds, camera push-ins/pans, parallax layers. No two consecutive shots with the same layout.
 - [x] Frame 0 hook: motion already happening at t=0 (ep 16 bubble, ep 17 candy to mouth + tooth); cover frame = Chubby + object + question.
-- [ ] Secondary motion everywhere (bob, squash on impacts, blinking, props wobble) so nothing is static > 2 s.
+- [~] Secondary motion everywhere (bob, squash on impacts, blinking, props wobble) so nothing is static > 2 s. (ep 18: follow-through kit -
+      hair drag on every head move, foam overshoot + settle, the dropped spoon bounces; next: apron hem + arm overlap)
 - [ ] Kinetic numbers: count-ups / slams for key numbers; consistent sources chip.
 - [ ] Better diagrams: more detail and texture (highlights, rim light, subtle 3D shadows) on the main prop each video.
-- [ ] Sound design: a signature 1-s FreshNestHub sting; foley that matches the action (squelch, fizz, sizzle).
+- [~] Sound design: a signature 1-s FreshNestHub sting (still to do); foley that matches the action (ep 18: simmer, foam_rise, spill_sizzle,
+      pop_bubble, knob in sfx_lib).
 Topic:
 - [ ] Prefer universal kitchen/daily-habit topics (biggest reach so far); use the daily trend scan for timely ones.
 - [ ] Every topic must have a "wait, what?" fact in the first line + a takeaway people can use today.
@@ -156,6 +159,18 @@ Script / packaging:
 - [x] Comment question in caption + firstCommentText (every episode since 10).
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-10-31 16:00 (second run of the day): Metricool reel rows are IDENTICAL to the 10:50 snapshot (chocolate 1280 / onions 1178 / mint 1211 /
+  sugar rush 1108 / gum 121 / coffee 126) and ep 17 (published 12:15) has no row yet (3.5 h old; the lag is usually 7-17 h) -> no new verdicts.
+  Topic pick follows the 'food in your hand this week' rule from the 10:50 verdicts: ep 18 = milk boiling over (the daily chai / doodh moment in
+  every Indian kitchen) with a practical, TESTED fix ranking (what only delays vs what works) because practical fixes drove onions' 13 shares.
+- 2026-10-31 (voice, ep 18): rewrites again beat settings. The first take at 446 words ran 2:56 (over the cap) -> trimmed to 432 words = 2:49.
+  DROP-stress A/B on the same take ('Gone.:dn', 'skin.:dn', 'lid.:dn', 'delayed:dn', 'phone.:dn', 'starch.:dn' vs normal lift stress): chunk20
+  4.502 vs 4.494, line mean 4.465 vs 4.468 = neutral (as every intonation-only change so far) -> kept for the deadpan grown-up delivery. Then
+  two weak lines rewritten as full sentences (b4 'There's a word for stuff like that: a surfactant.' 4.33 -> 'That trick has a name: surfactant.'
+  4.50; c1 'Bubble on bubble on bubble. That's foam.' 4.36 -> 'So the bubbles pile up, one on top of the other. That pile has a name too: foam.'
+  4.47) and the hook question re-phrased ('milk boils over... but water never does?' 4.29 -> 'milk boils over, but water never, ever does?' 4.41)
+  -> chunk20 4.509 / line mean 4.479 (ep 17 4.508 / 4.465; new best on both). Lesson: a '...' pause inside a QUESTION hurts the hook line;
+  put the pause in statements, keep questions in one breath. 169.7 wpm, f0 range 17.3 st, ASR clean (only 'per cent' / 'liters' spellings).
 - 2026-10-31 10:50 (first fresh analytics since 28 Oct; all CHUBBY posts >= 48 h, so these are verdicts): 4 breakouts — sugar rush 1108, mint
   1211, onions 1178 (13 shares, 6 saves), chocolate 1280 (74.9 % 3-s hold, 38.7 s avg watch on 2:25) — vs ~120 reach for carrots, pineapple,
   spicy, silver, coffee and gum. VERDICTS: (1) the 'belief flip' is not the predictor (coffee + gum flipped beliefs and stalled); the 4
@@ -240,6 +255,18 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 18 why does milk boil over (31 Oct, auto run, 2:51): VOICE drop-stress markup 'word:dn' (lower + longer payoff words) A/B neutral (4.502/4.465
+  vs 4.494/4.468, kept) + 3 rewrites (b4, c1, hook) -> chunk20 4.509 / line mean 4.479 (ep 17 4.508 / 4.465; best so far), 169.7 wpm, f0 17.3 st,
+  ASR clean | VISUAL FOLLOW-THROUGH + DRAG kit (anim_fx.drag / follow / jump_back; Chubby INK hair=(dx, dy) lag on every jump-back and double take,
+  the foam overshoots and settles on every boil-over, the dropped spoon bounces), Chubby INK HAND POSES (grip / pinch / point / open; grip_hand
+  over a tool; spoon_at pivot + arm IK stirring), new lit place set_stove (gas hob with live flames, 'on' = heat level) + side_flames, lib18 ink
+  props (cut-away pot with milk level / foam dome / skin / drips in steel, wide, water and pasta kinds; bubble with a protein 'jacket'; protein
+  bead / fat drop / sugar cube cast; soap bottle + drop; spoon; butter), one accent (amber = heat / proteins / jacket / skin / lid) + mint = the
+  fixes, 38 shots, 11 3D titles, new foley (simmer, foam_rise, spill_sizzle, pop_bubble, knob) | SCRIPT/TOPIC the daily chai moment ('food in your
+  hand this week' rule), a running metaphor paid 3 times (jacket / no jacket / different jacket), a home demo (one drop of soap makes water boil
+  over), TESTED fixes ranked (spoon + butter only delay; a 4-litre pot for half a litre works) + 3 easy extras, the phone joke, pasta bonus,
+  5 chapters, kitchen BOSSA NOVA score (new genre) with a marimba bubble-run opener that climbs with the foam | metric: reach at 48 h vs chocolate /
+  onions (in-your-hand pattern), shares/saves on a tested-fix ranking, 3-s hold of a boil-over-at-frame-0 hook, comments on 'spoon or wide pot'.
 - 17 does sugar rot your teeth (31 Oct, auto run, 2:46): VOICE conversational registers per beat (asides -0.6 st / 0.95, reveals +1.2, '...'
   micro-pauses) A/B vs uniform (4.508/4.465 vs 4.507/4.461, kept) + 4 weak/ASR lines rewritten -> chunk20 4.508 / line mean 4.465 (ep 16
   4.502 / 4.464; best so far), 169.6 wpm, f0 16.5 st, ASR clean | VISUAL FIRST CHUBBY INK EPISODE: ink prop toolkit (lib17: _ink_poly /
@@ -388,6 +415,11 @@ Script / packaging:
 | 31 Oct | ep 17 teeth, M2, first script (registers per beat) | 4.482* (chunk20 4.501, line mean 4.450) | 169 | 0.11 | 16.6 | 1 (b2 'Your spit' -> 'You're spat') |
 | 31 Oct | ep 17 teeth, uniform +0.8 base on the aside lines (A/B, rejected) | 4.493* (chunk20 4.507, line mean 4.461) | 170 | 0.11 | 16.6 | 0 |
 | 31 Oct | **ep 17 teeth, + a3/a4/b2/d1 rewrites, registers kept (shipped)** | **4.493* (chunk20 4.508, line mean 4.465)** | 170 | 0.11 | 16.5 | 0 |
+| 31 Oct | ep 18 milk, M2, first script (446 words, 2:56 - too long), drop-stress on 6 lines | 4.492* (chunk20 4.508, line mean 4.470) | 167 | 0.09 | 17.3 | 0 |
+| 31 Oct | ep 18 milk, trimmed to 426 words, drop-stress (B) | 4.439* (chunk20 4.502, line mean 4.465) | 169 | 0.10 | 17.3 | 0 |
+| 31 Oct | ep 18 milk, same take, normal lift-stress (A; A/B = neutral) | 4.416* (chunk20 4.494, line mean 4.468) | 170 | 0.10 | 17.3 | 0 |
+| 31 Oct | ep 18 milk, + b4 / c1 rewritten as full sentences (new take) | 4.313* (chunk20 4.469, line mean 4.476) | 170 | 0.10 | 17.3 | 0 |
+| 31 Oct | **ep 18 milk, + hook question in one breath ('never, ever does?') (shipped)** | **4.498* (chunk20 4.509, line mean 4.479)** | 170 | 0.10 | 17.3 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -405,11 +437,11 @@ video has it. Add newly discovered skills to the curriculum. Skills compound —
 Animation & visuals:
 - [x] Squash & stretch, slow in/out, overshoot, anticipation, smear trails, sparkles/confetti/dust (anim_fx.py seed, 26 Oct)
 - [x] Staging: one clear focal point per shot; silhouette test for Chubby's poses (ep 17: engine/tools/ink_sheet.py + anim_fx POSE / double_take / flinch)
-- [ ] Follow-through & overlapping action (hair curl, belly jiggle, props settling with `settle()`)
+- [x] Follow-through & overlapping action (ep 18: anim_fx.drag / follow / jump_back; Chubby INK hair lag, foam overshoot, dropped spoon bounce)
 - [~] Arcs: move props and limbs along curves, not straight lines (ep 12: hammer_swing on an arc + arm IK)
 - [ ] Timing & spacing: hold key poses 6–10 frames, fast in-betweens (snappy cartoon timing)
 - [~] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take) (ep 17: double_take + flinch helpers; next: a jaw-drop mouth state)
-- [ ] Character acting: eye direction leads action, blinks on cuts, reaction shots
+- [~] Character acting: eye direction leads action, blinks on cuts, reaction shots (ep 18: hand poses per action - grip / pinch / point; a reaction shot on every boil-over)
 - [ ] Simple lip-sync visemes for Chubby when he talks (mouth shapes from the VO envelope + vowels)
 - [ ] Camera language: push-in on reveals, whip pans between ideas, low/high angles, rack focus (`cam_keys`, `push_in`)
 - [~] Depth: parallax background layers, foreground elements passing the camera, atmospheric perspective (27 Oct: blurred
@@ -461,6 +493,16 @@ Story & topics:
 - [ ] Translucency / subsurface look for skin close-ups and fruit (reuse the set_gut rim-glow idea on Chubby's ears and on props)
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-10-31 (run 2) | FOLLOW-THROUGH, OVERLAPPING ACTION + DRAG (animation principle 5) | Walt Disney: "Things don't come to a stop all at once
+  guys; first there's one part and then another" (Thomas & Johnston, The Illusion of Life, via Wikipedia 'Follow through and overlapping action'):
+  loose parts (hair, cloth, ears, jowls, liquids) keep moving after the body stops, different parts move at different speeds, the completion of an
+  action matters more than the action itself, and a 'moving hold' keeps fleshy parts drifting while the body holds. Practical numbers (RebusFarm,
+  'Follow through and overlapping action', Aug 2026): motion flows core -> limbs -> extremities -> appendages; lag torso->shoulders 1-2 frames,
+  elbows->hands 2-3, head->hair tips 2-4; after the stop hair keeps going 4-8 frames, capes 3-6, heavy cloth 2-4, soft tissue 1-3; LIQUIDS show the
+  most follow-through; uniform delays look robotic, so vary by mass. Turned into anim_fx.drag(t, fn, frames, gain) (sample the motion 3 frames late
+  and add the difference to the appendage), follow() (overshoot + settle after the stop) and jump_back(); Chubby INK got hair=(dx, dy) so the
+  scribble hair + cowlick lag his head on every jump-back and double take; the foam overshoots the rim and settles on every boil-over; the
+  dropped spoon lands with drop_land + settle | ep 18 (S0 jump-back + spoon, S1b / S15 / S21 double takes, S12b flinch, foam in 8 shots) | yes
 - 2026-10-31 | STAGING + the SILHOUETTE TEST (visual / character acting) | Staging (Thomas & Johnston, 'The Illusion of Life', principle 5): present
   one idea at a time so it is unmistakably clear - one focal point per shot, the eye led by light, contrast and position, nothing else competing
   at that moment. The Disney drawing-class test for a pose: fill the character solid black - if the SILHOUETTE still tells you what he is doing,

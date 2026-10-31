@@ -10,7 +10,7 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 - Only judge posts that are >= 48 h old (numbers keep growing for 2–3 days). Overwrite each row with fresh numbers.
 - Derived: hold = IGRE28 (share of viewers past 3 s); watch% = avg watch / video length; shares and saves per 1k reach.
 
-## Instagram reels (snapshot 31 Oct 2026 10:50 IST — every CHUBBY post is now >= 48 h old; eps 14-16 rows arrived)
+## Instagram reels (snapshot 31 Oct 2026 16:00 IST — identical to the 10:50 snapshot; ep 17 has no row yet)
 | posted (IST) | reel | len s | reach | views | avg watch s | 3-s hold % | likes | shares | saves | comments | style |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 10-20 07:03 | fake honey (10 of 13 brands) | ~45 | 5567 | 6164 | 3.8 | 16.3 | 21 | 9 | 5 | 0 | old static |
@@ -36,8 +36,12 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 | 10-28 03:20 | 14 coffee doesn't give energy | ~137 | 126 | 141 | 15.2 | 56.3 | 5 | 0 | 0 | 1 | CHUBBY v4 + day graphs, daily habit + belief flip — did NOT break out |
 | 10-28 07:52 | 15 chocolate melts in your mouth | 145 | 1280 | 1484 | 38.7 | 74.9 | 35 | 5 | 3 | 1 | FIRST v5 LOOK + M2 voice, Halloween everyday food — BREAKOUT, best 3-s hold ever (74.9 %) |
 | 10-28 12:35 | 16 swallowed gum (7-year myth) | 169 | 121 | 136 | 21.8 | 61.3 | 5 | 0 | 0 | 1 | v5 look + INSIDE-THE-GUT world, myth flip, longest video — did NOT break out |
-| 10-31 (sched. 11:45) | 17 does sugar rot your teeth | 166 | — | — | — | — | — | — | — | — | FIRST Chubby INK episode (hand-drawn ink + paper), first 'person talking' script, Halloween-day candy + teeth, swing score |
+| 10-31 12:15 | 17 does sugar rot your teeth | 166 | — | — | — | — | — | — | — | — | FIRST Chubby INK episode (hand-drawn ink + paper), first 'person talking' script, Halloween-day candy + teeth, swing score — no row yet at 16:00 (3.5 h old) |
+| 10-31 (sched. ~17:00) | 18 why does milk boil over | 171 | — | — | — | — | — | — | — | — | Chubby INK ep 2: stove place + live flames, hand poses, follow-through, cut-away pot; daily chai moment + tested fixes; bossa nova score |
 ## What the numbers say so far (update every run, keep it to the 5 most useful lines)
+- 31 Oct 16:00: every reel row IDENTICAL to 10:50 (Metricool refreshes the reel rows a few times a day; ep 17 posted 12:15 has no row yet) ->
+  no new verdict this run. Ep 18 keeps the two rules the data supports: a food-in-your-hand-this-week moment (milk boiling over) + a practical,
+  tested fix ranking (shares/saves). Judge ep 17 (first ink look: 3-s hold vs chocolate 74.9 %) and ep 18 at 48 h (2 Nov).
 - 31 Oct 10:50 (first fresh snapshot since 28 Oct; all posts >= 48 h): FOUR breakouts now — sugar rush 1108, mint 1211, onions 1178 (13 shares,
   6 saves = our best share/save numbers ever), chocolate 1280 (74.9 % hold = best ever, 38.7 s avg watch on 2:25). Coffee (126), gum (121),
   silver (120), spicy (123) stayed at the ~120 floor. The 'belief flip' alone does NOT predict reach (coffee + gum were belief flips and
