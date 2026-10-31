@@ -243,8 +243,8 @@ def check(path, target_len=None):
         S["S5_parts"] = bool(re.search(r"part two", tail3, re.I))
         if not S["S5_parts"]: flags.append("S5 PART 1 must promise 'Part two tomorrow' in the last 3 lines")
     elif part == 2:
-        S["S5_parts"] = bool(re.search(r"part two", lines[0][1], re.I)) and bool(re.search(r"most of you said", " ".join(l[1] for l in lines), re.I)) is False
-        if not S["S5_parts"]: flags.append("S5 PART 2: say 'Part two' in the hook; never 'most of you said' in the script (only with real counts, added by hand)")
+        S["S5_parts"] = bool(re.search(r"part two", " ".join(l[1] for l in lines[:2]), re.I)) and not re.search(r"most of you said", " ".join(l[1] for l in lines), re.I)
+        if not S["S5_parts"]: flags.append("S5 PART 2: say 'Part two' in the first 2 lines (after the hook question is fine); never 'most of you said' in the script (only with real counts, added by hand)")
     else:
         S["S5_parts"] = True
     R.update(S)

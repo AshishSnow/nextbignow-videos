@@ -28,15 +28,17 @@ Instagram/YouTube bio line: `True business stories. You make the call. New episo
 - **Narration:** second person, present tense — "You're twenty-one. You open the catalog. You do the maths." It puts the viewer
   inside the story (immersion is what makes POV formats work) and makes the closing question personal.
 - **Signature beats (same every episode = brand memory):**
-  1. **Cold-open card** in frame 1: `hud_clock(f, "1996", "SEATTLE", "YOU: STUDENT, 21")` — year · place · your role.
+  1. **Cold-open card** in frame 1: `cold_open(f, "1996", "SEATTLE", "YOU: STUDENT, 21")` — year · place · your role.
+     (Story kit = `template/scripts/anim_story.py`: cold_open, series_badge, oops_beat, quote_card, choice_card, set_front,
+     plus the sets bedroom90s / schoolyard / courtroom and props jumpjet_el, crt_tv_el, mailbox_el, coupon_el, catalog_el.)
   2. **The "Oops." beat** — at the exact moment the blunder becomes clear, the hero turns to camera and says (VO) *"Oops."*;
-     OOPS stamp + one sting SFX. **Max once per video**, only where a real blunder exists (it's the channel name — keep it special).
-  3. **"Your move" end card** — two big choice pills (`hud_choice`) and the question. Same look every episode.
+     `oops_beat(f, t, t0)` stamp + one sting SFX. It is the hero's reaction, never the narrator's verdict on a real company. **Max once per video**, only where a real blunder exists (it's the channel name — keep it special).
+  3. **"Your move" end card** — `choice_card(f, "YOUR MOVE", "FIGHT", "FOLD")`: the question + two pills. Same look every episode.
 
 ## 3. Series — every video belongs to exactly one (badge + title + CTA)
 | Series | Share of videos | What it is | Types (PLAYBOOK §2) | Ends with |
 |---|---|---|---|---|
-| **YOUR MOVE** (flagship) | ~60 % | POV true story at a decision point | A, D, C (any story with a person deciding) | a two-option question: "Comment JET or DROP IT" |
+| **YOUR MOVE** (flagship) | ~60 % | POV true story at a decision point | A, D, C (any story with a person deciding) | a two-option question: "Comment FIGHT or FOLD IT" |
 | **SPOT THE TRICK** | ~30 % | the hero walks into an everyday place (shop, app, airport, cinema) and catches the tricks one by one | E, B, F | "Save this before your next …" + share line |
 | **WHO REALLY OWNS IT** | ~10 % | follow the money through doors to the hidden giant | C | "Tag someone who buys from them" |
 
@@ -79,7 +81,7 @@ DOOR #1…#N, each opens to the same owner → the twist (scale/number) → what
 6. **Real words only for real people.** Quotes from documents (court opinions, letters, filings, interviews) go on a quote card with
    the source chip. Invented lines are allowed only for "you" (your thoughts) or unnamed extras ("a cashier"), and never claim a real
    person said them.
-7. **The choice must be honestly debatable** — both answers defensible, one word each ("JET / DROP IT", "SELL / KEEP", "SUE / WALK").
+7. **The choice must be honestly debatable** — both answers defensible, one word each ("FIGHT / FOLD", "SELL / KEEP", "JOKE / DEAL").
    Not "Would you like free money?". Put it as a comment prompt *and* in the end card pills.
 8. **Takeaway = an action**, not a moral: "Read the small print — it's where the real price hides."
 9. **Respect.** Curious, not cruel: no mocking real private people, no "evil company" framing, no punching down. Blunders are

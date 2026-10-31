@@ -230,3 +230,8 @@ Visuals / Story / Tooling
   both 7/7 R + 6/6 S), PLAYBOOK gates (seat + choice, brand-safe) + posting (2 a day at 00:00/05:00 IST, firstCommentText = choice).
   Scheduled tasks: episodes 16:05 + 21:05 UTC; R&D → writers' room 3×/day. | kept; measure: sends + comments per 1,000 reach on the
   first 5 episodes vs the 16 animated reels before (≈ 0)
+  Follow-up (same session): story kit `template/scripts/anim_story.py` (cold_open, series_badge, oops_beat, quote_card, choice_card,
+  set_front occluder; sets bedroom90s / schoolyard / courtroom; props jumpjet_el, crt_tv_el, catalog_el, coupon_el, mailbox_el), part_badge
+  subtitle right-aligned (never meets the cold-open card); pilot storyboard rendered (`lab/story_kit/`); fresh-eyes review of the pilot →
+  7 must-fixes applied (chronology: PepsiCo sued first; cheque returned; 1996 ad change ≠ admission; FIGHT/FOLD + JOKE/DEAL choices;
+  "put up" not "lend"; Statute of Frauds wording). smoke_test PASSED (video path loads the kit).

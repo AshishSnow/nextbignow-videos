@@ -295,7 +295,7 @@ def say(f, text, y=1240, size=150, col=(255, 255, 255), t=None, t0=None, max_w=8
 def part_badge(f, part="PART 1", title=None, x=760, y=330):
     """series badge (red pill) + optional dark title bar under it; stays inside the right safe margin"""
     comp(f, gcache(("badge", part), lambda: _badge_el(part)), x, y)
-    if title: comp(f, gcache(("btitle", title), lambda: _title_el(title)), 540 + 100, y + 70)
+    if title: comp(f, gcache(("btitle", title), lambda: _title_el(title)), W - 124, y + 70, anchor="r")   # right-aligned: never meets the top-left cold-open card
 
 
 def _badge_el(part):

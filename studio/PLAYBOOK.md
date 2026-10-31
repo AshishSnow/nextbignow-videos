@@ -73,7 +73,7 @@ with Pepsi points?"). Best data so far: an everyday object + a "that can't be ri
 
 ## 4. Script (`scripts/vo_lines.py`)
 **Structure comes from STORY.md** (§4 beat sheet for the series, §5 writing rules): second person present tense, the viewer in the
-seat by line 3, stakes by 15 s, one "Oops." at most, the series ending (YOUR MOVE: "Comment JET or DROP"). Put `SERIES`, `PART`, `EP`
+seat by line 3, stakes by 15 s, one "Oops." at most, the series ending (YOUR MOVE: "Comment FIGHT or FOLD"). Put `SERIES`, `PART`, `EP`
 at the top of vo_lines.py; `tools/story_check.py` must pass 7/7 R-gates and all S-gates. The rules below are the craft details.
 Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words], ending)` — see `examples/*/vo_lines.py`.
 - Length = whatever the story needs for a viewer to fully understand it — usually 60–100 s, and up to ~3 min is fine (owner,
@@ -305,8 +305,8 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
   - `text`: line 1 = keyword sentence (brand + claim); 2–3 short lines of value; CTA line; "Follow for more business secrets.";
     "Sources: …"; then **exactly 5 hashtags** (topic/brand, niche, broad). No emoji. ≤ 2,000 characters.
   - `instagramData`: {type REEL, showReelOnFeed true, collaborators [], isAiGenerated true} (AI voice = realistic-sounding audio);
-    `firstCommentText` = the episode's question in one line ("JET or DROP — what would you do?") so the comment thread starts there.
-  - Series line in the text after the first line ("Your Move · Ep 1 · Part 1"); the CTA line repeats the choice ("Comment JET or DROP").
+    `firstCommentText` = the episode's question in one line ("FIGHT or FOLD — what would you do?") so the comment thread starts there.
+  - Series line in the text after the first line ("Your Move · Ep 1 · Part 1"); the CTA line repeats the choice ("Comment FIGHT or FOLD").
   - Sponsored episodes (only when a real deal exists): BRAND.md §4 disclosure — on-screen "Ad · Paid partnership with X" from the
     first second, said in the first 5 s, text starts with "Ad:", Instagram paid-partnership label, YouTube paid-promotion box, "(Ad)" in the title.
   - YouTube title: keyword first **and the most surprising number + an open loop** ("Airline Miles: Why Amex Paid Delta $8.2B").

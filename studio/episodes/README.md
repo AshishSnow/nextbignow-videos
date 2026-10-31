@@ -17,8 +17,8 @@ Part 1**: the episode task builds it on the second run after Part 1 was built. I
 ## Queue (top = next to build)
 | # | Folder | Series · EP · Part | Topic | Type | Status | Notes |
 |---|---|---|---|---|---|---|
-| 1 | queue/01-pepsi-jet-p1 | YOUR MOVE · EP 1 · Part 1 | Could you buy a fighter jet with Pepsi points? (Leonard v. PepsiCo, 1996) | A | DRAFT (fresh-eyes review running) | Pilot of the new format. ~95 s. New assets needed: jump-jet prop, 1996 bedroom + CRT TV set, school-yard set, mailbox. Ends "Comment JET or DROP" + "Part two tomorrow". |
-| 2 | queue/01-pepsi-jet-p2 | YOUR MOVE · EP 1 · Part 2 | The court case: was the ad a real offer? | A | DRAFT (fresh-eyes review running) | Build on the 2nd run after Part 1; same IST slot +1 day. New assets: courtroom set, judge look. Ends "Comment FAIR or ROBBED". |
+| 1 | queue/01-pepsi-jet-p1 | YOUR MOVE · EP 1 · Part 1 | Could you buy a fighter jet with Pepsi points? (Leonard v. PepsiCo, 1996) | A | REVIEWED (31 Oct: story_check 7/7 + 6/6; independent review "ready after must-fixes" → all applied) | Pilot of the new format. ~90 s. Assets ready in the story kit: jumpjet_el, crt_tv_el, catalog_el, coupon_el, mailbox_el, sets bedroom90s/schoolyard. Cliffhanger: Pepsi returns the cheque with coupons, then takes YOU to court → "Comment FIGHT or FOLD" + "Part two tomorrow". Storyboard frames: lab render 31 Oct (story kit). |
+| 2 | queue/01-pepsi-jet-p2 | YOUR MOVE · EP 1 · Part 2 | The court case: was the ad a real offer? | A | REVIEWED (31 Oct, same review) | Build on the 2nd run after Part 1; same IST slot +1 day. Courtroom set + `set_front` for the judge behind the bench (story kit). Twist: even a win = a jet you couldn't fly. Ends "Comment JOKE or DEAL". |
 
 ## Built
 (none yet in the new format)
