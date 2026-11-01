@@ -9,6 +9,16 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-01 ~08:45 IST (R&D run: Topics / HOW TO START shelf + writers' room EP 2)
+Instagram + YouTube pulls (IGRE / YTVP, 11 Oct → 1 Nov 03:30 UTC): **no change** since the 02:45 IST pull — glasses still 43 views / 13.1 s /
+35.3 % (IG rows look frozen for ~18 h); YouTube still has no glasses row; the drone episode (HOW TO START EP 1) published 05:00 IST on both
+(IG reel DfLV4fzRy5w, YT LfZrnTtzKWY) — rows next run. Media-kit numbers unchanged (IG last-10 avg 317 views, 1.1 reactions / 1,000 reach;
+YT last-10 avg 440). No vending / food-truck / bakery / POD / pressure-washing topic in the 21-day IG captions or the scheduled list.
+**Insight U2 (series planning):** the channel's only earlier *step-by-step* how-to (China → Amazon "in 5 steps", 21 Oct) has our biggest IG reach
+(4,640 views) but a 2.9 s avg watch / 13 % 3-s rate — reach came, the opening didn't hold. HOW TO START must hook with a story/question in
+frame 1 (the drone episode: money landing; EP 2: "do you know what a singer is?"), not with a list. Judge EP 1 vs that row next run:
+3-s rate ≥ 50 % and avg watch ≥ 20 s = the format holds.
+
 ## Snapshot 2026-11-01 ~02:45 IST (episode run: HOW TO START ep 1, drone business)
 Instagram (IGRE, last 21 days) — new row + changes since 31 Oct 14:30:
 | Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |

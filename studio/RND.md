@@ -31,9 +31,9 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
 | Tooling | render speed, smoke tests, QA automation | 2026-10-31 (run 9: `tools/board_check.py` storyboard pre-flight + build brief, in smoke_test.sh) |
 | Analytics | what the numbers say, cover frames, captions, posting times | never as a focus (refreshed every run; 31 Oct: first rows for the 4 story-type videos, media-kit baseline in BRAND.md §5) |
-| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-10-31 (scheduled run 8: SPOT THE TRICK #1 IKEA maze + YOUR MOVE EP 2 nickel Coke, both REVIEWED → queue = 4) |
+| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-11-01 (HOW TO START EP 2 vending machines, REVIEWED → queue = 5) |
 | Brand | BRAND.md readiness: media-kit numbers, brand-safety rules, sponsor formats, disclosure templates, community | 2026-10-31 (interactive: BRAND.md) |
-| Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-10-27 (R&D run 4: +7 → 23 Ready) |
+| Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-11-01 (R&D run: HOW TO START shelf 0 → 4 banked (#25–28, 3 Ready + 1 almost) + vending (#24) written and queued as EP 2) |
 
 ## Backlog (add ideas, strike when done)
 Voice
@@ -67,6 +67,8 @@ Analytics
 - Pull follower growth (brandSummary / IGFO*) and audience countries (demographic connector) next run — the media kit needs both (BRAND.md §5).
 - YouTube vs Instagram per topic: YT winners differ (Compaq 1,332 YT vs 130 IG) — pull YTVP06/08 every run and compare after 10 posts.
 Story
+- Writers' room lesson (1 Nov): numeric *ranges* ("four to eight thousand") fail R5 — say "several thousand" and put the range in the caption;
+  old regulator cases must say the year aloud; a how-to's "trap" step must not paint a legal category (a likely sponsor) as a scam.
 - story_check estimates 0.40 s/word: a 4-trick SPOT THE TRICK lands at ~125 s and a YOUR MOVE single at ~120 s. If the first two episodes hold < 25 % of
   their length (PERFORMANCE U), add a length gate (SPOT THE TRICK ≤ 3 tricks / ≤ 95 s; YOUR MOVE single ≤ 100 s).
 - Writers' room next: SPOT THE TRICK #2 = the airport (walk-through duty-free, $6 water vs 'street pricing' airports, currency kiosks, 'pay in home currency');
@@ -78,7 +80,7 @@ Story
 - Comment test: one specific A/B question in the last line vs the friend CTA (comments ~0; owner's references 75–300 per reel).
 Visuals / Story / Tooling
 - **Story-kit assets still missing for queued boards (write before their build run, `board_check --strict` tells you):** `04-nickel-coke` needs
-  sets office1950, oval_office, soda_fountain + props billboard_el, bottle_el, contract_el, memo_el, vending_el + a `MAP_US` polygon for
+  sets office1950, oval_office, soda_fountain + props billboard_el, bottle_el, contract_el, memo_el (~~vending_el~~ written 1 Nov, use `era="1950"`) + a `MAP_US` polygon for
   `map_view` — 8 assets, ≈ 1 R&D run (the IKEA kit took one run for 3 sets + 9 props, `template/scripts/anim_story2.py` is the pattern).
   Next after that: WHO REALLY OWNS IT #1 will need a "street of shopfronts" set (shopfront_el exists) and a hub/door kit (door_el, hub_map exist).
 - Tooling next: (a) `say()` could wrap to two lines itself when a caption would shrink below ~60 % (today it only scales down — the
@@ -110,6 +112,19 @@ Visuals / Story / Tooling
   part renders start each part with t = 0 for the first frame's windows; set it at the top of compose() if a flicker is ever seen.
 
 ## Log
+- 2026-11-01 | Topics (+ writers' room) | Queue held 4 REVIEWED and the bank 16 Ready, so rule 0 didn't fire; Topics, Story, Sound and Voice all
+  tied at 27 Oct. Chose Topics because the data said so: HOW TO START is ~40 % of the mix (STORY.md §3) but had **0** banked topics and no
+  queued episode — the drone episode was researched at build time. **Hypothesis:** a verified HOW TO START shelf + one REVIEWED episode in the
+  queue keeps the series at its share without build-time research, and a consumer-protection hook ("the singer") gives a how-to the curiosity
+  gap the 21 Oct list-style how-to lacked (4,640 IG views but 2.9 s avg watch / 13 % 3-s). **Result:** shelf 0 → 4 (#25 home bakery TX+UK 31/35,
+  #26 print-on-demand 29/35, #27 pressure washing 30/35 — not Ready until a 2nd primary source, #28 NYC food truck 32/35), all with dated
+  primary links (sourcing subagent; CDPH 2026 caps + Etsy fee page + food.gov.uk were blocked here). HOW TO START EP 2 (vending) written from FTC
+  primary releases (1998 Operation Vend Up Broke, 2004, 2006, 2009) + the FTC Business Opportunity Rule page; story_check first draft 4/7 R
+  (R2 35-s gap, R5 three two-number ranges, R7 35 s twist→end) → 7/7 R + 6/6 S after 6 edits; fresh-eyes review "ready after must-fixes"
+  (7 must: year said aloud, "charged some sellers", problem→protection order, step 4 not "the trap" (sponsor fairness), step-3 re-hook,
+  VO = end card, US-only) → applied, 7/7 + 6/6 again, ~107 → ~102 s; board_check PASS 0 warnings. Retention test of the hypothesis: when
+  EP 2 posts, compare its 3-s rate / avg watch with the 21 Oct list how-to and EP 1 (PERFORMANCE U2). Also wrote `vending_el` (props kit 4,
+  incl. `era="1950"` for the nickel-Coke board): 0.3–0.7 s/frame, lab sheet looked at, EP 2 build brief 1 → 0 missing, nickel 8 → 7; smoke test PASSED.
 - 2026-10-27 | Voice | Hypothesis: an LLM-style open TTS (Chatterbox-Turbo, MIT) conditioned on our own synthetic narrator gives more
   natural delivery than Kokoro + PSOLA, at ≥ equal intelligibility and acceptable CPU cost. Built `tools/tts_bakeoff.py`
   (engine A/B with whole + per-line UTMOS, range, wpm, ASR, RTF) and `lib/cb_turbo.py`. Results (Kokoro shipped → Chatterbox q4

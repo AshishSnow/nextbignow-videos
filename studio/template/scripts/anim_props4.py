@@ -256,3 +256,84 @@ def uk_eu_card_el(side="UK", lines=("OPERATOR ID", "+ ONLINE TEST"), col=(30, 90
             d.text(S(w / 2, h * 0.56 + i * h * 0.15), ln, font=font(F_ANTON, int(h * 0.105 * sc)), fill=(255, 236, 120, 255), anchor="mm")
         return _el4(im, w, h)
     return gcache(("ukeu", side, lines, col, w), mk)
+
+
+# ---- vending kit (R&D run 1 Nov 2026: BUILD BRIEF of episodes/queue/05-vending-machines AND 04-nickel-coke) ----
+#   vending_el(w, fill, glow, broken, era)  generic glass-front snack machine: 5 coil rows of plain coloured packs (no brands), keypad,
+#   coin slot + bill reader + cooler vent on the right panel, pickup flap. fill 0..1 empties the coils from the top; glow = glass light;
+#   broken = "coins" | "bills" | "cooler" greys that part and adds a red warning dot; era="1950" = a rounded red-free cream soda cooler
+#   with bottle caps behind a small window and a coin slot only (for the nickel-Coke board; no Coke red, no script lettering).
+def vending_el(w=600, fill=1.0, glow=1.0, broken=None, era=None):
+    k = round(float(clamp(fill)), 2); g = round(float(clamp(glow)), 2)
+    def mk():
+        h = int(w * 1.72); im, d, S = _im4(w, h); sc = 2
+        rng = np.random.default_rng(11)
+        if era == "1950":
+            body, trim = (238, 228, 204), (120, 126, 136)
+            d.rounded_rectangle(S(10, 30, w - 10, h - 10), 60 * sc, fill=body + (255,), outline=_O4, width=6 * sc)
+            d.rounded_rectangle(S(10, 30, w - 10, h * 0.16), 60 * sc, fill=trim + (255,), outline=_O4, width=6 * sc)
+            gx0, gy0, gx1, gy1 = w * 0.16, h * 0.24, w * 0.84, h * 0.62
+            d.rounded_rectangle(S(gx0, gy0, gx1, gy1), 24 * sc, fill=(40, 48, 62, 255), outline=_O4, width=5 * sc)
+            n = int(round(9 * k))
+            for i in range(9):
+                r, c = divmod(i, 3); cx = gx0 + (gx1 - gx0) * (c + 0.5) / 3; cy = gy0 + (gy1 - gy0) * (r + 0.5) / 3
+                if i < n:
+                    d.ellipse(S(cx - w * 0.07, cy - w * 0.07, cx + w * 0.07, cy + w * 0.07), fill=(196, 200, 206, 255), outline=_O4, width=3 * sc)
+                    d.ellipse(S(cx - w * 0.035, cy - w * 0.035, cx + w * 0.035, cy + w * 0.035), fill=(160, 166, 174, 255))
+            d.rounded_rectangle(S(w * 0.42, h * 0.68, w * 0.58, h * 0.74), 10 * sc, fill=(70, 74, 82, 255), outline=_O4, width=3 * sc)   # coin slot plate
+            d.line(S(w * 0.5, h * 0.695, w * 0.5, h * 0.725), fill=(20, 20, 24, 255), width=5 * sc)
+            d.rounded_rectangle(S(w * 0.2, h * 0.82, w * 0.8, h * 0.92), 16 * sc, fill=(60, 62, 70, 255), outline=_O4, width=4 * sc)     # door
+            if g > 0: d.rounded_rectangle(S(gx0 + 10, gy0 + 10, gx0 + 40, gy1 - 30), 12 * sc, fill=(255, 255, 255, int(70 * g)))
+            return _el4(im, w, h)
+        body = (52, 58, 72)
+        shape_grad(im, lambda m: m.rounded_rectangle(S(10, 10, w - 10, h - 10), 30 * sc, fill=255), (78, 86, 104), (40, 44, 56))
+        d.rounded_rectangle(S(10, 10, w - 10, h - 10), 30 * sc, outline=_O4, width=6 * sc)
+        gx0, gy0, gx1, gy1 = 36, 50, w * 0.70, h * 0.74            # glass window
+        d.rounded_rectangle(S(gx0, gy0, gx1, gy1), 16 * sc, fill=(22, 30, 44, 255), outline=_O4, width=5 * sc)
+        rows, cols = 5, 4; rh = (gy1 - gy0 - 24) / rows; cw = (gx1 - gx0 - 24) / cols
+        cols_pal = [(240, 80, 70), (255, 190, 50), (70, 170, 255), (90, 200, 120), (200, 110, 230), (255, 140, 40)]
+        empty_rows = int(round((1 - k) * rows))
+        for r in range(rows):
+            y1 = gy0 + 12 + (r + 1) * rh
+            d.line(S(gx0 + 10, y1 - 4, gx1 - 10, y1 - 4), fill=(150, 156, 170, 255), width=4 * sc)                      # shelf
+            for c in range(cols):
+                x0 = gx0 + 12 + c * cw
+                for j in range(3):                                                                                       # coil turns
+                    d.arc(S(x0 + cw * (0.15 + 0.25 * j), y1 - 22, x0 + cw * (0.35 + 0.25 * j), y1 - 2), 0, 360, fill=(180, 186, 198, 255), width=2 * sc)
+                if r >= empty_rows:
+                    col = cols_pal[int(rng.integers(0, len(cols_pal)))]
+                    if r % 2 == 0:   # chip bags
+                        d.rounded_rectangle(S(x0 + cw * 0.14, y1 - rh * 0.82, x0 + cw * 0.86, y1 - 12), 10 * sc, fill=col + (255,), outline=_O4, width=3 * sc)
+                        d.ellipse(S(x0 + cw * 0.36, y1 - rh * 0.6, x0 + cw * 0.64, y1 - rh * 0.34), fill=(255, 255, 255, 200))
+                    else:            # bars
+                        d.rounded_rectangle(S(x0 + cw * 0.1, y1 - rh * 0.5, x0 + cw * 0.9, y1 - 12), 6 * sc, fill=col + (255,), outline=_O4, width=3 * sc)
+                        d.line(S(x0 + cw * 0.25, y1 - rh * 0.32, x0 + cw * 0.75, y1 - rh * 0.32), fill=(255, 255, 255, 190), width=4 * sc)
+        if g > 0:   # glass light + reflection
+            ov = Image.new("RGBA", im.size, (0, 0, 0, 0)); q = ImageDraw.Draw(ov)
+            q.rounded_rectangle(S(gx0 + 6, gy0 + 6, gx1 - 6, gy0 + 22), 8 * sc, fill=(230, 245, 255, int(200 * g)))
+            q.polygon(S(gx0 + 40, gy1 - 10, gx0 + 120, gy0 + 10, gx0 + 170, gy0 + 10, gx0 + 90, gy1 - 10), fill=(255, 255, 255, int(38 * g)))
+            im.alpha_composite(ov)
+        px0, px1 = w * 0.74, w - 30                                   # right panel
+        d.rounded_rectangle(S(px0, 50, px1, h * 0.74), 14 * sc, fill=(34, 38, 48, 255), outline=_O4, width=4 * sc)
+        d.rounded_rectangle(S(px0 + 14, 74, px1 - 14, 140), 8 * sc, fill=(30, 200, 140, 255) if g > 0 else (40, 60, 50, 255))   # display
+        for i in range(12):                                           # keypad
+            r, c = divmod(i, 3); bx = px0 + 20 + c * (px1 - px0 - 40) / 3; by = 170 + r * 46
+            d.rounded_rectangle(S(bx, by, bx + (px1 - px0 - 40) / 3 - 8, by + 36), 6 * sc, fill=(210, 214, 222, 255), outline=_O4, width=2 * sc)
+        parts = {"coins": (h * 0.47, "COINS"), "bills": (h * 0.55, "BILLS"), "cooler": (h * 0.66, "COOL")}
+        for name, (py, _) in parts.items():
+            bad = broken == name; colp = (110, 110, 116) if bad else (200, 204, 212)
+            if name == "coins":
+                d.rounded_rectangle(S(px0 + 30, py, px1 - 30, py + 40), 8 * sc, fill=colp + (255,), outline=_O4, width=3 * sc)
+                d.line(S((px0 + px1) / 2, py + 8, (px0 + px1) / 2, py + 32), fill=(20, 20, 24, 255), width=5 * sc)
+            elif name == "bills":
+                d.rounded_rectangle(S(px0 + 20, py, px1 - 20, py + 50), 8 * sc, fill=colp + (255,), outline=_O4, width=3 * sc)
+                d.rectangle(S(px0 + 34, py + 20, px1 - 34, py + 28), fill=(20, 20, 24, 255))
+                d.ellipse(S(px1 - 40, py + 6, px1 - 28, py + 18), fill=((90, 220, 120) if not bad else (90, 90, 90)) + (255,))
+            else:
+                for j in range(4): d.line(S(px0 + 24, py + j * 14, px1 - 24, py + j * 14), fill=colp + (255,), width=5 * sc)
+            if bad:
+                d.ellipse(S(px1 - 30, py - 12, px1 - 6, py + 12), fill=(235, 50, 50, 255), outline=(255, 255, 255, 255), width=3 * sc)
+        d.rounded_rectangle(S(40, h * 0.79, w * 0.70, h * 0.92), 14 * sc, fill=(20, 24, 32, 255), outline=_O4, width=4 * sc)   # pickup flap
+        d.line(S(60, h * 0.83, w * 0.68, h * 0.83), fill=(70, 76, 90, 255), width=4 * sc)
+        return _el4(im, w, h)
+    return gcache(("vending4", w, k, g, broken, era), mk)
