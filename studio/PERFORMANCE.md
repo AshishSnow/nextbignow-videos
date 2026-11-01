@@ -9,6 +9,23 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-02 ~02:40 IST (episode run: HOW TO START EP 2, vending machines)
+Instagram (IGRE, 11 Oct → 2 Nov) — new + changed rows:
+| Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 11-01 | **HOW TO START EP 1 — drone business** (~22 h) | 115 s | **1,313** | 1,180 | **27.6 s** | **75.9 %** (channel best) | 34 | **6** | **14** | 1 (ours) |
+| 10-31 | Glasses: one company | 145 s | 141 (+98) | 117 | 18.9 s | 45.2 % | 2 | 0 | 1 | 1 (ours) |
+| 10-28 | Banana / Hoover / Monopoly | — | 144 / 153 / 188 | — | 23.9 / 15.3 / 30.8 s | 56.8 / 45.5 / 60.7 % | — | 0 | 0 | 0 |
+YouTube (YTVP): banana 677 / 33 s · Hoover 321 / 38 s · Monopoly 485 / 39 s · De Beers 345 / 35 s — **no rows yet for glasses (31 Oct) or the drone episode (1 Nov)**.
+**Media-kit numbers (2 Nov):** IG last 10 reels avg **445 views** (median 165), avg 3-s rate 54 %, reactions (shares + saves + comments, excl. our own
+first comment) **6.3 per 1,000 reach** (was 1.1 on 1 Nov — the drone episode alone: 20 reactions on 1,180 reach = 17 / 1,000); YT last 10 avg 439 views.
+**Insight V (2 Nov) — HOW TO START is the first format that gets *used*, not just watched.** The drone how-to beat every animated reel on the 3-s
+rate (75.9 % vs previous best 73.7 % printer ink), held 27.6 s (24 % of 115 s) and got the channel's first real saves (14) and shares (6) since the
+autopilot began — saves are what sponsors in tools/insurance/courses look at. Insight U2's bar (≥ 50 % / ≥ 20 s) is passed on day 1. The China → Amazon
+list how-to (13 % 3-s) proves it's the *story hook in frame 1* (money landing, a question) that makes a how-to work, not the list. → Owner's priority
+confirmed by data: build HOW TO START EP 2 now (vending machines, hook = "do you know what a singer is?"); keep a save-worthy step list + a debatable
+end question; judge EP 2 on saves per reach (drone: 12 / 1,000) and 3-s rate ≥ 60 %.
+
 ## Snapshot 2026-11-01 ~08:45 IST (R&D run: Topics / HOW TO START shelf + writers' room EP 2)
 Instagram + YouTube pulls (IGRE / YTVP, 11 Oct → 1 Nov 03:30 UTC): **no change** since the 02:45 IST pull — glasses still 43 views / 13.1 s /
 35.3 % (IG rows look frozen for ~18 h); YouTube still has no glasses row; the drone episode (HOW TO START EP 1) published 05:00 IST on both

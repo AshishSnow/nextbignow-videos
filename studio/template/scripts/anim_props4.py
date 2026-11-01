@@ -264,6 +264,7 @@ def uk_eu_card_el(side="UK", lines=("OPERATOR ID", "+ ONLINE TEST"), col=(30, 90
 #   broken = "coins" | "bills" | "cooler" greys that part and adds a red warning dot; era="1950" = a rounded red-free cream soda cooler
 #   with bottle caps behind a small window and a coin slot only (for the nickel-Coke board; no Coke red, no script lettering).
 def vending_el(w=600, fill=1.0, glow=1.0, broken=None, era=None):
+    if w < 400 and era is None: return scale_el(vending_el(400, fill, glow, broken, era), w / 400)   # keypad maths breaks below ~260 px (2 Nov)
     k = round(float(clamp(fill)), 2); g = round(float(clamp(glow)), 2)
     def mk():
         h = int(w * 1.72); im, d, S = _im4(w, h); sc = 2
@@ -337,3 +338,38 @@ def vending_el(w=600, fill=1.0, glow=1.0, broken=None, era=None):
         d.line(S(60, h * 0.83, w * 0.68, h * 0.83), fill=(70, 76, 90, 255), width=4 * sc)
         return _el4(im, w, h)
     return gcache(("vending4", w, k, g, broken, era), mk)
+
+
+# ---- small staging helpers (2 Nov, HOW TO START EP 2 vending): thought bubble, floating music notes, coin rain, split-screen wipe ----
+def thought(f, x, y, w, inner, op=1.0):
+    """white thought cloud (circle + 3 trailing dots towards the lower left) with an element inside — 'you dream of X'"""
+    if op <= 0: return
+    ov = f.copy()
+    cv2.ellipse(ov, (int(x), int(y)), (int(w * 0.62), int(w * 0.62)), 0, 0, 360, (1.0, 1.0, 1.0), -1, cv2.LINE_AA)
+    for i, r in enumerate((34, 22, 14)):
+        cv2.circle(ov, (int(x - w * 0.3 - i * 40), int(y + w * 0.62 + 30 + i * 46)), r, (1.0, 1.0, 1.0), -1, cv2.LINE_AA)
+    f[:] = f * (1 - op) + ov * op
+    comp(f, inner, x, y, op=op)
+
+
+def notes(f, x, y, t, n=3, op=1.0):
+    """music notes rising and fading from (x, y) — a 'singer', a jingle, a radio"""
+    for i in range(n):
+        ph = (t * 0.9 + i / n) % 1.0
+        comp(f, note_el(kind=i % 2), x + 60 * math.sin(ph * 6 + i), y - 220 * ph, scale=0.8, op=op * clamp(3 * (1 - ph)) * clamp(ph * 6))
+
+
+def coin_rain(f, t, t0, x, y, n=7):
+    """coins tumbling down from (x, y) after t0 — money draining away"""
+    for i in range(n):
+        q = t - t0 - i * 0.09
+        if q <= 0: continue
+        rot_comp(f, coin_el(42), x + (i - n / 2) * 40 + 30 * math.sin(i * 2.1), y + 900 * q * q, 40 * q * (i % 3 - 1), 1.0, clamp(2.0 - q), 0.2)
+
+
+def split_wipe(f, g, t, t0, d=0.3):
+    """split screen: frame g wipes in from the right to fill the right half (white divider) — 'meanwhile' / cause and effect"""
+    if t < t0: return
+    xs = int(W - (W // 2) * eo(clamp((t - t0) / d)))
+    f[:, xs:] = g[:, xs:]
+    cv2.line(f, (xs, 0), (xs, H), (1, 1, 1), 8)

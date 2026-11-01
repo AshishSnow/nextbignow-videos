@@ -15,7 +15,7 @@ Keep `say()` captions ≤ ~22 characters and clear of heads (y ≤ 1050 or ≥ 1
 |---|---|---|---|---|
 | i1 | `store` WIDE, frame 1: a bright `vending_el(900)` centre, the hero reaching for his wallet; behind him the grey seller holds a phone out to him | hero `brow="sus"`, seller smiling | `cold_open(f, "US", "VENDING MACHINES", "YOU: FIRST-TIME BUYER")` (no extra badge in frame 1); `say("A SINGER?")` y≈1000 from ~0.8 s, clear of the card | coin drop |
 | i2 | `street` MID: the hero pushes an empty dolly past an office block, thought bubble with a snack machine | hero dreamy | `series_badge(f, "HOW TO START", "EP 2")` top right | street hum |
-| i3 | push in on the machine; a price tag swings down → four step pills appear on the glass | hero `expr="wow"` | `tag_el("$4K–$8K NEW")`; chip "Dealer price lists, 2026"; pills 1–4 | ka-ching, dings |
+| i3 | push in on the machine; a price tag swings down → four step pills appear on the glass | hero `expr="wow"` | `tag_el("$4K–$9K NEW")`; chip "Dealer price lists, 2026"; pills 1–4 | ka-ching, dings |
 | i4 | pill #4 turns red and wobbles; coins drain out of the hero's wallet | hero gulps (`sweat=True`) | — | buzzer |
 | a1 | `office` corridor, the hero rolls the machine on a dolly, stops at a fork: empty hallway left, crowd noise right | hero looks both ways | `cold_open(f, "STEP 1", "SPOT FIRST", "THEN THE MACHINE")` | coin drop, wheels |
 | a2 | shot 1 `office` empty hallway, tumbleweed dust, `vending_el(fill=1.0)` untouched → shot 2 `airport` WIDE, people streaming past; three clock icons (morning / lunch / evening) tick | hero counts on fingers | `say("COUNT PEOPLE")`; tally marks (no number) | clicker ticks |
@@ -23,7 +23,7 @@ Keep `say()` captions ≤ ~22 characters and clear of heads (y ≤ 1050 or ≥ 1
 | b1 | desk CU, papers drop in a stack | hero cracks knuckles | `cold_open(f, "STEP 2", "PAPERWORK", "RULES VARY BY CITY")` | coin drop, paper thump |
 | b2 | `form_el(title="VENDING LICENSE")` gets a stamp → `shield_el(text="INSURED")` wraps the machine | girl2 points, hero thumbs up | `say("CHECK YOUR CITY")` → `say("INSURANCE")` | stamp, shield whoosh |
 | c1 | `street` used-machine lot, three machines, one dented; a phone with a music note rings far off (singer tease) | hero kneels to inspect, glances at the ringing | `cold_open(f, "STEP 3", "BUY SMART", "NEW OR USED")` | coin drop, faint ring |
-| c2 | price tag flips from $4K–$8K to $3K–$6K (used) | hero `expr="wow"` | `tag_el("$3K–$6K USED")`; chip "Dealer price lists, 2026" | tag flip |
+| c2 | price tag flips from $4K–$8K to $3K–$6K (used) | hero `expr="wow"` | `tag_el("$3K–$6K+ USED")`; chip "Dealer price lists, 2026" | tag flip |
 | c3 | CU `vending_el` panel: coin slot, bill reader, cooler light up in turn — `check_el` ✓ ✓ ✓ (`broken="bills"` blinks red first) | girl2 taps each part | `hud_rule(f, 3, "TEST BEFORE YOU PAY")` | beep ×3 |
 | e1 | `store` evening light: the grey seller fans out photos of "PRIME SPOTS" → push in on the contract, a pen slides toward the hero | seller grinning, hero tempted | `cold_open(f, "STEP 4", "CHECK THE DEAL", "SPOTS INCLUDED?")` | low synth swell |
 | e2 | `calendar_el("YEAR", "1998")` flips back; sepia tint over the `store` | — | small chip "FTC, Sep 1998" | page flips backwards |

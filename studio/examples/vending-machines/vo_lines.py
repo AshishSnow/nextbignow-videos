@@ -5,7 +5,7 @@
 # what the FTC charged/announced ("the FTC said"), never as our verdict on any seller; no real seller names on screen.
 SERIES = "HOW TO START"; PART = 0; EP = 2
 LINES = [
-    ("i1", "Before you buy a vending machine, do you know what a singer is?", 1.02, 0.40, +1.0, 1.45, ["vending", "singer"], None),
+    ("i1", "Before you buy a vending machine, do you know what a singer is?", 1.02, 0.40, +1.0, 1.45, ["vending", "singer"], "q"),
     ("i2", "You're in the US, and you want a snack machine side business.", 1.02, 0.25, +0.8, 1.45, ["US,", "snack"], "low"),
     ("i3", "A new machine often costs several thousand dollars. So here's the plan in four steps.", 1.02, 0.25, +0.8, 1.45, ["thousand", "four"], "low"),
     ("i4", "Step four has cost some buyers thousands.", 1.02, 0.40, +0.8, 1.45, ["four", "thousands.:dn"], "low"),

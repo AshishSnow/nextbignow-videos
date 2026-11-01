@@ -33,3 +33,10 @@ the same question (GYM / OFFICE, ties back to step 1); (7) US-only said in i2 + 
 (tally marks, no 312 / 250 CAL), on-screen chip "Dealer price lists" instead of a seller's name, cleaner frame 1, the singer's bubble carries
 praise so the slang reads on mute, friend CTA pushes back on "passive income", #sidehustle → #smallbusinessideas, pinned reply for income questions.
 story_check after fixes: 7/7 R + 6/6 S (101.6 s est.); board_check PASS, 0 warnings, build brief = `vending_el` only.
+
+## Build-run re-verification (2 Nov 2026, episode run; independent subagent, alternate copies where WebFetch timed out)
+- vending.com: Snack $3,850–$7,800, Cold drink $5,700–$8,300, Combo $5,350–$8,600; used "roughly $3,000 to $6,000 or more" → on-screen tags changed to **$4K–$9K NEW** (combo reaches $8.6K) and **$3K–$6K+ USED**.
+- Stripe guide: "Last updated 14 August 2026"; all four quotes match (compressor/coin mechanism/bill validator advice is framed for used machines — script says "test", fine).
+- FTC 3 Sep 1998 release: "40 enforcement actions", "misrepresenting the availability of profitable locations", "singers" quotes — verified verbatim.
+- 16 CFR 437: §437.2 "at least seven calendar days"; §437.3(a)(5) the 10 nearest purchasers (or all if fewer) in the last three years; §437.1(m) locations/accounts/customers. FTC proposed amendments (NPRM, 13 Jan 2025) found not finalized. Post copy says "generally must".
+- No vending-specific FTC action found in 2025–2026 (latest vending sweep: Dec 2006) → the 1998 case stays the example, said as "back in 1998".

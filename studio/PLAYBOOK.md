@@ -278,6 +278,11 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   + one big `say(TITLE)` at **y ≈ 700** — at y 560 the caption collided with the cold-open card (caught in test frames). Then 2–4 prop shots
   (one per fact: price tag drop, stamp, calendar, chip with the source), back to a scene within ≤ 2 shots. Show the waypoint cards from the
   shot start (an empty disc waited ~1 s for the word "five").
+- **Staging helpers (2 Nov, HOW TO START EP 2 vending, `template/scripts/anim_props4.py`):** `thought(f, x, y, w, el)` (dream cloud), `notes(f, x, y, t)`
+  (rising music notes — a jingle, a "singer"), `coin_rain(f, t, t0, x, y)` (money draining), `split_wipe(f, g, t, t0)` (right half wipes to a second
+  frame: "meanwhile" / cause → effect). Flashback block = `sepia_tone` on every shot of the era + `calendar_el` counting back on the first one.
+  Never give a character `phone_el()` / `phone2_el()` to hold — they render as a huge phone with an old chat / a "SEND THIS" button over the face;
+  use a chip ("CALLING PAST BUYER #3…") or a `bubble_el`. Keep `say()` off giant-head close-ups (`person_head_at` s ≥ 1.8): put the caption at y 450–600.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
   `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.
@@ -298,7 +303,7 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
   quote cards over 5 lines, rows of ≥ 4 s with no visible change, and the signature beats (badge, cold open, one Oops, series end card).
   Found on the first run (31 Oct): 13 of 31 captions on the two new boards would have rendered at 42–57 %; 16 assets to write.
 - Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano, 90s British ska, calypso steel band (+ mento flashback); next try disco, marching band, baroque harpsichord, sea shanty, etc.) using GeneralUser GS GM programs;
-  cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1.5 dBTP**; VO/bed ≥ 14 dB per line
+  cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1.0 dBTP** (template loudnorm TP −1.0 since 2 Nov — at −1.5 the limiter capped loudness at −11.9 LUFS); VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.
 - Word guard (since 27 Oct R&D run 6, template default `GUARD=12`): mix.py keeps music + SFX ≥ 12 dB under every word on a phone
   speaker, so SFX can sit right on the reveal word. Keep `bed = bed_carve.guard(...)` when you copy an older example's mix.py (examples
