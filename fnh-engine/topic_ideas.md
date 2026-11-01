@@ -2,6 +2,16 @@
 
 ## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
 Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
+NEW from the 1 Nov trend scan (data: ep 18 milk 1204 reach / 75.0 % hold, ep 17 candy 1043 -> 'in your hand this week' + a practical fix keeps winning):
+0n. bread-in-the-fridge (MOVE UP: direct sequel to ep 20's retrogradation diagram, reuse anim_props_lib20.starch_rows) — Do you know the fridge makes
+    bread go stale faster than the counter? (retrogradation is fastest just above freezing; freezer is fine; toast it to reverse). Verify: a university
+    food-science page + America's Test Kitchen / Serious Eats / BBC Good Food.
+0o. garlic-breath — Do you know garlic breath can last a day because it comes from your LUNGS, not your mouth? (allyl methyl sulfide goes through the
+    blood and out in the breath; apple / milk / mint tested in a 2016 Ohio State study). Verify: Ohio State (J Food Sci 2016) + a major outlet.
+0p. washing-rice — Do you know what rinsing rice really washes off? (surface starch = less sticky; some arsenic in some studies, but also some added
+    nutrients in enriched rice). Verify carefully: FSA / FDA + a university study; drop if contested.
+0q. soggy-fried-food — Why do crispy fried snacks go soggy in a box? (steam / moisture moves from the hot inside to the crust). Verify: a
+    food-science source + ATK / Serious Eats.
 NEW from the 31 Oct trend scan (Halloween day; Diwali 8 Nov; data: the 4 breakouts are all 'a food in your hand this week' moments —
 candy, gum + ice water, onions, chocolate — and shares/saves follow a practical fix, see performance.md):
 0h. (DONE ep 17) sugar-rot-teeth — Do you know sugar doesn't rot your teeth? (bacteria make acid; 30-60 min acid timer; how often > how much;
@@ -11,7 +21,7 @@ candy, gum + ice water, onions, chocolate — and shares/saves follow a practica
     Verify: a university food-science page (e.g. UC Davis / Penn State) + a major outlet (BBC Science Focus / Scientific American).
 0j. (DONE ep 19) cut-apples-turn-brown — Do you know a cut apple goes brown for the same reason you get a tan? (melanin; (polyphenol oxidase + oxygen; lemon juice slows it; not spoiled). Very
     visual (Chubby + a browning apple time-lapse). Verify: Scientific American 'Why do apples turn brown' + a university extension page.
-0k. rice-in-the-fridge — Do you know leftover rice goes hard in the fridge and soft again when you heat it? (starch retrogradation;
+0k. (DONE ep 20) rice-in-the-fridge — Do you know leftover rice goes hard in the fridge and soft again when you heat it? (starch retrogradation;
     plus the safe part: cool rice fast, eat within a day, reheat hot — NHS 'reheating rice'). Everyday Indian kitchen; practical takeaway.
     Verify: NHS + a food-science page (Serious Eats / a university extension).
 0l. bread-in-the-fridge (belief flip) — Do you know the fridge makes bread go stale FASTER? (retrogradation is fastest just above

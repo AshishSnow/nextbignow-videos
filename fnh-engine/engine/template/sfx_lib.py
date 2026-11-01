@@ -579,3 +579,47 @@ def shimmer(level=-26, dur=1.2):
     return _st(y / (np.abs(y).max() + 1e-9) * db(level), 110)
 
 
+# ---- ep 20 (1 Nov) foley: security camera hum, microwave hum + end beeps, spore shell crack, germ giggle, pedal bin ----
+def cctv_hum(level=-32, dur=3.0):
+    """security camera: 50 Hz mains hum with harmonics + a faint servo whir that rises and falls."""
+    t2 = np.arange(int(dur * SR)) / SR
+    y = sum(np.sin(2 * np.pi * 50 * k * t2) / k for k in (1, 2, 3, 5)) * 0.4
+    y += signal.sosfilt(signal.butter(2, [1800, 4200], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * (0.15 + 0.15 * np.sin(2 * np.pi * 0.7 * t2))
+    y *= np.minimum(1, np.minimum(t2 / 0.2, (dur - t2) / 0.3))
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def micro_hum(level=-28, dur=2.0):
+    """microwave running: a 100 Hz transformer hum + a soft turntable rattle."""
+    t2 = np.arange(int(dur * SR)) / SR
+    y = (np.sin(2 * np.pi * 100 * t2) + 0.5 * np.sin(2 * np.pi * 200 * t2) + 0.25 * np.sign(np.sin(2 * np.pi * 100 * t2))) * 0.5
+    y += signal.sosfilt(signal.butter(2, [400, 1600], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * 0.12 * (0.5 + 0.5 * np.sin(2 * np.pi * 3 * t2))
+    y *= np.minimum(1, np.minimum(t2 / 0.05, (dur - t2) / 0.1))
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def micro_beep(t0, level=-24):
+    for j in range(3): add(beep(level, 2000, 0.16), t0 + j * 0.28)
+
+
+def shell_crack(level=-20):
+    """a spore's armour cracking: a dry woody snap (band-passed click burst) + a few crumbs."""
+    t2 = np.arange(int(0.4 * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, [700, 3500], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.012)
+    for k in range(4):
+        i = int((0.05 + 0.06 * k + rng.uniform(0, 0.02)) * SR); seg = t2[: int(0.015 * SR)]
+        y[i:i + len(seg)] += signal.sosfilt(signal.butter(2, [2000, 6000], "band", fs=SR, output="sos"), rng.standard_normal(len(seg))) * np.exp(-seg / 0.003) * 0.5
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def giggle(level=-27, dur=0.5):
+    """a germ giggle: a fast run of pitched chirps going up and down."""
+    t2 = np.arange(int(dur * SR)) / SR; y = np.zeros(len(t2))
+    for k in range(7):
+        i = int(k * dur / 7 * SR); seg = t2[: int(0.045 * SR)]; f0 = 1200 + 300 * math.sin(k * 1.3)
+        y[i:i + len(seg)] += np.sin(2 * np.pi * np.cumsum(f0 * (1 + 0.4 * np.sin(2 * np.pi * 30 * seg))) / SR) * np.exp(-seg / 0.02)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level), 80)
+
+
+def pedal_bin(t, lv=-20):
+    add(clang(lv - 2, 700, 0.4), t); add(thud(lv), t + 0.3); add(crunch(lv - 4), t + 0.33)

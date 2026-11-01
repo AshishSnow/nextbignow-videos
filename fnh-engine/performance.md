@@ -10,7 +10,7 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 - Only judge posts that are >= 48 h old (numbers keep growing for 2–3 days). Overwrite each row with fresh numbers.
 - Derived: hold = IGRE28 (share of viewers past 3 s); watch% = avg watch / video length; shares and saves per 1k reach.
 
-## Instagram reels (snapshot 31 Oct 2026 21:40 IST — STILL identical to the 10:50 snapshot; eps 17 + 18 have no rows yet)
+## Instagram reels (snapshot 1 Nov 2026 15:50 IST — first fresh rows since 31 Oct 10:50; eps 17-19 now have rows, all < 48 h old)
 | posted (IST) | reel | len s | reach | views | avg watch s | 3-s hold % | likes | shares | saves | comments | style |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 10-20 07:03 | fake honey (10 of 13 brands) | ~45 | 5567 | 6164 | 3.8 | 16.3 | 21 | 9 | 5 | 0 | old static |
@@ -36,10 +36,14 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 | 10-28 03:20 | 14 coffee doesn't give energy | ~137 | 126 | 141 | 15.2 | 56.3 | 5 | 0 | 0 | 1 | CHUBBY v4 + day graphs, daily habit + belief flip — did NOT break out |
 | 10-28 07:52 | 15 chocolate melts in your mouth | 145 | 1280 | 1484 | 38.7 | 74.9 | 35 | 5 | 3 | 1 | FIRST v5 LOOK + M2 voice, Halloween everyday food — BREAKOUT, best 3-s hold ever (74.9 %) |
 | 10-28 12:35 | 16 swallowed gum (7-year myth) | 169 | 121 | 136 | 21.8 | 61.3 | 5 | 0 | 0 | 1 | v5 look + INSIDE-THE-GUT world, myth flip, longest video — did NOT break out |
-| 10-31 12:15 | 17 does sugar rot your teeth | 166 | — | — | — | — | — | — | — | — | FIRST Chubby INK episode (hand-drawn ink + paper), first 'person talking' script, Halloween-day candy + teeth, swing score — no row yet at 16:00 (3.5 h old) |
-| 10-31 17:15 | 18 why does milk boil over | 171 | — | — | — | — | — | — | — | — | Chubby INK ep 2: stove place + live flames, hand poses, follow-through, cut-away pot; daily chai moment + tested fixes; bossa nova score — no row yet at 21:40 (4.5 h old) |
-| 10-31 (sched. ~22:15) | 19 why do cut apples turn brown | 171 | — | — | — | — | — | — | — | — | Chubby INK ep 3: timing & spacing kit (snaps, takes, moving holds), ink 3D titles, lunch-table place; tan hook + guess beat + 3-rule fixes; bluegrass score |
+| 10-31 12:15 | 17 does sugar rot your teeth | 166 | 1043 | 1218 | 25.3 | 65.2 | 18 | 2 | 2 | 1 | FIRST Chubby INK episode, 'person talking' script, Halloween-day candy + teeth, swing score — BREAKOUT at ~27 h (provisional) |
+| 10-31 17:15 | 18 why does milk boil over | 171 | 1204 | 1350 | 30.2 | 75.0 | 23 | 0 | 0 | 1 | Chubby INK ep 2: stove place, hand poses, follow-through; daily chai moment + tested fixes — BREAKOUT at ~22 h, BEST 3-s HOLD EVER (75.0 %) (provisional) |
+| 10-31 22:35 | 19 why do cut apples turn brown | 171 | 155 | 201 | 11.6 | 68.5 | 2 | 0 | 1 | 1 | Chubby INK ep 3: timing & spacing kit, ink titles, lunch table; tan hook + guess beat — row only ~17 h old, judge 2-3 Nov |
+| 11-01 17:20 | 20 is leftover rice safe | 172 | — | — | — | — | — | — | — | — | Chubby INK ep 4: camera-language kit (CCTV opener, crash zooms, dutch, rack focus), night stove; belief-flip hook + rule-of-four mnemonic; tango score — judge 3 Nov |
 ## What the numbers say so far (update every run, keep it to the 5 most useful lines)
+- 1 Nov 15:50: fresh rows at last. The ink look holds as well as the 3D look or better: milk 75.0 % 3-s hold (best ever) / 1204 reach / 30.2 s
+  avg watch; candy+teeth 65.2 % / 1043 / 25.3 s; apples 68.5 % (17 h, still growing). 6 of the last 8 Chubby posts passed 1k reach, all of them a
+  food in people's hands that week. Shares stay low on the ink eps (0-2) -> ep 20 adds a repeatable one-line rule to SEND (rule-of-four mnemonic).
 - 31 Oct 21:40: reel rows STILL identical to 10:50 (third identical snapshot today; eps 17 + 18 have no rows at 9.5 h / 4.5 h) -> the reel
   rows refresh at most once or twice a day now; no new verdict. Ep 19 keeps the in-your-hand rule (a browning apple) + a belief flip (brown =
   bad? no) + a cheap tested fix; judge eps 17-19 at 48 h (2 Nov).

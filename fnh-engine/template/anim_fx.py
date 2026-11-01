@@ -459,7 +459,9 @@ def route_map(f, stops, k, t, token=None, pts=None, col=(255, 210, 90), line_col
 POSE = {"idle": dict(la=(28, 14), ra=(22, 12)), "point": dict(la=(20, 10), ra=(72, 42), lean=4), "present": dict(la=(90, 120), ra=(90, 120)),
         "cheer": dict(la=(150, 170), ra=(150, 170)), "shock": dict(la=(112, 160), ra=(112, 160), lean=8), "think": dict(la=(-160, -115), ra=(30, 16), lean=-6),
         "whisper": dict(la=(20, 10), ra=(140, -140), lean=6), "cheek": dict(la=(150, -120), ra=(26, 12), lean=-8), "shrug": dict(la=(80, 150), ra=(80, 150)),
-        "hold_up": dict(la=(40, 30), ra=(150, 175), lean=5), "arms_out": dict(la=(96, 60), ra=(96, 60)), "tada": dict(la=(120, 150), ra=(160, 150), lean=6)}
+        "hold_up": dict(la=(40, 30), ra=(150, 175), lean=5), "arms_out": dict(la=(96, 60), ra=(96, 60)), "tada": dict(la=(120, 150), ra=(160, 150), lean=6),
+        # ep 20: queasy (hand on belly + hand to mouth), STOP (palm out, warning), yawn (hands behind the head, the walk-away at night)
+        "sick": dict(la=(26, -112), ra=(148, -130), lean=-6), "stop": dict(la=(22, 10), ra=(100, 70), lean=-5), "yawn": dict(la=(160, -150), ra=(160, -150), lean=-3)}
 
 
 def double_take(t, t0, d=0.55):
@@ -565,3 +567,58 @@ def take(t, t0, amp=1.0, hold=8):
     if q < 5 + hold: k = (q - 5) / hold; return dict(dy=-22 * amp + 2 * math.sin(k * 6), squash=-0.4 * amp * (1 - 0.3 * k), lean=6 * amp, expr="wow", brow="up", look=(0, -0.3))
     k = clamp((q - 5 - hold) / 6); s_ = math.sin(math.pi * k)
     return dict(dy=-22 * amp * (1 - k), squash=-0.4 * amp * (1 - k) + 0.12 * amp * s_, lean=6 * amp * (1 - k) + 3 * amp * s_, expr="wow" if k < 0.6 else "happy", brow="up", look=(0, -0.2 * (1 - k)))
+
+
+# --- CAMERA LANGUAGE kit (ep 20, 1 Nov; craft skill 'camera language'): each move carries ONE meaning, used where that meaning is the beat.
+#     crash zoom = a comic beat / sudden realisation (snaps in 3 frames, HOLDS, no ease back); dutch angle = unease ('something is wrong here');
+#     handheld drift = urgency / documentary closeness (the CCTV night); rack focus = move attention between depth planes without a cut;
+#     push-in (push_in above) = pull the viewer into a thought. Rule: one camera idea per shot, motivated by the line (HowToFilmSchool 'crash zoom';
+#     Morphic camera-movement reference: 'crash zoom - comic beats, shocks and punchlines', 'dutch angle - unease', 'rack focus - move attention
+#     without a cut', 'handheld - realism, urgency').
+def crash_zoom(f, t, t0, z=1.35, cx=W / 2, cy=900, frames=3):
+    """snap zoom onto (cx, cy): reaches z in `frames` frames (tiny overshoot) and holds - a punchline / realisation beat."""
+    if t < t0: return f
+    k = clamp((t - t0) * FPS / frames)
+    zz = 1 + (z - 1) * (k + 0.06 * math.sin(math.pi * k) if k < 1 else 1 + 0.04 * math.exp(-(t - t0 - frames / FPS) * 14))
+    return cam(f, zz, cx, cy)
+
+
+def dutch(f, t, t0, deg=7.0, dur=0.35, cx=W / 2, cy=H / 2, z=1.08):
+    """dutch angle: the frame eases into a tilt (zoomed slightly so no edge shows) - unease / 'something is off'."""
+    if t < t0: return f
+    k = eio(clamp((t - t0) / max(1e-3, dur)))
+    return cam(f, 1 + (z - 1) * k, cx, cy, rot=deg * k)
+
+
+def handheld(t, amp=1.0, seed=0):
+    """(dx, dy, rot) of a breathing handheld camera (layered slow sines, never repeats visibly) -> cam(f, z, cx, cy, dx, dy, rot)."""
+    p = seed * 1.7
+    dx = amp * (9 * math.sin(t * 1.3 + p) + 4 * math.sin(t * 3.1 + 2 * p))
+    dy = amp * (7 * math.sin(t * 1.7 + 0.5 + p) + 3 * math.sin(t * 2.6 + p))
+    return dx, dy, amp * 0.6 * math.sin(t * 0.9 + p)
+
+
+def rack_layer(f, draw, sigma=0.0, op=1.0):
+    """draw a FOREGROUND layer with its own focus: draw(g) paints onto a copy; only what changed is blended back, blurred by `sigma`.
+    Rack focus = animate sigma on the fg layer (sharp -> soft) while the background goes the other way with dof()."""
+    g = f.copy(); draw(g)
+    m = (np.abs(g - f).max(2) > 1e-3).astype(np.float32)
+    if sigma > 0.4:
+        sm = cv2.GaussianBlur(g, (0, 0), sigma); m = cv2.GaussianBlur(m, (0, 0), sigma * 0.8); g = sm
+    m = np.clip(m * 1.4, 0, 1) * op
+    f[:] = f * (1 - m[..., None]) + g * m[..., None]
+    return f
+
+
+def cctv(f, t, label="KITCHEN CAM 2", clock=None, rec=True):
+    """security-camera look (night): green-grey grade, scanlines, vignette, REC dot, a big timestamp. clock = 'HH:MM' text."""
+    gry = f.mean(2, keepdims=True)
+    f[:] = np.clip((f * 0.6 + gry * 0.4) * np.array([0.86, 1.0, 0.9], np.float32), 0, 1)
+    f[::4] *= 0.9
+    f[:] = f * (1 - 0.35 * np.clip(np.hypot(_xx - W / 2, _yy - H / 2) / 1100, 0, 1) ** 2)[..., None]
+    if rec and (int(t * 2) % 2 == 0): cv2.circle(f, (110, 300), 16, (0.9, 0.12, 0.1), -1, cv2.LINE_AA)
+    comp(f, ed_el(label, "", lead_col=(235, 240, 230), lead_size=30), 260 if rec else 220, 300)
+    if clock: comp(f, ed_el(clock, "", lead_col=(235, 240, 230), lead_size=58), 820, 300)
+    for (x0, y0, sx, sy) in ((80, 270, 1, 1), (1000, 270, -1, 1), (80, 1460, 1, -1), (1000, 1460, -1, -1)):
+        cv2.line(f, (x0, y0), (x0 + 60 * sx, y0), (0.9, 0.95, 0.88), 4, cv2.LINE_AA); cv2.line(f, (x0, y0), (x0, y0 + 60 * sy), (0.9, 0.95, 0.88), 4, cv2.LINE_AA)
+    return f

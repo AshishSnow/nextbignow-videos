@@ -217,6 +217,22 @@ Sheet: /home/claude/outputs/chubby_ink_colour_options.jpg. v3 (Pixar kid) stays 
   a metaphor paid twice (the tan), a three-rule map before the fixes. Pace lesson: many short sentences inside one line slow Kokoro below the
   165-wpm gate; join them with commas or raise that line's speed.
 
+### Ep 20 (1 Nov, fourth ink episode): CAMERA LANGUAGE kit, the NIGHT STOVE place, Chubby jaw drop + queasy face, the rice props (`anim_fx.py`, `fnh_char_ink.py`, `anim_props_lib20.py`)
+- CAMERA (anim_fx): one camera idea per shot, motivated by the line: `crash_zoom(f, t, t0, z, cx, cy)` = punchline / realisation (3-frame snap,
+  then HOLD); `dutch(f, t, t0, deg)` = unease; `handheld(t, amp)` -> (dx, dy, rot) for cam() = urgency / 'caught on camera'; `rack_layer(f, draw,
+  sigma)` = a layer with its own focus (two layers, opposite sigmas = a rack focus); `cctv(f, t, label, 'HH:MM')` = security-camera look; push_in for
+  a recap. Captions are scaled by a zoom: centre zooms at y 700-800 or draw the caption AFTER the camera move (S0 in ep 20) to keep it in the safe zone.
+- Chubby INK: `mouth="jaw"` (jaw drop with tongue, use it on a take), `expr="gross"` (> < eyes + wavy mouth), POSE['sick'|'stop'|'yawn'];
+  POSE dicts carry `lean` - when you also pass lean=, strip it first (ep 20 anim_shots: `nolean(POSE[...])`) or Python raises 'multiple values'.
+- Place: `set_stove_night(t, lamp)` (lib20) = the stove after dinner: lights off, moonlit window, ONE warm under-cabinet lamp pooling on the pot (pot
+  at (540, 1300 - 172) for rice_pot_el). Lib20 ink props: grains / rice_pot_el(level, warm, lid, mood) / rice_bowl_el(fluffy|hard|fried|salad) /
+  grain_el(mood, hard) / spore_el(mood, crack) / germ_el + germ_crowd / toxin_el(mood, helmet) / microwave_el(on, timer) / thermo_ink_el(k, zone) /
+  starch_rows(f, cx, cy, k, t) (retrogradation: loose swollen chains <-> tight rows, water squeezed out) / dish_el / bin_ink_el(open_) / clock_ink_el +
+  clock_hands(f, x, y, hours). sfx_lib (ep 20): cctv_hum, micro_hum, micro_beep, shell_crack, giggle, pedal_bin.
+- Script devices that worked: a belief flip in the hook ('the risky part isn't the reheating'), a CAUTION register on warning lines (base -0.3, range
+  1.35), and a rule-of-four mnemonic (one-sentence takeaway) seeded as numbered cards and paid in the recap. Padding a line to sound casual can LOWER
+  UTMOS - keep lines tight.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

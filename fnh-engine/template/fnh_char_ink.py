@@ -90,6 +90,8 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
         ex = cx + sgn * 36
         if blink or (expr == "happy" and mouth == 3):
             d.line(wob(_arcpts(ex, ey + 2, 16, 10, 200, 340, 10), 1.0, 7 + i), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve"); continue
+        if expr == "gross":                                                   # ep 20: squeezed '> <' eyes (disgust / nausea)
+            d.line(wob([(ex - sgn * 14, ey - 12), (ex + sgn * 10, ey), (ex - sgn * 14, ey + 12)], 0.8, 50 + i), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve"); continue
         if expr == "wow":
             d.ellipse(S(ex - 17, ey - 19, ex + 17, ey + 19), fill=(255, 255, 255, 255), outline=INKC + (255,), width=5 * sc)
             d.ellipse(S(ex + ox - 7, ey + oy - 7, ex + ox + 7, ey + oy + 7), fill=INKC + (255,))
@@ -128,6 +130,7 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
     mx, my = cx, 196
     if expr == "wow" and mouth == 0: mouth = "o"
     dark = _fillcol((110, 40, 46))
+    if mouth == 0 and expr == "gross": mouth = "wavy"
     if mouth == 0:
         if expr == "sad": d.line(wob(_arcpts(mx, my + 12, 20, 12, 200, 340, 12), 1.0, 40), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve")
         elif expr == "smirk": d.line(wob(_arcpts(mx - 4, my - 6, 22, 12, 10, 110, 10), 1.0, 41), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve")
@@ -135,6 +138,12 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
             d.chord(S(mx - 30, my - 20, mx + 30, my + 18), 0, 180, fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
             d.rectangle(S(mx - 22, my - 1, mx + 22, my + 6), fill=(255, 255, 255, 255))
         else: d.line(wob(_arcpts(mx, my - 8, 20, 12, 20, 160, 12), 1.0, 42), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve")
+    elif mouth == "jaw":                                                     # ep 20: JAW DROP for the take - tall open mouth, tongue, top teeth
+        d.ellipse(S(mx - 22, my - 12, mx + 22, my + 44), fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
+        d.chord(S(mx - 16, my + 16, mx + 16, my + 42), 180, 360, fill=(226, 104, 112, 255))
+        d.chord(S(mx - 18, my - 12, mx + 18, my + 2), 0, 180, fill=(255, 255, 255, 255))
+    elif mouth == "wavy" or (mouth == 0 and expr == "gross"):                # ep 20: queasy wavy mouth
+        d.line(wob([(mx - 24, my), (mx - 12, my - 7), (mx, my), (mx + 12, my - 7), (mx + 24, my)], 0.8, 44), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve")
     elif mouth == "o":
         d.ellipse(S(mx - 12, my - 10, mx + 12, my + 16), fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
     else:

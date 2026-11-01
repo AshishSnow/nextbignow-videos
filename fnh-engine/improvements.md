@@ -21,7 +21,12 @@ Understand the new algorithm and act on it — I shouldn't have to tell you ever
 learning beat speed. Every run must leave the channel a little better than it found it.
 
 ## A. Algorithm notes (re-check EVERY DAY: the first run of each IST day, i.e. when "Last checked" is not today; record what changed)
-Last checked: 2026-10-31 (10:50 IST run, first run since 28 Oct). 31 Oct: WebSearch (SocialPilot Sep/Oct 2026 changelog, Fanpage Karma 2026,
+Last checked: 2026-11-01 (15:50 IST run, first run of the IST day). 1 Nov: WebSearch (SocialPilot / Fanpage Karma 2026 changelogs, a Ground News
+Reels summary 4 days old, OutlierKit / tunepocket / Android Headlines / SEJ for Shorts): NO new official ranking or policy change since 31 Oct. Still
+current: Mosseri's 3 signals (watch seconds, likes/reach, sends/reach), keyword captions for 'Your Algorithm' topics, YouTube Shorts originality
+(1 Oct) + engaged views. Acting on it today: a search-question first line ('Is leftover rice safe?'), a repeatable one-line rule people can SEND
+(sends/reach), and an original CCTV-style opener no re-upload channel has.
+Previous: 2026-10-31 (10:50 IST run, first run since 28 Oct). 31 Oct: WebSearch (SocialPilot Sep/Oct 2026 changelog, Fanpage Karma 2026,
 Ground News 27 Oct summary of the TechCrunch 'Your Algorithm' piece, OutlierKit / tunepocket / Android Headlines for Shorts): NO new official
 ranking or policy change after 28 Oct. Still current: Mosseri's 3 signals (watch seconds, likes/reach, sends/reach), IG 'Your Algorithm'
 topic editing (keyword captions), YouTube Shorts originality push (1 Oct) + 'engaged views'. Acting on it today: Halloween-day timely topic,
@@ -69,7 +74,11 @@ more since users can edit their "Your Algorithm" topics (topic matching) -> firs
   news about everyday foods/drinks, "why does…" questions). Add 3–5 fresh candidates to the TOP of topic_ideas.md
   UP NEXT (with the angle + 2 likely sources), ranked by: broad appeal (everyone eats/does it) > surprise > share-worthy
   takeaway > visual potential. Drop/stale-mark ideas that the data says are too niche. Record the date here:
-- Last trend scan: 2026-10-31 — Halloween DAY (candy in every hand -> 'does sugar rot your teeth', done as ep 17) and Diwali in 8 days; the
+- Last trend scan: 2026-11-01 — web trend search again thin (generic 'viral food trends 2026' listicles); the data spoke instead: ep 18 milk (a daily
+  kitchen moment + a tested fix) hit 1204 reach / 75.0 % hold in ~27 h and ep 17 candy 1043 -> 'in your hand THIS week' + 'practical fix' holds. Added
+  to topic_ideas.md UP NEXT: bread-in-the-fridge (a direct sequel to today's retrogradation diagram), garlic breath lasts hours (it comes from your
+  lungs), washing rice (what rinsing really removes), soggy fried food (moisture moving back in), plus Diwali ghee still queued for the week.
+- Previous trend scan: 2026-10-31 — Halloween DAY (candy in every hand -> 'does sugar rot your teeth', done as ep 17) and Diwali in 8 days; the
   31 Oct analytics say the winners are 'a food in your hand this week' moments (candy, gum + ice water, onions, chocolate) with a practical
   fix -> added to topic_ideas.md UP NEXT: milk boils over (daily chai), cut apples turn brown, leftover rice in the fridge, bread goes stale
   faster in the fridge (belief flip), Diwali ghee smell. Web trend search itself was thin (generic 'food myths' results), so the scan leaned
@@ -117,11 +126,13 @@ Voice (a mature, natural, warm guy — never robotic):
       '...' micro-pause before payoff words. Same-take A/B vs uniform +0.8: chunk20 4.508 vs 4.507, line mean 4.465 vs 4.461, the two aside lines
       +0.10 / +0.02 -> adopted as the script-writing default (PLAYBOOK step 4). Micro-pauses before the payoff word used too ('...is acid').
 - [x] 26 Oct: calmer pacing for A (SPD 0.88, PZ 1.6, PMIN 0.3) — UTMOS 4.27 -> 4.36 (see F). Now default in voice.env.
+- [x] 1 Nov (ep 20): CAUTION register for warning lines (base -0.3 st, range 1.35 instead of +0.4 / 1.45) - same-take A/B on 4 lines: 4.51 / 4.49 / 4.47 / 4.40
+      vs plain 4.51 / 4.48 / 4.46 / 4.32 (chunk20 4.492 vs 4.483) -> kept as a script register: warnings go lower + flatter.
 - [ ] Next voice ideas to lab-test with voice_report: per-line SPD variety, EXS 0.6, STR 1.2 on payoff words, shorter
       lines (<= 12 words), commas for breath points. Keep the M2 blend (own register, no lift).
 Visual / edit:
-- [~] Chubby INK next steps: hand poses per action DONE ep 18; ink-style 3D titles DONE ep 19 (anim_cine.title_ink); still to do: a
-      side/three-quarter head turn, a walk cycle in ink, a jaw-drop mouth state for the take.
+- [~] Chubby INK next steps: hand poses per action DONE ep 18; ink-style 3D titles DONE ep 19 (anim_cine.title_ink); jaw-drop mouth ('jaw'),
+      queasy face (expr 'gross' + wavy mouth) and poses sick / stop / yawn DONE ep 20; still to do: a side/three-quarter head turn, a walk cycle in ink.
 - [~] Let Chubby stand INSIDE the diagram shots (ep 19: he stands beside the cell room and points at it in 9 shots; next: let him walk into it).
 - [x] 28 Oct OWNER: character redesign -> Chubby INK approved (fnh_char_ink.py, colour mode C); v3 kept as fallback. Was: Chubby v3 — expressive face (lidded eyes + pupils, brows per emotion, mouth with teeth/tongue, cheeks, nose),
       real silhouette (neck, shoulders, fingers), textured clothes with folds + a signature item (apron/cap), weighty poses, idle life.
@@ -159,6 +170,16 @@ Script / packaging:
 - [x] Comment question in caption + firstCommentText (every episode since 10).
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-11-01 15:50 (first fresh reel rows since 31 Oct 10:50): the Chubby INK look does NOT cost hold - ep 18 milk 1204 reach / 75.0 % 3-s hold
+  (= our best ever, with chocolate 74.9) / 30.2 s avg watch / 23 likes at ~22 h; ep 17 candy+teeth 1043 / 65.2 % / 25.3 s at ~27 h; ep 19 apples
+  155 / 68.5 % / 11.6 s at ~17 h (row still early). So 6 of the last 8 Chubby posts broke 1k; both ink episodes with a 'food in your hand this
+  week' moment did. Provisional (posts < 48 h): verdicts on eps 17-19 on 2-3 Nov. Ep 20 keeps the rule (leftover rice = every Indian kitchen,
+  every night) + a practical, repeatable rule-of-four.
+- 2026-11-01 (voice, ep 20): rewrites are NOT always upward - two 'more natural' rewrites (i2 'the hours it spends sitting in the pot before it ever
+  makes it to the fridge', a4 'And on their own, that's fine, because...') both dropped 4.41 -> 4.37 and were reverted; the long, padded versions
+  sounded less natural, not more. c1 'So, quick guess: does the fridge actually kill these germs?' rose 4.40 -> 4.46 (one-breath question).
+  Shipped take D: chunk20 4.496 / line mean 4.464 (ep 19 4.498 / 4.469) at 181 wpm speaking, f0 16.4 st, ASR clean. Weakest line again a
+  short imperative chain ('Don't gamble on it. Bin it.' 4.38).
 - 2026-10-31 21:40 (third run of the day): Metricool reel rows STILL identical to the 10:50 snapshot (chocolate 1280 / onions 1178 / mint 1211 /
   sugar rush 1108 / gum 121 / coffee 126) and eps 17 (12:15) + 18 (17:15) have no rows yet (9.5 h / 4.5 h old) -> no new verdicts; judge both
   at 48 h (2 Nov). Topic pick kept the 'food in your hand this week' rule: a cut apple going brown (lunchboxes, fruit bowls, every kitchen) with
@@ -266,6 +287,15 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 20 is leftover rice safe (1 Nov, auto run, 2:52): VOICE CAUTION register for warning lines (base -0.3 st, range 1.35; same-take A/B +0.01-0.08 on the
+  4 lines, kept) + c1/e1 rewrites, i2/a4 padded rewrites reverted -> chunk20 4.496 / line mean 4.464 (ep 19 4.498 / 4.469, within gate), 181 wpm, f0 16.4
+  st, ASR clean | VISUAL CAMERA LANGUAGE kit (anim_fx.crash_zoom / dutch / handheld / rack_layer / cctv; one meaning per move), new NIGHT STOVE place
+  (set_stove_night), Chubby INK jaw drop + 'gross' face + poses sick / stop / yawn, lib20 ink props (rice pot / bowls / grain / armoured spore / rod
+  germ / toxin with fire helmet / microwave / thermometer / live retrogradation diagram / wide dish / bin / night clock), warm-orange accent + cold
+  blue fixes, 41 shots, MIDNIGHT TANGO score (new genre), 6 new foley | SCRIPT/TOPIC every-kitchen leftover (in-your-hand rule), belief flip in the
+  hook, seed-wearing-armour metaphor, guess beat, pebbles open loop paid in part 3, rule-of-four mnemonic as the one-sentence takeaway | metric: reach
+  at 48 h vs milk / candy (in-your-hand), SHARES (the mnemonic is built to be sent), 3-s hold of the CCTV opener vs milk's 75.0 %, comments on 'under
+  an hour or all night'.
 - 19 why do cut apples turn brown (31 Oct, auto run, 2:51): VOICE comic-timing pauses per beat (0.4 after a joke / reveal / the guess, 0.25-0.3
   before a continuation) + pace rescue on a 437-word script (commas instead of full stops, explanation lines 1.04-1.09; 4 takes: 157 -> 162 ->
   164.7 -> 167.5 wpm) + 3 rewrites (b2 one-sentence payoff, c3 'Quick guess, then:', g1 'that makes brown melanin' for ASR) -> chunk20 4.498 /
@@ -452,6 +482,10 @@ Script / packaging:
 | 31 Oct | ep 19 apples, trimmed 431 words, speeds +0.03, pauses 0.4, b2/c3/g1 rewrites | 4.449* (chunk20 4.502, line mean 4.472) | 162 (fails pace) | 0.08 | 17.0 | 1 (g1 'melanin' -> 'melon in') |
 | 31 Oct | ep 19 apples, speeds +0.01-0.03, commas for full stops, g1 'brown melanin' | 4.253* (chunk20 4.472, line mean 4.468) | 164.7 (just under) | 0.07 | 17.1 | 0 |
 | 31 Oct | **ep 19 apples, + b2 one-sentence payoff, +0.01-0.04 speed (shipped)** | **4.473* (chunk20 4.498, line mean 4.469)** | 167.5 | 0.08 | 17.2 | 0 |
+| 1 Nov | ep 20 rice, M2, first script (465 words), CAUTION register on b5/b6/b7/e4 | 4.444* (chunk20 4.492, line mean 4.456) | 181.6 | 0.09 | 16.4 | 0 |
+| 1 Nov | ep 20 rice, same take, plain register on b5/b6/b7/e4 (A/B, rejected) | 4.444* (chunk20 4.483, line mean 4.455) | 181.6 | 0.09 | 16.6 | 0 |
+| 1 Nov | ep 20 rice, + e1/c1/i2/a4 rewrites (new take) | (chunk20 4.494, line mean 4.453) | 181.8 | 0.09 | 16.4 | 0 |
+| 1 Nov | **ep 20 rice, i2/a4 rewrites reverted, e1/c1 kept (shipped)** | **4.470* (chunk20 4.496, line mean 4.464)** | 181.2 | 0.085 | 16.4 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -475,7 +509,7 @@ Animation & visuals:
 - [~] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take) (ep 17: double_take + flinch; ep 19: take() with a 2-frame snap + held extreme; next: a jaw-drop mouth state)
 - [~] Character acting: eye direction leads action, blinks on cuts, reaction shots (ep 18: hand poses per action - grip / pinch / point; a reaction shot on every boil-over)
 - [ ] Simple lip-sync visemes for Chubby when he talks (mouth shapes from the VO envelope + vowels)
-- [ ] Camera language: push-in on reveals, whip pans between ideas, low/high angles, rack focus (`cam_keys`, `push_in`)
+- [x] Camera language: one meaning per move - crash zoom (punchline), dutch angle (unease), handheld (urgency), rack focus (attention without a cut), push-in (ep 20: anim_fx.crash_zoom / dutch / handheld / rack_layer / cctv)
 - [~] Depth: parallax background layers, foreground elements passing the camera, atmospheric perspective (27 Oct: blurred
       places = depth of field, haze on far hills; still to do: parallax camera moves inside the places)
 - [x] Lighting: key/rim light, AO, god rays, lights-drop + red rim for danger, golden backlight for reveals (27 Oct anim_cine)
@@ -515,7 +549,7 @@ Story & topics:
 - [x] Curiosity gap + open loop in the first line, payoff placed at ~70 % of the video (ep 11: nose teaser at 5 s, paid at 85 s)
 - [ ] STEPPS (Jonah Berger) for shareability: social currency, triggers, emotion, practical value, stories
 - [x] Concrete comparisons people can picture ("as heavy as…", "the size of…") (ep 12: 1 m2 paper 80 g vs silver leaf < 3 g)
-- [ ] One-sentence takeaway people can use today
+- [x] One-sentence takeaway people can use today (ep 20: a rhythm-of-four mnemonic 'cool it in an hour, eat it in a day, heat it once, and heat it hot', seeded as 4 rules, paid as the recap)
 - [x] Charts on video: a self-drawing graph of a hidden quantity over time, finding-titles, direct labels, presenter rides the line (ep 14: day_graph)
 - [~] Character acting: tiredness you can SEE (ep 14: Chubby 'sleepy' heavy lids + bags, yawns) - next: double takes, eye leads
 - [x] Tape stop (varispeed slow-down of the score) as an audio 'crash' / 'fake' cue (ep 14 music.py tape_stop)
@@ -525,6 +559,17 @@ Story & topics:
 - [ ] Translucency / subsurface look for skin close-ups and fruit (reuse the set_gut rim-glow idea on Chubby's ears and on props)
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-11-01 | CAMERA LANGUAGE (visual / editing) | A camera move is a sentence, not decoration: each one carries one meaning and must be motivated by
+  the line. Crash / snap zoom = 'an abrupt, very fast zoom onto one detail, landing almost instantly' for 'comic beats, shocks and punchlines'
+  (Morphic camera-movement reference); 'a staple of comedic timing, especially deadpan', 'intentionally aggressive, noticeable' (HowToFilmSchool,
+  'Crash zoom'). Dutch angle = 'unease; steep angles read as chaos'. Rack focus = 'move attention without a cut'. Handheld = 'realism, urgency,
+  documentary closeness'. Dolly-in = 'pull the viewer into a thought'. Built anim_fx.crash_zoom (3-frame snap with a tiny overshoot, then HOLD -
+  no ease back, the hold is the joke), dutch (eases into a tilt with a small zoom so no edge shows), handheld (layered slow sines -> dx, dy, rot),
+  rack_layer (a foreground layer with its own blur: animate sigma on two layers in opposite directions = a rack focus), cctv (security-cam look:
+  grade, scanlines, REC dot, timestamp). Lesson from the test frames: a zoom scales the captions too - centre the zoom low (y 700-800) or draw
+  the caption AFTER the camera move, or the text leaves the safe zone | ep 20 (S0 CCTV handheld + crash zoom on 'isn't', S6 / S8b dutch for the warm
+  hours, crash zooms on pebbles / wakes / shrugs / hard / bin it, S10b rack focus from Chubby + microwave to the bowl where the toxin pops up,
+  S23 push-in on the mnemonic) | yes
 - 2026-10-31 (run 3) | TIMING & SPACING (animation principle 7) | Timing = how many frames an action takes, spacing = how far it moves per frame
   (Binus DKV 'Timing and spacing: why every frame matters' / 'Frame by frame', Nov 2025: 6 frames at 24 fps = 0.25 s feels very fast, 24 frames
   feels heavy; few in-betweens = snappy, many = floaty; ease = big spacing then small near the stop). Practical numbers (playbooks 'timing
