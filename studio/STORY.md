@@ -35,12 +35,13 @@ Instagram/YouTube bio line: `True business stories. You make the call. New episo
      `oops_beat(f, t, t0)` stamp + one sting SFX. It is the hero's reaction, never the narrator's verdict on a real company. **Max once per video**, only where a real blunder exists (it's the channel name — keep it special).
   3. **"Your move" end card** — `choice_card(f, "YOUR MOVE", "FIGHT", "FOLD")`: the question + two pills. Same look every episode.
 
-## 2b. Look (owner, 31 Oct 2026: "Visual not good, use colourful stick men and girls")
-The cast is **colourful stick men and girls** (`template/scripts/anim_stick.py`, default on): one bright colour per character, big
-round head with white eyes, thick rounded limbs, dark outline, one or two accessories (hair, bow, cap, hard hat, tie, glasses,
-dress for girls). The hero stays **orange** (spiky hair) — the channel's face. Looks: hero, friend, girl, girl2, lady, inventor,
-exec, creator, worker, oldman, kid, mystery, judge; re-colour anyone with `who={"base": "girl", "col": (0, 190, 120)}`.
-Mix men and girls in every episode. Sets stay full-frame and colourful (anim_sets / anim_story).
+## 2b. Look (owner, 31 Oct → 1 Nov 2026: "use colourful stick men and girls" → then a reference: "use this type of character; change the dress colour like the tie colour, or sometimes the hair")
+The cast is **white line-art cartoon people** (`template/scripts/anim_stick.py`, default on): white body, thick black ink outline, big
+round head with ears, big eyes with pupils glancing sideways, wide grin, slim outlined limbs, black shoes, a short ground line under the
+feet. **Colour lives only in the accents:** tie, shirt/dress, jacket, hair, cap. The hero = spiky white hair + **orange tie** (channel
+face). Looks: hero, friend, girl, girl2, lady, inventor, exec, creator, worker, oldman, kid, mystery, judge; change accents per story with
+`who={"base": "exec", "tie": (0, 170, 90)}`, `{"base": "girl", "shirt": (255, 200, 0), "hair": (200, 60, 40)}`. Mix men and girls in
+every episode. Our own design inspired by the reference — never a copy of an artist's character. Sets stay full-frame and colourful.
 
 ## 3. Series — every video belongs to exactly one (badge + title + CTA)
 | Series | Share of videos | What it is | Types (PLAYBOOK §2) | Ends with |
