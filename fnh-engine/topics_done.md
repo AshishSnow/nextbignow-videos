@@ -39,3 +39,4 @@ voice (v2 MOOD table), 14–20 explaining scenes (step-by-step visuals), never r
 Owner feedback to apply from episode 02 on: captions at true centre (x=540); open with a clear "Do you know…?"
 intro so viewers instantly know what the video is about.
 | 2026-11-01 17:20 IST | 20-leftover-rice | Is leftover rice safe? The risky part isn't the reheating (+ why it goes hard, the 4 rules) | CCTV night-cam time-lapse: Chubby yawns away from the pot, timestamp races, crash zoom on 'isn't' | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=7499436652116397675 | https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=3907223506394432006 |
+CLAIMED 2026-11-02 15:56 IST | 21-bread-in-fridge | Does the fridge make bread go stale faster?
