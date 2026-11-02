@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-02 ~08:30 IST (R&D run: writers' room HOW TO START EP 3 + props kit 5)
+Instagram + YouTube pulls (IGRE / YTVP, 12 Oct → 2 Nov 03:00 UTC): **no change** since the 02:40 IST pull — no row yet for HOW TO START EP 2 (vending, posted
+1 Nov 23:30 UTC) and still no YouTube row for glasses (31 Oct) or the drone episode (1 Nov). Media-kit numbers unchanged (IG last 10 avg 445 views, 6.3 reactions
+/ 1,000 reach). Insight V still the driver of this run: the only series with sends + saves (HOW TO START) had **0** queued scripts → EP 3 written and queued.
+
 ## Snapshot 2026-11-02 ~02:40 IST (episode run: HOW TO START EP 2, vending machines)
 Instagram (IGRE, 11 Oct → 2 Nov) — new + changed rows:
 | Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |

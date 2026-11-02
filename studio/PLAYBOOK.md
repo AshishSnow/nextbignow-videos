@@ -266,6 +266,10 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   (box → wobbly shelf), `tray_el`, `shortcut_door_el(open_=)`, `exit_sign_el(mirror=)`, `list_el("LAMP")`, `turnstile_el`, `heart_el(cracked=)`.
   Lab frames: `lab/story_kit/storyboard_ikea_st1.jpg`. Pattern for new kits: one file per world, sets registered via `_STORY_SETS.update` +
   `_FLOOR.update` + `SET_LIGHT.update`, added to anim.py's exec list, checked with `board_check --strict` and a 10–12-row lab render with guides.
+- **Props kit 5 (2 Nov, HOW TO START EP 3 food truck, `template/scripts/anim_props5.py`, in anim.py's exec list):** `foodtruck_el(w, open_=True, menu="TACOS",
+  glow, permit=True, col)` (step-van side view: striped awning + lit window when open, shutter when closed, menu board, permit sticker or a red dashed empty
+  outline, reads at w 260–900), `permit_el(w, price="$200", stamped=False)` (plain city permit card, no seal), set `commissary` (garage-kitchen base: roll-up
+  door, prep table, hose reel, drain, bay lines; sign sits right of the cold-open card). Cast in front of the truck hides `menu` → `menu=None` or stand by the wheels.
 - **Props kit 4 (1 Nov, HOW TO START drone episode, `template/scripts/anim_props4.py`, in anim.py's exec list):** `home_el(w, sign="FOR SALE")`
   (suburban house), `aerial_view(t, zoom, cx, cy, rot)` (full-frame top-down "seen from the drone" yard: hip roof, pool, trees, drive, street) +
   `viewfinder(f, t, alt)` (drone-camera HUD: brackets, blinking REC, altitude), `route_map(f, t, k, n_red, labels, t_pop=)` (the step roadmap as

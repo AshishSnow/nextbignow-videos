@@ -27,11 +27,11 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 |---|---|---|
 | Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 (3×) |
 | Sound | music score, SFX, mix levels, loudness | 2026-10-27 (run 6: word guard + `tools/mix_check.py`) |
-| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-10-31 (run 10: story kit 2 — the IKEA board's 3 sets + 9 props, `anim_story2.py`) |
+| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-11-02 (writers' room run: props kit 5 — `foodtruck_el`, `permit_el`, set `commissary` for HOW TO START EP 3, `anim_props5.py`) |
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
 | Tooling | render speed, smoke tests, QA automation | 2026-10-31 (run 9: `tools/board_check.py` storyboard pre-flight + build brief, in smoke_test.sh) |
 | Analytics | what the numbers say, cover frames, captions, posting times | never as a focus (refreshed every run; 31 Oct: first rows for the 4 story-type videos, media-kit baseline in BRAND.md §5) |
-| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-11-01 (HOW TO START EP 2 vending machines, REVIEWED → queue = 5) |
+| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-11-02 (HOW TO START EP 3 food truck NYC, REVIEWED → queue = 5 unbuilt REVIEWED incl. the only HOW TO START) |
 | Brand | BRAND.md readiness: media-kit numbers, brand-safety rules, sponsor formats, disclosure templates, community | 2026-10-31 (interactive: BRAND.md) |
 | Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-11-01 (R&D run: HOW TO START shelf 0 → 4 banked (#25–28, 3 Ready + 1 almost) + vending (#24) written and queued as EP 2) |
 
@@ -67,6 +67,8 @@ Analytics
 - Pull follower growth (brandSummary / IGFO*) and audience countries (demographic connector) next run — the media kit needs both (BRAND.md §5).
 - YouTube vs Instagram per topic: YT winners differ (Compaq 1,332 YT vs 130 IG) — pull YTVP06/08 every run and compare after 10 posts.
 Story
+- Writers' room lesson (2 Nov): a how-to's twist must help the *seat* (a first-timer), not the system in general — "2,200 new applications" read as good
+  news until the review noticed they go to 2022 lists; and a preference poll ("tacos or coffee") is not a choice — ask about the decision the story raised.
 - Writers' room lesson (1 Nov): numeric *ranges* ("four to eight thousand") fail R5 — say "several thousand" and put the range in the caption;
   old regulator cases must say the year aloud; a how-to's "trap" step must not paint a legal category (a likely sponsor) as a scam.
 - story_check estimates 0.40 s/word: a 4-trick SPOT THE TRICK lands at ~125 s and a YOUR MOVE single at ~120 s. If the first two episodes hold < 25 % of
@@ -112,6 +114,30 @@ Visuals / Story / Tooling
   part renders start each part with t = 0 for the first frame's windows; set it at the top of compose() if a flicker is ever seen.
 
 ## Log
+- 2026-11-02 (02:41 UTC run) | Writers' room (data override of rule 0) + Visuals | Queue held 4 REVIEWED (Pepsi P1/P2, IKEA, nickel Coke) and the bank
+  ≥ 10 Ready, so rule 0 didn't fire and the rotation said Voice/Sound/Story (27 Oct). Overrode it on data: the last two episode runs both built
+  **HOW TO START** (drone 1 Nov, vending 2 Nov) and the drone how-to is the channel's best on every sponsor metric (3-s 75.9 %, 20 reactions on
+  1,180 reach = 17 / 1,000 vs 1.1 before), but the queue held **0** HOW TO START scripts — tonight's build would have had to research from scratch.
+  **Hypothesis:** a HOW TO START episode whose hook is a *mystery the steps solve* ("why would a vendor pay thousands to rent a $200 permit?") and
+  whose steps are told in the order you must do them passes 7/7 + 6/6 and a fresh-eyes review, and with its assets pre-written the build needs
+  0 new code. **Research:** NYC Health Mobile Food Vendors page + release 015-26 (13 Mar 2026) verified today (cap by law; ≥ 2,200 supervisory
+  license applications/yr from 1 Jul 2026 for 5 yrs under LL 54 + 59 of 2026, offered to the 2022 lists; daily commissary return; ~5,800 permits;
+  no list for the personal license). **WebFetch was blocked session-wide after the first batch** (permission timeout, unattended) → MyCity fees,
+  DOI 2009, Queens Daily Eagle 2025 and Square stay at the 1 Nov check, marked ⚠ with a BUILD GATE + a verified-only fallback hook in SOURCES.md.
+  Caught: the Eagle story is about *street vendors* (mostly carts) → hook says "food vendor", not "food truck"; the 500/1,500/200 split and an
+  "11k waitlist" exist only on secondary sites → kept out. **Script:** first draft 6/7 (R7 25 s twist→end) → 7/7 + 6/6 after 3 trims. **Review**
+  (independent subagent, saw only STORY/BRAND + the 3 files): **"not ready" (close)** — 9 must-fixes, all applied: hook scope, "can't sell" ambiguity,
+  "buy the truck last" contradicting step 4, e3 overreach (the Mar 2026 list reopening), t1 "adds applications" ≈ permits, **the twist was false
+  comfort** for a first-timer (the 2,200 go to 2022 lists) → takeaway "Not on one? Try working a truck first.", **"tacos or coffee" wasn't a decision**
+  → "Still New York? STAY or MOVE?", renting read like a tip → "outside the official system" + "Back in 2009", an unsourced pinned reply. Re-check
+  7/7 + 6/6 (~102 s, twist→end 18.0 s). Lesson for STORY.md: a how-to's twist must help *the seat* (the first-timer), not the industry in general.
+  **Visuals:** wrote `foodtruck_el(w, open_, menu, glow, permit, col)`, `permit_el(w, price, stamped)`, set `commissary` (`template/scripts/anim_props5.py`,
+  in anim.py's exec list). Before → after on the same board: `board_check --strict` FAIL (3 missing) → PASS (0 missing, 0 warnings); lab sheet of 6 rows
+  with safe-zone guides (`lab/story_kit/storyboard_foodtruck_ep3.py/.jpg`), 0.04–0.33 s/frame; 2 fixes after the first sheet (COMMISSARY sign collided
+  with the cold-open card → moved right; i1 captions/permit/tag re-placed), 4 placement notes in the shots.md header. Smoke test PASSED with the
+  food-truck board added to its `--strict` list. Analytics: Metricool IG + YT pulls identical to the 02:40 IST snapshot (no row yet for vending EP 2,
+  posted 23:30 UTC); ALGORITHM.md 2 days old → not redone. | kept — measure: EP 3's 3-s rate and saves per reach vs EP 1 (75.9 % / 12 per 1,000)
+  and EP 2; comments on STAY/MOVE vs GYM/OFFICE (a story-tension question vs a preference poll)
 - 2026-11-01 | Topics (+ writers' room) | Queue held 4 REVIEWED and the bank 16 Ready, so rule 0 didn't fire; Topics, Story, Sound and Voice all
   tied at 27 Oct. Chose Topics because the data said so: HOW TO START is ~40 % of the mix (STORY.md §3) but had **0** banked topics and no
   queued episode — the drone episode was researched at build time. **Hypothesis:** a verified HOW TO START shelf + one REVIEWED episode in the
