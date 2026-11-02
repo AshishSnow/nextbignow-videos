@@ -21,7 +21,8 @@ Understand the new algorithm and act on it — I shouldn't have to tell you ever
 learning beat speed. Every run must leave the channel a little better than it found it.
 
 ## A. Algorithm notes (re-check EVERY DAY: the first run of each IST day, i.e. when "Last checked" is not today; record what changed)
-Last checked: 2026-11-01 (15:50 IST run, first run of the IST day). 1 Nov: WebSearch (SocialPilot / Fanpage Karma 2026 changelogs, a Ground News
+Last checked: 2026-11-02 (15:50 IST run, first run of the IST day). 2 Nov: WebSearch + read air.io month-by-month (updated 14 Oct), Fanpage Karma, ppc.land (Dec 2025 report: since Sep 2025 Shorts ranking reportedly moved from 'expected watch time per impression' toward 'satisfied watch time per click', no YouTube confirmation): NO new official Reels or Shorts ranking change after 25 Oct; the only later item is monetisation (YPP thresholds from 1 Feb 2027). Still current: Mosseri's 3 signals, keyword captions, Shorts originality (1 Oct). Acting on it today: search-question first line ('Does the fridge make bread go stale faster?'), a comic original opener no re-upload farm has, a 2:43 cut (no padding) because 'satisfied' watch time beats minutes.
+Previous: 2026-11-01 (15:50 IST run, first run of the IST day). 1 Nov: WebSearch (SocialPilot / Fanpage Karma 2026 changelogs, a Ground News
 Reels summary 4 days old, OutlierKit / tunepocket / Android Headlines / SEJ for Shorts): NO new official ranking or policy change since 31 Oct. Still
 current: Mosseri's 3 signals (watch seconds, likes/reach, sends/reach), keyword captions for 'Your Algorithm' topics, YouTube Shorts originality
 (1 Oct) + engaged views. Acting on it today: a search-question first line ('Is leftover rice safe?'), a repeatable one-line rule people can SEND
@@ -74,7 +75,8 @@ more since users can edit their "Your Algorithm" topics (topic matching) -> firs
   news about everyday foods/drinks, "why does…" questions). Add 3–5 fresh candidates to the TOP of topic_ideas.md
   UP NEXT (with the angle + 2 likely sources), ranked by: broad appeal (everyone eats/does it) > surprise > share-worthy
   takeaway > visual potential. Drop/stale-mark ideas that the data says are too niche. Record the date here:
-- Last trend scan: 2026-11-01 — web trend search again thin (generic 'viral food trends 2026' listicles); the data spoke instead: ep 18 milk (a daily
+- Last trend scan: 2026-11-02 — web results again generic (Diwali mithai + adulteration pieces; Diwali is 8 Nov, adulterated-sweets stories are running). All four ink episodes passed 1k -> kitchen moments keep winning. Added to topic_ideas.md UP NEXT: namkeen goes soft (Diwali-box version of soggy snacks, mirror of today's bread), ghee smell, why milk sweets spoil faster (+ FSSAI best-before rule).
+- Previous trend scan: 2026-11-01 — web trend search again thin (generic 'viral food trends 2026' listicles); the data spoke instead: ep 18 milk (a daily
   kitchen moment + a tested fix) hit 1204 reach / 75.0 % hold in ~27 h and ep 17 candy 1043 -> 'in your hand THIS week' + 'practical fix' holds. Added
   to topic_ideas.md UP NEXT: bread-in-the-fridge (a direct sequel to today's retrogradation diagram), garlic breath lasts hours (it comes from your
   lungs), washing rice (what rinsing really removes), soggy fried food (moisture moving back in), plus Diwali ghee still queued for the week.
@@ -170,6 +172,8 @@ Script / packaging:
 - [x] Comment question in caption + firstCommentText (every episode since 10).
 
 ## D. Learnings (newest first, dated, with numbers)
+- 2026-11-02 15:50: VERDICTS eps 17-18 (>= 48 h): candy 1049 / 65.0 % / 25.1 s, milk 1217 / 74.7 % / 30.2 s; apples at ~41 h 1024 / 65.6 % / 16.9 s with 38 likes + 4 saves; rice at 22 h already 1034 / 72.1 % / 22.3 s. So ALL 4 ink eps broke 1k: the owner-approved look costs nothing and 'food in your kitchen' is a reliable floor. KEEP ink + kitchen. Hold follows the first second: a physical accident (milk) or a gag (CCTV) ~ 72-75 %, a slow change (apples) or a bite (candy) ~ 65 %. Apples' low watch (16.9 s) vs its top likes suggests people got the point early: answer late, keep the loop open. Shares still 0-3; the mnemonic hasn't lifted them at 22 h.
+- 2026-11-02 (voice, ep 21): soft synthetic in-breaths before long lines LOSE: -30 dB on 22 lines chunk20 4.497 -> 4.486, first-100 s 4.469 -> 4.452; -38 dB on 15 lines first-100 s 4.458: rejected (engine/tools/add_breaths.py kept for later, a real breath sample might behave differently). TAKE COMPING works: takes of identical text differ by up to 0.14 on a line (c2 4.35 vs 4.49); swapping that one line from another take: line mean 4.456 -> 4.460, first-100 s 4.469 -> 4.474. Tool: engine/tools/comp_takes.py. Hook-adjacent rewrites still matter: i2 question + statement 4.33 -> one-breath sentence 4.41.
 - 2026-11-01 15:50 (first fresh reel rows since 31 Oct 10:50): the Chubby INK look does NOT cost hold - ep 18 milk 1204 reach / 75.0 % 3-s hold
   (= our best ever, with chocolate 74.9) / 30.2 s avg watch / 23 likes at ~22 h; ep 17 candy+teeth 1043 / 65.2 % / 25.3 s at ~27 h; ep 19 apples
   155 / 68.5 % / 11.6 s at ~17 h (row still early). So 6 of the last 8 Chubby posts broke 1k; both ink episodes with a 'food in your hand this
@@ -287,6 +291,7 @@ Script / packaging:
   much water" topics got the biggest reach (4.7–5.6k).
 
 ## E. Changelog (one line per video)
+- 21 does the fridge make bread go stale faster (2 Nov, auto run, 2:43): VOICE TAKE COMPING (engine/tools/comp_takes.py: keep the best take of each line, c2 4.35 -> 4.49) + i2 one-breath rewrite, synthetic breaths A/B rejected -> chunk20 4.496 / line mean 4.460 (ep 20 4.496 / 4.464), 177 wpm, f0 17.5 st, ASR clean | VISUAL VISEMES (anim_fx.viseme: Chubby's mouth makes the sound shapes M/B/P, F/V, EE/S/T, AH, EH, OH, OO/W, L/TH, from the align.json words), a real face close-up (S2), new lit place set_worktop + worktop_front (drawers, towel: the empty-foreground backlog item), new world set_crumb (inside a slice), lib21 ink props (slice stale / frozen / toast / mould, loaf + nightcap, top-freezer fridge, toaster + pop, bread bin, freezer bag, nail, starch-chain culprit, WANTED poster, tombstone, crystal), starch_lock (water LOCKED in rows; the reverse of ep 20), temp_strip fast zone, RACE explainer (race_lanes; positions proportional to staling speed), crust-gold accent + cold blue, 43 shots, 6 foley | SCRIPT/TOPIC direct sequel to ep 20, belief flip twice ('isn't even dry', 'the fridge is the fast lane'), the WHY of the wrong intuition ('cold slows almost everything... starch is the weird one'), a three-way guess, one honest catch for hot climates, three-part rule 'counter for now, freezer for later, fridge for literally everything else', 2:43 (no padding), RAGTIME BAKERY score that freezes in the freezer | metric: reach at 48 h vs rice; 3-s hold of the hammer gag vs milk 74.7 %; avg watch on a shorter video; shares on the rule; comments on 'where do you keep your bread'.
 - 20 is leftover rice safe (1 Nov, auto run, 2:52): VOICE CAUTION register for warning lines (base -0.3 st, range 1.35; same-take A/B +0.01-0.08 on the
   4 lines, kept) + c1/e1 rewrites, i2/a4 padded rewrites reverted -> chunk20 4.496 / line mean 4.464 (ep 19 4.498 / 4.469, within gate), 181 wpm, f0 16.4
   st, ASR clean | VISUAL CAMERA LANGUAGE kit (anim_fx.crash_zoom / dutch / handheld / rack_layer / cctv; one meaning per move), new NIGHT STOVE place
@@ -486,6 +491,12 @@ Script / packaging:
 | 1 Nov | ep 20 rice, same take, plain register on b5/b6/b7/e4 (A/B, rejected) | 4.444* (chunk20 4.483, line mean 4.455) | 181.6 | 0.09 | 16.6 | 0 |
 | 1 Nov | ep 20 rice, + e1/c1/i2/a4 rewrites (new take) | (chunk20 4.494, line mean 4.453) | 181.8 | 0.09 | 16.4 | 0 |
 | 1 Nov | **ep 20 rice, i2/a4 rewrites reverted, e1/c1 kept (shipped)** | **4.470* (chunk20 4.496, line mean 4.464)** | 181.2 | 0.085 | 16.4 | 0 |
+| 2 Nov | ep 21 bread, M2, first script (441 words) | 4.460* (chunk20 4.494, line mean 4.460) | 176 | 0.08 | 17.3 | 1 (f3 'today's') |
+| 2 Nov | ep 21 bread, 6 rewrites (i2 still a question) | 4.478* (chunk20 4.501, line mean 4.458) | 177 | 0.08 | 17.4 | 0 |
+| 2 Nov | ep 21 bread, i2 one-breath (new take; c2 fell to 4.35) | 4.469* (chunk20 4.497, line mean 4.456) | 177 | 0.08 | 17.6 | 0 |
+| 2 Nov | ep 21, same take + breaths -30 dB / 22 lines (rejected) | 4.452* (chunk20 4.486, line mean 4.455) | 177 | 0.08 | 17.6 | 0 |
+| 2 Nov | ep 21, same take + breaths -38 dB / 15 lines (rejected) | 4.458* | 177 | 0.08 | 17.6 | 0 |
+| 2 Nov | **ep 21, take comp: c2 from the previous take (shipped)** | **4.474* (chunk20 4.496, line mean 4.460)** | 177 | 0.08 | 17.5 | 0 |
 *ep 10: whole-file UTMOS now scores only the first 100 s (a 118-s whole-file pass ran out of RAM on the 8 GB box).
 Note (27 Oct): whole-file UTMOS is length-biased (94 s file 4.28 vs its own 20-s chunks 4.41), so voice_report now
 also prints utmos_chunk20 + utmos_line_mean; gate on those when lengths differ (ep 09 vs ep 08: -0.04 / -0.04, pass).
@@ -508,7 +519,7 @@ Animation & visuals:
 - [x] Timing & spacing: hold key poses, fast 4-frame in-betweens, moving holds, the cartoon take (ep 19: anim_fx.snap / keyed / pose_keys / moving_hold / take)
 - [~] Exaggeration: bigger expressions at reveals (eyes pop, jaw drop, double take) (ep 17: double_take + flinch; ep 19: take() with a 2-frame snap + held extreme; next: a jaw-drop mouth state)
 - [~] Character acting: eye direction leads action, blinks on cuts, reaction shots (ep 18: hand poses per action - grip / pinch / point; a reaction shot on every boil-over)
-- [ ] Simple lip-sync visemes for Chubby when he talks (mouth shapes from the VO envelope + vowels)
+- [x] Lip-sync visemes for Chubby: real sound-group mouth shapes from the word timings (ep 21: anim_fx.viseme, talk() now returns visemes)
 - [x] Camera language: one meaning per move - crash zoom (punchline), dutch angle (unease), handheld (urgency), rack focus (attention without a cut), push-in (ep 20: anim_fx.crash_zoom / dutch / handheld / rack_layer / cctv)
 - [~] Depth: parallax background layers, foreground elements passing the camera, atmospheric perspective (27 Oct: blurred
       places = depth of field, haze on far hills; still to do: parallax camera moves inside the places)
@@ -531,7 +542,7 @@ Voice (M2 mature blend since 27 Oct — refine it):
 - [x] Mic-like polish: de-ess / presence / body / room / compressor A/B on one fixed take (ep 16: all UTMOS-neutral -> chain at plateau)
 Sound:
 - [~] Foley that matches the action (crunch, fizz, squelch, sizzle) synthesized per video (ep 10: record scratch, wrapper crinkle, boing, key jingle)
-- [ ] Music that follows the story (build -> drop on the reveal -> soft under explanations), stems ducking
+- [~] Music that follows the story (ep 21: thin oom-pah under explanations, full band on reveals, the freezer freezes the band with a ritard to a held chord); stems ducking still to do
 - [ ] A signature 1-second FreshNestHub audio logo
 Explaining (the owner's #1 priority — people must understand what they watch):
 - [x] Mayer's multimedia principles: signalling (highlight what matters), segmenting (one step per shot), coherence
@@ -559,6 +570,7 @@ Story & topics:
 - [ ] Translucency / subsurface look for skin close-ups and fruit (reuse the set_gut rim-glow idea on Chubby's ears and on props)
 
 ### Journal (newest first: date | skill | what I learned (source) | used in | kept?)
+- 2026-11-02 | LIP SYNC / VISEMES (character acting) | Mouths don't track letters, they track a handful of sound groups: Rhubarb Lip Sync (D. Wolf, GitHub) uses A = P B M closed, B = K S T + EE, C = EH AE, D = AA, E = AO ER, F = UW OW W, plus G = F V, H = long L, X = idle; Preston Blair's chart via Frameo's 'animation mouth chart' uses nine (A/I, E, O, U, C/D/G/K, F/V, L/Th, M/B/P, Rest). Practice: 'hold vowels, snap consonants, return to rest between phrases', 'hold each mouth for at least two frames' at 12 fps, and the mouth opens before the vowel (Rhubarb describes anticipating it). Built anim_fx.viseme: letters -> sound groups per word (digraphs, silent e), shared out over the word's time weighted toward vowels, leading the sound by one frame, merging anything shorter than ~2 frames while keeping hard closes, rest between words; new mouths vm vf ve va vh vo vu vl in Chubby INK; talk(t) returns them everywhere. Honest limit: letter guessing, not real phonemes, and at normal size the mouth is small, so it pays most in close-ups (S2) | ep 21 (every talking shot) | yes
 - 2026-11-01 | CAMERA LANGUAGE (visual / editing) | A camera move is a sentence, not decoration: each one carries one meaning and must be motivated by
   the line. Crash / snap zoom = 'an abrupt, very fast zoom onto one detail, landing almost instantly' for 'comic beats, shocks and punchlines'
   (Morphic camera-movement reference); 'a staple of comedic timing, especially deadpan', 'intentionally aggressive, noticeable' (HowToFilmSchool,

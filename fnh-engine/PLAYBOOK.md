@@ -233,6 +233,13 @@ Sheet: /home/claude/outputs/chubby_ink_colour_options.jpg. v3 (Pixar kid) stays 
   1.35), and a rule-of-four mnemonic (one-sentence takeaway) seeded as numbered cards and paid in the recap. Padding a line to sound casual can LOWER
   UTMOS - keep lines tight.
 
+### Ep 21 (2 Nov, fifth ink episode): VISEMES, the MORNING WORKTOP + INSIDE-THE-SLICE places, the RACE explainer, take comping (`anim_fx.py`, `fnh_char_ink.py`, `anim_props_lib21.py`, `engine/tools/comp_takes.py`)
+- `talk(t)` now returns VISEME mouths from work/align.json (`anim_fx.viseme`: vm M/B/P, vf F/V, ve EE/S/T/K, va AH, vh EH, vo OH, vu OO/W, vl L/N/D/TH; one-frame lead, tiny sounds merged, rest between words). `mouth=talk(t)` in every talking shot and use a face close-up (`chub_head_only`) when the line is an aside: the mouth is what he acts with.
+- Places: `set_worktop(t)` + `worktop_front(f, 1330)` AFTER Chubby (morning kitchen, window, jars, drawers + towel, so no more empty foreground; props on it at y ~ 1200-1320); `set_crumb(t, stale, zoom)` = inside a slice (captions + diagrams stay clear, sharp pores only at the bottom).
+- lib21 ink props: bread_slice_el(stale, mood, look, frozen, toast, mould), loaf_el(stale, mood, look, cap, frost), fridge_ink_el(open_, top) (top freezer + main door; shots add the loaf with a helper like ep 21 fridge_at), toaster_el + ep 21 toaster_scene (slices drawn BEFORE the toaster so they rise out of it), bread_bin_el, freezer_bag_el, nail_el, starch_guy_el, wanted_el, tomb_el, egg_el, crystal_el. Live: starch_lock(f, cx, cy, k, t, w, h, n, locks, swell) on a paper panel (k 0 = loose chains + free water, 1 = tight rows + water locked), temp_strip (thermometer ruler with a lit zone + marker), race_lanes(f, t, pos, ...) (three things race to a line: lane position = the RATE you're explaining; great for 'which is fastest').
+- Voice: `python3 engine/tools/comp_takes.py <project> <tag> [margin]` keeps the best read of each identical line across takes (save a take first as work/vo_<tag>.wav + align_<tag>.json + vr_<tag>.log); confirm with voice_report. Synthetic breaths (engine/tools/add_breaths.py) lowered UTMOS: not used.
+- Fetching sources: open only URLs that came from a WebSearch result; guessed URLs get refused (PROVENANCE_REQUIRED).
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

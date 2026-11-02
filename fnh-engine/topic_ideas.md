@@ -3,14 +3,16 @@
 ## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
 Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
 NEW from the 1 Nov trend scan (data: ep 18 milk 1204 reach / 75.0 % hold, ep 17 candy 1043 -> 'in your hand this week' + a practical fix keeps winning):
-0n. bread-in-the-fridge (MOVE UP: direct sequel to ep 20's retrogradation diagram, reuse anim_props_lib20.starch_rows) — Do you know the fridge makes
-    bread go stale faster than the counter? (retrogradation is fastest just above freezing; freezer is fine; toast it to reverse). Verify: a university
-    food-science page + America's Test Kitchen / Serious Eats / BBC Good Food.
+NEW from the 2 Nov trend scan (Diwali 8 Nov; web trend search still thin -> calendar + data; ep 19 apples, ep 20 rice, ep 18 milk and ep 17 candy ALL passed 1k reach = 4 of 4 ink episodes, all kitchen moments):
+0r. namkeen-goes-soft (Diwali week, replaces 0q) — Why do crispy Diwali snacks go soft once the box is open? (moisture moves in from the air / from the soft sweets packed next to them; the mirror of today's bread: chips soften while bread hardens). Verify: ScienceABC 'why chips soften but bread hardens' + a food-science / extension source.
+0s. ghee-smell (Diwali, was 0m) — Why does ghee smell so good when it's heated? (browned milk solids, Maillard). Verify first; drop if only blogs.
+0t. mithai-goes-off-fast (Diwali) — Why do milk sweets spoil faster than dry ones? (water activity; khoya / chenna vs besan / dry-fruit). FSSAI 'best before' on loose sweets rule as the practical takeaway. Verify: FSSAI + a university food-science source.
+0n. (DONE ep 21) bread-in-the-fridge.
 0o. garlic-breath — Do you know garlic breath can last a day because it comes from your LUNGS, not your mouth? (allyl methyl sulfide goes through the
     blood and out in the breath; apple / milk / mint tested in a 2016 Ohio State study). Verify: Ohio State (J Food Sci 2016) + a major outlet.
 0p. washing-rice — Do you know what rinsing rice really washes off? (surface starch = less sticky; some arsenic in some studies, but also some added
     nutrients in enriched rice). Verify carefully: FSA / FDA + a university study; drop if contested.
-0q. soggy-fried-food — Why do crispy fried snacks go soggy in a box? (steam / moisture moves from the hot inside to the crust). Verify: a
+0q. (see 0r, Diwali version first) soggy-fried-food — Why do crispy fried snacks go soggy in a box? (steam / moisture moves from the hot inside to the crust). Verify: a
     food-science source + ATK / Serious Eats.
 NEW from the 31 Oct trend scan (Halloween day; Diwali 8 Nov; data: the 4 breakouts are all 'a food in your hand this week' moments —
 candy, gum + ice water, onions, chocolate — and shares/saves follow a practical fix, see performance.md):
@@ -24,7 +26,7 @@ candy, gum + ice water, onions, chocolate — and shares/saves follow a practica
 0k. (DONE ep 20) rice-in-the-fridge — Do you know leftover rice goes hard in the fridge and soft again when you heat it? (starch retrogradation;
     plus the safe part: cool rice fast, eat within a day, reheat hot — NHS 'reheating rice'). Everyday Indian kitchen; practical takeaway.
     Verify: NHS + a food-science page (Serious Eats / a university extension).
-0l. bread-in-the-fridge (belief flip) — Do you know the fridge makes bread go stale FASTER? (retrogradation is fastest just above
+0l. (DONE ep 21) bread-in-the-fridge (belief flip) — Do you know the fridge makes bread go stale FASTER? (retrogradation is fastest just above
     freezing; freezer is fine). Verify: a university food-science page + a major outlet (NYT / BBC Good Food).
 0m. diwali-ghee-smell (Diwali 8 Nov) — Why does ghee smell so good when it's heated? (Maillard + browned milk solids). Verify first.
 NEW from the 28 Oct trend scan (data: myth-flip + everyday habit topics broke out: sugar rush 1.1k, mint 1.2k reach):

@@ -623,3 +623,47 @@ def giggle(level=-27, dur=0.5):
 
 def pedal_bin(t, lv=-20):
     add(clang(lv - 2, 700, 0.4), t); add(thud(lv), t + 0.3); add(crunch(lv - 4), t + 0.33)
+
+
+# ---- ep 21 foley (bread): bread_knock (a stale slice on wood: dull, short knock), nail_tink (a nail taking a hit: bright little ping), toaster_lever (a ratchet click down), toaster_pop (the spring: thunk + twang), crust_crack (a dry crust breaking), freeze_creak (ice tightening)
+def bread_knock(level=-14):
+    n_ = int(0.12 * SR); t2 = np.arange(n_) / SR
+    y = (np.sin(2 * np.pi * 170 * t2) + 0.6 * np.sin(2 * np.pi * 330 * t2) + 0.25 * rng.standard_normal(n_)) * np.exp(-t2 / 0.022)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def nail_tink(level=-22):
+    n_ = int(0.2 * SR); t2 = np.arange(n_) / SR
+    y = (np.sin(2 * np.pi * 2600 * t2) + 0.5 * np.sin(2 * np.pi * 4100 * t2)) * np.exp(-t2 / 0.035)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def toaster_lever(level=-20):
+    n_ = int(0.25 * SR); y = np.zeros(n_)
+    for j in range(5):
+        i = int((0.02 + j * 0.03) * SR); m = int(0.012 * SR)
+        y[i:i + m] += rng.standard_normal(m) * np.exp(-np.arange(m) / (0.003 * SR))
+    i = int(0.19 * SR); t2 = np.arange(n_ - i) / SR; y[i:] += np.sin(2 * np.pi * 240 * t2) * np.exp(-t2 / 0.02) * 1.4
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def toaster_pop(level=-15):
+    n_ = int(0.55 * SR); t2 = np.arange(n_) / SR
+    y = np.sin(2 * np.pi * 150 * t2) * np.exp(-t2 / 0.03) * 1.2 + np.sin(2 * np.pi * (520 + 70 * np.sin(2 * np.pi * 34 * t2)) * t2) * np.exp(-t2 / 0.13) * 0.5
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def crust_crack(level=-20, dur=0.4):
+    n_ = int(dur * SR); y = np.zeros(n_)
+    for j in range(16):
+        i = int(rng.uniform(0, n_ * 0.8)); m = int(rng.uniform(0.002, 0.008) * SR)
+        y[i:i + m] += rng.standard_normal(m) * rng.uniform(0.3, 1.0)
+    y = signal.sosfilt(signal.butter(2, 1500, "high", fs=SR, output="sos"), y)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def freeze_creak(level=-26, dur=0.9):
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR; f_ = 300 + 900 * t2 / dur
+    y = np.sign(np.sin(2 * np.pi * np.cumsum(f_ / 7) / SR * 7)) * (0.5 + 0.5 * np.sin(2 * np.pi * 21 * t2)) * np.minimum(t2 / 0.1, (dur - t2) / 0.2).clip(0, 1)
+    y = signal.sosfilt(signal.butter(2, [500, 3200], "band", fs=SR, output="sos"), y)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))

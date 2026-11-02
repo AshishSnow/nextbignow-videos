@@ -1,3 +1,4 @@
+import bisect, re
 # ================= anim_fx.py — FreshNestHub craft library (grows every run; see improvements.md section G) =================
 # Each technique here was learned, used in an episode and kept. Add new ones at the bottom with a one-line note:
 # what it is, where it came from (principle / source), which episode first used it.
@@ -622,3 +623,75 @@ def cctv(f, t, label="KITCHEN CAM 2", clock=None, rec=True):
     for (x0, y0, sx, sy) in ((80, 270, 1, 1), (1000, 270, -1, 1), (80, 1460, 1, -1), (1000, 1460, -1, -1)):
         cv2.line(f, (x0, y0), (x0 + 60 * sx, y0), (0.9, 0.95, 0.88), 4, cv2.LINE_AA); cv2.line(f, (x0, y0), (x0, y0 + 60 * sy), (0.9, 0.95, 0.88), 4, cv2.LINE_AA)
     return f
+
+
+# ================= VISEMES (ep 21): Chubby's mouth follows the actual SOUNDS of the narration, not only its loudness =================
+# Craft: mouths don't track letters, they track a small set of sound groups (Preston Blair's chart; Rhubarb Lip Sync's 6 basic + 3 extended shapes): lips closed
+# for M B P, teeth on the lip for F V, wide/teeth for EE S T K, tall open for AH, medium for EH, round for OH, pucker for OO W, tongue up for L N D TH.
+# The mouth shape should arrive a frame or so BEFORE the sound; flicker between shapes under ~2 frames reads as noise, so short sounds merge; hard closes (M B P) stay.
+_V_DIG = [("tion", "ve"), ("ough", "vo"), ("igh", "ve"), ("ee", "ve"), ("ea", "ve"), ("oo", "vu"), ("ou", "vh"), ("ow", "vo"), ("oa", "vo"), ("ai", "vh"), ("ay", "vh"),
+          ("th", "vl"), ("sh", "ve"), ("ch", "ve"), ("ph", "vf"), ("qu", "vu"), ("wh", "vu"), ("ck", "ve"), ("ng", "vl"), ("er", "vh"), ("ar", "va"), ("or", "vo"), ("ir", "vh"), ("ur", "vh")]
+_V_ONE = dict(a="vh", e="vh", i="ve", o="vo", u="vh", y="ve", m="vm", b="vm", p="vm", f="vf", v="vf", w="vu", l="vl", n="vl", d="vl", t="ve", s="ve", z="ve", c="ve", k="ve", g="ve", j="ve", x="ve", r="vu", h="vh", q="ve")
+_V_WEIGHT = dict(vh=1.3, va=1.4, vo=1.4, vu=1.1, ve=0.9, vl=0.7, vm=0.9, vf=0.9)
+
+
+def _word_visemes(w):
+    w = re.sub(r"[^a-z]", "", w.lower())
+    if len(w) > 2 and w.endswith("e") and w[-2] not in "aeiou": w = w[:-1]                # silent e
+    out = []; i = 0
+    while i < len(w):
+        for dg, v in _V_DIG:
+            if w.startswith(dg, i): out.append(v); i += len(dg); break
+        else:
+            out.append(_V_ONE.get(w[i], "vh")); i += 1
+    res = []
+    for v in out:
+        if not res or res[-1] != v: res.append(v)
+    return res or ["vh"]
+
+
+def _build_visemes(lead=0.042, min_d=0.075):
+    W_ = AL["words"]; tl = []
+    for i, w in enumerate(W_):
+        t0 = w["t"]; nxt = W_[i + 1]["t"] if i + 1 < len(W_) and W_[i + 1]["line"] == w["line"] else None
+        lend = AL["lines"][w["line"]]["end"]
+        t1 = nxt if nxt is not None else lend
+        t1 = min(t1, t0 + 0.09 * max(2, len(w["w"])) + 0.12)                                  # don't hold a mouth through a pause inside a line
+        vs = _word_visemes(w["w"])
+        if (t1 - t0) / len(vs) < min_d:                                                       # too fast: keep the hard closes + the vowels only
+            keep = [v for v in vs if v in ("vm", "vf", "vh", "va", "vo", "vu")] or vs[:1]; vs = keep[: max(1, int((t1 - t0) / min_d))]
+        tw = sum(_V_WEIGHT.get(v, 1.0) for v in vs); c = t0
+        for v in vs:
+            d_ = (t1 - t0) * _V_WEIGHT.get(v, 1.0) / tw; tl.append((c - lead, c + d_ - lead, v)); c += d_
+    return tl
+
+
+_VIS = None
+
+
+def viseme(t):
+    """the mouth for time t (from work/align.json) or 0 between words. Upgrade open vowels on stressed-loud moments to the tall mouth."""
+    global _VIS
+    if _VIS is None: _VIS = _build_visemes(); _VIS_T = None
+    i = bisect.bisect_right(_VIS_S(), t) - 1
+    if i >= 0 and _VIS[i][0] <= t < _VIS[i][1]:
+        v = _VIS[i][2]
+        if v == "vh":
+            j = int(t * FPS)
+            if j < len(_env) and _env[j] > 0.85: return "va"
+        return v
+    return 0
+
+
+_VIS_ST = None
+
+
+def _VIS_S():
+    global _VIS_ST
+    if _VIS_ST is None: _VIS_ST = [x[0] for x in _VIS]
+    return _VIS_ST
+
+
+def talk(t, on=True):
+    """ep 21: lip sync = visemes (replaces the loudness-only 0/1/2/3 of anim_base)."""
+    return viseme(t) if on else 0

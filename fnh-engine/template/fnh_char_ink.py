@@ -146,6 +146,30 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
         d.line(wob([(mx - 24, my), (mx - 12, my - 7), (mx, my), (mx + 12, my - 7), (mx + 24, my)], 0.8, 44), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve")
     elif mouth == "o":
         d.ellipse(S(mx - 12, my - 10, mx + 12, my + 16), fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
+    elif isinstance(mouth, str) and mouth.startswith("v"):                  # ep 21: VISEMES (see anim_fx.viseme): one mouth per sound group
+        if mouth == "vm":                                                    # M B P: lips pressed, a little wider + a dent under
+            d.line(wob([(mx - 20, my + 1), (mx, my + 3), (mx + 20, my + 1)], 0.5, 45), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve")
+            d.line(S(mx - 7, my + 12, mx + 7, my + 12), fill=INKC + (150,), width=2 * sc)
+        elif mouth == "vf":                                                  # F V: top teeth on the lower lip
+            d.rounded_rectangle(S(mx - 16, my - 4, mx + 16, my + 9), 4 * sc, fill=dark + (255,), outline=INKC + (255,), width=4 * sc)
+            d.rectangle(S(mx - 12, my - 3, mx + 12, my + 3), fill=(255, 255, 255, 255))
+        elif mouth == "ve":                                                  # EE I + S T K: wide, teeth together
+            d.rounded_rectangle(S(mx - 24, my - 7, mx + 24, my + 9), 7 * sc, fill=(255, 255, 255, 255), outline=INKC + (255,), width=5 * sc)
+            d.line(S(mx - 19, my + 1, mx + 19, my + 1), fill=INKC + (130,), width=2 * sc)
+        elif mouth == "va":                                                  # AA AH: tall open + tongue + top teeth
+            d.rounded_rectangle(S(mx - 22, my - 9, mx + 22, my + 26), 13 * sc, fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
+            d.rectangle(S(mx - 16, my - 7, mx + 16, my - 1), fill=(255, 255, 255, 255))
+            d.chord(S(mx - 14, my + 8, mx + 14, my + 26), 180, 360, fill=(226, 104, 112, 255))
+        elif mouth == "vh":                                                  # EH AE: medium open
+            d.rounded_rectangle(S(mx - 21, my - 8, mx + 21, my + 14), 9 * sc, fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
+            d.rectangle(S(mx - 15, my - 6, mx + 15, my - 1), fill=(255, 255, 255, 255))
+        elif mouth == "vo":                                                  # OH AW: rounded
+            d.ellipse(S(mx - 15, my - 12, mx + 15, my + 18), fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
+        elif mouth == "vu":                                                  # OO W: puckered
+            d.ellipse(S(mx - 9, my - 6, mx + 9, my + 10), fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
+        else:                                                                # vl = L N D TH: open a little, tongue up behind the teeth
+            d.rounded_rectangle(S(mx - 19, my - 7, mx + 19, my + 11), 8 * sc, fill=dark + (255,), outline=INKC + (255,), width=5 * sc)
+            d.chord(S(mx - 11, my - 5, mx + 11, my + 8), 180, 360, fill=(226, 104, 112, 255))
     else:
         hh = {1: 9, 2: 16, 3: 23}[mouth]; ww = {1: 17, 2: 22, 3: 26}[mouth]
         d.rounded_rectangle(S(mx - ww, my - 7, mx + ww, my - 7 + hh * 1.5), int(hh * 0.7) * sc, fill=dark + (255,), outline=INKC + (255,), width=5 * sc)

@@ -10,7 +10,7 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 - Only judge posts that are >= 48 h old (numbers keep growing for 2–3 days). Overwrite each row with fresh numbers.
 - Derived: hold = IGRE28 (share of viewers past 3 s); watch% = avg watch / video length; shares and saves per 1k reach.
 
-## Instagram reels (snapshot 1 Nov 2026 15:50 IST — first fresh rows since 31 Oct 10:50; eps 17-19 now have rows, all < 48 h old)
+## Instagram reels (snapshot 2 Nov 2026 15:50 IST; eps 17-18 now >= 48 h = verdicts; ep 19 ~41 h; ep 20 ~22 h)
 | posted (IST) | reel | len s | reach | views | avg watch s | 3-s hold % | likes | shares | saves | comments | style |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 10-20 07:03 | fake honey (10 of 13 brands) | ~45 | 5567 | 6164 | 3.8 | 16.3 | 21 | 9 | 5 | 0 | old static |
@@ -36,11 +36,13 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 | 10-28 03:20 | 14 coffee doesn't give energy | ~137 | 126 | 141 | 15.2 | 56.3 | 5 | 0 | 0 | 1 | CHUBBY v4 + day graphs, daily habit + belief flip — did NOT break out |
 | 10-28 07:52 | 15 chocolate melts in your mouth | 145 | 1280 | 1484 | 38.7 | 74.9 | 35 | 5 | 3 | 1 | FIRST v5 LOOK + M2 voice, Halloween everyday food — BREAKOUT, best 3-s hold ever (74.9 %) |
 | 10-28 12:35 | 16 swallowed gum (7-year myth) | 169 | 121 | 136 | 21.8 | 61.3 | 5 | 0 | 0 | 1 | v5 look + INSIDE-THE-GUT world, myth flip, longest video — did NOT break out |
-| 10-31 12:15 | 17 does sugar rot your teeth | 166 | 1043 | 1218 | 25.3 | 65.2 | 18 | 2 | 2 | 1 | FIRST Chubby INK episode, 'person talking' script, Halloween-day candy + teeth, swing score — BREAKOUT at ~27 h (provisional) |
-| 10-31 17:15 | 18 why does milk boil over | 171 | 1204 | 1350 | 30.2 | 75.0 | 23 | 0 | 0 | 1 | Chubby INK ep 2: stove place, hand poses, follow-through; daily chai moment + tested fixes — BREAKOUT at ~22 h, BEST 3-s HOLD EVER (75.0 %) (provisional) |
-| 10-31 22:35 | 19 why do cut apples turn brown | 171 | 155 | 201 | 11.6 | 68.5 | 2 | 0 | 1 | 1 | Chubby INK ep 3: timing & spacing kit, ink titles, lunch table; tan hook + guess beat — row only ~17 h old, judge 2-3 Nov |
-| 11-01 17:20 | 20 is leftover rice safe | 172 | — | — | — | — | — | — | — | — | Chubby INK ep 4: camera-language kit (CCTV opener, crash zooms, dutch, rack focus), night stove; belief-flip hook + rule-of-four mnemonic; tango score — judge 3 Nov |
+| 10-31 12:15 | 17 does sugar rot your teeth | 166 | 1049 | 1236 | 25.1 | 65.0 | 18 | 2 | 2 | 1 | FIRST Chubby INK episode, 'person talking' script, Halloween-day candy + teeth, swing score — BREAKOUT (final at ~51 h) |
+| 10-31 17:15 | 18 why does milk boil over | 171 | 1217 | 1368 | 30.2 | 74.7 | 24 | 0 | 0 | 1 | Chubby INK ep 2: stove place, hand poses, follow-through; daily chai moment + tested fixes — BREAKOUT (final at ~46 h), joint best hold |
+| 10-31 22:35 | 19 why do cut apples turn brown | 171 | 1024 | 1134 | 16.9 | 65.6 | 38 | 3 | 4 | 1 | Chubby INK ep 3: timing & spacing kit, ink titles, lunch table; tan hook + guess beat — BREAKOUT (~41 h), MOST LIKES of any reel since (38), best saves of the ink eps (4) |
+| 11-01 17:20 | 20 is leftover rice safe | 172 | 1034 | 1145 | 22.3 | 72.1 | 19 | 1 | 3 | 1 | Chubby INK ep 4: camera-language kit (CCTV opener, crash zooms, dutch, rack focus), night stove; belief-flip hook + rule-of-four mnemonic; tango score — BREAKOUT at ~22 h (provisional) |
+| 11-02 17:10 | 21 does the fridge make bread go stale faster | 163 | — | — | — | — | — | — | — | — | Chubby INK ep 5: visemes (real mouth shapes), morning worktop + inside-the-slice places, the staling race; sequel to rice; ragtime score — judge 4 Nov |
 ## What the numbers say so far (update every run, keep it to the 5 most useful lines)
+- 2 Nov 15:50: ALL FOUR ink episodes passed 1k reach (candy 1049, apples 1024, rice 1034 in only 22 h, milk 1217) -> 8 of the last 10 Chubby posts broke 1k, the ink look is now the safest thing we do. Avg watch swings with the topic (milk 30 s, candy 25 s, rice 22 s, apples 17 s), 3-s hold with the first second (milk boil-over 74.7 %, CCTV rice 72.1 % vs apples / candy 65 %): a physical accident or a surveillance gag at frame 0 beats a slow change. Shares stay low (0-3) and the mnemonic on rice did not move them yet (1 share at 22 h). Ep 21 shortens the video to 2:43 and tests a comic physical gag at frame 0 (hammering a nail with bread).
 - 1 Nov 15:50: fresh rows at last. The ink look holds as well as the 3D look or better: milk 75.0 % 3-s hold (best ever) / 1204 reach / 30.2 s
   avg watch; candy+teeth 65.2 % / 1043 / 25.3 s; apples 68.5 % (17 h, still growing). 6 of the last 8 Chubby posts passed 1k reach, all of them a
   food in people's hands that week. Shares stay low on the ink eps (0-2) -> ep 20 adds a repeatable one-line rule to SEND (rule-of-four mnemonic).
