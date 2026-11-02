@@ -126,6 +126,31 @@ def honk(level=-19, dur=0.42):
     x = x / np.abs(x).max() * db(level); return np.stack([x, x], 1).astype(np.float32)
 
 
+def sizzle(dur=1.2, level=-32):
+    """griddle: band-limited noise with random crackle (HOW TO START EP 3)"""
+    n_ = int(dur * SR); x = signal.sosfilt(signal.butter(2, [2500, 9000], "band", fs=SR, output="sos"), rng.standard_normal(n_))
+    cr = (rng.random(n_) > 0.9994).astype(np.float32); cr = signal.sosfilt(signal.butter(2, 3000, "high", fs=SR, output="sos"), cr) * 6
+    te = np.arange(n_) / n_; x = (x + cr) * np.minimum(1, te / 0.1) * np.minimum(1, (1 - te) / 0.25); x = x / (np.abs(x).max() + 1e-9) * db(level)
+    return np.stack([x, x], 1).astype(np.float32)
+
+
+def hose(dur=1.0, level=-30):
+    """water spray: bright steady noise"""
+    n_ = int(dur * SR); x = signal.sosfilt(signal.butter(2, [1200, 7000], "band", fs=SR, output="sos"), rng.standard_normal(n_))
+    te = np.arange(n_) / n_; x = x * (0.8 + 0.2 * np.sin(te * 40)) * np.minimum(1, te / 0.06) * np.minimum(1, (1 - te) / 0.12); x = x / (np.abs(x).max() + 1e-9) * db(level)
+    return np.stack([x, x], 1).astype(np.float32)
+
+
+def rattle(dur=0.9, level=-26, rate=16.0):
+    """roll-up door / shutter: a fast train of metal clicks"""
+    n_ = int(dur * SR); x = np.zeros(n_, np.float32); c = int(0.012 * SR); k_ = np.exp(-np.arange(c) / (0.003 * SR)) * rng.standard_normal(c)
+    for i in range(int(dur * rate)):
+        a = int(i / rate * SR)
+        if a + c < n_: x[a:a + c] += (k_ * (0.7 + 0.3 * rng.random())).astype(np.float32)
+    x = signal.sosfilt(signal.butter(2, 600, "high", fs=SR, output="sos"), x); x = x / (np.abs(x).max() + 1e-9) * db(level)
+    return np.stack([x, x], 1).astype(np.float32)
+
+
 def crt_off(level=-17, dur=0.5):
     n_ = int(dur * SR); tt_ = np.arange(n_) / SR
     fr = 1600 * np.exp(-tt_ / 0.12) + 60

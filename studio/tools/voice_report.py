@@ -27,6 +27,7 @@ try:
         rep["utmos"] = round(sum(u * d for u, d in sc_) / sum(d for _, d in sc_), 3); rep["utmos_mode"] = f"chunked x{len(sc_)}"
     # per line (VOICE.md: trust the per-line mean; whole-file moves +-0.1 on long files)
     ul = {lid: _ut(x[int((l["start"] - 0.05) * sr):int((l["end"] + 0.1) * sr)]) for lid, l in L.items()}
+    rep["utmos_lines"] = {k: round(float(v), 3) for k, v in ul.items()}   # per-line, for tools/comp_takes.py
     rep["utmos_line"] = round(float(np.mean(list(ul.values()))), 3); rep["utmos_line_min"] = round(min(ul.values()), 2)
     rep["utmos_weak_lines"] = {k: round(v, 2) for k, v in ul.items() if v < 4.2}
 except Exception as e:
@@ -84,6 +85,7 @@ try:
         s = re.sub(r"\$(\d+)\.(\d\d)\b", _cents, s)   # "$1.50" (ASR) == "a dollar fifty" (script)
         s = re.sub(r"\b((?:19|20)\d0)'?s\b", _decade, s)   # "1980s" == "nineteen eighties"
         _teen = {w: i for i, w in enumerate("eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(), 11)}
+        s = re.sub(r"\btwenty[ -](one|two|three|four|five|six|seven|eight|nine) hundred\b", lambda m: " " + str((20 + ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"].index(m.group(1)) + 1) * 100) + " ", s)   # "twenty-two hundred" == "2,200" (3 Nov)
         s = re.sub(r"\b(" + "|".join(_teen) + r") hundred\b", lambda m: " " + str(_teen[m.group(1)] * 100) + " ", s)   # "twelve hundred" == "$1,200" (1 Nov)
         s = re.sub(r"\d[\d,]*(\.\d+)?", _num, s)
         s = re.sub(r"[^a-z ]", " ", s.replace("-", " "))

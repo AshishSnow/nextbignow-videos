@@ -133,3 +133,24 @@ _STORY_SETS.update(commissary=_commissary)
 _FLOOR.update(commissary=1220)
 SET_LIGHT.update(commissary="cool")
 SETS = tuple(_FLOOR)
+
+
+# ---- staging helpers (3 Nov, HOW TO START EP 3): rope = velvet rope that clicks shut (a cap, a queue); steam = rising vent puffs ----
+def steam(f, x, y, t, n=4, s=1.0):
+    for i in range(n):
+        ph = (t * 0.55 + i / n) % 1.0; r = int((14 + 40 * ph) * s)
+        ov = f.copy(); cv2.circle(ov, (int(x + 30 * math.sin(ph * 5 + i)), int(y - 240 * ph * s)), r, (1.0, 1.0, 1.0), -1, cv2.LINE_AA)
+        a = 0.28 * clamp(ph * 6) * clamp(2.2 * (1 - ph)); f[:] = f * (1 - a) + ov * a
+
+
+def rope(f, x0, x1, y, t, t_close=None, h=170):
+    """velvet rope between two brass posts; t_close = the hook clicks across the gap at that moment"""
+    k = 1.0 if t_close is None else eback(clamp((t - t_close) / 0.25))
+    xm = x0 + (x1 - x0) * k
+    for x in (x0, x1):
+        cv2.rectangle(f, (int(x - 9), int(y - h)), (int(x + 9), int(y)), (0.72, 0.56, 0.18), -1, cv2.LINE_AA)
+        cv2.rectangle(f, (int(x - 9), int(y - h)), (int(x + 9), int(y)), (0.1, 0.08, 0.1), 3, cv2.LINE_AA)
+        cv2.circle(f, (int(x), int(y - h)), 17, (0.9, 0.72, 0.25), -1, cv2.LINE_AA); cv2.circle(f, (int(x), int(y - h)), 17, (0.1, 0.08, 0.1), 3, cv2.LINE_AA)
+        cv2.ellipse(f, (int(x), int(y)), (46, 13), 0, 0, 360, (0.72, 0.56, 0.18), -1, cv2.LINE_AA)
+    pts = np.array([[x0 + (xm - x0) * q, y - h + 8 + 70 * math.sin(q * math.pi) * (0.6 + 0.4 * k)] for q in np.linspace(0, 1, 24)], np.int32)
+    cv2.polylines(f, [pts], False, (0.1, 0.06, 0.08), 22, cv2.LINE_AA); cv2.polylines(f, [pts], False, (0.72, 0.1, 0.16), 15, cv2.LINE_AA)

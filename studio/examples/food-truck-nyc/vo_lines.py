@@ -5,10 +5,11 @@
 # no waiting list for the personal vendor license). Checked 1 Nov 2026 by the sourcing run (re-verify at build): fees, DOI 2009, Queens
 # Daily Eagle 2025 reported rental prices, Square truck prices. Never promise income; NYC-only (said in i2 + frame-1 card).
 # Vendors who rent permits are told as people squeezed by a cap, never as villains; the 2009 DOI case is told as "charged".
+# Build run 2 Nov 21:30 UTC: all sources re-read (SOURCES.md): e6 now = DOI headline (six arrests), e7 'at least', new t2 = Restricted Area permit (NYC Health: no waiting list; private property).
 # Fresh-eyes review 2 Nov: "not ready" → 9 must-fixes applied (see SOURCES.md). BUILD GATE: re-open the ⚠ sources before rendering.
 SERIES = "HOW TO START"; PART = 0; EP = 3
 LINES = [
-    ("i1", "Why would a New York food vendor pay thousands to rent a two-hundred-dollar permit?", 1.02, 0.40, +1.0, 1.45, ["thousands", "permit?"], "q"),
+    ("i1", "Why would a New York food vendor pay thousands to rent a two-hundred-dollar permit?", 1.02, 0.40, +1.0, 1.45, ["thousands", "permit?"], None),
     ("i2", "You're in New York City, and you want to sell tacos from a truck.", 1.02, 0.25, +0.8, 1.45, ["New", "tacos"], "low"),
     ("i3", "Get the order wrong, and your truck can't legally serve anyone. So here's the plan in four steps.", 1.02, 0.25, +0.8, 1.45, ["legally", "four"], "low"),
     ("a1", "Step one is you, not the truck.", 1.0, 0.30, +1.0, 1.45, ["you,", "truck.:dn"], "low"),
@@ -25,9 +26,10 @@ LINES = [
     ("e3", "The city is still working through waiting lists from twenty twenty-two.", 1.0, 0.35, +0.6, 1.5, ["still", "twenty-two.:dn"], "low"),
     ("e4", "So some vendors quietly rent a permit from a holder, outside the official system.", 1.02, 0.30, +0.6, 1.5, ["rent", "outside"], "low"),
     ("e5", "Vendors told reporters they paid up to twenty-five thousand dollars.", 1.0, 0.30, +0.6, 1.5, ["twenty-five", "thousand"], "low"),
-    ("e6", "That's risky. Back in two thousand nine, city investigators charged people over permit resales.", 1.0, 0.40, +0.6, 1.5, ["risky.", "charged"], "low"),
-    ("t1", "The twist? Since July, the city offers two thousand two hundred license applications a year.", 1.04, 0.20, +0.8, 1.45, ["twist?", "hundred"], "low"),
-    ("t2", "Only for those lists. Not on one? Try working a truck first.", 1.04, 0.20, +0.7, 1.45, ["lists.", "first.:dn"], "low"),
-    ("z1", "Save this. Still New York? Comment: STAY or MOVE?", 1.04, 0.25, +1.0, 1.45, ["Save", "MOVE?"], None),
+    ("e6", "That's risky. A city undercover probe of black-market permits once led to six arrests.", 1.0, 0.40, +0.6, 1.5, ["risky.", "six"], "low"),
+    ("e7", "But since July, the city offers at least twenty-two hundred license applications a year.", 1.04, 0.30, +0.8, 1.45, ["since", "twenty-two"], "low"),
+    ("t1", "The twist? They only go to those lists. Not on one? Try working a truck first.", 1.04, 0.25, +0.8, 1.45, ["twist?", "first.:dn"], "low"),
+    ("t2", "Or stay on private property. That permit has no waiting list.", 1.04, 0.25, +0.8, 1.45, ["private", "no"], "low"),
+    ("z1", "Save this before you start. Still New York? Comment: STAY or MOVE?", 1.04, 0.25, +1.0, 1.45, ["Save", "MOVE?"], None),
     ("z2", "Send this to the friend who wants a truck.", 1.06, 0.0, +1.0, 1.45, ["friend", "truck."], None),
 ]

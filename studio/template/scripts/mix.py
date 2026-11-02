@@ -85,6 +85,11 @@ bed = bed_carve.carve(M * db(-12.0) + sfx, vo)
 # word guard: no SFX hit / loud note within 12 dB of a word on a phone speaker (GUARD=0 disables; studio/tools/mix_check.py measures it)
 if float(os.environ.get("GUARD", 12)) > 0: bed = bed_carve.guard(bed, vo, ld=float(os.environ.get("GUARD", 12)))
 mix = VO + bed
+# pre-limiter (3 Nov, food truck): take the peaks off so loudnorm really reaches -11 LUFS (dynamic path capped it at -11.7..-11.9). LIM=0 disables.
+if float(os.environ.get("LIM", -8)) < 0:
+    from pedalboard import Limiter
+    _p = float(np.abs(mix).max()) + 1e-9; _r = 10 ** (-1.0 / 20) / _p
+    mix = Limiter(threshold_db=float(os.environ.get("LIM", -8)), release_ms=120.0)((mix * _r).astype(np.float32).T, SR).T / _r
 sf.write(f"{B}/work/mix_pre.wav", mix, SR, subtype="FLOAT")
 sf.write(f"{B}/work/stem_vo.wav", vo, SR, subtype="FLOAT"); sf.write(f"{B}/work/stem_bed.wav", bed, SR, subtype="FLOAT")
 TGT = -11.0

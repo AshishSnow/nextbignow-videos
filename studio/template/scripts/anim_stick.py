@@ -1,3 +1,4 @@
+import bisect, re, os
 # ================= line-art stick cast (exec'd after anim_mascot3d.py) — owner, 1 Nov 2026 =================
 # Owner sent a reference (white cartoon guy, thick black outline, big round head + ears, big eyes, wide grin, spiky hair strokes,
 # white collar shirt + coloured tie, slim outlined limbs, ground line) and said: "use this type of character; change the dress colour
@@ -109,6 +110,22 @@ def _stick_head_el(who, mouth, blink, brow, lx, ly, expr, sweat, back, k):
                 d.line(S(cx - 44, my - 2, cx + 44, my - 2), fill=ink, width=lw(5))
         elif mouth == "o":
             d.ellipse(S(cx - 14, my - 6, cx + 14, my + 26), fill=(150, 30, 40, 255), outline=ink, width=lw(5))
+        elif isinstance(mouth, str):   # visemes (3 Nov, talk() below): the sound shapes, ink style
+            dk = (150, 30, 40, 255); tg = (255, 120, 130, 255)
+            if mouth == "vm": d.line(S(cx - 26, my + 4, cx + 26, my + 4), fill=ink, width=lw(8))                           # M B P: lips shut
+            elif mouth == "vf":                                                                                            # F V: teeth on the lip
+                d.rounded_rectangle(S(cx - 26, my - 4, cx + 26, my + 14), int(7 * sc), fill=pap, outline=ink, width=lw(5)); d.line(S(cx - 24, my + 12, cx + 24, my + 12), fill=ink, width=lw(5))
+            elif mouth == "ve":                                                                                            # EE S T: wide, teeth
+                d.rounded_rectangle(S(cx - 36, my - 8, cx + 36, my + 16), int(10 * sc), fill=pap, outline=ink, width=lw(6)); d.line(S(cx - 32, my + 4, cx + 32, my + 4), fill=ink, width=lw(4))
+            elif mouth == "va":                                                                                            # AH: tall open
+                d.chord(S(cx - 38, my - 20, cx + 38, my + 46), 0, 180, fill=dk, outline=ink, width=lw(6)); d.chord(S(cx - 30, my - 18, cx + 30, my - 4), 0, 180, fill=pap)
+                d.ellipse(S(cx - 18, my + 16, cx + 18, my + 30), fill=tg)
+            elif mouth == "vh":                                                                                            # EH: medium open
+                d.chord(S(cx - 34, my - 16, cx + 34, my + 26), 0, 180, fill=dk, outline=ink, width=lw(6)); d.chord(S(cx - 26, my - 14, cx + 26, my - 2), 0, 180, fill=pap)
+            elif mouth == "vo": d.ellipse(S(cx - 20, my - 10, cx + 20, my + 28), fill=dk, outline=ink, width=lw(6))        # OH: round
+            elif mouth == "vu": d.ellipse(S(cx - 11, my - 2, cx + 11, my + 18), fill=dk, outline=ink, width=lw(5))         # OO W: pucker
+            else:                                                                                                          # L N D TH: tongue up
+                d.chord(S(cx - 30, my - 12, cx + 30, my + 20), 0, 180, fill=dk, outline=ink, width=lw(6)); d.ellipse(S(cx - 13, my - 4, cx + 13, my + 8), fill=tg)
         else:
             hh = {1: 14, 2: 22, 3: 30}.get(mouth, 14); ww = {1: 34, 2: 40, 3: 44}.get(mouth, 34)
             d.chord(S(cx - ww, my - 16, cx + ww, my - 16 + hh * 2), 0, 180, fill=(150, 30, 40, 255), outline=ink, width=lw(6))
@@ -234,6 +251,43 @@ if STICK:
 
     def person_head_at(f, cx, cy, s, who="hero", **kw):   # noqa: F811
         return stick_person(f, cx, cy + 446 * s, s, who, **kw)
+
+    # ---- lip sync (3 Nov): talk(t) returns the sound shape of the narration's current word (sound groups after Preston Blair / Rhubarb; letters -> groups, from align.json).
+    # Mouth arrives ~1 frame before the sound, shapes shorter than ~2 frames merge, hard closes survive. VISEME=0 -> old loudness mouth. ----
+    if os.environ.get("VISEME", "1") != "0":
+        _V2 = [("tion", "ve"), ("ough", "vo"), ("igh", "ve"), ("ee", "ve"), ("ea", "ve"), ("oo", "vu"), ("ou", "vh"), ("ow", "vo"), ("oa", "vo"), ("ai", "vh"), ("ay", "vh"), ("th", "vl"), ("sh", "ve"),
+               ("ch", "ve"), ("ph", "vf"), ("qu", "vu"), ("wh", "vu"), ("ck", "ve"), ("ng", "vl"), ("er", "vh"), ("ar", "va"), ("or", "vo"), ("ir", "vh"), ("ur", "vh")]
+        _V1 = dict(a="vh", e="vh", i="ve", o="vo", u="vh", y="ve", m="vm", b="vm", p="vm", f="vf", v="vf", w="vu", l="vl", n="vl", d="vl", t="ve", s="ve", z="ve", c="ve", k="ve", g="ve", j="ve", x="ve", r="vu", h="vh", q="ve")
+        _VW = dict(vh=1.3, va=1.4, vo=1.4, vu=1.1, ve=0.9, vl=0.7, vm=0.9, vf=0.9)
+
+        def _wvis(w):
+            w = re.sub(r"[^a-z]", "", w.lower())
+            if len(w) > 2 and w.endswith("e") and w[-2] not in "aeiou": w = w[:-1]
+            out = []; i = 0
+            while i < len(w):
+                for dg, v in _V2:
+                    if w.startswith(dg, i): out.append(v); i += len(dg); break
+                else: out.append(_V1.get(w[i], "vh")); i += 1
+            return [v for j, v in enumerate(out) if j == 0 or out[j - 1] != v] or ["vh"]
+
+        def _vis_timeline(lead=0.042, min_d=0.075):
+            tl = []
+            for i, w in enumerate(WORDS):
+                t0 = w["t"]; nx = WORDS[i + 1]["t"] if i + 1 < len(WORDS) and WORDS[i + 1]["line"] == w["line"] else LINES[w["line"]]["end"]
+                t1 = min(nx, t0 + 0.09 * max(2, len(w["w"])) + 0.12); vs = _wvis(w["w"])
+                if (t1 - t0) / len(vs) < min_d: vs = ([v for v in vs if v in ("vm", "vf", "vh", "va", "vo", "vu")] or vs[:1])[: max(1, int((t1 - t0) / min_d))]
+                tw = sum(_VW.get(v, 1.0) for v in vs); c = t0
+                for v in vs:
+                    d_ = (t1 - t0) * _VW.get(v, 1.0) / tw; tl.append((c - lead, c + d_ - lead, v)); c += d_
+            return tl
+        _VT = _vis_timeline(); _VS = [x[0] for x in _VT]
+
+        def talk(t, on=True):   # noqa: F811
+            if not on: return 0
+            i = bisect.bisect_right(_VS, t) - 1
+            if i < 0 or t >= _VT[i][1]: return 0
+            v = _VT[i][2]; j = int(t * FPS)
+            return "va" if v == "vh" and j < len(_env) and _env[j] > 0.85 else v
 
 
 # ---------------- drone prop (HOW TO START EP 1; generic quadcopter, no brand) ----------------

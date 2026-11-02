@@ -162,3 +162,4 @@ Not adopted: a global pitch clip −7/+8 st (range fell to 15.0 st for the same 
 - Add an expressiveness check beyond range: question-final rise (st) and reveal-final fall per line.
 
 - 2026-11-01 (drone episode): EXS 1.15 confirmed on a 2nd script (per-line 4.407 = 4.407, min 4.28 → 4.31, range 18.1 → 18.8 st, low_fall −6.0 → −6.3 st) → **template default**. Wh-question hook ('How can one drone start a whole business?', ending None) replaced the yes/no hook (q_rise was −4.4 st, i.e. it fell like a statement). SPD 1.0 for line speeds 1.0–1.04 (163 → 168 wpm).
+- 2026-11-03 (food truck): take comping via `tools/comp_takes.py <project> <tag>` (needs work/vo_<tag>.wav, align_<tag>.json, vr_<tag>.log): only 1 of 23 lines swapped, per-line 4.412 → 4.414. A rewrite of the weak line beat it: spelled-out 'two thousand two hundred' 4.18 → 'twenty-two hundred' ≥ 4.26. Rewrite weak lines first, comp second. 'Save this.' alone misreads in ASR.

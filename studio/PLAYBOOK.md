@@ -69,6 +69,7 @@ with Pepsi points?"). Best data so far: an everyday object + a "that can't be ri
 - Use WebSearch/WebFetch. Every number in the script needs a primary source (SEC 10-K/10-Q/8-K, company release, government data such as FDIC/BLS)
   or two reputable outlets. Use the **latest** data available today; say "last year"/"in 2025" precisely.
 - Round honestly ("about $1.7 billion", "over $200 million"). Quotes must be real (light profanity removal is fine).
+- **Fetching (3 Nov):** a guessed or stored URL can time out (PROVENANCE_REQUIRED). WebSearch for the page first, then fetch the URL the search returned. No curl, mirrors or archives. Don't drop a fact as unverifiable until you have tried this.
 - Keep a list of sources; put a short "Sources:" line in the post text and a small source chip on screen for key stats.
 
 ## 4. Script (`scripts/vo_lines.py`)
@@ -287,6 +288,7 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   frame: "meanwhile" / cause → effect). Flashback block = `sepia_tone` on every shot of the era + `calendar_el` counting back on the first one.
   Never give a character `phone_el()` / `phone2_el()` to hold — they render as a huge phone with an old chat / a "SEND THIS" button over the face;
   use a chip ("CALLING PAST BUYER #3…") or a `bubble_el`. Keep `say()` off giant-head close-ups (`person_head_at` s ≥ 1.8): put the caption at y 450–600.
+- **3 Nov (HOW TO START EP 3):** `talk(t)` now returns sound-shape mouths on the stick cast (`VISEME=0` = old): they read in close-ups (`person_head_at` s ≈ 1.5), so give the mentor at least two. `rope(f, x0, x1, y, t, t_close)` and `steam(f, x, y, t)` in anim_props5. SFX `sizzle`, `hose`, `rattle`. **`sepia_tone()` returns the frame: write `f[:] = sepia_tone(f, k)`** (the helper in examples before 3 Nov silently did nothing). Stamps are unreadable over busy props; use `tag_el` there. `form_el` crops long titles below w≈300.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
   `suitcase_el`, `rulebook_el`, `terminal_el`, `runway`, plus `clouds`, `arrow`/`along` (animated money-flow maps) and `dial`.
@@ -307,7 +309,7 @@ bash scripts/render_all.sh                         # -> work/final.mp4  (~10–1
   quote cards over 5 lines, rows of ≥ 4 s with no visible change, and the signature beats (badge, cold open, one Oops, series end card).
   Found on the first run (31 Oct): 13 of 31 captions on the two new boards would have rendered at 42–57 %; 16 assets to write.
 - Music: new genre each video (used so far: funk, boom-bap, synth-pop, bluegrass, pizzicato, big-band swing, salsa, chiptune, surf-rock, bossa nova, film-noir heist jazz, ragtime stride piano, 90s British ska, calypso steel band (+ mento flashback); next try disco, marching band, baroque harpsichord, sea shanty, etc.) using GeneralUser GS GM programs;
-  cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). Mix targets: master **−11 LUFS, −1.0 dBTP** (template loudnorm TP −1.0 since 2 Nov — at −1.5 the limiter capped loudness at −11.9 LUFS); VO/bed ≥ 14 dB per line
+  cues land on every reveal (`hit`, `stab`, `riser`, `sparkle`). (+ doo-wop, 3 Nov.) Mix targets (template pre-limiter `LIM=-8` since 3 Nov: reaches −10.9 LUFS, −1.4 dBFS): master **−11 LUFS, −1.0 dBTP** (template loudnorm TP −1.0 since 2 Nov — at −1.5 the limiter capped loudness at −11.9 LUFS); VO/bed ≥ 14 dB per line
   (mix.py prints it); voice clean and on top.
 - Word guard (since 27 Oct R&D run 6, template default `GUARD=12`): mix.py keeps music + SFX ≥ 12 dB under every word on a phone
   speaker, so SFX can sit right on the reveal word. Keep `bed = bed_carve.guard(...)` when you copy an older example's mix.py (examples

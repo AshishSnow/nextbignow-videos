@@ -9,6 +9,17 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-03 ~02:40 IST (episode run: HOW TO START EP 3, food truck NYC)
+Instagram (IGRE, 12 Oct → 3 Nov) — new + changed rows:
+| Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 11-02 | **HOW TO START EP 2 — vending machines** (~21 h) | 99 s | 501 | 441 | **36.5 s (37 % of length; animated-era best in seconds)** | 68.2 % | 10 | 0 | **5** | 2 (1 ours = **first real comment**) |
+| 11-01 | HOW TO START EP 1 — drone business (~45 h) | 115 s | 1,319 | 1,187 | 27.5 s | 75.9 % | 34 | 6 | 14 | 1 (ours) |
+| 10-31 | Glasses: one company | 145 s | 149 | 122 | 18.3 s | 43.4 % | 2 | 0 | 1 | 1 (ours) |
+YouTube (YTVP): **still no rows after 28 Oct** — glasses, drone and vending are all published on YouTube per the planner, but Metricool's table has not returned them for 5 days. Treat YT as unknown for these three, not as zero.
+**Media-kit numbers (3 Nov):** IG last 10 reels avg **490 views** (median 177), avg 3-s rate 55 %, avg watch 23.1 s, reactions (shares + saves + comments, excl. our own first comment) **7.2 per 1,000 reach** (30 on 4,195 reach); YT last 10 with rows avg 439 views (unchanged).
+**Insight W (3 Nov) — saves repeat, sends don't yet.** Two how-tos in a row save at the same rate (drone 11.8, vending 11.3 saves per 1,000 reach; everything else on the channel ≈ 0–5), and vending held the longest watch of the animated era. But vending got 0 shares and 37 % of the drone's reach: a broad, dream-y topic (drones) gets sent, a cautionary one (scam history) gets kept. n = 2, so a lead, not a rule. → This run: give the viewer a *way in* at the end (work a truck; private-property permit with no waiting list) rather than only a warning, and judge EP 3 on shares per reach, not just saves. Judge: saves ≥ 10 / 1,000 reach (holds), any shares (new).
+
 ## Snapshot 2026-11-02 ~08:30 IST (R&D run: writers' room HOW TO START EP 3 + props kit 5)
 Instagram + YouTube pulls (IGRE / YTVP, 12 Oct → 2 Nov 03:00 UTC): **no change** since the 02:40 IST pull — no row yet for HOW TO START EP 2 (vending, posted
 1 Nov 23:30 UTC) and still no YouTube row for glasses (31 Oct) or the drone episode (1 Nov). Media-kit numbers unchanged (IG last 10 avg 445 views, 6.3 reactions
