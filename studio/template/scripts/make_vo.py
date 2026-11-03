@@ -6,6 +6,10 @@ import os
 R = os.environ.get("STUDIO", "/home/claude/studio"); B = os.environ.get("PROJ") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, f"{R}/lib"); sys.path.insert(0, f"{B}/scripts")
 from vo_lines import LINES
+try:
+    from vo_lines import VOICES   # optional per-line second voice {line_id: "af_heart:1.0"} (first two-voice episode, 3 Nov 2026)
+except ImportError:
+    VOICES = {}
 from kokoro_onnx import Kokoro
 import voice_clean
 from num2words import num2words
@@ -23,6 +27,8 @@ VMIX = os.environ.get("VMIX", "am_michael:0.5,am_eric:0.3,am_fenrir:0.2")
 if VMIX:
     VOICE = sum(float(w) * V(n) for n, w in (p.split(":") for p in VMIX.split(",")))
 CFG = {L[0]: L for L in LINES}
+_vmix = lambda m: sum(float(w) * V(n) for n, w in (p.split(":") for p in m.split(",")))
+LINE_VOICE = {lid: _vmix(m) for lid, m in VOICES.items()}
 
 import os, hashlib
 # SPD scales every line's speed, PZ scales every pause (PMIN = shortest pause, s) -> calmer, clearer pacing
@@ -31,7 +37,7 @@ SPLIT = float(os.environ.get("SPLIT", "0.12"))   # per-sentence Kokoro calls + 0
 # ENGINE=chatterbox -> Chatterbox-Turbo (MIT, onnx q4) conditioned on our synthetic narrator (studio/voices/*.cbcond.npz);
 # it takes its pace and melody from the reference, so SPD/SPLIT don't apply (line pauses still do). See studio/VOICE.md.
 ENGINE = os.environ.get("ENGINE", "kokoro"); CBV = os.environ.get("CBV", "narrator_slow")
-_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX] + ([SPLIT] if SPLIT > 0 else []) + ([ENGINE, CBV] if ENGINE != "kokoro" else [])).encode()).hexdigest()   # pauses are baked into the cache too
+_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX, sorted(VOICES.items())] + ([SPLIT] if SPLIT > 0 else []) + ([ENGINE, CBV] if ENGINE != "kokoro" else [])).encode()).hexdigest()   # pauses are baked into the cache too
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}
 t = LEAD
@@ -51,7 +57,7 @@ for lid, text, sp, pause, *_ in ([] if os.path.exists(_cache) else LINES):
     parts = [q for q in re.split(r"(?<=[.?!…])\s+", text) if q.strip()] if SPLIT > 0 else [text]
     segs = []
     for qi, q in enumerate(parts):   # SPLIT>0: one Kokoro call per sentence + a short natural gap (long lines sound less rushed)
-        a, sr = k.create(q, voice=VOICE, speed=sp * SPD, lang="en-us", trim=True)
+        a, sr = k.create(q, voice=LINE_VOICE.get(lid, VOICE), speed=sp * SPD, lang="en-us", trim=True)
         segs.append(signal.resample_poly(a.astype(np.float64), SR, sr).astype(np.float32))
         if qi < len(parts) - 1: segs.append(np.zeros(int(SPLIT * SR), np.float32))
     a = np.concatenate(segs)
@@ -123,7 +129,10 @@ for lid, L in lines.items():
 snd = parselmouth.Sound(flat.astype(np.float64), SR)
 pitch = snd.to_pitch_ac(0.01, 65, 15, False, 0.03, 0.45, 0.01, 0.35, 0.14, 400)
 f0 = pitch.selected_array["frequency"]; tf = pitch.xs(); vo_ = f0 > 0
-G = float(np.median(f0[vo_])); print("global median F0", round(G, 1))
+_nar = np.ones(len(f0), bool)
+for _l in VOICES:
+    if _l in lines: _nar &= ~((tf >= lines[_l]["start"]) & (tf <= lines[_l]["end"]))
+G = float(np.median(f0[vo_ & _nar])); print("global median F0 (narrator)", round(G, 1))
 if GT <= 0: GT = G   # GT=0 -> keep the voice's own register (no global pitch shift = most natural)
 line_med = {}
 for lid, L in lines.items():
@@ -167,7 +176,8 @@ def prosody(gm):
         if end == "q" and tt >= ws_l[2]: s2 += 4.5 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1) ** 1.3
         if end == "low" and tt >= ws_l[2]: s2 -= 2.2 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1)
         g_ = gm.get(lid, 1.0); s2 = s + g_ * (s2 - s)
-        rel = np.clip(12 * np.log2(ref / G) + s2, CLO, CHI)
+        _off = 12 * np.log2(ref / G) if lid in VOICES else 0.0   # a second voice is clipped around its own register
+        rel = np.clip(12 * np.log2(ref / G) + s2, CLO + _off, CHI + _off)
         call(newp, "Add point", tt, GT * 2 ** (rel / 12))
     # loudness lift + length on stressed words
     for (lid, w, ws_, we_) in spans:

@@ -9,6 +9,17 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-04 ~02:40 IST (episode run: HOW TO START EP 4, Christmas lights)
+Instagram (IGRE, 13 Oct → 4 Nov) — new + changed rows:
+| Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 11-03 | **HOW TO START EP 3 — food truck NYC** (~21 h) | 101 s | **1,299** | 1,126 | **31.9 s** | 68.3 % | 23 | **0** | **3** | 1 (ours) |
+| 11-02 | HOW TO START EP 2 — vending (~45 h) | 99 s | 570 | 503 | 35.5 s | 67.9 % | 11 | 1 | 6 | 2 (1 ours) |
+| 11-01 | HOW TO START EP 1 — drone (~69 h) | 115 s | 1,323 | 1,191 | 27.5 s | 75.9 % | 35 | 6 | 14 | 1 (ours) |
+YouTube (YTVP) **rows are back after 28 Oct** (sync returned): drone 348 / 29 s avg / 5 likes / 2 shares · vending 205 / 30 s / 0 / 0 · glasses 81 / 25 s / 5 / 0. Food truck: no row yet. Same-age comparison is not fair yet, but the how-tos sit below the 2-min stories on YouTube (banana 678, Monopoly 487, De Beers 346) with about the same seconds watched.
+**Media-kit numbers (4 Nov):** IG last 10 reels avg **611 views** (median 379), avg 3-s rate 59.5 %, avg watch 25.0 s, reactions (shares + saves + comments excl. our own) **6.7 per 1,000 reach** (35 on 5,242 reach); YT last 10 with rows avg 419 views.
+**Insight Y (4 Nov) — three how-tos, three different results on one number: saves depend on who can use it.** All three open at 68–76 % and hold 27–36 s, so the format's opening and hold are steady. Saves per 1,000 reach: drone 11.8, vending 11.9, **food truck 2.7** (0 shares). The food truck had the reach (1,126) and 32 s of watch, but it was NYC-only, so most viewers could not use it. This corrects insight W's "way in" guess: EP 3 ended on a way in and still got 0 sends. → This run: a broad topic (any US homeowner, with a friend to send it to), no city lock, and a one-word question anyone can answer (PAY or DIY). Judge EP 4 on saves ≥ 10 / 1,000 reach and any comments from strangers. n = 3, a lead.
+
 ## Snapshot 2026-11-03 ~08:30 IST (R&D run: Story audit)
 Instagram rows ≈ unchanged since 02:40 IST (±2–3 views on old reels); food truck (posted 05:00 IST) has no row yet. Media-kit numbers unchanged: last 10 reels avg 490 views, median 177, 7.2 reactions / 1,000 reach. Followers 58 (1 Nov).
 **YouTube is blind, not weak:** no `YTVP` rows after 28 Oct and account-level `YTEV02` views stop on 30 Oct, for 3 published episodes. Subscribers 32 (25 Oct) → 41 (28 Oct), flat since (last row 2 Nov). Looks like the Metricool ↔ YouTube sync; don't read these Shorts as flops. Check the channel directly.

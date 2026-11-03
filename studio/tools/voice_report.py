@@ -80,7 +80,8 @@ try:
         return " " + " ".join(w) + " "
     def norm(s):
         # compare words, not formatting: "$1.7 billion" == "one point seven billion dollars", "Step 1." == "step one"
-        s = s.lower().replace("%", " percent ").replace(" and a half", " point five")   # "ten and a half" == "10.5"
+        s = s.lower().replace("roofwork", "roof work").replace("handeman", "handyman").replace("%", " percent ")   # ASR spellings of correct speech (4 Nov)
+        s = s.replace("%", " percent ").replace(" and a half", " point five")   # "ten and a half" == "10.5"
         s = re.sub(r"\b((?:[a-z]\.){2,})", lambda m: m.group(1).replace(".", ""), s)   # "U.S." == "US"
         s = re.sub(r"\$(\d+)\.(\d\d)\b", _cents, s)   # "$1.50" (ASR) == "a dollar fifty" (script)
         s = re.sub(r"\b((?:19|20)\d0)'?s\b", _decade, s)   # "1980s" == "nineteen eighties"

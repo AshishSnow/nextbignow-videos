@@ -74,6 +74,7 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
   6 shares + 14 saves); YouTube last 10 Shorts avg 439 views. Top 3 (IG, last 10): gas station 1,523, **HOW TO START EP 1 drone 1,313 (75.9 % 3-s, channel best)**, airline miles 589.
   **3 Nov 2026 (R&D pull, food truck not in the data yet):** followers **58** on Instagram, **41 subscribers on YouTube** (first pull; 32 on 25 Oct, flat since 28 Oct).
   **3 Nov 2026:** Instagram last 10 reels avg **490 views** (median 177), 3-s rate 55 %, avg watch 23.1 s, **7.2 reactions per 1,000 reach** (saves ~11–12 / 1,000 on both how-tos); YouTube last 10 Shorts with rows avg 439 views (no rows since 28 Oct). Top 3 (IG, last 10): gas station 1,523, drone 1,319, airline miles 589. First real comment on an autopilot post (vending).
+  **4 Nov 2026:** Instagram last 10 reels avg **611 views** (median 379), 3-s rate 59.5 %, avg watch 25.0 s, **6.7 reactions per 1,000 reach**; YouTube last 10 with rows avg 419 views (rows back after a 5-day gap). Top 3 (IG, last 10): gas station 1,523, drone 1,323, food truck 1,299.
 - **Community:** pin a comment on each post restating the choice ("FIGHT or FOLD — what would you do?"); reply to early comments within
   the first hour when a run is live (the post copy's firstCommentText); Part 2 may quote real comment counts only.
 - **Owned channel:** bio link to oopsmybusiness.com (later: an email list / newsletter "The Oops Weekly") so the audience isn't only rented.

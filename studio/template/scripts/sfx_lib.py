@@ -197,3 +197,25 @@ def shutter(level=-22):
     x = np.zeros(int(0.14 * SR), np.float32); x[:n_] += a; x[int(0.05 * SR):int(0.05 * SR) + n_] += 0.7 * a
     x = x / (np.abs(x).max() + 1e-9) * 10 ** ((level + 8) / 20)
     return np.stack([x, x], 1)
+
+
+def bell_shake(dur=0.6, level=-26):
+    """sleigh-bell shake: fast noise grains in a high band"""
+    n = int(dur * SR); x = np.zeros(n, np.float32); r = np.random.default_rng(int(dur * 1000) + 7)
+    for q in np.arange(0, dur - 0.03, 0.055):
+        a = int(q * SR); l = int(0.045 * SR); g = r.standard_normal(l) * np.exp(-np.arange(l) / (0.012 * SR)) * (0.6 + 0.4 * r.random())
+        x[a:a + l] += g[: max(0, n - a)]
+    x = signal.sosfilt(signal.butter(2, [4500, 11000], "band", fs=SR, output="sos"), x)
+    x = x * (np.clip(np.arange(n) / (0.04 * SR), 0, 1) * np.clip((n - np.arange(n)) / (0.2 * SR), 0, 1))
+    x = x / (np.abs(x).max() + 1e-9) * 10 ** (level / 20)
+    return np.stack([x, x], 1).astype(np.float32)
+
+
+def tape_zip(dur=1.5, level=-30):
+    """tape measure pulled out: ratchet clicks that speed up over a soft whirr"""
+    n = int(dur * SR); x = np.zeros(n, np.float32); tq = 0.0; gap = 0.06; r = np.random.default_rng(11)
+    while tq < dur - 0.01:
+        a = int(tq * SR); l = int(0.008 * SR); x[a:a + l] += (r.standard_normal(l) * np.exp(-np.arange(l) / (0.002 * SR)))[: max(0, n - a)]; tq += gap; gap = max(0.022, gap * 0.97)
+    x = signal.sosfilt(signal.butter(2, [1200, 7000], "band", fs=SR, output="sos"), x)
+    x = x / (np.abs(x).max() + 1e-9) * 10 ** (level / 20)
+    return np.stack([x, x], 1).astype(np.float32)

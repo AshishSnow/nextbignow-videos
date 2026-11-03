@@ -24,7 +24,16 @@ CLEAN_SETS = {
     "commissary": ((20, 130, 110), (8, 70, 70), 1440, "counter"),
     "mall":       ((200, 50, 120), (110, 20, 90), 1440, "shelves"),
     "optician":   ((20, 110, 170), (10, 50, 110), 1440, "shelves"),
+    "wintry":     ((14, 22, 78), (38, 44, 130), 1400, "houses"),      # 3 Nov, EP 4: winter street, snow floor
+    "garage":     ((96, 44, 170), (46, 20, 104), 1440, "counter"),
+    "frostdusk":  ((58, 40, 140), (226, 88, 120), 1400, "trees"),
+    "roofday":    ((24, 118, 214), (96, 190, 240), 1400, "trees"),
+    "depot":      ((8, 120, 92), (6, 62, 62), 1440, "shelves"),
+    "january":    ((66, 86, 128), (38, 50, 92), 1400, "houses"),
+    "ladderday":  ((30, 134, 210), (120, 205, 235), 1400, "trees"),   # dry daytime: every ladder / roof shot (fresh-eyes review: never model frost or dusk)
 }
+_CLEAN_FLOOR = {"wintry": ((196, 212, 246), (130, 150, 218)), "frostdusk": ((236, 214, 232), (176, 140, 196)),
+                "roofday": ((236, 244, 252), (176, 202, 236)), "january": ((176, 186, 206), (120, 130, 164)), "ladderday": ((104, 182, 100), (60, 134, 72))}
 _CLEAN_PALETTES = [((30, 90, 200), (14, 40, 120)), ((120, 40, 170), (60, 20, 110)), ((10, 140, 130), (6, 70, 80)),
                    ((220, 80, 40), (150, 30, 50)), ((40, 150, 70), (14, 80, 50)), ((200, 50, 110), (100, 20, 80))]
 _SIL_KINDS = ["skyline", "houses", "trees", "shelves", "window", "counter"]
@@ -93,7 +102,7 @@ def _clean_base(name):
         cv2.rectangle(f, (120, fy - 300), (960, fy), _scv(sil), -1, cv2.LINE_AA)
         cv2.rectangle(f, (100, fy - 330), (980, fy - 290), _scv(_cmix(top, (255, 255, 255), 0.15)), -1, cv2.LINE_AA)
     if m.any(): f[m > 0] = _c(sil)
-    fc_top = _cmix(bot, (0, 0, 0), 0.18); fc_bot = _cmix(bot, (0, 0, 0), 0.42)
+    fc_top, fc_bot = _CLEAN_FLOOR.get(name, (_cmix(bot, (0, 0, 0), 0.18), _cmix(bot, (0, 0, 0), 0.42)))
     kk = np.clip((_yy[fy:] - fy) / (H - fy), 0, 1)[..., None]
     f[fy:] = _c(fc_top) * (1 - kk) + _c(fc_bot) * kk
     cv2.line(f, (0, fy), (W, fy), _scv(_cmix(bot, (255, 255, 255), 0.25)), 4, cv2.LINE_AA)

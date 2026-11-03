@@ -312,7 +312,7 @@ H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check cit
 ### H7. Where the 30 % app-store cut goes — HOW IT WORKS · 25/35
 - **Hook:** "You pay $10 for an app. Where do $3 go?" **Beats:** 30 % standard → 15 % for developers under $1M/yr → why a subscription can be cheaper on the website → 2024–25 court/EU changes. **Caution:** re-check current US/EU terms before scripting. **Sources:** [Apple Newsroom Nov 2020](https://www.apple.com/newsroom/2020/11/apple-announces-app-store-small-business-program/) · [CNBC 18 Nov 2020](https://www.cnbc.com/2020/11/18/apple-will-cut-app-store-fees-by-half-to-15percent-for-small-developers.html)
 
-### T1. Start a Christmas-light install business — HOW TO START · 29/35 (seasonal: post before ~20 Nov)
+### T1. USED 2026-11-04 (HOW TO START EP 4, done/07-christmas-lights) — Start a Christmas-light install business — HOW TO START · 29/35 (seasonal: post before ~20 Nov)
 - **Hook:** "Why do people pay strangers to hang their lights?" **Steps:** the safety problem (≈14,900 US ER visits from decorating in 2023, almost half falls — CPSC via WHA) → design / install / take-down as one package → liability insurance + ladder training → book clients in early November. **Caution:** safety framing, no injury shown; prices unverified → "get local quotes". **Sources:** [WHA citing CPSC, 12 Dec 2024](https://wha.org/news/newsletters/2024/12-12-2024/4) · [CBS 10 Dec 2013](https://www.cbsnews.com/pittsburgh/news/cpsc-warns-public-about-holiday-related-dangers/)
 
 ### T2. Start reselling without tax surprises (US + UK) — HOW TO START · 29/35

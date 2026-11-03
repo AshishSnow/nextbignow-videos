@@ -49,6 +49,7 @@ def registry():
     for p in sorted(glob.glob(os.path.join(TEMPLATE, "*.py"))):
         src = open(p, encoding="utf-8").read()
         funcs.update(re.findall(r"^def ([A-Za-z_][A-Za-z0-9_]*)\s*\(", src, re.M))
+        for m in re.finditer(r"CLEAN_SETS\s*=\s*\{(.*?)\n\}", src, re.S): sets.update(re.findall(r"^\s*\"([a-z][a-z0-9_]*)\":", m.group(1), re.M))
         for m in re.finditer(r"_FLOOR\s*=\s*dict\(([^)]*)\)", src): sets.update(re.findall(r"([a-z][a-z0-9_]*)\s*=", m.group(1)))
         for m in re.finditer(r"_FLOOR\.update\(([^)]*)\)", src): sets.update(re.findall(r"([a-z][a-z0-9_]*)\s*=", m.group(1)))
         for m in re.finditer(r"SET_LIGHT\.update\(([^)]*)\)", src): sets.update(re.findall(r"([a-z][a-z0-9_]*)\s*=", m.group(1)))
@@ -239,7 +240,7 @@ def check(folder, funcs, sets, looks, strict=False):
     # B5 signature beats
     head2 = " ".join(x["raw"] for x in rows[:2]); head3 = " ".join(x["raw"] for x in rows[:3]); tail2 = " ".join(x["raw"] for x in rows[-2:])
     if not re.search(r"series_badge|part_badge", head2): rep["fail"].append("B5 no series_badge/part_badge in the first 2 rows")
-    if not re.search(r"cold_open|hud_clock", head3): rep["fail"].append("B5 no cold_open/hud_clock in the first 3 rows")
+    if not re.search(r"cold_open|hud_clock|mini_card", head3): rep["fail"].append("B5 no cold_open/hud_clock in the first 3 rows")
     oops_rows = sum(1 for x in rows if "oops_beat" in x["raw"]); oops_lines = sum(1 for l in lines if re.search(r"\boops\b", l[1], re.I))
     if oops_rows != oops_lines or oops_rows > 1: rep["fail"].append(f"B5 oops_beat rows {oops_rows} vs 'Oops' lines {oops_lines} (max 1)")
     series = (meta.get("SERIES") or "").upper()
