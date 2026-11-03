@@ -667,3 +667,43 @@ def freeze_creak(level=-26, dur=0.9):
     y = np.sign(np.sin(2 * np.pi * np.cumsum(f_ / 7) / SR * 7)) * (0.5 + 0.5 * np.sin(2 * np.pi * 21 * t2)) * np.minimum(t2 / 0.1, (dur - t2) / 0.2).clip(0, 1)
     y = signal.sosfilt(signal.butter(2, [500, 3200], "band", fs=SR, output="sos"), y)
     return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+# ---- ep 22 foley: soft_flop (a limp snack sagging), footstep (a heavyset flat plant on stone), clip_snap (airtight jar clip), oven_ding, soggy (a backbeat that lost its crunch), drink (a straw gulp) ----
+def soft_flop(level=-18):
+    t2 = np.arange(int(0.3 * SR)) / SR
+    y = np.sin(2 * np.pi * (170 - 240 * t2) * t2) * np.exp(-t2 / 0.09) + 0.3 * signal.sosfilt(signal.butter(2, 500, "low", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.06)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def footstep(level=-24, heavy=1.0):
+    t2 = np.arange(int(0.16 * SR)) / SR
+    y = np.sin(2 * np.pi * (95 + 40 * np.exp(-t2 / 0.015)) * t2) * np.exp(-t2 / (0.03 * heavy)) + 0.35 * signal.sosfilt(signal.butter(2, [500, 2600], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.012)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def clip_snap(level=-16):
+    t2 = np.arange(int(0.2 * SR)) / SR
+    y = np.sin(2 * np.pi * 2300 * t2) * np.exp(-t2 / 0.008) + 0.8 * np.sin(2 * np.pi * 420 * t2) * np.exp(-t2 / 0.03) + 0.5 * rng.standard_normal(len(t2)) * np.exp(-t2 / 0.004)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def oven_ding(level=-20):
+    t2 = np.arange(int(1.0 * SR)) / SR
+    y = (np.sin(2 * np.pi * 1760 * t2) + 0.5 * np.sin(2 * np.pi * 3520 * t2) + 0.25 * np.sin(2 * np.pi * 5280 * t2)) * np.exp(-t2 / 0.3)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def soggy(level=-20):
+    t2 = np.arange(int(0.18 * SR)) / SR
+    y = signal.sosfilt(signal.butter(2, 380, "low", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.05) + 0.7 * np.sin(2 * np.pi * 130 * t2) * np.exp(-t2 / 0.04)
+    return _st(y / np.abs(y).max() * db(level))
+
+
+def drink(level=-24, n=3, gap=0.22):
+    L = int((n * gap + 0.15) * SR); y = np.zeros(L)
+    for j in range(n):
+        i = int(j * gap * SR); t2 = np.arange(int(0.14 * SR)) / SR
+        s_ = np.sin(2 * np.pi * (240 + 500 * t2) * t2) * np.exp(-t2 / 0.05) + 0.3 * signal.sosfilt(signal.butter(2, [600, 3000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.03)
+        y[i:i + len(s_)] += s_[: L - i]
+    return _st(y / np.abs(y).max() * db(level))

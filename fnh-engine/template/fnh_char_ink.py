@@ -46,12 +46,14 @@ def _hatch(im, S, box, ang=-35, gap=7, col=(0, 0, 0, 60), w=2):
 def _fillcol(c): return c if INK_MODE != "mono" else PAPER
 
 
-def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0, nose=None, cap=False, hair=(0, 0)):
-    """hair = (dx, dy) px offset of the scribble hair (ep 18 follow-through: the hair lags the head by a few frames)."""
+def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0, nose=None, cap=False, hair=(0, 0), turn=0.0):
+    """hair = (dx, dy) px offset of the scribble hair (ep 18 follow-through: the hair lags the head by a few frames).
+    turn = -1..1 THREE-QUARTER HEAD (ep 22): face features slide toward the side he faces, far eye narrows in, far ear hides."""
+    turn = round(clamp(turn, -1, 1) * 4) / 4; TX = 26 * turn; TZ = 1 - 0.14 * abs(turn)
     tint = round(clamp(tint) * 10) / 10
     if not isinstance(hair, (tuple, list)): hair = (hair, 0)          # a bare number = horizontal drag
     hair = (int(round(clamp(hair[0], -16, 16) / 2)) * 2, int(round(clamp(hair[1], -12, 12) / 2)) * 2)
-    key = ("chead_ink", INK_MODE, mouth, blink, brow, lx, ly, expr, tint, nose, cap, hair)
+    key = ("chead_ink", INK_MODE, mouth, blink, brow, lx, ly, expr, tint, nose, cap, hair, turn)
     if key in _gc: return _gc[key]
     W_, H_, sc = 240, 250, 3
     im = Image.new("RGBA", (W_ * sc, H_ * sc), (0, 0, 0, 0)); d = ImageDraw.Draw(im); S = lambda *v: [x * sc for x in v]
@@ -69,7 +71,8 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
     d.line(wob(_arcpts(cx, cy, R, R - 4, -90, 270, 40), 2.0, 1), fill=INKC + (255,), width=INK_W * sc, joint="curve")
     # ears
     for sgn in (-1, 1):
-        ex = cx + sgn * (R + 4)
+        if abs(turn) >= 0.5 and sgn * turn > 0: continue                   # far ear hidden in a three-quarter view
+        ex = cx + sgn * (R + 4) + (TX * 0.8 if abs(turn) >= 0.5 else 0)
         d.ellipse(S(ex - 13, cy - 12, ex + 13, cy + 18), fill=skin + (255,), outline=INKC + (255,), width=INK_W * sc - 3)
     # hair: a scribble of loops along the top (fixed seed), drawn as thick ink; the whole scribble shifts by `hair` (drag)
     hx_, hy_ = hair
@@ -87,7 +90,7 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
     # eyes: ink dots with a little white glint; expression changes shape
     ox, oy = lx * 6, ly * 5; ey = 134
     for i, sgn in enumerate((-1, 1)):
-        ex = cx + sgn * 36
+        ex = cx + TX + sgn * 36 * TZ
         if blink or (expr == "happy" and mouth == 3):
             d.line(wob(_arcpts(ex, ey + 2, 16, 10, 200, 340, 10), 1.0, 7 + i), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve"); continue
         if expr == "gross":                                                   # ep 20: squeezed '> <' eyes (disgust / nausea)
@@ -111,7 +114,7 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
     # brows: single ink strokes, the angle is the emotion
     by = 104
     for i, sgn in enumerate((-1, 1)):
-        ex = cx + sgn * 36; inn, out = ex - sgn * 18, ex + sgn * 18
+        ex = cx + TX + sgn * 36 * TZ; inn, out = ex - sgn * 18, ex + sgn * 18
         if brow == "up": yi, yo = by - 10, by - 2
         elif brow == "sus": yi, yo = by + 4, by - 6
         elif brow == "sad": yi, yo = by - 8, by + 4
@@ -120,14 +123,14 @@ def chub_head_el(mouth=0, blink=False, brow="n", lx=0, ly=0, expr="n", tint=0.0,
         if expr == "wow": yi, yo = yi - 10, yo - 10
         d.line(wob([(inn, yi), ((inn + out) / 2, (yi + yo) / 2 - 3), (out, yo)], 1.2, 20 + i), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve")
     # nose: one small hook stroke
-    d.line(wob([(cx + 2, 150), (cx + 8, 166), (cx - 2, 170)], 0.8, 31), fill=INKC + (255,), width=(INK_W - 2) * sc, joint="curve")
+    _nf = 1 if turn >= 0 else -1; d.line(wob([(cx + TX * 1.25 + 2, 150), (cx + TX * 1.25 + (8 + 7 * abs(turn)) * _nf, 166), (cx + TX * 1.25 - 2, 170)], 0.8, 31), fill=INKC + (255,), width=(INK_W - 2) * sc, joint="curve")
     # cheeks (colour modes only)
     if INK_MODE != "mono":
-        for sgn in (-1, 1): d.ellipse(S(cx + sgn * 56 - 14, 160, cx + sgn * 56 + 14, 176), fill=(240, 130, 120, 70))
+        for sgn in (-1, 1): d.ellipse(S(cx + TX + sgn * 56 * TZ - 14, 160, cx + TX + sgn * 56 * TZ + 14, 176), fill=(240, 130, 120, 70))
     if cap:
         d.chord(S(cx - R - 2, cy - R - 2, cx + R + 2, cy + 8), 180, 360, fill=_fillcol((130, 80, 46)) + (255,), outline=INKC + (255,), width=5 * sc)
     # mouth
-    mx, my = cx, 196
+    mx, my = cx + TX, 196
     if expr == "wow" and mouth == 0: mouth = "o"
     dark = _fillcol((110, 40, 46))
     if mouth == 0 and expr == "gross": mouth = "wavy"
@@ -289,7 +292,8 @@ def _ink_limb(f, pts, w, fill, shade, s, seed):
 
 def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=False, brow="n", look=(0, 0), expr="n", tint=0.0,
          hold=None, hold_off=(0, 0), hold_l=None, bob=0.0, op=1.0, shirt=HOOD3, shadow=True, lean=0.0, squash=0.0, sit=False, nose=None, cap=False,
-         hold_front=False, t=None, hand_r="open", hand_l="open", hair=(0, 0)):
+         hold_front=False, t=None, hand_r="open", hand_l="open", hair=(0, 0), turn=0.0, legs=None):
+    """turn = three-quarter head (ep 22); legs = explicit 2-bone legs from anim_fx.walk (far leg first), replaces the front-view legs."""
     g = f if op >= 0.999 else f.copy()
     if t is not None:
         bob = bob + 3.0 * math.sin(t * 2.4)
@@ -298,7 +302,13 @@ def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=Fa
     if shadow:
         contact(g, x, y + 6 * s, 300 * s, 0.30)
     hipy = y - 112 * s / sq
-    for side, ang in ((-1, ll), (1, rl)):
+    if legs is not None:
+        for j, (hip, knee, ank, frot, sd) in enumerate(legs):
+            shade_k = 0.82 if j == 0 else 1.0                                # the far leg sits a little darker = depth
+            _ink_limb(g, (hip, knee, ank), 26 * s, tuple(int(c * shade_k) for c in INK_JEAN), INK_JEAN_S, s, 50 + j)
+            sn = scale_el(_sneaker_ink_el(sd), s)
+            rot_comp(g, sn, ank[0] + sd * 14 * s * math.cos(math.radians(frot)), ank[1] + 2 * s - sd * 14 * s * math.sin(math.radians(frot)), frot, 1.0, 1.0, 0.0)
+    for side, ang in (() if legs is not None else ((-1, ll), (1, rl))):
         hx_ = x + side * 46 * s
         if sit:
             kn = (hx_ + side * 30 * s, hipy + 20 * s); ft = (hx_ + side * 40 * s, y)
@@ -332,7 +342,7 @@ def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=Fa
     hand_at(-1); hand_at(1)
     hxc, hyc = bcx + 14 * s * math.sin(lr), bcy - 214 * s / sq + bob * s
     _ink_limb(g, ((bcx, bcy - 100 * s), (hxc, hyc + 70 * s)), 30 * s, INK_SKIN, INK_SKIN_S, s, 70)       # neck
-    hel = scale_el(chub_head_el(mouth, blink, brow, look[0], look[1], expr, tint, nose, cap, hair), s)
+    hel = scale_el(chub_head_el(mouth, blink, brow, look[0], look[1], expr, tint, nose, cap, hair, turn), s)
     if abs(lean) > 0.5: hel = _rot_el(hel, -lean * 0.6)
     comp(g, hel, hxc, hyc)
     if hold is not None and hold_front:
@@ -341,10 +351,10 @@ def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=Fa
     return hands
 
 
-def chub_head_only(f, x, y, s, t=0.0, mouth=None, expr="n", brow="n", look=(0, 0), tint=0.0, blink=None, nose=None, cap=False, op=1.0, hair=(0, 0)):
+def chub_head_only(f, x, y, s, t=0.0, mouth=None, expr="n", brow="n", look=(0, 0), tint=0.0, blink=None, nose=None, cap=False, op=1.0, hair=(0, 0), turn=0.0):
     m = talk(t) if mouth is None else mouth
     b = blink_at(t, 1) if blink is None else blink
-    comp(f, scale_el(chub_head_el(m, b, brow, look[0], look[1], expr, tint, nose, cap, hair), s), x, y, op=op)
+    comp(f, scale_el(chub_head_el(m, b, brow, look[0], look[1], expr, tint, nose, cap, hair, turn), s), x, y, op=op)
 
 
 def grip_hand(f, x, y, s=1.0, tint=0.0, kind="grip", rot=0.0):

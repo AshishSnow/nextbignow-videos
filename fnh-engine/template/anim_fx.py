@@ -695,3 +695,58 @@ def _VIS_S():
 def talk(t, on=True):
     """ep 21: lip sync = visemes (replaces the loudness-only 0/1/2/3 of anim_base)."""
     return viseme(t) if on else 0
+
+
+
+# ================= ep 22 (3 Nov): THE WALK CYCLE (animation craft: contact -> down -> passing -> up; Adobe / GarageFarm / Brian Lemay walk guides, improvements.md G) =================
+# One full cycle = 2 steps; heavyset = flat plants, a clear dip on the down pose, ~26 frames. The planted foot NEVER slides: during stance it moves back relative to the body at
+# exactly the body's ground speed (stride = speed x period / 2). The swing foot travels forward on an ARC. Pelvis: lowest ~3 frames after contact (down), highest ~9 frames (up).
+# Arms swing opposite to the same-side leg and the forearm lags (follow-through). Head + hair lag the body. The shot passes **walk(...) straight into chub().
+def _ik2(hip, ank, L1, L2, bend=1.0):
+    """2-bone knee: the knee bends toward `bend` (+1 = screen right)."""
+    dx, dy = ank[0] - hip[0], ank[1] - hip[1]; D = max(1e-3, math.hypot(dx, dy)); D2 = min(D, L1 + L2 - 0.5)
+    a = (L1 * L1 - L2 * L2 + D2 * D2) / (2 * D2); h_ = math.sqrt(max(0.0, L1 * L1 - a * a))
+    ux, uy = dx / D, dy / D
+    return (hip[0] + ux * a - uy * h_ * bend * -1, hip[1] + uy * a + ux * h_ * bend * -1)
+
+
+def walk(t, x, y, s=1.0, speed=300.0, dir=1, period=1.08, t0=0.0, lift=30.0, bob=9.0, amt=1.0, arm=26.0, arm_base=14.0, track=False):
+    """returns dict(x, y, legs, la, ra, lean, turn, look, hair, bob) for chub(). speed = ground speed px/s at this s. track=True: x stays (the set scrolls by walk_shift); else x + speed*(t-t0).
+    amt 0..1 scales the whole walk so he can walk to a stop. Foot times for the foley: walk_steps()."""
+    amt = clamp(amt); sl = speed * period / 2 * amt
+    ph = (t - t0) / period
+    wx = x if track else x + dir * speed * (t - t0)
+    def foot(p):
+        p = p % 1.0
+        if p < 0.5:                                                          # stance: heel strike at 0, flat, rolling to the toe at the end; locked to the ground
+            rel = sl / 2 - sl * (p / 0.5); up = 0.0
+            frot = (14.0 * clamp(1 - p / 0.05) - 24.0 * clamp((p - 0.36) / 0.14)) * amt     # + = toe up (heel strike), - = toe down (toe off); flat plants for a heavy guy
+        else:                                                                # swing: forward on an arc, highest just after passing
+            k = (p - 0.5) / 0.5; e_ = k * k * (3 - 2 * k)
+            rel = -sl / 2 + sl * e_; up = lift * s * amt * math.sin(math.pi * k ** 0.85)
+            frot = (-24.0 * (1 - clamp(k / 0.45)) + 14.0 * clamp((k - 0.7) / 0.3)) * amt
+        return rel, up, frot
+    drop = bob * s * amt * math.cos(4 * math.pi * (ph - 0.11))               # + = down: lowest 3 frames after contact, highest ~10 frames after
+    yb = y + drop
+    hip_y = yb - 112 * s; L = 57 * s
+    legs = []
+    for (off, side_) in ((0.5, -dir), (0.0, dir)):                           # far leg (drawn first) is half a cycle away
+        rel, up, frot = foot(ph + off)
+        hipx = wx + side_ * 16 * s
+        ank = (wx + dir * rel + side_ * 8 * s, y - 8 * s - up)
+        knee = _ik2((hipx, hip_y), ank, L, L, dir)
+        legs.append(((hipx, hip_y), knee, ank, frot * dir, dir))
+    swing = math.cos(2 * math.pi * ph); lag = math.cos(2 * math.pi * (ph - 0.09))     # + = the near leg is forward
+    # this body is drawn front-on, so 'forward' reads as the arm lifting + the forearm bending; arms alternate, opposite to their leg, forearm lags (follow-through)
+    a_r = arm_base + arm * 0.55 * amt * (-swing) * dir; f_r = 10 + arm * 1.5 * amt * max(0.0, -lag * dir) - 6 * amt * max(0.0, lag * dir)
+    a_l = arm_base + arm * 0.55 * amt * (swing) * dir; f_l = 10 + arm * 1.5 * amt * max(0.0, lag * dir) - 6 * amt * max(0.0, -lag * dir)
+    hair_x = -dir * 7 * amt + 3 * amt * math.sin(2 * math.pi * ph * 2 - 1.0); hair_y = 3 * amt * math.cos(4 * math.pi * (ph - 0.2))
+    wx += 7 * s * amt * math.sin(2 * math.pi * (ph + 0.15))                     # the S-curve: the weight shifts over the planted foot
+    return dict(x=wx, y=yb, legs=legs, la=(a_l, f_l), ra=(a_r, f_r), lean=dir * (3.0 * amt + 1.5 * amt * math.sin(2 * math.pi * ph)), turn=dir * 0.75, look=(dir * 0.7, 0), hair=(hair_x, hair_y), bob=drop * 0.35)
+
+
+def walk_steps(t0, t1, period=1.08):
+    """contact times (for the footstep foley)."""
+    out = []; k = 0
+    while t0 + k * period / 2 < t1: out.append(t0 + k * period / 2); k += 1
+    return out
