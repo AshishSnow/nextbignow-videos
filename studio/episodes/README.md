@@ -17,6 +17,8 @@ waiting for the "second" run would post it 48 h later and break Part 1's spoken 
 
 ## Series counters
 - HOW TO START: EP 1 (drone business, BUILT 1 Nov 05:00 IST), EP 2 (vending machines, BUILT 2 Nov 05:00 IST), EP 3 (food truck NYC, BUILT 3 Nov 05:00 IST; next: EP 4) — banked + verified (topic_bank.md #25–27): home bakery (Texas + UK), print-on-demand, pressure washing (needs 1 more source); unresearched: mobile car detailing
+- HOW IT WORKS (new 3 Nov): — (next: EP 1 = Spotify 999 plays, topic_bank H1)
+- **Writers' room priority from 3 Nov (owner: "informative, interesting"):** write + review next, in order: H1 Spotify (HOW IT WORKS) → T1 Christmas-light install (HOW TO START, must post before ~20 Nov) → H2 credit score → T2 reselling tax (US+UK) → H3 Shorts money; alternate the two series; keep YOUR MOVE / SPOT THE TRICK episodes already REVIEWED in the queue, but these go above them once reviewed. All new boards use the clean look (STORY.md §2b): one idea per frame, captions in the top band.
 - YOUR MOVE: EP 1 (Pepsi jet, two parts), EP 2 (nickel Coke, queued)
 - SPOT THE TRICK: #1 (IKEA maze, queued; next: #2)
 - WHO REALLY OWNS IT: — (next: #1; the glasses video, built 28 Oct in the old format, counts as the format's origin)

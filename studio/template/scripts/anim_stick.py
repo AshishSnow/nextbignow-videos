@@ -8,7 +8,7 @@ import bisect, re, os
 # face_dir, op, shadow, sweat, back) and person_head_at(...). guy() = the hero (orange tie). STICK=0 -> lit 2.5D cast.
 import os as _os
 STICK = _os.environ.get("STICK", "1") != "0"
-INK_ = (22, 22, 26); PAPER = (252, 252, 248)
+INK_ = (22, 22, 26); SPAPER = (252, 252, 248)
 
 STICK_LOOKS = {   # tie / shirt / hair (None = white with ink lines) / hairstyle / girl / extras
     "hero":     dict(tie=(255, 128, 0), shirt=None, hair=None, style="spikes"),
@@ -47,7 +47,7 @@ def _lighter(c, k=0.35): return tuple(int(v + (255 - v) * k) for v in c)
 def _darker(c, k=0.7): return tuple(int(v * k) for v in c)
 
 
-def _limb(g, p, q, th, col=PAPER, ow=None):
+def _limb(g, p, q, th, col=SPAPER, ow=None):
     ow = ow if ow is not None else max(4, th * 0.42)
     P = (int(round(p[0])), int(round(p[1]))); Q = (int(round(q[0])), int(round(q[1])))
     cv2.line(g, P, Q, _c3(INK_), int(th + 2 * ow), cv2.LINE_AA)
@@ -61,7 +61,7 @@ def _stick_head_el(who, mouth, blink, brow, lx, ly, expr, sweat, back, k):
     SS = 3; w = h = 280; sc = k * SS; R = 86; cx, cy = 140, 150
     S = lambda *v: [x * sc for x in v]; lw = lambda v: max(1, int(v * sc))
     im = Image.new("RGBA", (int(w * sc), int(h * sc)), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
-    ink = INK_ + (255,); pap = PAPER + (255,); st = L.get("style", "spikes")
+    ink = INK_ + (255,); pap = SPAPER + (255,); st = L.get("style", "spikes")
     hairc = (tuple(L["hair"]) + (255,)) if L.get("hair") else pap
     if st == "long": d.rounded_rectangle(S(cx - 98, cy - 50, cx + 98, cy + 104), int(44 * sc), fill=hairc, outline=ink, width=lw(6))
     if st == "ponytail":
@@ -176,7 +176,7 @@ def stick_person(f, x, y, s=1.0, who="hero", la=(18, 8), ra=(18, 8), ll=7, rl=7,
     if L.get("small"): s = s * 0.82
     g = f if op >= 0.999 else f.copy()
     th = 16 * s; lr = math.radians(lean); ink = _c3(INK_)
-    shirt = L.get("shirt"); jacket = L.get("jacket"); top = jacket or shirt or PAPER
+    shirt = L.get("shirt"); jacket = L.get("jacket"); top = jacket or shirt or SPAPER
     if not sit:
         hip = (x, y - 190 * s)
         if shadow:
@@ -190,7 +190,7 @@ def stick_person(f, x, y, s=1.0, who="hero", la=(18, 8), ra=(18, 8), ll=7, rl=7,
         for side, ang in ((-1, ll), (1, rl)):
             hp = (hip[0] + side * 16 * s, hip[1])
             ft = (hp[0] + side * math.sin(math.radians(ang)) * 184 * s, hp[1] + math.cos(math.radians(ang)) * 184 * s)
-            _limb(g, hp, ft, th * 1.25, PAPER if not L.get("girl") else PAPER)
+            _limb(g, hp, ft, th * 1.25, SPAPER if not L.get("girl") else SPAPER)
             sx = ft[0] + side * 16 * s
             cv2.ellipse(g, (int(sx), int(ft[1])), (int(30 * s), int(14 * s)), 0, 180, 360, ink, -1, cv2.LINE_AA)
             cv2.rectangle(g, (int(sx - 30 * s), int(ft[1] - 1)), (int(sx + 30 * s), int(ft[1] + 6 * s)), ink, -1, cv2.LINE_AA)
@@ -211,11 +211,11 @@ def stick_person(f, x, y, s=1.0, who="hero", la=(18, 8), ra=(18, 8), ll=7, rl=7,
         cv2.fillPoly(g, [pts], _c3(top), cv2.LINE_AA); cv2.polylines(g, [pts], True, ink, ow, cv2.LINE_AA)
         if jacket:   # white shirt V under an open jacket
             v = np.array([(neck[0] - 18 * s, neck[1] + 12 * s), (neck[0] + 18 * s, neck[1] + 12 * s), (neck[0], neck[1] + 90 * s)], np.int32)
-            cv2.fillPoly(g, [v], _c3(PAPER), cv2.LINE_AA); cv2.polylines(g, [v], True, ink, max(2, ow - 2), cv2.LINE_AA)
+            cv2.fillPoly(g, [v], _c3(SPAPER), cv2.LINE_AA); cv2.polylines(g, [v], True, ink, max(2, ow - 2), cv2.LINE_AA)
         # collar
         for side in (-1, 1):
             c = np.array([(neck[0], neck[1] + 12 * s), (neck[0] + side * 22 * s, neck[1] + 6 * s), (neck[0] + side * 16 * s, neck[1] + 30 * s)], np.int32)
-            cv2.fillPoly(g, [c], _c3(PAPER), cv2.LINE_AA); cv2.polylines(g, [c], True, ink, max(2, ow - 3), cv2.LINE_AA)
+            cv2.fillPoly(g, [c], _c3(SPAPER), cv2.LINE_AA); cv2.polylines(g, [c], True, ink, max(2, ow - 3), cv2.LINE_AA)
         if L.get("tie"):
             p0 = (neck[0], neck[1] + 14 * s)
             t_ = np.array([(p0[0] - 9 * s, p0[1]), (p0[0] + 9 * s, p0[1]), (p0[0] + 14 * s, p0[1] + 70 * s), (p0[0], p0[1] + 86 * s), (p0[0] - 14 * s, p0[1] + 70 * s)], np.int32)
@@ -227,12 +227,12 @@ def stick_person(f, x, y, s=1.0, who="hero", la=(18, 8), ra=(18, 8), ll=7, rl=7,
         sp = (sh[0] + side * 26 * s, sh[1])
         e = (sp[0] + side * math.sin(math.radians(a1)) * 80 * s, sp[1] + math.cos(math.radians(a1)) * 80 * s)
         hd = (e[0] + side * math.sin(math.radians(a2)) * 74 * s, e[1] + math.cos(math.radians(a2)) * 74 * s)
-        _limb(g, sp, e, th, top if top != PAPER else PAPER); _limb(g, e, hd, th); hands[side] = hd
+        _limb(g, sp, e, th, top if top != SPAPER else SPAPER); _limb(g, e, hd, th); hands[side] = hd
     if hold is not None:
         hx, hy = hands[1]; comp(g, hold, hx + hold_off[0] * s, hy + hold_off[1] * s)
     for side, hd in hands.items():
         cv2.circle(g, (int(hd[0]), int(hd[1])), int(19 * s), ink, -1, cv2.LINE_AA)
-        cv2.circle(g, (int(hd[0]), int(hd[1])), int(14 * s), _c3(PAPER), -1, cv2.LINE_AA)
+        cv2.circle(g, (int(hd[0]), int(hd[1])), int(14 * s), _c3(SPAPER), -1, cv2.LINE_AA)
         cv2.ellipse(g, (int(hd[0] + side * 12 * s), int(hd[1] - 8 * s)), (int(7 * s), int(10 * s)), 0, 0, 360, ink, max(2, int(4 * s)), cv2.LINE_AA)
     k = max(0.2, round(s * 20) / 20)
     hel = _stick_head_el(who, mouth, blink, brow, look[0], look[1], expr, sweat, back, k)

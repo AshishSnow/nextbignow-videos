@@ -283,6 +283,56 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
   [Dezeen, Jul 2015](https://www.dezeen.com/2015/07/06/bubble-wrap-redesigned-pop-less-packaging-material-ibubble-sealed-air/) · [PlasticsToday, Jul 2015](https://www.plasticstoday.com/plastics-processing/bubble-wrap-loses-its-pop-ularity) ·
   [CD&R release, 9 Apr 2026](https://www.cdr.com/news/sealed-air-announces-completion-of-acquisition-by-cd-and-r)
 
+## Ready — HOW IT WORKS + HOW TO START shelf (3 Nov 2026, owner: "find topics which are informative, interesting"; sourcing subagent
+## 3 Nov 2026 — every figure re-check at build time; never promise income; finance topics = education only, no product advice)
+Build order: **H1 Spotify → T1 Christmas lights (seasonal: post before ~20 Nov) → H2 credit score → T2 reselling tax → H3 Shorts money**, then H4 hotel fees,
+H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check city law), T5 car detailing (= owner's idea), H7 app-store cut, T6 Amazon FBA, T7 cleaning (weakest sources).
+
+### H1. Why 999 plays can pay $0 — HOW IT WORKS · 31/35
+- **Hook:** "Your song got 999 plays this year. Spotify paid you nothing. Why?" **Beats:** one big pot of subscription + ad money → ~2/3 to rights-holders → split by each song's *share of all streams* (no fixed per-stream price) → since 2024 a track needs 1,000 streams in 12 months to earn at all → label/distributor cut before the artist. **Fact:** Spotify paid out >$11B in 2025. **Takeaway:** there is no "price per stream" — your share of total listening is what counts. **Visuals:** a big coin pot, pipes splitting, a 999/1,000 gate. **Caution:** no earnings promises; no Spotify logo/green.
+- **Sources:** [Spotify Newsroom 28 Jan 2026](https://newsroom.spotify.com/2026-01-28/2025-music-industry-payouts-whats-next-for-artists/) · [Music Week 2025](https://www.musicweek.com/digital/read/spotify-loud-clear-2025-report-breaks-down-its-10-billion-role-in-the-streaming-economy/091558) · [MBW Nov 2023, 1,000 plays](https://www.musicbusinessworldwide.com/confirmed-next-year-tracks-on-spotify-1000-plays/)
+
+### H2. The 5 numbers behind your credit score — HOW IT WORKS · 30/35 (US)
+- **Hook:** "One number decides your rent, your car and your mortgage. Who makes it?" **Beats:** payment history 35 % → amounts owed 30 % → length of history 15 % → credit mix 10 % → new credit 10 % → myth: Experian says keep each card's use under ~10 %, not the "30 % rule". **Takeaway:** paying on time + low balances ≈ two-thirds of the score. **Visuals:** a pizza pie chart, a gauge needle. **Caution:** education only, no credit-repair or card advice; US FICO only (UK differs).
+- **Sources:** [myFICO](https://www.myfico.com/crediteducation/whatsinyourscore.aspx) · [Experian 1 Oct 2025](https://experian.com/blogs/ask-experian/what-factor-has-the-biggest-impact-on-credit-score)
+
+### H3. Who gets paid when you watch a Short — HOW IT WORKS · 28/35
+- **Hook:** "You just watched 50 Shorts. The ads made money. Who got it?" **Beats:** Shorts-feed ad money pooled → share for music licensing when a Short uses music → rest split by creators' share of views → creators keep 45 % (long videos 55 %). **Takeaway:** music in your Short shrinks the pot it's paid from. **Visuals:** a river of coins splitting. **Caution:** YouTube page mentions changes from 1 Feb 2027 — recheck before scripting.
+- **Sources:** [YouTube Help 12504220](https://support.google.com/youtube/answer/12504220) · [Fox Business 21 Sep 2022](https://foxbusiness.com/technology/youtube-reward-shorts-creators-share-ad-revenue)
+
+### H4. The hotel price trick that's now illegal — HOW IT WORKS · 28/35 (US)
+- **Hook:** "That $99 hotel turned into $160 at checkout. Not any more — why?" **Beats:** drip pricing → "resort"/"service" fees → FTC rule in force 12 May 2025 → the all-in price must be the most prominent → taxes may still come later. **Fact:** FTC: up to 53M hours/yr saved, >$11B over a decade. **Takeaway:** in the US the first price must include mandatory fees — screenshot it. **Visuals:** a price tag that grows at each step. **Sources:** [FTC 17 Dec 2024](https://ftc.gov/node/86973) · [TechCrunch 5 May 2025](https://techcrunch.com/2025/05/05/ftc-bans-hidden-fees-for-live-events-and-short-term-rentals-effective-may-12/)
+
+### H5. Why takeout costs more on the app — HOW IT WORKS · 27/35
+- **Hook:** "That $20 burger? The restaurant may keep about $14." **Beats:** restaurant picks a plan → 15 / 25 / 30 % commission on delivery → ~6 % on pickup → why app menu prices are higher. **Takeaway:** pickup leaves the restaurant much more. **Visuals:** a burger sliced into shares; generic delivery bag, no logo; don't attack the company. **Sources:** [DoorDash merchant pricing 2026](https://merchants.doordash.com/en-us/products/pricing) · [QSR 2022](https://www.qsrmagazine.com/news/doordash-unveils-tiered-pricing-plans-restaurants)
+
+### H6. How "pay in 4" makes money — HOW IT WORKS · 26/35
+- **Hook:** "4 payments, 0 % interest. So who pays?" **Beats:** the store pays a fee (avg 2.49 % in 2021, CFPB) — more than a card fee → late fees (~12 % of borrowers paid one) → why stores pay: people spend more. **Takeaway:** "free" credit is paid by the store — and by you if you're late. **Caution:** no advice for/against using it. **Sources:** [Atlanta Fed on CFPB report, 3 Oct 2022](https://www.atlantafed.org/blogs/take-on-payments/2022/10/03/cfpb-releases-report-on-buy-now-pay-later) · [Richmond Fed Jan 2025](https://www.richmondfed.org/publications/research/economic_brief/2025/eb_25-03)
+
+### H7. Where the 30 % app-store cut goes — HOW IT WORKS · 25/35
+- **Hook:** "You pay $10 for an app. Where do $3 go?" **Beats:** 30 % standard → 15 % for developers under $1M/yr → why a subscription can be cheaper on the website → 2024–25 court/EU changes. **Caution:** re-check current US/EU terms before scripting. **Sources:** [Apple Newsroom Nov 2020](https://www.apple.com/newsroom/2020/11/apple-announces-app-store-small-business-program/) · [CNBC 18 Nov 2020](https://www.cnbc.com/2020/11/18/apple-will-cut-app-store-fees-by-half-to-15percent-for-small-developers.html)
+
+### T1. Start a Christmas-light install business — HOW TO START · 29/35 (seasonal: post before ~20 Nov)
+- **Hook:** "Why do people pay strangers to hang their lights?" **Steps:** the safety problem (≈14,900 US ER visits from decorating in 2023, almost half falls — CPSC via WHA) → design / install / take-down as one package → liability insurance + ladder training → book clients in early November. **Caution:** safety framing, no injury shown; prices unverified → "get local quotes". **Sources:** [WHA citing CPSC, 12 Dec 2024](https://wha.org/news/newsletters/2024/12-12-2024/4) · [CBS 10 Dec 2013](https://www.cbsnews.com/pittsburgh/news/cpsc-warns-public-about-holiday-related-dangers/)
+
+### T2. Start reselling without tax surprises (US + UK) — HOW TO START · 29/35
+- **Hook:** "You sold 30 old things online. Does the taxman know?" **Steps:** source → list → US: platforms send a 1099-K only above $20,000 AND 200 sales (IRS IR-2025-107) → UK: platforms report sellers at 30 items or ~£1,700 → the £1,000 UK trading allowance. **Takeaway:** platform reporting doesn't change whether money is taxable. **Caution:** "check with a tax professional". **Sources:** [IRS 23 Oct 2025](https://irs.gov/newsroom/irs-issues-faqs-on-form-1099-k-threshold-under-the-one-big-beautiful-bill-dollar-limit-reverts-to-20000) · [GOV.UK 4 Dec 2024](https://www.gov.uk/government/news/information-for-online-sellers) · [GOV.UK allowance](https://gov.uk/guidance/tax-free-allowances-on-property-and-trading-income) · [Which? 30 Nov 2025](https://www.which.co.uk/news/article/could-your-christmas-side-hustle-land-you-with-a-tax-bill-aGK607i5p4qO)
+
+### T3. Start pet-sitting: who takes what — HOW TO START · 26/35 (needs 1 more independent source)
+- **Hook:** "You charge $30 a walk. How much do you keep?" **Steps:** app vs direct → platform fee (Rover: 20 % from sitters, ~11 % owner fee; CA differs) → pricing → insurance. **Source:** [Rover Help Center](https://support.rover.com/hc/en-us/articles/205385304)
+
+### T4. Start Airbnb co-hosting (check your city first) — HOW TO START · 26/35
+- **Hook:** "Make money from Airbnb without owning a home?" **Steps:** Co-Host Network (12 countries) → set your own fee, payouts split via Airbnb → city rules first (NYC Local Law 18: registration, host present, ≤ 2 guests; listings fell from >38,000 to ~3,000). **Caution:** never encourage illegal listings; replace the Wikipedia source with NYC OSE. **Sources:** [Airbnb local partners](https://www.airbnb.com/d/local-partners) · [Local Law 18](https://en.wikipedia.org/wiki/Local_Law_18_of_2022)
+
+### T5. Start mobile car detailing the legal way — HOW TO START · 26/35 (owner's idea)
+- **Hook:** "Washing a car in a driveway can break the law. Why?" **Steps:** kit → package pricing → wash water must not reach storm drains (EPA fact sheet: Federal Way, WA study ≈190 gal/yr of fuel and oil into drains) → capture mat + wet/dry vac → local permits. **Sources:** [EPA BMP](https://www.epa.gov/system/files/documents/2021-11/bmp-municipal-vehicle-and-equipment-washing.pdf) · [Roseville CA](https://www.roseville.ca.gov/Documents/Environmental%20Utilities/Programs/Stormwater%20Management/Best%20Practices%20For%20Business/Vehicle%20Wash%20Water.pdf)
+
+### T6. Start selling with Amazon FBA in 2026 — HOW TO START · 24/35
+- **Hook:** "Amazon packs and ships your product. What does it cost you?" **Steps:** Individual ($0.99/item) vs Professional ($39.99/mo) → ~15 % referral fee in most categories → FBA fees (+$0.08/unit avg from 15 Jan 2026) → run the Revenue Calculator before ordering stock. **Caution:** no profit claims. **Sources:** [Amazon 15 Oct 2025](https://sellingpartners.aboutamazon.com/update-to-u-s-referral-and-fulfillment-by-amazon-fees-for-2026) · [sell.amazon.com pricing](https://sell.amazon.com/pricing)
+
+### T7. Start a home-cleaning business — HOW TO START · 22/35 (weakest; add a pricing source)
+- **Hook:** "$0 to start, paid every week — what's the catch?" **Steps:** free EIN at irs.gov (never pay a website for it) → insurance + bonding → per-room pricing → it's physical (BLS: cleaners stand 95.2 % of the day). **Sources:** [BLS ORS](https://www.bls.gov/ors/factsheet/maids-and-housekeeping-cleaners.htm) · [IRS EIN](https://www.irs.gov/EIN)
+
 ## Ready — HOW TO START shelf (R&D run 1 Nov 2026: the series is ~40 % of the mix but had 0 banked topics; research by a sourcing subagent,
 ## checked 1 Nov 2026 — every figure re-check at build time; never promise income: "typical", "can", "in their example")
 Next HOW TO START episodes, in order: ~~28 food truck (NYC)~~ (queued 2 Nov) → 25 home bakery (Texas + UK) → 26 print-on-demand → 27 pressure washing (after one more source).

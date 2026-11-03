@@ -41,15 +41,22 @@ round head with ears, big eyes with pupils glancing sideways, wide grin, slim ou
 feet. **Colour lives only in the accents:** tie, shirt/dress, jacket, hair, cap. The hero = spiky white hair + **orange tie** (channel
 face). Looks: hero, friend, girl, girl2, lady, inventor, exec, creator, worker, oldman, kid, mystery, judge; change accents per story with
 `who={"base": "exec", "tie": (0, 170, 90)}`, `{"base": "girl", "shirt": (255, 200, 0), "hair": (200, 60, 40)}`. Mix men and girls in
-every episode. Our own design inspired by the reference — never a copy of an artist's character. Sets stay full-frame and colourful.
+every episode. Our own design inspired by the reference — never a copy of an artist's character. 
+**Clean look (owner, 3 Nov 2026: "it's not clean like you are doing for NextBigNow")** — `template/scripts/anim_clean.py`, default on
+(`CLEAN=0` = old look). Every set name now renders as a **flat, deep, saturated two-colour gradient + one soft light spot + one simple
+flat silhouette layer (houses / skyline / trees / shelves / window / counter) + a flat floor band** — no bricks, textures or busy rooms.
+No film grain, no bloom haze, no warm cast: whites stay white. `stage()` = clean gradient + one flat circle. **Captions live in the top
+band** (`say()` → y≈560, never on faces; `keep=True` only for a deliberate exception). One idea per frame, lots of empty space, the cast
+and the one prop in the lower half. New sets: add a palette + silhouette row to `CLEAN_SETS` instead of drawing a detailed room.
 
 ## 3. Series — every video belongs to exactly one (badge + title + CTA)
 | Series | Share of videos | What it is | Types (PLAYBOOK §2) | Ends with |
 |---|---|---|---|---|
-| **YOUR MOVE** (flagship) | ~35 % | POV true story at a decision point | A, D, C (any story with a person deciding) | a two-option question: "Comment FIGHT or FOLD IT" |
+| **YOUR MOVE** (flagship) | ~20 % | POV true story at a decision point | A, D, C (any story with a person deciding) | a two-option question: "Comment FIGHT or FOLD IT" |
 | **SPOT THE TRICK** | ~15 % | the hero walks into an everyday place (shop, app, airport, cinema) and catches the tricks one by one | E, B, F | "Save this before your next …" + share line |
-| **HOW TO START** (new, owner 31 Oct: "informative, like how to start a drone business") | ~40 % | a practical, verified step-by-step guide to starting a real small business (drone services, food truck, vending machines, print-on-demand…): what it is, licences/rules, gear + startup cost, what clients pay, first customers, the mistake that sinks beginners | E / F (how-to) | "Save this before you start" + "Comment your city/question" |
-| **WHO REALLY OWNS IT** | ~10 % | follow the money through doors to the hidden giant | C | "Tag someone who buys from them" |
+| **HOW TO START** (new, owner 31 Oct: "informative, like how to start a drone business") | ~35 % | a practical, verified step-by-step guide to starting a real small business (drone services, food truck, vending machines, print-on-demand…): what it is, licences/rules, gear + startup cost, what clients pay, first customers, the mistake that sinks beginners | E / F (how-to) | "Save this before you start" + "Comment your city/question" |
+| **HOW IT WORKS** (new, owner 3 Nov: "find topics which are informative, interesting") | ~25 % | an explainer of a money machine everyone touches but nobody sees: who gets paid when you stream a song, what's inside your credit score, where the 30 % app cut goes, why takeout costs more. Hook = a surprising number about the viewer's own life; 4–5 beats, each one picture (a pot, pipes, a sliced burger, a pie); one practical takeaway | E (explainer) | "Send this to someone who …" or "Save this" + a comment question |
+| **WHO REALLY OWNS IT** | ~5 % | follow the money through doors to the hidden giant | C | "Tag someone who buys from them" |
 
 - Badge: `part_badge(f, "YOUR MOVE", "EP 7 · THE PEPSI JET")` style, top right, first 2 s and on the end card.
 - Post title format (YouTube ≤ 50 chars, keyword first): `<keyword hook> | Your Move` / `… | Spot the Trick`.
