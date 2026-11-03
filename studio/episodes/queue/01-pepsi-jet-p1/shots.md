@@ -6,28 +6,31 @@ insignia (grey, two swivel nozzles, bubble canopy). New template assets this epi
 `set_view("bedroom90s")` (CRT TV, posters, desk), `set_view("schoolyard")` (brick school, bike rack, flagpole without flag),
 `mailbox_el`, `catalog_el`, `coupon_el` — all already in the story kit (`anim_story.py`, 31 Oct) with `cold_open`, `oops_beat`,
 `quote_card`, `choice_card`, `series_badge`, `set_front`. Reuse them; improve them in the template if the episode needs more.
+**Checked in the current line-art cast (R&D 3 Nov, `lab/story_kit/storyboard_pepsi_lineart.jpg`, 12 rows; props kit 6 = `template/scripts/anim_props6.py`). Placement notes:**
+(1) `bottlecap_el` is big: always `rot_comp(f, bottlecap_el("COLA"), x, y, r, scale≈0.26)`, or it covers the jet. (2) End card: stand the hero at feet y≈1340 (s≈0.95) or `choice_card(y=1410)` lands on his face; end-card jet `jumpjet_el(420)` at x≈300 (w 520 at x 230 runs off the left edge).
+(3) `who={"base": "hero", "top": ...}` recolours the shirt; the orange tie stays. "Hoodie" in older text = this line-art shirt. (4) `person_head_at` draws the whole body on the stick cast: s≈1.6–1.7, feet near the frame bottom.
 
 | Line | Set / shot | Cast + acting | HUD / props / caption | SFX / camera |
 |---|---|---|---|---|
-| i1 "Could you buy a real fighter jet… with Pepsi points?" | **schoolyard, dusk**, low angle WIDE: the jump-jet hovering over the bike rack, cola caps raining | hero small at bottom, looking up, `expr="wow"` | frame 1 = the jet already hovering; `part_badge("YOUR MOVE", "EP 1 · THE PEPSI JET")` | jet whine, slow push-in |
+| i1 "Could you buy a real fighter jet… with Pepsi points?" | **schoolyard, dusk**, low angle WIDE: the jump-jet hovering over the bike rack, `bottlecap_el("COLA")` raining (`scale≈0.26`) | hero small at bottom, looking up, `expr="wow"` | frame 1 = the jet already hovering; `part_badge("YOUR MOVE", "EP 1 · THE PEPSI JET")` | jet whine, slow push-in |
 | i2 "It's 1996. You're 21, a business student near Seattle." | bedroom90s MEDIUM | hero on bed with textbook, turns to camera | `cold_open(f, "1996", "NEAR SEATTLE", "YOU: STUDENT, 21")` | clock tick |
 | i3 "…a jet worth over twenty million dollars… as a prize." | CRT TV close-up (the ad playing: tiny jet on screen) | hero reflection on the glass, eyebrows up | `say("$20,000,000+ JET")` | TV static pop |
-| a1 "Pepsi lets you swap points from its packs for T-shirts, jackets, sunglasses." | TV CU → items pop out of the screen one by one | — | T-shirt / jacket / shades icons with point tags (no numbers needed) | pop pop pop |
+| a1 "Pepsi lets you swap points from its packs for T-shirts, jackets, sunglasses." | TV CU → items pop out of the screen one by one | — | `tee_el`, `jacket_el`, `glasses_el(style="round")` with point tags (no numbers needed) | pop pop pop |
 | a2 "Its last scene? A teenager lands a fighter jet at school." | schoolyard WIDE (inside the TV frame edge) | a kid look in the cockpit, papers flying | — | jet roar, screen shake |
 | a3 "The price… seven million Pepsi points." | TV CU | — | `hud_rule(f, 1, "7,000,000 POINTS = 1 JET")` | rule "ding" |
-| a4 "You want that jet. But three problems stand in your way." | bedroom90s MEDIUM, hero stands up | determined, `look=(1,0)` | three locked padlocks labelled 1 2 3 (roadmap) | lock clicks |
-| b1 "Problem one… drinking an ocean of Pepsi." | bedroom90s WIDE: hero buried in a mountain of generic cans | `sweat=True`, `expr="sad"` | lock 1 pops; `say("PROBLEM 1")` | can avalanche |
+| a4 "You want that jet. But three problems stand in your way." | bedroom90s MEDIUM, hero stands up | determined, `look=(1,0)` | `padlock_el(190, n)` ×3 (1 2 3, roadmap) | lock clicks |
+| b1 "Problem one… drinking an ocean of Pepsi." | bedroom90s WIDE: hero buried in `can_pile(f, 540, 1860, w=900)` | `sweat=True`, `expr="sad"` | `padlock_el(170, 1, open_=True)`; `say("PROBLEM 1")` | can avalanche |
 | b2 "So you read the small print." | catalog CU (generic "PRIZE CATALOG") | hero leaning in, magnifier | — | page flip |
 | b3 "fifteen real points… buy the rest. Ten cents each." | catalog CU, small print highlighted | — | highlight the rule; `say("10¢ PER POINT")` | marker squeak |
-| b4 "Seven million points? That's seven hundred thousand dollars." | hero CU (`person_head_at`, parlor-style blur bg) | `expr="smirk"`, calculator in hand | `say("$700,000")` | calculator beeps |
-| b5 "For a jet worth more than thirty times that." | split: small $700K bag vs giant jet | — | scale arrow "×30+" | — |
+| b4 "Seven million points? That's seven hundred thousand dollars." | hero CU (`person_head_at`, parlor-style blur bg) | `expr="smirk"`, `calculator_el(300, "700,000")` beside him | `say("$700,000")` | calculator beeps |
+| b5 "For a jet worth more than thirty times that." | split: `moneybag_el(250, "$700K")` vs giant jet | — | scale arrow "×30+" | — |
 | b6 **"Oops, Pepsi."** (signature beat — the hero's reaction) | hero turns to camera, CU | smirk | `oops_beat(f, t, t0)` | **Oops sting** (same every episode) |
 | c1 "Problem two. You don't have seven hundred thousand dollars." | hero empties pockets (lint, a coin) | `expr="sad"` | lock 2 | coin tinkle |
-| c2 "So you pitch five investors. And they put up all of it." | **office** two-shot → wide: hero with a flip chart, five `exec`/`creator` looks around a table | investors nod one by one | 5 money bags slide in; `say("5 INVESTORS")` | cash register |
+| c2 "So you pitch five investors. And they put up all of it." | **office** two-shot → wide: hero with a flip chart, five `exec`/`creator` looks around a table | investors nod one by one | `moneybag_el(110)` ×5 slide in; `say("5 INVESTORS")` | cash register |
 | d1 "Problem three. Pepsi has to say yes." | bedroom desk MEDIUM | nervous, glancing at the TV | lock 3 | — |
 | d2 order form, fifteen points, cheque $700,008.50 | desk top-down: `form_el("PRIZE ORDER FORM")`, 15 tiny points, `cheque_el(...)` with the amount | hero's hands (fg_hand style) | amount readable: $700,008.50 | pen scratch |
 | d3 "Ten of those dollars are for shipping." | cheque CU on "$10 S&H" line | — | circle on the $10 | tiny honk (comedy) |
-| d4 "You mail it. And you wait." | street at night, mailbox_el, hero drops envelope | — | `hud_clock(f, "MARCH 1996", "SEATTLE", "DAY 1")` → days tick | mail thunk, clock ticking |
+| d4 "You mail it. And you wait." | street at night, `mailbox_el`, hero drops `envelope_el(340)` | — | `hud_clock(f, "MARCH 1996", "SEATTLE", "DAY 1")` → days tick | mail thunk, clock ticking |
 | t1 "Pepsi's reply: the jet was fanciful. Just for fun." | hero at the door with an opened letter, CU | `expr="wow"` → sad | `quote_card(f, "fanciful… simply included to create a humorous and entertaining ad", "PepsiCo's letter, 1996 · via Seattle Times")` | paper rustle |
 | t2 "Your check comes back… with free Pepsi coupons." | the cheque slides back onto the desk, coupons flutter down | deadpan | `cheque_el` with a RETURNED stamp, `coupon_el("FREE COLA")` ×3 | short sad trombone |
 | t3 "Then Pepsi's lawyers take you to court." | **courtroom** doors swing open, three `exec` lawyers walk in (wide) | hero `sweat=True` | plain "COURT PAPERS" stamp (no real case caption on screen) | door boom, small shake |

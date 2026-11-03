@@ -1,6 +1,6 @@
 # What the platforms reward right now (keep this current)
 
-Last researched: **2026-10-31** (R&D writers' room run; previous 26 Oct). Every run: if this date is more than 3 days old, research again (WebSearch, extended mode:
+Last researched: **2026-11-03, partial** (R&D Story run: Instagram via one relay only; no new YouTube facts, Metricool / SocialBee / OutlierKit pages blocked, re-check them next run; previous full scan 31 Oct). Every run: if this date is more than 3 days old, research again (WebSearch, extended mode:
 "Instagram Reels algorithm <month year>", "YouTube Shorts algorithm <month year>", "Instagram/YouTube policy AI content <month year>"),
 update this file with dated, sourced facts, and say what changed in the run report.
 
@@ -16,6 +16,9 @@ update this file with dated, sourced facts, and say what changed in the run repo
 | Mosseri, 23 Oct 2026: ranking focuses "a lot more on finding reels and photos that you might send to a friend" than on comments; scheduling a post does not hurt reach (ZoomSphere transcript, 28 Oct 2026) | Every episode is built to be *sent* (a surprising true story + a debatable choice); keep scheduling via Metricool |
 | Mosseri, 16 Oct 2026: "We do not throttle reach of AI content just for being AI content" — as long as it is labelled; the Sep 2026 "AI-generated profile" label applies only to accounts presenting an AI-generated *person* (Metricool news, 28 Oct 2026) | Keep `isAiGenerated=true` per post for the synthetic voice; our cartoon hero is not an AI person → no profile label |
 | Jul 2026: an "AI Info" label can be added to posts; Aug 2026: Bonuses program pays for photo/carousel posts; Oct 2026: a Reels-first feed is being tested on iOS (SocialBee, 26 Oct 2026) | Nothing to change for Reels; a photo/carousel "trick card" post could earn a bonus later |
+| Mosseri, 16 Oct 2026, reported by ZoomSphere (30 Oct 2026, secondhand): experimenting with Trial Reels is fine, reposting the same trial reel repeatedly is not: "We're going to crack down on that." | Never re-post a trial reel; every post is new anyway |
+| Mosseri, 30 Oct 2026 (same relay): "We don't demote content for being created with other apps other than ours", but a video with another app's logo is "going to get less distribution" | Our renders carry no third-party watermark; keep it so, and don't re-upload from an app that stamps one |
+| Mosseri, 23 Oct 2026 (same relay): opt-in AI dubbing in "more than 12 languages" for creator and public accounts | Possible cheap reach test for EU viewers later; check how it interacts with the AI label first. Not adopted |
 
 ## YouTube Shorts
 | Fact (date) | What we do about it |

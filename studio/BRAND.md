@@ -59,7 +59,7 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
   (Influencer Marketing Hub / Later / Modash, 2026). Shorts integrations ~0.25–0.5× a long-form integration.
 
 ## 5. What we do now (the readiness checklist — R&D keeps it current)
-- **Cadence: 2 polished episodes a day** at the best US/UK/EU slots (00:00 and 05:00 IST = 18:30 / 23:30 UTC), Part 2 of two-parters
+- **Cadence: 1 episode a day in practice since 1 Nov** (one scheduled task, 21:05 UTC, posting at 05:00 IST; 2 a day was the 31 Oct plan, with slots 00:00 and 05:00 IST = 18:30 / 23:30 UTC), Part 2 of two-parters
   in the same slot the next day. Consistency beats volume; brands see activity (≥ 3 posts/week is enough), and every weak reel
   lowers the average views a sponsor will pay for.
 - **Track from today** (PERFORMANCE.md, every run): avg views of the last 10 reels/Shorts, avg watch time and %, **sends + saves +
@@ -72,10 +72,11 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
   YouTube last 10 Shorts avg 440 views (median 521), story episodes 33–40 s avg view duration. Top 3 (IG): gas station 1,522, Planet Fitness 1,280, printer ink 1,376. Followers **57** on Instagram (31 Oct; +4 in the week of 24–29 Oct); audience countries: Instagram reports none below ~100 followers.
   **2 Nov 2026:** Instagram last 10 reels avg **445 views** (median 165), 3-s rate 54 %, **6.3 reactions per 1,000 reach** (drone how-to alone 17 / 1,000:
   6 shares + 14 saves); YouTube last 10 Shorts avg 439 views. Top 3 (IG, last 10): gas station 1,523, **HOW TO START EP 1 drone 1,313 (75.9 % 3-s, channel best)**, airline miles 589.
+  **3 Nov 2026 (R&D pull, food truck not in the data yet):** followers **58** on Instagram, **41 subscribers on YouTube** (first pull; 32 on 25 Oct, flat since 28 Oct).
   **3 Nov 2026:** Instagram last 10 reels avg **490 views** (median 177), 3-s rate 55 %, avg watch 23.1 s, **7.2 reactions per 1,000 reach** (saves ~11–12 / 1,000 on both how-tos); YouTube last 10 Shorts with rows avg 439 views (no rows since 28 Oct). Top 3 (IG, last 10): gas station 1,523, drone 1,319, airline miles 589. First real comment on an autopilot post (vending).
 - **Community:** pin a comment on each post restating the choice ("FIGHT or FOLD — what would you do?"); reply to early comments within
   the first hour when a run is live (the post copy's firstCommentText); Part 2 may quote real comment counts only.
 - **Owned channel:** bio link to oopsmybusiness.com (later: an email list / newsletter "The Oops Weekly") so the audience isn't only rented.
 - **Milestones:** media kit (1 page: premise, series, hero, audience, avg views, engagement, top videos, a sample integration
   storyboard, disclosure + brand-safety rules) at ~1,000 followers; start pitching best-fit categories at ~5–10K followers or when
-  the last-15 average passes ~5K views; apply for YPP at 500 subs + 3M Shorts views in 90 days.
+  the last-15 average passes ~5K views; apply for YPP at 500 subs + 3M Shorts views in 90 days (ALGORITHM.md carries an Aug 2026 report that the bar for new channels rises to 20M Shorts views from 1 Feb 2027; check YouTube Help before relying on either number).

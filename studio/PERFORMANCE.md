@@ -9,6 +9,14 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-03 ~08:30 IST (R&D run: Story audit)
+Instagram rows ≈ unchanged since 02:40 IST (±2–3 views on old reels); food truck (posted 05:00 IST) has no row yet. Media-kit numbers unchanged: last 10 reels avg 490 views, median 177, 7.2 reactions / 1,000 reach. Followers 58 (1 Nov).
+**YouTube is blind, not weak:** no `YTVP` rows after 28 Oct and account-level `YTEV02` views stop on 30 Oct, for 3 published episodes. Subscribers 32 (25 Oct) → 41 (28 Oct), flat since (last row 2 Nov). Looks like the Metricool ↔ YouTube sync; don't read these Shorts as flops. Check the channel directly.
+**Insight X (3 Nov, n = 18 animated reels, `lab/story/hook_length_audit.py`) — three of our rules were weaker than we said.**
+(1) Length: seconds watched do not fall with length (rho +0.32); bands <80 s 18.2 s · 80–105 s 25.0 s · 105–125 s 22.4 s · 125 s+ 21.9 s. **This corrects insight U:** "hold % of length" falls partly by arithmetic, so it can't justify a cut on its own. (2) Hook wording: no signal (words −0.24, you/your −0.10, ellipsis −0.17). (3) Roadmap: +1.8 s / +6.7 points of 3-s (n = 11 vs 7), down from the "+10 points of length" in insight K (n = 6).
+What does separate: **3-s rate vs views rho +0.80**, and by subject: things the viewer pays for or could do themselves (drone, vending, gas, printer, Costco, gym) 3-s 64–76 %, mean 69.8 %; all 12 others 24–64 %, mean 51.0 %. Four of the six tags were set after seeing those rows (insights L/O), the two how-tos were out-of-sample, and banana (type B, predicted to win) came in at 56 %. Treat as a lead, confounded by date.
+→ Expect Pepsi P1 (type A) to open below the how-tos on IG: the earlier A/C/D stories opened at 43–61 %. Judge it on comments and on YouTube once sync returns, not on 3-s alone. A blind AI viewer panel failed to predict any of this (rho 0.00), so human numbers only.
+
 ## Snapshot 2026-11-03 ~02:40 IST (episode run: HOW TO START EP 3, food truck NYC)
 Instagram (IGRE, 12 Oct → 3 Nov) — new + changed rows:
 | Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |
@@ -187,7 +195,7 @@ T. **Media-kit numbers (BRAND.md §5), 31 Oct:** avg views of the last 10 Instag
    21.5 s; reactions 1.6 / 1,000 reach; YouTube last 10 Shorts avg **302** views (median 196; Duolingo 609 views but a 6-s average view =
    the title drew clicks the video lost in the first seconds — a title/hook mismatch to avoid). Follower growth: not in these pulls (add
    `IGFO*`/brandSummary next run). Audience countries: not pulled yet (demographic connector) — needed for the media kit.
-U. **Length vs hold:** the three videos over 115 s hold 15–23 % of their length; the 70–100 s ones 28–35 % (airline 28 %, Planet Fitness 35 %,
+U. *(Corrected by insight X, 3 Nov: the hold % gap is largely arithmetic.)* **Length vs hold:** the three videos over 115 s hold 15–23 % of their length; the 70–100 s ones 28–35 % (airline 28 %, Planet Fitness 35 %,
    Costco 34 %). Avg watch in *seconds* is flat (16–31 s) whatever the length → the first ~25 s decide, and a 2-minute script is paid
    for in completion rate. The two new episodes are written at ~120–125 s with a re-hook every ≤ 20 s and the roadmap labels; if their hold
    stays < 25 %, cut SPOT THE TRICK to 3 tricks / ≤ 95 s and YOUR MOVE singles to ≤ 100 s.
@@ -239,7 +247,7 @@ N. **Roadmap prediction (insight K) — partly confirmed:** no-roadmap Duolingo 
    AWS 18 %, popcorn 17 %, Duolingo 15 %.
 
 ## Insights (27 Oct 23:30 IST, R&D Story run — script structure vs retention; `tools/story_check.py`, `lab/story/`)
-K. **A roadmap in the script ("Step one… Step two", "four secrets, the last one is genius") goes with ~10 points more of the video
+K. *(Weakened by insight X, 3 Nov, n = 18.)* **A roadmap in the script ("Step one… Step two", "four secrets, the last one is genius") goes with ~10 points more of the video
    watched.** Avg watch as % of length, Instagram: with roadmap Costco 34 %, Starbucks #2 31 %, Planet Fitness 30 %, printer ink 29 %
    (+ restaurant tricks 33 %) vs without Amazon 19 %, Chick-fil-A 24 %. Holds inside type F (Starbucks, Planet Fitness), so it is not
    only insight I. Item labels rho +0.93 with avg-watch % (n = 6 — direction, not proof; labels also track the 3-s rate, so part is

@@ -55,8 +55,8 @@ every episode. Our own design inspired by the reference — never a copy of an a
 - Post title format (YouTube ≤ 50 chars, keyword first): `<keyword hook> | Your Move` / `… | Spot the Trick`.
 - Number episodes per series (`episodes/README.md` keeps the counter).
 - **Two-part episodes** (YOUR MOVE only, max 1 in 4 videos): when the true story has a natural cliffhanger *at the decision*.
-  Part 1 ends on the choice with no answer + "Part two tomorrow — follow so you don't miss it". Part 2 is built by the **second**
-  video run after Part 1 (≈ 24 h later, same IST slot), opens with the PART 2 badge and a ≤ 6-s recap inside the hook question,
+  Part 1 ends on the choice with no answer + "Part two tomorrow — follow so you don't miss it". Part 2 is built by the **next**
+  video run after Part 1 (the task fires once a day; ≈ 24 h later, same IST slot), opens with the PART 2 badge and a ≤ 6-s recap inside the hook question,
   and must make sense on its own. Say "MOST OF YOU SAID …" **only** with real comment counts from Metricool/the app — never invent it.
 
 ## 4. Beat sheet — YOUR MOVE (single episode 75–110 s; Part 1 ≈ 70–85 s, Part 2 ≈ 60–80 s)
@@ -111,6 +111,11 @@ DOOR #1…#N, each opens to the same owner → the twist (scale/number) → what
 - **A real decision** with two defensible options — or for SPOT THE TRICK, ≥ 3 tricks the viewer can spot tomorrow.
 - **An arc:** want → obstacle → turn → outcome, all verifiable.
 - **Brand-safe** (BRAND.md §3) and ideally in a theme sponsors care about: money, shopping, work, starting a business, tech.
+- **What our data says about openings (3 Nov, n = 18 animated reels, `lab/story/hook_length_audit.py`, PERFORMANCE insight X):** hook wording does not predict the
+  3-s rate (words, "you", ellipsis: all |rho| ≤ 0.24, p ≥ 0.3), so don't polish wording by rule. The one split that separates is what the video is *about*: something
+  the viewer pays for or could do themselves (how-tos, gas, printer ink, gym, hot dog) 64–76 %, everything else 24–64 %. Post-hoc tags, n small: use it to choose topics, not as proof.
+- **AI readers can't judge watchability.** A blind panel of 5 simulated viewers scored 0.00 against our real 3-s rates and ranked our two best how-tos near the bottom. Use
+  fresh-eyes subagents for accuracy, clarity, logic and brand safety; never let them kill or pick a topic or hook on "people won't watch this".
 
 ## 7. Checklist before `make_vo.py`
 - `SERIES = "YOUR MOVE"` (or `"SPOT THE TRICK"` / `"WHO REALLY OWNS IT"`), `PART = 0/1/2`, `EP = n` at the top of `vo_lines.py`.

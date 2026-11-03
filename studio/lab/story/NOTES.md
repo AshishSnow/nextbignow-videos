@@ -72,3 +72,7 @@ https://scienceblog.com/t-humans-eight-second-attention-span-goldfish-myth/
 - When Metricool rows return: tag every post roadmap yes/no and re-run `python3 lab/story/corr.py` (add the rows to its `D` table) with n ≥ 10; drop R8 if the gap closes.
 - Real reversal detection (good/bad polarity per line) instead of keywords — e.g. a tiny sentiment lexicon, or hand-tag `+`/`−`.
 - Two-part story + choice CTA (owner's references) — needs comment data to judge.
+
+# R&D Story run 3 Nov 2026 — re-test at n = 18
+Scripts: `hook_length_audit.py` (length, hook wording), `hook_panel_items.py` + `hook_panel_ratings.json` + `hook_panel_score.py` + `hook_panel_id_map.json` (blind panel; lists = the id map shuffled with `random.Random(0..4)`). Numbers and verdicts: RND.md log, PERFORMANCE insight X.
+Panel lesson: 5 simulated viewers agreed with each other (+0.42) and not with real viewers (0.00). Their favourites are famous brands with neat paradoxes; real viewers favoured practical, own-wallet topics. Don't repeat this without a new idea (e.g. a much larger real-post calibration set).

@@ -6,7 +6,7 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 ## Rules
 0. **Writers' room first (since 31 Oct, STORY.md §8):** if `episodes/queue/` holds fewer than 3 REVIEWED episodes, this run writes
    1–2 complete episodes (vo_lines.py + shots.md + SOURCES, story_check 7/7 + all S-gates, a fresh-eyes subagent review) and marks
-   them REVIEWED in `episodes/README.md`. Only when the queue is full does the rotation below apply. Runs: 02:41, 08:41, 12:41 UTC.
+   them REVIEWED in `episodes/README.md`. Only when the queue is full does the rotation below apply. Runs: once a day, 02:41 UTC (scheduled task list, 3 Nov; 3 a day was the 31 Oct plan).
 1. One focus area per run. Pick the one with the oldest "last worked" date, unless something is broken or the data
    clearly says otherwise. **Voice has priority until the narrator clearly meets `VOICE.md`'s spec.**
 2. Write the hypothesis before building. Research first (primary sources, dated), then experiment in
@@ -20,15 +20,15 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 5. Every run also: refresh `PERFORMANCE.md` (Metricool, last 21 days); if `ALGORITHM.md` is > 3 days old, research it; if
    `topic_bank.md` has fewer than 10 Ready topics, add verified ones first (owner, 27 Oct: "topics need to improve — something interesting").
    Voice has had 3 runs in a row — give the other areas (Topics, Story, Visuals, Sound) their turn unless voice is broken.
-6. Finish within 2 h; don't push template changes near episode runs (16:05 and 21:05 UTC).
+6. Finish within 2 h; don't push template changes near the episode run (21:05 UTC).
 
 ## Focus rotation
 | Area | What it covers | Last worked |
 |---|---|---|
 | Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 (3×) |
 | Sound | music score, SFX, mix levels, loudness | 2026-10-27 (run 6: word guard + `tools/mix_check.py`) |
-| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-11-02 (writers' room run: props kit 5 — `foodtruck_el`, `permit_el`, set `commissary` for HOW TO START EP 3, `anim_props5.py`) |
-| Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-10-27 (`tools/story_check.py`, roadmap rule R8) |
+| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-11-03 (props kit 6 + line-art lab sheet for the Pepsi pilot, `anim_props6.py`) |
+| Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-11-03 (hook + length audit n = 18, blind AI panel rejected, R8 re-tested) |
 | Tooling | render speed, smoke tests, QA automation | 2026-10-31 (run 9: `tools/board_check.py` storyboard pre-flight + build brief, in smoke_test.sh) |
 | Analytics | what the numbers say, cover frames, captions, posting times | never as a focus (refreshed every run; 31 Oct: first rows for the 4 story-type videos, media-kit baseline in BRAND.md §5) |
 | Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-11-02 (HOW TO START EP 3 food truck NYC, REVIEWED → queue = 5 unbuilt REVIEWED incl. the only HOW TO START) |
@@ -71,12 +71,12 @@ Story
   news until the review noticed they go to 2022 lists; and a preference poll ("tacos or coffee") is not a choice — ask about the decision the story raised.
 - Writers' room lesson (1 Nov): numeric *ranges* ("four to eight thousand") fail R5 — say "several thousand" and put the range in the caption;
   old regulator cases must say the year aloud; a how-to's "trap" step must not paint a legal category (a likely sponsor) as a scam.
-- story_check estimates 0.40 s/word: a 4-trick SPOT THE TRICK lands at ~125 s and a YOUR MOVE single at ~120 s. If the first two episodes hold < 25 % of
-  their length (PERFORMANCE U), add a length gate (SPOT THE TRICK ≤ 3 tricks / ≤ 95 s; YOUR MOVE single ≤ 100 s).
+- ~~Length gate~~ — tested 3 Nov, **rejected**: avg watch in *seconds* does not fall with length (rho +0.32, n = 18); "hold % of length" falls partly by arithmetic. The 80–105 s band has the best seconds (25.0, n = 4), so aim there when the story allows, no gate. IKEA (~125 s) and nickel Coke (~120 s) stay as written.
+- Next Story test worth running: real comment rate by end-question type (YOUR MOVE FIGHT/FOLD vs how-to STAY/MOVE vs GYM/OFFICE) once the Pepsi rows land.
 - Writers' room next: SPOT THE TRICK #2 = the airport (walk-through duty-free, $6 water vs 'street pricing' airports, currency kiosks, 'pay in home currency');
   WHO REALLY OWNS IT #1 candidates: AB InBev 'craft' beers, store brands; YOUR MOVE EP 3 candidates: Burger King Whopper Detour (A, seat = the CMO:
   TROLL / PLAY SAFE), Knight Capital (A, seat = the CTO at 9:30: HALT / TRADE), frozen-chicken tax / Ford vans (A: BOLT SEATS / PAY 25 %), LEGO 2004 (SELL PARKS / KEEP).
-- Validate R8 (roadmap) when Metricool rows return: tag roadmap yes/no per post, `python3 lab/story/corr.py` at n ≥ 10 (PERFORMANCE K).
+- ~~Validate R8~~ — done 3 Nov, n = 18: roadmap 21.7 s / 59.8 % 3-s vs none 19.9 s / 53.1 % (was "+10 points" at n = 6). Keep as cheap structure, not as a proven lever.
 - Real reversal detection for story_check (good/bad polarity per line, e.g. a small lexicon or hand tags) — keyword "but" counts
   did not track retention.
 - Comment test: one specific A/B question in the last line vs the friend CTA (comments ~0; owner's references 75–300 per reel).
@@ -114,6 +114,13 @@ Visuals / Story / Tooling
   part renders start each part with t = 0 for the first frame's windows; set it at the top of compose() if a flicker is ever seen.
 
 ## Log
+- 2026-11-03 (02:41 UTC run) | Story (+ Visuals for tonight's build) | Queue 4 REVIEWED, bank ≥ 10 Ready → rule (c); Voice/Sound/Story tied at 27 Oct; Story chosen (owner's priority, and 3 older rules had never been re-tested on n > 6).
+  **Hypotheses, written first:** (1) our data supports a length gate (backlog); (2) hook wording features predict the 3-s rate; (3) R8 roadmap still separates at n ≥ 10; (4) a blind panel of simulated viewers can pre-screen hooks, if it first predicts the 18 real rates.
+  **Results (18 animated reels, `lab/story/hook_length_audit.py`, `hook_panel_*`):** (1) **rejected** — length vs avg-watch seconds rho +0.32 (p 0.20); length vs hold % −0.53 (p 0.03) is largely arithmetic (hold = seconds / length); bands <80 s 18.2 s · 80–105 s 25.0 s · 105–125 s 22.4 s · 125 s+ 21.9 s. No gate; the two long queued scripts not cut. (2) **rejected** — hook words −0.24 (p 0.35), real "you/your" −0.10, ellipsis −0.17. (3) **shrunk** — roadmap 21.7 s / 23.8 % / 59.8 % 3-s (n = 11) vs none 19.9 s / 22.2 % / 53.1 % (n = 7); the 27 Oct "+10 points" was n = 6. (4) **rejected** — 5 independent Sonnet raters with different viewer personas, shuffled lists, no data: panel mean vs real 3-s **rho 0.00 (p 0.99)**, top half 55.9 % vs bottom half 58.6 %, inter-rater +0.42, so they agree with each other and not with viewers; drone (real 75.9 %) and vending (68.2 %) ranked 16th and 18th of 18. Data caveat: 4 raters answered by list position rather than the printed id, mapped back by position; one dropped an item (banana). So no hook was changed on its score. Rule added: fresh-eyes reviews judge accuracy/clarity/safety, not watchability (STORY §6). 3-s rate vs views rho +0.80 (p < 0.001): the opening is what buys reach.
+  **Bug found and fixed:** README/STORY told the episode task to build Part 2 on the "second run after Part 1". The task now fires once a day (scheduled task list, 3 Nov), so Part 2 would have posted 48 h after a Part 1 that says "Part two tomorrow". Now: next run. Cadence text corrected in BRAND/PLAYBOOK/RND (1 + 1 run a day, not 2 + 3).
+  **Visuals:** tonight's top entry (Pepsi P1) had only a 31 Oct lab sheet in the retired 3D cast, and `board_check --strict` passed while the board's prose named props that did not exist. Wrote props kit 6 (`anim_props6.py`: can_el, can_pile, padlock_el, calculator_el, moneybag_el, tee_el, jacket_el, envelope_el); props named in the rows. Before → after on the same board: 7 prose-only props that did not exist → 0 (a flip chart in c2 stays prose, the build can drop it); 12-row line-art sheet with guides (`lab/story_kit/storyboard_pepsi_lineart.jpg`, 0.03–0.29 s/frame). The sheet caught 3 layout problems before a render (giant bottle caps over the jet, end-card pills on the hero's face, end-card jet off the left edge), fixed, 4 placement notes in the shots.md header. Not rendered with audio; the build run still decides shots.
+  Analytics: IG rows unchanged (no food-truck row yet); **YouTube still blind**: no YTVP rows after 28 Oct, and account-level views (YTEV02) stop 30 Oct, so this looks like a Metricool sync problem, not a reach problem (owner: check the YouTube connection in Metricool). First YT subscriber number: 41. ALGORITHM.md refreshed, partially: Metricool, SocialBee and OutlierKit pages were blocked (PROVENANCE_REQUIRED), only ZoomSphere's relay of Mosseri was read.
+  Lesson: the bigger gain was re-testing our own rules; 3 of 4 did not survive more data. | kept: kit 6, rules, timing fix; dropped: length gate, hook-wording rules, AI hook panel — measure: Pepsi P1 real comments vs 1 real comment channel-wide on autopilot posts; panel's frozen score for food truck 47/100 (ranks low) vs its real 3-s tomorrow
 - 2026-11-02 (02:41 UTC run) | Writers' room (data override of rule 0) + Visuals | Queue held 4 REVIEWED (Pepsi P1/P2, IKEA, nickel Coke) and the bank
   ≥ 10 Ready, so rule 0 didn't fire and the rotation said Voice/Sound/Story (27 Oct). Overrode it on data: the last two episode runs both built
   **HOW TO START** (drone 1 Nov, vending 2 Nov) and the drone how-to is the channel's best on every sponsor metric (3-s 75.9 %, 20 reactions on

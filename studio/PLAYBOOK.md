@@ -14,7 +14,7 @@ I will get brand deals"). **Read STORY.md (what we tell and how: hero = "you", s
 (`studio/episodes/`), already story-checked and reviewed; the build run re-verifies the facts and makes it beautiful.
 
 **Time budget:** take your time — a good episode takes 90–150 minutes. Don't rush any step. The only hard limit: be finished
-(scheduled, logged, pushed) about 30 minutes before the next run starts (episode runs fire at 16:05 and 21:05 UTC).
+(scheduled, logged, pushed) about 30 minutes before the next run starts (the episode task fires once a day, 21:05 UTC).
 
 ## 0. Setup (fresh workspace)
 ```bash
@@ -95,7 +95,7 @@ Format: `(id, text, speed, pause, base_semitones, range_expand, [stressed words]
 
 **Story rules (R&D Story run, 27 Oct — evidence and numbers in `lab/story/NOTES.md`).** Before `make_vo.py`, run
 `python3 /home/claude/nextbignow-videos/studio/tools/story_check.py $P` and fix every flag (aim 7/7; log the score in the run log):
-- **R8 Roadmap (strongest signal in our data):** promise a count in the first 4 lines and label the items. Our 4 reels with
+- **R8 Roadmap (cheap, keep it; n = 18 on 3 Nov shrank the 27 Oct gap to +1.8 s avg watch / +1.6 points of length, so it is no longer "the strongest signal"):** promise a count in the first 4 lines and label the items. Our 4 reels with
   "Step one / Secret two…" held 29–34 % of their length on Instagram, the 2 without 19–24 % (n = 6; works for type F too).
   The last 5 videos dropped it. Per type: A/D story → "…flipped in three moves. And the last one is the cruelest." (Move one /
   Move two / Move three = eras or turns); B object → "three reasons…"; E trick → "N tricks, the last one is the sneakiest";
@@ -288,6 +288,7 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   frame: "meanwhile" / cause → effect). Flashback block = `sepia_tone` on every shot of the era + `calendar_el` counting back on the first one.
   Never give a character `phone_el()` / `phone2_el()` to hold — they render as a huge phone with an old chat / a "SEND THIS" button over the face;
   use a chip ("CALLING PAST BUYER #3…") or a `bubble_el`. Keep `say()` off giant-head close-ups (`person_head_at` s ≥ 1.8): put the caption at y 450–600.
+- **Props kit 6 (3 Nov, Pepsi pilot, `template/scripts/anim_props6.py`, in anim.py's exec list):** `can_el`, `can_pile(f, cx, base_y, w, rows)`, `padlock_el(w, n, open_)` (roadmap locks), `calculator_el(w, display)`, `moneybag_el(w, label)`, `tee_el`, `jacket_el`, `envelope_el`. `bottlecap_el` has no size argument and is huge: `rot_comp(..., scale≈0.26)`. `choice_card(y≈1410)` covers a hero standing at feet y 1840: stand him at feet y≈1340. **Writers: name every prop by its function in the row; board_check only sees `*_el` names, so a prop written in prose ("three padlocks") can be missing without any warning.**
 - **3 Nov (HOW TO START EP 3):** `talk(t)` now returns sound-shape mouths on the stick cast (`VISEME=0` = old): they read in close-ups (`person_head_at` s ≈ 1.5), so give the mentor at least two. `rope(f, x0, x1, y, t, t_close)` and `steam(f, x, y, t)` in anim_props5. SFX `sizzle`, `hose`, `rattle`. **`sepia_tone()` returns the frame: write `f[:] = sepia_tone(f, k)`** (the helper in examples before 3 Nov silently did nothing). Stamps are unreadable over busy props; use `tag_el` there. `form_el` crops long titles below w≈300.
 - Generic props now in `template/anim_props3.py` (27 Oct): `plane_el`, `card_el` (rewards card, no network logo), `cheque_el`,
   `balance` (scale that tips), `flapboard` (split-flap departures board), `mile_el` token, `chest_el` (chains/padlock),
