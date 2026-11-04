@@ -707,3 +707,20 @@ def drink(level=-24, n=3, gap=0.22):
         s_ = np.sin(2 * np.pi * (240 + 500 * t2) * t2) * np.exp(-t2 / 0.05) + 0.3 * signal.sosfilt(signal.butter(2, [600, 3000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.03)
         y[i:i + len(s_)] += s_[: L - i]
     return _st(y / np.abs(y).max() * db(level))
+
+
+# ep 23 foley
+def crackle(level=-26, dur=1.0):
+    """a burning fuse / cracker crackle: sparse random clicks over a noise floor (new foley, ep 23)."""
+    N_ = int(dur * SR); x = np.zeros(N_); r_ = np.random.default_rng(int(dur * 100) + 3)
+    for i in range(int(dur * 42)):
+        p = r_.integers(0, max(1, N_ - 900)); L_ = r_.integers(120, 800); x[p:p + L_] += r_.normal(0, 1, L_) * np.exp(-np.linspace(0, 6, L_)) * r_.uniform(0.3, 1)
+    x = x / (np.abs(x).max() + 1e-9) * db(level)
+    return np.stack([x, x], 1).astype(np.float32)
+def munch_sfx(level=-22, dur=1.2):
+    """fast happy chewing (ep 23): soft crunches with squelchy tails."""
+    N_ = int(dur * SR); x = np.zeros(N_); r_ = np.random.default_rng(5); t_ = 0.0
+    while t_ < dur - 0.2:
+        p = int(t_ * SR); L_ = int(0.09 * SR); x[p:p + L_] += r_.normal(0, 1, L_) * np.exp(-np.linspace(0, 5, L_)) * r_.uniform(0.6, 1); t_ += r_.uniform(0.14, 0.2)
+    b_ = signal.butter(2, [300, 3200], "band", fs=SR, output="sos"); x = signal.sosfilt(b_, x); x = x / (np.abs(x).max() + 1e-9) * db(level)
+    return np.stack([x, x], 1).astype(np.float32)

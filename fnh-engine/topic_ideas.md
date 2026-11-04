@@ -3,15 +3,16 @@
 ## UP NEXT (take the first one not yet in topics_done.md; the number in a slug is only a hint — use the next free episode number)
 Broad, everyday topics (things in everyone's kitchen/fridge/daily habits) reach the most — see performance.md.
 NEW from the 1 Nov trend scan (data: ep 18 milk 1204 reach / 75.0 % hold, ep 17 candy 1043 -> 'in your hand this week' + a practical fix keeps winning):
+NEW from the 4 Nov trend scan (Diwali 8 Nov, FSSAI festive drive + adulterated ghee / khoya seizures still running; web results otherwise generic): barfi-goes-hard + mithai-best-before + mithai-goes-off-fast were merged into ep 23. Added: 0x. paneer-fake-test (festive adulterated paneer stories; only with FSSAI / DART test sources, no scare claims). 0y. ghee-adulteration-test (home tests that do and do not work; FSSAI DART + one lab source; say clearly what a home test cannot prove). After 8 Nov go back to garlic breath (0o) and washing rice (0p).
 NEW from the 3 Nov trend scan (Diwali 8 Nov; FSSAI festive drive + khoya seizures in the news; ink eps 5 for 5 past 1k):
-0u. barfi-goes-hard — Why does barfi go dry and hard after a few days? (the water leaves: aw ~0.79, moisture ~15 %, Badola 2018; shelf life about a week at room temperature). Sequel to ep 22. Verify: J Food Sci Technol + one more.
+0u. (DONE in ep 23) barfi-goes-hard — Why does barfi go dry and hard after a few days? (the water leaves: aw ~0.79, moisture ~15 %, Badola 2018; shelf life about a week at room temperature). Sequel to ep 22. Verify: J Food Sci Technol + one more.
 0v. namkeen-oil-smell — What is that old-oil smell in a snack? (rancidity, oxidation; light, heat, oxygen). Verify: university food-science + Baking Business; no scare claims.
-0w. mithai-best-before — How long does loose mithai really last? (FSSAI best-before display rule on loose sweets). Verify the current FSSAI order.
+0w. (DONE in ep 23) mithai-best-before — How long does loose mithai really last? (FSSAI best-before display rule on loose sweets). Verify the current FSSAI order.
 0r. (DONE ep 22) namkeen-goes-soft.
 NEW from the 2 Nov trend scan (Diwali 8 Nov; web trend search still thin -> calendar + data; ep 19 apples, ep 20 rice, ep 18 milk and ep 17 candy ALL passed 1k reach = 4 of 4 ink episodes, all kitchen moments):
 0r-old. (DONE ep 22) namkeen-goes-soft (Diwali week, replaces 0q) — Why do crispy Diwali snacks go soft once the box is open? (moisture moves in from the air / from the soft sweets packed next to them; the mirror of today's bread: chips soften while bread hardens). Verify: ScienceABC 'why chips soften but bread hardens' + a food-science / extension source.
 0s. ghee-smell (Diwali, was 0m) — Why does ghee smell so good when it's heated? (browned milk solids, Maillard). Verify first; drop if only blogs.
-0t. mithai-goes-off-fast (Diwali) — Why do milk sweets spoil faster than dry ones? (water activity; khoya / chenna vs besan / dry-fruit). FSSAI 'best before' on loose sweets rule as the practical takeaway. Verify: FSSAI + a university food-science source.
+0t. (DONE in ep 23) mithai-goes-off-fast (Diwali) — Why do milk sweets spoil faster than dry ones? (water activity; khoya / chenna vs besan / dry-fruit). FSSAI 'best before' on loose sweets rule as the practical takeaway. Verify: FSSAI + a university food-science source.
 0n. (DONE ep 21) bread-in-the-fridge.
 0o. garlic-breath — Do you know garlic breath can last a day because it comes from your LUNGS, not your mouth? (allyl methyl sulfide goes through the
     blood and out in the breath; apple / milk / mint tested in a 2016 Ohio State study). Verify: Ohio State (J Food Sci 2016) + a major outlet.
