@@ -15,7 +15,7 @@ import numpy as np, cv2
 
 TOP, BOTTOM, LEFT, RIGHT = 250, 420, 60, 120   # = PLAYBOOK §6 (IG measured 250/319/86/119; YT ~288/288/–/140)
 W_, H_ = 1080, 1920
-TEXT_FUNCS = ["ed_show", "say", "title3d", "part_badge", "hud_clock", "hud_rule", "hud_timer", "hud_choice"]
+TEXT_FUNCS = ["ed_show", "say", "title3d", "part_badge", "hud_clock", "hud_rule", "hud_timer", "hud_choice", "fnote"]
 
 
 def fake_align(P):

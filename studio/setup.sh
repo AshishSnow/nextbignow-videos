@@ -58,6 +58,8 @@ need PIL || pipi pillow
 need pystoi || pipi pystoi          # mix_check.py (MIT)
 need pyloudnorm || pipi pyloudnorm  # mix_check.py (MIT)
 need scipy || pipi scipy
+need skia || pipi skia-python       # nbnkit: NextBigNow's own drawing kit (5 Nov)
+need fontTools || pipi fonttools    # nbnkit: woff -> ttf
 need tokenizers || pipi tokenizers
 for m in tokenizers kokoro_onnx sherpa_onnx parselmouth pedalboard tinysoundfont num2words soundfile cv2 PIL scipy; do need $m || echo "MISSING python module: $m"; done
 [ -s "$STUDIO/models/utmos/utmos22.onnx" ] || echo "NOTE: UTMOS model missing -> voice_report.py reports pitch/pace/ASR only"

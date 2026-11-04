@@ -7,6 +7,6 @@ STUDIO=${STUDIO:-/home/claude/studio}
 P="$STUDIO/projects/$1"
 [ -n "$1" ] || { echo "usage: new_project.sh <slug>"; exit 1; }
 mkdir -p "$P"/{scripts,work,frames}
-for f in "$HERE"/template/scripts/*; do [ -e "$P/scripts/$(basename "$f")" ] || cp "$f" "$P/scripts/"; done
+for f in "$HERE"/template/scripts/*; do [ -e "$P/scripts/$(basename "$f")" ] || cp -r "$f" "$P/scripts/"; done
 chmod +x "$P/scripts/render_all.sh"
 echo "$P"

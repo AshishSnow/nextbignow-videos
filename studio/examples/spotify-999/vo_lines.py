@@ -28,7 +28,7 @@ LINES = [
     ("e2", "Your money still feeds your country's pot, split by everybody's plays.", 1.04, 0.25, +0.6, 1.45, ['still', "everybody's"], 'low'),
     ("e3", 'Fairer if it only paid who you play? One French study checked.', 1.04, 0.15, +0.8, 1.45, ['Fairer', 'French'], None),
     ("e4", 'Outside the top ten thousand artists, it found the change averaged a few euros a year at most.', 1.04, 0.3, +0.6, 1.45, ['ten', 'few', 'most.:dn'], 'low'),
-    ("e5", 'A later SoundCloud study found bigger swings.', 1.04, 0.3, +0.6, 1.45, ['later', 'bigger'], 'low'),
+    ("e5", 'A later study of SoundCloud artists found bigger swings.', 1.04, 0.3, +0.6, 1.45, ['SoundCloud', 'bigger'], 'low'),
     ("t1", "So a play count isn't a paycheck. Making music? Read your deal first.", 1.02, 0.25, +0.8, 1.45, ["paycheck.", "deal"], "low"),
     ("z1", 'Should your subscription pay only the artists you play? Comment YES or NO.', 1.04, 0.2, +1.0, 1.45, ['only', 'YES', 'NO.'], None),
     ("z2", 'Save this, and send this to the friend who just released a song.', 1.06, 0.0, +1.0, 1.45, ['Save', 'friend', 'song.'], None),

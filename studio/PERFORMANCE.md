@@ -9,6 +9,18 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-05 ~02:40 IST (episode run: HOW IT WORKS EP 1, Spotify 999 plays)
+Instagram (IGRE, 14 Oct → 4 Nov) — new + changed rows:
+| Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 11-04 | **HOW TO START EP 4 — Christmas lights** (~21.6 h) | 155 s | **228** | 202 | **21.3 s** | 68.0 % | 4 | 0 | 1 | 1 (ours) |
+| 11-03 | HOW TO START EP 3 — food truck (~45 h) | 101 s | 1,302 | 1,127 | 31.8 s | 68.3 % | 23 | 0 | 3 | 1 (ours) |
+| 11-02 | HOW TO START EP 2 — vending (~69 h) | 99 s | 571 | 503 | 35.6 s | 68.0 % | 11 | 1 | 6 | 2 (1 ours) |
+| 11-01 | HOW TO START EP 1 — drone (~93 h) | 115 s | 1,324 | 1,193 | 27.5 s | 75.9 % | 35 | 6 | 14 | 1 (ours) |
+YouTube (YTVP): drone 348 / 29 s, vending 205 / 30 s, glasses 81 / 25 s, all unchanged; food truck and Christmas lights still have no row.
+**Media-kit numbers (5 Nov):** IG last 10 reels avg **483 views** (median 208), avg 3-s rate 59.5 %, avg watch 24.8 s, reactions (shares + saves + comments excl. our own) **8.6 per 1,000 reach** (35 on 4,065 reach); YT last 10 with rows avg 419 views (unchanged; last rows are older than the last two episodes).
+**Insight AA (5 Nov) — the first three how-tos at ~21 h had 500–1,300 views, Christmas lights has 228, on the same 68 % 3-s rate.** Same opening hold, so it isn't the first three seconds. What differs: its 155 s length (our longest how-to), the lowest avg watch of the series (21.3 s against 27–36 s), and a seasonal subject. It is one row at under a day, and insight X found seconds watched don't fall with length across 18 reels, so this is a lead, not a verdict. The save target (≥ 10 / 1,000 reach) missed: 1 save = 5 / 1,000. It is also the episode the owner called "too cartoon" and "not like it triggers more views". Re-read it at 72 h before believing any of this. → This run: keep the new episode at ~135 s or less, and change the look completely. **Judge EP 1 (HOW IT WORKS): 3-s ≥ 65 %, saves ≥ 5 / 1,000 reach, any stranger comments on YES/NO, avg watch ≥ 27 s.**
+
 ## Snapshot 2026-11-04 ~08:30 IST (R&D run: writers' room)
 Instagram + YouTube rows unchanged from the 02:40 IST pull within ±1 view (food truck 1,299, vending 570, drone 1,323); Christmas lights (posted 05:00 IST, published on both per the planner) has no row yet; food truck still no YouTube row. Media-kit numbers unchanged: IG last 10 avg 611 views, YT last 10 with rows avg 419.
 **Insight Z (4 Nov) — a benchmark for HOW IT WORKS before it exists, three groups on the same IG rows (mixed dates, post-hoc tags, so a lead):** how-tos (n = 3) 1,064 views, 3-s 70.7 %, watch 31.6 s, shares 2.5 + saves 8.2 per 1,000 reach; old "how X makes money" explainers (n = 9, gas, printer, gym, Costco, AWS, Duolingo, Chick-fil-A, Visa, popcorn) 690 views, 56.4 %, 18.2 s, shares 0.6 + saves 1.0; stories (n = 6, glasses, banana, Hoover, Monopoly, De Beers, airline miles) 233 views, 52.7 %, 22.1 s, shares 0.8 + saves 1.6. Explainers about things in your hand reached people but were not kept (gas 1,523 views, 0 saves; printer 1,376, 0 saves). So HOW IT WORKS has one job the old ones failed: be worth saving. → Both new episodes end on something to do (read your deal; check your report free). **Judge EP 1 + EP 2: 3-s ≥ 65 %, saves ≥ 5 / 1,000 reach, any stranger comments on the YES/NO.** If they hold like the old explainers with ~1 save, the format needs more how-to in it, not better pictures.
