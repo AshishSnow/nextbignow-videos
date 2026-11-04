@@ -41,6 +41,7 @@ font() { [ -d "$STUDIO/fonts/$1/package" ] || { mkdir -p "$STUDIO/fonts/$1"; (cd
 font lilita @fontsource/lilita-one@5.2.5
 font anton @fontsource/anton@5.3.0
 font playfair @fontsource/playfair-display@5.1.0
+font montserrat @fontsource/montserrat@5.0.19
 
 # python packages (tinysoundfont without its pyaudio dependency — we only render offline)
 need() { python3 -c "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('$1') else 1)"; }

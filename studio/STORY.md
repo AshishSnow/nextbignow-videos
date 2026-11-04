@@ -42,6 +42,16 @@ feet. **Colour lives only in the accents:** tie, shirt/dress, jacket, hair, cap.
 face). Looks: hero, friend, girl, girl2, lady, inventor, exec, creator, worker, oldman, kid, mystery, judge; change accents per story with
 `who={"base": "exec", "tie": (0, 170, 90)}`, `{"base": "girl", "shirt": (255, 200, 0), "hair": (200, 60, 40)}`. Mix men and girls in
 every episode. Our own design inspired by the reference — never a copy of an artist's character. 
+**NextBigNow look (owner, 4 Nov 2026: "looking too cartoon … make it like NextBigNow")** — `template/scripts/anim_nbn.py`, default on
+(`NBN=0` = line-art cartoon cast). The cast is now the **NBN stick rig**: small round white head with dot eyes, thick black stick limbs
+with a soft light rim, a coloured shirt on the torso and the NBN scarf in the character's accent colour (hero = orange); girls get a small
+A-line dress + hair. Same `person()` API (la/ra/ll/rl/expr/brow/look/mouth/visemes/hold/sit/back), feet auto-placed on the floor line.
+Captions are **NBN two-tier**: a small Montserrat line over ONE big clean Anton word or number (no comic outline), centred at y≈590,
+auto-split ("It doesn't" / "KNOW"); `say(f, big, small="...")` to set the small line yourself. One brand pill at y≈292
+(`● OOPSMYBUSINESS · <SERIES>`), and one quiet yellow line under it for the step / clock / mini_card (`cold_open`, `hud_clock`,
+`mini_card`, `series_badge` all route there — no stacked cards). Story text has a soft shadow instead of a black outline. Sets get a
+deeper night-toned top and slow floating light dust. Write boards like a NBN frame: one big word, one prop, one small figure, space.
+
 **Clean look (owner, 3 Nov 2026: "it's not clean like you are doing for NextBigNow")** — `template/scripts/anim_clean.py`, default on
 (`CLEAN=0` = old look). Every set name now renders as a **flat, deep, saturated two-colour gradient + one soft light spot + one simple
 flat silhouette layer (houses / skyline / trees / shelves / window / counter) + a flat floor band** — no bricks, textures or busy rooms.

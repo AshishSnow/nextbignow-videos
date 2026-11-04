@@ -180,6 +180,7 @@ Output: `work/vo.wav`, `work/align.json` (word times used everywhere via `T(line
   and add it to `anim.py`'s exec list). Big objects, movement on beat (pin/pop, flips, slams), screen shake on impacts (`IMPACTS`),
   transitions vary: cut, whip, focus, zoom, punch, flash.
 - **Cast look (owner, 31 Oct): colourful stick men and girls** — `anim_stick.py` (default on; STORY.md §2b). Mix men and girls every episode.
+- **NextBigNow look (owner, 4 Nov: "too cartoon")** — `anim_nbn.py` (default on; STORY.md §2b): NBN stick rig, two-tier captions, one brand pill + one quiet line, light dust.
 - **Clean look (owner, 3 Nov): like NextBigNow** — `anim_clean.py` (default on; STORY.md §2b): flat deep gradient sets, no grain/haze, captions in the top band, one idea per frame. **Topics (3 Nov): informative + interesting** — HOW IT WORKS + HOW TO START first (episodes/README priority, topic_bank H1–H7 / T1–T7).
 - **Story scenes, full frame (owner, 27 Oct: "it's using full frame and looks engaging… colours, more natural and 3D, change
   the style of clothes").** At least half the shots are **character-driven full-frame scenes**, not a prop on a glow disc:
