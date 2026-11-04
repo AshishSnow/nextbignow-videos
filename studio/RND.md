@@ -27,11 +27,11 @@ A separate scheduled R&D run (no posting) improves the studio one focus area at 
 |---|---|---|
 | Voice | engine, narrator reference, prosody, pace, post chain | 2026-10-27 (3×) |
 | Sound | music score, SFX, mix levels, loudness | 2026-10-27 (run 6: word guard + `tools/mix_check.py`) |
-| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-11-03 (props kit 6 + line-art lab sheet for the Pepsi pilot, `anim_props6.py`) |
+| Visuals | props, sets, mascot acting, transitions, safe zones, frame 1 | 2026-11-04 (props kit 8 + clean sets for HOW IT WORKS, lab sheet; writers' room run) |
 | Story | hooks, re-hooks, structure, endings/takeaways, length | 2026-11-03 (hook + length audit n = 18, blind AI panel rejected, R8 re-tested) |
 | Tooling | render speed, smoke tests, QA automation | 2026-10-31 (run 9: `tools/board_check.py` storyboard pre-flight + build brief, in smoke_test.sh) |
 | Analytics | what the numbers say, cover frames, captions, posting times | never as a focus (refreshed every run; 31 Oct: first rows for the 4 story-type videos, media-kit baseline in BRAND.md §5) |
-| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-11-02 (HOW TO START EP 3 food truck NYC, REVIEWED → queue = 5 unbuilt REVIEWED incl. the only HOW TO START) |
+| Writers' room | episode scripts + storyboards + sources in `episodes/queue/` (default job — rule 0) | 2026-11-04 (HOW IT WORKS EP 1 Spotify + EP 2 credit score REVIEWED, props kit 8; next: T2 reselling tax → H3 Shorts money) |
 | Brand | BRAND.md readiness: media-kit numbers, brand-safety rules, sponsor formats, disclosure templates, community | 2026-10-31 (interactive: BRAND.md) |
 | Topics | keep `topic_bank.md` interesting and verified: research what makes business stories fascinating, verify 3–5 new topics per run (primary sources), score them with PLAYBOOK §2's interest test, retire weak ones | 2026-11-01 (R&D run: HOW TO START shelf 0 → 4 banked (#25–28, 3 Ready + 1 almost) + vending (#24) written and queued as EP 2) |
 
@@ -67,6 +67,7 @@ Analytics
 - Pull follower growth (brandSummary / IGFO*) and audience countries (demographic connector) next run — the media kit needs both (BRAND.md §5).
 - YouTube vs Instagram per topic: YT winners differ (Compaq 1,332 YT vs 130 IG) — pull YTVP06/08 every run and compare after 10 posts.
 Story
+- Writers' room lessons (4 Nov, review of the first two HOW IT WORKS): (a) check a made-up example against its own story: "everyone listens twice as much" doubles your plays too, so the point vanished; (b) answer the hook aloud: "why doesn't it know your salary?" had no answer until the review; (c) the word the video is about must be said in line 1 ("a number" hid "credit score"); (d) a true fact can be harmful next to another: "zero is worse than a little" after "pay in full" reads as "carry debt", cut; (e) a qualifier on a chip doesn't correct the voice when the voice misleads: say it; (f) when your only evidence comes through the company, read the primary study and say the counter-evidence.
 - Writers' room lesson (2 Nov): a how-to's twist must help the *seat* (a first-timer), not the system in general — "2,200 new applications" read as good
   news until the review noticed they go to 2022 lists; and a preference poll ("tacos or coffee") is not a choice — ask about the decision the story raised.
 - Writers' room lesson (1 Nov): numeric *ranges* ("four to eight thousand") fail R5 — say "several thousand" and put the range in the caption;
@@ -354,3 +355,4 @@ Visuals / Story / Tooling
   (BEAT IT captions at y≈700/830, bin CU placement, one-word pills, staff re-dress dict). Analytics: Metricool IG + YT pulls identical to
   31 Oct 14:30 IST (nothing posted since 28 Oct; glasses reel still PENDING for 19:30 IST). ALGORITHM.md dated today → not redone.
   | kept — measure: the 21:05 UTC build's time-to-first-test-frame and whether it needs any asset beyond the kit; caption readability on its contact sheet
+- 2026-11-04 | Writers' room (focus a: queue held 0 REVIEWED HOW IT WORKS / HOW TO START) | Hypothesis: a HOW IT WORKS can stay one picture per beat in the clean look and still pass all gates and an independent attack on clarity, accuracy and brand safety. Wrote H1 Spotify (four physical gates, dot grid where your share visibly shrinks, seat switch to subscriber) and H2 credit score (one pie filling through the video, statement timing strip, the report). **Result:** story_check 7/7 + 6/6 both, board_check --strict PASS 0 missing both; fresh-eyes "ready after must-fixes" both (6 + 9 must-fixes, all applied; one was a real logic error in our own example, one a line that could read as "carry debt"). Lab sheet 16 frames looked at: overlapping `say()` in stills is a lab artefact only; tags too wide side by side; stamps at size 44 vanish on green; `choice_card` default y hits heads, use y=1120; `phone_el` shows old restaurant text. New: props kit 8 (`anim_props8.py`), 6 clean sets, `gate`/`slice` labels + `gates`/`slices` count promise in story_check, HOW IT WORKS beat sheet in STORY.md. No viewer data yet: first test = insight Z. Length estimate 131–135 s by story_check's 0.40 s/word, above the 80–105 s band; left as written because insight X found no seconds penalty, but the next writer should aim shorter. | kept

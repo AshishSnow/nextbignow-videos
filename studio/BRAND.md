@@ -52,7 +52,7 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
   finance tools (non-investment), privacy/VPN, newsletters. **Finance products** only if the brand handles approval (UK FCA FG24/1
   requires sign-off by an authorised firm; no crypto in France without AMF approval).
 - **Disclosure (when paid or gifted anything):** on screen from the first second ("Ad · Paid partnership with X"), said aloud in the
-  first 5 s, caption starts with "Ad:", Instagram paid-partnership label on, YouTube "includes paid promotion" ticked and "(Ad)" in
+  first 5 s, caption starts with "Ad:", Instagram paid-partnership label on, YouTube "includes paid promotion" ticked (since 3 Sep 2026 YouTube may auto-label undeclared branded content, reported secondhand: ALGORITHM.md) and "(Ad)" in
   the title for UK viewers (FTC Endorsement Guides 2023: "difficult to miss"; ASA Aug 2026; EU UCPD; France: "Collaboration
   commerciale" visible throughout). Platform labels alone are not enough.
 - **Rates (ranges, price on views):** nano (<10K) ~$20–500 per Reel, micro (10–100K) ~$750–5,000 (US), mid ~$5–20K
@@ -75,6 +75,7 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
   **3 Nov 2026 (R&D pull, food truck not in the data yet):** followers **58** on Instagram, **41 subscribers on YouTube** (first pull; 32 on 25 Oct, flat since 28 Oct).
   **3 Nov 2026:** Instagram last 10 reels avg **490 views** (median 177), 3-s rate 55 %, avg watch 23.1 s, **7.2 reactions per 1,000 reach** (saves ~11–12 / 1,000 on both how-tos); YouTube last 10 Shorts with rows avg 439 views (no rows since 28 Oct). Top 3 (IG, last 10): gas station 1,523, drone 1,319, airline miles 589. First real comment on an autopilot post (vending).
   **4 Nov 2026:** Instagram last 10 reels avg **611 views** (median 379), 3-s rate 59.5 %, avg watch 25.0 s, **6.7 reactions per 1,000 reach**; YouTube last 10 with rows avg 419 views (rows back after a 5-day gap). Top 3 (IG, last 10): gas station 1,523, drone 1,323, food truck 1,299.
+  **4 Nov 2026 (R&D pull):** numbers unchanged from the same day's earlier pull. By group on IG (PERFORMANCE insight Z): how-tos 8.2 saves + 2.5 shares per 1,000 reach; older explainers 1.0 + 0.6; stories 1.6 + 0.8.
 - **Community:** pin a comment on each post restating the choice ("FIGHT or FOLD — what would you do?"); reply to early comments within
   the first hour when a run is live (the post copy's firstCommentText); Part 2 may quote real comment counts only.
 - **Owned channel:** bio link to oopsmybusiness.com (later: an email list / newsletter "The Oops Weekly") so the audience isn't only rented.

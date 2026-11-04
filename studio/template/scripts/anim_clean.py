@@ -31,6 +31,12 @@ CLEAN_SETS = {
     "depot":      ((8, 120, 92), (6, 62, 62), 1440, "shelves"),
     "january":    ((66, 86, 128), (38, 50, 92), 1400, "houses"),
     "ladderday":  ((30, 134, 210), (120, 205, 235), 1400, "trees"),   # dry daytime: every ladder / roof shot (fresh-eyes review: never model frost or dusk)
+    "recording":  ((120, 36, 150), (54, 18, 96), 1440, "frames"),     # 4 Nov, HOW IT WORKS EP 1: small home studio
+    "gatehall":   ((10, 110, 140), (6, 50, 90), 1440, "skyline"),     # the four gates (one plain blue-teal hall)
+    "subscriber": ((226, 76, 90), (130, 30, 90), 1440, "houses"),     # the viewer on the sofa side
+    "carlot":     ((30, 110, 210), (240, 150, 80), 1420, "skyline"),  # 4 Nov, HOW IT WORKS EP 2: car lot at golden hour
+    "lenderdesk": ((14, 120, 96), (6, 62, 62), 1440, "window"),       # the loan desk
+    "homedesk":   ((70, 50, 150), (30, 24, 86), 1440, "frames"),      # your kitchen table with the card bill
 }
 _CLEAN_FLOOR = {"wintry": ((196, 212, 246), (130, 150, 218)), "frostdusk": ((236, 214, 232), (176, 140, 196)),
                 "roofday": ((236, 244, 252), (176, 202, 236)), "january": ((176, 186, 206), (120, 130, 164)), "ladderday": ((104, 182, 100), (60, 134, 72))}

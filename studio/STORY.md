@@ -91,6 +91,8 @@ promises: "typical rates", "can", never "you will make") → "Save this before y
 we can't keep — "comment your question"). A girl character as the expert/mentor and the hero as the beginner works well.
 Brand note: this series is the most sponsor-friendly (tools, insurance, website builders, courses) — keep it neutral, no affiliate claims.
 
+**HOW IT WORKS beat sheet (aim 90–120 s, R&D 4 Nov):** frame 1 = the surprising number already on a physical object, and name the subject in line 1 → seat ("You're the singer") → a count of named stations you can draw ("four gates", "five slices"), strongest catch last → one picture per station, the same object growing through the video (a pot, a pie) → one worked example with labelled made-up numbers, checked against its own logic → **answer the hook aloud** → switch seats or a practical check the viewer can do today → a YES/NO comment question the facts don't settle + "Save this" + "Send this to the friend who…". Say the qualifier in the voice if the voice would mislead without it; a chip is only a footnote.
+
 **WHO REALLY OWNS IT beat sheet:** cold open on a street of "competing" shops → "You think you're choosing. Count the doors." →
 DOOR #1…#N, each opens to the same owner → the twist (scale/number) → what it means for your wallet → "Tag someone who…".
 

@@ -1,0 +1,28 @@
+# SOURCES — HOW IT WORKS · EP 1 (Spotify, 999 plays). Checked 4 Nov 2026 unless noted. Build run: re-open each page.
+Almost all facts are Spotify's own description of Spotify's system, so the script attributes them ("Spotify says"). No independent audit of them exists in this file.
+
+| Claim (line) | Source | Exact wording |
+|---|---|---|
+| 1,000 streams in 12 months, recording royalties (i1, c2, c4) | [Spotify for Artists, Track monetization eligibility](https://support.spotify.com/artists/article/track-monetization-eligibility) (in effect "As of April 2024"; read 4 Nov 2026) | "tracks must have reached a threshold of at least 1,000 streams in the previous 12 months to be included in the recorded music royalty pool calculation" |
+| Unique listeners, number secret (c2 chip) | same | "a minimum number of unique listeners required... We don't share this number publicly" |
+| Publishing not affected (c4 chip) | same | "This eligibility calculation only applies to recording royalties." |
+| No per-stream price anywhere (i2, i3) | [Loud & Clear FAQ](https://loudandclear.byspotify.com/faq/) (updated 11 Mar 2026) | "a 'per stream' rate isn't actually how anyone gets paid – not on Spotify, or on any major streaming service" |
+| Pool per market, subscription + ads (a2, b2) | FAQ | "Every month, in every country, we calculate streamshare"; "your streams in that market ÷ total streams in that market = your share of that market's royalty pool"; "based on the subscription and music advertising revenues generated there" |
+| About two-thirds (a2 chip) | FAQ + support page | "roughly two-thirds of every dollar generated from music" |
+| Over $11B in 2025 (a3) | [Loud & Clear Takeaways](https://loudandclear.byspotify.com/takeaways/) (Mar 2026) | "paying the music industry more than $11 billion in 2025" |
+| Pot example $100 / 100 → 200 plays (b3–b6) | Our illustration of the streamshare formula; **made-up numbers, chip on screen** | Pot held equal on purpose to isolate the effect; real pots change monthly |
+| Pennies a month: 2–3¢ (c5) | Support page $0.03, FAQ $0.02 (**the two Spotify pages differ; caption "2–3¢", voice "pennies"**) | "generating $0.03 per month"; "only $0.02 per month on average" |
+| Pennies often never arrived; minimums $2–$50 (c5) | Support page + FAQ | "often never reaches the uploader because it doesn't hit the minimums and fees"; "minimum amounts required for withdrawal (usually $2-$50)" |
+| Reallocated; Spotify keeps none (c6) | Support page | "reallocated by streamshare to increase the payments going to eligible tracks"; "No, Spotify doesn't make money from this change." |
+| Pays rights holders, not artists (d2) | FAQ | "Spotify doesn't pay artists or songwriters directly. We pay rights holders selected by the artist or songwriter, whether that's a record label, publisher, independent distributor..." |
+| Can't see take-home (d3) | FAQ | "We'd love to show you what artists actually take home, but we don't have visibility into everyone's individual contracts" |
+| Your subscription feeds the market pool, not who you play (e1, e2) | FAQ (pool-wide streamshare); user-centric "We're open to switching... But we can't make this change alone" | Inference from the formula, stated plainly by the FAQ's user-centric section |
+| French study (e3, e4) | [CNM press release, 27 Jan 2021](https://cnm.fr/wp-content/uploads/2021/01/20210121_UCPS_CNM_Pressrelease.pdf) (primary, read 4 Nov 2026), also cited in the Spotify FAQ | "beyond the 10,000th most streamed artists... the impact of the transition to the UCPS would be a maximum of a few euros per year on average per artist"; data: France, 2019 (Deezer full sample, Spotify sample of 100,000 users, H1 2019); "whether one model would be more efficient or fairer... these figures can neither validate nor invalidate" |
+| Bigger swings (e5) | [MBW, 27 Jul 2023, on the Pro Musik SoundCloud study](https://musicbusinessworldwide.com/user-centric-new-study-of-50k-indie-soundcloud-artists-shows-1-in-5-could-double-income-under-streaming-model) | "19% of artists would see an income increase of 100% or more"; "38.8% of artists would see a decrease in income of 40% or more" (50,300 SoundCloud profiles, May–Oct 2022). **Secondary report; the study itself not read.** |
+
+Rejected: "$40 million a year" (not on any page read; Spotify says "tens of millions"). 30-second stream rule (not on these pages, cut). Music Ally and Spotify Newsroom pages could not be read here.
+
+Interest test: wait-what 5 · story 3 · your life 5 · picture 5 · fresh 4 · share/save 4 · verifiable 5 = 31/35. Gates: seat (singer, then subscriber) + debatable question (YES/NO pay only who you play; both defensible, the study cuts against the obvious answer) yes; brand-safe yes (music, not finance; no "evil Spotify" framing; a likely sponsor category untouched).
+
+## Fresh-eyes review, 4 Nov 2026 (independent subagent, had not seen the writing): "ready after must-fixes"
+All 6 must-fixes applied: "everyone listens twice as much" was a logic error (your fans would double too) → "total plays double"; "a few euros" over-claim → "the change averaged..." + France/2019 chip; only evidence came through Spotify → CNM primary read and a contrary SoundCloud study added aloud; "there's a rule" sounded industry-wide → "Spotify has a rule", Spotify named in the hook; $11B on a one-country pot → many pots + ALL COUNTRIES; unclear CTA rewritten. Should-fixes applied: i2 antecedent, tag no longer collides with $0, "your track earns", no "royalties" aloud, c5 one idea per row, SHARED OUT, "doesn't profit" (exact to the quote), NOT PUBLIC, takeaway chip. Kept "middleman" (d1) as neutral plain language. Cut: a3 voice, c3 voice (both became chips).

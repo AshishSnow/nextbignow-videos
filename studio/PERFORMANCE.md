@@ -9,6 +9,10 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-04 ~08:30 IST (R&D run: writers' room)
+Instagram + YouTube rows unchanged from the 02:40 IST pull within ±1 view (food truck 1,299, vending 570, drone 1,323); Christmas lights (posted 05:00 IST, published on both per the planner) has no row yet; food truck still no YouTube row. Media-kit numbers unchanged: IG last 10 avg 611 views, YT last 10 with rows avg 419.
+**Insight Z (4 Nov) — a benchmark for HOW IT WORKS before it exists, three groups on the same IG rows (mixed dates, post-hoc tags, so a lead):** how-tos (n = 3) 1,064 views, 3-s 70.7 %, watch 31.6 s, shares 2.5 + saves 8.2 per 1,000 reach; old "how X makes money" explainers (n = 9, gas, printer, gym, Costco, AWS, Duolingo, Chick-fil-A, Visa, popcorn) 690 views, 56.4 %, 18.2 s, shares 0.6 + saves 1.0; stories (n = 6, glasses, banana, Hoover, Monopoly, De Beers, airline miles) 233 views, 52.7 %, 22.1 s, shares 0.8 + saves 1.6. Explainers about things in your hand reached people but were not kept (gas 1,523 views, 0 saves; printer 1,376, 0 saves). So HOW IT WORKS has one job the old ones failed: be worth saving. → Both new episodes end on something to do (read your deal; check your report free). **Judge EP 1 + EP 2: 3-s ≥ 65 %, saves ≥ 5 / 1,000 reach, any stranger comments on the YES/NO.** If they hold like the old explainers with ~1 save, the format needs more how-to in it, not better pictures.
+
 ## Snapshot 2026-11-04 ~02:40 IST (episode run: HOW TO START EP 4, Christmas lights)
 Instagram (IGRE, 13 Oct → 4 Nov) — new + changed rows:
 | Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |

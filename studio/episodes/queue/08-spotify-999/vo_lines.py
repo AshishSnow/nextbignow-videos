@@ -1,0 +1,35 @@
+# (id, text, speed, pause_after, base_semitones, range_expand, stressed_words, ending)
+# HOW IT WORKS · EP 1 — "Why 999 plays can earn zero" (four gates + the subscriber's seat). Written + reviewed by the R&D run 4 Nov 2026.
+# Facts: SOURCES.md. No earnings promises; no Spotify logo / green; pot example is labelled made-up numbers on screen.
+SERIES = "HOW IT WORKS"; PART = 0; EP = 1
+LINES = [
+    ("i1", 'Your song got nine hundred ninety-nine plays on Spotify. Why did the recording pay zero?', 1.02, 0.35, +1.0, 1.45, ['ninety-nine', 'zero?'], None),
+    ("i2", "You're the singer. You've heard streaming pays a tiny price per play.", 1.04, 0.25, +0.8, 1.45, ['singer.', 'tiny'], 'low'),
+    ("i3", "It doesn't. Spotify says no major service pays that way.", 1.02, 0.30, +0.6, 1.45, ["doesn't.", "no"], "low"),
+    ("i4", "Instead, your money passes four gates. And gate three is the one that stops you.", 1.04, 0.35, +0.8, 1.45, ["four", "three", "stops"], "low"),
+    ("a1", "Gate one. The pot.", 1.0, 0.20, +0.8, 1.35, ["one.", "pot.:dn"], "low"),
+    ("a2", "Every month, in each country, subscription and ad money pours into one pot.", 1.04, 0.20, +0.6, 1.45, ["country,", "pot.:dn"], "low"),
+    ("a3", 'Last year, Spotify paid the music industry more than eleven billion dollars.', 1.04, 0.35, +0.8, 1.45, ['eleven', 'dollars.:dn'], 'low'),
+    ("b1", "Gate two. Your slice.", 1.0, 0.20, +0.8, 1.35, ["two.", "slice.:dn"], "low"),
+    ("b2", 'Your track earns its share of all the plays in that country.', 1.04, 0.25, +0.6, 1.45, ['share', 'all'], 'low'),
+    ("b3", "Picture a tiny pot. A hundred dollars, and a hundred plays in all.", 1.04, 0.20, +0.6, 1.45, ["tiny", "all.:dn"], "low"),
+    ("b4", 'Five of those are yours. So your track earns five dollars.', 1.04, 0.3, +0.6, 1.45, ['yours.', 'five'], 'low'),
+    ("b5", 'Next month, same pot. Your track still gets those plays. But total plays double.', 1.04, 0.25, +0.6, 1.45, ['same', 'double.:dn'], 'low'),
+    ("b6", "Your plays now earn half. And you didn't lose a single fan.", 1.04, 0.35, +0.6, 1.45, ['half.', 'single'], 'low'),
+    ("c1", "Gate three. The line.", 1.0, 0.20, +0.8, 1.35, ["three.", "line.:dn"], "low"),
+    ("c2", 'Since twenty twenty-four, Spotify has a rule. A track needs a thousand plays in the past year.', 1.04, 0.2, +0.6, 1.45, ['rule.', 'thousand'], 'low'),
+    ("c4", 'So nine ninety-nine means out. The recording earns nothing.', 1.04, 0.35, +0.6, 1.45, ['out.', 'nothing.:dn'], 'low'),
+    ("c5", "Why so harsh? Spotify says those tracks averaged pennies a month, and those pennies often never arrived.", 1.04, 0.25, +0.8, 1.45, ["harsh?", "pennies", "never"], "low"),
+    ("c6", "Now that money is shared among the tracks that qualify.", 1.02, 0.35, +0.6, 1.45, ["shared", "qualify.:dn"], "low"),
+    ("d1", "Gate four. The middleman.", 1.0, 0.20, +0.8, 1.35, ["four.", "middleman.:dn"], "low"),
+    ("d2", "Even then, Spotify doesn't pay you. It pays your label or distributor.", 1.04, 0.20, +0.6, 1.45, ["doesn't", "distributor.:dn"], "low"),
+    ("d3", "They pay you under your deal. Spotify says it can't see what you take home.", 1.04, 0.35, +0.6, 1.45, ["deal.", "can't"], "low"),
+    ("e1", "Now switch seats. You're the subscriber. You play one band all month.", 1.04, 0.20, +0.8, 1.45, ["switch", "one"], "low"),
+    ("e2", "Your money still feeds your country's pot, split by everybody's plays.", 1.04, 0.25, +0.6, 1.45, ['still', "everybody's"], 'low'),
+    ("e3", 'Fairer if it only paid who you play? One French study checked.', 1.04, 0.15, +0.8, 1.45, ['Fairer', 'French'], None),
+    ("e4", 'Outside the top ten thousand artists, it found the change averaged a few euros a year at most.', 1.04, 0.3, +0.6, 1.45, ['ten', 'few', 'most.:dn'], 'low'),
+    ("e5", 'A later SoundCloud study found bigger swings.', 1.04, 0.3, +0.6, 1.45, ['later', 'bigger'], 'low'),
+    ("t1", "So a play count isn't a paycheck. Making music? Read your deal first.", 1.02, 0.25, +0.8, 1.45, ["paycheck.", "deal"], "low"),
+    ("z1", 'Should your subscription pay only the artists you play? Comment YES or NO.', 1.04, 0.2, +1.0, 1.45, ['only', 'YES', 'NO.'], None),
+    ("z2", 'Save this, and send this to the friend who just released a song.', 1.06, 0.0, +1.0, 1.45, ['Save', 'friend', 'song.'], None),
+]

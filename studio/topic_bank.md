@@ -285,14 +285,14 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
 
 ## Ready — HOW IT WORKS + HOW TO START shelf (3 Nov 2026, owner: "find topics which are informative, interesting"; sourcing subagent
 ## 3 Nov 2026 — every figure re-check at build time; never promise income; finance topics = education only, no product advice)
-Build order: **H1 Spotify → T1 Christmas lights (seasonal: post before ~20 Nov) → H2 credit score → T2 reselling tax → H3 Shorts money**, then H4 hotel fees,
+Build order: ~~H1 Spotify~~ + ~~H2 credit score~~ (queued), ~~T1~~ (built) → **T2 reselling tax → H3 Shorts money**, then H4 hotel fees,
 H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check city law), T5 car detailing (= owner's idea), H7 app-store cut, T6 Amazon FBA, T7 cleaning (weakest sources).
 
-### H1. Why 999 plays can pay $0 — HOW IT WORKS · 31/35
+### H1. QUEUED 4 Nov as HOW IT WORKS EP 1 (episodes/queue/08-spotify-999; new research: pot is per country + the 1,000 rule covers recording royalties only; Spotify FAQ user-centric section, CNM 2021 study, Pro Musik 2023) — Why 999 plays can pay $0 — HOW IT WORKS · 31/35
 - **Hook:** "Your song got 999 plays this year. Spotify paid you nothing. Why?" **Beats:** one big pot of subscription + ad money → ~2/3 to rights-holders → split by each song's *share of all streams* (no fixed per-stream price) → since 2024 a track needs 1,000 streams in 12 months to earn at all → label/distributor cut before the artist. **Fact:** Spotify paid out >$11B in 2025. **Takeaway:** there is no "price per stream" — your share of total listening is what counts. **Visuals:** a big coin pot, pipes splitting, a 999/1,000 gate. **Caution:** no earnings promises; no Spotify logo/green.
 - **Sources:** [Spotify Newsroom 28 Jan 2026](https://newsroom.spotify.com/2026-01-28/2025-music-industry-payouts-whats-next-for-artists/) · [Music Week 2025](https://www.musicweek.com/digital/read/spotify-loud-clear-2025-report-breaks-down-its-10-billion-role-in-the-streaming-economy/091558) · [MBW Nov 2023, 1,000 plays](https://www.musicbusinessworldwide.com/confirmed-next-year-tracks-on-spotify-1000-plays/)
 
-### H2. The 5 numbers behind your credit score — HOW IT WORKS · 30/35 (US)
+### H2. QUEUED 4 Nov as HOW IT WORKS EP 2 (episodes/queue/09-credit-score; new research: income isn't in FICO or on the report, balance reported at statement end, FTC 2013 errors, free weekly reports) — The 5 numbers behind your credit score — HOW IT WORKS · 30/35 (US)
 - **Hook:** "One number decides your rent, your car and your mortgage. Who makes it?" **Beats:** payment history 35 % → amounts owed 30 % → length of history 15 % → credit mix 10 % → new credit 10 % → myth: Experian says keep each card's use under ~10 %, not the "30 % rule". **Takeaway:** paying on time + low balances ≈ two-thirds of the score. **Visuals:** a pizza pie chart, a gauge needle. **Caution:** education only, no credit-repair or card advice; US FICO only (UK differs).
 - **Sources:** [myFICO](https://www.myfico.com/crediteducation/whatsinyourscore.aspx) · [Experian 1 Oct 2025](https://experian.com/blogs/ask-experian/what-factor-has-the-biggest-impact-on-credit-score)
 

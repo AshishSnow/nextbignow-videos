@@ -1,6 +1,6 @@
 # What the platforms reward right now (keep this current)
 
-Last researched: **2026-11-03, partial** (R&D Story run: Instagram via one relay only; no new YouTube facts, Metricool / SocialBee / OutlierKit pages blocked, re-check them next run; previous full scan 31 Oct). Every run: if this date is more than 3 days old, research again (WebSearch, extended mode:
+Last researched: **2026-11-04** (R&D run: secondary pages read in full or part; no first-party Meta or YouTube page read this scan, OutlierKit and SocialBee not re-tried; nothing here changes what we make today). Every run: if this date is more than 3 days old, research again (WebSearch, extended mode:
 "Instagram Reels algorithm <month year>", "YouTube Shorts algorithm <month year>", "Instagram/YouTube policy AI content <month year>"),
 update this file with dated, sourced facts, and say what changed in the run report.
 
@@ -19,6 +19,8 @@ update this file with dated, sourced facts, and say what changed in the run repo
 | Mosseri, 16 Oct 2026, reported by ZoomSphere (30 Oct 2026, secondhand): experimenting with Trial Reels is fine, reposting the same trial reel repeatedly is not: "We're going to crack down on that." | Never re-post a trial reel; every post is new anyway |
 | Mosseri, 30 Oct 2026 (same relay): "We don't demote content for being created with other apps other than ours", but a video with another app's logo is "going to get less distribution" | Our renders carry no third-party watermark; keep it so, and don't re-upload from an app that stamps one |
 | Mosseri, 23 Oct 2026 (same relay): opt-in AI dubbing in "more than 12 languages" for creator and public accounts | Possible cheap reach test for EU viewers later; check how it interacts with the AI label first. Not adopted |
+| Instagram stopped letting creators link Reels in a series from 28 Oct 2026 (Metricool news, page dated 30 Oct 2026) | Don't plan on IG series links; two-parts say "part two" aloud and in the caption |
+| Meta Q3 2026 (21 Oct): an "upgraded model architecture that ranks sequences of Reels at a time instead of evaluating each Reel independently"; 26 Oct: US test of 90-minute horizontal videos with selected creators, "we're testing a dedicated home for horizontal videos" 3 Nov (Keywords Everywhere tracker) | Nothing to change; the first reason to care about how a reel sits next to others in a session. Not adopted |
 
 ## YouTube Shorts
 | Fact (date) | What we do about it |
@@ -32,9 +34,11 @@ update this file with dated, sourced facts, and say what changed in the run repo
 | Shorts series (Sep 2026) group Shorts into seasons/episodes | Our three named series (YOUR MOVE / SPOT THE TRICK / WHO REALLY OWNS IT) map onto Shorts series — set them up once the first episodes are live |
 | AI labels (YouTube Blog, 27 May 2026): one label for all "photorealistic and meaningfully AI altered or generated content", shown as an overlay on Shorts; "unrealistic, animated, or slightly altered" content's disclosure sits in the expanded description; from May 2026 YouTube auto-applies the label when it detects undisclosed AI; "a disclosure label alone does not change how a video is recommended or whether it's eligible to earn money" | Keep `isAiGeneratedContent=false` for our code-drawn animation + generic synthetic narrator (not a realistic person); never a photoreal AI person or voice clone |
 | 1 Oct 2026 (TeamYouTube via OutlierKit, 3 Oct): channels "primarily aggregating or re-uploading other creators' videos without significant changes will likely see less distribution within the Shorts feed"; 1 Sep 2026 (Todd Beaupre): "no metric on its own is a good indicator of value" | Every episode is an original story with its own scenes/props/music (BRAND.md §2) |
-| Branded content: no new YouTube rule found this scan; existing "includes paid promotion" box + on-screen disclosure (BRAND.md §4) remain the standard | Unchanged |
+| 3 Sep 2026: YouTube may auto-apply a label to undeclared branded content: "we may automatically apply a branded content label to your video and notify you" (TeamYouTube via Miraflow, 13 Sep 2026; enforcement details on that page are the author's inference); creators got age and country controls for branded content (air.io, Oct 2026) | Tick "includes paid promotion" every time a deal arrives; BRAND.md §4 updated. Primary post not read yet: support.google.com/youtube/answer/17596007 |
 
 ## Sources
+- Keywords Everywhere — Instagram tracker (read 4 Nov 2026; Meta Q3 sequence ranking, horizontal video test): https://keywordseverywhere.com/news/instagram-algorithm-updates/
+- Miraflow — YouTube branded-content auto-label (13 Sep 2026): https://miraflow.ai/blog/youtube-auto-label-branded-content-ai-video-disclosure-2026
 - YouTube Blog — "Improving AI labels for viewers and creators" (27 May 2026): https://blog.youtube/news-and-events/improving-ai-labels-viewers-creators/
 - OutlierKit — YouTube algorithm updates 2026 (page updated 3 Oct 2026; Shorts originality 1 Oct, YPP 2027 bar, Beaupre 1 Sep): https://outlierkit.com/resources/youtube-algorithm-updates/
 - ZoomSphere — Mosseri Q&A transcript, 16/23 Oct 2026 (sends, AI content, scheduling): https://www.zoomsphere.com/blog/instagram-algorithm-2026-what-actually-gets-reach
