@@ -46,7 +46,7 @@ LOOK_WORDS = None  # filled from the registry
 
 def registry():
     funcs, sets, looks = set(), set(), set()
-    for p in sorted(glob.glob(os.path.join(TEMPLATE, "*.py"))):
+    for p in sorted(glob.glob(os.path.join(TEMPLATE, "*.py")) + glob.glob(os.path.join(TEMPLATE, "nbnkit", "*.py"))):
         src = open(p, encoding="utf-8").read()
         funcs.update(re.findall(r"^def ([A-Za-z_][A-Za-z0-9_]*)\s*\(", src, re.M))
         for m in re.finditer(r"CLEAN_SETS\s*=\s*\{(.*?)\n\}", src, re.S): sets.update(re.findall(r"^\s*\"([a-z][a-z0-9_]*)\":", m.group(1), re.M))

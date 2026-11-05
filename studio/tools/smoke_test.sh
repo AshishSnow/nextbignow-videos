@@ -6,7 +6,7 @@ set -e
 HERE=$(cd "$(dirname "$0")/.." && pwd); STUDIO=${STUDIO:-/home/claude/studio}
 P="$STUDIO/projects/_smoke"; rm -rf "$P"
 cp -f "$HERE"/lib/*.py "$STUDIO/lib/"; mkdir -p "$STUDIO/voices"; cp -f "$HERE"/voices/*.npz "$STUDIO/voices/" 2>/dev/null || true
-mkdir -p "$P"/{scripts,work,frames}; cp "$HERE"/template/scripts/* "$P/scripts/"
+mkdir -p "$P"/{scripts,work,frames}; cp -r "$HERE"/template/scripts/* "$P/scripts/"
 cat > "$P/scripts/vo_lines.py" <<'EOF'
 LINES = [
     ("i1", "Do you know your coffee shop is secretly a bank?", 1.04, 0.35, +1.0, 1.45, ["secretly", "bank?"], "q"),
@@ -18,7 +18,7 @@ fail=0
 # video path (R&D Visuals run, 28 Oct): template + the Hoover example's shots with fake timings -> layout_check renders frames
 # (captions inside the UI safe area, frame 0 not empty) and anim.py encodes 1 s of real video. ~2 min.
 PV="$STUDIO/projects/_smoke_video"; rm -rf "$PV"; mkdir -p "$PV"/{scripts,work,frames}
-cp "$HERE"/template/scripts/* "$PV/scripts/"; cp "$HERE"/examples/hoover/* "$PV/scripts/"
+cp -r "$HERE"/template/scripts/* "$PV/scripts/"; cp "$HERE"/examples/hoover/* "$PV/scripts/"
 if python3 "$HERE/tools/layout_check.py" "$PV" --fake-align --step 30 --no-sheet --json "$PV/work/layout.json" > "$PV/work/layout.txt" 2>&1 \
    && (cd "$PV" && python3 scripts/anim.py work/smoke.mp4 0:24 > work/anim.log 2>&1) && python3 - "$PV" <<'EOF'
 import json, subprocess, sys
@@ -41,6 +41,8 @@ python3 "$HERE/tools/board_check.py" --all "$HERE/episodes/queue" --no-brief > "
   && { [ ! -d "$HERE/episodes/queue/03-ikea-maze" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/03-ikea-maze" --strict --no-brief > /dev/null 2>&1; } \
   && { [ ! -d "$HERE/episodes/queue/08-spotify-999" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/08-spotify-999" --strict --no-brief > /dev/null 2>&1; } \
   && { [ ! -d "$HERE/episodes/queue/09-credit-score" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/09-credit-score" --strict --no-brief > /dev/null 2>&1; } \
+  && { [ ! -d "$HERE/episodes/queue/10-reselling-tax" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/10-reselling-tax" --strict --no-brief > /dev/null 2>&1; } \
+  && { [ ! -d "$HERE/episodes/queue/11-shorts-money" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/11-shorts-money" --strict --no-brief > /dev/null 2>&1; } \
   && { [ ! -d "$HERE/episodes/queue/06-food-truck-nyc" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/06-food-truck-nyc" --strict --no-brief > /dev/null 2>&1; } \
   && echo "ok   board_check $(tail -1 "$STUDIO/projects/_board.txt")" || { echo "FAIL board_check (queue boards, the pilot's or the IKEA board's assets)"; tail -3 "$STUDIO/projects/_board.txt"; fail=1; }
 rm -f "$STUDIO/projects/_board.txt"

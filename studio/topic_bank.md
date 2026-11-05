@@ -285,7 +285,7 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
 
 ## Ready — HOW IT WORKS + HOW TO START shelf (3 Nov 2026, owner: "find topics which are informative, interesting"; sourcing subagent
 ## 3 Nov 2026 — every figure re-check at build time; never promise income; finance topics = education only, no product advice)
-Build order: ~~H1 Spotify~~ + ~~H2 credit score~~ (queued), ~~T1~~ (built) → **T2 reselling tax → H3 Shorts money**, then H4 hotel fees,
+Build order: ~~H1 Spotify~~ (built), ~~H2 credit score~~ + ~~T2 reselling~~ + ~~H3 Shorts money~~ (queued), ~~T1~~ (built), then H4 hotel fees,
 H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check city law), T5 car detailing (= owner's idea), H7 app-store cut, T6 Amazon FBA, T7 cleaning (weakest sources).
 
 ### H1. QUEUED 4 Nov as HOW IT WORKS EP 1 (episodes/queue/08-spotify-999; new research: pot is per country + the 1,000 rule covers recording royalties only; Spotify FAQ user-centric section, CNM 2021 study, Pro Musik 2023) — Why 999 plays can pay $0 — HOW IT WORKS · 31/35
@@ -296,7 +296,7 @@ H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check cit
 - **Hook:** "One number decides your rent, your car and your mortgage. Who makes it?" **Beats:** payment history 35 % → amounts owed 30 % → length of history 15 % → credit mix 10 % → new credit 10 % → myth: Experian says keep each card's use under ~10 %, not the "30 % rule". **Takeaway:** paying on time + low balances ≈ two-thirds of the score. **Visuals:** a pizza pie chart, a gauge needle. **Caution:** education only, no credit-repair or card advice; US FICO only (UK differs).
 - **Sources:** [myFICO](https://www.myfico.com/crediteducation/whatsinyourscore.aspx) · [Experian 1 Oct 2025](https://experian.com/blogs/ask-experian/what-factor-has-the-biggest-impact-on-credit-score)
 
-### H3. Who gets paid when you watch a Short — HOW IT WORKS · 28/35
+### H3. QUEUED 5 Nov as HOW IT WORKS EP 3 (episodes/queue/11-shorts-money; new research: slice stays the same with or without a song, YouTube's example = 1M views → $405, money from non-monetizing creators covers music or stays with YouTube, 10M target from 1 Feb 2027, AIR 274-channel RPM) — Who gets paid when you watch a Short — HOW IT WORKS · 28/35
 - **Hook:** "You just watched 50 Shorts. The ads made money. Who got it?" **Beats:** Shorts-feed ad money pooled → share for music licensing when a Short uses music → rest split by creators' share of views → creators keep 45 % (long videos 55 %). **Takeaway:** music in your Short shrinks the pot it's paid from. **Visuals:** a river of coins splitting. **Caution:** YouTube page mentions changes from 1 Feb 2027 — recheck before scripting.
 - **Sources:** [YouTube Help 12504220](https://support.google.com/youtube/answer/12504220) · [Fox Business 21 Sep 2022](https://foxbusiness.com/technology/youtube-reward-shorts-creators-share-ad-revenue)
 
@@ -315,7 +315,7 @@ H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check cit
 ### T1. USED 2026-11-04 (HOW TO START EP 4, done/07-christmas-lights) — Start a Christmas-light install business — HOW TO START · 29/35 (seasonal: post before ~20 Nov)
 - **Hook:** "Why do people pay strangers to hang their lights?" **Steps:** the safety problem (≈14,900 US ER visits from decorating in 2023, almost half falls — CPSC via WHA) → design / install / take-down as one package → liability insurance + ladder training → book clients in early November. **Caution:** safety framing, no injury shown; prices unverified → "get local quotes". **Sources:** [WHA citing CPSC, 12 Dec 2024](https://wha.org/news/newsletters/2024/12-12-2024/4) · [CBS 10 Dec 2013](https://www.cbsnews.com/pittsburgh/news/cpsc-warns-public-about-holiday-related-dangers/)
 
-### T2. Start reselling without tax surprises (US + UK) — HOW TO START · 29/35
+### T2. QUEUED 5 Nov as HOW TO START EP 5 (episodes/queue/10-reselling-tax; new research: IRS on loss sales + $400, HMRC 'probably trading', eBay fee; myth caught in review: the two countries don't flip, report and tax are separate in both) — Start reselling without tax surprises (US + UK) — HOW TO START · 29/35
 - **Hook:** "You sold 30 old things online. Does the taxman know?" **Steps:** source → list → US: platforms send a 1099-K only above $20,000 AND 200 sales (IRS IR-2025-107) → UK: platforms report sellers at 30 items or ~£1,700 → the £1,000 UK trading allowance. **Takeaway:** platform reporting doesn't change whether money is taxable. **Caution:** "check with a tax professional". **Sources:** [IRS 23 Oct 2025](https://irs.gov/newsroom/irs-issues-faqs-on-form-1099-k-threshold-under-the-one-big-beautiful-bill-dollar-limit-reverts-to-20000) · [GOV.UK 4 Dec 2024](https://www.gov.uk/government/news/information-for-online-sellers) · [GOV.UK allowance](https://gov.uk/guidance/tax-free-allowances-on-property-and-trading-income) · [Which? 30 Nov 2025](https://www.which.co.uk/news/article/could-your-christmas-side-hustle-land-you-with-a-tax-bill-aGK607i5p4qO)
 
 ### T3. Start pet-sitting: who takes what — HOW TO START · 26/35 (needs 1 more independent source)

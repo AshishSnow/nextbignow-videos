@@ -9,6 +9,10 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-05 ~08:30 IST (R&D run: writers' room)
+Instagram rows unchanged from the 02:40 IST pull within ±0 views on the last 10 (Christmas lights still 228 / 21.3 s / 68.0 %, 1 save); Spotify EP 1 (published 05:00 IST on both, per the planner) has no row yet. YouTube rows still stop at vending (205 / 30 s) and drone (348 / 29 s): no row for food truck, Christmas lights or Spotify. Media-kit numbers unchanged: IG last 10 avg 483 views, median 208, 8.6 reactions / 1,000 reach; YT last 10 with rows avg 419. Whole-account check for repeats: no reselling, tax or Shorts-pay topic in any IG caption since the first post (19 Oct) or in the scheduled list.
+**Insight AB (5 Nov) — the one thing all our saved videos share is that the viewer could act on them, and the two that got sent were dreams or tricks, not warnings.** Saves on the 4 how-tos: drone 14, vending 6, food truck 3, lights 1. Shares: drone 6, vending 1, the rest 0. The older posts with the most of both are makhana (10 saves, 11 shares) and the restaurant tricks (6 saves, 4 shares), both about money a viewer can picture; everything else has 0–4 of each. n is small and rows are mixed in age, so a lead. → EP 5 reselling is built as something to do (one list) plus a thing to send (a friend with a full closet). If it saves but isn't sent, that's the warning pattern again; if neither, the tax angle cost us.
+
 ## Snapshot 2026-11-05 ~02:40 IST (episode run: HOW IT WORKS EP 1, Spotify 999 plays)
 Instagram (IGRE, 14 Oct → 4 Nov) — new + changed rows:
 | Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |

@@ -392,3 +392,246 @@ def pie_wedge(c, x, y, r, frac=0.14, k=1.0, col=ORANGE, base=(36, 40, 60), a0=-9
     c.translate(off * math.cos(md), off * math.sin(md))
     c.drawArc(oval, a0, 360 * frac, True, paint(col)); c.drawArc(oval, a0, 360 * frac, True, stroke(INK, 7))
     c.restore()
+
+
+# ------------------------------------------------------------------ HOW TO START EP 5 (reselling): the pack room + flat props (R&D 5 Nov 2026)
+def pack_room(c, t, lamp=(560, 1120), lamp_a=0.5, top=(30, 34, 74), bot=(70, 78, 132)):
+    """one held world: a night stockroom. Shelf silhouette across the top, a clothes rail + stacked parcels at the edges, dark floor."""
+    night_bg(c, t, top, bot, lamp=lamp, lamp_a=lamp_a, floor=None)
+    dk = (14, 16, 38)
+    c.drawRect(R.MakeLTRB(0, 0, W, 70), paint(dk))
+    for i in range(9):      # boxes on the top shelf, read as a silhouette
+        x = i * 128 - 20 + 16 * hsh(i, 3); w = 92 + 30 * hsh(i, 4); h = 34 + 24 * hsh(i, 5)
+        c.drawRect(R.MakeXYWH(x, 70, w, h), paint(mix(dk, (60, 66, 110), 0.25)))
+    c.drawRect(R.MakeLTRB(0, 70 + 58, W, 70 + 70), paint(dk))
+    for x, y0, w, n in ((44, FLOOR, 130, 3), (980, FLOOR, 120, 2)):
+        for j in range(n):
+            ww = w * (1 - 0.12 * j); h = 74
+            c.drawRect(R.MakeXYWH(x - ww / 2, y0 - (j + 1) * h, ww, h - 3), paint(mix(dk, (120, 90, 60), 0.3)))
+            c.drawLine(x, y0 - (j + 1) * h, x, y0 - j * h - 3, stroke(mix(dk, (200, 170, 120), 0.25), 8))
+    c.drawRect(R.MakeLTRB(0, FLOOR, W, H), paint(shader=lin(0, FLOOR, 0, H, [argb(mix(bot, (0, 0, 0), 0.45)), argb(mix(bot, (0, 0, 0), 0.75))])))
+    c.drawLine(0, FLOOR, W, FLOOR, stroke(INK, 5))
+    fg_dust(c, t, n=7, seed=9, a=0.2)
+
+
+def jacket(c, x, y, w=300, col=(70, 120, 200), k=1.0, tilt=0.0, hanger=True, worn=0.0):
+    """a plain flat jacket on a hanger; x, y = hanger hook. worn 0..1 greys it a little (the old closet one)."""
+    if k <= 0: return
+    col = mix(col, (130, 130, 140), 0.45 * worn); dk = mix(col, (0, 0, 0), 0.28)
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    s = w / 300.0; c.scale(s, s)
+    if hanger:
+        hk = skia.Path(); hk.moveTo(0, 34); hk.lineTo(0, 16); hk.cubicTo(0, 0, 24, 0, 22, 16); c.drawPath(hk, stroke((225, 228, 236), 7))
+        c.drawPath(poly([(-92, 62), (0, 30), (92, 62)]), stroke((225, 228, 236), 8))
+    body = poly([(-60, 42), (60, 42), (140, 86), (150, 262), (98, 268), (92, 138), (88, 340), (-88, 340), (-92, 138), (-98, 268), (-150, 262), (-140, 86)], True)
+    c.drawPath(body, paint(col)); c.drawPath(body, stroke(INK, 7))
+    c.drawLine(0, 60, 0, 340, stroke(dk, 8))
+    for sx in (-1, 1):
+        c.drawPath(poly([(sx * 2, 62), (sx * 44, 42), (sx * 58, 100), (sx * 8, 158)], True), paint(mix(col, (255, 255, 255), 0.18)))
+        c.drawPath(poly([(sx * 2, 62), (sx * 44, 42), (sx * 58, 100), (sx * 8, 158)], True), stroke(INK, 5))
+        c.drawRoundRect(R.MakeXYWH(sx * 46 - 24, 258, 48, 12), 4, 4, paint(dk))
+    for yy in (130, 190, 250): c.drawCircle(-14, yy, 6, paint(INK))
+    c.restore()
+
+
+def price_tag(c, x, y, text, k=1.0, tilt=-6.0, col=INK, fill=(250, 244, 226), size=64):
+    """string tag with a hole, centre x, y."""
+    if k <= 0: return
+    f = font("ant", size); w = f.measureText(text) + 96; h = size * 1.5
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    p = poly([(-w / 2, -h / 2 + 18), (-w / 2 + 34, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2 + 34, h / 2), (-w / 2, h / 2 - 18)], True)
+    c.drawPath(p, paint((0, 0, 0), 0.25, blur=8)); c.drawPath(p, paint(fill)); c.drawPath(p, stroke(INK, 6))
+    c.drawCircle(-w / 2 + 28, 0, 9, paint(mix(fill, (0, 0, 0), 0.5))); c.drawCircle(-w / 2 + 28, 0, 9, stroke(INK, 4))
+    c.drawString(text, -w / 2 + 52, size * 0.36, f, paint(col))
+    c.restore()
+
+
+def stamp(c, x, y, text, col=RED_C, k=1.0, tilt=-10.0, size=74):
+    """a rubber stamp mark that slams in: pass k from pop_()."""
+    if k <= 0: return
+    f = font("ant", size); w = f.measureText(text) + 54; h = size * 1.42
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    c.drawRoundRect(R.MakeXYWH(-w / 2 - 6, -h / 2 - 6, w + 12, h + 12), 16, 16, paint((12, 12, 18), 0.55, blur=5))
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 12, 12, paint(WHITE)); c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 12, 12, stroke(col, 9))
+    c.drawString(text, -f.measureText(text) / 2, size * 0.36, f, paint(col))
+    c.restore()
+
+
+def listing_card(c, x, y, w, price, state="ASKING", k=1.0, tilt=0.0, col=None):
+    """a plain online listing: picture box, price, one status strip. No site chrome or logos."""
+    if k <= 0: return
+    h = w * 1.22; card(c, x, y, w, h, k=k, tilt=tilt)
+    c.drawRoundRect(R.MakeXYWH(-w * 0.42, -h * 0.44, w * 0.84, h * 0.46), 12, 12, paint((226, 230, 240)))
+    jacket(c, 0, -h * 0.44 + 4, w * 0.48, hanger=False, col=(70, 120, 200))
+    ctext(c, price, 0, h * 0.2, "ant", w * 0.23, INK)
+    sc = col or (GRN if state == "SOLD" else (150, 154, 170))
+    c.drawRoundRect(R.MakeXYWH(-w * 0.42, h * 0.27, w * 0.84, h * 0.15), 14, 14, paint(sc))
+    ctext(c, state, 0, h * 0.27 + h * 0.105, "ant", w * 0.1, WHITE)
+    card_end(c)
+
+
+def receipt(c, x, y, w, rows, k=1.0, tilt=3.0, total=None, prog=1.0):
+    """paper receipt with a torn bottom. rows = [(label, value)]; prog 0..1 reveals rows one by one."""
+    if k <= 0: return
+    n = len(rows) + (1 if total else 0); rh = w * 0.15; h = w * 0.2 + n * rh + w * 0.08
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    pts = [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2)]
+    for i in range(1, 12): pts.append((w / 2 - i * w / 12, h / 2 + (-14 if i % 2 else 0)))
+    pts.append((-w / 2, h / 2))
+    p = poly(pts, True); c.drawPath(p, paint((0, 0, 0), 0.25, blur=9)); c.drawPath(p, paint((252, 250, 242))); c.drawPath(p, stroke(INK, 5))
+    fs = rh * 0.58; fl = font("mxb", fs); fr = font("ant", fs * 1.14); shown = int(math.ceil(cl(prog) * n))
+    for i, (a_, b_) in enumerate(rows[:shown]):
+        yy = -h / 2 + w * 0.2 + i * rh
+        c.drawString(a_, -w * 0.42, yy, fl, paint((70, 72, 86))); c.drawString(b_, w * 0.42 - fr.measureText(b_), yy, fr, paint(INK))
+    if total and shown > len(rows):
+        yy = -h / 2 + w * 0.2 + len(rows) * rh; c.drawLine(-w * 0.42, yy - rh * 0.72, w * 0.42, yy - rh * 0.72, stroke(INK, 4))
+        c.drawString(total[0], -w * 0.42, yy, fl, paint(INK)); c.drawString(total[1], w * 0.42 - fr.measureText(total[1]), yy, fr, paint((30, 150, 90)))
+    c.restore()
+
+
+def tax_form(c, x, y, w=420, title="TAX FORM", k=1.0, tilt=-3.0, ghost=False):
+    """a generic form sheet. ghost=True draws it as a dashed outline: the form that never came."""
+    if k <= 0: return
+    h = w * 1.28
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    rr = R.MakeXYWH(-w / 2, -h / 2, w, h)
+    if ghost:
+        pp = stroke(WHITE, 7, 0.75); pp.setPathEffect(skia.DashPathEffect.Make([26, 18], 0)); c.drawRoundRect(rr, 12, 12, pp)
+        ctext(c, "NO FORM", 0, 18, "ant", w * 0.17, WHITE, 0.85)
+    else:
+        c.drawRoundRect(rr, 12, 12, paint((0, 0, 0), 0.25, blur=9)); c.drawRoundRect(rr, 12, 12, paint(WHITE)); c.drawRoundRect(rr, 12, 12, stroke(INK, 6))
+        c.drawRect(R.MakeXYWH(-w / 2 + 8, -h / 2 + 8, w - 16, h * 0.14), paint((226, 232, 244)))
+        ctext(c, title, 0, -h / 2 + h * 0.115, "ant", h * 0.08, INK)
+        for i in range(5):
+            yy = -h / 2 + h * (0.24 + 0.135 * i); c.drawRect(R.MakeXYWH(-w * 0.4, yy, w * 0.8, h * 0.085), paint((245, 246, 250))); c.drawRect(R.MakeXYWH(-w * 0.4, yy, w * 0.8, h * 0.085), stroke((150, 154, 170), 3))
+    c.restore()
+
+
+def line_tally(c, x, y, w, rows, k=1.0, prog=1.0):
+    """the takeaway: one simple notebook list, columns PAID / SOLD / FEES. rows = [(paid, sold, fees)]"""
+    if k <= 0: return
+    rh = w * 0.13; h = rh * (len(rows) + 1) + w * 0.14
+    card(c, x, y, w, h, fill=(252, 250, 240), k=k, r=16)
+    hdr = ("PAID", "SOLD", "FEES"); xs = (-w * 0.28, 0, w * 0.28); top = -h / 2 + w * 0.13
+    for hx, s_ in zip(xs, hdr): ctext(c, s_, hx, top, "ant", rh * 0.62, INK)
+    c.drawLine(-w * 0.44, top + rh * 0.24, w * 0.44, top + rh * 0.24, stroke(INK, 5))
+    shown = int(math.ceil(cl(prog) * len(rows)))
+    for i, rw in enumerate(rows[:shown]):
+        yy = top + rh * (i + 1)
+        for hx, s_ in zip(xs, rw): ctext(c, s_, hx, yy, "mxb", rh * 0.5, (60, 62, 76))
+    card_end(c)
+
+
+def parcel(c, x, y, w=220, k=1.0, label=None):
+    """cardboard parcel, x = centre, y = bottom"""
+    if k <= 0: return
+    h = w * 0.72
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawOval(R.MakeXYWH(-w * 0.56, -12, w * 1.12, 26), paint((0, 0, 0), 0.25, blur=8))
+    c.drawRect(R.MakeXYWH(-w / 2, -h, w, h), paint((206, 160, 104))); c.drawRect(R.MakeXYWH(-w / 2, -h, w, h), stroke(INK, 6))
+    c.drawRect(R.MakeXYWH(-w * 0.08, -h, w * 0.16, h), paint((232, 200, 150)))
+    if label: ctext(c, label, 0, -h * 0.34, "ant", w * 0.16, INK)
+    c.restore()
+
+
+# ------------------------------------------------------------------ HOW IT WORKS EP 3 (Shorts money): the waterworks + flat props
+def waterworks(c, t, lamp=(540, 1130), lamp_a=0.42, top=(14, 40, 62), bot=(30, 96, 110)):
+    """one held world: a pump room at night. Big pipes framing the top, a gauge on the wall, wet dark floor."""
+    night_bg(c, t, top, bot, lamp=lamp, lamp_a=lamp_a, lamp_col=(150, 230, 230), floor=None)
+    dk = (8, 22, 34)
+    c.drawRect(R.MakeLTRB(0, 0, W, 74), paint(dk)); c.drawRect(R.MakeLTRB(0, 74, W, 118), paint(mix(dk, (70, 120, 130), 0.25))); c.drawLine(0, 118, W, 118, stroke(INK, 5))
+    for x in (130, 400, 690, 960):
+        c.drawRect(R.MakeXYWH(x - 15, 66, 30, 62), paint(dk))
+        c.drawRect(R.MakeXYWH(x - 26, 118, 52, 72), paint(mix(dk, (70, 120, 130), 0.2))); c.drawRect(R.MakeXYWH(x - 26, 118, 52, 72), stroke(INK, 4))
+    c.drawRect(R.MakeLTRB(0, FLOOR, W, H), paint(shader=lin(0, FLOOR, 0, H, [argb(mix(bot, (0, 0, 0), 0.5)), argb(mix(bot, (0, 0, 0), 0.8))])))
+    c.drawLine(0, FLOOR, W, FLOOR, stroke(INK, 5))
+    fg_dust(c, t, n=7, seed=21, a=0.16, col=(190, 240, 240))
+
+
+def tank(c, x, y, w=520, fill=0.6, k=1.0, t=0.0, label=None, liquid=(255, 206, 70)):
+    """a glass money tank with a coin-gold level; x = centre, y = bottom"""
+    if k <= 0: return
+    h = w * 1.05
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawOval(R.MakeXYWH(-w * 0.56, -16, w * 1.12, 32), paint((0, 0, 0), 0.3, blur=9))
+    rr = R.MakeXYWH(-w / 2, -h, w, h)
+    c.drawRoundRect(rr, 36, 36, paint((26, 50, 66), 0.9))
+    fl = cl(fill)
+    if fl > 0.004:
+        c.save(); c.clipRRect(skia.RRect.MakeRectXY(rr, 36, 36), True)
+        top_ = -h + h * (1 - fl); wob = 7 * math.sin(t * 2.2)
+        c.drawRect(R.MakeLTRB(-w, top_ + wob, w, 0), paint(shader=lin(0, top_, 0, 0, [argb(liquid), argb(mix(liquid, (170, 90, 10), 0.55))])))
+        for i in range(int(10 + 34 * fl)):
+            cx_ = w * (hsh(i, 61) - 0.5) * 0.9; cy_ = lerp(top_ + 26, -18, hsh(i, 62)); rr_ = w * 0.03
+            c.drawCircle(cx_, cy_, rr_, paint((255, 232, 130))); c.drawCircle(cx_, cy_, rr_, stroke((170, 112, 20), 3))
+        c.restore()
+    c.drawRoundRect(rr, 36, 36, stroke(INK, 8))
+    c.drawRoundRect(R.MakeXYWH(-w / 2 + 20, -h + 26, 20, h * 0.6), 10, 10, paint(WHITE, 0.16))
+    if label:
+        f = w * 0.13
+        while font("ant", f).measureText(label) > w * 0.82: f -= 2
+        ctext(c, label, 0, -h * 0.84 + f * 0.36, "ant", f, WHITE)
+    c.restore()
+
+
+def pipe(c, pts, w=46, flow=0.0, t=0.0, col=(92, 112, 128), coins=True, a=1.0):
+    """a thick pipe along a polyline. flow > 0 moves coins through it (they sit on top, so the money is visible)."""
+    path = poly(pts); c.drawPath(path, stroke(INK, w + 12, a)); c.drawPath(path, stroke(col, w, a)); c.drawPath(path, stroke(mix(col, (255, 255, 255), 0.3), w * 0.18, a))
+    if flow > 0 and coins:
+        n = 7
+        for i in range(n):
+            q = ((t * 0.34 * max(flow, 0.2) + i / n) % 1.0); seg = partial_pts(pts, q)
+            coin(c, seg[-1][0], seg[-1][1], w * 0.42, spin=t * 4 + i, a=min(1, q * 8) * min(1, (1 - q) * 8) * min(1, flow * 3))
+
+
+def valve(c, x, y, r=78, turn=0.0, col=RED_C, k=1.0):
+    """hand wheel valve"""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k, k); c.rotate(turn * 150)
+    c.drawCircle(0, 0, r, stroke(INK, r * 0.34)); c.drawCircle(0, 0, r, stroke(col, r * 0.22))
+    for a_ in (0, 60, 120): 
+        c.save(); c.rotate(a_); c.drawLine(-r, 0, r, 0, stroke(INK, r * 0.2)); c.drawLine(-r, 0, r, 0, stroke(col, r * 0.1)); c.restore()
+    c.drawCircle(0, 0, r * 0.22, paint(mix(col, (0, 0, 0), 0.2))); c.drawCircle(0, 0, r * 0.22, stroke(INK, 5))
+    c.restore()
+
+
+def split_bar(c, x, y, w, frac, left, right, k=1.0, lc=ORANGE, rc=(90, 104, 130), h=120):
+    """one bar cut in two: frac on the left in colour, the rest grey, each named. k 0..1 draws the cut opening."""
+    if k <= 0: return
+    gap = 18 * cl(k); xl = x - w / 2; wl = w * frac
+    for rx, rw, col, s_ in ((xl - gap / 2, wl, lc, left), (xl + wl + gap / 2, w - wl, rc, right)):
+        rr = R.MakeXYWH(rx, y - h / 2, rw, h); c.drawRoundRect(rr, 16, 16, paint(col)); c.drawRoundRect(rr, 16, 16, stroke(INK, 7))
+        f = h * 0.42
+        while font("ant", f).measureText(s_) > rw - 22 and f > 20: f -= 2
+        c.drawString(s_, rx + rw / 2 - font("ant", f).measureText(s_) / 2, y + f * 0.36, font("ant", f), paint(WHITE))
+
+
+def feed_phone(c, x, y, w=340, t=0.0, tilt=0.0, ad=True, k=1.0):
+    """a phone with a scrolling feed: short video cards with an AD card between them. Plain shapes, no app UI."""
+    if k <= 0: return
+    h = w * 1.9
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), w * 0.14, w * 0.14, paint((22, 22, 32))); c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), w * 0.14, w * 0.14, stroke(INK, 6))
+    scr = R.MakeXYWH(-w * 0.44, -h * 0.46, w * 0.88, h * 0.92)
+    c.save(); c.clipRRect(skia.RRect.MakeRectXY(scr, w * 0.08, w * 0.08), True)
+    ch = h * 0.92; off = (t * 0.18 % 3.0) * ch; cols = ((76, 60, 150), (255, 196, 60), (40, 130, 150))
+    for i in range(-1, 5):
+        yy = -h * 0.46 + i * ch - (off % (ch * 3))
+        j = i % 3; c.drawRect(R.MakeXYWH(-w * 0.44, yy, w * 0.88, ch + 1), paint(cols[j]))
+        if j == 1 and ad: ctext(c, "AD", 0, yy + ch * 0.55, "ant", w * 0.3, INK)
+        else: c.drawPath(poly([(-w * 0.08, yy + ch * 0.42), (-w * 0.08, yy + ch * 0.58), (w * 0.12, yy + ch * 0.5)], True), paint(WHITE, 0.92))
+    c.restore(); c.restore()
+
+
+def line_meter(c, x, y, w, frac, label, need="10M", k=1.0, ok=False, t=0.0):
+    """a progress bar with one hard mark at its end: are you past the line?"""
+    if k <= 0: return
+    h = 76; c.save(); c.translate(x, y); c.scale(k, k)
+    rr = R.MakeXYWH(-w / 2, -h / 2, w, h); c.drawRoundRect(rr, h / 2, h / 2, paint((24, 30, 46))); 
+    fl = w * cl(frac)
+    if fl > 8: c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, fl, h), h / 2, h / 2, paint(GRN if ok else ORANGE))
+    c.drawRoundRect(rr, h / 2, h / 2, stroke(INK, 7))
+    c.drawLine(w / 2 - 8, -h, w / 2 - 8, h, stroke(RED_C, 11))
+    f = font("ant", 46); c.drawString(need, w / 2 - 8 - f.measureText(need) / 2, -h - 16, f, paint(WHITE))
+    fl2 = font("mxb", 32); c.drawString(label, -w / 2, h + 34, fl2, paint(WHITE))
+    c.restore()
