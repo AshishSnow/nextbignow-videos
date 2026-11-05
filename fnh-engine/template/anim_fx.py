@@ -750,3 +750,24 @@ def walk_steps(t0, t1, period=1.08):
     out = []; k = 0
     while t0 + k * period / 2 < t1: out.append(t0 + k * period / 2); k += 1
     return out
+
+
+# ================= ep 24 (5 Nov): SPEED RAMPS = slow motion without a cut (craft: Morphic 'Speed ramping': 'action flows from normal speed into dramatic slow motion at a key moment, then ramps back out, creating
+# emphasis without a cut'; typical = 100 % -> 10-20 % over 0.5-1 s, hold 1-2 s at the key moment, back out over 0.5-1 s; sync the peak to a beat. Filmed slow motion judders with too few frames; ours is drawn, so every frame is new). =================
+def speed_ramp(t, keys):
+    """STORY TIME for clock time t. keys = [(clock_t, speed), ...]: speed is linear between keys (1 = real time, 0.15 = slow motion, 0 = freeze), constant outside. Drive the physics of a shot with it: y = y0 + 0.5 * g * s(t)^2."""
+    if t <= keys[0][0]: return (t - keys[0][0]) * keys[0][1]
+    s = 0.0
+    for (a, va), (b, vb) in zip(keys, keys[1:]):
+        if t <= b:
+            k = (t - a) / max(1e-6, b - a); vt = va + (vb - va) * k
+            return s + (t - a) * (va + vt) / 2
+        s += (b - a) * (va + vb) / 2
+    return s + (t - keys[-1][0]) * keys[-1][1]
+
+
+def slowmo_frame(f, t, on=1.0, label=None):
+    """a thin cue that time has slowed: soft vignette + a tiny speed tag (optional). on 0..1."""
+    if on <= 0: return f
+    f[:] = f * (1 - 0.3 * on * np.clip(np.hypot(_xx - W / 2, _yy - H / 2) / 1100, 0, 1) ** 2)[..., None]
+    return f

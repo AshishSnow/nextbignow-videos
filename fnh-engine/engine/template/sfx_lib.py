@@ -724,3 +724,24 @@ def munch_sfx(level=-22, dur=1.2):
         p = int(t_ * SR); L_ = int(0.09 * SR); x[p:p + L_] += r_.normal(0, 1, L_) * np.exp(-np.linspace(0, 5, L_)) * r_.uniform(0.6, 1); t_ += r_.uniform(0.14, 0.2)
     b_ = signal.butter(2, [300, 3200], "band", fs=SR, output="sos"); x = signal.sosfilt(b_, x); x = x / (np.abs(x).max() + 1e-9) * db(level)
     return np.stack([x, x], 1).astype(np.float32)
+
+
+# ep 24: the sound of a speed ramp, a heavy slowed drop, and the FreshNestHub audio logo (1 s). audio_logo adds itself: audio_logo(t, lv)
+def slowmo_swell(level=-26, dur=2.0):
+    """the sound of a speed ramp: a low sine + filtered noise that slowly rise toward the impact."""
+    N_ = int(dur * SR); tt = np.arange(N_) / SR; k = tt / dur
+    ph = 2 * np.pi * np.cumsum(50 + 90 * k ** 2) / SR; x = 0.6 * np.sin(ph) * k
+    nz = signal.sosfilt(signal.butter(2, [200, 2400], "band", fs=SR, output="sos"), np.random.default_rng(3).normal(0, 1, N_)) * k ** 2.5
+    x = x + 0.5 * nz / (np.abs(nz).max() + 1e-9); x = x / (np.abs(x).max() + 1e-9) * db(level)
+    return np.stack([x, x], 1).astype(np.float32)
+def drip_big(level=-13):
+    """a heavy, pitched-down drop landing (a slowed plip with a body)."""
+    N_ = int(0.5 * SR); tt = np.arange(N_) / SR
+    x = np.sin(2 * np.pi * (240 * tt + 340 * tt ** 2)) * np.exp(-tt * 9) + 0.5 * np.sin(2 * np.pi * 90 * tt) * np.exp(-tt * 14)
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x], 1).astype(np.float32)
+def audio_logo(t, lv=-16):
+    """the FreshNestHub sting (1 s): three warm rising mallet notes (Fresh-Nest-Hub) + a crunch on the last one."""
+    for j, f0 in enumerate((587.3, 880.0, 1174.7)):
+        N_ = int(0.6 * SR); tt = np.arange(N_) / SR; x = (np.sin(2 * np.pi * f0 * tt) + 0.3 * np.sin(2 * np.pi * f0 * 4 * tt) * np.exp(-tt * 24)) * np.exp(-tt * 7)
+        x = x / (np.abs(x).max() + 1e-9) * db(lv + (j == 2) * 2); add(np.stack([x, x], 1).astype(np.float32), t + j * 0.16)
+    add(crunch(lv - 4), t + 0.32)
