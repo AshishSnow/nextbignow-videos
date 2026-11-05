@@ -6,3 +6,4 @@
 Rebuild: `python3 -c "import sys; sys.path.insert(0,'$STUDIO/lib'); import cb_turbo; cb_turbo.Turbo('narrator_slow_ref24k.wav')"` (needs speech_encoder.onnx).
 - `narrator_flat_ref24k.wav` — 11 s of the same Kokoro narrator **without** PSOLA (SPD 0.88, Starbucks lines i1–i3), 24 kHz.
   As a Chatterbox reference it gives a calmer, flatter take that leaves room for a light PSOLA layer (hybrid test, 27 Oct, RND.md).
+- `narrator_brisk_ref24k.wav` + `narrator_brisk.cbcond.npz` (6 Nov 2026, default): the same Kokoro narrator read faster and with a wider melody (SPD 0.92, EXS 1.3, same three sentences). Gives Chatterbox ~175 wpm instead of ~150 and +2.4 st of range. Synthetic only.

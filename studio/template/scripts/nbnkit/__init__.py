@@ -635,3 +635,28 @@ def line_meter(c, x, y, w, frac, label, need="10M", k=1.0, ok=False, t=0.0):
     f = font("ant", 46); c.drawString(need, w / 2 - 8 - f.measureText(need) / 2, -h - 16, f, paint(WHITE))
     fl2 = font("mxb", 32); c.drawString(label, -w / 2, h + 34, fl2, paint(WHITE))
     c.restore()
+
+
+# ------------------------------------------------------------------ HOW TO START EP 5 (reselling): the rack as a held object + a count you can see
+def swing(t, t0, a=7.0):
+    """damped hanger swing in degrees after t0: pass as tilt= to jacket()"""
+    return a * math.exp(-max(t - t0, 0) * 2.4) * math.sin(max(t - t0, 0) * 8.5) if t >= t0 else 0.0
+
+
+def rack(c, y=772, x0=70, x1=1010, floor=FLOOR):
+    """clothes rack: one thin pipe across the room, two posts. Hang jackets from y - 4. Put step numbers on them and it is a roadmap."""
+    for x in (x0, x1):
+        c.drawLine(x, y, x, floor - 6, stroke((20, 22, 44), 16)); c.drawLine(x, y, x, floor - 6, stroke((96, 104, 136), 7))
+    c.drawLine(x0 - 12, y, x1 + 12, y, stroke((20, 22, 44), 18)); c.drawLine(x0 - 12, y, x1 + 12, y, stroke((196, 202, 220), 8))
+
+
+def jacket_grid(c, t, t0, d, worn=0.0, n=30, cols=6, x0=130, y0=790, dx=92, dy=112, w=76):
+    """n small jackets landing one by one, d seconds apart: makes a legal count visible. Returns how many have landed."""
+    pal = ((70, 120, 200), (200, 80, 70), (60, 160, 120), (150, 110, 190), (230, 160, 60)); landed = 0
+    for i in range(n):
+        q = pr(t, t0 + i * d, 0.16)
+        if q <= 0: continue
+        landed += 1
+        jacket(c, x0 + (i % cols) * dx, y0 + (i // cols) * dy + 60 * (1 - eo(q)), w, col=mix(pal[i % 5], (130, 130, 140), 0.5 * worn), k=eo(q), hanger=False)
+    return landed
+

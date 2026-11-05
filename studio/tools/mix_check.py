@@ -45,7 +45,7 @@ spans = [(int(L["start"] * SR), int(L["end"] * SR)) for L in lines.values()]
 for a, b in spans:
     for s in range(a, max(a + 1, b - w), h):
         ev = np.mean(kv[s:s + w] ** 2); eb = np.mean(kb[s:s + w] ** 2)
-        if ev < 1e-9: continue
+        if ev < 1e-9 or 10 * np.log10(ev + 1e-14) < -42: continue   # sentence gaps inside a line (room tone at -60 dB) are not speech (6 Nov: Chatterbox multi-sentence lines read p5 -11 LU, all of it gaps)
         mom.append(10 * np.log10(ev / (eb + 1e-14)))
 mom = np.array(mom)
 fs_ = 10000

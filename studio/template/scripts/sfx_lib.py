@@ -219,3 +219,27 @@ def tape_zip(dur=1.5, level=-30):
     x = signal.sosfilt(signal.butter(2, [1200, 7000], "band", fs=SR, output="sos"), x)
     x = x / (np.abs(x).max() + 1e-9) * 10 ** (level / 20)
     return np.stack([x, x], 1).astype(np.float32)
+
+
+def rewind(dur=0.42, level=-30):
+    """cassette rewind chirp: rising warble, used on chapter whips (lo-fi episode, 6 Nov)"""
+    n = int(dur * SR); t2 = np.arange(n) / SR; fr = 500 + 2600 * (t2 / dur) ** 1.6 + 240 * np.sin(2 * np.pi * 34 * t2)
+    x = np.sin(2 * np.pi * np.cumsum(fr) / SR) + 0.35 * signal.sosfilt(signal.butter(2, [1500, 6000], "band", fs=SR, output="sos"), rng.standard_normal(n))
+    x = x * np.sin(np.pi * t2 / dur) ** 0.7; x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x * 0.9, x], 1).astype(np.float32)
+
+
+def hanger(level=-30, f0=2350.0):
+    """wire hanger on a metal rail: two thin inharmonic clinks"""
+    n = int(0.35 * SR); t2 = np.arange(n) / SR; x = np.zeros(n)
+    for dt, a in ((0.0, 1.0), (0.055, 0.6)):
+        i = int(dt * SR); tt = t2[: n - i]
+        x[i:] += a * sum(w * np.sin(2 * np.pi * f0 * r * tt) * np.exp(-tt / d) for r, w, d in ((1, 1, 0.06), (1.47, 0.6, 0.04), (2.31, 0.4, 0.025)))
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x * 0.85], 1).astype(np.float32)
+
+
+def stamp_hit(level=-20):
+    """rubber stamp on paper: low thump + short paper slap"""
+    n = int(0.22 * SR); t2 = np.arange(n) / SR
+    lo = np.sin(2 * np.pi * np.cumsum(70 + 90 * np.exp(-t2 / 0.02)) / SR) * np.exp(-t2 / 0.05)
+    hi = signal.sosfilt(signal.butter(2, [900, 5200], "band", fs=SR, output="sos"), rng.standard_normal(n)) * np.exp(-t2 / 0.012)
+    x = lo + 0.5 * hi / (np.abs(hi).max() + 1e-9); x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x], 1).astype(np.float32)
