@@ -35,6 +35,7 @@ then :; else echo "FAIL video path (layout_check / anim.py)"; tail -5 "$PV/work/
 rm -rf "$PV"
 python3 "$HERE/tools/story_check.py" --all "$HERE/examples" > /dev/null && python3 "$HERE/tools/story_check.py" "$P" > /dev/null \
   && echo "ok   story_check" || { echo "FAIL story_check.py crashed"; fail=1; }
+python3 "$HERE/tools/human_check.py" "$HERE/examples/credit-board/vo_lines.py" > /dev/null && echo "ok   human_check" || { echo "FAIL human_check.py crashed"; fail=1; }
 # writers' room pre-flight (R&D Tooling run, 31 Oct): every queued board parses; the pilot's story-kit assets all exist (--strict)
 python3 "$HERE/tools/board_check.py" --all "$HERE/episodes/queue" --no-brief > "$STUDIO/projects/_board.txt" 2>&1 \
   && python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/01-pepsi-jet-p1" --strict --no-brief > /dev/null 2>&1 \
