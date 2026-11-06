@@ -745,3 +745,30 @@ def audio_logo(t, lv=-16):
         N_ = int(0.6 * SR); tt = np.arange(N_) / SR; x = (np.sin(2 * np.pi * f0 * tt) + 0.3 * np.sin(2 * np.pi * f0 * 4 * tt) * np.exp(-tt * 24)) * np.exp(-tt * 7)
         x = x / (np.abs(x).max() + 1e-9) * db(lv + (j == 2) * 2); add(np.stack([x, x], 1).astype(np.float32), t + j * 0.16)
     add(crunch(lv - 4), t + 0.32)
+
+
+# ---- ep 25 foley ----
+def gavel(level=-13):
+    """a court gavel: a hard wood knock (two bright modes + a short low body), very short."""
+    N_ = int(0.28 * SR); tt = np.arange(N_) / SR; r_ = np.random.default_rng(5)
+    x = 0.8 * np.sin(2 * np.pi * 1150 * tt) * np.exp(-tt * 70) + 0.7 * np.sin(2 * np.pi * 620 * tt) * np.exp(-tt * 45) + 0.9 * np.sin(2 * np.pi * 150 * tt) * np.exp(-tt * 22) + 0.4 * r_.normal(0, 1, N_) * np.exp(-tt * 180)
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x], 1).astype(np.float32)
+
+
+def sniff(level=-22, dur=0.45):
+    """a nose breathing in: band-passed noise that swells and stops."""
+    N_ = int(dur * SR); k = np.arange(N_) / N_
+    x = signal.sosfilt(signal.butter(2, [900, 4200], "band", fs=SR, output="sos"), np.random.default_rng(6).normal(0, 1, N_)) * k ** 1.5 * (k < 0.92)
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x], 1).astype(np.float32)
+
+
+def torch_click(level=-24):
+    N_ = int(0.05 * SR); tt = np.arange(N_) / SR; x = np.sin(2 * np.pi * 2600 * tt) * np.exp(-tt * 260) + 0.6 * np.sin(2 * np.pi * 900 * tt) * np.exp(-tt * 200)
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x], 1).astype(np.float32)
+
+
+def press(level=-18):
+    """a sealing press: a metal clunk + a short pneumatic hiss."""
+    N_ = int(0.5 * SR); tt = np.arange(N_) / SR; h_ = signal.sosfilt(signal.butter(2, 3000, "high", fs=SR, output="sos"), np.random.default_rng(8).normal(0, 1, N_))
+    x = np.sin(2 * np.pi * 210 * tt) * np.exp(-tt * 24) + 0.5 * np.sin(2 * np.pi * 870 * tt) * np.exp(-tt * 40) + 0.16 * h_ * np.exp(-((tt - 0.16) / 0.1) ** 2)
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x], 1).astype(np.float32)

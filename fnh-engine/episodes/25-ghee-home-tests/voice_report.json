@@ -1,0 +1,88 @@
+{
+ "utmos": 4.482,
+ "utmos_note": "whole-file utmos = first 100 s (RAM); gate on chunk20 / line_mean",
+ "utmos_chunk20": 4.495,
+ "utmos_line_mean": 4.462,
+ "utmos_lines": {
+  "i1": 4.42,
+  "i2": 4.45,
+  "i3": 4.47,
+  "a1": 4.48,
+  "a2": 4.43,
+  "a3": 4.52,
+  "b1": 4.45,
+  "b2": 4.36,
+  "c1": 4.45,
+  "c2": 4.49,
+  "c3": 4.49,
+  "d1": 4.48,
+  "d2": 4.44,
+  "e1": 4.48,
+  "e2": 4.46,
+  "f1": 4.47,
+  "f2": 4.47,
+  "f3": 4.45,
+  "f4": 4.48,
+  "f5": 4.46,
+  "g1": 4.49,
+  "g2": 4.46,
+  "g3": 4.44,
+  "g4": 4.42,
+  "g5": 4.46,
+  "h1": 4.47,
+  "h2": 4.47,
+  "h3": 4.46,
+  "k1": 4.47,
+  "k2": 4.5,
+  "k3": 4.47,
+  "k4": 4.46,
+  "l1": 4.49,
+  "l2": 4.46
+ },
+ "f0_median_hz": 129.0,
+ "f0_range_st": 15.7,
+ "words": 448,
+ "duration_s": 170.8,
+ "wpm_overall": 157.4,
+ "wpm_speaking": 173.3,
+ "pause_ratio": 0.092,
+ "asr_word_error_approx": 0.064,
+ "asr_bad_lines": [
+  [
+   "i3",
+   "So let's put these home tests on trial, only ones worth your time."
+  ],
+  [
+   "a2",
+   "The fakes built from cheaper fats, like palm oil and vanispati."
+  ],
+  [
+   "a3",
+   "Last month in Junegar police say they found soybean oil in bottles of essence, in tins sold as pure cow ghee."
+  ],
+  [
+   "c1",
+   "Test 2 your palm, your hands warm so ghee melts."
+  ],
+  [
+   "e1",
+   "Test 4 color, yellows good whites bad."
+  ],
+  [
+   "f3",
+   "The acid tests on the official list. It turns crimson if there's vanispatty."
+  ],
+  [
+   "h2",
+   "But milk fat has a tiny fat palm oil doesn't, called butyric acid. About 2.5% in ghee, 0 in palm oil."
+  ],
+  [
+   "h3",
+   "A lab can count it and catch palm oil down to about 5%. Your hand can't count."
+  ],
+  [
+   "k2",
+   "Look for the license number, the maker, a batch number and an expiry date. Those Junigar tins had no batch number and no expiry."
+  ]
+ ]
+}

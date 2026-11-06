@@ -771,3 +771,12 @@ def slowmo_frame(f, t, on=1.0, label=None):
     if on <= 0: return f
     f[:] = f * (1 - 0.3 * on * np.clip(np.hypot(_xx - W / 2, _yy - H / 2) / 1100, 0, 1) ** 2)[..., None]
     return f
+
+
+# --- ACTING (ep 25): THE EYES LEAD. A look-change travels up the body in order: eyes first (2 frames), head a few frames later, body last; a blink lands on the head turn. Replaces a whole-body turn all at once.
+def eye_lead(t, t0, frm=-1.0, to=1.0, turn_amt=0.6, lean_amt=4.0):
+    """-> dict(look, turn, lean, blink) moving from side frm to side to (-1..1), starting at t0."""
+    e = clamp((t - t0) * FPS / 2); h = clamp(((t - t0) * FPS - 3) / 5); b = clamp(((t - t0) * FPS - 5) / 7)
+    side = lambda k: frm + (to - frm) * (k * k * (3 - 2 * k))
+    blink = 3 <= (t - t0) * FPS < 6
+    return dict(look=(side(e), 0.0), turn=side(h) * turn_amt, lean=side(b) * lean_amt, blink=blink)

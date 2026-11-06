@@ -187,31 +187,33 @@ def chub_body_el(shirt=HOOD3, logo=True):
         W_, H_, sc = 300, 290, 3
         im = Image.new("RGBA", (W_ * sc, H_ * sc), (0, 0, 0, 0)); d = ImageDraw.Draw(im); S = lambda *v: [x * sc for x in v]
         wob = lambda pts, amp=1.6, seed=0: [(x * sc, y * sc) for x, y in _wob(pts, amp, seed)]
-        mint = _fillcol(INK_MINT); apron = _fillcol(INK_APRON)
+        own = tuple(shirt) != tuple(HOOD3)                        # ep 25: shirt= really recolours the clothes (robes, neighbours); no apron unless he's Chubby in mint
+        mint = tuple(shirt) if own else _fillcol(INK_MINT); apron = _fillcol(INK_APRON); shade_ = tuple(int(c * 0.7) for c in mint) if own else INK_MINT_S
         # hoodie: rounded torso with shoulders
         torso = [(60, 40), (240, 40), (272, 100), (268, 250), (230, 286), (70, 286), (32, 250), (28, 100)]
         tp = _arcpts(150, 160, 122, 128, 0, 360, 36)
         d.polygon([(x * sc, y * sc) for x, y in tp], fill=mint + (255,))
         if INK_MODE == "wash":
             m = Image.new("L", im.size, 0); ImageDraw.Draw(m).polygon([(x * sc, y * sc) for x, y in tp], fill=255)
-            sh = Image.new("RGBA", im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).ellipse(S(150, 60, 290, 300), fill=INK_MINT_S + (150,))
+            sh = Image.new("RGBA", im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).ellipse(S(150, 60, 290, 300), fill=shade_ + (150,))
             im.alpha_composite(Image.composite(sh, Image.new("RGBA", im.size, (0, 0, 0, 0)), m))
         d.line(wob(tp, 2.0, 5), fill=INKC + (255,), width=INK_W * sc, joint="curve")
         # hood collar: two strokes
         d.line(wob(_arcpts(150, 44, 54, 30, 180, 360, 14), 1.4, 6), fill=INKC + (255,), width=(INK_W - 1) * sc, joint="curve")
-        # apron: bib + skirt, outlined, with strap strokes and a pocket
-        ap = [(106, 62), (194, 62), (210, 150), (232, 150), (252, 282), (236, 290), (150, 286), (64, 290), (48, 282), (68, 150), (90, 150)]
-        d.polygon([(x * sc, y * sc) for x, y in ap], fill=apron + (255,))
-        if INK_MODE == "wash":
-            _hatch(im, S, (170, 150, 236, 288, lambda q: q.polygon([(x * sc, y * sc) for x, y in [(180, 150), (236, 150), (232, 288), (176, 288)]], fill=255)), -40, 10, INKC + (26,), 1)
-        d.line(wob(ap + [ap[0]], 1.8, 7), fill=INKC + (255,), width=INK_W * sc, joint="curve")
-        for x0 in (110, 190): d.line(wob([(x0, 64), (150 + (x0 - 150) * 0.5, 36)], 1.0, 8), fill=INKC + (255,), width=(INK_W - 2) * sc)
-        d.line(wob([(68, 152), (232, 152)], 1.0, 9), fill=INKC + (255,), width=(INK_W - 2) * sc)
-        d.line(wob([(232, 152), (268, 134)], 1.0, 10), fill=INKC + (255,), width=(INK_W - 2) * sc); d.line(wob([(232, 152), (272, 168)], 1.0, 11), fill=INKC + (255,), width=(INK_W - 2) * sc)
-        d.line(wob([(104, 196), (196, 196), (200, 250), (100, 250), (104, 196)], 1.4, 14), fill=INKC + (255,), width=(INK_W - 2) * sc, joint="curve")
-        if logo:
-            d.ellipse(S(136, 204, 164, 232), fill=mint + (255,), outline=INKC + (255,), width=3 * sc)
-            d.polygon(S(150, 208, 160, 218, 150, 228, 140, 218), fill=apron + (255,))
+        if not own:
+            # apron: bib + skirt, outlined, with strap strokes and a pocket
+            ap = [(106, 62), (194, 62), (210, 150), (232, 150), (252, 282), (236, 290), (150, 286), (64, 290), (48, 282), (68, 150), (90, 150)]
+            d.polygon([(x * sc, y * sc) for x, y in ap], fill=apron + (255,))
+            if INK_MODE == "wash":
+                _hatch(im, S, (170, 150, 236, 288, lambda q: q.polygon([(x * sc, y * sc) for x, y in [(180, 150), (236, 150), (232, 288), (176, 288)]], fill=255)), -40, 10, INKC + (26,), 1)
+            d.line(wob(ap + [ap[0]], 1.8, 7), fill=INKC + (255,), width=INK_W * sc, joint="curve")
+            for x0 in (110, 190): d.line(wob([(x0, 64), (150 + (x0 - 150) * 0.5, 36)], 1.0, 8), fill=INKC + (255,), width=(INK_W - 2) * sc)
+            d.line(wob([(68, 152), (232, 152)], 1.0, 9), fill=INKC + (255,), width=(INK_W - 2) * sc)
+            d.line(wob([(232, 152), (268, 134)], 1.0, 10), fill=INKC + (255,), width=(INK_W - 2) * sc); d.line(wob([(232, 152), (272, 168)], 1.0, 11), fill=INKC + (255,), width=(INK_W - 2) * sc)
+            d.line(wob([(104, 196), (196, 196), (200, 250), (100, 250), (104, 196)], 1.4, 14), fill=INKC + (255,), width=(INK_W - 2) * sc, joint="curve")
+            if logo:
+                d.ellipse(S(136, 204, 164, 232), fill=mint + (255,), outline=INKC + (255,), width=3 * sc)
+                d.polygon(S(150, 208, 160, 218, 150, 228, 140, 218), fill=apron + (255,))
         # a couple of fold strokes
         for (x0, x1, sd) in ((82, 70, 12), (218, 230, 13), (120, 112, 15), (180, 188, 16)):
             d.line(wob([(x0, 170), (x1, 276)], 1.2, sd), fill=INKC + (110,), width=3 * sc)
@@ -329,9 +331,10 @@ def chub(f, x, y, s=1.0, la=(20, 10), ra=(20, 10), ll=6, rl=6, mouth=0, blink=Fa
         sh_ = (bcx + side * 118 * s, bcy - 46 * s)
         e = (sh_[0] + side * math.sin(math.radians(a1)) * 76 * s, sh_[1] + math.cos(math.radians(a1)) * 76 * s)
         hd = (e[0] + side * math.sin(math.radians(a2)) * 70 * s, e[1] + math.cos(math.radians(a2)) * 70 * s)
-        _ink_limb(g, (sh_, e, hd), 24 * s, INK_MINT, INK_MINT_S, s, 60 + side)
+        _own = tuple(shirt) != tuple(HOOD3); _lc = tuple(shirt) if _own else INK_MINT; _ls = tuple(int(c * 0.7) for c in _lc) if _own else INK_MINT_S
+        _ink_limb(g, (sh_, e, hd), 24 * s, _lc, _ls, s, 60 + side)
         c0 = (e[0] + (hd[0] - e[0]) * 0.6, e[1] + (hd[1] - e[1]) * 0.6)      # rolled cuff: a short ink band
-        cv2.circle(g, (int(c0[0]), int(c0[1])), int(15 * s), C(INKC), -1, cv2.LINE_AA); cv2.circle(g, (int(c0[0]), int(c0[1])), int(12 * s), C(_fillcol(INK_MINT_S)), -1, cv2.LINE_AA)
+        cv2.circle(g, (int(c0[0]), int(c0[1])), int(15 * s), C(INKC), -1, cv2.LINE_AA); cv2.circle(g, (int(c0[0]), int(c0[1])), int(12 * s), C(_ls if _own else _fillcol(INK_MINT_S)), -1, cv2.LINE_AA)
         hands[side] = hd; fore[side] = math.degrees(math.atan2(hd[1] - e[1], hd[0] - e[0]))
     def hand_at(side):
         comp(g, _rot_el(scale_el(_hand_ink_el(tint, side, hand_r if side > 0 else hand_l), s), -(fore[side] + 90)), hands[side][0], hands[side][1])
