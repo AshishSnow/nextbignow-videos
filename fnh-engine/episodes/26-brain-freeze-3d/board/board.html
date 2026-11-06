@@ -1,0 +1,202 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Hand;src:url(hand.woff) format('woff');}
+@font-face{font-family:Anton;src:url(anton.woff) format('woff');}
+html,body{margin:0;background:#fff;width:1080px;height:1920px;overflow:hidden}
+svg{position:absolute;left:0;top:0}
+</style></head><body>
+<svg id="sv" width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="gmin" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#dce8f8" stroke-width="1.2"/></pattern>
+  <pattern id="gmaj" width="120" height="120" patternUnits="userSpaceOnUse"><rect width="120" height="120" fill="url(#gmin)"/><path d="M120 0H0V120" fill="none" stroke="#bcd3f0" stroke-width="2"/></pattern>
+  <pattern id="hCold" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="14" stroke="#16a3d6" stroke-width="4"/></pattern>
+  <pattern id="hWarm" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="14" stroke="#f08a24" stroke-width="4"/></pattern>
+  <pattern id="hPain" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><line x1="0" y1="0" x2="0" y2="12" stroke="#e5322d" stroke-width="4"/></pattern>
+  <pattern id="hBrain" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><line x1="0" y1="0" x2="0" y2="16" stroke="#f3a8b6" stroke-width="3"/></pattern>
+  <pattern id="waffle" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H18M0 0V18" stroke="#c9852f" stroke-width="3"/></pattern>
+  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1f4fbf"/></marker>
+  <marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e5322d"/></marker>
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.5"/></filter>
+</defs>
+<rect width="1080" height="1920" fill="#fdfdfb"/>
+<rect width="1080" height="1920" fill="url(#gmaj)"/>
+<g id="shake"><g id="cam"></g></g>
+<g id="hud"></g>
+</svg>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), sm=x=>{x=cl(x);return x*x*(3-2*x)}, ramp=(t,t0,d)=>sm((t-t0)/d), eo=x=>1-Math.pow(1-cl(x),3), lerp=(a,b,k)=>a+(b-a)*k;
+const eback=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+// Catmull-Rom -> cubic bezier path
+function cr(pts,closed=false){let d=`M${pts[0][0]} ${pts[0][1]}`;const P=closed?[pts[pts.length-1],...pts,pts[0],pts[1]]:[pts[0],...pts,pts[pts.length-1]];
+  for(let i=1;i<P.length-2;i++){const[p0,p1,p2,p3]=[P[i-1],P[i],P[i+1],P[i+2]];d+=` C${p1[0]+(p2[0]-p0[0])/6} ${p1[1]+(p2[1]-p0[1])/6},${p2[0]-(p3[0]-p1[0])/6} ${p2[1]-(p3[1]-p1[1])/6},${p2[0]} ${p2[1]}`;}return d+(closed?'Z':'');}
+const INK='#1f4fbf', INK2='#5b82d6', RED='#e5322d', CYAN='#16a3d6', ORANGE='#f08a24', NERVE='#e8a400';
+let out='';
+// draw a path with draw-on progress k (0..1)
+function P(d,k,col=INK,w=6,extra=''){if(k<=0)return;out+=`<path d="${d}" pathLength="1" stroke-dasharray="1" stroke-dashoffset="${1-cl(k)}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" ${extra}/>`;}
+function F(d,fill,op,extra=''){if(op<=0.01)return;out+=`<path d="${d}" fill="${fill}" opacity="${op}" ${extra}/>`;}
+function T(x,y,s,txt,col=INK,op=1,font='Hand',anchor='middle',extra=''){if(op<=0.01)return;out+=`<text x="${x}" y="${y}" font-family="${font}" font-size="${s}" fill="${col}" opacity="${op}" text-anchor="${anchor}" ${extra}>${txt}</text>`;}
+function label(txt,x,y,tx,ty,k,col=INK,s=40){if(k<=0)return;P(`M${x} ${y} L${tx} ${ty}`,k*1.6,col,3.5,'marker-start="url(#arr)"');const a=cl(k*2-0.6);T(tx,ty+(ty<y?-12:38),s,txt,col,a);}
+
+// ---------- the drawing (side profile, facing right) ----------
+const head=[[372,1150],[362,950],[318,830],[300,690],[328,560],[408,470],[520,428],[628,440],[712,492],[756,560],[772,622],[790,668],[778,700],[786,735],[838,800],[800,828],[808,856],[788,872],[800,892],[786,920],[792,962],[770,1006],[700,1022],[650,1040],[628,1150]];
+const headD=cr(head);
+const earD=cr([[470,770],[436,730],[440,800],[470,840],[492,812],[488,775],[470,770]]);
+const browD='M690 640 Q725 628 752 650';
+const palateD=cr([[560,846],[610,822],[680,814],[735,826],[772,842]]);
+const tongueD=cr([[560,870],[640,880],[720,872],[766,876],[742,900],[660,912],[580,904],[560,870]],true);
+const tongueUpD=cr([[560,862],[640,834],[720,826],[766,846],[742,880],[660,896],[580,892],[560,862]],true);
+const brainD=cr([[400,640],[388,580],[430,530],[500,504],[580,500],[650,524],[700,570],[712,630],[680,680],[600,700],[520,702],[440,690]],true);
+const gyri=['M440 600 q30 -30 60 0 t60 0','M470 650 q25 -25 50 0 t50 0 t50 0','M560 560 q30 -25 60 0','M620 620 q20 -30 45 -5','M430 645 q20 -20 40 -5'];
+const nerveD=cr([[640,826],[590,800],[540,770],[512,730],[505,690]]);
+const nerveD2=cr([[690,820],[610,790],[560,758],[528,722],[520,690]]);
+const arcD=cr([[560,560],[640,520],[700,560],[735,600]]);
+const vessels=['M575 838 q30 -14 60 -10 t60 -6 t50 6','M610 830 l-8 -18 M650 826 l6 -20 M700 826 l-4 -18 M740 834 l10 -14','M590 842 q40 8 90 -2 t80 6'];
+const skullD=cr([[352,830],[336,700],[368,580],[448,500],[560,470],[660,486],[724,540],[742,612],[748,660]]);
+const jawD=cr([[748,660],[756,712],[748,770]]);
+
+// ice cream cone (drawn around its own origin, scoop on top)
+function cone(cx,cy,k,s=1,bitten=false,rot=-28){if(k<=0)return;
+  out+=`<g transform="translate(${cx} ${cy}) rotate(${rot}) scale(${s})">`;
+  const cD='M-62 0 L0 210 L62 0'; F(cD+'Z','url(#waffle)',cl(k*2-1)*0.9); P(cD,k,'#b8732a',6);
+  const sD=bitten?cr([[-70,0],[-80,-50],[-50,-100],[-10,-112],[10,-90],[0,-70],[20,-60],[48,-84],[78,-46],[72,0]]):cr([[-70,0],[-82,-50],[-56,-102],[0,-126],[56,-102],[82,-50],[70,0]]);
+  F(sD+'Z','#ffc9da',cl(k*2-1)); P(sD,k,'#d9467a',6);
+  P('M-50 0 q10 26 18 0 M10 0 q8 34 16 0 M40 0 q6 18 12 0',k,'#d9467a',4);
+  out+='</g>';}
+
+window.TL=null;
+const L=i=>TL.lines[i][0], LE=i=>TL.lines[i][1];
+function WT(i,w){const q=TL.words.find(q=>q[2]==i&&q[0].toLowerCase().replace(/[^a-z']/g,'').startsWith(w));return q?q[1]:L(i);}
+// camera = viewBox of the drawing space (portrait 9:16)
+function camBox(cx,cy,w){const h=w*16/9;return [cx-w/2,cy-h/2,w,h];}
+
+window.renderAt=function(t){
+  out='';
+  const tBite=WT('i2','bite'),tFreeze=WT('i2','freezing'),tA1=L('a1'),tPanic=WT('a1','panic'),tSq=WT('a2','squeeze'),tSnap=WT('a2','snap'),tRush=WT('a2','rushing');
+  const tA3=L('a3'),tNerve=WT('a3','trigeminal'),tAlarm=WT('a3','alarm'),tB1=L('b1'),tWrong=WT('b1','wrong'),tB2=L('b2'),tFore=WT('b2','forehead'),tB3=L('b3'),tBF=WT('b3','brain'),tDoc=WT('b3','doctors');
+  const tC1=L('c1'),tSec=WT('c1','seconds'),tFaster=WT('c1','faster'),tC2=L('c2'),tTongue=WT('c2','tongue'),tWarm=WT('c2','warmth'),tFades=WT('c2','fades'),tC3=L('c3'),tSlow=WT('c3','slower'),END=TL.end;
+
+  // ----- camera per beat -----
+  let C=camBox(560,800,860), shk=0;
+  const cams=[[0,camBox(575,820,880)],[tBite-0.2,camBox(640,820,700)],[tFreeze,camBox(640,840,520)],[tA1-0.1,camBox(668,830,300)],[tA3-0.2,camBox(560,760,560)],
+              [tB1,camBox(580,700,640)],[tB3-0.3,camBox(560,800,880)],[tC1+0.2,camBox(660,840,420)],[tC3-0.3,camBox(575,820,880)]];
+  for(let i=0;i<cams.length;i++){if(t>=cams[i][0]){const prev=i?cams[i-1][1]:cams[0][1];const k=eo((t-cams[i][0])/0.55);C=prev.map((v,j)=>lerp(v,cams[i][1][j],k));}}
+  // slow drift
+  C=[C[0]+C[2]*0.01*Math.sin(t*0.5),C[1],C[2]*(1-0.004*((t*10)%10)/10),C[3]*(1-0.004*((t*10)%10)/10)];
+  const sc=1080/C[2];
+  const impacts=[[tBite,10],[tFreeze,8],[tSnap,9],[tAlarm,12],[tFore,12],[tBF,10]];
+  for(const[ti,a] of impacts) if(t>=ti&&t<ti+0.35) shk=a*(1-(t-ti)/0.35);
+
+  // ----- head line drawing -----
+  const kHead=ramp(t,0,1.1);
+  const xr=ramp(t,tFreeze-0.2,0.5);                               // cross-section on
+  P(headD,kHead,INK,7,'filter="url(#rough)"');
+  P(earD,ramp(t,0.5,0.6),INK,5);
+  P(browD,ramp(t,0.7,0.4),INK,6);
+  // eye: open -> squeezed when pain -> calm at the end
+  const pain=ramp(t,tFore-0.2,0.3)*(1-ramp(t,tFades-0.3,1.2));
+  const wince=Math.max(pain, ramp(t,tFreeze,0.2)*(1-ramp(t,tA1,0.3)));
+  if(wince>0.5){P('M688 690 l26 -12 M688 690 l26 12',1,INK,6);} else {P('M690 690 q18 -14 34 0',ramp(t,0.8,0.3),INK,6); if(kHead>0.9) out+=`<circle cx="712" cy="688" r="6" fill="${INK}"/>`;}
+  // mouth: open for the bite
+  const mo=t>tBite-0.5&&t<tBite+0.2?1:0;
+  if(mo) P('M790 866 q-22 10 -34 0',1,INK,5);
+  // nose wrinkle lines in pain
+  if(pain>0.3){P('M705 615 l-14 -10 M712 600 l-16 -6',pain,RED,4);}
+
+  // ----- inside (dashed cross-section) -----
+  if(xr>0){
+    P(skullD,xr,INK2,4,'stroke-dasharray="14 10" pathLength="0"');
+    P(jawD,xr,INK2,4);
+    // brain
+    F(brainD,'url(#hBrain)',xr*0.9); P(brainD,xr,'#d06a86',5); gyri.forEach((g,i)=>P(g,ramp(t,tFreeze+0.1*i,0.5),'#d06a86',4));
+    // palate (cold) + tongue
+    const cold=ramp(t,tFreeze-0.1,0.5)*(1-ramp(t,tWarm,1.4));
+    const tu=ramp(t,tTongue-0.2,0.6);
+    const tD=tu>0.5?tongueUpD:tongueD;
+    F(tD,'#ffd2d8',xr); P(tD,xr,'#d9467a',5);
+    if(tu>0) F(tD,'url(#hWarm)',ramp(t,tWarm-0.3,0.5)*(1-ramp(t,tC3-0.5,0.5)));
+    // cold zone above palate
+    F(cr([[560,846],[610,822],[680,814],[735,826],[772,842],[760,800],[680,786],[600,796]],true),'url(#hCold)',cold*0.85);
+    P(palateD,xr,INK,7);
+    // frost sparkles
+    if(cold>0.05) for(let i=0;i<9;i++){const x=575+i*22,y=800+((i*37)%24);const s=6+3*Math.sin(t*5+i);P(`M${x-s} ${y}H${x+s}M${x} ${y-s}V${y+s}`,cold,CYAN,3);}
+    // vessels: width animates (panic jitter -> squeeze -> wide open)
+    let vw=4; if(t>=tA1) vw=4+1.2*Math.sin(t*40)*(1-ramp(t,tSq,0.2)); if(t>=tSq) vw=lerp(4,1.2,ramp(t,tSq,0.25)); if(t>=tSnap) vw=lerp(1.2,10,eo((t-tSnap)/0.25)); if(t>=tRush+0.8) vw=lerp(10,6,ramp(t,tRush+0.8,1)); if(t>=tWarm) vw=lerp(6,4,ramp(t,tWarm,1.2));
+    const vk=ramp(t,tA1+0.1,0.8);
+    vessels.forEach((v,i)=>P(v,vk,RED,vw*(i==1?0.6:1)));
+    // blood rushing dots
+    if(t>=tSnap&&t<tA3+0.5){for(let i=0;i<8;i++){const u=((t-tSnap)*0.9+i/8)%1;const x=575+u*170,y=838-6*Math.sin(u*6);out+=`<circle cx="${x}" cy="${y}" r="5" fill="${RED}"/>`;}}
+    // nerve + pulses
+    const nk=ramp(t,tNerve-0.3,0.8), non=1-ramp(t,tWarm,1.5);
+    P(nerveD,nk,NERVE,8*(0.5+0.5*non)); P(nerveD2,nk,NERVE,5*(0.5+0.5*non));
+    if(t>tNerve&&t<tFore+0.3){for(let i=0;i<3;i++){const u=((t-tNerve)*0.8+i/3)%1;const path=[[640,826],[590,800],[540,770],[512,730],[505,690]];const seg=u*(path.length-1);const j=Math.floor(seg),f=seg-j;const x=lerp(path[j][0],path[j+1][0],f),y=lerp(path[j][1],path[j+1][1],f);
+      out+=`<circle cx="${x}" cy="${y}" r="11" fill="#ffd34a" stroke="${NERVE}" stroke-width="3"/>`;}}
+    // alarm burst at the brain
+    const al=ramp(t,tAlarm-0.05,0.15)*(1-ramp(t,tB1,0.4));
+    if(al>0){for(let i=0;i<10;i++){const a=i*0.628,r1=150,r2=150+40*al;P(`M${540+r1*Math.cos(a)} ${600+r1*Math.sin(a)*0.6}L${540+r2*Math.cos(a)} ${600+r2*Math.sin(a)*0.6}`,al,RED,6);}}
+    // wrong-address arc: brain -> forehead
+    P(arcD,ramp(t,tWrong-0.1,0.6)*(1-ramp(t,tB3-0.3,0.3)),RED,6,'stroke-dasharray="16 12" pathLength="0" marker-end="url(#arrR)"');
+  }
+  // forehead pain (outside, on the skin) — zig-zags + red hatch
+  if(pain>0){const pd=cr([[650,500],[705,512],[742,560],[756,620],[722,630],[680,590],[650,540]],true);F(pd,'#e5322d',pain*0.18);F(pd,'url(#hPain)',pain*(0.8+0.2*Math.sin(t*9)));
+    for(let i=0;i<3;i++){const y=530+i*40,x=790;P(`M${x} ${y} l20 -10 l-10 18 l24 -8`,pain,RED,5);}}
+  // ice cream (outside the head): approach, bite, leave; return at the end
+  let cx=1000,cy=1080,ck=ramp(t,0.6,0.6),bit=false,crot=-28;
+  if(t<tBite){const k=eo((t-0.6)/(tBite-0.6));cx=lerp(1020,822,k);cy=lerp(1100,935,k);}
+  else if(t<tC3-0.5){const k=ramp(t,tBite+0.05,0.4);cx=lerp(822,1040,k);cy=lerp(935,1180,k);bit=true;}
+  else {const k=eo((t-(tC3-0.5))/1.2);cx=lerp(1040,830,k);cy=lerp(1180,945,k);bit=true;}
+  cone(cx,cy,ck,0.95,bit,crot);
+  // a bitten chunk flies into the mouth
+  if(t>=tBite&&t<tBite+0.5){const k=(t-tBite)/0.5;out+=`<circle cx="${lerp(820,700,k)}" cy="${lerp(870,840,k)}" r="16" fill="#ffc9da" stroke="#d9467a" stroke-width="4"/>`;}
+  // thermometer next to the palate on "freezing"
+  const th=ramp(t,tFreeze-0.2,0.3)*(1-ramp(t,tA1+0.4,0.3));
+  if(th>0){const lv=lerp(0.85,0.12,ramp(t,tFreeze-0.1,0.6));const x=850,y=740;
+    out+=`<g opacity="${th}"><rect x="${x-14}" y="${y-120}" width="28" height="170" rx="14" fill="#fff" stroke="${INK}" stroke-width="5"/><circle cx="${x}" cy="${y+60}" r="24" fill="${lv>0.4?RED:CYAN}" stroke="${INK}" stroke-width="5"/><rect x="${x-7}" y="${y+50-160*lv}" width="14" height="${160*lv}" fill="${lv>0.4?RED:CYAN}"/></g>`;}
+
+  // ----- labels (drawing space) -----
+  label('roof of your mouth',690,818,640,960,ramp(t,tFreeze+0.2,0.5)*(1-ramp(t,tA1+0.1,0.3)),INK,30);
+  label('tiny blood vessels',690,826,690,740,ramp(t,tA1+0.3,0.5)*(1-ramp(t,tSq-0.2,0.2)),RED,22);
+  label('TRIGEMINAL NERVE',540,770,560,990,ramp(t,tNerve,0.5)*(1-ramp(t,tB1,0.3)),'#b07800',34);
+  label('brain',600,560,720,440,ramp(t,tAlarm,0.4)*(1-ramp(t,tB1+0.3,0.3)),'#c0466a',40);
+  label('tongue = heater',680,880,760,1010,ramp(t,tTongue,0.5)*(1-ramp(t,tC3-0.5,0.3)),ORANGE,30);
+
+  // ----- assemble camera + HUD -----
+  document.getElementById('cam').innerHTML=out;
+  document.getElementById('sv').setAttribute('viewBox','0 0 1080 1920');
+  const g=document.getElementById('cam');g.setAttribute('transform',`scale(${sc}) translate(${-C[0]} ${-C[1]})`);
+  document.getElementById('shake').setAttribute('transform',`translate(${shk*Math.sin(t*71)} ${shk*Math.cos(t*63)})`);
+
+  // HUD: blueprint title block + key-word captions (screen space, safe zones)
+  let h='';
+  const H=(s)=>h+=s;
+  // figure tag (top, inside the safe zone)
+  const figs=[[0,'FIG. 1','EATING ICE CREAM TOO FAST'],[tFreeze,'FIG. 2','THE ROOF OF YOUR MOUTH'],[tA3-0.2,'FIG. 3','THE NERVE ALARM'],[tB1,'FIG. 4','THE WRONG ADDRESS'],[tB3-0.3,'FIG. 5','BRAIN FREEZE'],[tC1+0.2,'FIG. 6','THE FIX'],[tC3-0.3,'FIG. 7','THE REAL FIX']];
+  let fi=0; figs.forEach((f,i)=>{if(t>=f[0])fi=i;}); const fk=ramp(t,figs[fi][0],0.35);
+  H(`<g opacity="${fk}"><rect x="90" y="272" width="900" height="92" fill="#fff" stroke="${INK}" stroke-width="4"/><line x1="250" y1="272" x2="250" y2="364" stroke="${INK}" stroke-width="3"/>
+     <text x="170" y="333" font-family="Anton" font-size="40" fill="${INK}" text-anchor="middle" letter-spacing="2">${figs[fi][1]}</text>
+     <text x="620" y="333" font-family="Hand" font-size="42" fill="${INK}" text-anchor="middle">${figs[fi][2]}</text></g>`);
+  function cap(txt,y,k,size=130,col=INK,und=RED){if(k<=0.01)return;const s=0.85+0.15*eback(k);
+    H(`<g transform="translate(540 ${y}) scale(${s})" opacity="${cl(k*1.5)}"><text x="0" y="0" font-family="Anton" font-size="${size}" fill="${col}" text-anchor="middle" letter-spacing="3" stroke="#fff" stroke-width="10" paint-order="stroke">${txt}</text>`);
+    const w=txt.length*size*0.27; H(`<path d="M${-w} 30 q${w} 18 ${2*w} -6" pathLength="1" stroke-dasharray="1" stroke-dashoffset="${1-cl(k*1.4-0.3)}" fill="none" stroke="${und}" stroke-width="10" stroke-linecap="round"/></g>`);}
+  cap('TOO FAST?',540,ramp(t,WT('i1','way')-0.1,0.3)*(1-ramp(t,tBite-0.3,0.2)),150);
+  cap('FREEZING',540,ramp(t,tFreeze-0.05,0.25)*(1-ramp(t,tA1-0.2,0.2)),150,CYAN,CYAN);
+  cap('PANIC!',520,ramp(t,tPanic-0.05,0.2)*(1-ramp(t,tSq-0.15,0.15)),150,RED,RED);
+  cap('SQUEEZE',520,ramp(t,tSq-0.05,0.2)*(1-ramp(t,tSnap-0.1,0.1)),150,INK,CYAN);
+  cap('WIDE OPEN!',520,ramp(t,tSnap-0.05,0.2)*(1-ramp(t,tA3-0.3,0.2)),150,RED,RED);
+  cap('ALARM!',520,ramp(t,tAlarm-0.05,0.2)*(1-ramp(t,tB1-0.2,0.2)),150,RED,RED);
+  cap('WRONG ADDRESS',520,ramp(t,tWrong-0.1,0.25)*(1-ramp(t,tFore-0.2,0.2)),118,INK,RED);
+  cap('FOREHEAD?!',520,ramp(t,tFore-0.1,0.2)*(1-ramp(t,tB3-0.35,0.2)),150,RED,RED);
+  // big title card (cover frame): blueprint stencil + definition
+  const bt=ramp(t,tBF-0.15,0.3)*(1-ramp(t,tC1+0.1,0.3));
+  if(bt>0){H(`<g opacity="${cl(bt*1.4)}" transform="translate(540 560) scale(${0.85+0.15*eback(bt)})"><rect x="-430" y="-150" width="860" height="250" fill="#fff" stroke="${INK}" stroke-width="6"/><rect x="-414" y="-134" width="828" height="218" fill="none" stroke="${INK}" stroke-width="2" stroke-dasharray="10 8"/>
+    <text x="0" y="40" font-family="Anton" font-size="170" fill="${INK}" text-anchor="middle" letter-spacing="6">BRAIN FREEZE</text></g>`);
+    const dk=ramp(t,tDoc,0.4); if(dk>0) H(`<text x="540" y="1470" font-family="Hand" font-size="50" fill="${INK}" text-anchor="middle" opacity="${dk}">a.k.a. "cold-stimulus headache"</text>`);}
+  cap('FADES IN SECONDS',520,ramp(t,tSec-0.2,0.25)*(1-ramp(t,tFaster+0.4,0.2)),110,INK,CYAN);
+  cap('TONGUE UP!',520,ramp(t,tTongue-0.1,0.25)*(1-ramp(t,tFades-0.2,0.2)),150,ORANGE,ORANGE);
+  cap('PAIN FADES',520,ramp(t,tFades-0.1,0.25)*(1-ramp(t,tC3-0.4,0.2)),140,INK,ORANGE);
+  cap('EAT SLOWER.',520,ramp(t,tSlow-0.15,0.25),150,INK,RED);
+  document.getElementById('hud').innerHTML=h;
+};
+window.setTL=x=>{TL=x;};
+document.fonts.load('40px Hand').then(()=>document.fonts.load('40px Anton')).then(()=>{window.ready=true;});
+</script></body></html>
