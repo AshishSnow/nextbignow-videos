@@ -33,7 +33,7 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 19. **For our TTS**: spell numbers out ("twenty-four", "thirty-five percent"), no symbols or unexplained acronyms, "dot com" for URLs; a full
     stop is the most reliable pause; listen to any "…" line before keeping it. (ElevenLabs docs on numbers/pauses apply to any TTS; VOICE.md)
 20. **Round numbers** unless the exact figure is the point ("about one in five"). (UF/IFAS)
-21. **Read it aloud, then read it again over the narrator.** Keep what sounds like you talking; cut what sounds like a brochure. (NPR)
+21. **Read it aloud, then read it again over the narrator.** (7 Nov: two of our own TTS misreads came from capitals and one rare adjective: 'Comment LOCAL or GLOBAL' read 'El Col', 'Plain candles' read 'Playing candles'. Write the comment words in lower case in vo_lines.py, caps only on screen.) Keep what sounds like you talking; cut what sounds like a brochure. (NPR)
 
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - "But FICO, a major credit score, doesn't count your pay, your job or your age." → "FICO's one of the big credit scores. And it skips your pay. Your job too. Even how old you are."

@@ -9,6 +9,20 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-07 ~02:50 IST (episode run: HOW TO START EP 7, exporting)
+**Delivery (getScheduledPosts, 5–10 Nov):** Spotify, credit score and importing PUBLISHED on both networks. **Reselling (418324142) still shows instagram ERROR** ("Media container not created by unknown cause"), YouTube published; already reported on 6 Nov, not re-posted (owner decides). Southwest (09:35), currency button (14:35) and Coca-Cola (19:35) are PENDING for 7 Nov. No new errors.
+Instagram (IGRE, 16 Oct → 7 Nov) — new + changed rows:
+| Date | Video | Look | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 11-06 23:35 | HOW TO START EP 6 — importing (~3 h) | whiteboard | 109 s | 95 | 18 | 13.9 s | **91.0 %** | 1 | 0 | 0 | 1 (ours) |
+| 11-06 20:35 | HOW IT WORKS EP 2 — credit score (~6 h) | whiteboard | 116 s | 132 | 114 | 16.9 s | 54.9 % | 1 | 0 | 0 | 1 (ours) |
+| 11-05 | HOW IT WORKS EP 1 — Spotify (~46 h) | NBN night | 136 s | 1,537 | 1,345 | 52.7 s | 84.0 % | 31 | 0 | 3 | 1 (ours) |
+| 11-04 | HOW TO START EP 4 — Christmas lights | old cast | 155 s | 240 | 214 | 21.7 s | 68.8 % | 5 | 0 | 1 | 1 |
+YouTube (YTVP): still no rows after Christmas lights (158 views / 31 s); food truck 311 / 54 s is now the best average view duration on YouTube; drone 366 / 29 s; vending 314 / 30 s.
+**Media-kit numbers (7 Nov):** IG last 10 reels avg **567 views** (median 201), avg 3-s rate 65.3 %, avg watch 25.5 s, **9.2 reactions per 1,000 reach** (our own first comments included); YouTube last 10 with rows avg 363 views.
+**Insight AF (7 Nov) — whiteboard vs night look: too early to call, and the two whiteboard rows disagree.** Importing opened at 91 % past 3 s (channel best, but on ~18 reach) and credit score at 55 %, both under 6 h old; Spotify on the night look holds the records with a full day of data (84 %, 52.7 s). Same look, opposite openings → the topic is still doing the work, not the board. Read again at ≥ 24 h before changing anything.
+**Insight AG (7 Nov) — which kind holds: how-tos open steadiest (68–76 % on all five), HOW IT WORKS swings (Spotify 84 %, credit 55 %), HOW THEY GOT SO BIG has no row yet (Southwest posts 09:35 IST today).** Saves still come from how-tos (drone 14, vending 6, food truck 3). → this run builds a how-to (exporting) whose hook is a surprise anyone can repeat (the Constitution bans export taxes) and whose steps end on something to do (search the buyer's name, agree who pays at the door). Judge: 3-s ≥ 68 %, saves ≥ 5 / 1,000 reach.
+
 ## Snapshot 2026-11-06 ~08:30 IST (R&D run: writers' room)
 Instagram rows identical to the 02:45 IST pull (Spotify 1,534 / 52.8 s / 84.1 %, drone 1,324, food truck 1,305, vending 571, lights 240). YouTube rows still stop at vending (205 / 30 s) and drone (348 / 29 s): no row for food truck, lights, Spotify or reselling. Media-kit numbers unchanged: IG last 10 avg 579 views, median 214, 9.8 reactions / 1,000 reach; YT last 10 with rows avg 419.
 **⚠ Reselling (HOW TO START EP 5, Metricool 418324142) did NOT reach Instagram.** Planner status at 08:15 IST: instagram `ERROR`, "Media container not created by unknown cause"; youtube `PUBLISHED` (shorts/KChsuhTLJDs). So there will be no IG row for it, and insight AC's read ("first how-to on the new stack") can only be done on YouTube, whose rows run days late. Spotify went through with the same stack and a longer file, so length isn't the obvious cause. This run is read-only on Metricool: **owner decides whether to re-post it to Instagram.** Rule added in PLAYBOOK §6: after a post's time, read its provider status.

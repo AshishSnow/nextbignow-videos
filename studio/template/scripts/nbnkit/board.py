@@ -112,19 +112,21 @@ def board_bg(c, t, seed=0):
 
 
 def say(c, t, t0, small, big, col=MK, t1=None, size=170, y=640, smallc=BLU, under=None):
-    """board two-tier: a small Kalam line written on, then ONE big Permanent Marker word written on; optional marker underline"""
+    """board two-tier: a small Kalam line written on, then ONE big Permanent Marker word written on; optional marker underline.
+    7 Nov: centred on the SAFE zone (x 60..960 -> centre 510), big word capped at 840 px, so layout_check finds 0 right-zone pixels."""
     if t < t0 or (t1 is not None and t > t1): return
+    CX = 510
     fb = font("pm", size); wb = tw(fb, big)
-    if wb > 860: size *= 860 / wb; fb = font("pm", size); wb = tw(fb, big)
+    if wb > 840: size *= 840 / wb; fb = font("pm", size); wb = tw(fb, big)
     k1 = pr(t, t0, 0.32); k2 = pr(t, t0 + 0.14, max(0.28, 0.035 * len(big)))
     if small:   # small line shrinks to fit the safe width (left 60 / right 120 px) — 6 Nov fix
         ss = 52; fs_ = font("kb", ss)
-        while tw(fs_, small) > 840 and ss > 34: ss -= 2; fs_ = font("kb", ss)
-        mtext(c, small, W / 2 - 30, y - size * 0.98, ss, smallc, k1, "kb")
-    mtext(c, big, W / 2, y, size, col, k2, "pm")
+        while tw(fs_, small) > 820 and ss > 34: ss -= 2; fs_ = font("kb", ss)
+        mtext(c, small, CX, y - size * 0.98, ss, smallc, k1, "kb")
+    mtext(c, big, CX, y, size, col, k2, "pm")
     if under is not None and k2 >= 1:
         ku = pr(t, t0 + 0.14 + max(0.28, 0.035 * len(big)), 0.25)
-        ink(c, [wob([(W / 2 - wb / 2, y + 26), (W / 2 + wb / 2, y + 20)], seed=len(big), amp=1.4)], ku, under, 10, pen_=False)
+        ink(c, [wob([(CX - wb / 2, y + 26), (CX + wb / 2, y + 20)], seed=len(big), amp=1.4)], ku, under, 10, pen_=False)
 
 
 def note(c, t, t0, text, t1=None, y=1478):
@@ -336,3 +338,169 @@ def heads_row(c, y, t, t0, hl_t):
         if hero_like and t > hl_t: ink(c, [wob(circ_pts(x, y + 60, 115, -100, 255, 40, ry=200), 77, 1.5)], pr(t, hl_t, 0.4), RD, 9, pen_=False)
 
 
+# ---------------------------------------------------------------- export props (HOW TO START EP 7, examples/export-start, 7 Nov 2026): US outline, TAX toll gate, parchment scroll write-on, candle jar, clipboard checklist, digit boxes, 10x10 grid, buyer card, restricted list, agency folders, search bar, laptop form, EU door + VAT tag
+PARCH = (246, 236, 208); PARCH_D = (196, 170, 120); WAX = (250, 222, 160); FLAME = (255, 168, 40)
+US_PTS = [(-1.00, -0.30), (-0.86, -0.52), (-0.40, -0.50), (0.10, -0.46), (0.36, -0.40), (0.50, -0.50), (0.70, -0.56), (0.84, -0.66),
+          (0.96, -0.58), (0.86, -0.36), (0.72, -0.10), (0.66, 0.12), (0.74, 0.40), (0.62, 0.30), (0.46, 0.14), (0.22, 0.20),
+          (0.06, 0.44), (-0.06, 0.24), (-0.30, 0.18), (-0.56, 0.16), (-0.80, 0.02), (-1.00, -0.30)]
+
+
+def us_m(c, x, y, s, k, col=BLU, label="USA"):
+    """a hand-drawn, simplified outline of the lower 48 (no flag, no map data)"""
+    pts = [(x + px * s, y + py * s) for px, py in US_PTS]
+    ink(c, [wob(pts, 7, 1.4)], k, MK, 7)
+    if k > 0.8: hatch(c, _path(pts), pr(k, 0.8, 0.2), col, gap=20, w=6, bbox=(x - s, y - 0.7 * s, x + s, y + 0.5 * s), a=0.35)
+    if k >= 1: mtext(c, label, x - 0.05 * s, y + 0.02 * s, int(s * 0.26), MK, 1, "pm")
+
+
+def tollgate_m(c, x, y, t, t0, arm=0.0, word="TAX"):
+    k = pr(t, t0, 0.5)
+    post = [(x - 40, y), (x - 40, y - 220), (x + 40, y - 220), (x + 40, y)]
+    ink(c, [wob(post, 41, 0.8)], k, MK, 7)
+    if k >= 1:
+        mtext(c, word, x, y - 250, 64, RD, 1, "pm")
+        a = math.radians(-78 * arm); bx, by = x + 40, y - 150; L = 300
+        c.drawPath(_path([(bx, by), (bx + L * math.cos(a), by + L * math.sin(a))]), stroke(RD, 16)); c.drawCircle(bx, by, 14, paint(MK))
+
+
+def scroll_m(c, x, y, w, h, t, t0, lines_, t_lines, col=MK, size=50):
+    """parchment that unrolls downward, then handwritten lines write on (each line at its own time)"""
+    u = eo(pr(t, t0, 0.7)); hh = max(30, h * u)
+    top, bot = y - h / 2, y - h / 2 + hh
+    body = [(x - w / 2, top), (x + w / 2, top), (x + w / 2, bot), (x - w / 2, bot), (x - w / 2, top)]
+    c.drawPath(_path(body), paint(PARCH)); c.drawPath(_path(body), stroke(PARCH_D, 5))
+    for yy in (top, bot):   # the two rolls
+        c.drawRoundRect(R.MakeXYWH(x - w / 2 - 26, yy - 22, w + 52, 44), 22, 22, paint((236, 220, 180)))
+        c.drawRoundRect(R.MakeXYWH(x - w / 2 - 26, yy - 22, w + 52, 44), 22, 22, stroke(MK, 6))
+    for i, (ln, tl) in enumerate(zip(lines_, t_lines)):
+        yy = top + 110 + i * size * 1.35
+        if yy < bot - 30: mtext(c, ln, x, yy, size, col, pr(t, tl, 0.3), "kb", pen_=True)
+
+
+def candle_m(c, x, y, s, t, t0, col=OR):
+    """a jar candle with a flickering marker flame"""
+    k = pr(t, t0, 0.5); w, h = 150 * s, 190 * s
+    jar = [(x - w / 2, y - h), (x - w / 2, y), (x + w / 2, y), (x + w / 2, y - h)]
+    ink(c, [wob(jar, 11, 0.8), [(x, y - h), (x, y - h - 26 * s)]], k, MK, 7)
+    if k > 0.7: hatch(c, _path([(x - w / 2, y - h * 0.82), (x + w / 2, y - h * 0.82), (x + w / 2, y), (x - w / 2, y)]), pr(t, t0 + 0.4, 0.3), col, gap=16, w=6, bbox=(x - w / 2, y - h, x + w / 2, y), a=0.55)
+    if k >= 1:
+        fl = 1 + 0.12 * math.sin(t * 13) + 0.06 * math.sin(t * 29)
+        c.save(); c.translate(x, y - h - 30 * s); c.scale(1, fl)
+        c.drawPath(poly([(0, -62 * s), (22 * s, -10 * s), (0, 8 * s), (-22 * s, -10 * s)], True), paint(FLAME, 0.95))
+        c.drawPath(poly([(0, -30 * s), (9 * s, -4 * s), (0, 4 * s), (-9 * s, -4 * s)], True), paint((255, 236, 140)))
+        c.restore()
+
+
+def clipboard_m(c, x, y, t, t0, items, ticks, hot=None, hot_t=None):
+    """a clipboard checklist: numbered boxes; ticks = list of times each box gets its green tick; hot = index circled red"""
+    w, h = 520, 640; k = pr(t, t0, 0.5)
+    c.drawRoundRect(R.MakeXYWH(x - w / 2 + 10, y - h / 2 + 14, w, h), 24, 24, paint((0, 0, 0), 0.10 * k, blur=10))
+    c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), 24, 24, paint((214, 176, 120), k))
+    c.drawRect(R.MakeXYWH(x - w / 2 + 30, y - h / 2 + 50, w - 60, h - 80), paint(WHITE, k))
+    c.drawRoundRect(R.MakeXYWH(x - 90, y - h / 2 - 20, 180, 60), 14, 14, paint((150, 156, 170), k))
+    for i, lab in enumerate(items):
+        yy = y - h / 2 + 150 + i * 125; ki = pr(t, t0 + 0.3 + i * 0.18, 0.3)
+        ink(c, [wob([(x - 200, yy - 40), (x - 130, yy - 40), (x - 130, yy + 30), (x - 200, yy + 30), (x - 200, yy - 40)], 50 + i, 0.6)], ki, MK, 6, pen_=False)
+        mtext(c, lab, x - 100, yy + 14, 46, MK, ki, "kb", align="l")
+        if i < len(ticks) and ticks[i] is not None and t > ticks[i]:
+            ink(c, [[(x - 190, yy - 4), (x - 168, yy + 22), (x - 120, yy - 56)]], pr(t, ticks[i], 0.25), GR, 11, pen_=False)
+        if hot == i and hot_t is not None and t > hot_t:
+            ink(c, [wob(circ_pts(x + 10, yy - 4, 250, -160, 200, 44, ry=72), 77, 1.3)], pr(t, hot_t, 0.4), RD, 9, pen_=False)
+
+
+def digits_m(c, x, y, t, t0, step=0.14, col=BLU, fill="•"):
+    """ten digit boxes grouped 4.2.4 that fill one by one"""
+    bw, gap = 64, 10; groups = [4, 2, 4]; xs = []
+    tot = sum(groups) * (bw + gap) + 2 * 26; cx = x - tot / 2
+    for gi, g in enumerate(groups):
+        for _ in range(g): xs.append(cx); cx += bw + gap
+        cx += 26
+    for i, bx in enumerate(xs):
+        k = pr(t, t0 + i * step * 0.5, 0.2)
+        if k <= 0: continue
+        c.drawRect(R.MakeXYWH(bx, y - 44, bw, 88), paint(WHITE)); ink(c, [wob([(bx, y - 44), (bx + bw, y - 44), (bx + bw, y + 44), (bx, y + 44), (bx, y - 44)], 60 + i, 0.5)], k, MK, 5, pen_=False)
+        if t > t0 + 0.6 + i * step: mtext(c, fill, bx + bw / 2, y + 22, 64, col, 1, "pm")
+
+
+def grid100_m(c, x, y, t, t0, red_t, cell=46):
+    """10x10 boxes; ticks wave in green; the last five turn red at red_t"""
+    x0 = x - 5 * cell; y0 = y - 5 * cell
+    for i in range(100):
+        r, q = divmod(i, 10); bx, by = x0 + q * cell, y0 + r * cell
+        k = pr(t, t0 + i * 0.012, 0.15)
+        if k <= 0: continue
+        red = i >= 95 and t > red_t
+        c.drawRect(R.MakeXYWH(bx + 4, by + 4, cell - 8, cell - 8), paint((255, 236, 232) if red else (232, 246, 236), k))
+        c.drawRect(R.MakeXYWH(bx + 4, by + 4, cell - 8, cell - 8), stroke(RD if red else GR, 3, k))
+        if k >= 1 and not red: c.drawPath(_path([(bx + 12, by + 24), (bx + 20, by + 33), (bx + 34, by + 13)]), stroke(GR, 4))
+        if red: c.drawPath(_path([(bx + 13, by + 13), (bx + 33, by + 33)]), stroke(RD, 4)); c.drawPath(_path([(bx + 33, by + 13), (bx + 13, by + 33)]), stroke(RD, 4))
+
+
+def namecard_m(c, x, y, t, t0, tilt=-4, label="BUYER"):
+    w, h = 460, 250; k = pr(t, t0, 0.5)
+    c.save(); c.translate(x, y); c.rotate(tilt)
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 18, 18, paint(WHITE, k))
+    ink(c, [wob([(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2)], 88, 1.0)], k, MK, 6)
+    mtext(c, label, 0, -40, 50, BLU, pr(t, t0 + 0.3, 0.3), "pm")
+    ink(c, [wob([(-150, 40), (-80, 10), (-30, 50), (30, 12), (90, 46), (150, 20)], 89, 1.5, 14)], pr(t, t0 + 0.6, 0.5), MK, 6, pen_=False)
+    c.restore()
+
+
+def list_m(c, x, y, t, t0, n=6, hit=None, hit_t=None, col=RD, title="RESTRICTED"):
+    """a long list of scribbled names; one row lights up as a match"""
+    w = 420; h = 120 + n * 62; k = pr(t, t0, 0.4)
+    c.drawRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), paint((255, 248, 246), k)); ink(c, [wob([(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)], 90, 1.0)], k, col, 6)
+    mtext(c, title, x, y - h / 2 + 70, 46, col, pr(t, t0 + 0.2, 0.3), "pm")
+    for i in range(n):
+        yy = y - h / 2 + 130 + i * 62; L = 260 - (i * 37) % 90
+        if hit == i and hit_t is not None and t > hit_t:
+            c.drawRect(R.MakeXYWH(x - w / 2 + 14, yy - 26, w - 28, 44), paint((255, 214, 120), min(1, pr(t, hit_t, 0.2))))
+        ink(c, [wob([(x - L / 2 - 40, yy), (x + L / 2 - 40, yy)], 91 + i, 1.4, 14)], pr(t, t0 + 0.4 + i * 0.08, 0.2), (120, 120, 130), 6, pen_=False)
+
+
+def folder_m(c, x, y, t, t0, label, col):
+    k = pop_(t, t0)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawPath(poly([(-110, -70), (-40, -70), (-25, -90), (110, -90), (110, 70), (-110, 70)], True), paint(col, 0.22))
+    c.drawPath(poly([(-110, -70), (-40, -70), (-25, -90), (110, -90), (110, 70), (-110, 70)], True), stroke(col, 6))
+    mtext(c, label, 0, 20, 36, col, 1, "pm"); c.restore()
+
+
+def searchbar_m(c, x, y, w, t, t0, text, col=BLU):
+    k = pr(t, t0, 0.4)
+    c.drawRoundRect(R.MakeXYWH(x - w / 2, y - 50, w, 100), 50, 50, paint(WHITE, k))
+    ink(c, [wob([(x - w / 2 + 50, y - 50), (x + w / 2 - 50, y - 50)], 3, 0.5), wob([(x - w / 2 + 50, y + 50), (x + w / 2 - 50, y + 50)], 4, 0.5),
+            circ_pts(x - w / 2 + 50, y, 50, 90, 270, 18), circ_pts(x + w / 2 - 50, y, 50, -90, 90, 18)], k, col, 7, pen_=False)
+    ink(c, [circ_pts(x + w / 2 - 70, y - 6, 20, 0, 360, 20), [(x + w / 2 - 56, y + 8), (x + w / 2 - 40, y + 26)]], pr(t, t0 + 0.3, 0.3), MK, 6, pen_=False)
+    mtext(c, text, x - 30, y + 14, 38, MK, pr(t, t0 + 0.5, 0.9), "kb", pen_=True)
+
+
+def laptop_m(c, x, y, t, t0, title="EXPORT FORM (EEI)", rows=3):
+    k = pr(t, t0, 0.5); w, h = 440, 290
+    scr = [(x - w / 2, y - h), (x + w / 2, y - h), (x + w / 2, y), (x - w / 2, y), (x - w / 2, y - h)]
+    base = [(x - w / 2 - 50, y + 10), (x + w / 2 + 50, y + 10), (x + w / 2 + 20, y + 44), (x - w / 2 - 20, y + 44), (x - w / 2 - 50, y + 10)]
+    c.drawPath(_path(scr), paint(WHITE, k))
+    ink(c, [wob(scr, 21, 0.8), wob(base, 22, 0.8)], k, MK, 7)
+    mtext(c, title, x, y - h + 64, 38, BLU, pr(t, t0 + 0.4, 0.4), "pm")
+    for i in range(rows):
+        yy = y - h + 130 + i * 50
+        ink(c, [[(x - w / 2 + 40, yy), (x + w / 2 - 60 - (i % 2) * 60, yy)]], pr(t, t0 + 0.7 + i * 0.12, 0.25), (150, 156, 170), 7, pen_=False)
+
+
+def eu_door_m(c, x, y, t, t0, t_tag):
+    """a doorway marked EU with a VAT price tag swinging on it"""
+    k = pr(t, t0, 0.5)
+    fr = [(x - 130, y), (x - 130, y - 380), (x + 130, y - 380), (x + 130, y)]
+    ink(c, [wob(fr, 71, 0.8)], k, MK, 8)
+    if k >= 1:
+        c.drawRect(R.MakeXYWH(x - 110, y - 360, 220, 360), paint(BLU, 0.12))
+        mtext(c, "EU", x, y - 400, 64, BLU, 1, "pm")
+        c.drawCircle(x + 80, y - 180, 10, paint(MK))
+    kt = pop_(t, t_tag)
+    if kt > 0:
+        sw = 6 * math.sin(t * 4)
+        c.save(); c.translate(x - 20, y - 300); c.rotate(sw); c.scale(kt, kt)
+        c.drawPath(_path([(0, 0), (0, 50)]), stroke(MK, 4))
+        c.drawRoundRect(R.MakeXYWH(-90, 50, 180, 92), 14, 14, paint(WHITE)); c.drawRoundRect(R.MakeXYWH(-90, 50, 180, 92), 14, 14, stroke(RD, 7))
+        mtext(c, "VAT", 0, 118, 58, RD, 1, "pm"); c.restore()

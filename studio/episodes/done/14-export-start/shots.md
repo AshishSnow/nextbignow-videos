@@ -13,7 +13,7 @@ Music: baroque harpsichord + pizzicato strings (new genre; fits the 1787 documen
 | 7 | c1–c2 | buyer card with a scribbled name; restricted list behind; red line MATCH → stamps LICENSE? / NO SALE | step three / WHO'S BUYING? → RESTRICTED LIST | EVEN EAR99 ITEMS CAN NEED A LICENSE · TRADE.GOV |
 | 8 | c3–c4 | three folders COMMERCE · STATE · TREASURY funnel into one search box; hero shrugs; fine tag | the fix is free / ONE SEARCH → $ HUNDREDS OF THOUSANDS | CONSOLIDATED SCREENING LIST · TRADE.GOV / EAR MAX CIVIL FINE $374,474 PER VIOLATION (2025) |
 | 9 | d1–d3 | dashed line on the floor $2,500; box slides over; laptop form EEI; then CANADA arrow with "MOST: NO FILING" | last step / THE $2,500 LINE → FILE ONLINE | EEI IF OVER $2,500 PER SCHEDULE B NUMBER · TRADE.GOV |
-| 10 | f1 | EORI card + receipt "PROOF IT LEFT" + 0% VAT stamp | from the UK? / 0% VAT | WITH PROOF OF EXPORT · GOV.UK VAT NOTICE 703 |
+| 10 | (f1 cut from VO) | UK line lives in the t1 chip: UK SELLER? GET AN EORI · EXPORTS CAN BE ZERO-RATED WITH PROOF · GOV.UK | — | — |
 | 11 | e1–e2 | the scroll again, half of board: US side green tick; EU side a door with a VAT till; "EVERY IMPORT" | it only covers / YOUR SIDE → VAT ON EVERY IMPORT | EU, SINCE 1 JULY 2021 · EUROPEAN COMMISSION |
 | 12 | t1 | hero + girl shake hands over a contract "WHO PAYS AT THE DOOR?" | agree it / IN WRITING | — |
 | 13 | z1–z2 | LOCAL / GLOBAL circled; hero + girl | sell overseas? / LOCAL OR GLOBAL? → SAVE THIS | COMMENT ONE WORD · EDUCATION ONLY |
