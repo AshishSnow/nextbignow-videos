@@ -117,7 +117,10 @@ def say(c, t, t0, small, big, col=MK, t1=None, size=170, y=640, smallc=BLU, unde
     fb = font("pm", size); wb = tw(fb, big)
     if wb > 860: size *= 860 / wb; fb = font("pm", size); wb = tw(fb, big)
     k1 = pr(t, t0, 0.32); k2 = pr(t, t0 + 0.14, max(0.28, 0.035 * len(big)))
-    if small: mtext(c, small, W / 2, y - size * 0.98, 52, smallc, k1, "kb")
+    if small:   # small line shrinks to fit the safe width (left 60 / right 120 px) — 6 Nov fix
+        ss = 52; fs_ = font("kb", ss)
+        while tw(fs_, small) > 840 and ss > 34: ss -= 2; fs_ = font("kb", ss)
+        mtext(c, small, W / 2 - 30, y - size * 0.98, ss, smallc, k1, "kb")
     mtext(c, big, W / 2, y, size, col, k2, "pm")
     if under is not None and k2 >= 1:
         ku = pr(t, t0 + 0.14 + max(0.28, 0.035 * len(big)), 0.25)
