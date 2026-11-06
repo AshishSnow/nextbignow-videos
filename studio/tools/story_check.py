@@ -198,7 +198,7 @@ def check(path, target_len=None):
     # ("Step one", "Secret one") — 27 Oct data: roadmap scripts held 29–34 % of their length on Instagram (Costco, printer
     # ink, Planet Fitness, Starbucks, + restaurant tricks), the two without one 19–24 % (Amazon, Chick-fil-A)
     head = " ".join(l[1] for l in lines[:4]).lower()
-    count_promise = bool(re.search(r"\b(two|three|four|five|seven|\d)\s+(\w+\s+)?(secrets|steps|tricks|moves|reasons|rules|traps|things|mistakes|moments|clues|lies|times|doors|layers|problems|questions|gates|slices|cuts|stops|floors)\b", head))
+    count_promise = bool(re.search(r"\b(two|three|four|five|seven|\d)\s+(\w+\s+)?(secrets|steps|tricks|moves|reasons|rules|traps|things|mistakes|moments|clues|lies|times|doors|layers|problems|questions|gates|slices|cuts|stops|floors|buttons|choices|options)\b", head))
     labels = sum(1 for l in lines if LABEL_RE.match(l[1].strip()))
     R["count_promise"] = count_promise
     R["item_labels"] = labels
