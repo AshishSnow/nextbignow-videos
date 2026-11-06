@@ -1,0 +1,257 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Hand;src:url(hand.woff) format('woff');}
+@font-face{font-family:Anton;src:url(anton.woff) format('woff');}
+html,body{margin:0;background:#fff;width:1080px;height:1920px;overflow:hidden}
+svg{position:absolute;left:0;top:0}
+</style></head><body>
+<svg id="sv" width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="gmin" width="27" height="27" patternUnits="userSpaceOnUse"><path d="M27 0H0V27" fill="none" stroke="#dfe9f7" stroke-width="1.3"/></pattern>
+  <pattern id="gmaj" width="135" height="135" patternUnits="userSpaceOnUse"><rect width="135" height="135" fill="url(#gmin)"/><path d="M135 0H0V135" fill="none" stroke="#c4d6f0" stroke-width="2.2"/></pattern>
+  <pattern id="hCold" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#19a7d8" stroke-width="5"/></pattern>
+  <pattern id="hRed" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="14" stroke="#e63946" stroke-width="5"/></pattern>
+  <pattern id="hWarm" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="16" stroke="#f4a12a" stroke-width="5"/></pattern>
+  <pattern id="waffle" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="22" height="22" fill="#f6c983"/><path d="M0 0H22M0 0V22" stroke="#c7832e" stroke-width="4"/></pattern>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="5" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4"/></filter>
+  <radialGradient id="bgCold" cx="50%" cy="40%" r="80%"><stop offset="0" stop-color="#1b6fa8"/><stop offset="1" stop-color="#071a33"/></radialGradient>
+  <radialGradient id="bgWarm" cx="50%" cy="40%" r="80%"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#c2410c"/></radialGradient>
+  <radialGradient id="bgPink" cx="50%" cy="38%" r="80%"><stop offset="0" stop-color="#ff8fc4"/><stop offset="1" stop-color="#7b1fa2"/></radialGradient>
+  <radialGradient id="bgBrain" cx="50%" cy="40%" r="80%"><stop offset="0" stop-color="#5b3cc4"/><stop offset="1" stop-color="#140a3a"/></radialGradient>
+  <radialGradient id="bgRed" cx="50%" cy="38%" r="80%"><stop offset="0" stop-color="#ff4d4d"/><stop offset="1" stop-color="#5a0010"/></radialGradient>
+  <radialGradient id="bgSky" cx="50%" cy="35%" r="85%"><stop offset="0" stop-color="#7fe0ff"/><stop offset="1" stop-color="#1b5fd1"/></radialGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <radialGradient id="vign" cx="50%" cy="45%" r="75%"><stop offset="60%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#1b2a55" stop-opacity="0.16"/></radialGradient>
+</defs>
+
+<g id="world"></g>
+<rect width="1080" height="1920" fill="url(#vign)" pointer-events="none"/>
+</svg>
+<script>
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), sm=x=>{x=cl(x);return x*x*(3-2*x)}, ramp=(t,t0,d)=>sm((t-t0)/d), eo=x=>1-Math.pow(1-cl(x),3), lerp=(a,b,k)=>a+(b-a)*k;
+const eback=x=>{x=cl(x);const c=1.9;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const INK='#14142b', INK2='#7a97d6', RED='#e63946', PINK='#ff9fb8', SKIN='#ffe2cc', ORANGE='#f4a12a', CYAN='#19a7d8', YEL='#ffcf33', BRAINC='#ffc2d1';
+function cr(pts,closed=false){let d=`M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;const P=closed?[pts[pts.length-1],...pts,pts[0],pts[1]]:[pts[0],...pts,pts[pts.length-1]];
+  for(let i=1;i<P.length-2;i++){const[p0,p1,p2,p3]=[P[i-1],P[i],P[i+1],P[i+2]];d+=` C${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)},${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)},${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;}return d+(closed?'Z':'');}
+function circ(cx,cy,rx,ry=rx,n=18,wob=0,seed=1){const p=[];for(let i=0;i<n;i++){const a=i/n*6.2832;const w=1+wob*Math.sin(a*3+seed)*0.5+wob*Math.sin(a*5+seed*2)*0.3;p.push([cx+rx*w*Math.cos(a),cy+ry*w*Math.sin(a)]);}return cr(p,true);}
+let o='';
+const S=(d,k=1,col=INK,w=9,ex='')=>{if(k<=0)return;o+=`<path d="${d}" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${(1-cl(k)).toFixed(4)}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" ${ex}/>`;};
+const Fi=(d,fill,op=1,ex='')=>{if(op<=0.01)return;o+=`<path d="${d}" fill="${fill}" opacity="${op.toFixed(3)}" ${ex}/>`;};
+// shape = shadow offset print + fill + outline (draw-on k)
+function shape(d,fill,k,col=INK,w=9){Fi(d,'#000',cl(k*2-1)*0.28,'transform="translate(8 14)"');Fi(d,fill,cl(k*2-1));S(d,k,col,w*0.8);}
+const Tx=(x,y,s,txt,col=INK,op=1,font='Hand',ex='')=>{if(op<=0.01)return;o+=`<text x="${x}" y="${y}" font-family="${font}" font-size="${s}" fill="${col}" opacity="${op.toFixed(3)}" text-anchor="middle" ${ex}>${txt}</text>`;};
+const G=(tr,f)=>{o+=`<g transform="${tr}">`;f();o+='</g>';};
+
+// ---------------- cast + props ----------------
+function kid(x,y,s,k,st){ // st: {eyes, mouth, pain, lookx, cone, coneBite, blink}
+  G(`translate(${x} ${y}) scale(${s})`,()=>{
+    // neck + shirt
+    shape('M-120 300 Q0 250 120 300 L210 470 L-210 470Z','#7fb3ff',k);
+    shape('M-50 230 L-50 300 Q0 320 50 300 L50 230Z',SKIN,k,INK,8);
+    // ears
+    shape(circ(-212,20,34,48,10),SKIN,k); shape(circ(212,20,34,48,10),SKIN,k);
+    // head
+    const hd=circ(0,0,215,245,26,0.03,2); shape(hd,SKIN,k);
+    // hair
+    shape('M-200 -90 Q-210 -250 -40 -265 Q120 -285 200 -120 Q150 -170 90 -150 Q60 -210 -10 -170 Q-40 -220 -100 -170 Q-150 -190 -200 -90Z','#5a3b2e',k,INK,9);
+    // forehead pain (red hatch throb + cracks)
+    if(st.pain>0){const pd=circ(0,-120,140,58,16);Fi(pd,'#ffb3b3',st.pain*0.6);Fi(pd,'url(#hRed)',st.pain*(0.6+0.4*Math.sin(st.t*14)));
+      S('M-90 -150 l25 22 l-10 20 l28 18 M60 -160 l-20 25 l18 15 l-14 22',st.pain,RED,8);
+      for(let i=0;i<3;i++){const a=-2.3+i*0.8;const r1=260,r2=300+18*Math.sin(st.t*16+i);S(`M${r1*Math.cos(a)} ${-60+r1*Math.sin(a)} L${r2*Math.cos(a)} ${-60+r2*Math.sin(a)}`,st.pain,RED,10);}}
+    // cheeks
+    Fi(circ(-125,85,42,26,10),'#ff9db0',cl(k*2-1)*0.7); Fi(circ(125,85,42,26,10),'#ff9db0',cl(k*2-1)*0.7);
+    // brows
+    const bu=st.eyes=='wide'?-22:(st.eyes=='squeeze'?10:0);
+    S(`M-120 ${-55+bu} q40 ${-22+(st.eyes=='squeeze'?28:0)} 80 0`,k,INK,10); S(`M40 ${-55+bu} q40 ${-22+(st.eyes=='squeeze'?28:0)} 80 0`,k,INK,10);
+    // eyes
+    for(const ex of [-80,80]){
+      if(st.eyes=='squeeze'){S(`M${ex-34} 0 l30 -14 M${ex-34} 0 l30 14`.replace(/l30/g,'l60').replace('M'+(ex-34),'M'+(ex-30)),k,INK,10);}
+      else if(st.eyes=='happy'||(st.blink)){S(`M${ex-30} 6 q30 -26 60 0`,k,INK,10);}
+      else if(st.eyes=='wink'&&ex>0){S(`M${ex-30} 6 q30 -26 60 0`,k,INK,10);}
+      else{const r=st.eyes=='wide'?40:32;shape(circ(ex,0,r,r*1.12,14),'#fff',k,INK,8);if(k>0.6){o+=`<circle cx="${ex+(st.lookx||0)*10}" cy="4" r="${st.eyes=='wide'?13:16}" fill="${INK}"/><circle cx="${ex+(st.lookx||0)*10+5}" cy="-3" r="5" fill="#fff"/>`;}}}
+    // nose
+    S('M-6 30 q-22 40 10 50',k,INK,8);
+    // mouth
+    const m=st.mouth;
+    if(m=='bite'){shape(circ(0,140,78,62,14),'#7a1f2e',k,INK,9);Fi('M-60 110 H60 V128 H-60Z','#fff',cl(k*2-1));}
+    else if(m=='o'){shape(circ(0,150,40,50,12),'#7a1f2e',k,INK,9);}
+    else if(m=='pain'){shape('M-70 150 l20 -18 l20 18 l20 -18 l20 18 l20 -18 l20 18 Q0 200 -70 150Z','#7a1f2e',k,INK,8);}
+    else if(m=='lick'){shape('M-55 130 Q0 175 55 130 Q0 150 -55 130Z','#7a1f2e',k,INK,8);shape('M-10 150 Q5 205 30 152Z','#ff7d99',k,INK,7);}
+    else S('M-60 130 Q0 185 60 130',k,INK,10);
+  });}
+function cone(x,y,s,k,bites=0,rot=0){G(`translate(${x} ${y}) rotate(${rot}) scale(${s})`,()=>{
+  shape('M-95 0 L0 330 L95 0Z','url(#waffle)',k,'#9a5a1c',9);
+  let sc;
+  if(bites==0) sc=cr([[-108,0],[-122,-70],[-80,-145],[0,-178],[80,-145],[122,-70],[108,0]],true);
+  else if(bites==1) sc=cr([[-108,0],[-122,-70],[-84,-140],[-30,-150],[-20,-110],[10,-96],[30,-130],[80,-140],[122,-70],[108,0]],true);
+  else sc=cr([[-108,0],[-118,-60],[-70,-96],[-30,-80],[0,-110],[40,-82],[90,-96],[118,-60],[108,0]],true);
+  shape(sc,'#ffb3c8',k,'#c22e63',9);
+  S('M-70 0 q12 44 26 0 M10 0 q12 58 24 0 M60 0 q8 30 16 0',k,'#c22e63',8);
+  for(const [a,b] of [[-40,-80],[30,-60],[-70,-40],[60,-110]]) if(bites==0||b>-90) Fi(`M${a} ${b} l10 4 l-6 8Z`,'#ff5c8a',cl(k*2-1));
+});}
+function frost(x,y,sz,k,seed=1){if(k<=0)return;for(let i=0;i<6;i++){const a=i*Math.PI/3+seed;const ex=x+Math.cos(a)*sz,ey=y+Math.sin(a)*sz;S(`M${x} ${y} L${ex} ${ey}`,k*1.3,CYAN,7);
+  for(const f of [0.45,0.72]){const bx=x+Math.cos(a)*sz*f,by=y+Math.sin(a)*sz*f;for(const sgn of [-1,1]){const aa=a+sgn*0.7;S(`M${bx} ${by} l${Math.cos(aa)*sz*0.32} ${Math.sin(aa)*sz*0.32}`,k*1.6-0.4,CYAN,5);}}}}
+function pipe(x,y,len,w,k,face,t,shakeA=0){ // hanging vessel creature (from the ceiling, top at y)
+  const jx=shakeA*Math.sin(t*45+x);
+  G(`translate(${x+jx} ${y})`,()=>{
+    const d=`M${-w/2} 0 C${-w/2} ${len*0.4} ${-w/2-6} ${len*0.7} ${-w/2} ${len} Q0 ${len+w*0.6} ${w/2} ${len} C${w/2+6} ${len*0.7} ${w/2} ${len*0.4} ${w/2} 0Z`;
+    shape(d,'#ff6b6b',k,'#8c1625',8);
+    if(k>0.6){const fy=len*0.62;
+      if(face=='scared'){o+=`<circle cx="${-w*0.18}" cy="${fy}" r="${Math.max(5,w*0.13)}" fill="#fff" stroke="#8c1625" stroke-width="4"/><circle cx="${w*0.18}" cy="${fy}" r="${Math.max(5,w*0.13)}" fill="#fff" stroke="#8c1625" stroke-width="4"/><circle cx="${-w*0.18}" cy="${fy}" r="4" fill="#3a0a10"/><circle cx="${w*0.18}" cy="${fy}" r="4" fill="#3a0a10"/>`;o+=`<ellipse cx="0" cy="${fy+w*0.32}" rx="${w*0.12}" ry="${w*0.15}" fill="#3a0a10"/>`;
+        S(`M${w*0.55} ${fy-30} q10 16 0 26`,1,CYAN,5);}
+      else if(face=='squish'){S(`M${-w*0.3} ${fy} l${w*0.22} 6 M${w*0.3} ${fy} l${-w*0.22} 6`,1,'#3a0a10',4);S(`M${-w*0.15} ${fy+w*0.4} h${w*0.3}`,1,'#3a0a10',4);}
+      else if(face=='gasp'){for(const s of [-1,1])o+=`<circle cx="${s*w*0.2}" cy="${fy}" r="${w*0.12}" fill="#fff" stroke="#8c1625" stroke-width="4"/><circle cx="${s*w*0.2}" cy="${fy}" r="${w*0.05}" fill="#3a0a10"/>`;o+=`<ellipse cx="0" cy="${fy+w*0.3}" rx="${w*0.16}" ry="${w*0.2}" fill="#3a0a10"/>`;}
+      else {S(`M${-w*0.3} ${fy} q${w*0.12} -10 ${w*0.24} 0 M${w*0.06} ${fy} q${w*0.12} -10 ${w*0.24} 0`,1,'#3a0a10',4);S(`M${-w*0.18} ${fy+w*0.28} q${w*0.18} 14 ${w*0.36} 0`,1,'#3a0a10',4);}}
+  });}
+function phone(x,y,s,k,ring,t,hung=true){G(`translate(${x+(ring?6*Math.sin(t*60):0)} ${y}) scale(${s}) rotate(${ring?6*Math.sin(t*30):0})`,()=>{
+  shape('M-90 40 Q-90 -10 -50 -10 H50 Q90 -10 90 40 V90 H-90Z','#ff6b6b',k);
+  shape('M-30 20 a30 30 0 1 0 60 0 a30 30 0 1 0 -60 0',`#fff`,k,INK,7);
+  const ry=hung?0:-60-10*Math.sin(t*20);
+  shape(`M-110 ${-30+ry} Q-110 ${-70+ry} -70 ${-70+ry} H70 Q110 ${-70+ry} 110 ${-30+ry} L80 ${-20+ry} Q60 ${-45+ry} 0 ${-45+ry} Q-60 ${-45+ry} -80 ${-20+ry}Z`,'#ff6b6b',k);
+  if(ring){for(let i=0;i<3;i++){const r=120+i*30;S(`M${-r} -40 q-16 -40 0 -80 M${r} -40 q16 -40 0 -80`,(Math.sin(t*12-i)+1)/2,RED,6);}}
+});}
+function brainHQ(x,y,s,k,expr,t){G(`translate(${x} ${y}) scale(${s})`,()=>{
+  const b=cr([[-200,40],[-215,-40],[-170,-120],[-80,-165],[20,-175],[120,-150],[195,-90],[215,0],[180,70],[90,100],[-20,105],[-130,95]],true);
+  shape(b,BRAINC,k,'#b0306a',10);
+  for(const g of ['M-150 -40 q30 -40 70 -10 t70 -10','M-120 30 q40 -30 80 0 t80 -6','M20 -120 q40 -10 50 30','M90 -60 q40 0 50 50','M-60 -130 q10 40 50 40']) S(g,k,'#b0306a',7);
+  // face
+  if(k>0.6){const ey=-20;
+    if(expr=='alarm'){for(const s of [-1,1])o+=`<circle cx="${s*60}" cy="${ey}" r="30" fill="#fff" stroke="${INK}" stroke-width="7"/><circle cx="${s*60}" cy="${ey}" r="9" fill="${INK}"/>`;o+=`<ellipse cx="0" cy="55" rx="34" ry="28" fill="#7a1f2e" stroke="${INK}" stroke-width="6"/>`;}
+    else if(expr=='confused'){o+=`<circle cx="-60" cy="${ey}" r="26" fill="#fff" stroke="${INK}" stroke-width="7"/><circle cx="-55" cy="${ey+4}" r="9" fill="${INK}"/><circle cx="60" cy="${ey}" r="18" fill="#fff" stroke="${INK}" stroke-width="7"/><circle cx="63" cy="${ey+2}" r="7" fill="${INK}"/>`;S('M-40 60 q20 -14 40 0 t40 0',1,INK,7);}
+    else {for(const s of [-1,1])S(`M${s*60-24} ${ey} q24 -22 48 0`,1,INK,8);S('M-40 50 q40 30 80 0',1,INK,8);}}
+  // headset
+  S('M-170 -60 Q0 -250 170 -60',k,INK,12); shape(circ(-178,-40,26,40,10),'#4a6fd0',k); shape(circ(178,-40,26,40,10),'#4a6fd0',k);
+  S('M178 0 Q170 70 90 80',k,INK,8); shape(circ(84,80,14,14,8),'#4a6fd0',k);
+});}
+
+window.TL=null; const L=i=>TL.lines[i][0], LE=i=>TL.lines[i][1];
+function W(i,w){const q=TL.words.find(q=>q[2]==i&&q[0].toLowerCase().replace(/[^a-z']/g,'').startsWith(w));return q?q[1]:L(i);}
+function stamp(txt,x,y,rot,k,col=RED,size=110){if(k<=0)return;const s=lerp(2.2,1,eo(k*1.4));const op=cl(k*3);
+  const w=txt.length*size*0.5+60;o+=`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})" opacity="${op}"><rect x="${-w/2}" y="${-size*0.85}" width="${w}" height="${size*1.25}" fill="#14142b" fill-opacity="0.92" stroke="${col}" stroke-width="10" rx="10"/><rect x="${-w/2+12}" y="${-size*0.85+12}" width="${w-24}" height="${size*1.25-24}" fill="none" stroke="${col}" stroke-width="4" rx="6"/><text x="0" y="${size*0.12}" font-family="Anton" font-size="${size}" fill="${col}" text-anchor="middle" letter-spacing="4">${txt}</text></g>`;}
+function note(txt,x,y,k,col=INK,size=54,rot=-3){if(k<=0)return;o+=`<g transform="translate(${x} ${y}) rotate(${rot})" opacity="${cl(k*2)}"><text x="0" y="0" font-family="Hand" font-size="${size}" fill="${col}" text-anchor="middle">${txt}</text></g>`;
+  const w=txt.length*size*0.26;S(`M${x-w} ${y+16} q${w} 14 ${2*w} -4`,k*1.5-0.5,col==INK?RED:col,7);}
+function arrow(x1,y1,x2,y2,k,col=INK,w=8){S(`M${x1} ${y1} Q${(x1+x2)/2+40} ${(y1+y2)/2-40} ${x2} ${y2}`,k,col,w);if(k>0.95){const a=Math.atan2(y2-y1,x2-x1);o+=`<path d="M${x2} ${y2} l${-30*Math.cos(a-0.5)} ${-30*Math.sin(a-0.5)} M${x2} ${y2} l${-30*Math.cos(a+0.5)} ${-30*Math.sin(a+0.5)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round" fill="none"/>`;}}
+function grid(){o+=`<rect x="-200" y="-400" width="1480" height="2720" fill="url(#gmaj)"/>`;}
+function sheetTag(n,title,k){if(k<=0)return;o+=`<g opacity="${cl(k*2)}" transform="translate(540 300)"><rect x="-330" y="-46" width="660" height="80" fill="#fff" stroke="${INK}" stroke-width="5"/><line x1="-190" y1="-46" x2="-190" y2="34" stroke="${INK}" stroke-width="4"/><text x="-260" y="12" font-family="Anton" font-size="40" fill="${INK}" text-anchor="middle" letter-spacing="2">${n}</text><text x="70" y="14" font-family="Hand" font-size="44" fill="${INK}" text-anchor="middle">${title}</text></g>`;}
+
+// ================= v4: fast beats + synced captions =================
+function bg(id){o+=`<rect x="-200" y="-300" width="1480" height="2520" fill="url(#${id})"/>`;
+  for(let i=0;i<14;i++){const x=(i*173)%1080, y=(i*331)%1920; o+=`<circle cx="${x}" cy="${y}" r="${30+(i%4)*22}" fill="#fff" opacity="0.06"/>`;}}
+function burst(x,y,r,k,col='#fff',n=12){if(k<=0)return;for(let i=0;i<n;i++){const a=i/n*6.283;S(`M${x+r*0.6*Math.cos(a)} ${y+r*0.6*Math.sin(a)} L${x+r*(0.7+0.5*k)*Math.cos(a)} ${y+r*(0.7+0.5*k)*Math.sin(a)}`,1,col,12,`opacity="${1-k*0.6}"`);}}
+function mouthCross(t,k,cold,tu,heat){ // vivid cross-section
+  shape('M0 700 Q540 470 1080 700 L1080 380 L0 380Z','#ff8fab',k,INK,10);
+  Fi('M0 700 Q540 470 1080 700 L1080 760 Q540 560 0 760Z','url(#hCold)',cold*0.95);
+  if(cold>0){[[160,690,70,0.2],[360,620,80,1.1],[560,600,90,2],[760,625,80,0.7],[950,680,64,1.6]].forEach(([x,y,s,sd],i)=>{o+=`<g filter="url(#glow)">`;frost(x,y+6,s,cold*1.4-i*0.08,sd);o+='</g>';});}
+  const ty=lerp(0,-300,tu);
+  shape(`M0 ${1560+ty} Q260 ${1260+ty} 540 ${1280+ty} Q820 ${1300+ty} 1080 ${1540+ty} L1080 1920 L0 1920Z`,'#ff5c8a',k,INK,10);
+  if(heat>0){Fi(`M0 ${1560+ty} Q260 ${1260+ty} 540 ${1280+ty} Q820 ${1300+ty} 1080 ${1540+ty} L1080 1920 L0 1920Z`,'#ffb347',heat*0.55);
+    o+=`<g filter="url(#glow)">`;for(let i=0;i<5;i++){const x=180+i*180,y=1220+ty;S(`M${x} ${y} q-24 -45 0 -90 q24 -45 0 -90`,heat,'#ffd166',12);}o+='</g>';}
+  if(tu>0.4&&k>0.6){o+=`<circle cx="450" cy="${1400+ty}" r="20" fill="${INK}"/><circle cx="630" cy="${1400+ty}" r="20" fill="${INK}"/>`;S(`M480 ${1460+ty} q60 45 120 0`,1,INK,10);}
+}
+function caption(t){ // synced 1-3 word captions, active word highlighted
+  const ws=TL.words; const groups=[];let g=[];
+  for(let i=0;i<ws.length;i++){g.push(ws[i]);const end=/[.,?!]$/.test(ws[i][0])||g.length>=3||(i+1<ws.length&&ws[i+1][1]-ws[i][1]>0.6);if(end){groups.push(g);g=[];}}
+  if(g.length)groups.push(g);
+  let cur=null;for(let i=0;i<groups.length;i++){const s=groups[i][0][1]-0.05, e=i+1<groups.length?groups[i+1][0][1]-0.05:TL.end;if(t>=s&&t<e){cur=[groups[i],s];break;}}
+  if(!cur)return;
+  const [grp,s]=cur;const pop=eback(cl((t-s)/0.16));const words=grp.map(w=>w[0].replace(/[.,?!]$/,'').toUpperCase());
+  const size=words.join(' ').length>12?118:136;
+  let txt='';grp.forEach((w,i)=>{const on=t>=w[1]-0.05;txt+=`<tspan fill="${on?'#ffe14d':'#fff'}">${words[i]}</tspan>${i<grp.length-1?' ':''}`;});
+  o+=`<g transform="translate(540 1500) scale(${0.8+0.2*pop})"><text x="0" y="0" font-family="Anton" font-size="${size}" text-anchor="middle" stroke="#0d0d1a" stroke-width="22" stroke-linejoin="round" paint-order="stroke" letter-spacing="2">${txt}</text></g>`;
+}
+window.renderAt=function(t){
+  o='';
+  const w=(i,x)=>W(i,x);
+  const B=[ // beat start times -> scene ids
+    [0,'hook'],[w('i1','hurt')-0.05,'fore1'],[w('i1','not')-0.05,'notmouth'],[w('i1','your')>3?w('i1','your'):L('i1')+2.4,'fore2'],
+    [L('a1')-0.05,'cold'],[w('a1','and')-0.05,'panic'],[L('a2')-0.05,'squeeze'],[w('a2','then')-0.05,'burst'],
+    [L('b1')-0.05,'nerve'],[w('b1','basically')-0.05,'phoneline'],[L('b2')-0.05,'hq'],[w('b2','sends')-0.05,'wrong'],[w('b2','your')>w('b2','wrong')?w('b2','your')-0.05:LE('b2')-0.6,'fore3'],
+    [L('b3')-0.05,'title'],[w('b3','doctors')-0.05,'csh'],[L('c1')-0.05,'fix'],[w('c1','its')-0.05,'heater'],[w('c1','and')-0.05,'relief'],[L('c2')-0.05,'end'],[TL.end-0.45,'hook']];
+  // fix 'Your forehead' in i1 (second 'your')
+  const iw=TL.words.filter(q=>q[2]=='i1'); const yf=iw.filter(q=>q[0].toLowerCase().startsWith('your'));
+  if(yf.length>1) B[3][0]=yf[1][1]-0.05;
+  let bi=0;for(let i=0;i<B.length;i++) if(t>=B[i][0]) bi=i;
+  const sc=B[bi][1], st=B[bi][0], lk=t-st;
+  const pin=eo(lk/0.18); // punch-in on every cut
+  let shk=0; if(lk<0.22 && ['fore1','fore2','cold','burst','hq','wrong','fore3','title'].includes(sc)) shk=16*(1-lk/0.22);
+  const zoom=1.06-0.06*pin+0.012*lk;
+  o+=`<g transform="translate(${shk*Math.sin(t*90)} ${shk*Math.cos(t*70)}) translate(540 960) scale(${zoom}) translate(-540 -960)">`;
+  const pain=(k)=>k;
+  if(sc=='hook'){bg('bgSky');
+    const bitK=ramp(t,w('i1','bite')-0.15,0.25);
+    G(`translate(540 1000) scale(${lerp(1.0,1.25,ramp(t,0,1.2))}) translate(-540 -1000)`,()=>{
+      kid(540,820,1.25,1,{eyes:t>w('i1','bite')?'wide':'open',mouth:bitK>0&&bitK<1?'bite':'smile',pain:0,t,lookx:0.4});
+      cone(lerp(700,600,bitK),lerp(1300,1150,bitK),1.15,1,t>w('i1','bite')+0.1?1:0,-12);
+    });
+    if(t>TL.end-0.6){} }
+  else if(sc=='fore1'||sc=='fore2'||sc=='fore3'){bg('bgRed');
+    const z=sc=='fore2'?1.7:(sc=='fore3'?1.45:1.15);
+    G(`translate(540 ${sc=='fore2'?1160:1000}) scale(${z}) translate(-540 -880)`,()=>{kid(540,860,1.2,1,{eyes:'squeeze',mouth:'pain',pain:1,t});});
+    o+=`<g filter="url(#glow)">`;burst(540,sc=='fore2'?520:560,300,cl(lk/0.4),'#ffe14d',14);o+='</g>';
+    if(sc=='fore3') stamp('WRONG ADDRESS',540,420,-4,ramp(t,st,0.2),'#ffe14d',90); }
+  else if(sc=='notmouth'){bg('bgSky');
+    G('translate(540 1000) scale(2.1) translate(-540 -1000)',()=>{kid(540,860,1.2,1,{eyes:'open',mouth:'o',pain:0,t});});
+    S('M330 1040 L750 1360 M750 1040 L330 1360',ramp(t,st+0.05,0.2),RED,34); }
+  else if(sc=='cold'||sc=='panic'||sc=='squeeze'||sc=='burst'){bg('bgCold');
+    const cold=sc=='cold'?ramp(t,st+0.1,0.5):1;
+    const zz=sc=='cold'?1:1.35;
+    G(`translate(540 ${sc=='cold'?960:1240}) scale(${zz}) translate(-540 -${sc=='cold'?960:720})`,()=>{
+      mouthCross(t,1,cold,0,0);
+      if(sc=='cold'){const ch=eo(cl(lk/0.35));G(`translate(${lerp(1300,560,ch)} ${lerp(1200,800,ch)}) rotate(${lerp(60,0,ch)})`,()=>{shape(circ(0,0,170,120,16,0.08,4),'#ffd1e0',1,INK,10);frost(0,-30,50,cold,0.3);});
+        o+=`<g filter="url(#glow)">`;burst(560,700,320,cl((lk-0.25)/0.4),'#bff3ff',16);o+='</g>';}
+      let ww=70,face='calm',shake=0;
+      if(sc=='panic'){face='scared';shake=10;}
+      if(sc=='squeeze'){ww=lerp(70,16,eo(lk/0.25));face='squish';}
+      if(sc=='burst'){ww=lerp(16,130,eo(lk/0.22));face='gasp';}
+      if(sc!='cold') [[230,200],[420,180],[610,190],[800,205]].forEach(([x,len],i)=>pipe(x,560+(i%2)*14,len+(sc=='burst'?50:0),ww*(i%2?0.9:1),1,face,t,shake));
+      if(sc=='burst'){o+=`<g filter="url(#glow)">`;for(let i=0;i<22;i++){const u=(lk*1.4+i/22)%1;const x=lerp(80,1000,u),y=600+70*Math.sin(u*9+i);o+=`<circle cx="${x}" cy="${y}" r="13" fill="#ff3b3b"/>`;}o+='</g>';}
+    });
+    if(sc=='squeeze') stamp('SQUEEZE',540,430,-4,ramp(t,st,0.15),'#bff3ff',120);
+    if(sc=='burst') stamp('BOOM!',540,430,5,ramp(t,st,0.15),'#ffe14d',140); }
+  else if(sc=='nerve'||sc=='phoneline'){bg('bgBrain');
+    const pan=sc=='nerve'?0:eo(cl(lk/0.9));
+    G(`translate(0 ${lerp(-150,1350,pan)})`,()=>{
+      shape('M0 1640 Q540 1440 1080 1640 L1080 1900 L0 1900Z','#ff8fab',1);
+      for(let i=0;i<4;i++) pipe(260+i*180,1600,180,100,1,'gasp',t,0);
+      phone(800,1420,1.05,1,true,t,true);
+      const wire=cr([[740,1370],[600,1150],[720,880],[520,600],[640,330],[520,60],[560,-300]]);
+      const wk=sc=='nerve'?ramp(t,st,0.6):1;
+      o+=`<g filter="url(#glow)">`;S(wire,wk,'#ffd43b',20);o+='</g>';
+      const pts=[[740,1370],[600,1150],[720,880],[520,600],[640,330],[520,60],[560,-300]];
+      for(let j=0;j<3;j++){const u=((t-st)*0.9+j/3)%1;const sgi=u*(pts.length-1);const a=Math.floor(sgi),f=sgi-a;o+=`<circle cx="${lerp(pts[a][0],pts[a+1][0],f)}" cy="${lerp(pts[a][1],pts[a+1][1],f)}" r="26" fill="#fff6c2" filter="url(#glow)"/>`;}
+      brainHQ(560,-520,1.1,1,'calm',t);
+    }); }
+  else if(sc=='hq'||sc=='wrong'){bg('bgBrain');
+    brainHQ(540,700,1.35,1,sc=='wrong'?'confused':'alarm',t);
+    if(sc=='hq'){o+=`<g filter="url(#glow)">`;burst(540,680,360,cl(lk/0.4),'#ff4d6d',14);o+='</g>';phone(170,430,0.9,1,true,t,false);}
+    G('translate(540 1250)',()=>{shape('M-430 -140 H430 V170 H-430Z','#2a2f6b',1,INK,9);
+      ['MOUTH','NOSE','EYES','FOREHEAD'].forEach((l,i)=>{const x=-320+i*213;shape(circ(x,-40,42,42,12),'#fff',1,INK,8);o+=`<circle cx="${x}" cy="-40" r="15" fill="${INK}"/>`;Tx(x,70,44,l,i==3&&sc=='wrong'?'#ffe14d':'#fff',1,'Anton');});
+      const wr=sc=='wrong'?eo(cl(lk/0.45)):0;const px=lerp(-320,320,wr),py=-40-(wr>0&&wr<1?110*Math.sin(wr*Math.PI):0);
+      S(`M-560 -360 Q${px-200} ${py-220} ${px} ${py-60}`,1,'#ffd43b',16);shape(`M${px-28} ${py-66} h56 v62 h-56Z`,'#4cc9f0',1);
+      if(sc=='wrong'&&lk>0.45) S('M190 -150 l130 130 M320 -150 l-130 130',ramp(t,st+0.45,0.15),'#ff4d6d',18);
+    });
+    if(sc=='hq') stamp('EMERGENCY!',540,330,-4,ramp(t,st+0.05,0.15),'#ff4d6d',100); }
+  else if(sc=='title'||sc=='csh'){bg('bgCold');
+    G('translate(540 1000) scale(1.15) translate(-540 -920)',()=>{kid(540,900,1.15,1,{eyes:'squeeze',mouth:'pain',pain:1,t});});
+    o+=`<g filter="url(#glow)">`;for(let i=0;i<8;i++){frost(120+((i*137)%840),300+((i*211)%1300),40+(i%3)*14,1,i);}o+='</g>';
+    stamp('BRAIN FREEZE',540,400,-4,sc=='title'?ramp(t,st+0.05,0.2):1,'#ffffff',128);
+    if(sc=='csh') {o+=`<g transform="translate(540 1330)" opacity="${ramp(t,st,0.2)}"><rect x="-400" y="-60" width="800" height="90" rx="45" fill="#ffffff"/><text x="0" y="8" font-family="Hand" font-size="50" fill="#14142b" text-anchor="middle">a.k.a. "cold-stimulus headache"</text></g>`;} }
+  else if(sc=='fix'||sc=='heater'){bg(sc=='fix'?'bgCold':'bgWarm');
+    const tu=ramp(t,W('c1','tongue')-0.2,0.5), heat=sc=='heater'?ramp(t,st,0.4):0;
+    mouthCross(t,1,sc=='heater'?1-ramp(t,st+0.2,1.0):1,tu,heat);
+    [[230,200],[420,180],[610,190],[800,205]].forEach(([x,len],i)=>pipe(x,560,len,sc=='heater'?lerp(110,70,ramp(t,st,0.8)):110,1,sc=='heater'&&lk>0.6?'calm':'gasp',t,0));
+    stamp(sc=='fix'?'TONGUE UP!':'HEATER',540,330,-4,ramp(t,st+0.05,0.15),sc=='fix'?'#ffe14d':'#ffffff',120); }
+  else if(sc=='relief'){bg('bgWarm');
+    G('translate(540 1000) scale(1.2) translate(-540 -900)',()=>{kid(540,900,1.15,1,{eyes:'happy',mouth:'smile',pain:0,t});});
+    o+=`<g filter="url(#glow)">`;for(let i=0;i<6;i++){const a=i*1.05+t;S(`M${540+330*Math.cos(a)} ${560+200*Math.sin(a)} l14 -24 l14 24 l-14 24Z`,1,'#fff6c2',8);}o+='</g>'; }
+  else if(sc=='end'){bg('bgPink');
+    const hk=t>W('c2','stop')-0.1;
+    G(`translate(540 1000) scale(${hk?1.3:1.1}) translate(-540 -950)`,()=>{kid(540,860,1.2,1,{eyes:hk?'wink':'happy',mouth:'lick',pain:0,t});cone(640,1180,1.05,1,1,-10);});
+  }
+  caption(t);
+  o+='</g>';
+  document.getElementById('world').innerHTML=o;
+};
+window.setTL=x=>{TL=x;};
+document.fonts.load('40px Hand').then(()=>document.fonts.load('40px Anton')).then(()=>{window.ready=true;});
+</script></body></html>
