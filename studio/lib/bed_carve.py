@@ -47,7 +47,7 @@ def guard(bed, vo, ld=12.0, max_dip=10.0):
     bed measured on 50 ms windows vs the voice's syllable level (300 ms); dips at most `max_dip` dB. bed (N,2), vo (N,).
     Lab (printer ink / gas station / Hoover): momentary LD p5 7.5-8.5 -> ~12 LU, phone ESTOI +0.01, gaps -0.7 LU."""
     from scipy.ndimage import uniform_filter1d
-    env = lambda x, ms: np.sqrt(uniform_filter1d(x * x, max(1, int(SR * ms / 1000))) + 1e-20)
+    env = lambda x, ms: np.sqrt(np.maximum(uniform_filter1d(x * x, max(1, int(SR * ms / 1000))), 0) + 1e-20)   # float32 filter can dip below 0 -> NaN (6 Nov fix)
     ev = env(_phone(vo), 300); eb = env(_phone(bed.mean(1)), 50)
     act = ev > np.percentile(ev[ev > 1e-6], 50) * 0.1
     g = np.where(act, np.minimum(1.0, ev * 10 ** (-ld / 20) / (eb + 1e-12)), 1.0)
