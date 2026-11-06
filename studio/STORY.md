@@ -42,6 +42,13 @@ feet. **Colour lives only in the accents:** tie, shirt/dress, jacket, hair, cap.
 face). Looks: hero, friend, girl, girl2, lady, inventor, exec, creator, worker, oldman, kid, mystery, judge; change accents per story with
 `who={"base": "exec", "tie": (0, 170, 90)}`, `{"base": "girl", "shirt": (255, 200, 0), "hair": (200, 60, 40)}`. Mix men and girls in
 every episode. Our own design inspired by the reference — never a copy of an artist's character. 
+**Whiteboard look (owner, 6 Nov 2026: "whiteboard + chalkboard style, white background, better font")** — `template/scripts/nbnkit/board.py`
+(`from nbnkit.board import *`). A white board with soft light and faint erased-marker ghosts; everything is drawn on in front of the viewer
+with a marker pen at the stroke tip (`ink()`), fills are marker hatching (`hatch()`), type is handwritten: **Permanent Marker** for the one big
+word, **Kalam Bold** in blue for the small line (`say()` writes both on, then a marker underline). Black / blue / red / green / orange / purple
+markers only; the NBN stick rig stays the cast. Ideas change with an **eraser wipe**; music is bright acoustic (uke, pizz, glock), SFX are
+marker squeaks + eraser + stamps. First episode: HOW IT WORKS EP 2 (credit score), `examples/credit-board`. Alternate it with the NBN night look.
+
 **NextBigNow look (owner, 4 Nov 2026: "looking too cartoon … make it like NextBigNow")** — `template/scripts/anim_nbn.py`, default on
 (`NBN=0` = line-art cartoon cast). The cast is now the **NBN stick rig**: small round white head with dot eyes, thick black stick limbs
 with a soft light rim, a coloured shirt on the torso and the NBN scarf in the character's accent colour (hero = orange); girls get a small
