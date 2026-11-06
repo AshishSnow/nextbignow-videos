@@ -285,7 +285,7 @@ Type data (PERFORMANCE insight I): B and E reels held ~68 % past 3 s / 23 s avg 
 
 ## Ready — HOW IT WORKS + HOW TO START shelf (3 Nov 2026, owner: "find topics which are informative, interesting"; sourcing subagent
 ## 3 Nov 2026 — every figure re-check at build time; never promise income; finance topics = education only, no product advice)
-Build order: ~~H1 Spotify~~ (built), ~~H2 credit score~~ + ~~T2 reselling~~ + ~~H3 Shorts money~~ (queued), ~~T1~~ (built), then H4 hotel fees,
+Build order: ~~H1 Spotify~~ (built), ~~H2 credit score~~ + ~~T2 reselling~~ + ~~H3 Shorts money~~ + ~~H4 hotel fees~~ (queued), ~~T1~~ (built), then
 H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check city law), T5 car detailing (= owner's idea), H7 app-store cut, T6 Amazon FBA, T7 cleaning (weakest sources).
 
 ### H1. QUEUED 4 Nov as HOW IT WORKS EP 1 (episodes/queue/08-spotify-999; new research: pot is per country + the 1,000 rule covers recording royalties only; Spotify FAQ user-centric section, CNM 2021 study, Pro Musik 2023) — Why 999 plays can pay $0 — HOW IT WORKS · 31/35
@@ -300,7 +300,7 @@ H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check cit
 - **Hook:** "You just watched 50 Shorts. The ads made money. Who got it?" **Beats:** Shorts-feed ad money pooled → share for music licensing when a Short uses music → rest split by creators' share of views → creators keep 45 % (long videos 55 %). **Takeaway:** music in your Short shrinks the pot it's paid from. **Visuals:** a river of coins splitting. **Caution:** YouTube page mentions changes from 1 Feb 2027 — recheck before scripting.
 - **Sources:** [YouTube Help 12504220](https://support.google.com/youtube/answer/12504220) · [Fox Business 21 Sep 2022](https://foxbusiness.com/technology/youtube-reward-shorts-creators-share-ad-revenue)
 
-### H4. The hotel price trick that's now illegal — HOW IT WORKS · 28/35 (US)
+### H4. QUEUED 6 Nov as HOW IT WORKS EP 4 (episodes/queue/13-hotel-fees; new research: the FTC's own $199 + $39 example, StubHub's 21 % test + its Apr 2026 $10M settlement, FTC 2017 paper on the commission claim, CMA209; the catch: the rule doesn't ban the fee) — The hotel price trick that's now illegal — HOW IT WORKS · 28/35 (US)
 - **Hook:** "That $99 hotel turned into $160 at checkout. Not any more — why?" **Beats:** drip pricing → "resort"/"service" fees → FTC rule in force 12 May 2025 → the all-in price must be the most prominent → taxes may still come later. **Fact:** FTC: up to 53M hours/yr saved, >$11B over a decade. **Takeaway:** in the US the first price must include mandatory fees — screenshot it. **Visuals:** a price tag that grows at each step. **Sources:** [FTC 17 Dec 2024](https://ftc.gov/node/86973) · [TechCrunch 5 May 2025](https://techcrunch.com/2025/05/05/ftc-bans-hidden-fees-for-live-events-and-short-term-rentals-effective-may-12/)
 
 ### H5. Why takeout costs more on the app — HOW IT WORKS · 27/35
@@ -335,12 +335,12 @@ H5 delivery commission, T3 pet-sitting, H6 BNPL, T4 Airbnb co-hosting (check cit
 
 ## Ready — HOW TO START shelf (R&D run 1 Nov 2026: the series is ~40 % of the mix but had 0 banked topics; research by a sourcing subagent,
 ## checked 1 Nov 2026 — every figure re-check at build time; never promise income: "typical", "can", "in their example")
-Next HOW TO START episodes, in order: ~~28 food truck (NYC)~~ (queued 2 Nov) → 25 home bakery (Texas + UK) → 26 print-on-demand → 27 pressure washing (after one more source).
+Next HOW TO START episodes, in order: ~~28 food truck (NYC)~~ (queued 2 Nov) → ~~25 home bakery~~ (queued 6 Nov) → 26 print-on-demand → 27 pressure washing (after one more source).
 Owner's other ideas still unresearched: mobile car detailing.
 
 ### 24. Vending machines — the "singer" trap — HOW TO START · 31/35 — **QUEUED 1 Nov as HOW TO START EP 2 (episodes/queue/05-vending-machines; FTC "Operation Vend Up Broke" 1998: 40 actions, phony references nicknamed "singers"; FTC Business Opportunity Rule: one-page disclosure with ≥ 10 past buyers, 7 days before you pay)**
 
-### 25. Your kitchen can be a legal bakery, with a sales cap — HOW TO START (type E/F how-to) · 31/35
+### 25. QUEUED 6 Nov as HOW TO START EP 6 (episodes/queue/12-home-bakery; new research: Wisconsin + New Jersey bans, enrolled SB 541 $150,000, DSHS label + complaint powers, GOV.UK training duty) — Your kitchen can be a legal bakery, with a sales cap — HOW TO START (type E/F how-to) · 31/35
 - **Interest:** wait-what 4 · story 4 · life 5 · picture 5 · fresh 4 · share 5 · verifiable 4 = **31/35**
 - **Hook:** "Can you legally sell cookies from your home kitchen?"
 - **Steps (5):** 1) Check your state's "cottage food" law. It sets which foods you can sell (shelf-stable bakes; Texas bans meat, seafood, etc.) [Texas DSHS; Front Porch summary of SB 541]. 2) **California:** Class A (direct sales only) = register with your county, base cap **$75,000/yr**. Class B (can also sell via shops/cafes) = county permit, base cap **$150,000/yr** [CDPH CFO page]. Both caps are inflation-adjusted every year. Fees are set by each county, e.g. Orange County: **$225** initial review, then **$128/yr** renewal (A) or **$384/yr** (B) [OC Health]. 3) **Texas:** no permit for most bakers. The cap is **$150,000/yr** gross since SB 541 (in force 1 Sep 2025). You need a food-handler course, and you register with DSHS only for time/temperature-controlled foods [Texas DSHS]. 4) Train and label. CA: a state-approved food-safety class within **90 days**, and labels say "Made in a Home Kitchen" [OC Health]. TX: the label must carry the "PRODUCED IN A PRIVATE RESIDENCE THAT IS NOT SUBJECT TO GOVERNMENTAL LICENSING OR INSPECTION" disclaimer [Texas DSHS]. 5) THE MISTAKE: skipping registration because it's "just a hobby". **UK:** if you sell food "on a regular and organised basis" you are a food business. Register with your council **at least 28 days before trading**. It's **free and can't be refused**, and officers can inspect your home kitchen [GOV.UK].

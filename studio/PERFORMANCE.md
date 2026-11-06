@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-06 ~08:30 IST (R&D run: writers' room)
+Instagram rows identical to the 02:45 IST pull (Spotify 1,534 / 52.8 s / 84.1 %, drone 1,324, food truck 1,305, vending 571, lights 240). YouTube rows still stop at vending (205 / 30 s) and drone (348 / 29 s): no row for food truck, lights, Spotify or reselling. Media-kit numbers unchanged: IG last 10 avg 579 views, median 214, 9.8 reactions / 1,000 reach; YT last 10 with rows avg 419.
+**⚠ Reselling (HOW TO START EP 5, Metricool 418324142) did NOT reach Instagram.** Planner status at 08:15 IST: instagram `ERROR`, "Media container not created by unknown cause"; youtube `PUBLISHED` (shorts/KChsuhTLJDs). So there will be no IG row for it, and insight AC's read ("first how-to on the new stack") can only be done on YouTube, whose rows run days late. Spotify went through with the same stack and a longer file, so length isn't the obvious cause. This run is read-only on Metricool: **owner decides whether to re-post it to Instagram.** Rule added in PLAYBOOK §6: after a post's time, read its provider status.
+**Insight AE (6 Nov) — what the writers' room changed because of this data:** the hook of the new how-to is a law people can feel (jail for a muffin), the choice is one a stranger can answer without owning a kitchen, and the pricing step ends on a sum anyone can check (160 hours). Same test as AC/AB: 3-s, watch, saves ≥ 10 / 1,000, stranger comments. Nothing proven yet.
+
 ## Snapshot 2026-11-06 ~02:45 IST (episode run: HOW TO START EP 5, reselling)
 Instagram (IGRE, 15 Oct → 6 Nov) — new + changed rows:
 | Date | Video | Len | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |

@@ -660,3 +660,285 @@ def jacket_grid(c, t, t0, d, worn=0.0, n=30, cols=6, x0=130, y0=790, dx=92, dy=1
         jacket(c, x0 + (i % cols) * dx, y0 + (i // cols) * dy + 60 * (1 - eo(q)), w, col=mix(pal[i % 5], (130, 130, 140), 0.5 * worn), k=eo(q), hanger=False)
     return landed
 
+
+
+# ------------------------------------------------------------------ HOW TO START EP 6 (home bakery): the night kitchen + bakes
+def home_kitchen(c, t, lamp=(540, 1140), lamp_a=0.5, top=(46, 26, 58), bot=(120, 66, 84)):
+    """one held world: a home kitchen at night. Wall shelf with jars across the top, pendant lamp, worktop line at the back, dark floor."""
+    night_bg(c, t, top, bot, lamp=lamp, lamp_a=lamp_a, floor=None)
+    dk = (24, 12, 30)
+    c.drawRect(R.MakeLTRB(0, 0, W, 66), paint(dk)); c.drawRect(R.MakeLTRB(0, 118, W, 132), paint(dk))
+    for i in range(9):      # jars on the shelf, read as a silhouette
+        x = 40 + i * 122 + 14 * hsh(i, 6); w = 46 + 34 * hsh(i, 7); h = 30 + 20 * hsh(i, 8)
+        c.drawRoundRect(R.MakeXYWH(x, 118 - h, w, h), 8, 8, paint(mix(dk, (150, 110, 110), 0.3)))
+    c.drawLine(lamp[0], 132, lamp[0], 470, stroke(dk, 6))
+    c.drawPath(poly([(lamp[0] - 60, 520), (lamp[0] + 60, 520), (lamp[0] + 26, 470), (lamp[0] - 26, 470)], True), paint(dk))
+    c.drawRect(R.MakeLTRB(0, FLOOR - 250, 150, FLOOR), paint(mix(dk, bot, 0.25))); c.drawRect(R.MakeLTRB(930, FLOOR - 250, W, FLOOR), paint(mix(dk, bot, 0.25)))
+    c.drawRect(R.MakeLTRB(0, FLOOR - 262, 164, FLOOR - 242), paint(mix(dk, (220, 190, 170), 0.3))); c.drawRect(R.MakeLTRB(916, FLOOR - 262, W, FLOOR - 242), paint(mix(dk, (220, 190, 170), 0.3)))
+    c.drawRect(R.MakeLTRB(0, FLOOR, W, H), paint(shader=lin(0, FLOOR, 0, H, [argb(mix(bot, (0, 0, 0), 0.5)), argb(mix(bot, (0, 0, 0), 0.8))])))
+    c.drawLine(0, FLOOR, W, FLOOR, stroke(INK, 5))
+    fg_dust(c, t, n=7, seed=33, a=0.18)
+
+
+def oven(c, x, y=FLOOR, w=360, glow=0.6, k=1.0):
+    """home oven, x = centre, y = bottom; glow = the window lit from inside"""
+    if k <= 0: return
+    h = w * 1.05
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h, w, h), 16, 16, paint((226, 226, 232))); c.drawRoundRect(R.MakeXYWH(-w / 2, -h, w, h), 16, 16, stroke(INK, 7))
+    for i in range(4): c.drawCircle(-w * 0.3 + i * w * 0.2, -h + 42, 15, paint(INK))
+    wx, wy, ww, wh = -w * 0.36, -h * 0.72, w * 0.72, h * 0.46
+    c.drawRoundRect(R.MakeXYWH(wx, wy, ww, wh), 12, 12, paint(mix((40, 30, 34), (255, 170, 70), glow))); c.drawRoundRect(R.MakeXYWH(wx, wy, ww, wh), 12, 12, stroke(INK, 6))
+    c.drawLine(wx + 10, wy + wh * 0.68, wx + ww - 10, wy + wh * 0.68, stroke(INK, 4))
+    c.drawLine(-w * 0.32, -h * 0.8, w * 0.32, -h * 0.8, stroke(INK, 11))
+    c.restore()
+
+
+def cookie(c, x, y, r=46, k=1.0, spin=0.0):
+    """one flat cookie with chocolate chips"""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(spin); c.scale(k, k)
+    c.drawCircle(0, 0, r, paint((214, 160, 96))); c.drawCircle(0, 0, r, stroke(INK, max(3, r * 0.1)))
+    for i in range(6):
+        a = i * 1.05 + 0.4; d = r * (0.25 + 0.42 * hsh(i, 2))
+        c.drawCircle(math.cos(a) * d, math.sin(a) * d, r * 0.13, paint((70, 42, 30)))
+    c.restore()
+
+
+def cookie_tray(c, x, y, w=440, cols=4, rows=3, k=1.0, shown=None):
+    """baking tray of cookies seen from above; shown = how many have landed"""
+    if k <= 0: return
+    h = w * (rows / cols) * 0.96
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 14, 14, paint((96, 100, 112))); c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 14, 14, stroke(INK, 7))
+    n = rows * cols if shown is None else shown; r = w / cols * 0.38
+    for j in range(rows):
+        for i in range(cols):
+            if j * cols + i < n: cookie(c, -w / 2 + (i + 0.5) * w / cols, -h / 2 + (j + 0.5) * h / rows, r, spin=(i * 37 + j * 11) % 360)
+    c.restore()
+
+
+def muffin(c, x, y, w=200, k=1.0, tilt=0.0):
+    """x = centre, y = bottom"""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    c.drawPath(poly([(-w * 0.34, -w * 0.5), (w * 0.34, -w * 0.5), (w * 0.26, 0), (-w * 0.26, 0)], True), paint((236, 120, 110))); c.drawPath(poly([(-w * 0.34, -w * 0.5), (w * 0.34, -w * 0.5), (w * 0.26, 0), (-w * 0.26, 0)], True), stroke(INK, 6))
+    for i in range(1, 5): c.drawLine(-w * 0.34 + i * w * 0.136, -w * 0.5, -w * 0.26 + i * w * 0.104, 0, stroke(INK, 3))
+    top = skia.Path(); top.addOval(R.MakeXYWH(-w * 0.46, -w * 0.92, w * 0.92, w * 0.56))
+    c.drawPath(top, paint((214, 160, 96))); c.drawPath(top, stroke(INK, 6))
+    for i in range(5): c.drawCircle(-w * 0.24 + i * w * 0.12, -w * (0.68 + 0.08 * hsh(i, 9)), w * 0.03, paint((70, 42, 30)))
+    c.restore()
+
+
+def cell_bars(c, x0, y0, x1, y1, n=7):
+    """plain prison-window bars laid over a prop, no people behind them"""
+    for i in range(n):
+        xx = x0 + (i + 0.5) * (x1 - x0) / n
+        c.drawLine(xx, y0, xx, y1, stroke((40, 44, 54), 16))
+    c.drawRect(R.MakeLTRB(x0, y0 - 10, x1, y0 + 10), paint((40, 44, 54))); c.drawRect(R.MakeLTRB(x0, y1 - 10, x1, y1 + 10), paint((40, 44, 54)))
+
+
+def cake_box(c, x, y, w=560, lines=None, k=1.0, tilt=0.0, size=34, title=None):
+    """a plain white bakery box with a paper label; lines = the label text, one string per row. x = centre, y = bottom"""
+    if k <= 0: return
+    h = w * 0.72
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    c.drawOval(R.MakeXYWH(-w * 0.56, -14, w * 1.12, 30), paint((0, 0, 0), 0.25, blur=10))
+    c.drawRect(R.MakeXYWH(-w / 2, -h, w, h), paint((248, 246, 240))); c.drawRect(R.MakeXYWH(-w / 2, -h, w, h), stroke(INK, 7))
+    c.drawPath(poly([(-w / 2, -h), (w / 2, -h), (w * 0.42, -h - w * 0.09), (-w * 0.42, -h - w * 0.09)], True), paint((232, 228, 220))); c.drawPath(poly([(-w / 2, -h), (w / 2, -h), (w * 0.42, -h - w * 0.09), (-w * 0.42, -h - w * 0.09)], True), stroke(INK, 6))
+    if lines:
+        lw, lh = w * 0.86, h * 0.8
+        c.drawRect(R.MakeXYWH(-lw / 2, -h * 0.9, lw, lh), paint((255, 236, 170))); c.drawRect(R.MakeXYWH(-lw / 2, -h * 0.9, lw, lh), stroke(INK, 4))
+        y0 = -h * 0.9 + 16
+        if title: ctext(c, title, 0, y0 + size, "ant", size * 1.15, INK); y0 += size * 1.5
+        for i, s in enumerate(lines): ctext(c, s, 0, y0 + size * (i + 1) * 1.2, "ant", size, INK)
+    c.restore()
+
+
+def cookie_grid(c, cx, cy, n=80, cols=10, w=780, k=1.0, shown=None):
+    """a count you can see: n small cookies in rows (eighty dozen a week)"""
+    d = w / cols; m = n if shown is None else int(shown)
+    rows = math.ceil(n / cols)
+    for j in range(rows):
+        for i in range(cols):
+            idx = j * cols + i
+            if idx < min(n, m): cookie(c, cx - w / 2 + (i + 0.5) * d, cy - rows * d / 2 + (j + 0.5) * d, d * 0.38 * k, spin=idx * 29)
+
+
+# ------------------------------------------------------------------ HOW IT WORKS EP 4 (hotel fees): the lobby + elevator
+def hotel_lobby(c, t, lamp=(540, 1130), lamp_a=0.45, top=(16, 32, 66), bot=(44, 72, 118)):
+    """one held world: a hotel lobby at night. Dark ceiling with a row of small lights across the top, marble line, potted plants at the edges, dark floor."""
+    night_bg(c, t, top, bot, lamp=lamp, lamp_a=lamp_a, floor=None)
+    dk = (8, 14, 34)
+    c.drawRect(R.MakeLTRB(0, 0, W, 104), paint(dk))
+    for i in range(7):
+        x = 90 + i * 150
+        c.drawLine(x, 104, x, 148, stroke(dk, 5)); c.drawCircle(x, 158, 15, paint(LAMP, 0.95)); c.drawCircle(x, 158, 42, paint(LAMP, 0.2, blur=18))
+    for x, s in ((64, 1.0), (1016, 0.9)):       # plants
+        c.drawRect(R.MakeXYWH(x - 42 * s, FLOOR - 92 * s, 84 * s, 92 * s), paint((30, 26, 44))); c.drawRect(R.MakeXYWH(x - 42 * s, FLOOR - 92 * s, 84 * s, 92 * s), stroke(INK, 4))
+        for a in (-40, -15, 15, 40): 
+            xx = x + 110 * s * math.sin(math.radians(a)); yy = FLOOR - 92 * s - 190 * s * math.cos(math.radians(a))
+            c.drawLine(x, FLOOR - 92 * s, xx, yy, stroke((14, 44, 48), 26))
+    c.drawRect(R.MakeLTRB(0, FLOOR, W, H), paint(shader=lin(0, FLOOR, 0, H, [argb(mix(bot, (0, 0, 0), 0.45)), argb(mix(bot, (0, 0, 0), 0.8))])))
+    c.drawLine(0, FLOOR, W, FLOOR, stroke(INK, 5))
+    fg_dust(c, t, n=6, seed=41, a=0.16)
+
+
+def elevator(c, x, y=FLOOR, w=420, price="$199", floor_=None, open_=0.0, k=1.0, col=LAMP):
+    """brass elevator doors with a price where the floor number should be. Same object all episode: the price climbs. x = centre, y = bottom; open_ 0..1"""
+    if k <= 0: return
+    h = w * 1.5
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawRect(R.MakeXYWH(-w / 2 - 22, -h - 22, w + 44, h + 22), paint((70, 56, 40))); c.drawRect(R.MakeXYWH(-w / 2 - 22, -h - 22, w + 44, h + 22), stroke(INK, 6))
+    c.drawRect(R.MakeXYWH(-w / 2, -h, w, h), paint((20, 18, 26)))
+    if open_ > 0: c.drawRect(R.MakeXYWH(-w / 2, -h, w, h), paint(LAMP, 0.5 * open_))
+    dw = w / 2 * (1 - 0.86 * cl(open_))
+    for side in (-1, 1):
+        xx = -w / 2 if side < 0 else w / 2 - dw
+        c.drawRect(R.MakeXYWH(xx, -h, dw, h), paint((186, 150, 96))); c.drawRect(R.MakeXYWH(xx, -h, dw, h), stroke(INK, 5))
+    pw = w * 0.72; ph = w * 0.3
+    c.drawRoundRect(R.MakeXYWH(-pw / 2, -h - 22 - ph - 12, pw, ph), 14, 14, paint((12, 12, 18))); c.drawRoundRect(R.MakeXYWH(-pw / 2, -h - 22 - ph - 12, pw, ph), 14, 14, stroke(INK, 5))
+    ctext(c, price, 0, -h - 22 - 12 - ph * 0.22, "ant", ph * 0.72, col)
+    if floor_ is not None:
+        for i in range(4):
+            cx = -w * 0.24 + i * w * 0.16; on = i + 1 == floor_
+            c.drawCircle(cx, -h - 22 - ph - 34, 13, paint(col if on else (60, 56, 66)))
+    c.restore()
+
+
+def hotel_card(c, x, y, w, rate, name="HOTEL A", note=None, k=1.0, hl=False, tilt=0.0):
+    """a plain listing row on a booking page: no site UI. x, y = centre"""
+    if k <= 0: return
+    h = w * 0.34
+    card(c, x, y, w, h, 1.0, tilt=tilt, k=k)
+    c.drawRoundRect(R.MakeXYWH(-w / 2 + 16, -h / 2 + 16, h - 32, h - 32), 10, 10, paint((86, 110, 160)))
+    for i in range(3):
+        for j in range(3): c.drawRect(R.MakeXYWH(-w / 2 + 34 + i * (h - 32) * 0.26, -h / 2 + 32 + j * (h - 32) * 0.26, (h - 32) * 0.15, (h - 32) * 0.15), paint(LAMP))
+    ctext(c, name, -w * 0.02, -h * 0.1, "ant", h * 0.24, (90, 90, 104))
+    if note: ctext(c, note, -w * 0.02, h * 0.28, "mss", h * 0.13, (150, 60, 50))
+    ctext(c, rate, w * 0.32, h * 0.14, "ant", h * 0.46, RED_C if hl else INK)
+    card_end(c)
+
+
+def ticket(c, x, y, w=320, k=1.0, tilt=-6.0, label="TICKET"):
+    """plain event ticket with a torn notch, no venue or seller"""
+    if k <= 0: return
+    h = w * 0.46
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 12, 12, paint((250, 214, 110))); c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 12, 12, stroke(INK, 6))
+    c.drawLine(w * 0.22, -h / 2 + 8, w * 0.22, h / 2 - 8, stroke(INK, 4))
+    ctext(c, label, -w * 0.12, h * 0.14, "ant", h * 0.36, INK)
+    c.restore()
+
+
+def front_desk(c, x=540, y=FLOOR, w=760, k=1.0):
+    """reception desk seen from the guest side, with a small bell"""
+    if k <= 0: return
+    h = 240
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawRect(R.MakeXYWH(-w / 2, -h, w, h), paint((88, 62, 44))); c.drawRect(R.MakeXYWH(-w / 2, -h, w, h), stroke(INK, 6))
+    c.drawRect(R.MakeXYWH(-w / 2 - 22, -h - 22, w + 44, 26), paint((212, 192, 160))); c.drawRect(R.MakeXYWH(-w / 2 - 22, -h - 22, w + 44, 26), stroke(INK, 5))
+    c.drawCircle(w * 0.3, -h - 40, 26, paint((226, 190, 90))); c.drawCircle(w * 0.3, -h - 40, 26, stroke(INK, 4)); c.drawCircle(w * 0.3, -h - 72, 7, paint(INK))
+    c.restore()
+
+
+def room_key(c, x, y, w=260, k=1.0, tilt=-8.0):
+    """a plain hotel key card, no chain"""
+    if k <= 0: return
+    h = w * 0.62
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 14, 14, paint((60, 90, 150))); c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 14, 14, stroke(INK, 6))
+    c.drawRect(R.MakeXYWH(-w / 2, -h * 0.18, w, h * 0.2), paint(INK)); ctext(c, "ROOM", 0, h * 0.42, "ant", h * 0.24, WHITE)
+    c.restore()
+
+
+# ------------------------------------------------------------------ HOW IT WORKS EP 2 (credit score): Skia redraw of the props in anim_props8
+def car_lot(c, t, lamp=(540, 1130), lamp_a=0.45, top=(14, 30, 58), bot=(38, 74, 104)):
+    """one held world: a car lot at dusk. String of bulbs across the top, flat car silhouettes at the edges, dark floor."""
+    night_bg(c, t, top, bot, lamp=lamp, lamp_a=lamp_a, floor=None)
+    dk = (8, 16, 32)
+    c.drawRect(R.MakeLTRB(0, 0, W, 60), paint(dk))
+    pts = [(x, 110 + 34 * math.sin(math.pi * ((x % 270) / 270))) for x in range(0, W + 30, 30)]
+    for a, b in zip(pts, pts[1:]): c.drawLine(a[0], a[1], b[0], b[1], stroke(dk, 4))
+    for i, p in enumerate(pts):
+        if i % 3 == 1: c.drawCircle(p[0], p[1] + 12, 10, paint(LAMP, 0.95)); c.drawCircle(p[0], p[1] + 12, 28, paint(LAMP, 0.18, blur=12))
+    for x, flip in ((80, 1), (1000, -1)):
+        c.drawRoundRect(R.MakeXYWH(x - 170, FLOOR - 100, 340, 76), 22, 22, paint(mix(dk, bot, 0.3))); c.drawRoundRect(R.MakeXYWH(x - 95 + 20 * flip, FLOOR - 150, 170, 60), 18, 18, paint(mix(dk, bot, 0.3)))
+    c.drawRect(R.MakeLTRB(0, FLOOR, W, H), paint(shader=lin(0, FLOOR, 0, H, [argb(mix(bot, (0, 0, 0), 0.5)), argb(mix(bot, (0, 0, 0), 0.8))])))
+    c.drawLine(0, FLOOR, W, FLOOR, stroke(INK, 5))
+    fg_dust(c, t, n=6, seed=51, a=0.14)
+
+
+def car(c, x, y, w=560, col=(70, 150, 240), k=1.0, tag=None):
+    """generic flat car, x = centre, y = bottom; no brand"""
+    if k <= 0: return
+    h = w * 0.3
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawOval(R.MakeXYWH(-w * 0.52, -12, w * 1.04, 26), paint((0, 0, 0), 0.28, blur=10))
+    c.drawPath(poly([(-w * 0.26, -h), (-w * 0.14, -h * 1.72), (w * 0.2, -h * 1.72), (w * 0.34, -h)], True), paint(col)); c.drawPath(poly([(-w * 0.26, -h), (-w * 0.14, -h * 1.72), (w * 0.2, -h * 1.72), (w * 0.34, -h)], True), stroke(INK, 6))
+    c.drawPath(poly([(-w * 0.2, -h * 1.03), (-w * 0.11, -h * 1.58), (w * 0.02, -h * 1.58), (w * 0.02, -h * 1.03)], True), paint((196, 228, 244))); c.drawPath(poly([(w * 0.06, -h * 1.03), (w * 0.06, -h * 1.58), (w * 0.18, -h * 1.58), (w * 0.27, -h * 1.03)], True), paint((196, 228, 244)))
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h * 1.12, w, h * 0.92), 22, 22, paint(col)); c.drawRoundRect(R.MakeXYWH(-w / 2, -h * 1.12, w, h * 0.92), 22, 22, stroke(INK, 6))
+    for xx in (-w * 0.28, w * 0.28):
+        c.drawCircle(xx, -h * 0.2, h * 0.3, paint(INK)); c.drawCircle(xx, -h * 0.2, h * 0.13, paint((200, 204, 212)))
+    if tag: price_tag(c, w * 0.34, -h * 1.8, tag, tilt=6, size=48)
+    c.restore()
+
+
+_PIE_COLS = [(90, 120, 200), (60, 170, 180), (150, 110, 220), ORANGE, (250, 196, 60)]
+def score_slices(c, cx, cy, r, vals=(10, 10, 15, 35, 30), k=(1, 1, 1, 1, 1), hl=None, labels=None, cols=None):
+    """one pie that fills through the episode. vals in %, k = 0..1 per slice as it sweeps in, hl = index that pops outward. Dark empty disc behind."""
+    cols = cols or _PIE_COLS
+    c.drawCircle(cx, cy, r + 8, paint((0, 0, 0), 0.25, blur=14)); c.drawCircle(cx, cy, r, paint((26, 30, 50))); c.drawCircle(cx, cy, r, stroke(INK, 7))
+    a0 = -90.0
+    for i, v in enumerate(vals):
+        sw = v * 3.6; kk = cl(k[i] if i < len(k) else 0)
+        if kk > 0:
+            m = math.radians(a0 + sw / 2); off = 22 if hl == i else 0; xx = cx + math.cos(m) * off; yy = cy + math.sin(m) * off
+            p = skia.Path(); p.moveTo(xx, yy); p.arcTo(R.MakeXYWH(xx - r, yy - r, 2 * r, 2 * r), a0, sw * kk, False); p.close()
+            c.drawPath(p, paint(cols[i % len(cols)])); c.drawPath(p, stroke(INK, 6))
+            if labels and labels[i] and kk >= 1: ctext(c, labels[i], xx + math.cos(m) * r * 0.62, yy + math.sin(m) * r * 0.62 + r * 0.05, "ant", r * 0.15, INK)
+        a0 += sw
+
+
+def gauge(c, x, y, w=560, frac=0.5, lo="300", hi="850", k=1.0):
+    """half-dial score gauge; x, y = needle pivot"""
+    if k <= 0: return
+    r = w / 2
+    c.save(); c.translate(x, y); c.scale(k, k)
+    c.drawRoundRect(R.MakeXYWH(-r - 26, -r - 30, w + 52, r + 76), 26, 26, paint((248, 246, 240))); c.drawRoundRect(R.MakeXYWH(-r - 26, -r - 30, w + 52, r + 76), 26, 26, stroke(INK, 6))
+    for i, col in enumerate((RED_C, (250, 170, 60), (250, 214, 80), GRN)):
+        p = skia.Path(); p.arcTo(R.MakeXYWH(-r + 26, -r + 26, 2 * r - 52, 2 * r - 52), 180 + i * 45, 44, True)
+        pp = paint(col); pp.setStyle(skia.Paint.kStroke_Style); pp.setStrokeWidth(46); c.drawPath(p, pp)
+    a = math.radians(180 + 180 * cl(frac))
+    c.drawLine(0, 0, math.cos(a) * (r - 74), math.sin(a) * (r - 74), stroke(INK, 10)); c.drawCircle(0, 0, 18, paint(INK))
+    ctext(c, lo, -r + 30, 36, "ant", 34, INK); ctext(c, hi, r - 30, 36, "ant", 34, INK)
+    c.restore()
+
+
+def cycle_strip(c, x, y, w=860, k=3, pay=None):
+    """a month as a strip: 1 PAY DAY?, 2 STATEMENT ENDS = reported, 3 DUE DATE. k = markers shown; pay = 0..1 position of a coin before the red marker"""
+    h = 96
+    c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), 22, 22, paint((248, 246, 240))); c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), 22, 22, stroke(INK, 6))
+    for i in range(1, 30):
+        xx = x - w / 2 + i * w / 30; c.drawLine(xx, y - 14, xx, y + 14, stroke((190, 190, 196), 3))
+    for i, (fx, s, col) in enumerate(((0.12, "MONTH STARTS", (120, 124, 140)), (0.62, "STATEMENT ENDS", RED_C), (0.92, "DUE", (60, 150, 90)))):
+        if i < k:
+            xx = x - w / 2 + fx * w
+            c.drawCircle(xx, y, 22, paint(col)); c.drawCircle(xx, y, 22, stroke(INK, 4))
+            ctext(c, s, min(max(xx, x - w / 2 + 130), x + w / 2 - 40), y - 78 if i != 1 else y + 112, "ant", 42, WHITE)
+    if pay is not None: coin(c, x - w / 2 + lerp(0.92, 0.5, cl(pay)) * w, y - 2, 28)
+
+
+def credit_report(c, x, y, w=460, err=False, title="CREDIT REPORT", k=1.0, tilt=-3.0):
+    """a generic report sheet with no agency look; x, y = centre; err = one row circled"""
+    if k <= 0: return
+    h = w * 1.28
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k)
+    c.drawRect(R.MakeXYWH(-w / 2 + 6, -h / 2 + 8, w, h), paint((0, 0, 0), 0.25, blur=10)); c.drawRect(R.MakeXYWH(-w / 2, -h / 2, w, h), paint(WHITE)); c.drawRect(R.MakeXYWH(-w / 2, -h / 2, w, h), stroke(INK, 6))
+    ctext(c, title, 0, -h / 2 + w * 0.14, "ant", w * 0.1, INK)
+    for i in range(7):
+        yy = -h / 2 + w * 0.26 + i * w * 0.13
+        c.drawLine(-w * 0.38, yy, w * 0.14, yy, stroke((150, 154, 170), 8)); c.drawLine(w * 0.22, yy, w * 0.38, yy, stroke((90, 94, 110), 8))
+        if err and i == 3:
+            c.drawOval(R.MakeXYWH(-w * 0.44, yy - w * 0.06, w * 0.88, w * 0.12), stroke(RED_C, 7))
+    c.restore()

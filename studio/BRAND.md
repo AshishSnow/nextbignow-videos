@@ -79,6 +79,7 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
   **5 Nov 2026:** Instagram last 10 reels avg **483 views** (median 208), 3-s rate 59.5 %, avg watch 24.8 s, **8.6 reactions per 1,000 reach**; YouTube last 10 with rows avg 419 views (no rows yet for the last two episodes). Top 3 (IG, last 10): drone 1,324, food truck 1,302, airline miles 589.
   **5 Nov 2026 (R&D pull):** numbers unchanged from the same day's earlier pull; Spotify EP 1 has no row yet.
   **6 Nov 2026:** Instagram last 10 reels avg **579 views** (median 214), 3-s rate 61.5 %, avg watch 27.3 s, **9.8 reactions per 1,000 reach**; YouTube last 10 with rows avg 419 views (no rows for the last three episodes). Top 3 (IG, last 10): Spotify 1,534 (84.1 % 3-s, 52.8 s watch, both channel best), drone 1,324, food truck 1,305.
+  **6 Nov 2026 (R&D pull):** numbers unchanged; reselling reached YouTube but failed on Instagram (planner status ERROR, PERFORMANCE.md).
 - **Community:** pin a comment on each post restating the choice ("FIGHT or FOLD — what would you do?"); reply to early comments within
   the first hour when a run is live (the post copy's firstCommentText); Part 2 may quote real comment counts only.
 - **Owned channel:** bio link to oopsmybusiness.com (later: an email list / newsletter "The Oops Weekly") so the audience isn't only rented.

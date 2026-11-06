@@ -95,7 +95,7 @@ pay. The last one is the sneakiest." → TRICK #1…#N (`hud_rule`-style pills):
 study or filing, source chip) → how to beat it (one concrete action) → strongest trick last → "Save this before your next shop" +
 "Send this to the friend who …". The hero is the shopper; the store staff/system are the antagonist (generic, no real logos).
 
-**HOW TO START beat sheet (75–120 s):** cold open: the hero doing the job with money landing (frame 1) + hook question ("Could you
+**HOW TO START beat sheet (75–120 s; EP 6 lesson, 6 Nov: a how-to on rules runs long, so one state + one country, the rest "search yours"):** cold open: the hero doing the job with money landing (frame 1) + hook question ("Could you
 start a drone business with one drone?") → "Here's the whole plan in N steps — step N is where beginners lose money" → STEP 1…N
 (`cold_open(f, "STEP 1", "GET LICENSED", "PART 107")` card each): rule/licence with its real cost and source; gear + total startup
 cost; what clients really pay (source chip); how to get the first 3 clients; the costly mistake → realistic takeaway (no income
