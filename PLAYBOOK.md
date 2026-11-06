@@ -262,3 +262,18 @@ The user had asked for richer colour, a more natural 3D feel and new clothes (re
 | 33 | What if the Moon came 10x closer? | **First v3 look**: painted 3D varsity mascot, cinematic dusk/night sets, DOF, bloom, grade and grain, crisp overlay captions. Real anchor: the Apollo 11 mirror panel (1969) and lunar laser ranging (Moon recedes 3.8 cm a year). Explainers: 10x wider and 100x brighter (10x10 grid of moons), 1000x tides (10x10x10 card), ground tides 20 cm, Io, Roche limit (~20,000 km) with the Moon shattering into a ring, Phobos, 18-hour days 1.4 billion years ago. Gags: sunglasses at midnight, sleep mask, snorkel in the beach house, Earth as a stress ball, sneaky Moon, fingernail speed. 2:50, 144 wpm. Mix drift 0.010 s. Instagram Nov 2 19:00, YouTube Nov 7 19:30 IST. | pending |
 | 34 | What if you lived in a cave for 500 days? | Back to the stick style by request. Isolation-experiment format: Beatriz Flamini (500 days, Granada, 2021–23) + Michel Siffre (Texas, 1972). Explainers: the 24 h 11 min body clock drifting without sunlight, a 48-hour day, tally wall giving up at day 65, counting to 120 in 5 real minutes, 160 vs 500 bar. Gags: 'early?', cobweb on the panic button, normal Tuesday at the desk, 'great chat' with herself, 5-star room service, flies, 'not finished!' book, phone vs sun. New cave set (lamp glow, drips, tent camp, rope). 2:58, 143 wpm. Mix drift 0.010 s. Instagram Nov 2 19:00, YouTube Nov 7 19:30 IST (replaced ep 33 in those slots). | pending |
 | 35 | What if you fell into Jupiter? | Space evergreen (Mars was top reach). Real anchor: Galileo probe, 7 Dec 1995 (170,000 km/h, 230 g, 58 min, 23 bar, 152 °C) and the orbiter's deliberate plunge on 21 Sep 2003 to protect Europa. Astronaut stick (helmet + suit). Layered fall: 2.5x weight on a scale + leg-day gag, ammonia clouds 'mopped floor' gag with spray bottle, 540 km/h wind gauge vs hurricane, signal lost, liquid hydrogen 'no splash', metallic hydrogen ocean + magnetic field, cutaway with a 'you are here' pin to the 25,000 °C core, Europa ocean + 'no Earth germs' stamp. 2:53, 147 wpm. Mix drift 0.010 s. Instagram Nov 5 10:00, YouTube Nov 8 19:30 IST. | pending |
+
+## 2026-11-06 update: tighter voice + human scripts (eps 36-41)
+- make_vo4.py pauses cut (user: "some place so much pause"): beat 0.32, ? 0.3, ! 0.24, sentence 0.2, paragraph +0.1, section +0.45; trim keeps 0.01 s before / 0.05 s after. Excess silence went from ~23 s (Jupiter) to ~3.5 s (Sneeze).
+- Scripts written like a person telling a friend: contractions, asides ("Yeah, no."), fewer tags/ellipses, ~360-470 words -> 2:10-2:50.
+- Don't run TTS while two render halves run: 7 GB box OOM-killed the VO once. Queue VO after renders.
+- Phrase lookups: duplicate words need longer phrases (e.g. "at the bottom you're").
+
+| # | Episode | Posted (IST) |
+|---|---|---|
+| 36 | Couldn't stop sneezing (Donna Griffiths) | IG+YT 6 Nov 22:00 |
+| 37 | Niagara Falls in a barrel (Annie Edson Taylor) | IG+YT 6 Nov 23:00 |
+| 38 | Trapped at the bottom of the sea (Harrison Okene) | IG+YT 6 Nov 23:30 |
+| 39 | Stuck in space for a year (Frank Rubio) | IG+YT 6 Nov 23:55 |
+| 40 | Left alone on an island (Alexander Selkirk) | IG+YT 7 Nov 00:20 |
+| 41 | A war ended and nobody told you (Hiroo Onoda) | IG+YT 7 Nov 00:45 |
