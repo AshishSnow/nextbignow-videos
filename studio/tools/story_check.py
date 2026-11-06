@@ -214,7 +214,7 @@ def check(path, target_len=None):
     meta = getattr(load_lines, "meta", {}) or {}
     series = (meta.get("SERIES") or "").upper(); part = meta.get("PART") or 0
     S = {}
-    S["S0_series"] = series in ("YOUR MOVE", "SPOT THE TRICK", "WHO REALLY OWNS IT", "HOW TO START", "HOW IT WORKS")
+    S["S0_series"] = series in ("YOUR MOVE", "SPOT THE TRICK", "WHO REALLY OWNS IT", "HOW TO START", "HOW IT WORKS", "HOW THEY GOT SO BIG")
     if not S["S0_series"]: flags.append("S0 set SERIES = 'YOUR MOVE' | 'SPOT THE TRICK' | 'WHO REALLY OWNS IT' (and PART, EP) in vo_lines.py")
     first3 = " ".join(l[1] for l in lines[:3]).lower()
     S["S1_seat"] = bool(re.search(r"\byou('re| are|'ve| have| walk| open| run| own| work| want| need| just| mailed| raised| bought| sold| sent)\b", first3))
@@ -231,6 +231,9 @@ def check(path, target_len=None):
     elif series == "HOW TO START":
         S["S3_ending"] = bool(re.search(r"\bsave this\b", tail3, re.I)) and bool(re.search(r"\b(comment|tag)\b", tail3, re.I))
         if not S["S3_ending"]: flags.append("S3 HOW TO START must end with 'Save this…' and a comment prompt in the last 3 lines")
+    elif series == "HOW THEY GOT SO BIG":
+        S["S3_ending"] = bool(re.search(r"\b(save|send) this\b", tail3, re.I)) and bool(re.search(r"\b(comment|tag)\b", tail3, re.I))
+        if not S["S3_ending"]: flags.append("S3 HOW THEY GOT SO BIG must end with 'Save this' / 'Send this to…' and a comment prompt in the last 3 lines")
     elif series == "HOW IT WORKS":
         S["S3_ending"] = bool(re.search(r"\b(save|send) this\b", tail3, re.I)) and bool(re.search(r"\b(comment|tag)\b", tail3, re.I))
         if not S["S3_ending"]: flags.append("S3 HOW IT WORKS must end with 'Save this' / 'Send this to…' and a comment prompt in the last 3 lines")
