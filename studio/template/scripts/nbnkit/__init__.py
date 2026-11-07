@@ -14,12 +14,16 @@ for _src, _dst in ((f"{_S}/fonts/anton/package/files/anton-latin-400-normal.woff
                    (f"{_S}/fonts/montserrat/package/files/montserrat-latin-900-normal.woff", "Montserrat-Black.ttf"),
                    (f"{_S}/fonts/permanent-marker/package/files/permanent-marker-latin-400-normal.woff", "PermanentMarker.ttf"),
                    (f"{_S}/fonts/kalam/package/files/kalam-latin-700-normal.woff", "Kalam-Bold.ttf"),
-                   (f"{_S}/fonts/kalam/package/files/kalam-latin-400-normal.woff", "Kalam-Regular.ttf")):
+                   (f"{_S}/fonts/kalam/package/files/kalam-latin-400-normal.woff", "Kalam-Regular.ttf"),
+                   (f"{_S}/fonts/caveat/package/files/caveat-latin-500-normal.woff", "Caveat-Medium.ttf"),      # notebook look (7 Nov)
+                   (f"{_S}/fonts/caveat/package/files/caveat-latin-700-normal.woff", "Caveat-Bold.ttf"),
+                   (f"{_S}/fonts/gochi-hand/package/files/gochi-hand-latin-400-normal.woff", "GochiHand.ttf")):
     if not os.path.exists(f"{_TTF}/{_dst}") and os.path.exists(_src):
         from fontTools.ttLib import TTFont
         _f = TTFont(_src); _f.flavor = None; _f.save(f"{_TTF}/{_dst}")
 _gfx.FONTDIR = _TTF
-_gfx._TF.update({"pm": "PermanentMarker.ttf", "kb": "Kalam-Bold.ttf", "kr": "Kalam-Regular.ttf"})   # whiteboard look (6 Nov)
+_gfx._TF.update({"pm": "PermanentMarker.ttf", "kb": "Kalam-Bold.ttf", "kr": "Kalam-Regular.ttf",
+                  "cv": "Caveat-Medium.ttf", "cb": "Caveat-Bold.ttf", "gh": "GochiHand.ttf"})   # whiteboard look (6 Nov)
 from nbn_toon import *        # noqa
 from nbn_toon import draw_stick, draw_face, Face, POSES, LEN, walk_pose, lerp_pose, two_tier, set_bg, rig_points, stroke, make_mini, minis, ground_shadow
 from nbn_gfx import paint, font, cl, pr, eo, eio, eback, lerp, mix, hsh, argb, lin, rad, poly, partial, WHITE, PLUS, SCREEN, glow_disc

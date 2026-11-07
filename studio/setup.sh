@@ -44,6 +44,8 @@ font playfair @fontsource/playfair-display@5.1.0
 font montserrat @fontsource/montserrat@5.0.19
 font permanent-marker @fontsource/permanent-marker@5.0.12   # whiteboard look (6 Nov)
 font kalam @fontsource/kalam@5.0.13
+font caveat @fontsource/caveat@5.0.13            # notebook look (7 Nov)
+font gochi-hand @fontsource/gochi-hand@5.0.12
 
 # python packages (tinysoundfont without its pyaudio dependency — we only render offline)
 need() { python3 -c "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('$1') else 1)"; }
