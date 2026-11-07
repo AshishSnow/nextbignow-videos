@@ -23,6 +23,13 @@ Since 7 Nov (owner 6 Nov: "blueprint, board style with white background, 2D, no 
 - Topics: food + health facts that make people say "wait, what?" (see topic_ideas.md).
 
 **OWNER FEEDBACK 28 Oct 12:40 IST (CURRENT, overrides the v5 look where they conflict): "The 3D character is not looking good, and
+
+> **OWNER APPROVED — 7 Nov 2026 23:01 IST: "Sleepy feeling after big meal is good video with voice nice."** Episode 27
+> (`episodes/27-sleepy-after-eating/`) is the current reference: the draw-on blueprint board on white for every explanation,
+> Chubby acting (nodding off), one lavender accent, erase cuts with pen/eraser foley, a new music genre with a score that reacts to
+> the story, and the Kokoro M2 voice with wide-range payoff lines (range_expand 1.55-1.6, base +1.0-1.2). Keep this look and voice;
+> improve inside it (new hero props, sharper hooks, tighter pauses), don't swap it. (The 6 Nov 3D/Zack-style and fast-cut
+> neon experiments for ep 26 were NOT approved — not posted.)
 the scripts don't sound natural. Make the character more interesting; improve the scripts." Also: the scheduled tasks now run on
 the Fable model.** -> Until a new character is approved, every run must: (1) spend its visual upgrade on CHUBBY HIMSELF (not on new
 places): a face with real personality (bigger expressive eyes with lids + pupils that lead the action, eyebrows that shape every
