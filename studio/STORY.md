@@ -69,7 +69,7 @@ band** (`say()` → y≈560, never on faces; `keep=True` only for a deliberate e
 and the one prop in the lower half. New sets: add a palette + silhouette row to `CLEAN_SETS` instead of drawing a detailed room.
 
 ### 2c. Notebook look (owner, 7 Nov 2026: "make like this which looks real and realistic, paper texture, pencil animation")
-Current default. Kit: `nbnkit/paper.py`, applied automatically by `anim.py` on top of a whiteboard-kit episode (`nbnkit/board.py`).
+REJECTED by the owner 7 Nov 08:50 IST ("not looking authentic") — OFF; whiteboard stays until a new style is approved. Kit: `nbnkit/paper.py`, applied automatically by `anim.py` on top of a whiteboard-kit episode (`nbnkit/board.py`).
 Page = ruled notebook stock filmed on a phone (warm off-white, fibres, tooth, dotted rules, printed OOPSMYBUSINESS header with the series
 handwritten on it, light fall-off, faint show-through). Ink = graphite pencil (outlines, characters), blue ballpoint (captions), red pen
 (warnings), coloured pencils (green/orange/purple), all carrying paper-tooth grain. Type = Caveat Bold / Caveat. A real yellow pencil (or a

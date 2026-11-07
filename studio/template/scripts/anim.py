@@ -4,8 +4,8 @@ _D = os.path.dirname(os.path.abspath(__file__))
 for _p in ("anim_base.py", "anim_cine.py", "anim_mascot3d.py", "anim_stick.py", "anim_sets.py", "anim_props.py", "anim_props2.py", "anim_props3.py", "anim_story.py", "anim_story2.py", "anim_props4.py", "anim_props5.py", "anim_props6.py", "anim_props7.py", "anim_props8.py", "anim_clean.py", "anim_nbn.py", "anim_shots.py"):
     exec(open(f"{_D}/{_p}").read())
 # NOTEBOOK look (owner, 7 Nov 2026: "looks real and realistic, paper texture, pencil animation"): any whiteboard-kit episode is drawn on a
-# ruled notebook page in pencil + ballpoint. Default ON; OMB_LOOK=board keeps the plain whiteboard.
-if "board_bg" in globals() and "PAPER" not in globals() and os.environ.get("OMB_LOOK", "paper") == "paper" and os.path.exists(f"{_D}/nbnkit/paper.py"):
+# ruled notebook page. Owner rejected it 7 Nov 08:50 ("not looking authentic") -> default OFF; OMB_LOOK=paper turns it on.
+if "board_bg" in globals() and "PAPER" not in globals() and os.environ.get("OMB_LOOK", "board") == "paper" and os.path.exists(f"{_D}/nbnkit/paper.py"):
     exec(open(f"{_D}/nbnkit/paper.py").read())
 
 N = int(round(END * FPS))
