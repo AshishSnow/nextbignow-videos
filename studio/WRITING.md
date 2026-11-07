@@ -43,6 +43,7 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 24. **Stressed words must be words of the line.** `make_vo.py` matches `stressed_words` to the aligned words (case and punctuation ignored); a
     word that isn't there silently loses its emphasis. `human_check.py` now prints a `note stress …` line for each miss (7 Nov audit of 40
     scripts: 1 real miss, home bakery a5 'refuse' vs 'refused', fixed; our 2 new scripts had 4 after rewrites, fixed).
+25. **Watch for words that run together.** Read fast, "That's a maze" became "That's amazing" and "one internal comment it quotes" became "commented quotes" in the ASR read-back of both takes (8 Nov, Prime). If two short words can fuse into a real word, add a word between them ("Feels like a maze, and you're the one stuck in the middle of it.") or put the source first ("The FTC quotes one internal comment: …").
 
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - (7 Nov, Prime) "To skip it, the button read: no, I don't want free shipping." → "Back then, the button to skip it said: no, I don't want free shipping." (rule 22)

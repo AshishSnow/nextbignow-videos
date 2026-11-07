@@ -672,3 +672,184 @@ def helmet_m(c, x, y, t, t0, s=1.0, col=RD):
         hatch(c, _path(crest), pr(k, 0.5, 0.5), col, gap=12, w=7, bbox=(x - 110 * s, y - 240 * s, x + 110 * s, y - 100 * s), a=0.85)
         hatch(c, _path(dome), pr(k, 0.6, 0.4), OR, gap=20, w=6, bbox=(x - 120 * s, y - 130 * s, x + 120 * s, y + 140 * s), a=0.4)
     ink(c, [wob(crest, 131, 0.8), wob(dome, 132, 0.8)] + [[(x + px * s, y - 230 * s), (x + px * 1.4 * s, y - 116 * s)] for px in (-30, 0, 30)], k, MK, 7)
+
+
+GOLD = (236, 176, 40); LIGHT = (150, 156, 170)
+
+
+# ---------------------------------------------------------------- HOW IT WORKS EP 4 (Prime 'Iliad', 8 Nov 2026): spears, door map, office,
+# highlighted memo, courthouse, gavel, money bag, heads, quote card, balance scale, envelope, mailbox, straight hallway, claim form, laptop with a screen callback
+def spears_m(c, x, y, t, t0, s=1.0):
+    """two crossed spears (an X with leaf tips)"""
+    k = pr(t, t0, 0.5)
+    for i, (a, b) in enumerate((((-150, 150), (150, -150)), ((150, 150), (-150, -150)))):
+        p0 = (x + a[0] * s, y + a[1] * s); p1 = (x + b[0] * s, y + b[1] * s)
+        ink(c, [wob([p0, p1], 140 + i, 0.8)], k, (120, 84, 50), 9, pen_=False)
+        if k >= 1:
+            ang = math.atan2(p1[1] - p0[1], p1[0] - p0[0]); ca, sa = math.cos(ang), math.sin(ang)
+            tip = [(p1[0] + 46 * ca * s, p1[1] + 46 * sa * s), (p1[0] - 14 * sa * s, p1[1] + 14 * ca * s), (p1[0] - 10 * ca * s, p1[1] - 10 * sa * s), (p1[0] + 14 * sa * s, p1[1] - 14 * ca * s)]
+            c.drawPath(poly(tip, True), paint(LIGHT)); c.drawPath(poly(tip, True), stroke(MK, 4))
+
+
+def doormap(c, active, fixed=(False, False), a=1.0):
+    """mini map under the pill: two small doors IN / OUT; the active one is coloured, a rebuilt one gets a green tick"""
+    if a <= 0: return
+    for i, (lab, x) in enumerate((("IN", 470), ("OUT", 610))):
+        on = (active == i) or active == 2
+        w, h = (46, 64) if on else (38, 54); y = 392
+        rr = R.MakeXYWH(x - w / 2, y - h, w, h)
+        c.drawRect(rr, paint(WHITE, a)); c.drawRect(rr, paint((BLU if i == 0 else RD), (0.35 if on else 0.0) * a))
+        c.drawRect(rr, stroke(MK if on else LIGHT, 5 if on else 3, a)); c.drawCircle(x + w / 2 - 10, y - h / 2, 4, paint(MK if on else LIGHT, a))
+        f = font("pm", 30 if on else 24); c.drawString(lab, x + w / 2 + 10, y - 12, f, paint(MK if on else LIGHT, a))
+        if fixed[i]: ink(c, [[(x - 16, y - 30), (x - 4, y - 16), (x + 22, y - 50)]], 1, GR, 7, pen_=False)
+
+
+def office_m(c, x, y, t, t0, label="INSIDE AMAZON"):
+    k = pr(t, t0, 0.6); w, h = 420, 520
+    body = [(x - w / 2, y), (x - w / 2, y - h), (x + w / 2, y - h), (x + w / 2, y)]
+    ink(c, [wob(body, 151, 0.8)], k, MK, 8)
+    for r_ in range(4):
+        for q in range(3):
+            kk = pr(t, t0 + 0.4 + (r_ * 3 + q) * 0.03, 0.2)
+            if kk > 0:
+                bx, by = x - w / 2 + 50 + q * 120, y - h + 60 + r_ * 100
+                c.drawRect(R.MakeXYWH(bx, by, 80, 60), paint((255, 236, 170), 0.8 * kk)); c.drawRect(R.MakeXYWH(bx, by, 80, 60), stroke(MK, 4, kk))
+    mtext(c, label, x, y - h - 30, 52, MK, pr(t, t0 + 0.5, 0.4), "pm")
+
+
+def memo_m(c, x, y, t, t0, hl_t, quote="\"a bit of a shady world\"", tilt=-3):
+    w, h = 640, 380; k = pr(t, t0, 0.5)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(tilt)
+    c.drawRect(R.MakeXYWH(-w / 2 + 8, -h / 2 + 12, w, h), paint((0, 0, 0), 0.10 * k, blur=10)); c.drawRect(R.MakeXYWH(-w / 2, -h / 2, w, h), paint(WHITE, k))
+    ink(c, [wob([(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2)], 161, 1.0)], k, MK, 6)
+    mtext(c, "INTERNAL", -w / 2 + 40, -h / 2 + 70, 46, LIGHT, pr(t, t0 + 0.3, 0.3), "pm", align="l")
+    for i in range(2): ink(c, [[(-w / 2 + 40, -h / 2 + 120 + i * 46), (w / 2 - 60 - i * 90, -h / 2 + 120 + i * 46)]], pr(t, t0 + 0.5 + i * 0.1, 0.25), LIGHT, 7, pen_=False)
+    yy = -h / 2 + 250
+    if t > hl_t:
+        fq = font("kb", 50); wq = tw(fq, quote)
+        c.drawRect(R.MakeXYWH(-wq / 2 - 14, yy - 52, (wq + 28) * min(1, pr(t, hl_t, 0.5)), 72), paint((255, 222, 60), 0.8))
+    mtext(c, quote, 0, yy, 50, MK, pr(t, t0 + 0.7, 0.6), "kb")
+    ink(c, [[(-w / 2 + 40, yy + 70), (w / 2 - 160, yy + 70)]], pr(t, t0 + 0.9, 0.25), LIGHT, 7, pen_=False)
+    c.restore()
+
+
+def court_m(c, x, y, t, t0, label="SEATTLE"):
+    k = pr(t, t0, 0.7); w = 560
+    roof = [(x - w / 2 - 30, y - 420), (x, y - 560), (x + w / 2 + 30, y - 420), (x - w / 2 - 30, y - 420)]
+    steps = [[(x - w / 2 - 40, y), (x + w / 2 + 40, y)], [(x - w / 2 - 20, y - 30), (x + w / 2 + 20, y - 30)]]
+    cols = [[(x - w / 2 + 50 + i * 115, y - 30), (x - w / 2 + 50 + i * 115, y - 400)] for i in range(5)]
+    beam = [[(x - w / 2 - 10, y - 400), (x + w / 2 + 10, y - 400)]]
+    if k > 0.6: hatch(c, _path(roof), pr(k, 0.6, 0.4), GOLD, gap=16, w=6, bbox=(x - w, y - 570, x + w, y - 410), a=0.5)
+    ink(c, [wob(roof, 171, 0.8)] + [wob(p, 172 + i, 0.6) for i, p in enumerate(steps + cols + beam)], k, MK, 8)
+    mtext(c, label, x, y - 446, 44, MK, pr(t, t0 + 0.6, 0.3), "pm")
+
+
+def gavel_m(c, x, y, t, t_hit, s=1.0):
+    """a gavel that swings down at t_hit (rests raised before)"""
+    u = eo(pr(t, t_hit - 0.35, 0.35)); ang = -55 + 55 * u
+    c.drawRoundRect(R.MakeXYWH(x - 130, y + 74, 180, 40), 10, 10, paint((150, 100, 60))); c.drawRoundRect(R.MakeXYWH(x - 130, y + 74, 180, 40), 10, 10, stroke(MK, 5))
+    c.save(); c.translate(x, y); c.rotate(ang); c.scale(s, s)
+    c.drawRoundRect(R.MakeXYWH(-14, -10, 260, 26), 10, 10, paint((150, 100, 60))); c.drawRoundRect(R.MakeXYWH(-14, -10, 260, 26), 10, 10, stroke(MK, 5))
+    c.drawRoundRect(R.MakeXYWH(-70, -70, 110, 140), 18, 18, paint((120, 76, 44))); c.drawRoundRect(R.MakeXYWH(-70, -70, 110, 140), 18, 18, stroke(MK, 6))
+    c.restore()
+    if t > t_hit:
+        kb = pr(t, t_hit, 0.3)
+        for dx_ in (-1, 1): ink(c, [[(x - 40 + dx_ * 120, y + 80), (x - 40 + dx_ * 170, y + 40)]], kb, MK, 6, pen_=False)
+
+
+def bag_m(c, x, y, t, t0, text, col=GR, s=1.0, label=None):
+    k = pr(t, t0, 0.5)
+    body = _sc(x, y, s, [(-90, -150), (-150, -40), (-150, 60), (-100, 120), (100, 120), (150, 60), (150, -40), (90, -150), (-90, -150)])
+    neck = _sc(x, y, s, [(-70, -150), (-50, -200), (50, -200), (70, -150)])
+    if k > 0.5: hatch(c, _path(body), pr(k, 0.5, 0.5), col, gap=17, w=6, bbox=(x - 160 * s, y - 210 * s, x + 160 * s, y + 130 * s), a=0.45)
+    ink(c, [wob(body, 181, 1.0), wob(neck, 182, 0.6)], k, MK, 8)
+    mtext(c, text, x, y + 30 * s, int(76 * s), MK, pr(t, t0 + 0.4, 0.3), "pm")
+    if label: mtext(c, label, x, y + 200 * s, int(48 * s), col, pr(t, t0 + 0.6, 0.3), "pm")
+
+
+def heads_m(c, x0, x1, y, t, t0, n=9, col=BLU):
+    for i in range(n):
+        kk = pop_(t, t0 + i * 0.05)
+        if kk <= 0: continue
+        hx = x0 + (x1 - x0) * i / (n - 1)
+        c.save(); c.translate(hx, y); c.scale(kk, kk)
+        c.drawCircle(0, -40, 22, paint(WHITE)); c.drawCircle(0, -40, 22, stroke(MK, 5))
+        c.drawPath(_path([(-28, 20), (-22, -10), (22, -10), (28, 20)]), stroke(col, 6)); c.restore()
+
+
+def quote_m(c, x, y, t, t0, lines_, who):
+    w, h = 820, 330; k = pr(t, t0, 0.5)
+    if k <= 0: return
+    c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), 30, 30, paint(WHITE, k))
+    ink(c, [wob([(x - w / 2 + 30, y - h / 2), (x + w / 2 - 30, y - h / 2), (x + w / 2, y - h / 2 + 30), (x + w / 2, y + h / 2 - 30), (x + w / 2 - 30, y + h / 2),
+                 (x - w / 2 + 30, y + h / 2), (x - w / 2, y + h / 2 - 30), (x - w / 2, y - h / 2 + 30), (x - w / 2 + 30, y - h / 2)], 191, 0.8)], k, BLU, 7)
+    mtext(c, "“", x - w / 2 + 60, y - h / 2 + 110, 120, BLU, k, "pm")
+    for i, ln in enumerate(lines_): mtext(c, ln, x + 20, y - 50 + i * 70, 54, MK, pr(t, t0 + 0.2 + i * 0.25, 0.3), "kb")
+    mtext(c, who, x, y + h / 2 - 40, 40, BLU, pr(t, t0 + 0.7, 0.3), "pm")
+
+
+def scale_m(c, x, y, t, t0, tilt=0.0):
+    k = pr(t, t0, 0.5)
+    ink(c, [wob([(x, y), (x, y - 260)], 201, 0.5), wob([(x - 90, y), (x + 90, y)], 202, 0.5)], k, MK, 8)
+    if k < 1: return
+    a = math.radians(tilt); L = 200
+    lx, ly = x - L * math.cos(a), y - 260 - L * math.sin(a); rx, ry = x + L * math.cos(a), y - 260 + L * math.sin(a)
+    c.drawPath(_path([(lx, ly), (rx, ry)]), stroke(MK, 8)); c.drawCircle(x, y - 260, 12, paint(MK))
+    for px, py in ((lx, ly), (rx, ry)):
+        c.drawPath(_path([(px, py), (px - 60, py + 110)]), stroke(MK, 4)); c.drawPath(_path([(px, py), (px + 60, py + 110)]), stroke(MK, 4))
+        c.drawPath(_path(circ_pts(px, py + 110, 70, 0, 180, 16, ry=26)), stroke(MK, 6))
+
+
+def envelope_m(c, x, y, t, t0, s=1.0, text="$"):
+    k = pr(t, t0, 0.4); w, h = 260 * s, 170 * s
+    if k <= 0: return
+    c.drawRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), paint(WHITE, k))
+    ink(c, [wob([(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)], 211, 0.6),
+            [(x - w / 2, y - h / 2), (x, y + 10 * s), (x + w / 2, y - h / 2)]], k, MK, 6, pen_=False)
+    mtext(c, text, x, y + 60 * s, int(56 * s), GR, k, "pm")
+
+
+def mailbox_m(c, x, y, t, t0, flag=0.0):
+    k = pr(t, t0, 0.5)
+    box = [(x - 130, y - 300), (x + 130, y - 300), (x + 130, y - 160), (x - 130, y - 160)]
+    ink(c, [wob([(x, y), (x, y - 160)], 221, 0.5), wob(box + [box[0]], 222, 0.6), wob(circ_pts(x, y - 300, 130, 180, 360, 18, ry=60), 223, 0.6)], k, MK, 8)
+    if k >= 1:
+        hatch(c, _path(box + [box[0]]), 1, BLU, gap=18, w=6, bbox=(x - 140, y - 310, x + 140, y - 150), a=0.3)
+        a = math.radians(-90 * flag); fx, fy = x + 130, y - 220
+        c.drawPath(_path([(fx, fy), (fx + 110 * math.cos(a), fy + 110 * math.sin(a))]), stroke(RD, 10))
+        c.drawRect(R.MakeXYWH(fx + 110 * math.cos(a) - 18, fy + 110 * math.sin(a) - 18, 36, 36), paint(RD))
+
+
+def hallway_m(c, x, y, t, t0, w=300, h=520):
+    """the OUT door redrawn as a short straight hallway with EXIT at the end"""
+    k = pr(t, t0, 0.6)
+    fr = [(x - w / 2, y), (x - w / 2, y - h), (x + w / 2, y - h), (x + w / 2, y)]
+    inner = [(x - 50, y - 180), (x - 50, y - 340), (x + 50, y - 340), (x + 50, y - 180), (x - 50, y - 180)]
+    lines_ = [[(x - w / 2, y - h), (x - 50, y - 340)], [(x + w / 2, y - h), (x + 50, y - 340)], [(x - w / 2, y), (x - 50, y - 180)], [(x + w / 2, y), (x + 50, y - 180)]]
+    ink(c, [wob(fr, 231, 0.8), wob(inner, 232, 0.5)] + lines_, k, MK, 7)
+    if k >= 1:
+        c.drawRect(R.MakeXYWH(x - 50, y - 340, 100, 160), paint(GR, 0.3)); mtext(c, "EXIT", x, y - 250, 34, GR, 1, "pm")
+        ink(c, [[(x, y - 30), (x, y - 160)], [(x - 22, y - 136), (x, y - 166), (x + 22, y - 136)]], pr(t, t0 + 0.6, 0.3), GR, 8, pen_=False)
+
+
+def form_m(c, x, y, t, t0, cross_t=None):
+    w, h = 260, 320; k = pr(t, t0, 0.4)
+    if k <= 0: return
+    c.drawRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), paint(WHITE, k))
+    ink(c, [wob([(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)], 241, 0.6)], k, MK, 6, pen_=False)
+    mtext(c, "CLAIM FORM", x, y - h / 2 + 56, 34, MK, k, "pm")
+    for i in range(4):
+        yy = y - h / 2 + 110 + i * 50
+        c.drawRect(R.MakeXYWH(x - w / 2 + 30, yy - 14, 24, 24), stroke(MK, 3, k)); ink(c, [[(x - w / 2 + 70, yy), (x + w / 2 - 30, yy)]], k, LIGHT, 5, pen_=False)
+    if cross_t is not None and t > cross_t:
+        cross(c, x - w / 2 - 20, y - h / 2 - 20, x + w / 2 + 20, y + h / 2 + 20, pr(t, cross_t, 0.2), RD, 14, 3)
+        cross(c, x + w / 2 + 20, y - h / 2 - 20, x - w / 2 - 20, y + h / 2 + 20, pr(t, cross_t + 0.15, 0.2), RD, 14, 4)
+
+
+def laptop2(c, x, y, t, t0, w=440, h=290, screen=None):
+    k = pr(t, t0, 0.5)
+    scr = [(x - w / 2, y - h), (x + w / 2, y - h), (x + w / 2, y), (x - w / 2, y), (x - w / 2, y - h)]
+    base = [(x - w / 2 - 50, y + 10), (x + w / 2 + 50, y + 10), (x + w / 2 + 20, y + 44), (x - w / 2 - 20, y + 44), (x - w / 2 - 50, y + 10)]
+    c.drawPath(_path(scr), paint(WHITE, k)); ink(c, [wob(scr, 251, 0.8), wob(base, 252, 0.8)], k, MK, 7)
+    if screen and k >= 1: screen(c, x, y - h / 2)

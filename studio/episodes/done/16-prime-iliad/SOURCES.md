@@ -30,3 +30,9 @@ claiming to be" wording; 3 stress-word typos; row 2 drops the "10 YEARS?" clock.
 d1 no stock signpost; row 11 = a highlighted line on a document (no single author implied); row 8 caption ends with "?"; row 15 decline button clear, not "equal"; rows 17–20
 captions; UK chip "PLANNED · 2027". Kept: e1/e2 as two short lines (the merge read worse aloud).
 Gates after fixes: human_check --strict 6/6, story_check 7/7 + 6/6 (~126 s est.), board_check --strict PASS, 0 missing.
+
+## Build re-check (episode run, 8 Nov 2026 ~02:45 IST)
+- FTC Amazon Refunds page (meta modified 2 Nov 2026) re-read: "a maximum total payment of $200" (earlier payments "capped at $51"); "No action is needed to receive a refund" / "You do not have to file a claim, respond to a notice, or complete any forms"; "you will get your refund by April 2027"; "By September 2026, Amazon issued over $845 million in refunds." → e3/e4 unchanged.
+- FTC release 17 Sep 2026 re-read: "$51 to $200 total"; supplemental $149 if a threshold isn't met by Feb 2027, last round "by April 2027"; scam line verbatim "If someone contacts you and claims to be with the FTC, it is likely a scam." → t1 unchanged.
+- FTC 25 Sep 2025 release: blocked to the fetch agent (PROVENANCE_REQUIRED); the $1bn + $1.5bn split and "$2.5 billion" re-confirmed on the refunds page and in NPR/MPR, ABC, The Register (25 Sep 2025, ~35M customers); free-shipping button + "shady world" wording were read verbatim on 7 Nov (rows 3, 7). No news after 1 Oct 2026 changing the order.
+- Text changes at build (rule 21 + ASR): i5 + a3 source first ("The FTC says both…", "The FTC alleged plenty…"); e1 "Now the doors get rebuilt"; b3 end "Feels like a maze, and you're the one stuck in the middle of it." (ASR heard "That's a maze" as "That's amazing" in 2 takes); c2 "The FTC quotes one internal comment: …" (ASR heard "commented quotes"). human_check 6/6, story 7/7 + 6/6 after the changes.

@@ -9,6 +9,23 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-08 ~02:50 IST (episode run: HOW IT WORKS EP 4, Prime 'Iliad')
+**Delivery (getScheduledPosts, 5–12 Nov IST):** Spotify, credit score, importing, Southwest, currency button, Coca-Cola and **exporting (00:00 IST today)** all PUBLISHED on Instagram + YouTube. **Reselling (418324142) still instagram ERROR** (unchanged since 6 Nov, owner's call, not re-posted). No new provider errors.
+Instagram (IGRE, 17 Oct → 8 Nov) — new + changed rows:
+| Date | Video | Kind | Look | Views | Reach | Avg watch | 3-s rate | Likes | Shares | Saves | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 11-08 00:00 | HOW TO START EP 7 — exporting (~3 h) | HOW TO | whiteboard | 4 | 0 | — | — | 0 | 0 | 0 | 1 (ours) |
+| 11-07 19:35 | BIG EP 2 — Coca-Cola $1 (~7 h) | BIG | whiteboard | 157 | 134 | 17.1 s | **69.9 %** | 0 | 0 | 1 | 1 (ours) |
+| 11-07 14:35 | HOW IT WORKS EP 3 — currency button (~12 h) | HIW | whiteboard | 276 | 253 | 15.6 s | 64.4 % | 1 | 0 | 0 | 1 (ours) |
+| 11-07 09:35 | BIG EP 1 — Southwest (~17 h) | BIG | whiteboard | 338 | 301 | 22.6 s | 60.5 % | 3 | 0 | 0 | 1 (ours) |
+| 11-06 23:35 | HOW TO START EP 6 — importing (~27 h) | HOW TO | whiteboard | 439 | 387 | 25.7 s | 65.6 % | 7 | 0 | **5** | 1 (ours) |
+| 11-06 20:35 | HOW IT WORKS EP 2 — credit score (~30 h) | HIW | whiteboard | 137 | 117 | 16.7 s | 54.3 % | 1 | 0 | 0 | 1 (ours) |
+| 11-05 05:00 | HOW IT WORKS EP 1 — Spotify | HIW | night | 1,538 | 1,345 | 52.7 s | 84.0 % | 31 | 0 | 3 | 1 |
+YouTube (YTVP): still no rows after Christmas lights (158 views / 31 s avg); food truck 311 / 54 s, vending 314 / 30 s, drone 366 / 29 s.
+**Media-kit numbers (8 Nov, last 10 IG reels with ≥ 7 h, exporting excluded):** avg **633 views** (median 389), avg 3-s rate 67.9 %, avg watch 26.7 s, **9.5 sends + saves + comments per 1,000 reach** (30.6 incl. likes; our own first comments included); YouTube last 10 with rows avg 363 views (unchanged, rows stalled).
+**Insight AI (8 Nov) — whiteboard vs night: on the first 5 whiteboard posts the board opens lower and gets watched less.** Whiteboard 3-s rate avg **62.9 %** (54–70) and avg watch 19.5 s on 80–116 s videos, vs the last 5 night/old-cast posts 72.9 % (68–84) and 34 s. Views are not comparable yet (night rows are 3–7 days old, whiteboard 7–30 h), but 3-s rate barely moves after day 1, so the gap is real on what we have: **~10 points fewer people past the first 3 s.** It's not topic alone: the kinds overlap (HIW: credit 54 / currency 64 on board vs Spotify 84 night; HOW TO: importing 66 board vs 68–76 night). The look is the owner's order, so the fix is inside the look: the first frame has to read as a finished picture with motion before the first word (Coca-Cola, whose frame 1 was pre-drawn, opened best at 70 %). Owner should see this number (he also asked on 7 Nov for a new style after rejecting the notebook).
+**Insight AJ (8 Nov) — which kind holds:** BIG opens best on the board (Coca-Cola 70 %, Southwest 61 %, avg 65 %), HOW TO steadiest and the only one with saves on the board (importing 5 saves = 12.9 / 1,000 reach), HOW IT WORKS weakest on the board (54 %, 64 %). → this run's HOW IT WORKS (Prime 'Iliad') opens on a finished picture (scroll + helmet + the question) already in motion at frame 0, and carries a two-door map through the video so a viewer always knows where they are. Judge: 3-s ≥ 65 %, avg watch ≥ 25 s, saves ≥ 5 / 1,000 reach.
+
 ## Snapshot 2026-11-07 ~08:25 IST (R&D run: writers' room)
 **Delivery (getScheduledPosts, 6–9 Nov IST):** credit score + importing PUBLISHED on both; **reselling (418324142) still instagram ERROR** (unchanged, owner's call). Southwest 09:35, currency button 14:35, Coca-Cola 19:35 (7 Nov) and exporting 00:00 (8 Nov) PENDING. No new provider errors.
 Instagram and YouTube rows identical to the 02:50 IST pull (importing 95 views / 18 reach / 91.0 %; credit score 132 / 114 / 16.9 s / 54.9 %, 1 like, 0 saves, 0 shares; YouTube still no rows after Christmas lights). Media-kit numbers unchanged: IG last 10 avg 567 views, median 201.
