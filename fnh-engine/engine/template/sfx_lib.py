@@ -772,3 +772,37 @@ def press(level=-18):
     N_ = int(0.5 * SR); tt = np.arange(N_) / SR; h_ = signal.sosfilt(signal.butter(2, 3000, "high", fs=SR, output="sos"), np.random.default_rng(8).normal(0, 1, N_))
     x = np.sin(2 * np.pi * 210 * tt) * np.exp(-tt * 24) + 0.5 * np.sin(2 * np.pi * 870 * tt) * np.exp(-tt * 40) + 0.16 * h_ * np.exp(-((tt - 0.16) / 0.1) ** 2)
     x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x], 1).astype(np.float32)
+
+
+# ---- ep 27 foley (the draw-on board + the nap) ----
+def pen_draw(level=-30, dur=0.8, seed=7):
+    """a marker on paper: band-passed noise with a fast scratchy grain, swells in and out (sync it to a draw_on stroke)."""
+    N_ = int(dur * SR); tt = np.arange(N_) / SR; r_ = np.random.default_rng(seed)
+    x = signal.sosfilt(signal.butter(2, [2200, 7000], "band", fs=SR, output="sos"), r_.normal(0, 1, N_))
+    grain = 0.55 + 0.45 * np.abs(np.sin(2 * np.pi * (11 + 4 * np.sin(tt * 5)) * tt))
+    x = x * grain * np.minimum(1, tt / 0.03) * np.clip((dur - tt) / 0.06, 0, 1)
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x * 0.9], 1).astype(np.float32)
+
+
+def eraser(level=-28, dur=0.42):
+    """an eraser wipe: a soft low-mid rub, two strokes."""
+    N_ = int(dur * SR); tt = np.arange(N_) / SR; r_ = np.random.default_rng(9)
+    x = signal.sosfilt(signal.butter(2, [400, 2500], "band", fs=SR, output="sos"), r_.normal(0, 1, N_)) * (0.4 + 0.6 * np.abs(np.sin(np.pi * tt / dur * 2)))
+    x = x * np.minimum(1, tt / 0.02) * np.clip((dur - tt) / 0.05, 0, 1)
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x * 0.9, x], 1).astype(np.float32)
+
+
+def snore(level=-24, dur=1.6):
+    """a cartoon snore: a low buzzy in-breath (rising) then a soft whistle out."""
+    N_ = int(dur * SR); tt = np.arange(N_) / SR; r_ = np.random.default_rng(13); h = int(N_ * 0.55)
+    f0 = np.concatenate([np.linspace(70, 95, h), np.full(N_ - h, 0)]); ph = 2 * np.pi * np.cumsum(f0) / SR
+    buzz_ = signal.sawtooth(ph) * signal.sosfilt(signal.butter(2, 900, "low", fs=SR, output="sos"), 0.5 + 0.5 * r_.normal(0, 1, N_))
+    env = np.sin(np.pi * np.clip(tt / (h / SR), 0, 1)) * (tt < h / SR)
+    wh = np.sin(2 * np.pi * np.cumsum(np.linspace(1400, 900, N_)) / SR) * np.sin(np.pi * np.clip((tt - h / SR) / (dur - h / SR), 0, 1)) * (tt >= h / SR) * 0.25
+    x = buzz_ * env + wh
+    x = x / (np.abs(x).max() + 1e-9) * db(level); return np.stack([x, x], 1).astype(np.float32)
+
+
+def dial_ticks(t0, t1, level=-27, n_=6):
+    """a dimmer knob turning: small detent clicks spread from t0 to t1."""
+    for j in range(n_): add(click(level), t0 + (t1 - t0) * j / max(1, n_ - 1))

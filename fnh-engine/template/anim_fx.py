@@ -780,3 +780,117 @@ def eye_lead(t, t0, frm=-1.0, to=1.0, turn_amt=0.6, lean_amt=4.0):
     side = lambda k: frm + (to - frm) * (k * k * (3 - 2 * k))
     blink = 3 <= (t - t0) * FPS < 6
     return dict(look=(side(e), 0.0), turn=side(h) * turn_amt, lean=side(b) * lean_amt, blink=blink)
+
+
+# ================= ep 27 (7 Nov): the DRAW-ON BOARD kit (whiteboard / blueprint explainer, owner 6 Nov: 'blueprint, board style with white background, 2D').
+# Craft rules (Epipheo whiteboard production guide 2026; Knowlify): draw each element IN SYNC with the word that names it; one visual per idea; minimal blank
+# background; mostly one ink colour + ONE pop of accent for the key point; hand-lettered, readable type; the scene change is an ERASE ('one drawing erases
+# itself as the next one takes shape'); small swoosh / pop sounds. Mine: big shape first, then details, then the label (Disney 'staging' order), a pen tip on
+# the moving end, a fixed wobble so lines never boil. Chubby INK stays the actor: put him (or peek()) beside the board drawing.
+BP_INK = (34, 86, 168); BP_GRID = (214, 228, 246); BP_GRID2 = (190, 210, 238); BP_PAPER = (253, 252, 248)
+F_HAND = f"{R}/fonts/hand/ArchitectsDaughter-Regular.ttf"
+if not os.path.exists(F_HAND): F_HAND = F_BOLD
+
+
+def board_bg(grid=60):
+    """white drawing paper with a pale blue blueprint grid (major line every 5 cells)."""
+    def mk():
+        f = np.ones((H, W, 3), np.float32) * np.array(C(BP_PAPER), np.float32)
+        for i, x in enumerate(range(0, W + 1, grid)): cv2.line(f, (x, 0), (x, H), C(BP_GRID2 if i % 5 == 0 else BP_GRID), 2 if i % 5 == 0 else 1, cv2.LINE_AA)
+        for i, y in enumerate(range(0, H + 1, grid)): cv2.line(f, (0, y), (W, y), C(BP_GRID2 if i % 5 == 0 else BP_GRID), 2 if i % 5 == 0 else 1, cv2.LINE_AA)
+        return f
+    return gcache(("board_bg", grid), mk).copy()
+
+
+def _cut_poly(P, k):
+    """the first k (0..1) of a polyline by length -> (points, end point)."""
+    P = [tuple(map(float, p)) for p in P]
+    if k >= 1 or len(P) < 2: return P, P[-1]
+    seg = [math.hypot(P[i + 1][0] - P[i][0], P[i + 1][1] - P[i][1]) for i in range(len(P) - 1)]; L = sum(seg) * max(0.0, k); out = [P[0]]
+    for i, s in enumerate(seg):
+        if L <= s:
+            q = L / max(s, 1e-6); e = (P[i][0] + (P[i + 1][0] - P[i][0]) * q, P[i][1] + (P[i + 1][1] - P[i][1]) * q); out.append(e); return out, e
+        L -= s; out.append(P[i + 1])
+    return out, P[-1]
+
+
+def draw_on(f, pts, k, col=BP_INK, w=7, seed=0, wob=1.4, tip=True, closed=False):
+    """DRAW-ON: the polyline appears from its first point to its last as k goes 0 -> 1 (a pen tip rides the moving end). Returns the end point."""
+    if k <= 0.001: return None
+    P = list(pts) + ([pts[0]] if closed else [])
+    if wob: P = _wob(P, wob, seed)
+    Q, e = _cut_poly(P, clamp(k))
+    if len(Q) >= 2: cv2.polylines(f, [np.int32(np.round(np.array(Q)))], False, C(col), int(w), cv2.LINE_AA)
+    if tip and k < 0.999: cv2.circle(f, (int(e[0]), int(e[1])), int(w * 0.75) + 2, C(col), -1, cv2.LINE_AA)
+    return e
+
+
+def draw_ell_on(f, cx, cy, rx, ry, k, col=BP_INK, w=7, seed=0, a0=-100, wob=1.4):
+    return draw_on(f, _arcpts(cx, cy, rx, ry, a0, a0 + 360, 56), k, col, w, seed, wob)
+
+
+def draw_arrow_on(f, p0, p1, k, col=BP_INK, w=7, head=26, bend=0.0, seed=0):
+    """a hand-drawn arrow (optionally bent) that draws itself; the head appears at the end."""
+    mx, my = (p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2; nx, ny = -(p1[1] - p0[1]), p1[0] - p0[0]; nl = math.hypot(nx, ny) or 1
+    c = (mx + nx / nl * bend, my + ny / nl * bend)
+    P = [((1 - u) ** 2 * p0[0] + 2 * (1 - u) * u * c[0] + u * u * p1[0], (1 - u) ** 2 * p0[1] + 2 * (1 - u) * u * c[1] + u * u * p1[1]) for u in np.linspace(0, 1, 24)]
+    draw_on(f, P, k, col, w, seed, 0.8)
+    if k > 0.92:
+        a = math.atan2(P[-1][1] - P[-3][1], P[-1][0] - P[-3][0]); hk = clamp((k - 0.92) / 0.08)
+        for s_ in (-1, 1):
+            q = (p1[0] - head * hk * math.cos(a + s_ * 0.5), p1[1] - head * hk * math.sin(a + s_ * 0.5))
+            cv2.line(f, (int(p1[0]), int(p1[1])), (int(q[0]), int(q[1])), C(col), int(w), cv2.LINE_AA)
+
+
+def hand_text_el(text, size=56, col=BP_INK):
+    def mk():
+        fn = font(F_HAND, size * 2); tw = fn.getlength(text) / 2; w_, h_ = int(tw + 30), int(size * 1.55)
+        im = Image.new("RGBA", (w_ * 2, h_ * 2), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+        d.text((w_, h_), text, font=fn, fill=tuple(col) + (255,), anchor="mm", stroke_width=max(1, size // 22), stroke_fill=tuple(col) + (255,))
+        return el_from(im.resize((w_, h_), Image.LANCZOS))
+    return gcache(("htext", text, size, col), mk)
+
+
+def write_on(f, text, x, y, t, t0, size=56, col=BP_INK, cps=22.0, op=1.0):
+    """hand lettering that WRITES itself left to right at cps characters a second (a soft edge, no pop). Starts at t0."""
+    if t < t0: return
+    pm, a = hand_text_el(text, size, col); h_, w_ = a.shape
+    k = clamp((t - t0) * cps / max(1, len(text)))
+    if k < 1:
+        xx = np.arange(w_, dtype=np.float32)[None, :]; edge = k * (w_ + 30) - 15
+        m = np.clip((edge - xx) / 15.0, 0, 1); pm = pm * m[..., None]; a = a * m
+    comp(f, (pm, a), x, y, op=op)
+
+
+def hatch_on(f, poly, k, col=None, gap=16, ang=45, w=4, op=0.85):
+    """accent hatching that sweeps into a closed shape (the ONE pop of colour on the board)."""
+    if k <= 0.001: return
+    col = col or ACC; P = np.int32(np.round(np.array(poly)))
+    x0, y0 = P[:, 0].min(), P[:, 1].min(); x1, y1 = P[:, 0].max(), P[:, 1].max()
+    m = np.zeros((H, W), np.uint8); cv2.fillPoly(m, [P], 255)
+    lay = np.zeros((H, W), np.uint8); L = (x1 - x0) + (y1 - y0)
+    for d_ in range(-int(y1 - y0), int(x1 - x0) + 1, gap):
+        cv2.line(lay, (int(x0 + d_), int(y1)), (int(x0 + d_ + (y1 - y0)), int(y0)), 255, w, cv2.LINE_AA)
+    sweep = np.zeros((H, W), np.float32); xe = int(x0 + (x1 - x0 + 40) * clamp(k)); sweep[:, :max(0, min(W, xe))] = 1
+    a = (lay.astype(np.float32) / 255) * (m.astype(np.float32) / 255) * sweep * op
+    f[:] = f * (1 - a[..., None]) + np.array(C(col), np.float32) * a[..., None]
+
+
+def erase_mix(prev, cur, p):
+    """ERASE transition: a soft eraser band sweeps diagonally; the old drawing is wiped away and the new one is under it (Epipheo: the wipe)."""
+    yy, xx = np.mgrid[0:H:4, 0:W:4].astype(np.float32)
+    d = (xx + yy * 0.45) / (W + H * 0.45); edge = p * 1.25 - 0.1
+    m = np.clip((edge - d) / 0.08, 0, 1); band = np.exp(-((d - edge + 0.04) / 0.03) ** 2) * 0.55
+    m = cv2.resize(m, (W, H))[..., None]; band = cv2.resize(band, (W, H))[..., None]
+    return prev * (1 - m) + cur * m + band * (1.0 - cur) * 0.6
+
+
+def doze(t, t0=0.0, period=2.6, depth=1.0):
+    """NODDING OFF (acting, ep 27): the head sinks slowly (eyes closing, lean + drop), then JERKS back up in 3 frames with wide eyes; repeats.
+    -> dict(lean, look, bob, blink, expr, brow) for chub()."""
+    ph = ((t - t0) % period) / period; q = (t - t0) % period
+    if t < t0: return dict(lean=0.0, look=(0, 0.1), bob=0.0, blink=False, expr="sleepy", brow="sad")
+    if ph < 0.82: d = eio(ph / 0.82) * depth; return dict(lean=9 * d, look=(0.1, 0.25 + 0.7 * d), bob=16 * d, blink=d > 0.55, expr="sleepy", brow="sad")
+    j = (q - 0.82 * period) * FPS
+    if j < 3: d = depth * (1 - j / 3); return dict(lean=9 * d - 2, look=(0, -0.2), bob=16 * d - 4, blink=False, expr="wow", brow="up")
+    return dict(lean=-2.0, look=(0, -0.3), bob=-3.0, blink=False, expr="wow", brow="up")

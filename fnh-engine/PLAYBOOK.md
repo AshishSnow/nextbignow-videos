@@ -5,7 +5,8 @@ Runs every 5 hours. Every run makes ONE new vertical animated reel (45 s–3 min
 The owner (Ashish) is usually not watching: decide, build, verify, post, log. Never ask questions mid-run.
 
 **CURRENT character + look = Chubby INK (28 Oct, owner-approved; first full episode = 17, 31 Oct). Reference episodes for the ink look:
-`episodes/17-sugar-rot-teeth/` (props, places, acting, script registers) and `episodes/18-milk-boils-over/` (stove place, hand poses, follow-through, cut-away pot). Older notes below describe v4/v5; follow them only where they don't conflict.**
+`episodes/17-sugar-rot-teeth/` (props, places, acting, script registers) and `episodes/18-milk-boils-over/` (stove place, hand poses, follow-through, cut-away pot). Older notes below describe v4/v5; follow them only where they don't conflict.
+Since 7 Nov (owner 6 Nov: "blueprint, board style with white background, 2D, no 3D"): explanation shots = the white DRAW-ON BOARD (ep 27 section), story shots = Chubby INK in lit places.**
 
 **Approved style = `template/` (episode 07 "carrots turn your skin orange", posted 26 Oct 18:00 IST). Copy its approach.**
 - Bright animated sets (studio engine: gradient stage + big colour circle, flat shaded props, punchy transitions,
@@ -265,6 +266,21 @@ Sheet: /home/claude/outputs/chubby_ink_colour_options.jpg. v3 (Pixar kid) stays 
 - `chub(shirt=)` now really recolours body + sleeves and drops the apron (ep 25 fix). `eye_lead(t, t0, frm, to)` -> look, turn, lean, blink: eyes first, head 3 frames later, body last, a blink on the turn. `peek(f, t, x, y, s, expr, look)` (ep 25 anim_shots) keeps his head in a corner of diagram shots.
 - Props: hand_big_el() (a big open palm with a mint cuff), palm_tree(f, x, y, s, k, t, mood) (grows from its base with snap), tin_el(fake, mood, look, seed, tag_text), label_card(f, cx, cy, t, t0s, fake, s, names, miss) (rows tick on words, misses get a red X), vanaspati_el(mood, look, tag), sesame_el, sealer_el(down), potato_el, chain_el(n, col, r, seed, mood) (a fat molecule of n beads), peaks(f, x, y, w, h, k, spike) (a chromatogram that draws itself; returns the first peak's point), test_icon_el(kind), verdict_board(f, t, t0s, y0, gap, x_ic, x_n, x_v, cur) (edit BOARD for any 'we tried them all' list), test_pill, vstamp_el(text, col, size) (a stamp on a cream slip: legible on wood, dark and pink; use it instead of stamp_el on busy backgrounds). sfx_lib: gavel, sniff, torch_click, press.
 - Voice: paratones in vo_lines: a new item starts base +0.8-1.0, a closing line -0.3; neutral on UTMOS. Respell vanaspati as vanuspatee, Junagadh as Joonagurh. Never test-render during voice_report (RAM). Patch a shot by re-rendering its frames with `anim.py out A:B`, encoding the three segments with the same settings, then concat copy + mux the mix.
+
+### Ep 27 (7 Nov, tenth ink episode): the DRAW-ON BOARD kit, nodding off, the score as a dimmer (`anim_fx.py`, `anim_props_lib27.py`, sfx_lib, ep 27 music.py)
+Owner, 6 Nov 21:28 (on the 3D brain-freeze test): "use blueprint, board style with white background, don't use 3D, 2D is fine." -> ink-look episodes now put every
+EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps acting in the lit places (the story). Both looks are 2D and hand-drawn.
+- Board kit (anim_fx): `board_bg()` (white paper + pale blue grid), `draw_on(f, pts, k, col=BP_INK, w, seed, wob, tip, closed)` = a polyline that draws itself as k 0->1 with a
+  pen tip; `draw_ell_on`, `draw_arrow_on(f, p0, p1, k, col, w, head, bend)`, `write_on(f, text, x, y, t, t0, size, col, cps)` = hand lettering (Architects Daughter, fonts/hand,
+  installed by setup.sh) that writes itself left to right; `hatch_on(f, poly, k, col)` = the ONE accent pop as hatching that sweeps in; `erase_mix(prev, cur, p)` = the ERASE cut
+  (add `"erase"` to compose's transitions, see ep 27 anim_shots). Rules: draw each element on the word that names it; big shape -> details -> label; one ink colour + ONE accent;
+  board text >= ~60 px (the ep 27 shots wrap write_on at 1.3x: 36-50 px read too small in the test sheet); keep Chubby on the board with `peek()` at >= 0.85 head scale.
+- Acting: `doze(t, t0, period, depth)` -> kwargs for chub = NODDING OFF (head sinks, lids close, then jerks up in 3 frames with wide eyes). Use it on anyone tired.
+- lib27 ink props: thali_el(full|small|empty, mood), dimmer_el(k) (wall dimmer AWAKE..SLEEPY), orexin_el(lit, mood) (bulb-headed buddy), pizza_el(left), blood_el(mood),
+  brain_ink_el(mood, look, level), stomach_ink_el(mood, look, grab), keys_el, envelope_el, sugar_ink_el, sofa_el, steth_el. sfx_lib: pen_draw (marker on paper, put one on every
+  board shot), eraser (on every erase cut), snore, dial_ticks(t0, t1).
+- Score trick: `dim_sweep(mus, keys)` in ep 27 music.py = crossfade to a low-passed copy where the story turns the lights down (the music IS the dimmer). Note: mix/music now exec
+  anim_shots split at "SHOTS = [" (the shot list only), so helper code above SHOTLIST must stay plain.
 
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
