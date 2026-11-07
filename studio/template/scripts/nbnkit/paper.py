@@ -356,3 +356,15 @@ def note(c, t, t0, text, t1=None, y=1478):
     size = 40; f = font("kr", size)
     while tw(f, s) > 860 and size > 26: size -= 2; f = font("kr", size)
     mtext(c, s, 540, y + 14, size, (26, 30, 42), pr(t, t0, 0.6), "kr")
+
+# Props imported from the module (`from nbnkit.board import house_m, stamp_m, carton_m …`) look up ink/hatch/mtext in nbnkit.board's own
+# namespace, so on paper they stayed marker drawings. Point that namespace at the pencil versions too (R&D 7 Nov 2026; only runs when the
+# NOTEBOOK look is on, OMB_LOOK=board never executes this file).
+try:
+    import nbnkit.board as _bdm
+    globals().setdefault("_path", _bdm._path)
+    for _n in ("ink", "hatch", "mtext", "pen", "tw", "stamp_m"):
+        if _n in globals(): setattr(_bdm, _n, globals()[_n])
+    del _n
+except Exception as _e:   # never break a render over the look
+    print("paper.py: board props stay marker:", _e)

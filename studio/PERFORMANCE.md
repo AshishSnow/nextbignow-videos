@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-07 ~08:25 IST (R&D run: writers' room)
+**Delivery (getScheduledPosts, 6–9 Nov IST):** credit score + importing PUBLISHED on both; **reselling (418324142) still instagram ERROR** (unchanged, owner's call). Southwest 09:35, currency button 14:35, Coca-Cola 19:35 (7 Nov) and exporting 00:00 (8 Nov) PENDING. No new provider errors.
+Instagram and YouTube rows identical to the 02:50 IST pull (importing 95 views / 18 reach / 91.0 %; credit score 132 / 114 / 16.9 s / 54.9 %, 1 like, 0 saves, 0 shares; YouTube still no rows after Christmas lights). Media-kit numbers unchanged: IG last 10 avg 567 views, median 201.
+**Insight AH (7 Nov) — nothing new to read yet; what the next pull must answer:** three whiteboard posts land today (Southwest 09:35, currency 14:35, Coca-Cola 19:35 IST) next to two whiteboard rows still under 24 h. Read whiteboard-vs-night at ≥ 24 h for ≥ 4 whiteboard posts before changing the look. The two HOW IT WORKS scripts queued today were picked by the owner's order, not by data; judge them on 3-s ≥ 65 % and saves ≥ 5 / 1,000 reach (insight Z).
+
 ## Snapshot 2026-11-07 ~02:50 IST (episode run: HOW TO START EP 7, exporting)
 **Delivery (getScheduledPosts, 5–10 Nov):** Spotify, credit score and importing PUBLISHED on both networks. **Reselling (418324142) still shows instagram ERROR** ("Media container not created by unknown cause"), YouTube published; already reported on 6 Nov, not re-posted (owner decides). Southwest (09:35), currency button (14:35) and Coca-Cola (19:35) are PENDING for 7 Nov. No new errors.
 Instagram (IGRE, 16 Oct → 7 Nov) — new + changed rows:

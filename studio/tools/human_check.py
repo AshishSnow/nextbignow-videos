@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """HUMAN check — does the script sound like a person talking, not like AI text? (owner, 6 Nov 2026: "research how to write like a human")
 Rules + sources: studio/WRITING.md. Usage: human_check.py <vo_lines.py> [--strict]   exit 1 if a gate fails.
+Notes (not gates): stress words that aren't in their line, digits/symbols in spoken text (R&D 7 Nov 2026).
 Gates (H1–H6):
   H1 tells      ≤ 1 AI-tell / house-cliché hit per 150 words (Wikipedia "Signs of AI writing"; Kobak 2024; Reinhart 2025 PNAS)
   H2 openers    no single first word opens > 15 % of sentences; But/So/And together ≤ 20 %
@@ -53,6 +54,23 @@ def skeleton(s):
     return " ".join(w[:2]) + (" #" if "#" in w else "")
 
 
+def voice_notes(path):
+    """Not gates (R&D 7 Nov 2026, from two fresh-eyes reviews): things the TTS pipeline silently gets wrong.
+    stress: a stressed_words entry (field 7, ':dn' suffix allowed) that isn't a token of its line — the emphasis is dropped.
+    symbols: digits / $ % £ € & / in spoken text — WRITING rule 19 (spell numbers out)."""
+    src = open(path).read(); tree = ast.parse(src); out = []
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and any(getattr(t, "id", "") == "LINES" for t in node.targets):
+            for row in ast.literal_eval(node.value):
+                lid, text = row[0], row[1]; norm = lambda w: re.sub(r"\W", "", w.lower()); toks = {norm(w) for w in text.split()} | {norm(w) for w in re.split(r"[\s\-–—]+", text)}
+                stress = row[6] if len(row) > 6 and isinstance(row[6], (list, tuple)) else []
+                miss = [w for w in stress if norm(w.split(":")[0]) not in toks]   # make_vo.py matches the same way
+                if miss: out.append(f"stress {lid}: {miss} not in the line's words (make_vo matches whole words, case/punctuation ignored)")
+                sym = re.findall(r"[0-9$%£€&/]", text)
+                if sym: out.append(f"symbols {lid}: {''.join(sorted(set(sym)))} in spoken text — spell it out (rule 19)")
+    return out
+
+
 def main():
     path = sys.argv[1]; strict = "--strict" in sys.argv
     L = load(path); text = " ".join(t for _, t in L); low = text.lower()
@@ -101,6 +119,7 @@ def main():
     for k, v in G.items(): print(f"{k:14s} {v}")
     print(f"\nstats: {nW} words, {len(S)} sentences, CV {cv:.2f}, contractions {crate:.2f}, tells/150w {per150:.1f}, top opener '{top}' {topr:.0%}, But/So/And {bsa:.0%}")
     for f in flags: print("  - " + f)
+    for n in voice_notes(path): print("  note " + n)
     ok = sum(G.values()); print(f"\n{ok}/{len(G)} human-voice gates passed (H1–H6) — studio/WRITING.md")
     sys.exit(0 if ok == len(G) or not strict else 1)
 

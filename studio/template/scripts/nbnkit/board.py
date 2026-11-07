@@ -314,16 +314,16 @@ def report_m(c, x, y, t, t0, rows, err=None, wq=False):
             c.save(); c.translate(x + 250, y - 250); c.scale(kq, kq); mtext(c, "?", 0, 50, 200, RD, 1, "pm"); c.restore()
 
 
-def browser_m(c, x, y, t, t0):
-    w, h = 760, 470
+def browser_m(c, x, y, t, t0, url="AnnualCreditReport.com", title="YOUR REPORT", w=760, h=470):
+    """a browser window; url/title default to the credit-score episode (7 Nov: made generic, same defaults)"""
     k = pr(t, t0, 0.7)
     ink(c, [wob([(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)], 91, 1.4),
             wob([(x - w / 2, y - h / 2 + 70), (x + w / 2, y - h / 2 + 70)], 92, 0.8)], k, MK, 8)
     if k >= 1:
         for i, col in enumerate((RD, OR, GR)): c.drawCircle(x - w / 2 + 40 + i * 36, y - h / 2 + 35, 11, paint(col))
         c.drawRoundRect(R.MakeXYWH(x - w / 2 + 150, y - h / 2 + 14, w - 190, 42), 21, 21, stroke(MK, 4))
-        mtext(c, "AnnualCreditReport.com", x + 50, y - h / 2 + 47, 34, BLU, pr(t, t0 + 0.7, 0.6), "kb")
-        mtext(c, "YOUR REPORT", x, y + 30, 64, MK, pr(t, t0 + 1.0, 0.4), "pm")
+        if url: mtext(c, url, x + 50, y - h / 2 + 47, 34, BLU, pr(t, t0 + 0.7, 0.6), "kb")
+        if title: mtext(c, title, x, y + 30, 64, MK, pr(t, t0 + 1.0, 0.4), "pm")
         for i in range(3): ink(c, [[(x - 230, y + 90 + i * 40), (x + 230 - i * 70, y + 90 + i * 40)]], pr(t, t0 + 1.2 + i * 0.1, 0.25), (150, 156, 170), 8, pen_=False)
 
 
@@ -504,3 +504,171 @@ def eu_door_m(c, x, y, t, t0, t_tag):
         c.drawPath(_path([(0, 0), (0, 50)]), stroke(MK, 4))
         c.drawRoundRect(R.MakeXYWH(-90, 50, 180, 92), 14, 14, paint(WHITE)); c.drawRoundRect(R.MakeXYWH(-90, 50, 180, 92), 14, 14, stroke(RD, 7))
         mtext(c, "VAT", 0, 118, 58, RD, 1, "pm"); c.restore()
+
+
+# ---------------------------------------------------------------- shop + subscription props (R&D writers' room 7 Nov 2026: HOW IT WORKS
+# "same cart" (queue/15-same-cart) + "Prime Iliad" (queue/16-prime-iliad)): egg carton, price tag, phone, cart, coin flip, mouse cursor,
+# big button, door, maze, Greek helmet. All marker line art with hatch fills; every one draws on with (t, t0).
+EGG = (250, 240, 214); CARD_BOARD = (214, 186, 140)
+
+
+def _sc(x, y, s, pts): return [(x + px * s, y + py * s) for px, py in pts]
+
+
+def tag_m(c, x, y, text, t, t0, col=BLU, tilt=-8, s=1.0, hot=False):
+    """a swing price tag with a string hole; the price writes itself on (hot=True: red ink + a small shake)"""
+    k = pr(t, t0, 0.35)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(tilt + (3 * math.sin(t * 9) if hot and k >= 1 else 0)); c.scale(s, s)
+    body = [(-120, -60), (90, -60), (140, 0), (90, 60), (-120, 60), (-120, -60)]
+    c.drawPath(_path(body), paint(WHITE)); ink(c, [wob(body, 61, 0.8)], k, MK, 6, pen_=False)
+    if k > 0.6: c.drawCircle(98, 0, 11, stroke(MK, 4)); ink(c, [wob([(108, 0), (150, -40), (175, -90)], 62, 1)], pr(k, 0.6, 0.4), MK, 3, pen_=False)
+    mtext(c, text, -12, 24, 66, RD if hot else col, pr(t, t0 + 0.2, 0.35), "pm")
+    c.restore()
+
+
+def carton_m(c, x, y, t, t0, s=1.0, open_=1.0):
+    """a dozen-egg carton: box with bumps, lid open (open_ 0..1) showing 2 rows of eggs"""
+    k = pr(t, t0, 0.6); w, h = 460, 120
+    base = _sc(x, y, s, [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2 - 20, h / 2), (-w / 2 + 20, h / 2), (-w / 2, -h / 2)])
+    if k > 0.5: hatch(c, _path(base), pr(k, 0.5, 0.5), CARD_BOARD, gap=16, w=6, bbox=(x - w * s, y - h * s, x + w * s, y + h * s), a=0.8)
+    bumps = [wob(circ_pts(x + (-w / 2 + 38 + i * 77) * s, y + 30 * s, 26 * s, 180, 360, 12), 70 + i, 0.5) for i in range(6)]
+    ink(c, [wob(base, 71, 1.0)] + bumps, k, MK, 7)
+    if open_ > 0 and k >= 1:
+        lid = _sc(x, y, s, [(-w / 2 + 10, -h / 2 - 66), (-w / 2 + 30, -h / 2 - 66 - 170 * open_), (w / 2 - 30, -h / 2 - 66 - 170 * open_), (w / 2 - 10, -h / 2 - 66)])
+        ink(c, [wob(lid, 72, 0.8)], pr(t, t0 + 0.6, 0.3), MK, 6, pen_=False)
+        for row in range(2):
+            for i in range(6):
+                ex, ey = x + (-w / 2 + 38 + i * 77) * s + row * 10 * s, y - (34 + row * 34) * s
+                c.drawOval(R.MakeXYWH(ex - 30 * s, ey - 38 * s, 60 * s, 70 * s), paint(EGG, open_)); c.drawOval(R.MakeXYWH(ex - 30 * s, ey - 38 * s, 60 * s, 70 * s), stroke(MK, 4, open_))
+
+
+def phone_m(c, x, y, t, t0, s=1.0, screen=None, buzz_t=None, caller=None):
+    """a phone outline (no brand); screen(c, cx, cy, w, h) draws inside the screen clip; buzz_t: shakes + 'bzz' marks; caller: name on top"""
+    k = pr(t, t0, 0.5); w, h = 300 * s, 560 * s
+    if k <= 0: return
+    dx = 6 * math.sin(t * 60) if buzz_t is not None and buzz_t <= t <= buzz_t + 1.2 else 0
+    x += dx
+    c.drawRoundRect(R.MakeXYWH(x - w / 2 + 8, y - h / 2 + 12, w, h), 40 * s, 40 * s, paint((0, 0, 0), 0.10 * k, blur=10))
+    c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), 40 * s, 40 * s, paint(WHITE, k))
+    ink(c, [wob([(x - w / 2 + 40 * s, y - h / 2), (x + w / 2 - 40 * s, y - h / 2), (x + w / 2, y - h / 2 + 40 * s), (x + w / 2, y + h / 2 - 40 * s),
+                 (x + w / 2 - 40 * s, y + h / 2), (x - w / 2 + 40 * s, y + h / 2), (x - w / 2, y + h / 2 - 40 * s), (x - w / 2, y - h / 2 + 40 * s),
+                 (x - w / 2 + 40 * s, y - h / 2)], 81, 0.8)], k, MK, 8)
+    if k >= 1:
+        c.drawRoundRect(R.MakeXYWH(x - 40 * s, y - h / 2 + 20 * s, 80 * s, 14 * s), 7, 7, paint(MK))
+        if screen:
+            c.save(); c.clipRect(R.MakeXYWH(x - w / 2 + 18 * s, y - h / 2 + 50 * s, w - 36 * s, h - 100 * s)); screen(c, x, y, w - 36 * s, h - 100 * s); c.restore()
+        if caller: mtext(c, caller, x, y - h / 2 + 130 * s, int(54 * s), MK, pr(t, t0 + 0.4, 0.3), "pm")
+        if buzz_t is not None and t >= buzz_t:
+            kb = pr(t, buzz_t, 0.3)
+            for side in (-1, 1):
+                for j in range(2):
+                    xx = x + side * (w / 2 + 26 + j * 24); ink(c, [[(xx, y - 60 + j * 10), (xx + side * 10, y - 20), (xx, y + 20 - j * 10)]], kb, RD, 6, pen_=False)
+
+
+def cart_m(c, x, y, t, t0, s=1.0, items=0, col=GR):
+    """a shopping cart (side view); items 0..1 fills it with hatched boxes/bottles"""
+    k = pr(t, t0, 0.7)
+    basket = _sc(x, y, s, [(-210, -200), (190, -200), (150, -40), (-170, -40), (-210, -200)])
+    frame = _sc(x, y, s, [(-260, -240), (-210, -200)]); under = _sc(x, y, s, [(-170, -40), (-180, 10), (170, 10)])
+    grid = [_sc(x, y, s, [(-210 + i * 80, -200), (-170 + i * 64, -40)]) for i in range(1, 5)] + [_sc(x, y, s, [(-200, -120), (170, -120)])]
+    ink(c, [wob(frame, 91, 0.6), wob(basket, 92, 1.0), wob(under, 93, 0.8)] + [wob(g, 94 + i, 0.4) for i, g in enumerate(grid)], k, MK, 7)
+    for wx in (-140, 130):
+        kw = pr(t, t0 + 0.55, 0.2)
+        if kw > 0: ink(c, [circ_pts(x + wx * s, y + 40 * s, 28 * s, 0, 360, 20)], kw, MK, 7, pen_=False)
+    if items > 0 and k >= 1:
+        boxes = [(-160, -290, 90, 110, OR), (-50, -270, 70, 90, BLU), (40, -300, 60, 120, RD), (120, -260, 60, 70, PU)]
+        n = int(len(boxes) * items + 0.999)
+        for i, (bx, by, bw, bh, bc) in enumerate(boxes[:n]):
+            pth = _path(_sc(x, y, s, [(bx, by), (bx + bw, by), (bx + bw, by + bh), (bx, by + bh), (bx, by)]))
+            c.drawPath(pth, paint(WHITE)); hatch(c, pth, 1, bc, gap=14, w=5, bbox=(x + bx * s, y + by * s, x + (bx + bw) * s, y + (by + bh) * s), a=0.6)
+            c.drawPath(pth, stroke(MK, 5))
+
+
+def coin_m(c, x, y, t, t0, r=90, land=0.9, face="?"):
+    """a coin tossed up from (x, y): flips (squashes) on the way, lands at t0+land and writes its face"""
+    if t < t0: return
+    u = min(1.0, (t - t0) / land); hy = -320 * 4 * u * (1 - u)
+    sq = abs(math.cos((t - t0) * 18)) if u < 1 else 1.0
+    c.save(); c.translate(x, y + hy); c.scale(1, max(0.08, sq))
+    c.drawCircle(0, 0, r, paint((252, 206, 70))); c.drawCircle(0, 0, r, stroke(MK, 7)); c.drawCircle(0, 0, r * 0.74, stroke((190, 140, 30), 4))
+    c.restore()
+    if u >= 1: mtext(c, face, x, y + r * 0.35, int(r * 0.95), MK, pr(t, t0 + land, 0.25), "pm")
+
+
+def cursor_m(c, x, y, t, t0, s=1.0, wiggle=True):
+    """a mouse arrow cursor that draws on, then wanders a little"""
+    k = pr(t, t0, 0.35)
+    if k <= 0: return
+    if wiggle and k >= 1: x += 26 * math.sin((t - t0) * 2.3); y += 18 * math.sin((t - t0) * 3.1)
+    pts = _sc(x, y, s, [(0, 0), (0, 120), (30, 92), (54, 146), (76, 136), (52, 84), (92, 84), (0, 0)])
+    if k >= 1: c.drawPath(_path(pts), paint(WHITE))
+    ink(c, [pts], k, MK, 6, pen_=False)
+
+
+def button_m(c, x, y, text, t, t0, w=520, h=120, col=OR, glow=True, small=False):
+    """a big rounded call-to-action button (marker hatch fill); small=True draws a tiny text-link instead"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    if small:
+        mtext(c, text, x, y, 40, BLU, k, "kb", pen_=True)
+        if k >= 1: ink(c, [wob([(x - tw(font("kb", 40), text) / 2, y + 8), (x + tw(font("kb", 40), text) / 2, y + 8)], 101, 0.6)], 1, BLU, 3, pen_=False)
+        return
+    if glow and k >= 1: c.drawRoundRect(R.MakeXYWH(x - w / 2 - 20, y - h / 2 - 20, w + 40, h + 40), 50, 50, paint(col, 0.18 + 0.08 * math.sin(t * 5), blur=22))
+    rr = skia.Path(); rr.addRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), 44, 44)
+    c.drawPath(rr, paint(WHITE)); hatch(c, rr, pr(t, t0 + 0.25, 0.3), col, gap=14, w=7, bbox=(x - w / 2, y - h / 2, x + w / 2, y + h / 2), a=0.75)
+    c.drawPath(rr, stroke(MK, 7, k))
+    mtext(c, text, x, y + 24, 64, MK, pr(t, t0 + 0.3, 0.3), "pm")
+
+
+def door_m(c, x, y, t, t0, w=300, h=520, label=None, open_=0.0, col=BLU):
+    """a door in a frame, standing on y; open_ 0..1 swings it (the leaf narrows, the dark gap shows); label written above"""
+    k = pr(t, t0, 0.6)
+    fr = [(x - w / 2, y), (x - w / 2, y - h), (x + w / 2, y - h), (x + w / 2, y)]
+    if open_ > 0: c.drawRect(R.MakeLTRB(x - w / 2, y - h, x + w / 2, y), paint((60, 66, 80), 0.85 * k))
+    lw = w * (1 - 0.78 * eo(min(1, open_)))
+    leaf = [(x - w / 2, y), (x - w / 2, y - h), (x - w / 2 + lw, y - h + 30 * open_), (x - w / 2 + lw, y - 30 * open_ * 0), (x - w / 2, y)]
+    if k > 0.5:
+        c.drawPath(_path(leaf), paint(WHITE)); hatch(c, _path(leaf), pr(k, 0.5, 0.5), col, gap=18, w=6, bbox=(x - w / 2, y - h, x + w / 2, y), a=0.35)
+    ink(c, [wob(fr, 111, 0.8), wob(leaf, 112, 0.6)], k, MK, 8)
+    if k >= 1: c.drawCircle(x - w / 2 + lw - 30, y - h / 2, 12, paint(MK))
+    if label: mtext(c, label, x, y - h - 30, 70, MK, pr(t, t0 + 0.5, 0.3), "pm")
+
+
+def maze_m(c, x, y, t, t0, size=560, n=6, solve_t=None, seed=7):
+    """a square maze drawn wall by wall (deterministic depth-first maze); solve_t: a green path from entry to exit draws on"""
+    r = _rng(seed); cell = size / n; x0, y0 = x - size / 2, y - size / 2
+    seen = [[False] * n for _ in range(n)]; walls = {(i, j, d): True for i in range(n) for j in range(n) for d in "NESW"}
+    stack = [(0, 0)]; seen[0][0] = True; parent = {(0, 0): None}
+    D = {"N": (0, -1, "S"), "S": (0, 1, "N"), "E": (1, 0, "W"), "W": (-1, 0, "E")}
+    while stack:
+        i, j = stack[-1]; opts = [(d, i + dx, j + dy, o) for d, (dx, dy, o) in D.items() if 0 <= i + dx < n and 0 <= j + dy < n and not seen[i + dx][j + dy]]
+        if not opts: stack.pop(); continue
+        d, ni, nj, o = opts[int(r.integers(len(opts)))]; walls[(i, j, d)] = False; walls[(ni, nj, o)] = False
+        seen[ni][nj] = True; parent[(ni, nj)] = (i, j); stack.append((ni, nj))
+    segs = []
+    for i in range(n):
+        for j in range(n):
+            cx, cy = x0 + i * cell, y0 + j * cell
+            if walls[(i, j, "N")] and not (i == 0 and j == 0): segs.append([(cx, cy), (cx + cell, cy)])
+            if walls[(i, j, "W")]: segs.append([(cx, cy), (cx, cy + cell)])
+            if j == n - 1 and not (i == n - 1): segs.append([(cx, cy + cell), (cx + cell, cy + cell)])
+            if i == n - 1: segs.append([(cx + cell, cy), (cx + cell, cy + cell)])
+    ink(c, [wob(sg, 120 + q, 0.5, step=30) for q, sg in enumerate(segs)], pr(t, t0, 1.2), MK, 7, pen_=False)
+    if solve_t is not None and t >= solve_t:
+        node, path = (n - 1, n - 1), []
+        while node is not None: path.append((x0 + (node[0] + 0.5) * cell, y0 + (node[1] + 0.5) * cell)); node = parent[node]
+        path = path[::-1]; path = [(path[0][0], y0 - 20)] + path + [(path[-1][0], y0 + size + 30)]
+        ink(c, [path], pr(t, solve_t, 1.0), GR, 12, pen_=True)
+
+
+def helmet_m(c, x, y, t, t0, s=1.0, col=RD):
+    """a simple Greek (Corinthian-style) helmet, front view: dome, T-shaped face opening, cheek guards, hatched crest on top"""
+    k = pr(t, t0, 0.6)
+    dome = _sc(x, y, s, [(-110, 120)] + [(px, py) for px, py in circ_pts(0, 0, 115, 180, 360, 30, ry=125)] + [(110, 120), (40, 130), (34, 30),
+                                                                                                             (70, 0), (70, -30), (-70, -30), (-70, 0), (-34, 30), (-40, 130), (-110, 120)])
+    crest = _sc(x, y, s, [(-100, -110), (-60, -230), (60, -230), (100, -110), (0, -128), (-100, -110)])
+    if k > 0.5:
+        hatch(c, _path(crest), pr(k, 0.5, 0.5), col, gap=12, w=7, bbox=(x - 110 * s, y - 240 * s, x + 110 * s, y - 100 * s), a=0.85)
+        hatch(c, _path(dome), pr(k, 0.6, 0.4), OR, gap=20, w=6, bbox=(x - 120 * s, y - 130 * s, x + 120 * s, y + 140 * s), a=0.4)
+    ink(c, [wob(crest, 131, 0.8), wob(dome, 132, 0.8)] + [[(x + px * s, y - 230 * s), (x + px * 1.4 * s, y - 116 * s)] for px in (-30, 0, 30)], k, MK, 7)

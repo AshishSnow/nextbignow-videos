@@ -34,8 +34,19 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     stop is the most reliable pause; listen to any "…" line before keeping it. (ElevenLabs docs on numbers/pauses apply to any TTS; VOICE.md)
 20. **Round numbers** unless the exact figure is the point ("about one in five"). (UF/IFAS)
 21. **Read it aloud, then read it again over the narrator.** (7 Nov: two of our own TTS misreads came from capitals and one rare adjective: 'Comment LOCAL or GLOBAL' read 'El Col', 'Plain candles' read 'Playing candles'. Write the comment words in lower case in vo_lines.py, caps only on screen.) Keep what sounds like you talking; cut what sounds like a brochure. (NPR)
+22. **Tense matches the record.** A practice that ended gets past tense and a time stamp ("Back then, the button said…", "On a computer,
+    that meant four pages"). A claim the company disputes is said as theirs, and a regulator's general study is never placed so it sounds like
+    it's about the company in the story ("That's Instacart's side. Separately, America's consumer watchdog…"). (7 Nov: both fresh-eyes reviews
+    caught a present-tense or run-together claim that the sources didn't support.)
+23. **Attribute to the right document.** A word in a press statement isn't in the blog post; a gloss in a complaint ("Fittingly…") isn't the
+    company's reason. Say whose words they are, or say less. (7 Nov: "negligible" was in Instacart's statement to Consumer Reports, not its blog.)
+24. **Stressed words must be words of the line.** `make_vo.py` matches `stressed_words` to the aligned words (case and punctuation ignored); a
+    word that isn't there silently loses its emphasis. `human_check.py` now prints a `note stress …` line for each miss (7 Nov audit of 40
+    scripts: 1 real miss, home bakery a5 'refuse' vs 'refused', fixed; our 2 new scripts had 4 after rewrites, fixed).
 
 ## Before → after (from the 6 Nov credit script; facts unchanged)
+- (7 Nov, Prime) "To skip it, the button read: no, I don't want free shipping." → "Back then, the button to skip it said: no, I don't want free shipping." (rule 22)
+- (7 Nov, same cart) "Instacart says these were price tests. Run at random, for a handful of its stores." → "Instacart's answer? A coin toss. It says shoppers were put into price test groups at random." (the source: random *shoppers*, ten retail partners)
 - "But FICO, a major credit score, doesn't count your pay, your job or your age." → "FICO's one of the big credit scores. And it skips your pay. Your job too. Even how old you are."
 - "But card companies usually report your balance when each monthly statement ends. That can be before you pay." → "Your card company usually reports your balance the day your statement closes. Sometimes that's before you've paid it."
 - "So Experian says your card can look heavily used, even when you pay in full." → "Experian says that can make your card look heavily used. Even when you pay in full."

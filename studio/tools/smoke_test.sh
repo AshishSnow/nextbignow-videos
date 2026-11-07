@@ -46,6 +46,8 @@ python3 "$HERE/tools/board_check.py" --all "$HERE/episodes/queue" --no-brief > "
   && { [ ! -d "$HERE/episodes/queue/11-shorts-money" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/11-shorts-money" --strict --no-brief > /dev/null 2>&1; } \
   && { [ ! -d "$HERE/episodes/queue/12-home-bakery" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/12-home-bakery" --strict --no-brief > /dev/null 2>&1; } \
   && { [ ! -d "$HERE/episodes/queue/13-hotel-fees" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/13-hotel-fees" --strict --no-brief > /dev/null 2>&1; } \
+  && { [ ! -d "$HERE/episodes/queue/15-same-cart" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/15-same-cart" --strict --no-brief > /dev/null 2>&1; } \
+  && { [ ! -d "$HERE/episodes/queue/16-prime-iliad" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/16-prime-iliad" --strict --no-brief > /dev/null 2>&1; } \
   && { [ ! -d "$HERE/episodes/queue/06-food-truck-nyc" ] || python3 "$HERE/tools/board_check.py" "$HERE/episodes/queue/06-food-truck-nyc" --strict --no-brief > /dev/null 2>&1; } \
   && echo "ok   board_check $(tail -1 "$STUDIO/projects/_board.txt")" || { echo "FAIL board_check (queue boards, the pilot's or the IKEA board's assets)"; tail -3 "$STUDIO/projects/_board.txt"; fail=1; }
 rm -f "$STUDIO/projects/_board.txt"

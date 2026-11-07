@@ -12,7 +12,7 @@ LINES = [
     ("a2", "Rules change at every border. So search your state's name, plus cottage food.", 1.04, 0.2, +0.6, 1.45, ['border.', 'cottage'], "low"),
     ("a3", "In Texas, you can bake almost anything. But no meat, no seafood, no ice cream.", 1.04, 0.2, +0.6, 1.45, ['almost', 'meat,', 'cream.:dn'], "low"),
     ("a3b", "Needs a fridge? Register with the state first, and keep it cold.", 1.04, 0.25, +0.6, 1.45, ['fridge?', 'cold.:dn'], "low"),
-    ("a5", "In England, register with your council at least twenty eight days before you start. It's free, and can't be refused.", 1.04, 0.2, +0.6, 1.45, ['twenty', 'free,', 'refuse'], "low"),
+    ("a5", "In England, register with your council at least twenty eight days before you start. It's free, and can't be refused.", 1.04, 0.2, +0.6, 1.45, ['twenty', 'free,', 'refused.:dn'], "low"),
     ("a6", "An officer can then come and inspect your kitchen.", 1.04, 0.35, +0.6, 1.45, ['officer', 'inspect'], "low"),
     ("b1", "Step two. Get covered.", 1.0, 0.2, +0.8, 1.35, ['two.', 'covered.:dn'], "low"),
     ("b2", "Texas requires a food handler course. England requires hygiene training. So take a course.", 1.04, 0.2, +0.6, 1.45, ['course.', 'training,'], "low"),

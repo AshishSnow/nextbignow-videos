@@ -16,6 +16,9 @@ What it measures (no audio, no render; ~0.2 s per board):
                     ≤ 5 wrapped lines at 58 px; `hud_rule` text ≤ 560 px at 50 px.
   B4 static rows    a row whose line is ≥ 4 s (0.40 s/word + pause, as story_check) with no visible change in the shot/props
                     cells (→, pop, slide, flip, cut, zoom, …) — PLAYBOOK §6: the picture changes every 2–3 s.
+  Whiteboard boards (header mentions "whiteboard", STORY §2b): rows may be `| Row | Line(s) | Drawing | Caption | Chip |` with spans
+                    ("a1–a3", "c1, c2"); every line must be covered exactly once; B5 = the series pill is automatic, row 1 must describe
+                    frame 1's drawing, the last 2 rows carry the end card (SAVE / the two choice words). (R&D 7 Nov 2026)
   B5 signature beats  series badge in the first 2 rows, cold_open/hud_clock in the first 3, "Oops" rows == "Oops" lines (≤ 1),
                     the series end card in the last 2 rows (YOUR MOVE: choice_card/hud_choice; SPOT THE TRICK: choice_card or
                     a SAVE pill; WHO REALLY OWNS IT: choice_card or TAG).
@@ -38,7 +41,7 @@ RULE_MAX_W = 560
 STATIC_SEC = 4.0
 SHOT_RE = re.compile(r"[\s,]*(WIDE|MEDIUM|CU|two-shot|frame 1|top-down)\b")
 SETWORD_RE = re.compile(r"\b([a-z][a-z0-9_]*)[\s,]+(?:WIDE|MEDIUM|two-shot)\b")
-CHANGE_RE = re.compile(r"(→|->|\bpop|\bslide|\bflip|\bcut\b|\bzoom|\broll|\bswing|\bwalk|\bslam|\bdrop|\bfly|\bfall|\bspin|\bpush|\bpan\b|\bwhip|\bthen\b|\bturn|\bstand|\btake|\blean|\bkneel|\bhug|\bpoint|\bwave|\bempt|\bopen|\bclose|\bnod|\breach|\bappear|\bhighlight|\bstamp|\bflash|\bglow|\bdissolve|\bhop|\bflutter|\brain|\blight up|\blit\b|\bsnap|\bpull|\bset.{0,6}down|\bswap|\bsplit|\bhand|\bone by one|×\d|\bx\d|\bmultipl|\bgrow|\brise|\bfade|\bticks?\b|\bcount)", re.I)
+CHANGE_RE = re.compile(r"(→|->|\bpop|\bslide|\bflip|\bcut\b|\bzoom|\broll|\bswing|\bwalk|\bslam|\bdrop|\bfly|\bfall|\bspin|\bpush|\bpan\b|\bwhip|\bthen\b|\bturn|\bstand|\btake|\blean|\bkneel|\bhug|\bpoint|\bwave|\bempt|\bopen|\bclose|\bnod|\breach|\bappear|\bhighlight|\bstamp|\bflash|\bglow|\bdissolve|\bhop|\bflutter|\brain|\blight up|\blit\b|\bsnap|\bpull|\bset.{0,6}down|\bswap|\bsplit|\bhand|\bone by one|×\d|\bx\d|\bmultipl|\bgrow|\brise|\bfade|\bticks?\b|\bcount|\bwrit|\bdraw|\bwipe|\beras|\bcircl|\bcross|\bbuzz|\bwiggl|\bmerge|\bticks?\b|\blands?\b|\btips?\b|\bshrug)", re.I)
 SET_STOP = {"end", "split", "frame", "hero", "cu", "wide", "medium", "two", "ots", "data", "lab", "street", "lecture", "highway",
             "desk", "table", "gallery", "judge", "marketing", "bottling", "home", "office1950s"}
 LOOK_WORDS = None  # filled from the registry
@@ -80,8 +83,16 @@ def parse_board(folder):
             cells = [c.strip() for c in s.strip("|").split("|")]
             if not cells or cells[0].lower() == "line" or set(cells[0]) <= set("-: "): continue
             first = re.sub(r"[`*_]", "", cells[0]).strip()
+            if first.lower() in ("row", "#"): continue
+            if re.fullmatch(r"\d{1,3}[a-z]?", first) and len(cells) > 1:   # whiteboard boards: | Row | Line(s) | Drawing | ...
+                first = re.sub(r"[`*_]", "", cells[1]).strip(); cells = cells[1:]
             m = re.match(r"([a-z]{1,2}\d{1,2}[a-z]?)\b", first)
-            rows.append({"id": m.group(1) if m else None, "cells": cells, "raw": s})
+            ids = []
+            if m:   # "a1", "a1–a3" (range, expanded later against the script), "c1, c2", "d1–d3 + e1"
+                for part in re.split(r"\s*(?:,|\+|&|\band\b)\s*", first):
+                    mm = re.match(r"([a-z]{1,2}\d{1,2}[a-z]?)(?:\s*[–—-]\s*([a-z]{1,2}\d{1,2}[a-z]?))?\b", part.strip())
+                    if mm: ids.append((mm.group(1), mm.group(2)))
+            rows.append({"id": m.group(1) if m else None, "span": ids, "cells": cells, "raw": s})
         elif not rows: pre.append(ln)
     return "\n".join(pre), rows, text
 
@@ -121,10 +132,21 @@ def check(folder, funcs, sets, looks, strict=False):
     lines, meta = load_lines(folder)
     pre, rows, full = parse_board(folder)
     ids = [l[0] for l in lines]; texts = {l[0]: l[1] for l in lines}; pauses = {l[0]: l[3] for l in lines}
+    whiteboard = bool(re.search(r"whiteboard", pre, re.I))
+    expanded = []   # one entry per covered line id, so a whiteboard row "a1–a3" counts for a1, a2, a3
+    for r in rows:
+        cover = []
+        for a, b in r.get("span") or []:
+            if b and a in ids and b in ids and ids.index(a) <= ids.index(b): cover += ids[ids.index(a): ids.index(b) + 1]
+            else: cover += [a] + ([b] if b else [])
+        r["ids"] = cover or ([r["id"]] if r["id"] else [])
+        if len(r["ids"]) > 1:   # B4 below measures the whole span
+            texts["+".join(r["ids"])] = " ".join(texts.get(i, "") for i in r["ids"]); pauses["+".join(r["ids"])] = sum(float(pauses.get(i) or 0) for i in r["ids"])
+        expanded += [(i, r) for i in r["ids"]]
     rep = {"folder": os.path.basename(os.path.abspath(folder)), "series": meta.get("SERIES"), "part": meta.get("PART"), "ep": meta.get("EP"),
            "lines": len(lines), "rows": len(rows), "fail": [], "warn": [], "missing": {}, "sets_used": [], "looks_used": [], "captions": 0}
     # B1 rows <-> lines
-    row_ids = [r["id"] for r in rows]
+    row_ids = [i for i, _ in expanded] + [None for r in rows if not r["ids"]]
     for r in rows:
         if r["id"] is None: rep["fail"].append(f"B1 row without a line id: {r['cells'][0][:60]!r}")
     unknown = [i for i in row_ids if i and i not in ids]
@@ -144,7 +166,7 @@ def check(folder, funcs, sets, looks, strict=False):
         for m in re.finditer(r"\bwho\s*=\s*\"([a-z0-9_]+)\"", cell): out.append(("look", m.group(1)))
         for m in re.finditer(r"\*\*([a-z][a-z0-9_]*)([^*]*)\*\*", cell):
             w, rest = m.group(1), m.group(2)
-            if w in sets or (("_" in w or re.search(r"\d", w)) and not w.endswith("_el")) or SHOT_RE.match(rest): out.append(("set", w))
+            if w in sets or (("_" in w or re.search(r"\d", w)) and not w.endswith(("_el", "_m"))) or SHOT_RE.match(rest): out.append(("set", w))
         plain = re.sub(r"`[^`]*`", " ", cell)
         named = [x for x in sets if re.search(rf"\b{x}\b", plain)]
         out += [("set", x) for x in named]                      # "street set, 1950", "office: hero on the phone"
@@ -174,7 +196,7 @@ def check(folder, funcs, sets, looks, strict=False):
             if name in looks: return ("ok", "look")
             if name in sets: return ("ok", "set")
             if name in SET_STOP or len(name) < 3: return ("ok", "word")
-            if name.endswith(("_el", "_view", "_dressing")): return ("missing", "prop")
+            if name.endswith(("_el", "_view", "_dressing", "_m")): return ("missing", "prop")
             if "_" in name or name.endswith(("store", "hall", "cafe", "office", "room", "yard", "shop", "plant", "fountain")): return ("missing", "set")
             return ("missing", "unknown")
         return ("ok", kind)
@@ -232,18 +254,25 @@ def check(folder, funcs, sets, looks, strict=False):
             if w > RULE_MAX_W: rep["warn"].append(f"B3 {r['id']}: hud_rule {s!r} is {int(w)} px at 50 px (max ~{RULE_MAX_W}) — shorten")
     # B4 static rows
     for r in rows:
-        if r["id"] not in texts: continue
-        est = SEC_PER_WORD * len(words(texts[r["id"]])) + float(pauses.get(r["id"]) or 0)
+        key = "+".join(r["ids"]) if len(r.get("ids") or []) > 1 else r["id"]
+        if key not in texts: continue
+        est = SEC_PER_WORD * len(words(texts[key])) + float(pauses.get(key) or 0)
+        if len(r["ids"]) > 1 and est >= STATIC_SEC * 2 and len(CHANGE_RE.findall(" ".join(r["cells"][1:]))) < 2:
+            rep["warn"].append(f"B4 {key}: ~{est:.1f} s across {len(r['ids'])} lines with < 2 visible changes — the pen should draw something new every 2–3 s"); continue
         shotcells = " ".join(r["cells"][1:])
         if est >= STATIC_SEC and not CHANGE_RE.search(shotcells):
             rep["warn"].append(f"B4 {r['id']}: ~{est:.1f} s on one picture — add a second shot, a prop reveal or a camera move")
     # B5 signature beats
     head2 = " ".join(x["raw"] for x in rows[:2]); head3 = " ".join(x["raw"] for x in rows[:3]); tail2 = " ".join(x["raw"] for x in rows[-2:])
-    if not re.search(r"series_badge|part_badge", head2): rep["fail"].append("B5 no series_badge/part_badge in the first 2 rows")
-    if not re.search(r"cold_open|hud_clock|mini_card", head3): rep["fail"].append("B5 no cold_open/hud_clock in the first 3 rows")
+    if whiteboard:   # board look (STORY §2b): the series pill is drawn on every shot by rs(); frame 1 must already show the hook object
+        if not rows or len(rows[0]["cells"]) < 2 or len(rows[0]["cells"][1]) < 12: rep["fail"].append("B5 whiteboard: row 1 must describe the drawing on screen in frame 1")
+    else:
+        if not re.search(r"series_badge|part_badge", head2): rep["fail"].append("B5 no series_badge/part_badge in the first 2 rows")
+        if not re.search(r"cold_open|hud_clock|mini_card", head3): rep["fail"].append("B5 no cold_open/hud_clock in the first 3 rows")
     oops_rows = sum(1 for x in rows if "oops_beat" in x["raw"]); oops_lines = sum(1 for l in lines if re.search(r"\boops\b", l[1], re.I))
     if oops_rows != oops_lines or oops_rows > 1: rep["fail"].append(f"B5 oops_beat rows {oops_rows} vs 'Oops' lines {oops_lines} (max 1)")
     series = (meta.get("SERIES") or "").upper()
+    if whiteboard: tail2 += " SAVE" if re.search(r"\bsave\b", tail2, re.I) else ""
     end_ok = {"YOUR MOVE": r"choice_card|hud_choice", "SPOT THE TRICK": r"choice_card|hud_choice|\bSAVE\b", "WHO REALLY OWNS IT": r"choice_card|hud_choice|\bTAG\b"}.get(series, r"choice_card|hud_choice|\bSAVE\b|\bTAG\b")
     if not re.search(end_ok, tail2): rep["fail"].append(f"B5 no series end card ({end_ok}) in the last 2 rows")
     if strict and missing: rep["fail"].append(f"B2 --strict: {len(missing)} assets missing from template/scripts: {sorted(missing)}")
