@@ -44,8 +44,18 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     word that isn't there silently loses its emphasis. `human_check.py` now prints a `note stress …` line for each miss (7 Nov audit of 40
     scripts: 1 real miss, home bakery a5 'refuse' vs 'refused', fixed; our 2 new scripts had 4 after rewrites, fixed).
 25. **Watch for words that run together.** Read fast, "That's a maze" became "That's amazing" and "one internal comment it quotes" became "commented quotes" in the ASR read-back of both takes (8 Nov, Prime). If two short words can fuse into a real word, add a word between them ("Feels like a maze, and you're the one stuck in the middle of it.") or put the source first ("The FTC quotes one internal comment: …").
+26. **Acronyms that are also words get read as the word.** "US shops paid…" can come out "us shops". Write "American" / "in America"
+    in vo_lines.py (UK, EU, FTC are fine). `human_check.py` prints a `note caps …` line for US / IT / AM / OK etc. (8 Nov fresh-eyes review,
+    cash rewards; the room's audit found 5 such lines in older scripts: 11 ×2, 12, 13, 17.)
+27. **Use the study's own definitions, out loud.** A paper's "cash" can mean "everything except credit cards, debit included"; its
+    numbers can be 2007 data published in 2010. If the everyday word means something narrower, say the paper's meaning in one short line
+    ("Debit counted as cash.") and put the data year on screen. And a rebuttal must answer the same claim: an industry group's point about
+    cardholders isn't a reply to a number about cash payers ("Card groups push back…", not "The card side calls that wrong"). (8 Nov, both
+    fresh-eyes reviews: the biggest catches were definitions and scope, again not voice.)
 
 ## Before → after (from the 6 Nov credit script; facts unchanged)
+- (8 Nov, cash rewards) "Each cash-paying household sent about a hundred and fifty dollars a year to card users." → "Debit counted as cash. … A home with no credit card paid credit card users about a hundred and fifty dollars a year." (rule 27)
+- (8 Nov, dropship) "Selling in the UK? Thirty days there too." → "Selling in the UK? Thirty days to deliver it, not just ship it." (US = ship, UK = deliver)
 - (7 Nov, Prime) "To skip it, the button read: no, I don't want free shipping." → "Back then, the button to skip it said: no, I don't want free shipping." (rule 22)
 - (7 Nov, same cart) "Instacart says these were price tests. Run at random, for a handful of its stores." → "Instacart's answer? A coin toss. It says shoppers were put into price test groups at random." (the source: random *shoppers*, ten retail partners)
 - "But FICO, a major credit score, doesn't count your pay, your job or your age." → "FICO's one of the big credit scores. And it skips your pay. Your job too. Even how old you are."

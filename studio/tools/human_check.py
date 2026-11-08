@@ -54,6 +54,9 @@ def skeleton(s):
     return " ".join(w[:2]) + (" #" if "#" in w else "")
 
 
+AMBIG_CAPS = {"us", "it", "am", "in", "on", "or", "no", "so", "do", "go", "me", "we", "he", "is", "as", "at", "an", "id", "ok", "hi", "who", "can", "con", "sat", "act", "aid", "art", "ban", "bar", "pet", "tax", "via"}
+
+
 def voice_notes(path):
     """Not gates (R&D 7 Nov 2026, from two fresh-eyes reviews): things the TTS pipeline silently gets wrong.
     stress: a stressed_words entry (field 7, ':dn' suffix allowed) that isn't a token of its line — the emphasis is dropped.
@@ -68,6 +71,9 @@ def voice_notes(path):
                 if miss: out.append(f"stress {lid}: {miss} not in the line's words (make_vo matches whole words, case/punctuation ignored)")
                 sym = re.findall(r"[0-9$%£€&/]", text)
                 if sym: out.append(f"symbols {lid}: {''.join(sorted(set(sym)))} in spoken text — spell it out (rule 19)")
+                # 8 Nov (fresh-eyes review, cash rewards): an all-caps acronym that is also a word ("US" -> "us") gets read as the word
+                amb = [w for w in re.findall(r"\b[A-Z]{2,4}\b", text) if w.lower() in AMBIG_CAPS]
+                if amb: out.append(f"caps {lid}: {sorted(set(amb))} can be read as a word ('US' -> 'us') — say 'American' / 'in America', or listen to the take (rule 26)")
     return out
 
 

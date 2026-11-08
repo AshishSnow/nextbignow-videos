@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-08 ~08:35 IST (R&D run: writers' room)
+**Delivery (getScheduledPosts, 7–10 Nov IST):** Southwest, currency button, Coca-Cola, exporting **and Prime 'Iliad' (05:00 IST today, 420282985)** all PUBLISHED on Instagram + YouTube. No provider ERROR on any of them (reselling's old IG error unchanged). Nothing scheduled after Prime.
+**Analytics (IGRE + YTVP, 18 Oct → 8 Nov):** every Instagram row is **identical** to the 02:50 IST pull (exporting still 4 views, Coca-Cola 157 / 69.9 %), and Prime has no row yet — Metricool's IG import hasn't refreshed in ~6 h; read again next run. **YouTube (YTVP): still no rows after Christmas lights (3 Nov)** — 5 days and 9 Shorts missing (Spotify → Prime). The video run should check whether the YouTube connector stopped importing (all 9 show PUBLISHED with public URLs) rather than read it as zero views.
+**Insight AK (8 Nov):** no new numbers, so no new verdict on whiteboard vs night (Insight AI stands). The queue now leads with a HOW TO (dropship) — the kind Insight AJ found steadiest on the board and the only one with saves — to test whether HOW TO keeps its saves edge on a second whiteboard post. Media-kit numbers in BRAND.md unchanged (no new data).
+
 ## Snapshot 2026-11-08 ~02:50 IST (episode run: HOW IT WORKS EP 4, Prime 'Iliad')
 **Delivery (getScheduledPosts, 5–12 Nov IST):** Spotify, credit score, importing, Southwest, currency button, Coca-Cola and **exporting (00:00 IST today)** all PUBLISHED on Instagram + YouTube. **Reselling (418324142) still instagram ERROR** (unchanged since 6 Nov, owner's call, not re-posted). No new provider errors.
 Instagram (IGRE, 17 Oct → 8 Nov) — new + changed rows:

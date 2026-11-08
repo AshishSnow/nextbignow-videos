@@ -853,3 +853,135 @@ def laptop2(c, x, y, t, t0, w=440, h=290, screen=None):
     base = [(x - w / 2 - 50, y + 10), (x + w / 2 + 50, y + 10), (x + w / 2 + 20, y + 44), (x - w / 2 - 20, y + 44), (x - w / 2 - 50, y + 10)]
     c.drawPath(_path(scr), paint(WHITE, k)); ink(c, [wob(scr, 251, 0.8), wob(base, 252, 0.8)], k, MK, 7)
     if screen and k >= 1: screen(c, x, y - h / 2)
+
+
+# ---------------------------------------------------------------- 8 Nov 2026 R&D writers' room: dropshipping (EP 17) + cash rewards (EP 18) props
+def parcel_m(c, x, y, t, t0, s=1.0, label=None, label_t=None, label_col=RD, open_=0.0):
+    """a cardboard shipping box (3/4 view) with packing tape and a white label; `label` writes on at label_t; open_ 0..1 lifts the flaps"""
+    k = pr(t, t0, 0.6)
+    if k <= 0: return
+    w, h, d = 300 * s, 210 * s, 90 * s
+    front = [(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)]
+    top = [(x - w / 2, y - h / 2), (x - w / 2 + d, y - h / 2 - d * 0.6), (x + w / 2 + d, y - h / 2 - d * 0.6), (x + w / 2, y - h / 2)]
+    side = [(x + w / 2, y - h / 2), (x + w / 2 + d, y - h / 2 - d * 0.6), (x + w / 2 + d, y + h / 2 - d * 0.6), (x + w / 2, y + h / 2)]
+    c.drawPath(_path(front), paint(WHITE, k))
+    if k > 0.5:
+        hatch(c, _path(front), pr(k, 0.5, 0.5), CARD_BOARD, gap=17, w=6, bbox=(x - w / 2, y - h / 2, x + w / 2, y + h / 2), a=0.7)
+        hatch(c, _path(side + [side[0]]), pr(k, 0.5, 0.5), CARD_BOARD, gap=12, w=6, bbox=(x + w / 2, y - h / 2 - d, x + w / 2 + d, y + h / 2), a=0.95)
+    tape = [(x - 18 * s, y - h / 2), (x - 18 * s + d, y - h / 2 - d * 0.6)]
+    ink(c, [wob(front, 301, 0.9), wob(top, 302, 0.7), wob(side, 303, 0.7), tape, [(x - 18 * s, y - h / 2), (x - 18 * s, y - h / 2 + 50 * s)]], k, MK, 7)
+    if open_ > 0 and k >= 1:
+        ink(c, [[(x - w / 2, y - h / 2), (x - w / 2 - 40 * s, y - h / 2 - 120 * s * open_)], [(x + w / 2, y - h / 2), (x + w / 2 + 50 * s, y - h / 2 - 120 * s * open_)]], 1, MK, 6, pen_=False)
+    if k >= 1:   # the label (always drawn white; text optional)
+        lb = R.MakeXYWH(x - 120 * s, y - 10 * s, 200 * s, 92 * s); c.drawRoundRect(lb, 8, 8, paint(WHITE)); c.drawRoundRect(lb, 8, 8, stroke(MK, 4))
+        if label and (label_t is None or t >= label_t):
+            sz = int(52 * s); f = font("pm", sz)
+            while tw(f, label) > 180 * s and sz > 20: sz -= 2; f = font("pm", sz)
+            mtext(c, label, x - 20 * s, y + 52 * s, sz, label_col, pr(t, label_t if label_t is not None else t0 + 0.6, 0.35), "pm")
+
+
+def lamp_m(c, x, y, t, t0, s=1.0, on=0.0, col=OR):
+    """a desk lamp (base, two arm segments, cone shade); on 0..1 = a soft light cone under the shade"""
+    k = pr(t, t0, 0.55)
+    if k <= 0: return
+    P = lambda pts: [(x + px * s, y + py * s) for px, py in pts]
+    base = P([(-80, 0), (80, 0), (60, -24), (-60, -24), (-80, 0)])
+    arm = P([(0, -24), (-50, -150), (40, -250)])
+    shade = P([(40, -250), (150, -210), (100, -150), (40, -250)])
+    if k >= 1 and on > 0:
+        cone = _path(P([(125, -180), (230, 0), (40, 0), (110, -165)])); c.drawPath(cone, paint((255, 214, 90), 0.35 * on, blur=8))
+    c.drawPath(_path(shade), paint(WHITE, k))
+    if k > 0.6: hatch(c, _path(shade), pr(k, 0.6, 0.4), col, gap=14, w=6, bbox=(x + 30 * s, y - 260 * s, x + 160 * s, y - 140 * s), a=0.85)
+    ink(c, [wob(base, 311, 0.6), wob(arm, 312, 0.6), wob(shade, 313, 0.6)], k, MK, 7)
+    if k >= 1: c.drawCircle(x - 50 * s, y - 150 * s, 9 * s, paint(MK)); c.drawCircle(x + 40 * s, y - 250 * s, 9 * s, paint(MK))
+
+
+def ship_m(c, x, y, t, t0, s=1.0, label="SUPPLIER", bob=True):
+    """a small cargo ship on a wavy water line with three stacked containers; bobs gently"""
+    k = pr(t, t0, 0.7)
+    if k <= 0: return
+    dy = 6 * math.sin(t * 2.2) * s if bob and k >= 1 else 0
+    P = lambda pts: [(x + px * s, y + dy + py * s) for px, py in pts]
+    hull = P([(-220, -40), (220, -40), (170, 40), (-190, 40), (-220, -40)])
+    bridge = P([(-190, -40), (-190, -130), (-120, -130), (-120, -40)])
+    c.drawPath(_path(hull), paint(WHITE, k))
+    if k > 0.5: hatch(c, _path(hull), pr(k, 0.5, 0.5), BLU, gap=15, w=6, bbox=(x - 230 * s, y + dy - 50 * s, x + 230 * s, y + dy + 50 * s), a=0.55)
+    boxes = []
+    for i, (bx, by, bc) in enumerate(((-90, -40, RD), (0, -40, GR), (90, -40, OR), (-45, -100, BLU), (45, -100, RD))):
+        bp = P([(bx - 42, by), (bx - 42, by - 58), (bx + 42, by - 58), (bx + 42, by), (bx - 42, by)]); boxes.append(wob(bp, 330 + i, 0.4))
+        if k > 0.7: hatch(c, _path(bp), pr(k, 0.7, 0.3), bc, gap=12, w=5, bbox=(x + (bx - 45) * s, y + dy + (by - 60) * s, x + (bx + 45) * s, y + dy + by * s), a=0.6)
+    waves = [wob([(x + (-260 + i * 40) * s, y + 44 * s + (8 if i % 2 else -4) * s) for i in range(14)], 340, 0.3)]
+    ink(c, [wob(hull, 321, 0.7), wob(bridge, 322, 0.6)] + boxes, k, MK, 6)
+    ink(c, waves, k, BLU, 6, pen_=False)
+    if label and k >= 1: mtext(c, label, x, y + dy + 120 * s, int(46 * s), MK, pr(t, t0 + 0.7, 0.3), "kb")
+
+
+def giftcard_m(c, x, y, t, t0, s=1.0, label="GIFT CARD", col=PU, tilt=-6, cross_t=None):
+    """a gift card with a ribbon bow and a handwritten label; cross_t: red X over it"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    w, h = 300 * s, 190 * s
+    c.save(); c.translate(x, y); c.rotate(tilt)
+    body = skia.Path(); body.addRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), 20 * s, 20 * s)
+    c.drawPath(body, paint(WHITE, k)); hatch(c, body, k, col, gap=16, w=6, bbox=(-w / 2, -h / 2, w / 2, h / 2), a=0.35)
+    c.drawPath(body, stroke(MK, 6, k))
+    c.drawRect(R.MakeXYWH(-w / 2 + 28 * s, -h / 2, 18 * s, h), paint(RD, k))
+    for sx in (-1, 1): c.drawOval(R.MakeXYWH(-w / 2 + 37 * s + (sx * 34 - 17) * s, -h / 2 - 20 * s, 34 * s, 26 * s), stroke(RD, 6, k))
+    sz = int(40 * s); f = font("pm", sz)
+    while tw(f, label) > w - 110 * s and sz > 18: sz -= 2; f = font("pm", sz)
+    mtext(c, label, 24 * s, 14 * s, sz, MK, pr(t, t0 + 0.3, 0.35), "pm")
+    c.restore()
+    if cross_t is not None and t > cross_t:
+        cross(c, x - w / 2 - 20, y - h / 2 - 20, x + w / 2 + 20, y + h / 2 + 20, pr(t, cross_t, 0.2), RD, 14, 3)
+        cross(c, x + w / 2 + 20, y - h / 2 - 20, x - w / 2 - 20, y + h / 2 + 20, pr(t, cross_t + 0.15, 0.2), RD, 14, 4)
+
+
+def cup_m(c, x, y, t, t0, s=1.0, steam=True, col=OR):
+    """a takeaway coffee cup with lid and sleeve; steam curls wiggle"""
+    k = pr(t, t0, 0.55)
+    if k <= 0: return
+    P = lambda pts: [(x + px * s, y + py * s) for px, py in pts]
+    body = P([(-80, -200), (80, -200), (62, 0), (-62, 0), (-80, -200)])
+    lid = P([(-92, -200), (92, -200), (86, -232), (-86, -232), (-92, -200)])
+    sleeve = P([(-76, -150), (76, -150), (70, -70), (-70, -70), (-76, -150)])
+    c.drawPath(_path(body), paint(WHITE, k))
+    if k > 0.5: hatch(c, _path(sleeve), pr(k, 0.5, 0.5), col, gap=13, w=6, bbox=(x - 80 * s, y - 155 * s, x + 80 * s, y - 65 * s), a=0.85)
+    ink(c, [wob(body, 351, 0.6), wob(lid, 352, 0.5), wob(sleeve, 353, 0.5)], k, MK, 7)
+    if steam and k >= 1:
+        for i, sx in enumerate((-30, 10, 45)):
+            ph = t * 2.4 + i
+            pts = [(x + (sx + 12 * math.sin(ph + j * 0.9)) * s, y + (-250 - j * 22) * s) for j in range(6)]
+            ink(c, [pts], 1, GHOST if i % 2 else (190, 196, 206), 6, pen_=False)
+
+
+def cash_m(c, x, y, t, t0, s=1.0, text="$5", tilt=-5, n=1):
+    """a banknote (or a small fanned stack of n): green hatched note, oval centre, value in the corners"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    w, h = 300 * s, 140 * s
+    for i in range(n - 1, -1, -1):
+        c.save(); c.translate(x + i * 16 * s, y - i * 12 * s); c.rotate(tilt + i * 4)
+        body = skia.Path(); body.addRect(R.MakeXYWH(-w / 2, -h / 2, w, h))
+        c.drawPath(body, paint(WHITE, k)); hatch(c, body, k, GR, gap=15, w=6, bbox=(-w / 2, -h / 2, w / 2, h / 2), a=0.45)
+        c.drawPath(body, stroke(MK, 6, k)); c.drawOval(R.MakeXYWH(-46 * s, -46 * s, 92 * s, 92 * s), stroke(MK, 5, k))
+        if i == 0:
+            mtext(c, text, 0, 22 * s, int(54 * s), GR, pr(t, t0 + 0.3, 0.3), "pm")
+            for cx_, cy_ in ((-w / 2 + 34 * s, -h / 2 + 40 * s), (w / 2 - 34 * s, h / 2 - 14 * s)):
+                mtext(c, text.strip("$£€") or "$", cx_, cy_, int(28 * s), MK, k, "pm")
+        c.restore()
+
+
+def wallet_m(c, x, y, t, t0, s=1.0, empty=False, col=(150, 96, 52)):
+    """a folded wallet; empty=True shows the open pocket with a written 0"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    P = lambda pts: [(x + px * s, y + py * s) for px, py in pts]
+    body = P([(-150, -95), (150, -95), (150, 95), (-150, 95), (-150, -95)])
+    flap = P([(150, -40), (40, -40), (40, 40), (150, 40)])
+    c.drawPath(_path(body), paint(WHITE, k))
+    if k > 0.5: hatch(c, _path(body), pr(k, 0.5, 0.5), col, gap=16, w=6, bbox=(x - 150 * s, y - 95 * s, x + 150 * s, y + 95 * s), a=0.6)
+    ink(c, [wob(body, 361, 0.7), wob(flap, 362, 0.5)], k, MK, 7)
+    if k >= 1: c.drawCircle(x + 70 * s, y, 10 * s, paint(MK))
+    if empty and k >= 1:
+        ink(c, [wob(P([(-150, -95), (-110, -150), (110, -150), (150, -95)]), 363, 0.5)], pr(t, t0 + 0.5, 0.3), MK, 6, pen_=False)
+        mtext(c, "0", x - 40 * s, y + 30 * s, int(110 * s), RD, pr(t, t0 + 0.7, 0.3), "pm")
