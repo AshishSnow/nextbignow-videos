@@ -53,6 +53,8 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     cardholders isn't a reply to a number about cash payers ("Card groups push back…", not "The card side calls that wrong"). (8 Nov, both
     fresh-eyes reviews: the biggest catches were definitions and scope, again not voice.)
 
+28. **Read the ASR notes before rewriting.** voice_report flags a line when the read-back spells a word differently: "dropshipping" comes back "drop shipping" and "lamp's" comes back "lamps" — those are spelling, not misreads (9 Nov, dropship: 3 of 4 flags were this). Real misreads change the word ("come in one word"); fix those, note the rest in the run log. And `story_check` R7 on *estimated* timing runs long: the dropship script showed 18.x s before voicing and 15.0 s after (with the tighter trim_gaps).
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - (8 Nov, cash rewards) "Each cash-paying household sent about a hundred and fifty dollars a year to card users." → "Debit counted as cash. … A home with no credit card paid credit card users about a hundred and fifty dollars a year." (rule 27)
 - (8 Nov, dropship) "Selling in the UK? Thirty days there too." → "Selling in the UK? Thirty days to deliver it, not just ship it." (US = ship, UK = deliver)

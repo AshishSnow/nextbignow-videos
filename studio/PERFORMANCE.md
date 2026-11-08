@@ -9,6 +9,21 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-09 ~02:45 IST (episode run: HOW TO START EP 8, dropshipping 30-day rule)
+**Delivery (getScheduledPosts, 5–16 Nov IST):** every post from Spotify to **Prime 'Iliad' (8 Nov 05:00 IST)** PUBLISHED on Instagram + YouTube; only the old reselling Instagram ERROR (418324142, 6 Nov) remains — owner's call, not re-posted. Nothing scheduled after Prime; the owner's Michelin anime pilot (live session 8 Nov) isn't scheduled yet.
+**Instagram finally refreshed (IGRE, 18 Oct → 9 Nov)** — whiteboard rows:
+| Date (IST) | Video | Kind | Views | Reach | Avg watch | 3-s rate | Shares | Saves | Likes | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 8 Nov 05:00 | Prime 'Iliad' | HOW IT WORKS | 611 | 555 | 24.1 s | 65.0 % | 0 | 1 | 6 | 1 |
+| 8 Nov 00:00 | Exporting | HOW TO START | **1,712** | 1,537 | **35.3 s** | **78.9 %** | 1 | **5** | 16 | 1 |
+| 7 Nov 19:35 | Coca-Cola $1 | BIG | 274 | 237 | 20.8 s | 68.8 % | 0 | 1 | 1 | 1 |
+| 7 Nov 14:35 | Currency button | HOW IT WORKS | 343 | 320 | 16.0 s | 62.5 % | 0 | 0 | 2 | 1 |
+| 7 Nov 09:35 | Southwest | BIG | 349 | 309 | 23.0 s | 60.5 % | 0 | 0 | 3 | 1 |
+| 6 Nov 23:35 | Importing | HOW TO START | 443 | 391 | 25.8 s | 65.8 % | 0 | **5** | 7 | 1 |
+| 6 Nov 20:35 | Credit score | HOW IT WORKS | 137 | 117 | 16.7 s | 54.3 % | 0 | 0 | 1 | 1 |
+YouTube (YTVP): still no rows after Christmas lights (3 Nov) — 10 Shorts missing for 6 days; Metricool's YouTube import looks stuck (the Shorts themselves are PUBLISHED with public URLs).
+**Insight AL (9 Nov): on the whiteboard, HOW TO START wins on every number.** Exporting is the best whiteboard post so far (78.9 % 3-s, 35.3 s avg watch = a third of the video, 1,712 views) and the two HOW TO posts hold **10 of the 12 whiteboard saves** (exporting 3.3 / 1,000 reach, importing 12.8 / 1,000). HOW IT WORKS sits mid (62–65 %, 16–24 s; Prime 611 views), and the two HOW THEY GOT SO BIG stories are the weakest on watch time (21–23 s on ~80–98 s videos, 0–1 saves). Whiteboard vs night look: whiteboard 3-s average 65.1 % (7 posts) vs the night/stick look 72.7 % (drone, vending, food truck, lights, Spotify) — the gap from Insight AI narrowed from ~10 to ~7.6 points now that exporting landed. → Keep HOW TO START in every rotation; BIG stories need a stronger "useful" ending to earn saves (the founder's move as a rule the viewer can copy), and they're the right slot to try the owner's new anime look on. This run builds a HOW TO (dropship) — it tests whether a third whiteboard HOW TO repeats the saves.
+
 ## Snapshot 2026-11-08 ~08:35 IST (R&D run: writers' room)
 **Delivery (getScheduledPosts, 7–10 Nov IST):** Southwest, currency button, Coca-Cola, exporting **and Prime 'Iliad' (05:00 IST today, 420282985)** all PUBLISHED on Instagram + YouTube. No provider ERROR on any of them (reselling's old IG error unchanged). Nothing scheduled after Prime.
 **Analytics (IGRE + YTVP, 18 Oct → 8 Nov):** every Instagram row is **identical** to the 02:50 IST pull (exporting still 4 views, Coca-Cola 157 / 69.9 %), and Prime has no row yet — Metricool's IG import hasn't refreshed in ~6 h; read again next run. **YouTube (YTVP): still no rows after Christmas lights (3 Nov)** — 5 days and 9 Shorts missing (Spotify → Prime). The video run should check whether the YouTube connector stopped importing (all 9 show PUBLISHED with public URLs) rather than read it as zero views.

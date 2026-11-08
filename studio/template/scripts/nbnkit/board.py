@@ -985,3 +985,147 @@ def wallet_m(c, x, y, t, t0, s=1.0, empty=False, col=(150, 96, 52)):
     if empty and k >= 1:
         ink(c, [wob(P([(-150, -95), (-110, -150), (110, -150), (150, -95)]), 363, 0.5)], pr(t, t0 + 0.5, 0.3), MK, 6, pen_=False)
         mtext(c, "0", x - 40 * s, y + 30 * s, int(110 * s), RD, pr(t, t0 + 0.7, 0.3), "pm")
+
+
+# ---------------------------------------------------------------- HOW TO START EP 8 (dropshipping 30-day rule, 9 Nov 2026)
+# stepmap = generalised door map (n numbered parcels under the pill); relabel = rub out + rewrite the held parcel's label;
+# grid30_m = a 30-day month; strip_m = day boxes that fill; gov_m, stopwatch_m, snail_m, tagpill_m, store_page, dash_line.
+PINK = (236, 92, 150)
+
+
+def stepmap(c, n, active, done=(), a=1.0, x0=None, y=392, labels=None):
+    """mini map under the pill: n small numbered parcels; the active one coloured + bigger, finished ones ticked"""
+    if a <= 0: return
+    gap = 120; x0 = x0 if x0 is not None else 510 - gap * (n - 1) / 2
+    for i in range(n):
+        x = x0 + i * gap; on = (i == active)
+        w, h = (78, 56) if on else (62, 44)
+        rr = R.MakeXYWH(x - w / 2, y - h, w, h)
+        c.drawRect(rr, paint(WHITE, a))
+        if on: c.drawRect(rr, paint(CARD_BOARD, 0.85 * a))
+        c.drawRect(rr, stroke(MK if on else LIGHT, 5 if on else 3, a))
+        c.drawLine(x, y - h, x, y - h + 14, stroke(MK if on else LIGHT, 3, a))
+        mtext(c, str(i + 1), x, y - h * 0.22, 38 if on else 30, RD if on else LIGHT, a, "pm")
+        if i in done: ink(c, [[(x - 20, y - 70), (x - 6, y - 56), (x + 24, y - 92)]], 1, GR, 7, pen_=False)
+
+
+def gov_m(c, x, y, t, t0, label="FTC", sign="CONSUMER WATCHDOG", s=1.0):
+    k = pr(t, t0, 0.7); w = 440 * s
+    roof = [(x - w / 2 - 30 * s, y - 330 * s), (x, y - 440 * s), (x + w / 2 + 30 * s, y - 330 * s), (x - w / 2 - 30 * s, y - 330 * s)]
+    steps = [[(x - w / 2 - 40 * s, y), (x + w / 2 + 40 * s, y)], [(x - w / 2 - 20 * s, y - 26 * s), (x + w / 2 + 20 * s, y - 26 * s)]]
+    cols = [[(x - w / 2 + 40 * s + i * 90 * s, y - 26 * s), (x - w / 2 + 40 * s + i * 90 * s, y - 312 * s)] for i in range(5)]
+    beam = [[(x - w / 2 - 10 * s, y - 312 * s), (x + w / 2 + 10 * s, y - 312 * s)]]
+    if k > 0.6: hatch(c, _path(roof), pr(k, 0.6, 0.4), BLU, gap=16, w=6, bbox=(x - w, y - 450 * s, x + w, y - 320 * s), a=0.4)
+    ink(c, [wob(roof, 401, 0.8)] + [wob(p, 402 + i, 0.6) for i, p in enumerate(steps + cols + beam)], k, MK, 8)
+    mtext(c, label, x, y - 350 * s, int(54 * s), MK, pr(t, t0 + 0.6, 0.3), "pm")
+    if sign:
+        ks = pr(t, t0 + 0.8, 0.3)
+        if ks > 0:
+            f = font("pm", int(30 * s)); sw = tw(f, sign) + 40
+            c.drawRoundRect(R.MakeXYWH(x - sw / 2, y + 24 * s, sw, 54 * s), 10, 10, paint(WHITE, ks)); c.drawRoundRect(R.MakeXYWH(x - sw / 2, y + 24 * s, sw, 54 * s), 10, 10, stroke(BLU, 5, ks))
+            mtext(c, sign, x, y + 62 * s, int(30 * s), BLU, ks, "pm")
+
+
+def stopwatch_m(c, x, y, t, t0, r=90, run_t=None, stop_t=None, col=RD):
+    """a stopwatch; the hand sweeps from run_t until stop_t"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    ink(c, [wob(circ_pts(x, y, r, -90, 270, 40), 411, 0.6), [(x - 18, y - r - 26), (x + 18, y - r - 26)], [(x, y - r), (x, y - r - 26)]], k, MK, 7)
+    if k < 1: return
+    for i in range(12):
+        a_ = math.radians(i * 30); c.drawLine(x + 0.78 * r * math.sin(a_), y - 0.78 * r * math.cos(a_), x + 0.9 * r * math.sin(a_), y - 0.9 * r * math.cos(a_), stroke(MK, 3))
+    el = 0.0
+    if run_t is not None and t > run_t: el = (min(t, stop_t) if stop_t else t) - run_t
+    a_ = math.radians(el * 140)
+    c.drawLine(x, y, x + 0.72 * r * math.sin(a_), y - 0.72 * r * math.cos(a_), stroke(col, 7)); c.drawCircle(x, y, 8, paint(col))
+
+
+def snail_m(c, x, y, t, t0, s=1.0):
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    sp = [(x + (14 + 4.2 * a_ / 30) * s * math.cos(math.radians(a_)), y - 60 * s + (14 + 4.2 * a_ / 30) * s * math.sin(math.radians(a_))) for a_ in range(0, 720, 20)]
+    body = [(x - 90 * s, y), (x + 90 * s, y), (x + 120 * s, y - 30 * s), (x + 96 * s, y - 40 * s)]
+    if k >= 1: c.drawCircle(x, y - 60 * s, 62 * s, paint(GOLD, 0.45))
+    ink(c, [wob(body, 421, 0.6), sp, wob(circ_pts(x, y - 60 * s, 62 * s, -90, 270, 30), 422, 0.6), [(x + 104 * s, y - 36 * s), (x + 120 * s, y - 90 * s)], [(x + 90 * s, y - 36 * s), (x + 96 * s, y - 92 * s)]], k, MK, 6)
+    if k >= 1: c.drawCircle(x + 120 * s, y - 94 * s, 6 * s, paint(MK)); c.drawCircle(x + 96 * s, y - 96 * s, 6 * s, paint(MK))
+
+
+def strip_m(c, x, y, n, t, t0, fill_t=None, step=0.12, cell=None, col=GR, label=None, lab_col=MK, mark_last=None):
+    """a row of n day-boxes; from fill_t they fill one by one; mark_last = text on the last box"""
+    cell = cell or min(96, 880 / n); x0 = x - cell * n / 2
+    k = pr(t, t0, 0.5)
+    grid = [[(x0, y), (x0 + cell * n, y), (x0 + cell * n, y + cell), (x0, y + cell), (x0, y)]] + [[(x0 + cell * i, y), (x0 + cell * i, y + cell)] for i in range(1, n)]
+    ink(c, [wob(g, 430 + i, 0.4) for i, g in enumerate(grid)], k, MK, 5, pen_=False)
+    if fill_t is not None and t > fill_t and k >= 1:
+        m_ = min(n, int((t - fill_t) / step) + 1)
+        for i in range(m_):
+            ki = pr(t, fill_t + i * step, 0.12)
+            c.drawRect(R.MakeXYWH(x0 + cell * i + 6, y + 6, (cell - 12) * ki, cell - 12), paint(col, 0.55))
+            mtext(c, str(i + 1), x0 + cell * (i + 0.5), y + cell * 0.66, int(cell * 0.42), MK, ki, "kb")
+    if label: mtext(c, label, x, y + cell + 64, 44, lab_col, pr(t, t0 + 0.4, 0.3), "pm")
+
+
+def tagpill_m(c, x, y, text, k, col=BLU, size=46, fill=False):
+    if k <= 0: return
+    f = font("pm", size); w = tw(f, text) + 56; h = size * 1.55
+    c.save(); c.translate(x, y); s = eback(min(1, k), 1.7); c.scale(s, s)
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), h / 2, h / 2, paint(col if fill else WHITE, 0.95))
+    c.drawRoundRect(R.MakeXYWH(-w / 2, -h / 2, w, h), h / 2, h / 2, stroke(col, 7))
+    c.drawString(text, -tw(f, text) / 2, size * 0.36, f, paint(WHITE if fill else col)); c.restore()
+
+
+def relabel(c, x, y, t, t0, old, new, t_sw, s=1.0, old_col=RD, new_col=RD, open_=0.0):
+    """the held parcel: its label reads `old`; at t_sw a tiny eraser rubs it out (0.35 s) and `new` is written on"""
+    if t < t_sw:
+        parcel_m(c, x, y, t, t0, s, label=old, label_t=None if old else None, label_col=old_col, open_=open_)
+        return
+    parcel_m(c, x, y, t, t0, s, label=None, open_=open_)
+    u = pr(t, t_sw, 0.35)
+    lb_x, lb_y = x - 120 * s, y - 10 * s
+    if u < 1 and old:   # the old word fades under the eraser's strokes
+        mtext(c, old, x - 20 * s, y + 52 * s, int(40 * s), old_col, 1, "pm", a=1 - u)
+        ex = lb_x + 200 * s * (0.5 + 0.5 * math.sin(u * 9))
+        c.drawRoundRect(R.MakeXYWH(ex - 28 * s, lb_y + 10 * s, 56 * s, 70 * s), 8, 8, paint((60, 66, 84)))
+        c.drawRect(R.MakeXYWH(ex - 28 * s, lb_y + 66 * s, 56 * s, 14 * s), paint((210, 210, 214)))
+    else:
+        parcel_m(c, x, y, t, t0, s, label=new, label_t=t_sw + 0.35, label_col=new_col, open_=open_)
+
+
+def store_page(c, x, y, t, t0, line=None, line_t=None, line_col=GR, strike_t=None):
+    """laptop with a tiny shop page: a lamp photo, a price, and one shipping line that can be written / struck through"""
+    def scr(c_, cx, cy):
+        lamp_m(c_, cx - 150, cy + 110, t, t0 + 0.3, 0.45)
+        mtext(c_, "MY STORE", cx + 60, cy - 70, 40, MK, pr(t, t0 + 0.4, 0.3), "pm")
+        mtext(c_, "$39", cx + 80, cy, 46, BLU, pr(t, t0 + 0.6, 0.3), "pm")
+        if line and line_t is not None and t > line_t:
+            mtext(c_, line, cx + 70, cy + 76, 34, line_col, pr(t, line_t, 0.4), "pm")
+            if strike_t is not None and t > strike_t:
+                ink(c_, [[(cx - 30, cy + 64), (cx + 180, cy + 60)]], pr(t, strike_t, 0.2), RD, 8, pen_=False)
+    laptop2(c, x, y, t, t0, w=460, h=300, screen=scr)
+
+
+def grid30_m(c, x, y, t, t0, fill_t=None, step=0.07, upto=0, hl=None, cw=128, ch=78):
+    """a 30-day month (6 x 5 boxes): days count on from fill_t (or `upto` days already written); hl = time day 30 gets circled red"""
+    x0 = x - cw * 3; k = pr(t, t0, 0.6)
+    grid = [[(x0, y), (x0 + cw * 6, y), (x0 + cw * 6, y + ch * 5), (x0, y + ch * 5), (x0, y)]]
+    grid += [[(x0 + cw * i, y), (x0 + cw * i, y + ch * 5)] for i in range(1, 6)] + [[(x0, y + ch * j), (x0 + cw * 6, y + ch * j)] for j in range(1, 5)]
+    ink(c, [wob(g, i + 470, 0.5) for i, g in enumerate(grid)], k, MK, 5, pen_=False)
+    if k < 1: return
+    m_ = upto
+    if fill_t is not None and t > fill_t: m_ = max(m_, min(30, int((t - fill_t) / max(step, 1e-3)) + 1))
+    for d in range(m_):
+        i, j = d % 6, d // 6
+        mtext(c, str(d + 1), x0 + cw * (i + 0.5), y + ch * (j + 0.5) + 14, 38, (BLU if d < 29 else RD) if upto == 0 else LIGHT, 1, "kb")
+    if hl is not None and t > hl - 0.05:
+        cx, cy = x0 + cw * 5.5, y + ch * 4.5
+        c.drawRect(R.MakeXYWH(cx - cw / 2 + 4, cy - ch / 2 + 4, cw - 8, ch - 8), paint(RD, 0.15 * pr(t, hl, 0.3)))
+        ink(c, [wob(circ_pts(cx, cy, 64, -150, 215, 30, ry=44), 12, 1.0)], pr(t, hl, 0.35), RD, 9, pen_=False)
+        mtext(c, "30", cx, cy + 16, 48, RD, pr(t, hl + 0.1, 0.25), "pm")
+
+
+def dash_line(c, a, b, prog, col=MK, w=7):
+    if prog <= 0: return
+    n = 14; (x0, y0), (x1, y1) = a, b
+    for i in range(int(n * prog)):
+        u0, u1 = i / n, (i + 0.55) / n
+        c.drawLine(x0 + (x1 - x0) * u0, y0 + (y1 - y0) * u0, x0 + (x1 - x0) * u1, y0 + (y1 - y0) * u1, stroke(col, w))

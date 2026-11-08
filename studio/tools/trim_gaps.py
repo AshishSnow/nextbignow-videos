@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Cap dead air INSIDE a line (8 Nov 2026, Prime 'Iliad'): Chatterbox sometimes leaves 2.1-2.4 s of silence between two sentences of the
 same line (b3, i5, b2 there), which breaks VOICE.md's pause rule (sentence ends 350-500 ms, never > 1 s) and drags the picture.
-Usage: trim_gaps.py <project> [max_s=0.65] [to_s=0.45] [--dry]
+Usage: trim_gaps.py <project> [max_s=0.55] [to_s=0.42] [--dry]   (defaults tightened 9 Nov 2026, dropship: 161 -> 171 wpm overall)
 Finds silent runs (20 ms RMS < -40 dBFS) longer than max_s that lie strictly between two words of one line, shortens each to to_s (cut from the
 middle, 10 ms crossfade), and shifts every later word/line time in work/align.json. Pauses BETWEEN lines (the designed beats) are left alone.
 Backs up work/vo_pretrim.wav + align_pretrim.json. Run voice_report afterwards."""
@@ -9,7 +9,7 @@ import sys, json, shutil
 import numpy as np, soundfile as sf
 
 P = sys.argv[1]; args = [a for a in sys.argv[2:] if not a.startswith("--")]
-MAX = float(args[0]) if args else 0.65; TO = float(args[1]) if len(args) > 1 else 0.45; DRY = "--dry" in sys.argv
+MAX = float(args[0]) if args else 0.55; TO = float(args[1]) if len(args) > 1 else 0.42; DRY = "--dry" in sys.argv   # 9 Nov: 0.65/0.45 -> 0.55/0.42 (sentence ends 350-500 ms, VOICE.md)
 W = f"{P}/work"
 y, sr = sf.read(f"{W}/vo.wav", dtype="float32"); A = json.load(open(f"{W}/align.json"))
 mono = y.mean(1) if y.ndim > 1 else y
