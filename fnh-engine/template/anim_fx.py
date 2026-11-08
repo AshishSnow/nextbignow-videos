@@ -894,3 +894,22 @@ def doze(t, t0=0.0, period=2.6, depth=1.0):
     j = (q - 0.82 * period) * FPS
     if j < 3: d = depth * (1 - j / 3); return dict(lean=9 * d - 2, look=(0, -0.2), bob=16 * d - 4, blink=False, expr="wow", brow="up")
     return dict(lean=-2.0, look=(0, -0.3), bob=-3.0, blink=False, expr="wow", brow="up")
+
+
+# ================= MORPH CUT (ep 28): a shape-match transition between two shots =================
+# Rules (ProVideo Coalition, D. Allen 'The literal invisible cut: mastering the fluid morph' 2019; School of Motion 'Six essential motion design transitions'):
+# match POSITION in frame first, then size; momentum matters more than a perfect pose; 8-10 frames work best (the half-second default is too long); hide the
+# seam at a pause or at the fastest movement (motion blur hides it). In our 2D look: the object in shot A (a board drawing) slides + scales onto the matching
+# object in shot B (the lit version) while A dissolves into B, with a little blur at the middle. Use: transition "morph" in compose + MORPH[shot] = (a, b),
+# a = (x, y, size) of the thing in the outgoing shot, b = (x, y, size) of the same thing in the incoming shot.
+def morph_mix(prev, cur, p, a, b):
+    e = eio(clamp(p)); r = b[2] / max(1.0, a[2])
+    cx = a[0] + (b[0] - a[0]) * e; cy = a[1] + (b[1] - a[1]) * e
+    so = 1 + (r - 1) * e; si = (1 / r) + (1 - 1 / r) * e
+    Mo = np.float32([[so, 0, cx - so * a[0]], [0, so, cy - so * a[1]]]); Mi = np.float32([[si, 0, cx - si * b[0]], [0, si, cy - si * b[1]]])
+    po = cv2.warpAffine(prev, Mo, (W, H), borderMode=cv2.BORDER_REPLICATE); pi_ = cv2.warpAffine(cur, Mi, (W, H), borderMode=cv2.BORDER_REPLICATE)   # replicate, not reflect: a reflected edge shows a second copy of the scene when the incoming shot starts smaller
+    w = eio(clamp((p - 0.12) / 0.7))
+    out = po * (1 - w) + pi_ * w
+    bl = 7 * math.sin(math.pi * clamp(p))
+    if bl > 0.8: out = cv2.GaussianBlur(out, (0, 0), bl)
+    return out

@@ -289,6 +289,18 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
 - Score trick: `dim_sweep(mus, keys)` in ep 27 music.py = crossfade to a low-passed copy where the story turns the lights down (the music IS the dimmer). Note: mix/music now exec
   anim_shots split at "SHOTS = [" (the shot list only), so helper code above SHOTLIST must stay plain.
 
+### Ep 28 (8 Nov, eleventh ink episode): the MORPH CUT, the LIVER FACTORY, organ characters, tighter pauses (`anim_fx.py`, `anim_props_lib28.py`, sfx_lib, voice.env)
+- `morph_mix(prev, cur, p, a, b)` (anim_fx) = a shape-match transition: a / b = (x, y, size) of the SAME object in the outgoing / incoming shot; 10 frames (0.42 s), match position first,
+  then size; use it to bridge the board and the lit places (board drawing -> lit object). In compose add `elif k == "morph" and dt < 0.42: a, b = MORPH[sh["id"]]; f = morph_mix(...)`
+  and a `MORPH = {shot: (a, b)}` dict (copy from ep 28 anim_shots). Seam at a pause or a fast move; not inside fast action (a hard cut is better there).
+- Place: `set_factory(t, dim)` = inside the LIVER FACTORY (warm works hall, arched windows, red/blue pipes = blood in/out, lamps) + `conveyor(f, t, y=1230, speed)` (moving belt + rollers,
+  props ride at y ~ 1150-1170) + `machine_el(lit)` (hopper + STEP 1 / STEP 2 lamps). Good for any 'the body processes X' idea.
+- lib28 ink props: liver_el(mood, look, arms None|cross|up|work|shrug, hat), kidney_el(mood, look, flip, hat), junk_el(mood, packed) (greasy fat-soluble blob / water-blue gift box),
+  detox_bottle_el(level, mood), beaker_el(fat|water, level), jerrycan_el (20 L), jug_el, prod_el(bottle|tea|patch|pills|powder) (generic, no brands), soap_bar_el, papers_el, pill_el,
+  pillow_el + blanket_el (sleep without a lying body: chub_head_only on the pillow). lib28 sets ACC to lime: your anim_props6 overrides it. sfx_lib (ep 28): spray (spit-take), glug, clank, pour, belt.
+- Hook data (ep 27 vs the rest): a slow first second (nodding off) held 60.7 %, an accident 75-79 %. Open MID-ACCIDENT at frame 0 (ep 28: the chug is already going, spit-take at 1.3 s).
+- Voice: PZ 1.35 (tighter pauses, owner 7 Nov) is now voice.env; a rewrite can move UNCHANGED neighbour lines (b0 4.43 -> 4.26): always comp from the previous take after a rewrite.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

@@ -1,0 +1,53 @@
+{
+ "utmos": 4.484,
+ "utmos_note": "whole-file utmos = first 100 s (RAM); gate on chunk20 / line_mean",
+ "utmos_chunk20": 4.506,
+ "utmos_line_mean": 4.466,
+ "utmos_lines": {
+  "i1": 4.44,
+  "i2": 4.48,
+  "i3": 4.49,
+  "a1": 4.5,
+  "a2": 4.49,
+  "a3": 4.46,
+  "a4": 4.49,
+  "b0": 4.43,
+  "b1": 4.47,
+  "b2": 4.42,
+  "b3": 4.45,
+  "b4": 4.45,
+  "c0": 4.42,
+  "c1": 4.47,
+  "c2": 4.48,
+  "c3": 4.5,
+  "c4": 4.47,
+  "d0": 4.42,
+  "d1": 4.49,
+  "d2": 4.46,
+  "d3": 4.47,
+  "d4": 4.47,
+  "e0": 4.46,
+  "e1": 4.48,
+  "e2": 4.49,
+  "f1": 4.47,
+  "f2": 4.47
+ },
+ "f0_median_hz": 130.2,
+ "f0_range_st": 16.7,
+ "words": 391,
+ "duration_s": 148.6,
+ "wpm_overall": 157.9,
+ "wpm_speaking": 170.3,
+ "pause_ratio": 0.073,
+ "asr_word_error_approx": 0.013,
+ "asr_bad_lines": [
+  [
+   "c2",
+   "Every day they filter more than 140 liters. That's about seven big water cans."
+  ],
+  [
+   "c3",
+   "and only a liter or two of it ends up as P the rest goes straight back into U."
+  ]
+ ]
+}

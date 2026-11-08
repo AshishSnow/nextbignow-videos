@@ -806,3 +806,56 @@ def snore(level=-24, dur=1.6):
 def dial_ticks(t0, t1, level=-27, n_=6):
     """a dimmer knob turning: small detent clicks spread from t0 to t1."""
     for j in range(n_): add(click(level), t0 + (t1 - t0) * j / max(1, n_ - 1))
+
+
+# ---------------- ep 28 (8 Nov) foley: spray (a spit-take), glug (chugging from a bottle), clank (the factory), pour (water filling a tank), belt (conveyor hum) ----------------
+def spray(level=-16, dur=0.5):
+    """a SPIT-TAKE: a wet lip burst + a hissing spray that fans out and patters down."""
+    t2 = np.arange(int(dur * SR)) / SR
+    burst = signal.sosfilt(signal.butter(2, [300, 1600], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.02)
+    hissn = signal.sosfilt(signal.butter(2, [2500, 9000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.16) * np.minimum(1, t2 / 0.01)
+    pat = np.zeros(len(t2))
+    for j in range(14):
+        i = int(rng.uniform(0.12, dur - 0.03) * SR); s_ = np.arange(int(0.012 * SR)) / SR; pat[i:i + len(s_)] += np.sin(2 * np.pi * rng.uniform(900, 2200) * s_) * np.exp(-s_ / 0.003) * 0.4
+    y = 1.4 * burst + hissn + pat
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def glug(level=-22, n=4, gap=0.2):
+    """chugging: hollow bottle glugs (a falling resonant bubble each)."""
+    L = int((n * gap + 0.2) * SR); y = np.zeros(L)
+    for j in range(n):
+        i = int(j * gap * SR); t2 = np.arange(int(0.16 * SR)) / SR
+        s_ = np.sin(2 * np.pi * np.cumsum(380 - 900 * t2) / SR) * np.exp(-t2 / 0.06) * np.minimum(1, t2 / 0.004)
+        y[i:i + len(s_)] += s_[: L - i]
+    y = signal.sosfilt(signal.butter(2, [150, 2500], "band", fs=SR, output="sos"), y)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def clank(level=-24, f0=420):
+    """a friendly metal clank (the factory on 2 and 4)."""
+    t2 = np.arange(int(0.5 * SR)) / SR
+    y = sum(a * np.sin(2 * np.pi * f0 * r * t2) * np.exp(-t2 / d) for r, a, d in ((1, 1, 0.08), (2.43, 0.6, 0.06), (3.9, 0.4, 0.04)))
+    y += 0.5 * signal.sosfilt(signal.butter(2, [1500, 6000], "band", fs=SR, output="sos"), rng.standard_normal(len(t2))) * np.exp(-t2 / 0.01)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def pour(level=-26, dur=1.6):
+    """water pouring into a tank: band noise whose pitch rises as it fills, with a bubbling texture."""
+    t2 = np.arange(int(dur * SR)) / SR
+    y = rng.standard_normal(len(t2)); out = np.zeros(len(t2)); seg = int(0.05 * SR)
+    for i in range(0, len(t2), seg):
+        fc = 500 + 1400 * i / len(t2)
+        out[i:i + seg] = signal.sosfilt(signal.butter(2, [fc * 0.6, fc * 1.6], "band", fs=SR, output="sos"), y[i:i + seg])
+    out *= np.minimum(1, t2 / 0.1) * np.minimum(1, (dur - t2) / 0.2) * (0.8 + 0.2 * np.sin(2 * np.pi * 9 * t2))
+    return _st(out / (np.abs(out).max() + 1e-9) * db(level))
+
+
+def belt(level=-32, dur=2.0):
+    """a soft conveyor hum: low motor + rhythmic roller ticks."""
+    t2 = np.arange(int(dur * SR)) / SR
+    y = 0.6 * np.sin(2 * np.pi * 60 * t2) + 0.3 * np.sin(2 * np.pi * 120 * t2)
+    y += 0.3 * signal.sosfilt(signal.butter(2, [200, 900], "band", fs=SR, output="sos"), rng.standard_normal(len(t2)))
+    y *= 0.8 + 0.2 * (np.sin(2 * np.pi * 4 * t2) > 0.9)
+    y *= np.minimum(1, t2 / 0.2) * np.minimum(1, (dur - t2) / 0.3)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
