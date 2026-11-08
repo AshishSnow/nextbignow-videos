@@ -22,7 +22,7 @@ for i in range(0, NS, 48):
     x = env[i]; a_ = aa if x > prev else ar; prev = a_ * prev + (1 - a_) * x; g[i:i + 48] = prev
 M = m * (1 - 0.7 * g)[:, None]
 # ---- VO level automation: per-line dB offsets (quiet "secret" lines ~-2.5, reveal lines ~+1) + -60 dB room tone in the gaps ----
-LINE_DB = {"i1": +1.5, "i2": +0.8, "a2": +0.8, "b3": +0.6, "c4": +0.6, "z1": +0.5}
+LINE_DB = {"i1": +1.5, "i2": +0.8, "a3": +0.8, "b3": +0.6, "c5": +0.6, "z1": +0.5}
 gl = np.zeros(NS, np.float32)
 for lid, L in LINES.items():
     a0, a1 = int(L["start"] * SR), int(L["end"] * SR); gl[a0:a1] = LINE_DB.get(lid, 0.0)
