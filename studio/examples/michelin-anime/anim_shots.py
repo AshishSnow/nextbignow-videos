@@ -111,47 +111,57 @@ def icon(c, kind, x, y, s=1.0):
 # ---------------------------------------------------------------- shots
 def S_i1(c, t, n):
     u = lt(t, "S_i1"); sunset(c, t, city=False, top=(40, 20, 90), mid=(240, 70, 120), bot=(255, 170, 110))
-    speed_lines(c, 540, 700, (255, 240, 220), n=70, seed=n // 2, a=0.45)
-    ks = back(pr(u, 0.0, 0.35), 2.0); kt = back(pr(t, TW("i1", "tyre", off=-0.2), 0.3)); sy = 640 - 110 * min(1, kt); sc_ = 1 - 0.28 * min(1, kt)
-    for i in range(10):   # sparkle ring round the star
-        a_ = i * math.tau / 10 + t * 1.5; star4(c, 540 + math.cos(a_) * 260 * sc_, sy + math.sin(a_) * 260 * sc_, 22 + 10 * math.sin(t * 6 + i), (255, 250, 210))
-    if kt > 0: tyre(c, 540 - 900 * (1 - kt), sy, 230 * sc_, t * 300 * (1 - kt))
-    star5(c, 540, sy, 170 * ks * sc_, YEL, 7, rot=10 * math.sin(t * 2))
-    outline_text(c, "MICHELIN STAR", 540, 360 - 60 * min(1, kt), 96 * ks, CREAM2, INK, 11)
-    kai(c, 540, 1300, 0.9, t, mth(t), "talk", "shock" if kt > 0 else "open", "up", look=(0, -0.8), blink=blink(n))
-    if kt > 0: caption(c, t, TW("i1", "tyre", off=-0.05), "STARTED BY A", "TYRE COMPANY?!", (255, 120, 120), y=930, size=130)
+    speed_lines(c, 540, 900, (255, 240, 220), n=70, seed=n // 2, a=0.45)
+    banner(c, t, [("HOW A TYRE COMPANY", 92), ("CREATED THE MICHELIN STAR", 92)], y=300)
+    ks = 1.0 + 0.06 * math.sin(t * 5); kt = back(pr(t, TW("i1", "tyre", off=-0.2), 0.3)); sy = 880
+    for i in range(10):
+        a_ = i * math.tau / 10 + t * 1.5; star4(c, 540 + math.cos(a_) * 300, sy + math.sin(a_) * 300, 22 + 10 * math.sin(t * 6 + i), (255, 250, 210))
+    if kt > 0: tyre(c, 540 - 900 * (1 - kt), sy, 260, t * 300 * (1 - kt))
+    star5(c, 540, sy, 190 * ks, YEL, 8, rot=10 * math.sin(t * 2))
+    kai(c, 860, 1360, 0.62, t, mth(t), "talk", "shock" if kt > 0 else "open", "up", look=(-0.6, -0.6), blink=blink(n))
+    if kt > 0: caption(c, t, TW("i1", "tyre", off=-0.05), "", "A TYRE COMPANY?!", (255, 120, 120), y=1250, size=110)
 
 
 def S_i2(c, t, n):
     u = lt(t, "S_i2"); sky(c, (255, 120, 160), (255, 190, 140), (255, 236, 170)); halftone(c, (0, 0, W, H), (255, 255, 255), 26, 8, 0.22)
-    speed_lines(c, 540, 900, (255, 255, 255), n=60, seed=7, a=0.45)
-    ta = TW("i2", "free", off=-0.15)
-    kai(c, 540, 1000, 1.05, t, mth(t), "smirk" if u < 0.5 else "talk", "open", "smug", look=(0.4, 0), blink=blink(n), sparkle=u < 1.0,
-        arm="wave" if TW("i2", "Kai", off=-0.2) < t < ta else None)
-    caption(c, t, SHOT["S_i2"]["start"] + 0.1, "YEP.", "TO SELL MORE TYRES", YEL, y=470, size=120, t1=TW("i2", "Kai", off=-0.15))
-    if t < ta: c.save(); c.translate(0, 140); nameplate(c, t, TW("i2", "Kai", off=-0.15), "KAI", "BUSINESS DETECTIVE"); c.restore()
-    k = back(pr(t, ta, 0.3), 2.0)
+    speed_lines(c, 540, 800, (255, 255, 255), n=60, seed=7, a=0.4)
+    ta = TW("i2", "free", off=-0.15); tk = TW("i2", "Kai", off=-0.2)
+    if t < ta:   # "to sell more tyres": a tower of tyres and coins raining
+        for j in range(5):
+            kk = back(pr(t, SHOT["S_i2"]["start"] + 0.08 * j, 0.25), 2.0)
+            if kk > 0: tyre(c, 540 + (j % 2) * 30 - 15, 1010 - j * 120, 150 * kk, j * 20)
+        for j in range(6):
+            yy = ((t * 900 + j * 260) % 1300) + 300; coin(c, 150 + j * 150, yy, 46, t * 6 + j)
+        caption(c, t, SHOT["S_i2"]["start"] + 0.1, "YEP.", "TO SELL MORE TYRES", YEL, y=420, size=120, t1=tk)
+    kai(c, 860, 1350, 0.6, t, mth(t), "smirk" if u < 0.5 else "talk", "open", "smug", look=(-0.5, 0), blink=blink(n), arm="wave" if tk < t < ta else None)
+    if tk < t < ta: c.save(); c.translate(-30, 60); nameplate(c, t, tk, "KAI", "BUSINESS DETECTIVE"); c.restore()
+    k = ease(pr(t, ta, 0.25))
     if k > 0:   # the whole story in one picture: free tyre ad -> famous food award
-        c.save(); c.translate(540, 470); c.scale(k, k)
-        c.drawRect(skia.Rect.MakeLTRB(-520, -190, 520, 190), P((40, 20, 70), 0.85)); c.drawRect(skia.Rect.MakeLTRB(-520, -190, 520, 190), S(YEL, 8))
-        tyre(c, -330, -10, 110, t * 90); outline_text(c, "FREE AD", -330, 160, 50, CREAM2, INK, 7)
-        c.drawPath(path([(-160, -30), (90, -30), (90, -70), (170, 0), (90, 70), (90, 30), (-160, 30)]), P(YEL)); c.drawPath(path([(-160, -30), (90, -30), (90, -70), (170, 0), (90, 70), (90, 30), (-160, 30)]), S(INK, 5))
-        star5(c, 330, -14, 110, YEL, 6, rot=t * 40); outline_text(c, "FOOD AWARD", 330, 160, 50, CREAM2, INK, 7)
+        c.save(); c.translate(540, 820); c.scale(k, k)
+        c.drawRoundRect(skia.Rect.MakeLTRB(-440, -300, 440, 300), 40, 40, P((40, 20, 70), 0.9)); c.drawRoundRect(skia.Rect.MakeLTRB(-440, -300, 440, 300), 40, 40, S(YEL, 8))
+        red_book(c, -250, -20, 0.5, -6); outline_text(c, "FREE TYRE AD", -250, 230, 56, CREAM2, INK, 8)
+        c.drawPath(path([(-90, -30), (50, -30), (50, -80), (120, 0), (50, 80), (50, 30), (-90, 30)]), P(YEL)); c.drawPath(path([(-90, -30), (50, -30), (50, -80), (120, 0), (50, 80), (50, 30), (-90, 30)]), S(INK, 5))
+        for i in range(3): star5(c, 270 + (i - 1) * 95, -60 + (i == 1) * -30, 52, YEL, 5, rot=t * 40)
+        plate(c, 270, 80, 0.45, t); outline_text(c, "FAMOUS FOOD AWARD", 270, 230, 48, CREAM2, INK, 8)
         c.restore()
 
 
 def S_i3(c, t, n):
     u = lt(t, "S_i3"); sunset(c, t)
-    kai(c, 540, 1180, 1.0, t, mth(t), "grin" if t > TW("i3", "genius", off=-0.1) else "talk", "open", "smug", blink=blink(n), arm="point")
-    title_card(c, t, SHOT["S_i3"]["start"], [("3 SNEAKY MOVES", 120)], bg=TEAL, y=430, rot=-4)
-    for i in range(3):
-        k = back(pr(t, TW("i3", "three", off=0.1 + 0.18 * i), 0.25), 2.2)
-        if k > 0:
-            x = 260 + i * 280; r_ = 80 * k * (1.25 if i == 2 else 1)
-            c.drawCircle(x, 760, r_, P(YEL if i == 2 else CREAM2)); c.drawCircle(x, 760, r_, S(INK, 7))
-            outline_text(c, str(i + 1), x, 760 + r_ * 0.38, r_ * 1.1, PINK if i == 2 else INK, INK, 0.1, shadow=False)
-    if t > TW("i3", "genius", off=-0.1):
-        star4(c, 820, 650, 50 * (0.6 + 0.4 * math.sin(t * 12)), (255, 255, 255)); outline_text(c, "GENIUS", 820, 900, 70, YEL, INK, 9)
+    title_card(c, t, SHOT["S_i3"]["start"], [("3 SNEAKY MOVES", 120)], bg=TEAL, y=420, rot=-4)
+    for i, (lab, col) in enumerate((("FREE BOOK", CREAM2), ("A PRICE", CREAM2), ("SECRET EATERS", YEL))):
+        k = back(pr(t, TW("i3", "three", off=0.1 + 0.25 * i), 0.3), 2.0)
+        if k <= 0: continue
+        y = 720 + i * 230; c.save(); c.translate(540, y); c.scale(k, k)
+        c.drawRoundRect(skia.Rect.MakeLTRB(-420, -95, 420, 95), 30, 30, P((40, 20, 70), 0.88)); c.drawRoundRect(skia.Rect.MakeLTRB(-420, -95, 420, 95), 30, 30, S(col, 6))
+        c.drawCircle(-330, 0, 62, P(col)); c.drawCircle(-330, 0, 62, S(INK, 6)); outline_text(c, str(i + 1), -330, 30, 90, PINK if i == 2 else INK, INK, 0.1, shadow=False)
+        if i == 0: red_book(c, 290, 0, 0.3, -8)
+        elif i == 1: price_tag(c, 290, 0, "1920", 0.6)
+        else: magnifier(c, 290, -10, 0.5)
+        outline_text(c, lab, -40, 26, 74, col, INK, 8)
+        c.restore()
+    kai(c, 880, 1340, 0.5, t, mth(t), "grin" if t > TW("i3", "genius", off=-0.1) else "talk", "open", "smug", blink=blink(n), arm="point")
+    if t > TW("i3", "genius", off=-0.1): star4(c, 880, 1000, 50 * (0.6 + 0.4 * math.sin(t * 12)), (255, 255, 255))
 
 
 def S_s1(c, t, n):
@@ -221,9 +231,15 @@ def S_a4(c, t, n):
 
 
 def S_a4b(c, t, n):
-    u = lt(t, "S_a4b"); sky(c, (255, 120, 160), (255, 190, 140), (255, 236, 170)); speed_lines(c, 540, 1000, (255, 255, 255), 70, seed=9, a=0.5)
-    kai(c, 540, 1050, 1.35, t, mth(t), "smirk" if mth(t) < 0.2 else "talk", "open", "smug", look=(0.5, 0), blink=blink(n), sparkle=True, arm="point")
-    caption(c, t, TW("a4", "guess", off=0.1), "GUESS WHO SELLS NEW ONES?", "THEM.", YEL, y=1500, size=170)
+    u = lt(t, "S_a4b"); shop_bg(c, t)
+    c.drawRect(skia.Rect.MakeLTRB(0, 1180, W, 1260), P((150, 96, 60))); c.drawRect(skia.Rect.MakeLTRB(0, 1180, W, 1260), S(INK, 5))   # counter
+    for j in range(4): tyre(c, 200 + j * 120, 1080 - (j % 2) * 20, 110, 0)
+    price_tag(c, 330, 880, "NEW!", 0.8, -8)
+    k = back(pr(t, TW("a4", "guess", off=0.2), 0.3), 2.2)
+    if k > 0:
+        gent(c, 760, 960, 0.5 * k, t, 0, 0); gent(c, 920, 990, 0.45 * k, t, 0, 1)
+        caption(c, t, TW("a4", "guess", off=0.25), "GUESS WHO SELLS THEM?", "THE MICHELINS", YEL, y=560, size=120)
+    kai(c, 170, 1340, 0.45, t, mth(t), "smirk" if mth(t) < 0.2 else "talk", "open", "smug", look=(0.6, 0), blink=blink(n))
 
 
 def S_b1(c, t, n):
@@ -250,9 +266,15 @@ def S_b2b(c, t, n):
 
 def S_b3(c, t, n):
     u = lt(t, "S_b3"); sky(c, (120, 200, 255), (200, 235, 255), (255, 255, 255)); halftone(c, (0, 0, W, H), (90, 150, 220), 24, 7, 0.2)
-    kai(c, 540, 1050, 1.3, t, max(mth(t), 0.6 if u < 0.5 else 0), "shout", "closed" if u < 0.4 else "open", "worried", blink=0, sweat=True, tilt=-4)
-    outline_text(c, "OUCH!", 540, 520, 220 * back(pr(u, 0, 0.2), 2.5), RED2, INK, 16)
-    caption(c, t, TW("b3", "worthless", off=-0.25), "FREE STUFF CAN FEEL", "WORTHLESS", (120, 200, 255), y=1500, size=140)
+    outline_text(c, "OUCH!", 540, 470, 200 * back(pr(u, 0, 0.2), 2.5), RED2, INK, 16)
+    kw = pr(t, TW("b3", "worthless", off=-0.3), 0.3)
+    red_book(c, 470, 820, 0.8 - 0.12 * kw, -10 + 30 * kw)
+    if kw > 0:   # a big red cross through "FREE"
+        c.save(); c.translate(470, 820); c.rotate(-8)
+        outline_text(c, "FREE", 0, -250, 120, CREAM2, INK, 10)
+        c.drawLine(-150, -330, 150, -230, S(RED2, 22 * kw)); c.drawLine(150, -330, -150, -230, S(RED2, 22 * kw)); c.restore()
+        caption(c, t, TW("b3", "worthless", off=-0.25), "FREE STUFF CAN FEEL", "WORTHLESS", (120, 200, 255), y=1170, size=120)
+    kai(c, 880, 1380, 0.5, t, max(mth(t), 0.6 if u < 0.5 else 0), "shout", "closed" if u < 0.4 else "open", "worried", sweat=True, tilt=-4)
 
 
 def S_b3b(c, t, n):
@@ -324,9 +346,12 @@ def S_c5(c, t, n):
 
 
 def S_c5b(c, t, n):
-    u = lt(t, "S_c5b"); sky(c, (255, 120, 160), (255, 190, 140), (255, 236, 170)); speed_lines(c, 540, 900, (255, 255, 255), 80, seed=11, a=0.55)
-    kai(c, 540, 1050, 1.35, t, mth(t), "grin", "happy", "smug", sparkle=True, arm="fist", blush=True)
-    outline_text(c, "CLEVER!", 540, 520, 200 * back(pr(u, 0, 0.25), 2.4), YEL, INK, 16)
+    u = lt(t, "S_c5b"); sky(c, (255, 120, 160), (255, 190, 140), (255, 236, 170)); speed_lines(c, 540, 900, (255, 255, 255), 80, seed=11, a=0.5)
+    outline_text(c, "CLEVER!", 540, 470, 190 * back(pr(u, 0, 0.25), 2.4), YEL, INK, 16)
+    old_car(c, 470, 1120, 0.75, t, wheel_rot=-u * 600, body_col=(200, 40, 50))
+    for i in range(3): star5(c, 360 + i * 180, 760, 60 * back(pr(u, 0.1 + 0.1 * i, 0.25), 2.2), YEL, 5)
+    outline_text(c, "STARS = MORE DRIVING = MORE TYRES", 540, 620, 56, CREAM2, INK, 8)
+    kai(c, 870, 1340, 0.45, t, mth(t), "grin", "happy", "smug", sparkle=True, blush=True)
 
 
 def S_d1(c, t, n):
@@ -340,17 +365,24 @@ def S_d1(c, t, n):
 
 
 def S_d2(c, t, n):
-    u = lt(t, "S_d2"); sunset(c, t)
-    kai(c, 540, 1100, 1.2, t, mth(t), "talk", "open", "neutral", blink=blink(n), arm="point")
-    caption(c, t, TW("d2", "Give", off=-0.1), "GIVE SOMETHING USEFUL", "FOR FREE", YEL, y=520, size=150, t1=TW("d2", "far", off=-0.2))
-    caption(c, t, TW("d2", "far", off=-0.1), "THEY COME BACK", "TO BUY", (120, 240, 220), y=520, size=150)
+    u = lt(t, "S_d2"); sunset(c, t, city=True)
+    kg = back(pr(t, TW("d2", "useful", off=-0.2), 0.3), 2.0); kb = back(pr(t, TW("d2", "buy", off=-0.4), 0.3), 2.0)
+    if kg > 0: gift_box(c, 260, 900, 1.0 * kg); outline_text(c, "GIVE IT FREE", 260, 1120, 64, CREAM2, INK, 8, a=min(1, kg))
+    if kb > 0:
+        c.drawPath(path([(440, 870), (580, 870), (580, 830), (650, 900), (580, 970), (580, 930), (440, 930)]), P(YEL)); c.drawPath(path([(440, 870), (580, 870), (580, 830), (650, 900), (580, 970), (580, 930), (440, 930)]), S(INK, 5))
+        shop_bag(c, 820, 900, 1.0 * kb); outline_text(c, "THEY COME BACK", 820, 1120, 58, (120, 240, 220), INK, 8, a=min(1, kb))
+    caption(c, t, TW("d2", "Try", off=-0.1), "", "TRY THIS", YEL, y=520, size=150)
+    kai(c, 540, 1360, 0.48, t, mth(t), "talk", "open", "neutral", blink=blink(n), arm="point")
 
 
 def S_z1(c, t, n):
     u = lt(t, "S_z1"); sunset(c, t, top=(40, 20, 90), mid=(240, 70, 120), bot=(255, 170, 110))
-    kai(c, 540, 1100, 1.2, t, mth(t), "talk" if mth(t) > 0.1 else "smile", "open", "up", blink=blink(n), arm="wave")
-    caption(c, t, SHOT["S_z1"]["start"] + 0.1, "", "SAVE THIS", YEL, y=520, size=170, t1=L0("z2") - 0.1)
-    caption(c, t, L0("z2") - 0.05, "COMMENT:", "WHICH COMPANY NEXT?", (120, 240, 220), y=520, size=110)
+    k1 = back(pr(t, SHOT["S_z1"]["start"] + 0.1, 0.3), 2.0); k2 = back(pr(t, TW("z1", "Send"), 0.3), 2.0); k3 = back(pr(t, L0("z2"), 0.3), 2.0)
+    if k1 > 0: bookmark(c, 250, 820, 1.1 * k1); outline_text(c, "SAVE", 250, 1020, 80, YEL, INK, 9, a=min(1, k1))
+    if k2 > 0: share_arrow(c, 560, 820, 1.0 * k2); outline_text(c, "SEND", 560, 1020, 80, (120, 240, 220), INK, 9, a=min(1, k2))
+    if k3 > 0: bubble(c, 850, 800, 0.75 * k3, "?"); outline_text(c, "COMMENT", 850, 1020, 70, CREAM2, INK, 9, a=min(1, k3))
+    caption(c, t, L0("z2") + 0.2, "", "WHICH COMPANY NEXT?", (120, 240, 220), y=480, size=110)
+    kai(c, 540, 1340, 0.55, t, mth(t), "talk" if mth(t) > 0.1 else "smile", "open", "up", blink=blink(n), arm="wave")
 
 
 RENDER = {k: globals()[k] for k, _, _ in SHOTLIST}

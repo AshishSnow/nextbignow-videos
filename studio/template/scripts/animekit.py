@@ -609,3 +609,67 @@ def road_sign(c, x, y, text, s=1.0, col=(255, 200, 40)):
     while f.measureText(text) > 480 and sz > 40: sz -= 4; f = font("Bangers.ttf", sz)
     outline_text(c, text, -30, -40 + sz * 0.34, sz, (40, 30, 30), INK, 0.1, shadow=False)
     c.restore()
+
+
+# ------------------------------------------------------------------ more props (8 Nov v3: "show things more")
+def gift_box(c, x, y, s=1.0, col=(250, 70, 110), rib=(255, 214, 60)):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    cel(c, path([(-130, -60), (130, -60), (130, 130), (-130, 130)]), col, tuple(int(v * 0.75) for v in col), path([(40, -70), (140, -70), (140, 140), (40, 140)]), 6)
+    cel(c, path([(-150, -110), (150, -110), (150, -50), (-150, -50)]), col, line=6)
+    c.drawRect(skia.Rect.MakeLTRB(-22, -110, 22, 130), P(rib)); c.drawRect(skia.Rect.MakeLTRB(-22, -110, 22, 130), S(INK, 4))
+    for sx in (-1, 1): cel(c, ell(sx * 50, -140, 56, 30), rib, line=5)
+    c.restore()
+
+
+def shop_bag(c, x, y, s=1.0, col=(24, 160, 160)):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    h = skia.Path(); h.moveTo(-60, -110); h.cubicTo(-60, -200, 60, -200, 60, -110); c.drawPath(h, S(INK, 12))
+    cel(c, path([(-130, -110), (130, -110), (150, 150), (-150, 150)]), col, tuple(int(v * 0.75) for v in col), path([(40, -120), (160, -120), (160, 160), (40, 160)]), 6)
+    outline_text(c, "$", 0, 70, 150, (255, 214, 60), INK, 10, shadow=False)
+    c.restore()
+
+
+def coin(c, x, y, r=50, rot=0.0):
+    c.save(); c.translate(x, y); c.scale(max(0.15, abs(math.cos(rot))), 1)
+    c.drawCircle(0, 0, r, P((255, 200, 50))); c.drawCircle(0, 0, r * 0.78, S((220, 150, 30), 5)); c.drawCircle(0, 0, r, S(INK, 5))
+    outline_text(c, "$", 0, r * 0.38, r * 1.1, (220, 150, 30), INK, 0.1, shadow=False)
+    c.restore()
+
+
+def bookmark(c, x, y, s=1.0, col=(255, 214, 60)):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    cel(c, path([(-70, -100), (70, -100), (70, 110), (0, 60), (-70, 110)]), col, line=7); c.restore()
+
+
+def bubble(c, x, y, s=1.0, text="...", col=(255, 250, 240)):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    b = skia.Path(); b.addRoundRect(skia.Rect.MakeLTRB(-200, -110, 200, 90), 60, 60)
+    b = skia.Op(b, path([(-120, 60), (-40, 60), (-150, 170)]), skia.PathOp.kUnion_PathOp); cel(c, b, col, line=7)
+    outline_text(c, text, 0, 22, 90, INK, INK, 0.1, shadow=False); c.restore()
+
+
+def share_arrow(c, x, y, s=1.0, col=(120, 240, 220)):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    cel(c, path([(-110, 80), (-110, 10), (-40, -60), (40, -60), (40, -120), (140, -20), (40, 80), (40, 20), (-20, 20), (-60, 60)]), col, line=7); c.restore()
+
+
+def magnifier(c, x, y, s=1.0, rot=-30):
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s, s)
+    cel(c, path([(-18, 90), (18, 90), (22, 260), (-22, 260)]), (120, 70, 40), line=6)
+    c.drawCircle(0, 0, 100, P((200, 235, 255), 0.6)); c.drawCircle(0, 0, 100, S((90, 90, 110), 18)); c.drawCircle(0, 0, 100, S(INK, 5))
+    c.drawArc(skia.Rect.MakeLTRB(-70, -70, 70, 70), 200, 60, False, S((255, 255, 255), 10)); c.restore()
+
+
+def banner(c, t, lines, y=330, col=(255, 214, 60), bg=(40, 20, 70), t0=-1.0, width=980):
+    """the episode title: on screen from the very first frame"""
+    k = back(pr(t, t0, 0.3), 1.8)
+    if k <= 0: return
+    c.save(); c.translate(W / 2, y); c.scale(k, k)
+    hgt = sum(sz for _, sz in lines) * 1.1 + 40
+    c.drawRoundRect(skia.Rect.MakeLTRB(-width / 2, -40, width / 2, hgt - 40), 26, 26, P(bg, 0.92)); c.drawRoundRect(skia.Rect.MakeLTRB(-width / 2, -40, width / 2, hgt - 40), 26, 26, S(col, 7))
+    yy = 0
+    for ln, sz in lines:
+        f_ = font("Bangers.ttf", sz); s_ = sz
+        while f_.measureText(ln) > width - 70 and s_ > 40: s_ -= 3; f_ = font("Bangers.ttf", s_)
+        outline_text(c, ln, 0, yy + s_ * 0.82, s_, col if yy else (255, 250, 240), INK, 9); yy += sz * 1.1
+    c.restore()

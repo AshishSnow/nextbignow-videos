@@ -61,9 +61,9 @@ for j, f0 in enumerate((1174.7, 1480, 1760, 2349.3)): add(ding(-27, f0), END - 1
 
 
 sfx = np.nan_to_num(sfx); sfx *= db(-2.0)
-bed = bed_carve.carve(M * db(-8.2) + sfx, vo)
+bed = bed_carve.carve(M * db(-13.5) + sfx, vo)   # owner 8 Nov: "not music loud" (-5.3 dB vs v2)
 # word guard: no SFX hit / loud note within 12 dB of a word on a phone speaker (GUARD=0 disables; studio/tools/mix_check.py measures it)
-if float(os.environ.get("GUARD", 12)) > 0: bed = bed_carve.guard(bed, vo, ld=float(os.environ.get("GUARD", 12)))
+if float(os.environ.get("GUARD", 16)) > 0: bed = bed_carve.guard(bed, vo, ld=float(os.environ.get("GUARD", 16)))
 mix = VO + bed
 # pre-limiter (3 Nov): take the peaks off so loudnorm can stay linear and really reach -11 LUFS (was -11.7..-11.9 on the dynamic path). LIM=0 disables.
 if float(os.environ.get("LIM", -8)) < 0:
