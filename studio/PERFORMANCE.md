@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-09 ~08:30 IST (R&D run: writers' room)
+**Delivery (getScheduledPosts, 8–16 Nov IST):** exporting (419444583), Prime 'Iliad' (420282985) and **dropshipping (421118761, 05:00 IST today)** all PUBLISHED on Instagram + YouTube; no provider ERROR. Nothing scheduled after dropshipping.
+**Analytics (IGRE + YTVP, 19 Oct → 9 Nov):** every Instagram row is identical to the 02:45 IST pull (exporting 1,712 / 78.9 %, Prime 611 / 65.0 %); dropshipping has no row yet (posted 3.5 h before the pull). YouTube (YTVP) still ends at Christmas lights (3 Nov) — 6 days, 11 Shorts missing; the Shorts are live, Metricool's YouTube import is the problem.
+**Insight AM (9 Nov):** no new numbers → insight AL stands (HOW TO START wins on the whiteboard; BIGs hold least, 0–1 saves). The room acted on it: the next BIG in the queue (Netflix 2011) ends on a rule the viewer can copy ("say why before they pay", from Netflix's own letter) and the queue now holds a BIG, two HOW IT WORKS and a HOW TO. Test when it posts: Netflix saves / 1,000 reach vs Southwest 0 and Coca-Cola 1 (≈ 4 / 1,000). Media-kit numbers in BRAND.md unchanged (no new data).
+
 ## Snapshot 2026-11-09 ~02:45 IST (episode run: HOW TO START EP 8, dropshipping 30-day rule)
 **Delivery (getScheduledPosts, 5–16 Nov IST):** every post from Spotify to **Prime 'Iliad' (8 Nov 05:00 IST)** PUBLISHED on Instagram + YouTube; only the old reselling Instagram ERROR (418324142, 6 Nov) remains — owner's call, not re-posted. Nothing scheduled after Prime; the owner's Michelin anime pilot (live session 8 Nov) isn't scheduled yet.
 **Instagram finally refreshed (IGRE, 18 Oct → 9 Nov)** — whiteboard rows:

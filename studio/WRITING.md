@@ -55,7 +55,18 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 
 28. **Read the ASR notes before rewriting.** voice_report flags a line when the read-back spells a word differently: "dropshipping" comes back "drop shipping" and "lamp's" comes back "lamps" — those are spelling, not misreads (9 Nov, dropship: 3 of 4 flags were this). Real misreads change the word ("come in one word"); fix those, note the rest in the run log. And `story_check` R7 on *estimated* timing runs long: the dropship script showed 18.x s before voicing and 15.0 s after (with the tighter trim_gaps).
 
+29. **A reaction is an opinion now, never a memory.** "I didn't see that coming" / "I didn't expect…" tells the listener the narrator found
+    something out once — a life it doesn't have (rule 15). Say it as a present opinion or a hypothetical: "Who knew a coffee worked like that?",
+    "That's the one I'd have missed.", "I'd have scrapped it too." `human_check.py` prints a `note memory …` line (9 Nov: 1 hit in the queue, fixed).
+30. **The hook's line must survive its own exceptions.** If the rule has a carve-out that hits the very person in your seat (a *friend* gets three
+    hours, not two), make the seat someone the rule fits ("a family down the road") and say the carve-out in one short line. And say the period
+    a number really covers ("July to September"), not a rounder word ("one summer"). (9 Nov, both fresh-eyes reviews.)
+31. **Don't contradict the story you just told.** After showing a company backing down on one thing, "most bosses would back down" reads as a
+    mistake. Name the thing: "I'd have scrapped the price split too." (9 Nov, Netflix review.)
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
+- (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)
+- (9 Nov, Netflix) "Members are furious." → "Members start cancelling." (say what the record shows, and it sets up the count)
 - (8 Nov, cash rewards) "Each cash-paying household sent about a hundred and fifty dollars a year to card users." → "Debit counted as cash. … A home with no credit card paid credit card users about a hundred and fifty dollars a year." (rule 27)
 - (8 Nov, dropship) "Selling in the UK? Thirty days there too." → "Selling in the UK? Thirty days to deliver it, not just ship it." (US = ship, UK = deliver)
 - (7 Nov, Prime) "To skip it, the button read: no, I don't want free shipping." → "Back then, the button to skip it said: no, I don't want free shipping." (rule 22)

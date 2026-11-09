@@ -19,7 +19,7 @@ LINES = [
     ("d2", "His tap carried the fee. But your price helped cover it, and you got nothing back.", 0.97, 0.25, +0.6, 1.45, ['his', 'nothing'], 'low'),
     ("d3", "Boston Fed economists ran the numbers in twenty ten. Debit counted as cash.", 0.97, 0.2, +0.6, 1.45, ['numbers', 'debit'], 'low'),
     ("d4", "Their estimate? A home with no credit card paid credit card users about a hundred and fifty dollars a year.", 0.97, 0.3, +0.6, 1.45, ['estimate?', 'hundred', 'credit'], 'low'),
-    ("d5", "Honestly? I didn't expect a coffee to work like that.", 0.96, 0.35, +0.8, 1.45, ['Honestly?', 'coffee'], 'low'),
+    ("d5", "Honestly? Who knew a coffee worked like that?", 0.96, 0.35, +0.8, 1.45, ['Honestly?', 'coffee'], 'low'),
     ("e1", "Card groups push back. One industry group says lower-income cardholders earn rewards at the same rate.", 0.97, 0.25, +0.6, 1.45, ['push', 'same'], 'low'),
     ("e2", "Even the economists flagged a catch. They assumed shops pass the whole fee on, and said they couldn't check that.", 0.97, 0.35, +0.6, 1.45, ['assumed', 'whole'], 'low'),
     ("f2", "In the UK, shops can't charge you extra for paying by card. Banned since twenty eighteen.", 0.97, 0.25, +0.6, 1.45, ["can't", 'banned'], 'low'),

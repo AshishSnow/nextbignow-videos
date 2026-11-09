@@ -1129,3 +1129,73 @@ def dash_line(c, a, b, prog, col=MK, w=7):
     for i in range(int(n * prog)):
         u0, u1 = i / n, (i + 0.55) / n
         c.drawLine(x0 + (x1 - x0) * u0, y0 + (y1 - y0) * u0, x0 + (x1 - x0) * u1, y0 + (y1 - y0) * u1, stroke(col, w))
+
+
+# ---- R&D writers' room 9 Nov 2026: props for B6 Netflix 2011 (queue/19) + T8 childminding (queue/20) ----
+def disc_m(c, x, y, t, t0, r=110, label=None, col=RD, spin=0.0):
+    """a DVD-style disc: outer ring, hub, a hatched label band; spin = degrees/s for the shine tick"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    ink(c, [wob(circ_pts(x, y, r, -90, 270, 48), 501, 0.6), wob(circ_pts(x, y, r * 0.22, -90, 270, 20), 502, 0.3)], k, MK, 7)
+    if k < 1: return
+    c.drawCircle(x, y, r * 0.09, paint(MK))
+    a_ = math.radians(30 + spin * max(0.0, t - t0))
+    for d_ in (0.0, 0.18):
+        c.drawLine(x + r * 0.42 * math.cos(a_ + d_), y + r * 0.42 * math.sin(a_ + d_), x + r * 0.82 * math.cos(a_ + d_), y + r * 0.82 * math.sin(a_ + d_), stroke(LIGHT, 5))
+    if label: mtext(c, label, x, y + r + 58, 44, col, pr(t, t0 + 0.35, 0.3), "pm")
+
+
+def tv_m(c, x, y, t, t0, w=420, h=260, play=True, col=RD, text=None):
+    """a flat screen on a small stand; a play triangle (or `text`) drawn in the middle"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    x0, y0 = x - w / 2, y - h / 2
+    ink(c, [wob([(x0, y0), (x0 + w, y0), (x0 + w, y0 + h), (x0, y0 + h), (x0, y0)], 511, 0.6),
+            [(x - 40, y0 + h), (x - 60, y0 + h + 44), (x + 60, y0 + h + 44), (x + 40, y0 + h)]], k, MK, 7)
+    if k < 1: return
+    k2 = pr(t, t0 + 0.4, 0.35)
+    if play:
+        tri = [(x - 38, y - 50), (x + 52, y), (x - 38, y + 50), (x - 38, y - 50)]
+        p = skia.Path(); p.addPoly([skia.Point(*q) for q in tri], True)
+        hatch(c, p, k2, col, gap=12, w=6, bbox=(x - 60, y - 70, x + 70, y + 70), seed=513)
+        ink(c, [wob(tri, 512, 0.4)], k2, col, 7, pen_=False)
+    if text: mtext(c, text, x, y + 18, 56, col, k2, "pm")
+
+
+def clock_m(c, x, y, t, t0, r=120, h0=15.0, hours=2.0, fill_t=None, col=RD, label=None):
+    """a wall clock; from fill_t a wedge sweeps from hour h0 for `hours` hours (the 'two-hour line'), hand follows"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    ink(c, [wob(circ_pts(x, y, r, -90, 270, 48), 521, 0.7)], k, MK, 8)
+    if k < 1: return
+    for i in range(12):
+        a_ = math.radians(i * 30); L = 0.14 if i % 3 == 0 else 0.08
+        c.drawLine(x + (0.92 - L) * r * math.sin(a_), y - (0.92 - L) * r * math.cos(a_), x + 0.92 * r * math.sin(a_), y - 0.92 * r * math.cos(a_), stroke(MK, 4))
+    u = 0.0
+    if fill_t is not None and t > fill_t: u = min(1.0, (t - fill_t) / 1.6)
+    a0 = (h0 % 12) * 30 - 90; sweep = hours * 30 * u
+    if u > 0:
+        p = skia.Path(); p.moveTo(x, y); p.arcTo(R.MakeXYWH(x - 0.86 * r, y - 0.86 * r, 1.72 * r, 1.72 * r), a0, sweep, False); p.close()
+        c.drawPath(p, paint(col, 0.28))
+    am = math.radians(a0 + 90 + sweep)
+    c.drawLine(x, y, x + 0.62 * r * math.sin(am), y - 0.62 * r * math.cos(am), stroke(MK, 8))
+    c.drawLine(x, y, x, y - 0.82 * r, stroke(MK, 5)); c.drawCircle(x, y, 9, paint(col))
+    if label: mtext(c, label, x, y + r + 62, 46, col, pr(t, t0 + 0.4, 0.3), "pm")
+
+
+def firstaid_m(c, x, y, t, t0, s=1.0, col=GR, label=None):
+    """a first-aid box with a handle and a cross"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    w, h = 220 * s, 150 * s; x0, y0 = x - w / 2, y - h / 2
+    ink(c, [wob([(x0, y0), (x0 + w, y0), (x0 + w, y0 + h), (x0, y0 + h), (x0, y0)], 531, 0.6),
+            [(x - 40 * s, y0), (x - 40 * s, y0 - 26 * s), (x + 40 * s, y0 - 26 * s), (x + 40 * s, y0)]], k, MK, 7)
+    if k < 1: return
+    a, b = 18 * s, 50 * s
+    cr = [(x - a, y - b), (x + a, y - b), (x + a, y - a), (x + b, y - a), (x + b, y + a), (x + a, y + a), (x + a, y + b),
+          (x - a, y + b), (x - a, y + a), (x - b, y + a), (x - b, y - a), (x - a, y - a), (x - a, y - b)]
+    p = skia.Path(); p.addPoly([skia.Point(*q) for q in cr], True)
+    k2 = pr(t, t0 + 0.35, 0.35)
+    hatch(c, p, k2, col, gap=11, w=6, bbox=(x - b - 4, y - b - 4, x + b + 4, y + b + 4), seed=532)
+    ink(c, [wob(cr, 533, 0.3)], k2, col, 6, pen_=False)
+    if label: mtext(c, label, x, y + h / 2 + 60, 44, col, pr(t, t0 + 0.5, 0.3), "pm")

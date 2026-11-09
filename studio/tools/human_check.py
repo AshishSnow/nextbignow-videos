@@ -74,6 +74,10 @@ def voice_notes(path):
                 # 8 Nov (fresh-eyes review, cash rewards): an all-caps acronym that is also a word ("US" -> "us") gets read as the word
                 amb = [w for w in re.findall(r"\b[A-Z]{2,4}\b", text) if w.lower() in AMBIG_CAPS]
                 if amb: out.append(f"caps {lid}: {sorted(set(amb))} can be read as a word ('US' -> 'us') — say 'American' / 'in America', or listen to the take (rule 26)")
+                # 9 Nov (fresh-eyes review, childminding): a narrator reaction told as a past discovery ("I didn't see that coming",
+                # "when I found out…") gives the narrator a life it doesn't have (rule 15); say it as an opinion or a hypothetical instead
+                mem = re.search(r"\bI (didn't|did not|never) (see|expect|know|realise|realize|think)\b|\bI (found out|learned|discovered|remember|used to)\b|\bwhen I\b|\bmy (mum|mom|dad|friend|wife|husband|kids?)\b", text, re.I)
+                if mem: out.append(f"memory {lid}: '{mem.group(0)}' reads as the narrator's own past — use a present opinion or a hypothetical ('That's the one I'd have missed.') (rule 15/29)")
     return out
 
 
