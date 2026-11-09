@@ -32,6 +32,8 @@ Since 7 Nov (owner 6 Nov: "blueprint, board style with white background, 2D, no 
 > In the run summary AND in Instagram firstComment-free notes, suggest ONE in-app track mood for him: "soft" (lo-fi /
 > acoustic / chill piano — calm, explainer moments) or "hard" (upbeat trap / phonk / energetic pop — fast, funny, shock
 > topics), plus 2-3 search words to type in the Instagram/YouTube music library, at volume 50-60 under the voice.
+> **Instagram = DRAFT (owner, 9 Nov 21:22: "Save as a draft")**: create the Instagram reel with draft=true (he adds the
+> in-app music and posts it himself); the YouTube short is still scheduled normally.
 
 > **OWNER APPROVED — 7 Nov 2026 23:01 IST: "Sleepy feeling after big meal is good video with voice nice."** Episode 27
 > (`episodes/27-sleepy-after-eating/`) is the current reference: the draw-on blueprint board on white for every explanation,
