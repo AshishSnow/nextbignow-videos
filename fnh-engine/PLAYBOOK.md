@@ -24,6 +24,15 @@ Since 7 Nov (owner 6 Nov: "blueprint, board style with white background, 2D, no 
 
 **OWNER FEEDBACK 28 Oct 12:40 IST (CURRENT, overrides the v5 look where they conflict): "The 3D character is not looking good, and
 
+> **OWNER — 9 Nov 2026 21:12 IST: "English video is good, like garlic breath. Don't give that continuous background music —
+> I'll add music from Insta and YouTube (soft or hard, whichever fits best) at volume 50-60. In-between object sounds are fine."**
+> So, from ep 30 on: stay in ENGLISH (the garlic-breath / ep 27 look and voice); the mix has NO baked-in music bed
+> (template mix.py: BED=0 by default) — keep every per-moment SFX/foley (pops, whooshes, crunches, dings, stings) and
+> the VO. Still write music.py only if a moment needs a short musical sting/SFX; no continuous score.
+> In the run summary AND in Instagram firstComment-free notes, suggest ONE in-app track mood for him: "soft" (lo-fi /
+> acoustic / chill piano — calm, explainer moments) or "hard" (upbeat trap / phonk / energetic pop — fast, funny, shock
+> topics), plus 2-3 search words to type in the Instagram/YouTube music library, at volume 50-60 under the voice.
+
 > **OWNER APPROVED — 7 Nov 2026 23:01 IST: "Sleepy feeling after big meal is good video with voice nice."** Episode 27
 > (`episodes/27-sleepy-after-eating/`) is the current reference: the draw-on blueprint board on white for every explanation,
 > Chubby acting (nodding off), one lavender accent, erase cuts with pen/eraser foley, a new music genre with a score that reacts to

@@ -1,4 +1,6 @@
-"""Mix: energetic narrator VO + ducked/carved food-funk score + per-moment SFX -> work/mix.wav (-11 LUFS, -1.5 dBTP)."""
+"""Mix: narrator VO + per-moment SFX/foley -> work/mix.wav (-11 LUFS, -1.5 dBTP).
+OWNER 9 Nov 2026: NO baked-in continuous music bed (he adds a trending track in the Instagram/YouTube app at volume 50-60).
+Set BED=1 only if he asks for the score back."""
 import sys, json, math, subprocess, numpy as np, soundfile as sf
 from scipy import signal
 import os
@@ -107,7 +109,8 @@ add(whoosh(0.4, peak=0.8, f_lo=300, f_hi=3000, level=-23), vend - 0.2); add(boom
 for j, f0 in enumerate((1046.5, 1318.5, 1568, 2093)): add(ding(-24, f0), vend + 0.25 + j * 0.09)
 
 sfx *= db(-2.0)
-bed = bed_carve.carve(M * db(-10.5) + sfx, vo)
+BED = float(os.environ.get('BED', '0'))
+bed = bed_carve.carve(M * db(-10.5) * BED + sfx, vo)
 mix = VO + bed
 sf.write(f"{B}/work/mix_pre.wav", mix, SR, subtype="FLOAT")
 TGT = -11.0
