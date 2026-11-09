@@ -2,8 +2,8 @@
 80s/90s TV-anime look drawn with skia: cel shading (one hard shadow tone + hair highlight band), ink line art, big glossy eyes,
 painted gradient skies, speed lines, impact frames, title-card eyecatches; finished with film grain, soft bloom, slight chromatic
 fringe, gate weave and a warm grade. Animation is held on twos (12 drawings a second), like the real thing.
-Host: KAI, our own character (not based on any existing anime character): messy navy hair with one tall strand, amber eyes,
-teal jacket with orange lining over a white tee, headphones round his neck.
+Host: KAI, our own character (not based on any existing anime character): side-parted dark-brown gentleman's cut, amber eyes,
+navy suit, white shirt, red tie, teal pocket square (business look, owner 9 Nov 2026).
 """
 import math, os
 import numpy as np, skia, cv2
@@ -24,8 +24,9 @@ def font(name, size): return skia.Font(tf(name), size)
 
 INK = (34, 22, 30)
 SKIN, SKIN_S, SKIN_B = (252, 222, 196), (232, 168, 150), (246, 150, 150)
-HAIR, HAIR_S, HAIR_H = (40, 46, 96), (26, 28, 64), (96, 112, 190)
-JACK, JACK_S, LINING = (24, 160, 160), (14, 108, 120), (250, 136, 40)
+HAIR, HAIR_S, HAIR_H = (46, 34, 30), (26, 18, 18), (120, 92, 80)          # 9 Nov: dark brown gentleman's cut
+JACK, JACK_S, LINING = (30, 46, 96), (18, 28, 64), (250, 248, 244)        # 9 Nov: navy business suit; LINING = white shirt cuff
+TIE, TIE_S, POCKET = (196, 36, 52), (140, 20, 36), (24, 170, 170)
 TEE, TEE_S = (250, 248, 244), (196, 200, 220)
 IRIS_T, IRIS_B = (150, 64, 10), (255, 186, 70)
 
@@ -140,57 +141,51 @@ def _mouth(c, kind, k):
 
 
 def _hair_back(c):
-    pts = [(-200, 60), (-232, -40), (-262, -150), (-210, -150), (-230, -250), (-150, -230), (-140, -330), (-60, -280), (0, -360),
-           (50, -290), (150, -340), (150, -250), (240, -260), (212, -160), (262, -130), (224, -40), (200, 60), (150, -60), (-150, -60)]
-    cel(c, path(pts), HAIR, HAIR_S, path([(-300, -100), (300, -100), (300, 100), (-300, 100)]), 5)
+    """short, tidy back and sides (barely wider than the head)"""
+    pts = [(-170, 40), (-176, -80), (-160, -200), (-90, -280), (0, -306), (110, -290), (176, -206), (184, -80), (172, 40), (150, -40), (-150, -40)]
+    cel(c, path(pts, smooth=True), HAIR, HAIR_S, path([(-300, -60), (300, -60), (300, 100), (-300, 100)]), 5)
 
 
 def _hair_front(c, t):
-    sway = 4 * math.sin(t * 2.3)
-    # one clean silhouette: cap over the crown, then a zig-zag of locks along the fringe (tips low, notches high)
-    tips = [(-206, 40), (-150, 66), (-96, 52), (-44, 34), (8, 40), (62, 30), (116, 58), (170, 70), (208, 36)]
-    notch = [(-176, -40), (-122, -30), (-70, -50), (-16, -36), (36, -54), (90, -34), (144, -26), (190, -40)]
-    fr = skia.Path(); fr.moveTo(214, 40)
-    fr.cubicTo(250, -120, 170, -290, 0, -296); fr.cubicTo(-170, -290, -250, -120, -214, 40)
-    for i in range(len(tips)):
-        x, y = tips[i]; fr.lineTo(x + sway * (0.5 + 0.5 * math.sin(i)), y)
-        if i < len(notch): fr.lineTo(*notch[i])
+    """a classic side-parted gentleman's cut: part on his right (viewer's left), volume swept across in one smooth wave"""
+    sway = 1.5 * math.sin(t * 2.0)
+    fr = skia.Path()
+    fr.moveTo(-162, -30)                                   # left temple, short side
+    fr.cubicTo(-176, -130, -150, -210, -96, -246)          # up the short side to the part
+    fr.lineTo(-74, -226)                                   # the part notch
+    fr.cubicTo(-30, -336, 130, -344, 196, -222)            # the swept top, full volume (a soft quiff)
+    fr.cubicTo(222, -176, 200, -90, 168, -40)              # down to the right temple
+    fr.cubicTo(150, -96, 110, -120, 60 + sway, -128)       # the wave's front edge across the forehead
+    fr.cubicTo(10, -134, -36, -150, -66, -186)
+    fr.cubicTo(-100, -150, -130, -110, -146, -40)
     fr.close()
-    cel(c, fr, HAIR, HAIR_S, path([(30, -320), (280, -320), (280, 120), (60, 120), (110, -40)]), 5.5)
-    # glossy highlight band across the crown: a soft arc with a few nicks (classic cel hair)
-    c.save(); c.clipPath(fr, doAntiAlias=True)
-    hb = skia.Path(); hb.moveTo(-180, -150); hb.cubicTo(-100, -230, 100, -230, 180, -150)
-    hb.lineTo(150, -128); hb.lineTo(118, -150); hb.lineTo(84, -170); hb.lineTo(40, -152); hb.lineTo(-6, -176); hb.lineTo(-50, -156)
-    hb.lineTo(-96, -172); hb.lineTo(-136, -146); hb.close(); c.drawPath(hb, P(HAIR_H))
-    c.drawPath(path([(-120, -196), (-80, -214), (-70, -204), (-112, -186)]), P((200, 210, 255)))
+    cel(c, fr, HAIR, HAIR_S, path([(40, -320), (260, -320), (260, 0), (130, 0), (120, -120)]), 5.5)
+    c.save(); c.clipPath(fr, doAntiAlias=True)             # glossy highlight following the sweep
+    hb = skia.Path(); hb.moveTo(-60, -244); hb.cubicTo(0, -304, 110, -300, 172, -224); hb.cubicTo(120, -262, 20, -270, -40, -226); hb.close()
+    c.drawPath(hb, P(HAIR_H)); c.drawPath(path([(-30, -246), (10, -262), (16, -254), (-24, -238)]), P((230, 210, 196)))
     c.restore()
-    # a couple of inner strand lines so the fringe reads as hair, not a hat
-    for (x0, y0, x1, y1) in ((-130, -120, -150, 40), (-40, -150, -44, 20), (60, -150, 62, 14), (140, -110, 160, 50)):
-        st = skia.Path(); st.moveTo(x0, y0); st.quadTo((x0 + x1) / 2 + 14, (y0 + y1) / 2, x1, y1 - 20); c.drawPath(st, S(HAIR_S, 4))
-    # the tall strand
-    ah = skia.Path(); ah.moveTo(-10, -292); ah.cubicTo(-30, -390, 60, -430, 70 + sway * 2, -368); ah.cubicTo(30, -388, 20, -336, 22, -292); ah.close()
-    cel(c, ah, HAIR, line=5)
+    for (x0, y0, x1, y1, cx, cy) in ((-60, -200, 150, -150, 50, -240), (-40, -170, 120, -128, 40, -200), (-120, -150, -150, -60, -150, -110)):
+        st = skia.Path(); st.moveTo(x0, y0); st.quadTo(cx, cy, x1, y1); c.drawPath(st, S(HAIR_S, 4))
+    c.drawLine(-96, -246, -74, -226, S((70, 50, 44), 3))  # part line
 
 
 def _body(c, t, breathe):
     b = 4 * breathe
-    # torso / jacket
     jk = path([(-330, 1400), (-300, 560), (-290, 330), (-230, 250 - b), (-120, 214 - b), (120, 214 - b), (230, 250 - b), (290, 330), (300, 560), (330, 1400)])
     cel(c, jk, JACK, JACK_S, path([(-340, 300), (-40, 230), (-60, 1400), (-340, 1400)]), 5.5)
-    tee = path([(-110, 220 - b), (110, 220 - b), (80, 1400), (-80, 1400)])
-    cel(c, tee, TEE, TEE_S, path([(-120, 220), (120, 220), (120, 300), (-120, 280)]), 4.5)
-    for sx in (-1, 1):   # open jacket fronts with orange lining
-        lap = path([(sx * 110, 218 - b), (sx * 150, 240), (sx * 104, 1400), (sx * 80, 1400)])
-        cel(c, lap, LINING, line=4.5)
-        col = path([(sx * 110, 216 - b), (sx * 196, 236 - b), (sx * 176, 300), (sx * 128, 300)])
-        cel(c, col, JACK, JACK_S, path([(sx * 100, 260), (sx * 200, 260), (sx * 200, 320), (sx * 100, 320)]), 5)
-    # neck + headphones resting round it
-    nk = path([(-58, 120), (58, 120), (66, 230), (0, 250), (-66, 230)])
+    shirt = path([(-110, 220 - b), (110, 220 - b), (40, 700), (-40, 700)])
+    cel(c, shirt, TEE, TEE_S, path([(-120, 220), (120, 220), (120, 280), (-120, 266)]), 4.5)
+    tie = path([(-26, 236), (26, 236), (16, 262), (40, 560), (0, 610), (-40, 560), (-16, 262)])
+    cel(c, tie, TIE, TIE_S, path([(0, 230), (60, 230), (60, 620), (0, 620)]), 4.5)
+    cel(c, path([(-30, 214 - b), (30, 214 - b), (24, 250), (-24, 250)]), TIE, line=4.5)       # knot
+    for sx in (-1, 1):   # notched lapels down to the buttons
+        lap = path([(sx * 104, 214 - b), (sx * 176, 236 - b), (sx * 196, 330), (sx * 150, 352), (sx * 182, 400), (sx * 46, 700), (sx * 40, 700)])
+        cel(c, lap, JACK, JACK_S, path([(sx * 40, 380), (sx * 220, 380), (sx * 220, 720), (sx * 40, 720)]), 5)
+        col = path([(sx * 40, 210 - b), (sx * 112, 214 - b), (sx * 128, 280), (sx * 70, 262)]); cel(c, col, TEE, line=4.5)   # shirt collar
+    cel(c, path([(-240, 430), (-170, 430), (-176, 470), (-236, 470)]), POCKET, line=4)          # pocket square
+    for yy in (720, 820): c.drawCircle(0, yy, 12, P((20, 24, 40))); c.drawCircle(0, yy, 12, S(INK, 3))
+    nk = path([(-58, 120), (58, 120), (62, 220), (0, 236), (-62, 220)])
     cel(c, nk, SKIN, SKIN_S, path([(-80, 100), (80, 100), (80, 170), (0, 196), (-80, 170)]), 4.5)
-    band = skia.Path(); band.moveTo(-122, 196); band.cubicTo(-100, 290, 100, 290, 122, 196); c.drawPath(band, S((54, 54, 66), 22)); c.drawPath(band, S(INK, 3))
-    for sx in (-1, 1):
-        cup = ell(sx * 130, 200, 46, 58); cel(c, cup, (60, 60, 74), (36, 36, 48), ell(sx * 130 + sx * 18, 210, 40, 58), 5)
-        c.drawPath(ell(sx * 130, 196, 20, 26), P(LINING))
 
 
 def _arm(c, kind, t):
@@ -230,9 +225,8 @@ def kai(c, x, y, s=1.0, t=0.0, mouth=0.0, mouth_kind="talk", eyes="open", brows=
     f = _face_path()
     cel(c, f, SKIN, SKIN_S, path([(40, -200), (220, -200), (220, 220), (110, 180), (60, 60)]), 5.5)   # shade on his left side
     c.save(); c.clipPath(f, doAntiAlias=True)   # the fringe throws a jagged shadow on the forehead
-    sh = skia.Path(); sh.moveTo(-200, -200)
-    for i in range(10): sh.lineTo(-180 + i * 40, -40 + (i % 2) * 34)
-    sh.lineTo(220, -200); sh.close(); c.drawPath(sh, P(SKIN_S)); c.restore()
+    sh = skia.Path(); sh.moveTo(-200, -220); sh.lineTo(-150, -20); sh.cubicTo(-120, -90, -60, -130, 0, -112)   # soft shadow under the hair wave
+    sh.cubicTo(80, -98, 140, -80, 180, -10); sh.lineTo(220, -220); sh.close(); c.drawPath(sh, P(SKIN_S)); c.restore()
     if blush or mouth_kind in ("grin",):
         for sx in (-1, 1):
             c.drawPath(ell(sx * 92, 92, 34, 14), P(SKIN_B, 0.6))
