@@ -63,6 +63,7 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     a number really covers ("July to September"), not a rounder word ("one summer"). (9 Nov, both fresh-eyes reviews.)
 31. **Don't contradict the story you just told.** After showing a company backing down on one thing, "most bosses would back down" reads as a
     mistake. Name the thing: "I'd have scrapped the price split too." (9 Nov, Netflix review.)
+32. **Paraphrase in the source's own order, and say it's theirs.** "Its words: same store, same items, same prices" put words in Instacart's mouth; the blog's sentence ran items → time → store. Say "Instacart's promise now? Same items, same time, same store, same price." and put the real quote on the chip. And avoid "Its + noun?" openers: ASR heard "It's promised" in 4 of 4 takes. (10 Nov, same cart.)
 
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)

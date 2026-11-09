@@ -1199,3 +1199,114 @@ def firstaid_m(c, x, y, t, t0, s=1.0, col=GR, label=None):
     hatch(c, p, k2, col, gap=11, w=6, bbox=(x - b - 4, y - b - 4, x + b + 4, y + b + 4), seed=532)
     ink(c, [wob(cr, 533, 0.3)], k2, col, 6, pen_=False)
     if label: mtext(c, label, x, y + h / 2 + 60, 44, col, pr(t, t0 + 0.5, 0.3), "pm")
+
+# ---------------------------------------------------------------- same-cart props (HOW IT WORKS EP 5, examples/same-cart, 10 Nov 2026): shop front with striped awning, a hand from the top with a word on its cuff, a growing till receipt, newspaper, location pin, sticky note, plain state shape (ny_m: no map data), falling coin pile, and the QUESTION MAP (qmap: the hook's two questions as pills under the brand pill, current coloured, answered ticked)
+YEL = (255, 232, 110)
+
+
+def shopfront_m(c, x, y, t, t0, s=1.0, label="STORE", col=RD):
+    """a small shop front: striped awning (hatched), window, door; label written on the sign"""
+    k = pr(t, t0, 0.6); w, h = 360 * s, 300 * s
+    body = [(x - w / 2, y), (x - w / 2, y - h), (x + w / 2, y - h), (x + w / 2, y), (x - w / 2, y)]
+    awn = [(x - w / 2 - 20 * s, y - h), (x + w / 2 + 20 * s, y - h), (x + w / 2, y - h + 70 * s), (x - w / 2, y - h + 70 * s), (x - w / 2 - 20 * s, y - h)]
+    sign = [(x - w / 2 + 20 * s, y - h - 90 * s), (x + w / 2 - 20 * s, y - h - 90 * s), (x + w / 2 - 20 * s, y - h - 10 * s), (x - w / 2 + 20 * s, y - h - 10 * s), (x - w / 2 + 20 * s, y - h - 90 * s)]
+    door = [(x + 40 * s, y), (x + 40 * s, y - 170 * s), (x + 130 * s, y - 170 * s), (x + 130 * s, y)]
+    win = [(x - 140 * s, y - 70 * s), (x - 140 * s, y - 190 * s), (x - 10 * s, y - 190 * s), (x - 10 * s, y - 70 * s), (x - 140 * s, y - 70 * s)]
+    if k > 0.6:
+        c.save(); c.clipPath(_path(awn))
+        for i in range(9):
+            if i % 2 == 0: c.drawRect(R.MakeXYWH(x - w / 2 - 20 * s + i * 45 * s, y - h, 45 * s, 70 * s), paint(col, 0.55 * pr(k, 0.6, 0.4)))
+        c.restore()
+    ink(c, [wob(body, 501, 0.8), wob(awn, 502, 0.8), wob(sign, 503, 0.6), wob(door, 504, 0.6), wob(win, 505, 0.6)], k, MK, 7)
+    if label: mtext(c, label, x, y - h - 34 * s, int(48 * s), MK, pr(t, t0 + 0.5, 0.3), "pm")
+
+
+def hand_m(c, x, y, t, t0, word=None, col=BLU, reach=1.0):
+    """a big drawn hand coming down from the top (cuff up, fingers pointing down); word written on the cuff"""
+    k = pr(t, t0, 0.5); y = y - 260 * (1 - eio(min(1.0, reach)))
+    arm = [[(x - 70, 730), (x - 70, y - 220)], [(x + 70, 730), (x + 70, y - 220)]]
+    cuff = [(x - 90, y - 220), (x + 90, y - 220), (x + 90, y - 120), (x - 90, y - 120), (x - 90, y - 220)]
+    palm = [(x - 80, y - 120), (x - 95, y - 20), (x - 60, y + 40), (x - 30, y + 70), (x + 10, y + 75), (x + 50, y + 55), (x + 80, y + 10), (x + 85, y - 120)]
+    fingers = [[(x - 40, y + 10), (x - 44, y + 110)], [(x - 4, y + 20), (x - 2, y + 130)], [(x + 34, y + 14), (x + 40, y + 110)]]
+    if k >= 1: c.drawPath(_path(cuff), paint(col, 0.25)); c.drawPath(_path(palm), paint(WHITE))
+    ink(c, [wob(p, 510 + i, 0.6) for i, p in enumerate(arm)] + [wob(cuff, 515, 0.6), wob(palm, 516, 0.8)] + [wob(f, 517 + i, 0.5) for i, f in enumerate(fingers)], k, MK, 7)
+    if word: mtext(c, word, x, y - 150, 52, col, pr(t, t0 + 0.4, 0.3), "pm")
+
+
+def receipt_m(c, x, y, t, t0, length=300, grow_t=None, grow=0.0, total=None, col=MK):
+    """a till receipt hanging down from (x, y); from grow_t it gets `grow` px longer; zig-zag bottom edge"""
+    k = pr(t, t0, 0.4)
+    if k <= 0: return
+    L = length + (grow * eio(pr(t, grow_t, 0.9)) if grow_t is not None else 0)
+    w = 150; Lk = L * k
+    zz = [(x - w / 2 + i * w / 8, y + Lk + (10 if i % 2 else 0)) for i in range(9)]
+    outline = [(x - w / 2, y), (x + w / 2, y)] + zz[::-1] + [(x - w / 2, y)]
+    outline = [(x - w / 2, y), (x + w / 2, y), (x + w / 2, y + Lk)] + zz[::-1][1:] + [(x - w / 2, y)]
+    c.drawPath(_path(outline), paint(WHITE)); c.drawPath(_path(outline), stroke(col, 5))
+    for i in range(max(0, int(Lk // 38) - 1)):
+        yy = y + 30 + i * 38; ww = 90 if i % 3 else 60
+        c.drawLine(x - w / 2 + 20, yy, x - w / 2 + 20 + ww, yy, stroke(LIGHT, 5))
+    if total and k >= 1: mtext(c, total, x, y + Lk - 22, 34, RD, 1, "pm")
+
+
+def newspaper_m(c, x, y, t, t0, head="PRICES", tilt=-5):
+    k = pr(t, t0, 0.5); w, h = 400, 300
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(tilt)
+    pg = [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2)]
+    if k >= 1: c.drawPath(_path(pg), paint(WHITE))
+    ink(c, [wob(pg, 531, 0.6), [(-w / 2 + 20, -h / 2 + 90), (w / 2 - 20, -h / 2 + 90)]], k, MK, 6, pen_=False)
+    mtext(c, head, 0, -h / 2 + 70, 50, MK, pr(t, t0 + 0.3, 0.3), "pm")
+    for i in range(4):
+        for col_ in range(2):
+            c.drawLine(-w / 2 + 24 + col_ * 190, -h / 2 + 125 + i * 36, -w / 2 + 24 + col_ * 190 + 150 - (i % 2) * 40, -h / 2 + 125 + i * 36, stroke(LIGHT, 6, pr(t, t0 + 0.4 + i * 0.05, 0.2)))
+    c.restore()
+
+
+def pin_m(c, x, y, t, t0, s=1.0, col=RD):
+    k = pr(t, t0, 0.4)
+    if k <= 0: return
+    pts = [(x, y)] + [(x + 60 * s * math.cos(math.radians(a_)), y - 110 * s + 60 * s * math.sin(math.radians(a_))) for a_ in range(150, 391, 15)] + [(x, y)]
+    if k >= 1: c.drawPath(_path(pts), paint(col, 0.75)); c.drawCircle(x, y - 110 * s, 22 * s, paint(WHITE))
+    ink(c, [wob(pts, 541, 0.5)], k, MK, 6, pen_=False)
+
+
+def sticky_m(c, x, y, t, t0, text, s=1.0, tilt=6, col=RD):
+    k = pop_(t, t0)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k * s, k * s)
+    c.drawRect(R.MakeXYWH(-170 + 6, -110 + 10, 340, 220), paint((0, 0, 0), 0.12, blur=8))
+    c.drawRect(R.MakeXYWH(-170, -110, 340, 220), paint(YEL)); c.drawRect(R.MakeXYWH(-170, -110, 340, 34), paint((240, 210, 80)))
+    sz = 50; f = font("pm", sz)
+    while tw(f, text) > 300: sz -= 2; f = font("pm", sz)
+    c.drawString(text, -tw(f, text) / 2, 30, f, paint(col)); c.restore()
+
+
+def ny_m(c, x, y, t, t0, label="NEW YORK"):
+    """a plain hand-drawn state shape (not map data): a rough box with one bumpy side, label inside"""
+    k = pr(t, t0, 0.6)
+    pts = [(x - 200, y + 70), (x - 200, y - 20), (x - 110, y - 40), (x - 40, y - 110), (x + 140, y - 120), (x + 170, y - 40), (x + 200, y + 70), (x - 200, y + 70)]
+    if k > 0.6: hatch(c, _path(pts), pr(k, 0.6, 0.4), BLU, gap=18, w=5, bbox=(x - 210, y - 130, x + 210, y + 80), a=0.35)
+    ink(c, [wob(pts, 551, 1.0)], k, MK, 7)
+    mtext(c, label, x, y + 30, 46, MK, pr(t, t0 + 0.5, 0.3), "pm")
+
+
+def coinpile_m(c, x, y, t, t0, n=9):
+    for i in range(n):
+        tk = t0 + i * 0.07
+        if t < tk: continue
+        u = pr(t, tk, 0.3); row = 0 if i < 4 else (1 if i < 7 else 2); col_ = i if i < 4 else (i - 4 if i < 7 else i - 7)
+        cx = x - 90 + col_ * 60 + row * 30; cy = y - row * 40
+        coin(c, cx, cy - 200 * (1 - eio(u)), 34, spin=t * 3 if u < 1 else 0)
+
+
+def qmap(c, active, done=(), a=1.0, y=380):
+    """the hook's two questions as small pills under the brand pill; active coloured, done ticked"""
+    if a <= 0: return
+    for i, (txt, x) in enumerate((("WHO PICKS?", 360), ("STILL?", 690))):
+        on = (i == active); col = RD if on else (GR if i in done else LIGHT)
+        sz = 36 if on else 30; f = font("pm", sz); w = tw(f, txt) + 50; h = 60 if on else 50
+        c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), h / 2, h / 2, paint(WHITE, a))
+        c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), h / 2, h / 2, stroke(col, 5 if on else 3, a))
+        c.drawString(txt, x - tw(f, txt) / 2, y + sz * 0.36, f, paint(col, a))
+        if i in done: ink(c, [[(x + w / 2 - 6, y - 4), (x + w / 2 + 10, y + 14), (x + w / 2 + 40, y - 26)]], 1, GR, 7, pen_=False)

@@ -9,6 +9,19 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-10 ~03:35 IST (episode run: HOW IT WORKS EP 5, same cart / Instacart price tests)
+**Delivery (getScheduledPosts, 6–14 Nov IST):** everything from credit score (6 Nov) to **dropshipping (9 Nov 05:00)** and the owner's **Michelin anime pilot (9 Nov 19:35, 421658174)** PUBLISHED on Instagram + YouTube. Only the old reselling Instagram ERROR (418324142, 6 Nov, "Media container not created") remains — owner's call, not re-posted. Nothing scheduled after Michelin.
+**Analytics (IGRE, 19 Oct → 10 Nov)** — new / refreshed rows:
+| Date (IST) | Video | Kind · look | Views | Reach | Avg watch | 3-s rate | Shares | Saves | Likes | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 9 Nov 19:35 | Michelin (owner's anime pilot) | BIG · anime | 166 | 148 | 7.2 s | 46.6 % | 0 | 0 | 2 | 0 |
+| 9 Nov 05:00 | Dropshipping 30-day rule | HOW TO · whiteboard | 129 | 114 | 12.6 s | 47.5 % | 0 | 1 | 1 | 1 |
+| 8 Nov 05:00 | Prime 'Iliad' | HOW IT WORKS · whiteboard | 632 | 576 | 24.1 s | 65.1 % | 0 | 1 | 6 | 1 |
+| 8 Nov 00:00 | Exporting | HOW TO · whiteboard | 1,727 | 1,545 | 35.0 s | 78.8 % | 1 | 5 | 16 | 1 |
+YouTube (YTVP): still no rows after 3 Nov (Metricool import stuck; the Shorts are live).
+**Insight AN (10 Nov): the last two posts both opened under 50 % — the first time two in a row did.** Dropshipping (whiteboard HOW TO, 22 h old) 47.5 % / 12.6 s and Michelin (anime BIG, 8 h old) 46.6 % / 7.2 s, vs 60–79 % for the 7 whiteboard posts before them. Both are young rows (they may climb), but two different looks failing the same way points at the **first second, not the look**: dropship opened on a calendar + parcel with "do you know your shop has a DEADLINE?" (abstract), Michelin on a character. The posts that opened ≥ 65 % opened on a **concrete surprising number or object** (exporting: a tax gate crossed out; Prime: ILIAD; Spotify: 999 plays = $0). → This run opens on the surprise itself: five real price tags on one egg carton, all five visible by 0.7 s. Test: same-cart 3-s rate vs dropship 47.5 % / Prime 65.1 %. HOW IT WORKS on the board: Prime 632 / 65.1 % beat currency 345 / 62.1 % and credit 137 / 54.3 % — the consumer-vs-company story with a regulator ending is the strongest HOW IT WORKS shape so far, which is the shape of this episode.
+Media kit (last 10 IG reels, incl. Michelin): avg **574 views** (median 347), 3-s rate 63.4 %, avg watch 23.4 s, 5.1 sends + saves + comments per 1,000 reach — down from 696 / 67.6 % on 9 Nov because the two newest rows are young and weak.
+
 ## Snapshot 2026-11-09 ~08:30 IST (R&D run: writers' room)
 **Delivery (getScheduledPosts, 8–16 Nov IST):** exporting (419444583), Prime 'Iliad' (420282985) and **dropshipping (421118761, 05:00 IST today)** all PUBLISHED on Instagram + YouTube; no provider ERROR. Nothing scheduled after dropshipping.
 **Analytics (IGRE + YTVP, 19 Oct → 9 Nov):** every Instagram row is identical to the 02:45 IST pull (exporting 1,712 / 78.9 %, Prime 611 / 65.0 %); dropshipping has no row yet (posted 3.5 h before the pull). YouTube (YTVP) still ends at Christmas lights (3 Nov) — 6 days, 11 Shorts missing; the Shorts are live, Metricool's YouTube import is the problem.

@@ -37,3 +37,18 @@ e1/e2 separate the FTC's general study from Instacart and spell out who the FTC 
 Should-fixes applied: a4, c2 (Instacart's own number), e4 (no "didn't wait"), d3, z1, rows 3/4/9/10/11/17/19 of the board (hero on the phone, "vs" not "→", coin flip to
 groups A/B, "INSTACART SAYS" with no tick, FTC building + MIDDLEMEN, $1,000 to the chip). Not applied: 4 "same…" lists kept on purpose (it's the episode's refrain: i1, d2, t2).
 Gates after fixes: human_check --strict 6/6, story_check 7/7 + 6/6 (~129 s est.), board_check --strict PASS, 0 missing.
+
+## Build re-verification (episode run, 10 Nov 2026 ~02:45 IST; subagent re-opened Groundwork page + PDF, CR article, Instacart blog, FTC release)
+Rows 1–9, 12–13, 16–17 CONFIRMED as of today (Groundwork: "74% of Instacart grocery items had different prices"; "up to 23% higher"; "about 7%";
+"$17,424" → "about $1,200 per year"; FTC: "only includes hypothetical examples"). Changes made at build:
+- **d2** said "Its words: same store, same items, same prices. Period." — the blog's real sentence is "if two families are shopping for the same items,
+  at the same time, from the same store location on Instacart, they see the same prices — period." → d2 now "Instacart's promise now? Same items, same
+  time, same store, same price. Period." (a paraphrase in its order, said as its promise, not a quote); the chip quotes the real words.
+- **b3 'negligible'**: CBS + Scripps report Instacart framed the gaps as "negligible"; the script says "it called the gaps negligible" (no quote marks on screen beyond the one word).
+- **Row 2 caveat:** 437 volunteers took part; the Groundwork PDF used 193 submissions in the analysis. VO says "got 437 volunteers to shop", which is true; no analysis count claimed.
+- **Row 14 (NY law):** legally effective 8 Jul 2025, enforcement paused during the NRF suit (dismissed Oct 2025), AG alert 5 Nov 2025; NRF appeal argued
+  2nd Cir. 19 Oct 2026, no ruling reported → chip says "ENFORCED SINCE NOV 2025", VO "the seller now has to say so" stands (Duane Morris 12 Mar 2026; Bloomberg Law 19 Oct 2026). NY AG page itself didn't load this run.
+- **Row 15 (AG tip)**: not re-read this run (AG page blocked); kept from the 7 Nov primary read.
+- News since 7 Nov: nothing contradicts the script (no restart of tests, no ruling against the NY law, no FTC complaint over the tests). Context only:
+  DoorDash–Instacart deal (29 Oct 2026), FTC 6(b) orders to 9 firms incl. Instacart (28 Oct 2026), FTC proposed personalized-pricing disclosure policy (Aug 2026).
+- Caption fix: row 18 big word "MADE UP" → "HYPOTHETICAL" (matches the e3 must-fix).
