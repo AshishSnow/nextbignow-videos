@@ -913,3 +913,60 @@ def morph_mix(prev, cur, p, a, b):
     bl = 7 * math.sin(math.pi * clamp(p))
     if bl > 0.8: out = cv2.GaussianBlur(out, (0, 0), bl)
     return out
+
+
+# ---------------- KINETIC TYPOGRAPHY that REACTS to the action (ep 29, 9 Nov; SVGator 'kinetic typography guide', Designshack intro, Upskillist 7 principles) ----------------
+# Rules: the motion must MEAN something (a word wobbles because it stinks, is blown away by the thing that beats it, shakes because it's loud, falls when it's
+# deflated, sneaks in like the sneaky gas); per-letter stagger with an ease-out-back entrance; time it to the voice; keep it readable (big, high contrast, hold it);
+# one mode per word, few words per video (if everything moves nothing stands out).
+def _kin_glyph(ch, size, col, fnt=None, stroke=0, stroke_col=(46, 32, 26)):
+    def mk():
+        fn = font(fnt or F_HAND, size * 2); tw = max(size * 0.28, fn.getlength(ch) / 2); w_, h_ = int(tw + 24 + stroke * 2), int(size * 1.5)
+        im = Image.new("RGBA", (w_ * 2, h_ * 2), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+        d.text((w_, h_), ch, font=fn, fill=tuple(col) + (255,), anchor="mm", stroke_width=stroke * 2, stroke_fill=tuple(stroke_col) + (255,))
+        return el_from(im.resize((w_, h_), Image.LANCZOS)), tw
+    return gcache(("kglyph", ch, size, tuple(col), fnt, stroke, tuple(stroke_col)), mk)
+
+
+def kin_word(f, text, x, y, t, t0, mode="pop", size=130, col=(46, 32, 26), fnt=None, stroke=0, stroke_col=(46, 32, 26), src=None, t1=None,
+             amp=1.0, stagger=0.045, track=0.0, wisp_col=None, op=1.0):
+    """draw `text` centred at (x, y), letter by letter. Entrance: each letter pops in (ease-out-back) `stagger` s after the previous one, rising 30 px.
+    mode: 'pop' (entrance only) | 'stink' (letters bob + sway out of phase, smell wisps rise off them) | 'shake' (vibration = loud / alarm) |
+    'blow' (from t1 the letters are pushed away from src=(sx, sy), nearest first, spinning + fading = beaten by something) |
+    'drop' (from t1 they fall, bounce once and lie tilted = deflated / busted) | 'sneak' (they tiptoe in sideways from the left, low, one hop each) |
+    'breathe' (the whole word swells and shrinks slowly, like lungs)."""
+    if t < t0 or op <= 0: return
+    gl = [_kin_glyph(ch, size, col, fnt, stroke, stroke_col) for ch in text]
+    ws = [g[1] + track for g in gl]; tot = sum(ws); cx = x - tot / 2
+    for i, (ch, (el, tw)) in enumerate(zip(text, gl)):
+        lx = cx + ws[i] / 2; cx += ws[i]
+        if ch == " ": continue
+        ti = t0 + i * stagger; q = (t - ti) / 0.22
+        if q <= 0: continue
+        s = eback(clamp(q)) if q < 1 else 1.0; dy = 30 * (1 - eo(clamp(q))); dx = 0.0; rot = 0.0; o = op * clamp(q * 3)
+        if mode == "sneak":
+            qq = clamp((t - ti) / 0.45); dx = -260 * (1 - eo(qq)); dy = -40 * math.sin(math.pi * qq) * amp; rot = 8 * (1 - qq); s = 1.0; o = op * clamp(qq * 4)
+        if mode == "stink":
+            dy += 12 * amp * math.sin(t * 5.2 + i * 0.9); rot = 7 * amp * math.sin(t * 3.7 + i * 1.3); dx = 4 * amp * math.sin(t * 4.1 + i)
+        if mode == "shake":
+            dx = 6 * amp * math.sin(t * 91 + i * 7); dy += 6 * amp * math.cos(t * 83 + i * 5); rot = 3 * amp * math.sin(t * 67 + i)
+        if mode == "breathe":
+            s *= 1 + 0.07 * amp * math.sin(t * 2.6)
+        if mode == "blow" and t1 is not None and src is not None:
+            dd = math.hypot(lx - src[0], y - src[1]) + 1e-3; tb = t1 + 0.0012 * dd
+            if t > tb:
+                u = t - tb; v = (lx - src[0]) / dd, (y - src[1]) / dd
+                dx += v[0] * (900 * u + 1500 * u * u); dy += v[1] * (900 * u + 1500 * u * u) - 200 * u; rot = (1 if v[0] > 0 else -1) * 400 * u; o *= clamp(1 - u / 0.6)
+        if mode == "drop" and t1 is not None:
+            tb = t1 + i * 0.03
+            if t > tb:
+                u = t - tb; fy = 900 * u * u
+                if fy > 140: u2 = u - math.sqrt(140 / 900); fy = 140 - max(0, 260 * u2 - 900 * u2 * u2)
+                dy += fy; rot = (-1) ** i * 18 * clamp(u / 0.5)
+        if o > 0.01: rot_comp(f, el, lx + dx, y + dy, rot, s, o, 0.0)
+        if mode == "stink" and i % 2 == 0 and t > ti + 0.3:
+            wc = wisp_col or (150, 96, 168)
+            for j in range(2):
+                ph = ((t * 0.9 + i * 0.37 + j * 0.5) % 1.0); bx = lx + dx; by = y - size * 0.55 - 120 * ph
+                P = np.array([(bx + 12 * math.sin(k * 0.9 + t * 4 + j * 2) + (j - 0.5) * 22, by - k * 9) for k in range(8)], np.int32)
+                cv2.polylines(f, [P], False, C(wc) if op * (1 - ph) > 0.5 else C((210, 186, 220)), 6, cv2.LINE_AA)

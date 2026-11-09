@@ -301,6 +301,22 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
 - Hook data (ep 27 vs the rest): a slow first second (nodding off) held 60.7 %, an accident 75-79 %. Open MID-ACCIDENT at frame 0 (ep 28: the chug is already going, spit-take at 1.3 s).
 - Voice: PZ 1.35 (tighter pauses, owner 7 Nov) is now voice.env; a rewrite can move UNCHANGED neighbour lines (b0 4.43 -> 4.26): always comp from the previous take after a rewrite.
 
+### Ep 29 (9 Nov, twelfth ink episode): KINETIC TYPE, the OFFICE place, gas characters, EXS 0.75 (`anim_fx.py`, `anim_props_lib29.py`, voice.env)
+- `kin_word(f, text, x, y, t, t0, mode, size, col, stroke=2, stroke_col=INKC, src=, t1=, amp=, stagger=)` (anim_fx) = words that REACT, letter by letter (stagger + ease-out-back entrance):
+  'stink' (letters bob + sway out of phase with smell wisps), 'sneak' (tiptoe in from the left, one hop each), 'shake' (loud / alarm), 'blow' (from t1 pushed away from src=(x, y),
+  nearest letters first, spinning + fading), 'drop' (from t1 they fall, bounce, lie tilted = deflated), 'breathe' (swells like lungs), 'pop'. The motion must MEAN the word; one mode
+  per word; Architects Daughter at >= 100 px for headline words (two lines if > 9 letters at 150 px: 'GARLIC' / 'BREATH?' at 150 fits the safe zone, one line at 120 did not).
+- Hook rule after eps 27-28 (54.9 / 60.2 % hold): the QUESTION is on screen as moving words at frame 0, over action that is already happening (the cloud already rolling into a face).
+- Place: `set_office(t, dim)` + `office_front(f, top_y)` (meeting room: window + skyline, whiteboard with a chart, plant; wood table front). Other people = `chub(shirt=)` + `dress(...)`.
+- lib29 ink props: garlic_bulb_el, clove_el(crush), alliin_el, enzyme_el(bite) (mint pac-man), allicin_el, gas_el2 (mauve stink cloud with a face), ams_el (bandit-masked sneaky gas),
+  lungs_el(mood, look, k) (k = breath), lettuce_el, mint_sprig_el, naan_el, red_apple() (lib19 apple_el follows ACC: this keeps it red), breath_meter_el(level), tongue_teeth_el(bits),
+  sweat_drop_el. Ep 29 anim_shots helpers: puff() (a cloud blown out of a mouth), wisp() (rising smell lines), kw() (kin_word with the ink stroke), board_lungs, ruler() (a 2-day
+  timeline with sun/moon marks + a bar that runs to a time), bar()/chart() (a 5-bar result chart with food icons).
+- Voice: EXS 0.75 in voice.env (A/B: chunk20 +0.012, first-100 s +0.13, line mean = ; f0 16.0 st). A deeper blend (michael .5) lost 0.025: M2 stays. Still true: lengthen 4-6-word
+  lines into one natural sentence (b6 4.34 -> 4.43, c0 4.36 -> 4.48).
+- Score: TARANTELLA (6/8, mandolin tremolo = re-struck 16ths on steel guitar, accordion off-beats, tambourine + castanets) with a tiptoe BASSOON theme for the sneaky character and the
+  accordion 'breathing' (bellows swells) under the lungs (ep 29 music.py). Foley (ep 29 mix.py): stink_puff, crush, floss, exhale.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with
