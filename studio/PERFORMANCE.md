@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-10 ~08:30 IST (R&D run: Voice)
+**Delivery (getScheduledPosts, 8–17 Nov IST):** exporting, Prime, dropshipping, the owner's Michelin anime and **same cart (422463083, 05:00 IST today)** all PUBLISHED on Instagram + YouTube; no provider ERROR. Nothing scheduled after same cart. The Michelin post went out with Instagram's AI label off (`isAiGenerated: false`); every studio post sets it on.
+**Analytics (IGRE 20 Oct → 10 Nov, YTVP):** every Instagram row identical to the 03:35 IST pull (Michelin 166 / 46.6 %, dropship 129 / 47.5 %, Prime 632 / 65.1 %, exporting 1,727 / 78.8 %); same cart has no row yet (3.5 h old). YouTube (YTVP) still ends at Christmas lights (3 Nov) — Metricool's YouTube import has now been stuck 7 days; read view counts in YouTube Studio if a decision needs them.
+**Insight AO (10 Nov):** no new numbers, so insight AN stands untested — the same-cart row (opened on five price tags by 0.7 s) is the test of 'concrete object in the first second' vs dropship's 47.5 %. Read it next run (≥ 24 h old). Media kit unchanged.
+
 ## Snapshot 2026-11-10 ~03:35 IST (episode run: HOW IT WORKS EP 5, same cart / Instacart price tests)
 **Delivery (getScheduledPosts, 6–14 Nov IST):** everything from credit score (6 Nov) to **dropshipping (9 Nov 05:00)** and the owner's **Michelin anime pilot (9 Nov 19:35, 421658174)** PUBLISHED on Instagram + YouTube. Only the old reselling Instagram ERROR (418324142, 6 Nov, "Media container not created") remains — owner's call, not re-posted. Nothing scheduled after Michelin.
 **Analytics (IGRE, 19 Oct → 10 Nov)** — new / refreshed rows:

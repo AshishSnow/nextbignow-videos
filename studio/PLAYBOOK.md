@@ -119,6 +119,7 @@ moves is re-rendered with softer moves (it prints `prosody gate …` with the li
 Since 27 Oct the cleanup chain is lighter (`DEESS=-8`, `ROOM_DB=-27`, `COMP=1.5`; old: −11/−21/2.2): per-line UTMOS 4.396 → 4.425, worst line
 3.996 → 4.063 on the De Beers script (chain-only A/B on one fixed raw take, `lab/voice_chain/chain_ab.py`).
 Write line speeds 1.0–1.06 and pauses 0.2–0.45 in `vo_lines.py` as in the examples; SPD/PZ make them calm.
+**Chatterbox (the default engine) ignores the speed column (R&D 10 Nov):** keep writing speeds for Kokoro fallback, but on Chatterbox pace comes from the reference (`CBV`, default `narrator_hype` since 10 Nov, phrase rate ~170–183 wpm) + pauses + `trim_gaps.py`. Don't time-stretch (PSOLA ±5 % cost 0.06–0.09 per-line UTMOS). To speed up, cut words; to slow down, add a pause where a number lands.
 Pace check (28 Oct, Hoover): line speeds of 1.0–1.02 with the default SPD 0.88 gave only 152 wpm speaking (target 165–190). If
 `voice_report` says < 165 wpm, re-run with `SPD=0.96` (Hoover: 152 → 160 wpm, per-line UTMOS 4.439 → 4.423, range 18.0 → 17.7 st,
 ASR clean) — or write line speeds 1.02–1.06 from the start. **Compare takes on per-line UTMOS (mean/min), not the chunked whole-file

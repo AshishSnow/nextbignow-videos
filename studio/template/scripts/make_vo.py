@@ -36,7 +36,10 @@ SPD = float(os.environ.get("SPD", "0.88")); PZ = float(os.environ.get("PZ", "1.6
 SPLIT = float(os.environ.get("SPLIT", "0.12"))   # per-sentence Kokoro calls + 0.12 s gap: UTMOS 4.23 -> 4.38 (27 Oct A/B)
 # ENGINE=chatterbox -> Chatterbox-Turbo (MIT, onnx q4) conditioned on our synthetic narrator (studio/voices/*.cbcond.npz);
 # it takes its pace and melody from the reference, so SPD/SPLIT don't apply (line pauses still do). See studio/VOICE.md.
-ENGINE = os.environ.get("ENGINE", "chatterbox"); CBV = os.environ.get("CBV", "narrator_brisk")   # default since 6 Nov 2026 (Spotify + reselling A/B, VOICE.md); ENGINE=kokoro for the old voice
+ENGINE = os.environ.get("ENGINE", "chatterbox"); CBV = os.environ.get("CBV", "narrator_hype")   # default since 10 Nov 2026 (R&D A/B vs narrator_brisk on 2 scripts x 2 takes:
+# per-line UTMOS +0.02/+0.06, min +0.11/+0.28, range +2.0/+0.9 st, low_fall -4 vs -2 st, phrase rate 184/193 -> 170/183 wpm; VOICE.md). CBV=narrator_brisk for the 6 Nov voice;
+# ENGINE=kokoro for the old one. NOTE: with Chatterbox the per-line speed column in vo_lines.py is IGNORED (no speed knob); pace = the reference
+# + pauses + tools/trim_gaps.py. A PSOLA re-time of 0.94-1.04 cost 0.06-0.09 per-line UTMOS (10 Nov, lab/voice_engine/pace_lab.py), so none is applied.
 _key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX, sorted(VOICES.items())] + ([SPLIT] if SPLIT > 0 else []) + ([ENGINE, CBV] if ENGINE != "kokoro" else [])).encode()).hexdigest()   # pauses are baked into the cache too
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}
