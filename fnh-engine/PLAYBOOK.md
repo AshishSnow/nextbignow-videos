@@ -328,6 +328,22 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
 - Score: TARANTELLA (6/8, mandolin tremolo = re-struck 16ths on steel guitar, accordion off-beats, tambourine + castanets) with a tiptoe BASSOON theme for the sneaky character and the
   accordion 'breathing' (bellows swells) under the lungs (ep 29 music.py). Foley (ep 29 mix.py): stink_puff, crush, floss, exhale.
 
+### Ep 31 (10 Nov, thirteenth ink episode, FIRST with no music bed): SOUND DESIGN WITHOUT A SCORE, the TV ROOM + THE CAPSULE, kin_word 'parch' (`engine/template/sfx_lib.py`, `anim_props_lib31.py`, `anim_fx.py`)
+- No score any more (owner 9 Nov), so the foley carries the mix. sfx_lib now has `layered_hit(t, level, sub_f, body, tail, bright)` = SUB (falling sine) + BODY (loudest, high-passed)
+  + TRANSIENT (-8 dB click) + TAIL (-14 dB decay), transients on the same sample; use it on the 4-5 BIGGEST moments only. `room_tone(kind, n)` ('tv' / 'cap' / 'kit' / 'sea' / board)
+  under every shot per place (levels in the comment, ducked -6 dB under the voice, 20 ms crossfades at cuts), and a DROP-OUT (room tone + foley -15 dB for 0.25 s) right before each
+  big hit so it lands out of silence. Copy the PLACE map / LVL / BIG / dip block from `episodes/31-salty-snacks-thirst/mix.py`. Other new foley: bell (alarm), shaker_rattle, tumble,
+  drain, magnet_zing, deflate, waves, hatch_hiss. music.py in a no-score episode just writes a silent music.wav. Keep VO/bed >= 14 dB (a growl + drain hit 13 on d5: lowered).
+- `kin_word(..., mode="parch", t1=)` = the word dries out (sags, ONE thin pale crack on every other letter, crumbs fall): thirsty / dry. More cracks were unreadable in the test frames.
+- Places: `set_tvroom(t, flick)` + `sofa_front(f, 1360)` (movie night: cool flickering TV key light from the camera side + a warm lamp; `sofa_el()` at (x, 1340) + `chub(..., sit=True)`
+  at y 1470 behind it) and `set_capsule(t, dim)` + `capsule_front(f, 1330)` (a mock spaceship module: white panels, a porthole with a painted Mars, a locker calendar, status lamps).
+- lib31 ink props: chip_el(seed, bite), chips_bowl_el(level), salt_el(mood) (salt crystal buddy, accent on its shadow face), shaker_el, cell_buddy_el(mood, look, k) (k = water lost:
+  shrinks + wrinkles), checker_el(mood, look, needle, ring) (a brain-pink inspector with a dial belly + an alarm bell: any 'sensor in your body'), courier_el (a hormone messenger),
+  urea_el, magnet_el, wdrop_el (water drop buddy), tray_el(salty). Other people in jumpsuits = `chub(shirt=(214, 218, 226))` + dress().
+- Voice: EXS 0.6 vs 0.75 on identical text = neutral (chunk20 4.491 vs 4.490, line mean 4.456 vs 4.449) but f0 range 16.3 -> 15.5 st (gate 15): voice.env stays 0.75; comp
+  across the two takes instead. 'Yeah' at a line start reads as 'Yay' to ASR (and probably to people): write 'Less!' / a full sentence instead. T(line, 'it'/'the'/'and'/'your')
+  matches the FIRST hit: 5 shots needed nth=1 here (a 0.2 s shot showed up in the frame list).
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

@@ -859,3 +859,106 @@ def belt(level=-32, dur=2.0):
     y *= 0.8 + 0.2 * (np.sin(2 * np.pi * 4 * t2) > 0.9)
     y *= np.minimum(1, t2 / 0.2) * np.minimum(1, (dur - t2) / 0.3)
     return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+# ---- ep 31 (10 Nov): SOUND DESIGN WITHOUT A MUSIC BED (owner 9 Nov: no score; he adds a track in-app at 50-60).
+# Layered hits = SUB + BODY (loudest) + TRANSIENT + TAIL with aligned transients (Morphic 'How to layer sound effects'; Violet Recording 2026);
+# room tone per place, low and ducked under the voice (Morphic 'Sound design basics': 'if the ambience is too loud, dialogue gets buried');
+# a ~0.25 s DROP-OUT (-15 dB) of room tone + foley before the 4-5 biggest moments (Sound On Sound 2013: 'a beat of silence just before the impact');
+# save the big sounds for the big moments. See episodes/31-salty-snacks-thirst/mix.py for the full pattern (PLACE map, LVL, dip).
+def _st2(y): return np.stack([y, y * 0.96], 1).astype(np.float32)
+
+
+def _bp(x, lo, hi): return signal.sosfilt(signal.butter(2, [lo, hi], "band", fs=SR, output="sos"), x)
+
+
+def _hp(x, f0): return signal.sosfilt(signal.butter(2, f0, "high", fs=SR, output="sos"), x)
+
+
+def _lp(x, f0): return signal.sosfilt(signal.butter(2, f0, "low", fs=SR, output="sos"), x)
+
+
+# ---------------- the layered hit (ep 31 skill) ----------------
+def layered_hit(t, level=-14, sub_f=(90, 42), body=(180, 1400), tail=1.0, bright=1.0):
+    """4 layers, transients on the same sample: SUB (falling sine) + BODY (band thump, loudest) + TRANSIENT (click, -8 dB) + TAIL (filtered decay, -14 dB)."""
+    n_ = int((tail + 0.4) * SR); tt = np.arange(n_) / SR
+    fr = sub_f[1] + (sub_f[0] - sub_f[1]) * np.exp(-tt / 0.08)
+    sub = np.sin(2 * np.pi * np.cumsum(fr) / SR) * np.exp(-tt / 0.32) * np.minimum(1, tt / 0.002)
+    bd = _hp(_bp(rng.standard_normal(n_), *body), 150) * np.exp(-tt / 0.07) * np.minimum(1, tt / 0.001)
+    bd = bd / (np.abs(bd).max() + 1e-9)
+    tr = _hp(rng.standard_normal(n_), 2500) * np.exp(-tt / 0.006); tr = tr / (np.abs(tr).max() + 1e-9)
+    tl = _lp(_hp(rng.standard_normal(n_), 300), 3500 * bright) * np.exp(-tt / (tail * 0.35)) * np.minimum(1, tt / 0.02); tl = tl / (np.abs(tl).max() + 1e-9)
+    y = 0.8 * sub + 1.0 * bd + db(-8) * tr + db(-14) * tl
+    y = y / (np.abs(y).max() + 1e-9) * db(level)
+    st = np.stack([y, np.roll(y, 90) * 0.95], 1).astype(np.float32)               # a hair of width on the tail
+    add(st, t)
+
+
+def bell(level=-22, f0=1760, dur=1.0, rate=18):
+    """an alarm bell ringing (struck partials + a fast hammer tremolo)."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = sum(a * np.sin(2 * np.pi * f0 * m * tt) for m, a in ((1, 1), (2.76, 0.5), (5.4, 0.25)))
+    x *= (0.55 + 0.45 * np.abs(np.sin(np.pi * rate * tt))) * np.minimum(1, tt / 0.005) * np.clip((dur - tt) / 0.15, 0, 1)
+    return _st2(x / (np.abs(x).max() + 1e-9) * db(level))
+
+
+def shaker_rattle(level=-26, dur=0.8, rate=9):
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = _bp(rng.standard_normal(n_), 3000, 9000) * np.abs(np.sin(np.pi * rate * tt)) ** 4
+    return _st2(x / (np.abs(x).max() + 1e-9) * db(level) * np.clip((dur - tt) / 0.1, 0, 1))
+
+
+def tumble(level=-28, dur=1.0):
+    """a dry tumbleweed: scratchy brush noise bumping along + a whistle of wind."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = _bp(rng.standard_normal(n_), 1500, 6000) * (0.3 + 0.7 * np.abs(np.sin(2 * np.pi * 4.5 * tt)) ** 3)
+    w = np.sin(2 * np.pi * (700 + 200 * np.sin(2 * np.pi * 0.7 * tt)) * tt) * 0.15
+    y = (x / (np.abs(x).max() + 1e-9) + w) * np.sin(np.pi * tt / dur)
+    return _st2(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def drain(level=-24, dur=1.2):
+    """a battery draining: a falling square-ish tone that slows down."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR; fr = 600 * np.exp(-tt * 1.4) + 90
+    y = np.sign(np.sin(2 * np.pi * np.cumsum(fr) / SR)) * 0.4 * np.exp(-tt / dur)
+    return _st2(_lp(y, 2500) / 0.4 * db(level))
+
+
+def magnet_zing(level=-26, dur=0.6):
+    n_ = int(dur * SR); tt = np.arange(n_) / SR; fr = 300 + 900 * tt / dur
+    y = np.sin(2 * np.pi * np.cumsum(fr) / SR) * (0.6 + 0.4 * np.sin(2 * np.pi * 30 * tt)) * np.sin(np.pi * tt / dur)
+    return _st2(y * db(level))
+
+
+def deflate(level=-24, dur=0.7):
+    """shrinking cells: a little falling 'wheee' + air."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR; fr = 900 * np.exp(-tt * 2.5) + 180
+    y = np.sin(2 * np.pi * np.cumsum(fr) / SR) * np.exp(-tt / dur) + 0.3 * _bp(rng.standard_normal(n_), 800, 3000) * np.exp(-tt / 0.2)
+    return _st2(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def waves(level=-30, dur=3.0):
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = _lp(rng.standard_normal(n_), 1400) * (0.35 + 0.65 * np.sin(np.pi * ((tt / 2.2) % 1)) ** 2)
+    return _st2(x / (np.abs(x).max() + 1e-9) * db(level) * np.minimum(1, np.minimum(tt / 0.4, (dur - tt) / 0.4)))
+
+
+def hatch_hiss(level=-26, dur=0.9):
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = _hp(rng.standard_normal(n_), 2000) * np.exp(-tt / 0.35) + 0.5 * np.sin(2 * np.pi * 70 * tt) * np.exp(-tt / 0.08)
+    return _st2(x / (np.abs(x).max() + 1e-9) * db(level))
+
+
+
+# room_tone(kind, n_): 'tv' (hiss + mains hum) | 'cap' (air handling) | 'kit' (kitchen) | 'sea' (waves) | anything else = the board's quiet paper room.
+# Suggested levels (dBFS before loudnorm): tv -44, cap -42, kit -46, sea -38, board -52; multiply by (1 - 0.5 * g) to duck under the voice.
+def room_tone(kind, n_):
+    tt = np.arange(n_) / SR; w = rng.standard_normal(n_)
+    if kind == "tv":   x = _lp(w, 2500) * 0.5 + 0.25 * np.sin(2 * np.pi * 60 * tt) + _bp(rng.standard_normal(n_), 4000, 9000) * 0.08 * (rng.random(n_) < 0.02)
+    elif kind == "cap": x = _lp(w, 700) * 0.8 + 0.35 * np.sin(2 * np.pi * 120 * tt) * (0.8 + 0.2 * np.sin(2 * np.pi * 0.3 * tt))
+    elif kind == "kit": x = _lp(w, 1800) * 0.4 + 0.2 * np.sin(2 * np.pi * 100 * tt)
+    elif kind == "sea": x = _lp(w, 1200) * (0.4 + 0.6 * np.sin(np.pi * ((tt / 2.2) % 1)) ** 2)
+    else:              x = _bp(w, 200, 2500) * 0.3                                    # the board: a quiet paper room
+    return x / (np.abs(x).max() + 1e-9)
+
+

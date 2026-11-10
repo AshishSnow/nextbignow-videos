@@ -934,7 +934,7 @@ def kin_word(f, text, x, y, t, t0, mode="pop", size=130, col=(46, 32, 26), fnt=N
     mode: 'pop' (entrance only) | 'stink' (letters bob + sway out of phase, smell wisps rise off them) | 'shake' (vibration = loud / alarm) |
     'blow' (from t1 the letters are pushed away from src=(sx, sy), nearest first, spinning + fading = beaten by something) |
     'drop' (from t1 they fall, bounce once and lie tilted = deflated / busted) | 'sneak' (they tiptoe in sideways from the left, low, one hop each) |
-    'breathe' (the whole word swells and shrinks slowly, like lungs)."""
+    'breathe' (the whole word swells and shrinks slowly, like lungs) | 'parch' (ep 31: from t1 the word dries out - sags, cracks, crumbs fall = thirsty / dry)."""
     if t < t0 or op <= 0: return
     gl = [_kin_glyph(ch, size, col, fnt, stroke, stroke_col) for ch in text]
     ws = [g[1] + track for g in gl]; tot = sum(ws); cx = x - tot / 2
@@ -963,7 +963,19 @@ def kin_word(f, text, x, y, t, t0, mode="pop", size=130, col=(46, 32, 26), fnt=N
                 u = t - tb; fy = 900 * u * u
                 if fy > 140: u2 = u - math.sqrt(140 / 900); fy = 140 - max(0, 260 * u2 - 900 * u2 * u2)
                 dy += fy; rot = (-1) ** i * 18 * clamp(u / 0.5)
+        if mode == "parch":                                   # ep 31: the word DRIES OUT - it sags + shrinks a little, cracks, and crumbs fall off it
+            u = clamp((t - (t1 if t1 is not None else ti + 0.35)) / 1.2)
+            s *= 1 - 0.07 * u * amp; dy += 10 * u * amp + 3 * math.sin(t * 2 + i); rot = 4 * amp * u * math.sin(i * 2.1 + 0.5)
         if o > 0.01: rot_comp(f, el, lx + dx, y + dy, rot, s, o, 0.0)
+        if mode == "parch" and u > 0.05:
+            rng_ = np.random.default_rng(97 + i); cx0 = lx + dx; cy0 = y + dy
+            if i % 2 == 0:                                      # ONE thin crack on every other letter (more = unreadable, ep 31 test frames)
+                P = [(cx0 + rng_.uniform(-0.12, 0.12) * size, cy0 - 0.3 * size)]
+                for k in range(3): P.append((P[-1][0] + (-1) ** k * 0.07 * size, P[-1][1] + 0.12 * size * min(1.0, u * 2)))
+                cv2.polylines(f, [np.array(P, np.int32)], False, C((250, 246, 236)), max(2, int(size / 60)), cv2.LINE_AA)
+            for j in range(2):                                  # crumbs falling from under the word
+                ph = ((t * 0.9 + i * 0.29 + j * 0.5) % 1.0)
+                if ph < u: cv2.circle(f, (int(cx0 + (j - 0.5) * size * 0.2 + 6 * math.sin(i + j)), int(cy0 + size * 0.5 + 140 * ph * ph)), max(3, int(size / 28)), C(col), -1, cv2.LINE_AA)
         if mode == "stink" and i % 2 == 0 and t > ti + 0.3:
             wc = wisp_col or (150, 96, 168)
             for j in range(2):
