@@ -9,6 +9,21 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-11 ~02:50 IST (episode run: HOW THEY GOT SO BIG EP 4, Netflix 2011)
+**Delivery (getScheduledPosts, 7–14 Nov IST):** Southwest, currency button, Coca-Cola, exporting, Prime, dropshipping, the owner's Michelin anime and **same cart (10 Nov 05:00)** all PUBLISHED on Instagram + YouTube; no provider ERROR in the window (only the old reselling IG error of 6 Nov remains). Nothing scheduled after same cart.
+**Analytics (IGRE + YTVP, 20 Oct → 11 Nov)** — new / refreshed rows:
+| Date (IST) | Video | Kind · look | Views | Reach | Avg watch | 3-s rate | Shares | Saves | Likes | Comments |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 10 Nov 05:00 | Same cart (Instacart) | HOW IT WORKS · whiteboard | 152 | 132 | 16.6 s | **63.4 %** | 0 | 0 | 1 | 1 |
+| 9 Nov 19:35 | Michelin (owner's anime) | BIG · anime | 173 | 156 | 7.0 s | 46.4 % | 0 | 0 | 2 | 0 |
+| 9 Nov 05:00 | Dropshipping 30-day rule | HOW TO · whiteboard | 132 | 116 | 12.3 s | 46.3 % | 0 | 1 | 1 | 1 |
+| 8 Nov 05:00 | Prime 'Iliad' | HOW IT WORKS · whiteboard | 634 | 577 | 24.0 s | 64.9 % | 0 | 1 | 6 | 1 |
+| 8 Nov 00:00 | Exporting | HOW TO · whiteboard | 1,730 | 1,550 | 35.0 s | 78.7 % | 1 | 5 | 16 | 1 |
+**YouTube (YTVP) is unstuck — rows now reach 8 Nov** (views · avg view duration s): exporting 312 · 55, **Southwest 292 · 30**, credit score 183 · 38, currency 169 · 13, Coca-Cola 109 · 20, importing 98 · 23, Prime 40 · 25 (young), reselling 179 · 24, Spotify 142 · 74.
+**Insight AP (11 Nov): the 'object in the first second' fix worked once.** Same cart opened on a carton with five price tags landing by 0.7 s and got **63.4 % past 3 s** (21 h old), vs 46.3 % (dropship) and 46.4 % (Michelin) the two posts before it — back at the whiteboard average. Watch time is still low (16.6 s of 118 s = 14 %): the opening now works, the middle loses people. One post, so a hint, not proof. → This run's Netflix board opens on a finished picture (red envelope, big −800,000) and adds a **re-hook every ~20 s drawn as a running counter** (members leaving) so the middle has a number that keeps moving.
+**Insight AQ (11 Nov): BIG stories do better on YouTube than their IG numbers suggest.** Southwest is the #2 YouTube Short of the whiteboard era (292 views, 30 s avg) while it was mid-table on IG (349, 60.5 %). Across the three kinds on YouTube: HOW TO avg 205 views (exporting, importing, reselling), BIG 201 (Southwest, Coca-Cola), HOW IT WORKS 134 (credit, currency, Prime, Spotify). On IG the HOW TOs still lead (exporting, food truck, drone). Keep the rotation; BIGs earn their place on YouTube.
+Media kit (last 10 IG reels, incl. Michelin): avg **437 views** (median 311), 3-s rate 61.1 %, avg watch 19.7 s, 5.9 sends + saves + comments per 1,000 reach. YouTube last 10 with rows: avg 177 views.
+
 ## Snapshot 2026-11-10 ~08:30 IST (R&D run: Voice)
 **Delivery (getScheduledPosts, 8–17 Nov IST):** exporting, Prime, dropshipping, the owner's Michelin anime and **same cart (422463083, 05:00 IST today)** all PUBLISHED on Instagram + YouTube; no provider ERROR. Nothing scheduled after same cart. The Michelin post went out with Instagram's AI label off (`isAiGenerated: false`); every studio post sets it on.
 **Analytics (IGRE 20 Oct → 10 Nov, YTVP):** every Instagram row identical to the 03:35 IST pull (Michelin 166 / 46.6 %, dropship 129 / 47.5 %, Prime 632 / 65.1 %, exporting 1,727 / 78.8 %); same cart has no row yet (3.5 h old). YouTube (YTVP) still ends at Christmas lights (3 Nov) — Metricool's YouTube import has now been stuck 7 days; read view counts in YouTube Studio if a decision needs them.
