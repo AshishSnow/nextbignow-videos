@@ -1310,3 +1310,112 @@ def qmap(c, active, done=(), a=1.0, y=380):
         c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), h / 2, h / 2, stroke(col, 5 if on else 3, a))
         c.drawString(txt, x - tw(f, txt) / 2, y + sz * 0.36, f, paint(col, a))
         if i in done: ink(c, [[(x + w / 2 - 6, y - 4), (x + w / 2 + 10, y + 14), (x + w / 2 + 40, y - 26)]], 1, GR, 7, pen_=False)
+
+
+# ---------------------------------------------------------------- HOW THEY GOT SO BIG EP 4 (Netflix 2011, 11 Nov 2026)
+# redenv_m (hatched red envelope), plancard_m (plan card that tears in two), wall_m (erasable brick wall), atbubble_m (plain @ bubble, no logo),
+# chart_drop_m (line chart off a cliff), tally (one-row live COUNTER pill under the brand pill: tick a number down/up through the middle
+# of a video = a moving re-hook), dashed_tv (a screen still only planned), qwik_label (word label card). Example: examples/netflix-2011.
+
+
+def redenv_m(c, x, y, t, t0, s=1.0, text="DVD", tilt=0.0, a=1.0):
+    """the red envelope: outline + flap drawn on, then hatched red; word on a small white card"""
+    k = pr(t, t0, 0.45); w, h = 260 * s, 170 * s
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(tilt)
+    box = [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2)]
+    c.drawPath(_path(box), paint(WHITE, a))
+    if k > 0.5:
+        hatch(c, _path(box), pr(k, 0.5, 0.5), RD, gap=13, w=6, bbox=(-w / 2, -h / 2, w / 2, h / 2), seed=701, a=0.8 * a)
+    ink(c, [wob(box, 702, 0.6), [(-w / 2, -h / 2), (0, 10 * s), (w / 2, -h / 2)]], k, MK, 6, a=a, pen_=False)
+    if text and k >= 1:
+        f = font("pm", int(50 * s)); tw_ = tw(f, text) + 30 * s
+        c.drawRoundRect(R.MakeXYWH(-tw_ / 2, 22 * s, tw_, 60 * s), 10, 10, paint(WHITE, 0.95 * a))
+        mtext(c, text, 0, 70 * s, int(50 * s), MK, 1, "pm", a=a)
+    c.restore()
+
+
+def plancard_m(c, x, y, t, t0, title="STREAMING + 1 DVD", split=0.0, s=1.0):
+    """a plan card; split 0..1 tears it in two along a zig-zag and slides the halves apart"""
+    k = pr(t, t0, 0.5); w, h = 620 * s, 300 * s
+    if k <= 0: return
+    zz = [((14 if i % 2 else -14) * s, -h / 2 + i * h / 10) for i in range(11)]
+    gap = 80 * eio(split)
+    for side in ((-1,) if split <= 0 else (-1, 1)):
+        c.save(); c.translate(x + side * gap, y)
+        if split <= 0:
+            box = [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2)]
+        elif side < 0:
+            box = [(-w / 2, -h / 2)] + zz + [(-w / 2, h / 2), (-w / 2, -h / 2)]
+        else:
+            box = [(w / 2, -h / 2)] + zz + [(w / 2, h / 2), (w / 2, -h / 2)]
+        c.drawPath(_path(box), paint(WHITE))
+        ink(c, [wob(box, 711 + side, 0.6)], k if split <= 0 else 1, MK, 7, pen_=False)
+        c.restore()
+    if split <= 0 and title:
+        mtext(c, title, x, y - h / 2 + 70 * s, int(46 * s), MK, pr(t, t0 + 0.4, 0.4), "pm")
+
+
+def wall_m(c, x, y0, y1, t, t0, erase=0.0):
+    """a brick wall drawn between two things; erase 0..1 rubs it out from the top"""
+    k = pr(t, t0, 0.6)
+    if k <= 0 or erase >= 1: return
+    yb = y0 + (y1 - y0) * erase; w = 70
+    rows = int((y1 - y0) / 50)
+    polys = [[(x - w / 2, y0), (x - w / 2, y1)], [(x + w / 2, y0), (x + w / 2, y1)]]
+    for r_ in range(rows + 1): polys.append([(x - w / 2, y0 + r_ * 50), (x + w / 2, y0 + r_ * 50)])
+    for r_ in range(rows):
+        xo = x if r_ % 2 else x - 12
+        polys.append([(xo, y0 + r_ * 50), (xo, y0 + r_ * 50 + 50)])
+    c.save(); c.clipRect(R.MakeLTRB(x - w, yb, x + w, y1 + 10))
+    c.drawRect(R.MakeLTRB(x - w / 2, y0, x + w / 2, y1), paint((246, 226, 214), k))
+    ink(c, polys, k, (150, 70, 50), 6, pen_=False)
+    c.restore()
+
+
+def atbubble_m(c, x, y, t, t0, handle="@QWIKSTER"):
+    """a plain speech bubble with an @handle (no platform logo)"""
+    k = pop_(t, t0)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k, k)
+    speech(c, 0, 0, 470, 140, handle, 1, 56, BLU, tail=1)
+    c.restore()
+
+
+def chart_drop_m(c, x, y, t, t0, drop_t, w=620, h=330, col=RD):
+    """a hand-drawn line chart: wiggles sideways, then falls off a cliff at drop_t"""
+    k = pr(t, t0, 0.4)
+    ink(c, [wob([(x - w / 2, y + h / 2), (x + w / 2, y + h / 2)], 721, 0.6), wob([(x - w / 2, y + h / 2), (x - w / 2, y - h / 2)], 722, 0.6)], k, MK, 6, pen_=False)
+    pts = [(x - w / 2 + 20 + i * (w - 140) / 10, y - h / 2 + 60 + 22 * math.sin(i * 1.3)) for i in range(11)]
+    ink(c, [wob(pts, 723, 0.8)], pr(t, t0 + 0.2, 0.8), BLU, 8, pen_=False)
+    if t > drop_t:
+        lx, ly = pts[-1]
+        ink(c, [[(lx, ly), (lx + 30, ly + 40), (lx + 50, y + h / 2 - 40), (lx + 80, y + h / 2 - 30)]], pr(t, drop_t, 0.35), col, 9, pen_=False)
+
+
+def tally(c, val, a=1.0, falling=False, x=765, y=372, label="US MEMBERS", fmt="{:.2f}M"):
+    """story upgrade 11 Nov: the member counter under the pill (US members, in millions), one row so it never meets the caption"""
+    if a <= 0: return
+    f1 = font("pm", 22); f2 = font("pm", 40)
+    txt = fmt.format(val); w1 = tw(f1, label); w2 = tw(f2, txt); w = w1 + w2 + 54; h = 58
+    c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), h / 2, h / 2, paint(WHITE, a))
+    c.drawRoundRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), h / 2, h / 2, stroke(RD if falling else MK, 4, a))
+    c.drawString(label, x - w / 2 + 20, y + 8, f1, paint(BLU, a))
+    c.drawString(txt, x - w / 2 + 34 + w1, y + 14, f2, paint(RD if falling else MK, a))
+
+
+def dashed_tv(c, x, y, t, t0, w=360, h=230):
+    """the screen Netflix wants to become, still only a dashed outline"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    x0, y0 = x - w / 2, y - h / 2
+    for (a_, b_) in (((x0, y0), (x0 + w, y0)), ((x0 + w, y0), (x0 + w, y0 + h)), ((x0 + w, y0 + h), (x0, y0 + h)), ((x0, y0 + h), (x0, y0))):
+        dash_line(c, a_, b_, k, LIGHT, 6)
+    tri = [(x - 30, y - 40), (x + 42, y), (x - 30, y + 40), (x - 30, y - 40)]
+    if k >= 1: ink(c, [tri], 1, LIGHT, 5, pen_=False)
+
+
+def qwik_label(c, x, y, k=1.0):
+    c.drawRoundRect(R.MakeXYWH(x - 150, y - 50, 300, 76), 12, 12, paint(WHITE, k))
+    c.drawRoundRect(R.MakeXYWH(x - 150, y - 50, 300, 76), 12, 12, stroke(RD, 4, k))
+    mtext(c, "QWIKSTER", x, y + 10, 56, RD, k, "pm")

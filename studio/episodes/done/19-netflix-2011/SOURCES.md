@@ -21,3 +21,14 @@ Researched 9 Nov 2026 (R&D writers' room; sourcing subagent read each page, ✓ 
 
 Dropped / not used: Blockbuster "$50 million" offer (founders' account, disputed by Antioco 2022 — keep out); "on purpose" framing from the topic bank (inaccurate: Netflix misjudged timing); share-price low ~$63 (unverified); "Qwikster" account holder details.
 Topic overlap check: not in topics.md, not in the queue, not in the last 90 days of posts (Metricool IG/YouTube pull 9 Nov: no Netflix video).
+
+## Build re-verification (episode run 10 Nov 2026, 21:15 UTC; fact-check subagent + own search)
+- i1/c2 ✓ Q3 2011 letter PDF (Netflix IR CDN): "Total Unique US Subscribers" 24.59 → 23.79; "What we misjudged was how quickly to move there."; "lack of explanation" ✓.
+- a2/a3 ✓ CNN Money 12 Jul 2011: $9.99 → "at least $15.98", effective 1 Sep for existing members (60 % = 15.98/9.99).
+- b1–b3 ✓ CableFax + CBS News (19 Sep 2011): "I messed up. I owe everyone an explanation."; qwikster.com separate site. Netflix's own page still not found.
+- b4 ✓ Consumerist 19 Sep 2011 (@Qwikster already used by someone else; holder never shown/named).
+- b6 ✓ Consumerist 10 Oct 2011: "one website, one account, one password… in other words, no Qwikster"; 22 days.
+- c3 ✓ CNN Money 25 Oct 2011 "Shares plunged 35% on Tuesday".
+- **d3 CHANGED:** Netflix stopped quarterly member counts in 2025 but announces milestones; Q4 2025 results (20 Jan 2026) = "over 325 million paid memberships" (Variety, Subscription Insider, Axios). Script now: "By the end of twenty twenty-five? More than three hundred and twenty-five million paid members." (was 300M / end 2024).
+- **d4 reworded:** Engadget counts "5.2 billion movies", CBS LA "more than 5 billion discs" → script says "After more than five billion of them." (envelopes); 29 Sep 2023 final shipment ✓ (Sarandos memo via TheWrap).
+- Build edits for TTS/voice: d1 "Its letter" → "The letter", t1 "Its other admitted mistake?" → "Netflix's other admitted mistake?" (WRITING rule 32), z1 → "Tell me in the comments. Keep, or split?", b3/b5 "!" (UTMOS b3 4.06 → 4.25, z1 3.85 → 4.26).

@@ -65,6 +65,10 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     mistake. Name the thing: "I'd have scrapped the price split too." (9 Nov, Netflix review.)
 32. **Paraphrase in the source's own order, and say it's theirs.** "Its words: same store, same items, same prices" put words in Instacart's mouth; the blog's sentence ran items → time → store. Say "Instacart's promise now? Same items, same time, same store, same price." and put the real quote on the chip. And avoid "Its + noun?" openers: ASR heard "It's promised" in 4 of 4 takes. (10 Nov, same cart.)
 
+33. **A line the TTS reads weakly gets rewritten, not re-rolled.** Chatterbox Turbo decodes greedily, so the same text gives the same read; only a
+    new wording changes it. 11 Nov (Netflix): z1 "Keep or split, in the comments." 3.85 → "Tell me in the comments. Keep, or split?" 4.26;
+    "Qwikster." 4.06 → "Qwikster!" 4.25. One-word lines ("Oops!") score ~3.4–3.5 whatever you do — judge them by ear.
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)
 - (9 Nov, Netflix) "Members are furious." → "Members start cancelling." (say what the record shows, and it sets up the count)

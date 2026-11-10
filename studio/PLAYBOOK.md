@@ -311,6 +311,7 @@ cd $P && python3 scripts/make_vo.py              # voice + timings
 # write scripts/anim_shots.py (SHOTLIST + shot functions + IMPACTS) — start from template/examples
 python3 -I scripts/anim.py x 2,40,100,...          # test frames -> frames/r_NNNN.jpg ; LOOK at them with safe-zone guides
 python3 scripts/music.py && python3 scripts/mix.py # score (edit cues section) + mix (edit SFX section) -> work/mix.wav
+python3 studio/tools/trim_gaps.py $P && python3 studio/tools/tempo.py $P 1.05   # pace (11 Nov): dead air out, then +5 % WSOLA (-0.02 UTMOS)
 bash scripts/render_all.sh                         # -> work/final.mp4  (~10–15 min, run in background)
 ```
 - **Board pre-flight (R&D Tooling run, 31 Oct):** `tools/board_check.py <episode folder>` reads the queued `vo_lines.py` + `shots.md` and
