@@ -167,3 +167,7 @@ DOOR #1…#N, each opens to the same owner → the twist (scale/number) → what
 Scripts are written **ahead** and reviewed with fresh eyes before anyone renders. The R&D runs keep `episodes/queue/` stocked
 with 2–3 REVIEWED scripts (vo_lines.py + shots.md storyboard + SOURCES.md); a video run builds the top REVIEWED one (re-verifying
 every number) unless a two-part Part 2 is due. Pilot: `episodes/queue/01-pepsi-jet-p1` and `-p2` (Your Move, Ep 1).
+
+**Colour spots (12 Nov 2026, owner 11 Nov: "make my video colourful"):** on the whiteboard, put one big hatched highlighter disc
+(`spot()` in nbnkit/board.py) behind the key drawing of every shot and colour-code it by the episode's held structure (stop, step, door).
+Measured on the cash-rewards episode: colourfulness 26.1 → 37.8 (+45 %), layout unchanged. Keep big captions and chips off the disc's edge.

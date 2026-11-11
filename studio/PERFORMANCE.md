@@ -9,6 +9,26 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-12 ~03:05 IST (episode run: HOW IT WORKS EP 6, cash pays card rewards)
+Delivery (getScheduledPosts 8–12 Nov): **every post PUBLISHED on both networks, no provider ERROR** — incl. the owner's live-session
+chair-flip (11 Nov 21:56 IST, bright explainer look, not a studio episode). Instagram (IGRE, pulled 21:20 UTC 11 Nov):
+| Post (IST) | Views | Reach | Avg watch s | 3-s % | Saves | Likes |
+|---|---|---|---|---|---|---|
+| 11 Nov 21:56 chair flip (owner, bright) | 6 | 5 | 3.9 | 20.0 | 0 | 2 |
+| 11 Nov 05:00 Netflix BIG (board) | 5 | 4 | 2.7 | 25.0 | 0 | 0 |
+| 10 Nov 05:00 Instacart HIW (board) | 154 | 134 | 16.3 | 63.2 | 0 | 1 |
+| 9 Nov 19:35 Michelin anime BIG (owner) | 174 | 157 | 6.9 | 46.1 | 0 | 2 |
+| 9 Nov 05:00 dropship HOW TO (board) | 132 | 116 | 12.2 | 46.3 | 1 | 1 |
+| 8 Nov 05:00 Prime HIW (board) | 634 | 577 | 24.0 | 64.9 | 1 | 6 |
+| 8 Nov 00:00 exporting HOW TO (board) | 1,733 | 1,550 | 35.0 | 78.7 | 5 | 16 |
+YouTube (YTVP; Metricool rows still stop at 8 Nov): exporting 431 / 50 s avg, Southwest 352 / 30 s, Prime 62 / 26 s, dropship 63 / 18 s.
+**Insights (AR):** (1) Netflix at 5 views after ~22 h and the chair flip at 6 after ~5 h look like Metricool's IG import lag
+(PERFORMANCE note 6), not a verdict — re-read next run; if Netflix is still < 50, compare its first 2 s with Instacart's.
+(2) The two HOW IT WORKS whiteboard posts (Prime 64.9 %, Instacart 63.2 %) open better than the last two HOW TOs except
+exporting; HOW TO still owns saves (exporting 5). (3) Views per post are sliding since 8 Nov on both networks (IG 1,733 → 634 → 132–174;
+YT 431 → ~62) — the opener fix (object on screen at frame 0) helped the 3-s rate, not reach. This run tests two owner-asked changes at once:
+an **American narrator** (usa_narr) and a **more colourful board** (colour spots) — judge them on the 3-s rate and avg watch vs Instacart.
+
 ## Snapshot 2026-11-11 ~08:30 IST (R&D run: writers' room)
 **Delivery (getScheduledPosts, 9–14 Nov IST):** dropshipping (9 Nov 05:00), the owner's Michelin anime (9 Nov 19:35), same cart (10 Nov 05:00) and **Netflix (11 Nov 05:00, 423740538)** all PUBLISHED on Instagram + YouTube; no provider ERROR. Nothing scheduled after Netflix.
 **Analytics (IGRE 21 Oct → 11 Nov, YTVP):** every Instagram row equal to the 02:50 IST pull within ±2 (same cart 152 / 63.4 %, Michelin 173 / 46.4 %, dropship 132 / 46.3 %, Prime 634 / 64.9 %, exporting 1,730 / 78.7 %); Netflix has no row yet (3.5 h old). YouTube rows unchanged (latest 8 Nov: Prime 40 · 25 s).

@@ -24,3 +24,16 @@ human_check note + WRITING rule 26); (4) c2 2011 brief in present tense → St. 
 (5) logic gap cash → rewards → d2 "His tap carried the fee. But your price helped cover it." Should-fixes applied: i4 "The last one is your wallet",
 "Fair?" dropped from e1, f3 adds "America has no cap like that" (true: no federal credit interchange cap), z1 softened to "Is that fair to the
 cash payer?" (not pro-surcharge advocacy), "credit card users" in d4. Not applied: the Felt 2020 line (length; kept in this file as backup).
+
+## Build-day re-verification (episode run, 11–12 Nov 2026, subagent + own read)
+All 7 claims re-read: **6 confirmed unchanged, 1 newer figure exists.** (1) Nilson 2024: $187.20bn, $1.57 per $100 — confirmed (Manila Times/GlobeNewswire
+copy). Nilson has since published a **2025** edition (issue 1303, paywalled); the Merchants Payments Coalition quotes **$198.25bn for 2025** (insideoutdoor.com),
+no per-$100 figure found → the script keeps the 2024 pair (both numbers from one source year) and the chip says 2024. (2) St. Louis Fed, Apr 2026: "operating
+rewards programs" — confirmed via the Fed's own copy (supervisionoutreach.org, 10 Apr 2026). (3) Boston Fed 10-3 rev. Aug 2010: $149; "cash" = "all payment
+instruments other than credit cards"; "the data needed to verify them are not available" — confirmed. (4) EPC May 2024 one-pager: "roughly 1.8 cents in rewards
+per dollar spent" for LMI, middle and upper income — confirmed (industry-funded; chip says so). (5) UK surcharge ban 13 Jan 2018 — confirmed, still in force (KC Fed
+Aug 2026 update). (6) EU 0.3 % credit cap — in force (KC Fed Aug 2026); US: no federal credit-card interchange cap; the Credit Card Competition Act is still stalled
+(and is about routing, not a cap). (7) 15 U.S.C. § 1666f — confirmed (Cornell LII). (8) Visa/Mastercard revised settlement: prelim. approval 9 Jun 2026, fairness
+hearing 16 Nov 2026, surcharging changes only ~90 days after final approval (2027) → "most shops don't charge card payers extra" stays, with "most".
+Build edits: a2 "…of card sales in fees" → "…of card sales as fees" (ASR heard "and fees"); e2 "pass the whole fee on" → "pass on the whole fee" (ASR heard
+"the whole fiance"); i1 reveal beat 0.7 s; z1 "Comment yes or no" → "Tell me in the comments. Yes, or no?" (WRITING rule 33).

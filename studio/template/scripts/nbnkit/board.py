@@ -1559,3 +1559,105 @@ def costbar_m(c, x, y, t, parts, total=25.0, w=900, h=96, t0=0.0, label_y=None, 
         left = total - used; mid = x0 + w * (used + left / 2) / total
         mtext(c, "LEFT", mid, y - 26, 34, GR, 1.0, "pm")
         mtext(c, money.format(left), mid, y + h / 2 + 14, 40, GR, 1.0, "pm")
+
+
+# ---------------------------------------------------------------- HOW IT WORKS EP 6 (cash vs card rewards, 12 Nov 2026)
+# COLOUR SPOTS (owner 11 Nov "make my video colourful"): spot() = big hatched highlighter disc behind the key drawing (+45 % colourfulness);
+# route_map = 4-stop money route under the pill; terminal_m (card reader + contactless beep), gift_m, feetag (price tag with a FEE slice that
+# can slide back in), pricebd_m (cafe price board with a crossed-out line), coin_hop (looping coin for frame-0 motion).
+SP_OR = (255, 196, 120); SP_YE = (255, 226, 90); SP_PU = (196, 170, 255); SP_GR = (150, 226, 170); SP_BL = (150, 196, 255); SP_PK = (255, 170, 200)
+
+
+# ---------------------------------------------------------------- new marker drawings (this episode)
+def spot(c, x, y, r, col, k, seed=1, a=0.55):
+    """COLOUR SPOT: a big highlighter disc laid in with wide diagonal strokes; pops from the centre"""
+    if k <= 0: return
+    rr = r * eback(min(1.0, k), 1.3)
+    p = skia.Path(); p.addCircle(x, y, rr)
+    c.drawCircle(x, y, rr, paint(col, a * 0.55))
+    hatch(c, p, 1.0, col, gap=34, w=30, ang=-30, bbox=(x - rr, y - rr, x + rr, y + rr), seed=seed, a=a)
+
+
+def route_map(c, active, done=(), a=1.0, y=392):
+    """the money route under the pill: 4 stops (SHOP, PRICE, BANK, YOU) on a dashed line; active = coloured + bigger, done = ticked"""
+    if a <= 0: return
+    names = ("SHOP", "PRICE", "BANK", "YOU"); cols = (OR, GOLD, PU, GR); xs = (210, 410, 610, 810)
+    for i in range(3):
+        x0, x1 = xs[i] + 40, xs[i + 1] - 40
+        for j in range(5):
+            u0, u1 = j / 5, (j + 0.55) / 5
+            c.drawLine(x0 + (x1 - x0) * u0, y - 22, x0 + (x1 - x0) * u1, y - 22, stroke(GR if i in done else LIGHT, 4, a))
+    for i, (nm, col, x) in enumerate(zip(names, cols, xs)):
+        on = (i == active); r = 30 if on else 22
+        c.drawCircle(x, y - 22, r, paint(col if on else WHITE, a))
+        c.drawCircle(x, y - 22, r, stroke(MK if on else (col if i in done else LIGHT), 5 if on else 3, a))
+        f = font("pm", 30 if on else 24); c.drawString(str(i + 1), x - tw(f, str(i + 1)) / 2, y - 22 + (11 if on else 9), f, paint(WHITE if on else (col if i in done else LIGHT), a))
+        mtext(c, nm, x, y + 34, 30 if on else 24, col if (on or i in done) else LIGHT, a, "pm")
+        if i in done: ink(c, [[(x + 14, y - 40), (x + 26, y - 28), (x + 50, y - 62)]], 1, GR, 6, pen_=False)
+
+
+def terminal_m(c, x, y, t, t0, s=1.0, beep_t=None):
+    """a small card terminal on the counter; screen flashes green on the tap, contactless arcs"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    P = lambda pts: _sc(x, y, s, pts)
+    body = P([(-70, 0), (-80, -230), (80, -230), (70, 0), (-70, 0)])
+    scr = P([(-55, -205), (55, -205), (55, -140), (-55, -140), (-55, -205)])
+    c.drawPath(_path(body), paint(WHITE, k))
+    if beep_t is not None and t > beep_t: c.drawPath(_path(scr), paint(GR, 0.6 * (1 - pr(t, beep_t + 0.5, 0.6)) + 0.2))
+    ink(c, [wob(body, 801, 0.6), wob(scr, 802, 0.4)], k, MK, 6)
+    for r_ in range(3):
+        for q in range(3):
+            c.drawCircle(x + (-34 + q * 34) * s, y + (-105 + r_ * 30) * s, 8 * s, paint(MK, k))
+    if beep_t is not None and beep_t < t < beep_t + 0.6:
+        u = pr(t, beep_t, 0.6)
+        for j in range(3):
+            rr = (40 + 30 * j + 40 * u) * s
+            c.drawArc(R.MakeXYWH(x - rr, y - 300 * s - rr, 2 * rr, 2 * rr), 220, 100, False, stroke(GR, 5, 1 - u))
+
+
+def gift_m(c, x, y, t, t0, s=1.0, label="REWARDS", col=PU):
+    """a little gift box with a bow, label written under"""
+    k = pop_(t, t0, 0.3, 1.6)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k * s, k * s)
+    box = [(-80, -60), (80, -60), (80, 70), (-80, 70), (-80, -60)]; lid = [(-92, -95), (92, -95), (92, -60), (-92, -60), (-92, -95)]
+    c.drawPath(_path(box), paint(WHITE)); hatch(c, _path(box), 1, col, gap=16, w=6, bbox=(-80, -60, 80, 70), a=0.5)
+    c.drawPath(_path(lid), paint(WHITE)); hatch(c, _path(lid), 1, col, gap=12, w=5, bbox=(-92, -95, 92, -60), a=0.35)
+    ink(c, [box, lid, [(0, -95), (0, 70)], [(0, -95), (-40, -140), (-50, -110), (0, -95)], [(0, -95), (40, -140), (50, -110), (0, -95)]], 1, MK, 6, pen_=False)
+    c.restore()
+    if label: mtext(c, label, x, y + 130 * s, int(42 * s), col, pr(t, t0 + 0.2, 0.3), "pm")
+
+
+def feetag(c, x, y, t, t0, price="$5", fee_t=None, inside=0.0, s=1.0, col=BLU, tilt=-8, fee_col=RD):
+    """the cup's $5 swing tag; from fee_t a hatched FEE slice sits off its right end; inside (0..1) slides it back into the tag"""
+    tag_m(c, x, y, price, t, t0, col, tilt, s)
+    if fee_t is None or t < fee_t: return
+    k = pr(t, fee_t, 0.4)
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(s, s)
+    out = (1 - eio(min(1.0, inside))) * 110
+    sl = [(70 + out, -60), (90 + out, -60), (140 + out, 0), (90 + out, 60), (70 + out, 60), (70 + out, -60)]
+    hatch(c, _path(sl), k, fee_col, gap=10, w=5, bbox=(60 + out, -62, 142 + out, 62), a=0.8)
+    ink(c, [sl], k, fee_col, 5, pen_=False)
+    mtext(c, "FEE", 100 + out, 105, 34, fee_col, pr(t, fee_t + 0.2, 0.3), "pm")
+    c.restore()
+
+
+def pricebd_m(c, x, y, t, t0, item="COFFEE", price="$5", fee_line="+ CARD FEE", cross_t=None, w=440):
+    """a cafe price board: item + price, and a second line (written, then crossed out at cross_t)"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    h = 300; rr = R.MakeXYWH(x - w / 2, y - h / 2, w, h)
+    c.drawRoundRect(rr, 16, 16, paint((44, 52, 60), k)); c.drawRoundRect(rr, 16, 16, stroke(MK, 7, k))
+    mtext(c, item, x - 70, y - 40, 54, WHITE, pr(t, t0 + 0.2, 0.3), "kb"); mtext(c, price, x + 130, y - 40, 60, SP_YE, pr(t, t0 + 0.35, 0.3), "pm")
+    if fee_line:
+        mtext(c, fee_line, x, y + 70, 46, (255, 170, 160), pr(t, t0 + 0.5, 0.35), "kb")
+        if cross_t is not None and t > cross_t:
+            ink(c, [wob([(x - 170, y + 60), (x + 170, y + 50)], 811, 1.0)], pr(t, cross_t, 0.3), RD, 10, pen_=False)
+
+
+def coin_hop(c, t, x0, x1, y, period=1.1, h=150, r=30, t_start=-9.0):
+    """a coin hopping from x0 to x1 on a loop (keeps something moving)"""
+    if t < t_start: return
+    u = ((t - t_start) % period) / period
+    coin(c, x0 + (x1 - x0) * eio(u), y - 4 * h * u * (1 - u), r, spin=t * 6)
