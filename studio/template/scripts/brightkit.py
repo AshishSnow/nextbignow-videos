@@ -294,3 +294,104 @@ def finish(img, flash=0.0):
     img = img * _VIG
     if flash: img = img * (1 - flash) + flash
     return np.clip(img, 0, 1)
+
+
+# ------------------------------------------------------------------ people (flat modern illustration, invented characters; 11 Nov 2026)
+SKIN1, SKIN2 = (241, 194, 160), (186, 128, 92)
+
+
+def _blob(pts, smooth=True):
+    p = skia.Path(); p.moveTo(*pts[0]); Q = pts + [pts[0]]
+    for i in range(1, len(Q) - 1):
+        mx, my = (Q[i][0] + Q[i + 1][0]) / 2, (Q[i][1] + Q[i + 1][1]) / 2; p.quadTo(Q[i][0], Q[i][1], mx, my)
+    p.close(); return p
+
+
+def person(c, x, y, s=1.0, t=0.0, who="boss", mouth=0.0, expr="neutral", look=(0, 0), blink=False, arm=None, talking=False):
+    """flat bust, face centre at (x, y). who: 'boss' (silver hair, glasses, navy suit, burgundy tie) / 'young' (curly dark hair, teal blazer).
+    expr: neutral / smile / skeptical / surprised / happy. arm: None / 'pen' (holds the pen up) / 'point' / 'shake'."""
+    boss = who == "boss"; skin = SKIN1 if boss else SKIN2; sk_s = shade(skin, 0.86)
+    suit = (28, 40, 80) if boss else (0, 150, 150); shirt = (205, 225, 245) if boss else WHITE
+    br = math.sin(t * 2.3 + (0 if boss else 1.3)) * 3
+    c.save(); c.translate(x, y + br); c.scale(s, s)
+    # body
+    body = _blob([(-260, 520), (-250, 330), (-200, 240), (-90, 205), (90, 205), (200, 240), (250, 330), (260, 520), (0, 560)])
+    shadow(c, body, 0, 18, 26, 0.25); c.drawPath(body, lin(-260, 0, 260, 0, [shade(suit, 1.15), suit, shade(suit, 0.8)]))
+    c.drawPath(path([(-80, 205), (80, 205), (0, 380)]), P(shirt))
+    if boss:
+        c.drawPath(path([(-18, 214), (18, 214), (30, 360), (0, 395), (-30, 360)]), P((140, 30, 50)))
+        for sx in (-1, 1): c.drawPath(path([(sx * 80, 205), (sx * 140, 230), (sx * 40, 400), (sx * 20, 380)]), P(shade(suit, 0.75)))
+    else:
+        for sx in (-1, 1): c.drawPath(path([(sx * 80, 205), (sx * 150, 235), (sx * 60, 420), (sx * 30, 380)]), P(shade(suit, 0.78)))
+    c.drawRoundRect(skia.Rect.MakeLTRB(-46, 140, 46, 230), 30, 30, P(sk_s))   # neck
+    # head
+    hd = _blob([(-125, -60), (-118, 60), (-80, 140), (0, 168), (80, 140), (118, 60), (125, -60), (90, -150), (0, -172), (-90, -150)])
+    for sx in (-1, 1): c.drawOval(skia.Rect.MakeXYWH(sx * 124 - 26, -24, 52, 70), P(sk_s))
+    c.drawPath(hd, lin(-125, 0, 125, 0, [skin, skin, sk_s], [0, 0.6, 1]))
+    # hair
+    if boss:
+        hr = _blob([(-132, -30), (-138, -120), (-90, -186), (10, -200), (100, -180), (138, -110), (130, -30), (112, -110), (40, -140), (-60, -132), (-112, -100)])
+        c.drawPath(hr, lin(0, -200, 0, -30, [(236, 238, 244), (178, 182, 196)]))
+    else:
+        for (hx, hy, hr_) in ((-110, -100, 52), (-70, -150, 58), (-10, -170, 60), (55, -160, 58), (105, -115, 52), (128, -60, 40), (-128, -55, 40), (0, -120, 70)):
+            c.drawCircle(hx, hy, hr_, P((40, 28, 24)))
+        for (hx, hy, hr_) in ((-60, -170, 18), (20, -185, 16)): c.drawCircle(hx, hy, hr_, P((80, 60, 50)))
+    # brows
+    bdy = {"skeptical": (-10, 10), "surprised": (-26, -26), "happy": (-14, -14), "smile": (-8, -8)}.get(expr, (0, 0))
+    for sx, dy in ((-1, bdy[0]), (1, bdy[1])):
+        c.drawRoundRect(skia.Rect.MakeXYWH(sx * 52 - 28, -58 + dy, 56, 13), 7, 7, P((90, 80, 80) if boss else (34, 24, 20)))
+    # eyes
+    for sx in (-1, 1):
+        ex, ey = sx * 52 + look[0] * 6, -12 + look[1] * 4
+        if blink or expr == "happy":
+            a_ = skia.Path(); a_.moveTo(ex - 16, ey + 2); a_.quadTo(ex, ey - 14, ex + 16, ey + 2); c.drawPath(a_, S(NAVY, 6))
+        else:
+            r_ = 15 if expr == "surprised" else 12
+            c.drawOval(skia.Rect.MakeXYWH(ex - r_, ey - r_ * 1.2, r_ * 2, r_ * 2.4), P(NAVY)); c.drawCircle(ex + 4, ey - 6, 4.5, P(WHITE))
+    if boss:   # glasses
+        for sx in (-1, 1): c.drawRoundRect(skia.Rect.MakeXYWH(sx * 52 - 36, -40, 72, 56), 16, 16, S((40, 40, 50), 6))
+        c.drawLine(-16, -16, 16, -16, S((40, 40, 50), 6))
+    c.drawPath(_blob([(-8, 20), (8, 20), (14, 52), (0, 60), (-14, 52)]), P(sk_s))   # nose
+    # mouth
+    k = max(mouth, 0.0)
+    if k > 0.12 or expr == "surprised":
+        k = max(k, 0.5 if expr == "surprised" else k); mw, mh = 34 - 6 * k, 8 + 30 * k
+        c.drawOval(skia.Rect.MakeLTRB(-mw, 92 - mh * 0.3, mw, 92 + mh), P((120, 30, 40)))
+        c.drawRect(skia.Rect.MakeLTRB(-mw * 0.8, 92 - mh * 0.3, mw * 0.8, 92 - mh * 0.3 + 8), P(WHITE))
+    elif expr in ("smile", "happy"):
+        m = skia.Path(); m.moveTo(-36, 86); m.quadTo(0, 120, 36, 86); m.close(); c.drawPath(m, P((120, 30, 40))); c.drawRect(skia.Rect.MakeLTRB(-30, 86, 30, 94), P(WHITE))
+    elif expr == "skeptical":
+        m = skia.Path(); m.moveTo(-30, 100); m.quadTo(5, 92, 32, 86); c.drawPath(m, S((120, 40, 50), 7))
+    else:
+        c.drawLine(-26, 98, 26, 98, S((120, 40, 50), 7))
+    if boss:   # a neat moustache-free beard shadow? keep clean: subtle jaw shade
+        pass
+    # arm
+    if arm:
+        hand = {"pen": (215, 150), "point": (190, 20), "shake": (210, 320)}[arm]
+        if not boss: c.scale(-1, 1)   # the candidate raises his inner arm (keeps the hand out of the right-hand buttons)
+        sl = path([(170, 300), (230, 300), (hand[0] + 40, hand[1] + 60), (hand[0] - 30, hand[1] + 70)])
+        c.drawPath(sl, lin(150, 0, 240, 0, [shade(suit, 1.1), shade(suit, 0.85)]))
+        c.drawCircle(hand[0], hand[1] + 30, 46, P(skin))
+        if arm == "point": c.drawRoundRect(skia.Rect.MakeXYWH(hand[0] - 10, hand[1] - 70, 22, 80), 11, 11, P(skin))
+    c.restore()
+
+
+def bubble_line(c, s, x, y, k=1.0, bg=WHITE, fg=NAVY, tail="left", size=54, maxw=760, who=None, who_bg=PNK):
+    """speech bubble with the spoken line (short dialogue lines only) and an optional speaker tag"""
+    if k <= 0: return
+    f = font(XB_F, size); words = s.split(); lines_ = [""]
+    for w_ in words:
+        tst = (lines_[-1] + " " + w_).strip()
+        if f.measureText(tst) > maxw - 80 and lines_[-1]: lines_.append(w_)
+        else: lines_[-1] = tst
+    wmax = max(f.measureText(l_) for l_ in lines_) + 80; hh = len(lines_) * size * 1.25 + 50
+    c.save(); c.translate(x, y); c.scale(k, k)
+    b = rrect(-wmax / 2, -hh / 2, wmax / 2, hh / 2, 44)
+    tx = -wmax / 2 + 70 if tail == "left" else wmax / 2 - 70
+    b = skia.Op(b, path([(tx - 26, hh / 2 - 10), (tx + 26, hh / 2 - 10), (tx - (40 if tail == "left" else -40), hh / 2 + 54)]), skia.PathOp.kUnion_PathOp)
+    shadow(c, b, 0, 14, 18, 0.3); c.drawPath(b, P(bg))
+    for i, l_ in enumerate(lines_):
+        w_ = f.measureText(l_); c.drawString(l_, -w_ / 2, -hh / 2 + 25 + size * (i + 0.95) * 1.25 - size * 0.2, f, P(fg))
+    if who: tag(c, who, -wmax / 2 + 120, -hh / 2 - 10, 34, who_bg, WHITE, -4)
+    c.restore()

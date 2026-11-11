@@ -10,6 +10,10 @@ try:
     from vo_lines import VOICES   # optional per-line second voice {line_id: "af_heart:1.0"} (first two-voice episode, 3 Nov 2026)
 except ImportError:
     VOICES = {}
+try:
+    from vo_lines import CBVOICES   # per-line Chatterbox voice {line_id: "usa_boss"} (dialogue skits, 11 Nov 2026)
+except ImportError:
+    CBVOICES = {}
 from kokoro_onnx import Kokoro
 import voice_clean
 from num2words import num2words
@@ -36,21 +40,20 @@ SPD = float(os.environ.get("SPD", "0.88")); PZ = float(os.environ.get("PZ", "1.6
 SPLIT = float(os.environ.get("SPLIT", "0.12"))   # per-sentence Kokoro calls + 0.12 s gap: UTMOS 4.23 -> 4.38 (27 Oct A/B)
 # ENGINE=chatterbox -> Chatterbox-Turbo (MIT, onnx q4) conditioned on our synthetic narrator (studio/voices/*.cbcond.npz);
 # it takes its pace and melody from the reference, so SPD/SPLIT don't apply (line pauses still do). See studio/VOICE.md.
-ENGINE = os.environ.get("ENGINE", "chatterbox"); CBV = os.environ.get("CBV", "narrator_hype")   # default since 10 Nov 2026 (R&D A/B vs narrator_brisk on 2 scripts x 2 takes:
-# per-line UTMOS +0.02/+0.06, min +0.11/+0.28, range +2.0/+0.9 st, low_fall -4 vs -2 st, phrase rate 184/193 -> 170/183 wpm; VOICE.md). CBV=narrator_brisk for the 6 Nov voice;
-# ENGINE=kokoro for the old one. NOTE: with Chatterbox the per-line speed column in vo_lines.py is IGNORED (no speed knob); pace = the reference
-# + pauses + tools/trim_gaps.py. A PSOLA re-time of 0.94-1.04 cost 0.06-0.09 per-line UTMOS (10 Nov, lab/voice_engine/pace_lab.py), so none is applied.
-_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX, sorted(VOICES.items())] + ([SPLIT] if SPLIT > 0 else []) + ([ENGINE, CBV] if ENGINE != "kokoro" else [])).encode()).hexdigest()   # pauses are baked into the cache too
+ENGINE = os.environ.get("ENGINE", "chatterbox"); CBV = os.environ.get("CBV", "narrator_brisk")   # default since 6 Nov 2026 (Spotify + reselling A/B, VOICE.md); ENGINE=kokoro for the old voice
+_key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX, sorted(VOICES.items())] + ([SPLIT] if SPLIT > 0 else []) + ([ENGINE, CBV, sorted(CBVOICES.items())] if ENGINE != "kokoro" else [])).encode()).hexdigest()   # pauses are baked into the cache too
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}
 t = LEAD
 if ENGINE == "chatterbox" and not os.path.exists(_cache):
     import cb_turbo
     _cbv = CBV if os.path.exists(CBV) else f"{R}/voices/{CBV}.cbcond.npz"
-    cb = cb_turbo.Turbo(_cbv)
+    cb = cb_turbo.Turbo(_cbv); _conds = {None: cb.cond}   # one model, swap the speaker conditioning per line (3 models OOM-killed the run)
+    for _v in set(CBVOICES.values()):
+        _z = np.load(_v if os.path.exists(_v) else f"{R}/voices/{_v}.cbcond.npz"); _conds[_v] = [_z[k] for k in ("cond_emb", "prompt_token", "spk", "feat")]
 for lid, text, sp, pause, *_ in ([] if os.path.exists(_cache) else LINES):
     if ENGINE == "chatterbox":
-        a = signal.resample_poly(cb.say(text), SR, cb_turbo.SR).astype(np.float32)
+        cb.cond = _conds[CBVOICES.get(lid)]; a = signal.resample_poly(cb.say(text), SR, cb_turbo.SR).astype(np.float32)
         f = int(0.012 * SR); a[:f] *= np.linspace(0, 1, f); a[-f:] *= np.linspace(1, 0, f)
         lines[lid] = dict(start=round(t, 3), end=round(t + len(a) / SR, 3), text=text)
         pieces.append(a); t += len(a) / SR
@@ -133,7 +136,7 @@ snd = parselmouth.Sound(flat.astype(np.float64), SR)
 pitch = snd.to_pitch_ac(0.01, 65, 15, False, 0.03, 0.45, 0.01, 0.35, 0.14, 400)
 f0 = pitch.selected_array["frequency"]; tf = pitch.xs(); vo_ = f0 > 0
 _nar = np.ones(len(f0), bool)
-for _l in VOICES:
+for _l in list(VOICES) + list(CBVOICES):
     if _l in lines: _nar &= ~((tf >= lines[_l]["start"]) & (tf <= lines[_l]["end"]))
 G = float(np.median(f0[vo_ & _nar])); print("global median F0 (narrator)", round(G, 1))
 if GT <= 0: GT = G   # GT=0 -> keep the voice's own register (no global pitch shift = most natural)
@@ -179,7 +182,7 @@ def prosody(gm):
         if end == "q" and tt >= ws_l[2]: s2 += 4.5 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1) ** 1.3
         if end == "low" and tt >= ws_l[2]: s2 -= 2.2 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1)
         g_ = gm.get(lid, 1.0); s2 = s + g_ * (s2 - s)
-        _off = 12 * np.log2(ref / G) if lid in VOICES else 0.0   # a second voice is clipped around its own register
+        _off = 12 * np.log2(ref / G) if (lid in VOICES or lid in CBVOICES) else 0.0   # a second voice is clipped around its own register
         rel = np.clip(12 * np.log2(ref / G) + s2, CLO + _off, CHI + _off)
         call(newp, "Add point", tt, GT * 2 ** (rel / 12))
     # loudness lift + length on stressed words

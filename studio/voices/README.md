@@ -11,3 +11,8 @@ Rebuild: `python3 -c "import sys; sys.path.insert(0,'$STUDIO/lib'); import cb_tu
   3-line text ("Wait, you've never heard this story? Okay. This is wild!" …). A/B on 6 Michelin lines vs brisk: UTMOS 4.462 vs ~4.45,
   pitch range 20.2 vs 18.5 st, ~152–160 wpm. Full episode comped from 3 takes: 4.503 (min 4.39), 20.4 st. Synthetic only. **Template default since 10 Nov 2026** (R&D A/B vs brisk on 2 scripts, VOICE.md); CBV=narrator_brisk for the old one.
   (Built with speech_encoder.onnx from ResembleAI/chatterbox-turbo-ONNX, downloaded 8 Nov to $STUDIO/models/cbturbo.)
+- `usa_narr`, `usa_young`, `usa_boss` (11 Nov 2026, owner: "give american accent so it catches USA people"): references read by our own Kokoro
+  American voices (en-us) on an excited 3-line text, then Chatterbox conditioning. usa_narr = am_michael .6 + am_puck .4 (SPD .98, EXS 1.6),
+  usa_young = am_puck (SPD 1.0, EXS 1.6), usa_boss = am_onyx .7 + am_michael .3 (SPD .92, EXS 1.25). Dialogue: `CBVOICES = {line_id: name}`
+  in vo_lines.py (make_vo swaps the speaker conditioning on ONE model — three models got the run OOM-killed). usa_narr reads fast
+  (~184 wpm): the pen episode was slowed 5.5% with atempo (align times scaled) to ~174 wpm, UTMOS unchanged (4.449).
