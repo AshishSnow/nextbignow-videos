@@ -961,4 +961,126 @@ def room_tone(kind, n_):
     else:              x = _bp(w, 200, 2500) * 0.3                                    # the board: a quiet paper room
     return x / (np.abs(x).max() + 1e-9)
 
+# ================= ep 33: PUT THE FOLEY IN THE ROOM (craft skill) =================
+# place(x, t, xpos, gain, far, where) = pan the dry effect to its on-screen x (equal power, +-0.55 max; the voice stays centred) and send it to the
+# reverb of the PLACE it happens in; at the end of mix.py call reverb_returns() once. Set PLACE = {shot_id: 'kit'|'stove'|'stadium'|'board'} (board = dry)
+# and define place_at(t) (see episodes/33-vitamin-c-league/mix.py). Sources: Designing Sound 'Panning reverb returns' (2012); Production Expert
+# 'How to use reverb in drama production'; Krotos 'How to pan spatial audio'. Rooms: kit 8 ms / 0.35 s, stove 0.45 s, stadium = 140 + 260 ms slap-back +
+# a 1.4 s darker tail. Add a new room spec in ir() for a new place.
+from scipy.signal import fftconvolve
 
+
+def place_at(t): return "board"
+
+
+def ir(kind):
+    """a synthetic stereo impulse response per place: early reflections (taps) + a diffuse decaying noise tail; L/R decorrelated."""
+    spec = {"kit": dict(pre=0.008, rt=0.35, taps=((0.011, 0.5), (0.019, 0.35), (0.027, 0.25)), lp=6000),
+            "stove": dict(pre=0.008, rt=0.45, taps=((0.012, 0.5), (0.021, 0.35), (0.031, 0.25)), lp=5000),
+            "stadium": dict(pre=0.03, rt=1.4, taps=((0.14, 0.45), (0.26, 0.28), (0.39, 0.14)), lp=2800)}[kind]
+    n_ = int((spec["pre"] + spec["rt"] * 1.2) * SR); out = np.zeros((n_, 2), np.float32)
+    tt = np.arange(n_) / SR
+    for ch in range(2):
+        r = np.random.default_rng(100 + ch + len(kind))
+        tail = r.standard_normal(n_) * np.exp(-6.9 * np.maximum(0, tt - spec["pre"]) / spec["rt"]) * (tt >= spec["pre"])
+        tail = signal.sosfilt(signal.butter(2, spec["lp"], "low", fs=SR, output="sos"), tail)
+        tail = tail / (np.sqrt(np.sum(tail ** 2)) + 1e-9) * 0.6
+        for d_, a_ in spec["taps"]:
+            k = int((d_ + 0.004 * ch) * SR)
+            if k < n_: tail[k] += a_
+        out[:, ch] = tail
+    return out
+
+
+WET = {"kit": -13, "stove": -11, "stadium": -10, "board": None}
+BUS = {k: np.zeros((NS, 2), np.float32) for k in ("kit", "stove", "stadium")}
+
+
+def place(x, t, xpos=540, gain=1.0, far=0.0, where=None):
+    """add an effect at time t, panned to its on-screen x, sent to the reverb of the place it happens in (far 0..1 = more wet, less dry)."""
+    i = int(t * SR)
+    if i < 0: x = x[-i:]; i = 0
+    j = min(NS, i + len(x))
+    if j <= i: return
+    m = x[: j - i].mean(1) if x.ndim == 2 else x[: j - i]
+    p = clamp((xpos - 540) / 540, -1, 1) * 0.55                                     # equal-power pan, max +-0.55 of the width
+    th = (p + 1) * math.pi / 4
+    dry = 1.0 - 0.45 * far
+    sfx[i:j, 0] += m * math.cos(th) * math.sqrt(2) * gain * dry
+    sfx[i:j, 1] += m * math.sin(th) * math.sqrt(2) * gain * dry
+    kind = where or place_at(t)
+    if WET.get(kind) is not None: BUS[kind][i:j] += (m * gain * db(WET[kind]) * (1 + 1.5 * far))[:, None]
+
+
+def mono(y): return np.stack([y, y], 1).astype(np.float32)
+
+
+def whistle_blow(level=-20, dur=0.5):
+    """a referee's pea whistle: a ~2.6 kHz tone with a fast warble (the pea) + breath noise."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    fr = 2600 + 120 * np.sin(2 * np.pi * 34 * tt)
+    y = np.sin(2 * np.pi * np.cumsum(fr) / SR) * (0.75 + 0.25 * np.sign(np.sin(2 * np.pi * 34 * tt))) + 0.15 * _bp(rng.standard_normal(n_), 2000, 6000)
+    y *= np.minimum(1, tt / 0.02) * np.clip((dur - tt) / 0.05, 0, 1)
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def crowd(level=-26, dur=2.0, cheer=0.0):
+    """a stadium crowd: band-limited murmur; cheer 0..1 swells into a roar."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = _bp(rng.standard_normal(n_), 300, 3000) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.7 * tt) ** 2)
+    if cheer > 0: x = x * (1 + 3 * cheer * np.minimum(1, tt / 0.25) * np.exp(-np.maximum(0, tt - 0.6) / (dur * 0.5)))
+    x *= np.minimum(1, tt / 0.1) * np.clip((dur - tt) / 0.3, 0, 1)
+    return mono(x / (np.abs(x).max() + 1e-9) * db(level))
+
+
+def drumroll(level=-24, dur=1.5):
+    n_ = int(max(0.3, dur) * SR); tt = np.arange(n_) / SR
+    hits = (np.sin(2 * np.pi * 14 * tt) > 0.9).astype(np.float32)
+    x = _bp(rng.standard_normal(n_), 200, 5000) * np.convolve(hits, np.exp(-np.arange(400) / 80), "same")
+    x *= (0.4 + 0.6 * tt / tt[-1])
+    return mono(x / (np.abs(x).max() + 1e-9) * db(level))
+
+
+def boing_up(level=-22, f0=260, dur=0.4):
+    n_ = int(dur * SR); tt = np.arange(n_) / SR; fr = f0 * (1 + 1.6 * tt / dur) * (1 + 0.06 * np.sin(2 * np.pi * 18 * tt))
+    return mono(np.sin(2 * np.pi * np.cumsum(fr) / SR) * np.exp(-tt / (dur * 0.7)) * np.minimum(1, tt / 0.004) * db(level))
+
+
+def mat_land(level=-18):
+    n_ = int(0.45 * SR); tt = np.arange(n_) / SR
+    y = _lp(rng.standard_normal(n_), 500) * np.exp(-tt / 0.08) * 1.5 + np.sin(2 * np.pi * 70 * tt) * np.exp(-tt / 0.12)
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def bar_rattle(level=-24):
+    n_ = int(0.6 * SR); tt = np.arange(n_) / SR
+    y = sum(np.sin(2 * np.pi * f_ * tt) * a_ for f_, a_ in ((620, 1), (1490, 0.5), (2710, 0.3))) * np.exp(-tt / 0.18) * (0.6 + 0.4 * np.sin(2 * np.pi * 22 * tt))
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def sneeze(level=-20):
+    n_ = int(0.6 * SR); tt = np.arange(n_) / SR
+    y = _bp(rng.standard_normal(n_), 800, 3000) * np.clip(tt / 0.3, 0, 1) * (tt < 0.32) * 0.3 + _bp(rng.standard_normal(n_), 600, 6000) * np.exp(-np.maximum(0, tt - 0.34) / 0.08) * (tt >= 0.34)
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def boil(level=-28, dur=3.0):
+    n_ = int(dur * SR); tt = np.arange(n_) / SR; y = np.zeros(n_)
+    for k in range(int(dur * 22)):
+        p = int(rng.uniform(0, n_ - 2000)); f_ = rng.uniform(300, 900); m_ = np.arange(1500) / SR
+        y[p:p + 1500] += np.sin(2 * np.pi * f_ * (1 + 3 * m_) * m_) * np.exp(-m_ / 0.01) * rng.uniform(0.3, 1)
+    y += 0.3 * _lp(rng.standard_normal(n_), 1500)
+    y *= np.minimum(1, tt / 0.2) * np.clip((dur - tt) / 0.3, 0, 1)
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+
+
+def reverb_returns():
+    """convolve each place bus with its room and add the wide returns to sfx (call once, after all place() calls)."""
+    global sfx
+    for kind, bus in BUS.items():
+        if np.abs(bus).max() < 1e-7: continue
+        h = ir(kind); wet = np.zeros_like(bus)
+        for ch in range(2): wet[:, ch] = fftconvolve(bus[:, ch], h[:, ch])[:NS]
+        sfx += wet.astype(np.float32)

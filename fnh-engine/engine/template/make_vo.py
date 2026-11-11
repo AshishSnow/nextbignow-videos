@@ -149,6 +149,8 @@ pts = np.array([[call(ptier, "Get time from index", i), call(ptier, "Get value a
 # PGATE: per-line prosody gate (R&D 27 Oct run 3) = max UTMOS a line may lose to PSOLA vs its flat take; worse lines are re-rendered
 # with softer moves (PG_STEPS strengths). Lifted the worst line 3.92-4.05 -> 4.25 on 2 of 3 scripts at -0.1...-0.3 st range. 0 = off.
 PG = float(os.environ.get("PGATE", "0.15"))
+UPOFF = os.environ.get("UPOFF", "0") == "1"   # A/B switch for the ep 33 continuation rise
+UPST = float(os.environ.get("UPST", "4.5"))   # rise size in st over the last 55 % of the word
 CLO = float(os.environ.get("CLIPLO", "-12")); CHI = float(os.environ.get("CLIPHI", "13"))   # pitch target limits, st vs global median
 PG_STEPS = [float(v) for v in os.environ.get("PG_STEPS", "1.0,0.6,0.3").split(",")]
 
@@ -169,7 +171,9 @@ def prosody(gm):
                 name, _, mode = st_.partition(":")
                 if re.sub(r"\W", "", name.lower()) == re.sub(r"\W", "", w.lower()):
                     ww = max(0.12, we_ - ws_)
-                    s2 += BMP * (-2.0 if mode == "dn" else 2.4) * rc(tt, ws_ + 0.4 * ww, 0.75 * ww)
+                    if mode == "up":   # ep 33: CONTINUATION RISE (list intonation) - climbs across the word, back to the line's melody after it
+                        if not UPOFF and ws_ <= tt <= we_ + 0.06: s2 += BMP * UPST * np.clip((tt - ws_ - 0.45 * ww) / (0.55 * ww), 0, 1) ** 1.2 * (1 if tt <= we_ else 0.5)
+                    else: s2 += BMP * (-2.0 if mode == "dn" else 2.4) * rc(tt, ws_ + 0.4 * ww, 0.75 * ww)
         ws_l = [sp for sp in spans if sp[0] == lid][-1]
         if end == "q" and tt >= ws_l[2]: s2 += 4.5 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1) ** 1.3
         if end == "low" and tt >= ws_l[2]: s2 -= 2.2 * np.clip((tt - ws_l[2]) / max(0.1, ws_l[3] - ws_l[2]), 0, 1)
@@ -185,8 +189,9 @@ def prosody(gm):
             a0, a1 = int(ws_ * SR), int(we_ * SR); r_ = int(0.03 * SR)
             env = np.zeros(len(flat)); env[a0:a1] = 1
             env = np.convolve(env, np.ones(r_) / r_, "same")
-            gain += env * (1.0 if mode == "dn" else 2.2)
-            stretch = 1 + g_ * STR * (0.22 if mode == "dn" else 0.08)
+            if mode == "up" and UPOFF: continue
+            gain += env * (1.0 if mode == "dn" else 0.6 if mode == "up" else 2.2)
+            stretch = 1 + g_ * STR * (0.22 if mode == "dn" else 0.12 if mode == "up" else 0.08)
             dur_pts += [(ws_ - 0.012, 1.0), (ws_, stretch), (we_ - 0.02, stretch), (we_ - 0.008, 1.0)]
     x = flat * 10 ** (gain / 20)
     snd2 = parselmouth.Sound(x.astype(np.float64), SR)

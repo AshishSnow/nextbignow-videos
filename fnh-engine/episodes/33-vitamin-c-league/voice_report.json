@@ -1,0 +1,46 @@
+{
+ "utmos": 4.456,
+ "utmos_note": "whole-file utmos = first 100 s (RAM); gate on chunk20 / line_mean",
+ "utmos_chunk20": 4.499,
+ "utmos_line_mean": 4.47,
+ "utmos_lines": {
+  "i1": 4.46,
+  "i2": 4.46,
+  "i3": 4.49,
+  "a0": 4.46,
+  "a1": 4.37,
+  "a2": 4.46,
+  "a3": 4.47,
+  "b0": 4.47,
+  "b1": 4.45,
+  "b2": 4.48,
+  "c0": 4.43,
+  "c1": 4.5,
+  "c2": 4.49,
+  "d0": 4.51,
+  "d1": 4.49,
+  "e0": 4.48,
+  "e1": 4.46,
+  "e2": 4.5,
+  "f0": 4.51,
+  "f1": 4.48
+ },
+ "f0_median_hz": 129.0,
+ "f0_range_st": 16.6,
+ "words": 328,
+ "duration_s": 126.5,
+ "wpm_overall": 155.5,
+ "wpm_speaking": 166.1,
+ "pause_ratio": 0.063,
+ "asr_word_error_approx": 0.024,
+ "asr_bad_lines": [
+  [
+   "d1",
+   "The chili, but nobody eats a hundred grams of chili. You eat one or two, just a few grams, so bite for bite, the guava still wins."
+  ],
+  [
+   "f0",
+   "So per hundred grams. Orange and lemon, fifty three, papaya, sixty one, capsicum, a hundred and twenty eight guava two hundred twenty eight and green chili two hundred forty two."
+  ]
+ ]
+}

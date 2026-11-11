@@ -351,6 +351,21 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
   across the two takes instead. 'Yeah' at a line start reads as 'Yay' to ASR (and probably to people): write 'Less!' / a full sentence instead. T(line, 'it'/'the'/'and'/'your')
   matches the FIRST hit: 5 shots needed nth=1 here (a 0.2 s shot showed up in the frame list).
 
+### Ep 33 (11 Nov, fourteenth ink episode): THE LIST REEL as a SPORTS METAPHOR, THE STADIUM, list intonation, FOLEY IN THE ROOM (`anim_props_lib33.py`, `make_vo.py`, `sfx_lib.py`)
+- List topics ('foods with more X than Y'): give the whole list ONE physical metaphor where the number is a distance you can see (ep 33: a HIGH JUMP, bar height = mg per
+  100 g, the familiar food sets the bar), then a screenshot LEADERBOARD recap (`board_row`, rows tick in on each spoken item). Say 'per 100 g' once on screen + in the voice,
+  and add the honest catch inside the list (per 100 g vs per bite). Data: the owner's Hindi list reel = 4259 reach / 164 shares / 140 saves.
+- Place: `set_stadium(t, dim, wave)` (athletics ground: stands with a dotted crowd that does a Mexican wave from t=wave, floodlights, infield, red track; dim 0..1 for a
+  lights-down beat). `hj_rig(f, ..., bar=mg, px=)` = uprights with a mg scale (px per mg: 7 for numbers < 100, 3.6 up to 250) + bar + landing mat; ep 33 `jump_shot()`
+  draws the athlete in front of the bar while rising and behind it while falling. lib33 props: food_el(orange|lemon|papaya|capsicum|guava|chilli, mood, look, cut, medal,
+  crown) (papaya always cut: whole, it reads as a guava), athlete(...) + legs(...) (food with ink legs), jump_xy (anticipation + arc + landing squash), crown_el, whistle_el,
+  clip_el, vitc_el(mood, look, k) (a vitamin C buddy that cracks/fades with k), scale_ink_el(text), bag_el(kind), el_pil (element -> PIL), board_row. Ep 33 `ref()` = Chubby as
+  a referee (striped shirt over chub(shirt=), whistle, clipboard).
+- Voice: `"word:up"` in the stressed list = CONTINUATION RISE (UPST 4.5 st over the last 55 % of the word; UPOFF=1 to A/B) for non-final list items; write the list with
+  commas, not full stops (Kokoro falls on every full stop). Hyphenated numbers are one word: 'twenty-eight.:up'. A/B neutral-to-up on UTMOS.
+- Sound: `place(x, t, xpos, gain, far, where)` + `reverb_returns()` (sfx_lib) = pan each dry effect to its on-screen x and send it to its place's room; set PLACE per shot
+  and `place_at(t)` in mix.py (copy from episodes/33-vitamin-c-league/mix.py). New foley: whistle_blow, crowd(cheer), drumroll, boing_up, mat_land, bar_rattle, sneeze, boil.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with
