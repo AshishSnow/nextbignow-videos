@@ -24,6 +24,7 @@ Since 7 Nov (owner 6 Nov: "blueprint, board style with white background, 2D, no 
 
 **OWNER FEEDBACK 28 Oct 12:40 IST (CURRENT, overrides the v5 look where they conflict): "The 3D character is not looking good, and
 
+> **OWNER — 11 Nov 2026 17:00 IST: "Hindi only" for YouTube.** Daily runs make the English Instagram DRAFT only and NEVER post English to YouTube; they also write a matching Hindi script (episodes/NN-slug/hindi_youtube.md). He makes the Bunty MP3 in ElevenLabs and sends it in chat, where the Hindi Short is built (bright set style of 30/31/32) and posted to YouTube.
 > **OWNER — 11 Nov 2026 YouTube fix (CURRENT): Shorts get ~0-7 views each; Oct 12-Nov 11 traffic = search 59, channel 8, Shorts feed 4 (YouTube is not distributing them) while Instagram gives 1-2k.**
 > - Max ONE FNH YouTube Short per 20 h (Hindi shorts made in chat count). If one exists, still make the IG draft but schedule YT 20 h after it.
 > - Frame 0 = hook picture + question caption. No fade-in, no title build-up, no blank frame.
