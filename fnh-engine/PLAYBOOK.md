@@ -24,6 +24,13 @@ Since 7 Nov (owner 6 Nov: "blueprint, board style with white background, 2D, no 
 
 **OWNER FEEDBACK 28 Oct 12:40 IST (CURRENT, overrides the v5 look where they conflict): "The 3D character is not looking good, and
 
+> **OWNER — 11 Nov 2026 YouTube fix (CURRENT): Shorts get ~0-7 views each; Oct 12-Nov 11 traffic = search 59, channel 8, Shorts feed 4 (YouTube is not distributing them) while Instagram gives 1-2k.**
+> - Max ONE FNH YouTube Short per 20 h (Hindi shorts made in chat count). If one exists, still make the IG draft but schedule YT 20 h after it.
+> - Frame 0 = hook picture + question caption. No fade-in, no title build-up, no blank frame.
+> - Aim 50-75 s unless the topic truly needs more.
+> - YT title = the exact searched question, <= 60 chars, no emoji/hashtags. Description line 1 repeats it. 3 hashtags incl. #shorts. videoCoverMilliseconds on the clearest hook frame.
+> - Every run: log the Shorts-feed share (YTTS) in performance.md; suggest one YouTube audio-library track mood too.
+
 > **OWNER — 9 Nov 2026 21:12 IST: "English video is good, like garlic breath. Don't give that continuous background music —
 > I'll add music from Insta and YouTube (soft or hard, whichever fits best) at volume 50-60. In-between object sounds are fine."**
 > So, from ep 30 on: stay in ENGLISH (the garlic-breath / ep 27 look and voice); the mix has NO baked-in music bed
