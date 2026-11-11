@@ -69,6 +69,10 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     new wording changes it. 11 Nov (Netflix): z1 "Keep or split, in the comments." 3.85 → "Tell me in the comments. Keep, or split?" 4.26;
     "Qwikster." 4.06 → "Qwikster!" 4.25. One-word lines ("Oops!") score ~3.4–3.5 whatever you do — judge them by ear.
 
+34. **A takeaway needs a result on record.** If the lesson is "watch what your partner learns", the story must *say* the partner overtook you (a count, a profit, a year) before the lesson — otherwise the viewer infers a cause the sources don't show. And check the order of events: a rescue agreed *before* a bankruptcy isn't "guess who walks in" after it. (11 Nov, 7-Eleven fresh-eyes review.)
+35. **Don't frame a cost as a skim.** The price of the product (a blank shirt + printing) isn't money that "never reaches" the seller; say what's *left*. Print companies, shops, banks and apps are our likeliest sponsors — describe their fees neutrally, with their own numbers. (11 Nov, print-on-demand review.)
+36. **One word, one meaning per script.** "A quarter" (25¢) next to "a quarter of the price"; "share" as a comment word next to the share button. And make spoken numbers add up for a listener: if the voice says about twelve + about five + fees, say the fee total aloud too. (11 Nov, both reviews.)
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)
 - (9 Nov, Netflix) "Members are furious." → "Members start cancelling." (say what the record shows, and it sets up the count)

@@ -1419,3 +1419,143 @@ def qwik_label(c, x, y, k=1.0):
     c.drawRoundRect(R.MakeXYWH(x - 150, y - 50, 300, 76), 12, 12, paint(WHITE, k))
     c.drawRoundRect(R.MakeXYWH(x - 150, y - 50, 300, 76), 12, 12, stroke(RD, 4, k))
     mtext(c, "QWIKSTER", x, y + 10, 56, RD, k, "pm")
+
+
+# ---------------------------------------------------------------- R&D 11 Nov 2026: 7-Eleven props (HOW THEY GOT SO BIG, queue/21-seven-eleven)
+def ice_m(c, x, y, t, t0, s=1.0, col=BLU):
+    """a block of ice: a 3-D box in outline, light-blue hatch on the front, two shine ticks; a few drip marks"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    w, h, d = 220 * s, 170 * s, 60 * s
+    front = [(x - w / 2, y), (x - w / 2, y - h), (x + w / 2, y - h), (x + w / 2, y), (x - w / 2, y)]
+    top = [(x - w / 2, y - h), (x - w / 2 + d, y - h - d * 0.7), (x + w / 2 + d, y - h - d * 0.7), (x + w / 2, y - h)]
+    side = [(x + w / 2, y), (x + w / 2 + d, y - d * 0.7), (x + w / 2 + d, y - h - d * 0.7)]
+    if k >= 1: hatch(c, _path(front), pr(t, t0 + 0.4, 0.35), col, gap=20, w=6, bbox=(x - w / 2, y - h, x + w / 2, y), seed=611, a=0.45)
+    ink(c, [wob(front, 601, 0.6), wob(top, 602, 0.5), wob(side, 603, 0.5)], k, MK, 7)
+    if k < 1: return
+    for i, (dx, dy) in enumerate(((-60, -120), (-30, -130))):
+        c.drawLine(x + dx * s, y + dy * s, x + (dx + 26) * s, y + (dy - 22) * s, stroke(WHITE, 8))
+    for i, dx in enumerate((-50, 30, 80)):
+        c.drawCircle(x + dx * s, y + (18 + 10 * i) * s, 7 * s, paint(col, 0.6 * pr(t, t0 + 0.6 + 0.15 * i, 0.3)))
+
+
+def riceball_m(c, x, y, t, t0, s=1.0, col=MK):
+    """a rice ball (onigiri): rounded triangle in outline with a few grain ticks, a dark hatched seaweed band at the bottom"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    r = 120 * s
+    tri = []
+    for i in range(3):
+        a0 = math.radians(-90 + 120 * i)
+        cx_, cy_ = x + 0.55 * r * math.cos(a0), y + 0.55 * r * math.sin(a0)
+        tri += circ_pts(cx_, cy_, 0.45 * r, -90 + 120 * i - 60, -90 + 120 * i + 60, 12)
+    tri.append(tri[0])
+    band = [(x - 0.42 * r, y + 0.95 * r), (x - 0.30 * r, y + 0.15 * r), (x + 0.30 * r, y + 0.15 * r), (x + 0.42 * r, y + 0.95 * r), (x - 0.42 * r, y + 0.95 * r)]
+    if k >= 1: hatch(c, _path(band), pr(t, t0 + 0.4, 0.3), col, gap=10, w=6, bbox=(x - r, y, x + r, y + r), seed=621, a=0.9)
+    ink(c, [wob(tri, 620, 0.5), wob(band, 622, 0.4)], k, MK, 7)
+    if k < 1: return
+    for i, (dx, dy) in enumerate(((-30, -40), (10, -60), (35, -20), (-55, 0), (55, 20))):
+        c.drawLine(x + dx * s, y + dy * s, x + (dx + 8) * s, y + (dy + 4) * s, stroke(LIGHT, 4))
+
+
+def truck_m(c, x, y, t, t0, s=1.0, label=None, col=GR, drive=0.0):
+    """a small delivery truck (box + cab + two wheels); `drive` = px it has rolled to the right; label on the box"""
+    k = pr(t, t0, 0.55)
+    if k <= 0: return
+    x = x + drive
+    box = [(x - 220 * s, y - 40 * s), (x - 220 * s, y - 230 * s), (x + 60 * s, y - 230 * s), (x + 60 * s, y - 40 * s), (x - 220 * s, y - 40 * s)]
+    cab = [(x + 60 * s, y - 40 * s), (x + 60 * s, y - 170 * s), (x + 150 * s, y - 170 * s), (x + 200 * s, y - 100 * s), (x + 200 * s, y - 40 * s), (x + 60 * s, y - 40 * s)]
+    win = [(x + 80 * s, y - 110 * s), (x + 80 * s, y - 150 * s), (x + 140 * s, y - 150 * s), (x + 168 * s, y - 110 * s), (x + 80 * s, y - 110 * s)]
+    if k >= 1: hatch(c, _path(cab), pr(t, t0 + 0.45, 0.3), col, gap=16, w=6, bbox=(x + 60 * s, y - 170 * s, x + 200 * s, y), seed=631, a=0.55)
+    ink(c, [wob(box, 630, 0.7), wob(cab, 632, 0.6), wob(win, 633, 0.4),
+            wob(circ_pts(x - 150 * s, y - 20 * s, 34 * s, -90, 270, 20), 634, 0.3), wob(circ_pts(x + 130 * s, y - 20 * s, 34 * s, -90, 270, 20), 635, 0.3)], k, MK, 7)
+    if label and k >= 1: mtext(c, label, x - 80 * s, y - 120 * s, int(46 * s), col, pr(t, t0 + 0.5, 0.3), "pm")
+
+
+def sunglasses_m(c, x, y, t, t0, s=1.0, col=MK, tag=None):
+    """a pair of sunglasses: two hatched lenses, a bridge, short arms; optional price tag word under them"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    L = [(x - 190 * s, y - 50 * s), (x - 30 * s, y - 50 * s), (x - 40 * s, y + 20 * s), (x - 90 * s, y + 55 * s), (x - 160 * s, y + 45 * s), (x - 190 * s, y - 10 * s), (x - 190 * s, y - 50 * s)]
+    Rr = [(2 * x - px, py) for px, py in L]
+    if k >= 1:
+        for i, poly in enumerate((L, Rr)):
+            hatch(c, _path(poly), pr(t, t0 + 0.35, 0.3), col, gap=9, w=6, bbox=(x - 200 * s, y - 60 * s, x + 200 * s, y + 60 * s), seed=641 + i, a=0.9)
+    ink(c, [wob(L, 640, 0.4), wob(Rr, 642, 0.4), [(x - 30 * s, y - 40 * s), (x, y - 52 * s), (x + 30 * s, y - 40 * s)],
+            [(x - 190 * s, y - 45 * s), (x - 240 * s, y - 60 * s)], [(x + 190 * s, y - 45 * s), (x + 240 * s, y - 60 * s)]], k, MK, 7)
+    if k >= 1:
+        c.drawLine(x - 160 * s, y - 30 * s, x - 130 * s, y - 10 * s, stroke(WHITE, 6)); c.drawLine(x + 60 * s, y - 30 * s, x + 90 * s, y - 10 * s, stroke(WHITE, 6))
+    if tag: mtext(c, tag, x, y + 130 * s, int(46 * s), RD, pr(t, t0 + 0.5, 0.3), "pm")
+
+
+def manual_m(c, x, y, t, t0, s=1.0, label="MANUAL", open_=0.0, col=BLU):
+    """a thick ring binder; open_ 0→1 swings the cover open to show ruled pages (and an empty '?' where the secret should be)"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    w, h = 230 * s, 300 * s
+    back = [(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)]
+    spine = [(x - w / 2 - 30 * s, y - h / 2 + 10 * s), (x - w / 2 - 30 * s, y + h / 2 + 10 * s), (x - w / 2, y + h / 2)]
+    ink(c, [wob(back, 650, 0.6), wob(spine, 651, 0.5)], k, MK, 7)
+    if k < 1: return
+    o = eio(min(1.0, max(0.0, open_)))
+    if o < 0.02:
+        hatch(c, _path(back), pr(t, t0 + 0.4, 0.3), col, gap=18, w=6, bbox=(x - w / 2, y - h / 2, x + w / 2, y + h / 2), seed=652, a=0.35)
+        if label: mtext(c, label, x, y + 12 * s, int(44 * s), MK, pr(t, t0 + 0.5, 0.3), "pm")
+        return
+    cx = x - w / 2 - (w + 10 * s) * o           # the cover swings out to the left
+    cov = [(x - w / 2, y - h / 2), (cx, y - h / 2 + 12 * s * o), (cx, y + h / 2 + 12 * s * o), (x - w / 2, y + h / 2)]
+    c.drawPath(_path(cov + [cov[0]]), paint(col, 0.22))
+    ink(c, [wob(cov + [cov[0]], 653, 0.4)], 1, MK, 6, pen_=False)
+    for i in range(7):
+        yy = y - h / 2 + 50 * s + i * 34 * s
+        c.drawLine(x - w / 2 + 30 * s, yy, x + w / 2 - 30 * s, yy, stroke(LIGHT, 4))
+    for i in range(3):
+        c.drawCircle(x - w / 2 + 16 * s, y - h / 3 + i * h / 3, 8 * s, stroke(MK, 4))
+    mtext(c, "?", x + 10 * s, y + 40 * s, int(110 * s), RD, pr(o, 0.6, 0.4), "pm")
+
+
+# ---------------------------------------------------------------- R&D 11 Nov 2026: print-on-demand props (HOW TO START, queue/22-print-on-demand)
+def tee_m(c, x, y, t, t0, s=1.0, col=OR, design=True, ghost=False):
+    """a plain t-shirt in outline (sleeves, collar); design=True scribbles a small star-sun doodle on the chest in `col`;
+    ghost=True draws it as a faint dashed-feel outline (a shirt that doesn't exist yet)"""
+    k = pr(t, t0, 0.55)
+    if k <= 0: return
+    sh = [(x - 90 * s, y - 200 * s), (x - 210 * s, y - 140 * s), (x - 260 * s, y - 40 * s), (x - 180 * s, y), (x - 150 * s, y - 60 * s),
+          (x - 150 * s, y + 220 * s), (x + 150 * s, y + 220 * s), (x + 150 * s, y - 60 * s), (x + 180 * s, y), (x + 260 * s, y - 40 * s),
+          (x + 210 * s, y - 140 * s), (x + 90 * s, y - 200 * s)]
+    collar = circ_pts(x, y - 205 * s, 90 * s, 10, 170, 16)
+    if ghost:
+        ink(c, [wob(sh, 660, 0.6), collar], k, LIGHT, 5, pen_=False); return
+    if k >= 1: c.drawPath(_path(sh + [sh[0]]), paint(WHITE))
+    ink(c, [wob(sh, 660, 0.7), wob(collar, 661, 0.3)], k, MK, 7)
+    if design and k >= 1:
+        kd = pr(t, t0 + 0.45, 0.45)
+        ray = [[(x + 70 * s * math.cos(math.radians(a)), y - 40 * s + 70 * s * math.sin(math.radians(a))),
+                (x + 105 * s * math.cos(math.radians(a)), y - 40 * s + 105 * s * math.sin(math.radians(a)))] for a in range(0, 360, 45)]
+        ink(c, [wob(circ_pts(x, y - 40 * s, 48 * s, -90, 270, 24), 662, 0.4)] + ray, kd, col, 7, pen_=False)
+
+
+def costbar_m(c, x, y, t, parts, total=25.0, w=900, h=96, t0=0.0, label_y=None, money="${:.2f}"):
+    """where the price goes: one long bar = `total`; parts = [(label, value, col, t_start)] hatch in left→right at their times,
+    each with its label + amount under it; whatever is left at the right end stays white and is labelled 'LEFT' in green"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    x0 = x - w / 2; box = [(x0, y), (x0 + w, y), (x0 + w, y + h), (x0, y + h), (x0, y)]
+    ink(c, [wob(box, 670, 0.5)], k, MK, 7)
+    if k < 1: return
+    acc = 0.0; ly = label_y or (y + h + 52); used = 0.0
+    for i, (lab, val, col, ts) in enumerate(parts):
+        u = pr(t, ts, 0.5)
+        if u <= 0: break
+        a_ = x0 + w * acc / total; b_ = x0 + w * (acc + val * u) / total
+        hatch(c, _path([(a_, y), (b_, y), (b_, y + h), (a_, y + h), (a_, y)]), 1.0, col, gap=12, w=6, bbox=(a_, y, b_ + 1, y + h), seed=671 + i, a=0.8)
+        c.drawLine(b_, y, b_, y + h, stroke(MK, 4))
+        if u >= 1:
+            mid = (a_ + b_) / 2; dy = (i % 2) * 70
+            mtext(c, lab, mid, ly + dy, 30, col, pr(t, ts + 0.3, 0.3), "pm")
+            mtext(c, money.format(val), mid, ly + dy + 34, 30, MK, pr(t, ts + 0.4, 0.3), "kb")
+        acc += val * u; used = acc
+    if used > 0 and all(pr(t, p[3], 0.5) >= 1 for p in parts):
+        left = total - used; mid = x0 + w * (used + left / 2) / total
+        mtext(c, "LEFT", mid, y - 26, 34, GR, 1.0, "pm")
+        mtext(c, money.format(left), mid, y + h / 2 + 14, 40, GR, 1.0, "pm")

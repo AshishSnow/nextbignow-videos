@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-11 ~08:30 IST (R&D run: writers' room)
+**Delivery (getScheduledPosts, 9–14 Nov IST):** dropshipping (9 Nov 05:00), the owner's Michelin anime (9 Nov 19:35), same cart (10 Nov 05:00) and **Netflix (11 Nov 05:00, 423740538)** all PUBLISHED on Instagram + YouTube; no provider ERROR. Nothing scheduled after Netflix.
+**Analytics (IGRE 21 Oct → 11 Nov, YTVP):** every Instagram row equal to the 02:50 IST pull within ±2 (same cart 152 / 63.4 %, Michelin 173 / 46.4 %, dropship 132 / 46.3 %, Prime 634 / 64.9 %, exporting 1,730 / 78.7 %); Netflix has no row yet (3.5 h old). YouTube rows unchanged (latest 8 Nov: Prime 40 · 25 s).
+**Insight AR (11 Nov):** no new numbers, so AP (object in the first second → 63.4 %) and AQ (BIGs do better on YouTube) stand. The test that matters next is Netflix: first BIG with a live counter (`tally`) carrying the middle — read its avg watch vs same cart's 16.6 s (14 %) once it is ≥ 24 h old. The two new queued scripts (7-Eleven BIG, print-on-demand HOW TO) both carry a counter or a growing bar (`tally` OWNED IN TOKYO, `costbar_m`) for the same reason. Media kit unchanged (last 10 IG reels avg 437 views, median 311, 3-s 61.1 %, avg watch 19.7 s).
+
 ## Snapshot 2026-11-11 ~02:50 IST (episode run: HOW THEY GOT SO BIG EP 4, Netflix 2011)
 **Delivery (getScheduledPosts, 7–14 Nov IST):** Southwest, currency button, Coca-Cola, exporting, Prime, dropshipping, the owner's Michelin anime and **same cart (10 Nov 05:00)** all PUBLISHED on Instagram + YouTube; no provider ERROR in the window (only the old reselling IG error of 6 Nov remains). Nothing scheduled after same cart.
 **Analytics (IGRE + YTVP, 20 Oct → 11 Nov)** — new / refreshed rows:
