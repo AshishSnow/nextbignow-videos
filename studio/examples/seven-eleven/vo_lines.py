@@ -10,7 +10,7 @@ LINES = [
     ('i2', "The same company that once couldn't even get a meeting.", 0.97, 0.35, 0.8, 1.45, ["couldn't", 'meeting.:dn'], 'low'),
     ('i3', "It's nineteen seventy-three. You work at Ito Yokado, a Tokyo supermarket company. You want those American stores.", 0.97, 0.25, 0.8, 1.45, ['Tokyo', 'want'], 'low'),
     ('i4', 'Three moves take you from a year of chasing a meeting to owning the whole thing.', 0.97, 0.4, 0.8, 1.45, ['Three', 'whole'], 'low'),
-    ('i5', 'Where did they start? At a Dallas ice company, in nineteen twenty-seven.', 0.97, 0.2, 0.6, 1.45, ['Dallas', 'ice'], 'low'),
+    ('i5', 'Where did the stores start? At a Dallas ice company, in nineteen twenty-seven.', 0.97, 0.2, 0.6, 1.45, ['Dallas', 'ice'], 'low'),
     ('i6', 'Milk, eggs and bread, sold off the ice dock.', 0.97, 0.25, 0.6, 1.45, ['Milk,', 'dock.:dn'], 'low'),
     ('i7', 'The name came from the hours. Open at seven. Closed at eleven at night.', 0.97, 0.4, 0.6, 1.45, ['hours.', 'eleven'], 'low'),
     ('a1', 'Move one: get the license.', 0.96, 0.25, 0.8, 1.35, ['one:', 'license.:dn'], 'low'),

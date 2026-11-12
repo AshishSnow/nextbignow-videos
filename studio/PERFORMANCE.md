@@ -9,6 +9,31 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-13 ~02:50 IST (episode run: HOW THEY GOT SO BIG EP 5, 7-Eleven)
+**Delivery (getScheduledPosts 10–16 Nov IST):** same cart, Netflix, chair flip (owner), cash rewards (424982411) and the owner's "sell me this
+pen" (12 Nov 07:22) — **all PUBLISHED on Instagram + YouTube, no provider ERROR.** Nothing was scheduled after the pen post.
+**Instagram (IGRE, 22 Oct → 13 Nov 03:00 IST) — the import moves again:**
+| Post (IST) | Views | Reach | Avg watch s | 3-s % | Shares | Saves | Likes |
+|---|---|---|---|---|---|---|---|
+| 12 Nov 07:22 sell me this pen (owner, bright) | 412 | 352 | 28.4 | 58.1 | 1 | 7 | 9 |
+| 12 Nov 05:00 cash rewards HIW (board, usa_narr, colour spots) | 151 | 133 | 16.0 | 52.9 | 0 | 0 | 4 |
+| 11 Nov 21:56 chair flip (owner, bright) | 51 | 51 | 4.1 | 34.0 | 0 | 0 | 3 |
+| 11 Nov 05:00 Netflix BIG (board) | **11** | 6 | 3.2 | 16.7 | 0 | 0 | 0 |
+| 10 Nov 05:00 Instacart HIW (board) | 154 | 134 | 16.3 | 63.2 | 0 | 0 | 1 |
+YouTube (YTVP) rows now reach 9 Nov: Instacart 48 · 25 s, Michelin 156 · 22 s, dropship 88 · 17 s, Prime 71 · 29 s, exporting 460 · 48 s.
+**Insight AT (13 Nov): Netflix's Instagram reel really got almost no distribution** — 11 views after ~46 h while posts made after it (chair flip,
+cash rewards, pen) have normal rows, so it is no longer import lag (insight AS). The first 3-s rate on its 6 reached accounts was 16.7 %. One post
+can't say why (a brand-name hook, the first frame, or Instagram's test pool); **owner: open that reel's Insights in the app — if it says
+"not eligible for recommendation", tell the studio.** Today's BIG keeps the brand name in plain text only and opens on a drawn, moving frame.
+**Insight AU (13 Nov, whiteboard posts only, IG, n small):** by content kind — HOW TO (exporting 1,734, importing 443, dropship 133) avg **770 views,
+63.7 % 3-s**; HOW IT WORKS (Prime 634, currency 346, Instacart 154, cash 151, credit 137) avg **284, 59.0 %**; HOW THEY GOT SO BIG (Southwest 351,
+Coca-Cola 275, Netflix 11; Michelin anime 174 was the owner's own look) avg **212, 48.5 %** (without Netflix 313 / 64.4 %). How-tos still win; BIG stories
+open about as well as HIW when they get distributed, but none has passed 400 views. **For BIG episodes the hook must be a fact about something the
+viewer uses** (7-Eleven: the shop on the corner is owned in Tokyo) — insight X again. The owner's bright, short pen post held **28.4 s avg watch**
+in < 20 h (best since exporting) — short, single-idea, human tip; saves 7.
+Media kit (last 10 IG reels): avg **373 views** (median 164), 3-s rate 53.0 %, avg watch 16.7 s, **7.2 sends + saves + comments per 1,000 reach**;
+YouTube last 10 with rows (to 9 Nov) avg 199 views. Top 3 (IG, last 10): exporting 1,734, Prime 634, pen 412.
+
 ## Snapshot 2026-11-12 ~08:50 IST (R&D run: writers' room, W7 overbooking)
 **Delivery (getScheduledPosts, 10–15 Nov IST):** same cart (10 Nov), Netflix (11 Nov), the owner's chair flip (11 Nov 21:56), **cash rewards
 (12 Nov 05:00, 424982411)** and a new owner post, **"sell me this pen" (12 Nov 07:22 IST, 425170804, bright look, not a studio episode)** — all

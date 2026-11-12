@@ -83,6 +83,8 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 39. **American narrator, American numbers** (`human_check` prints a `note number …` line; 12 Nov audit of the queue: 9 hits in 7 scripts, 7-Eleven d1 fixed, a UK-money line like "a hundred and three" pounds may stay — listen). Write "one thousand seventy-five", not "one thousand and seventy-five" (British "and"), and spell out
     agencies that read as words ("The Associated Press", not "the AP"). (12 Nov review.)
 
+40. **A pronoun after a seat line points at the seat.** After "You want those American stores… Three moves take you…", "Where did *they* start?" reads as the Tokyo side, not the stores. Name the thing again ("Where did the stores start?"). (13 Nov, 7-Eleven build read-aloud.)
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)
 - (9 Nov, Netflix) "Members are furious." → "Members start cancelling." (say what the record shows, and it sets up the count)

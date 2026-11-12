@@ -1729,3 +1729,159 @@ def gatedesk_m(c, x, y, t, t0, s=1.0, sign="GATE 12", bubble=None, bubble_t=None
     if bubble and bubble_t is not None and t >= bubble_t:
         bw = tw(font("pm", int(50 * s)), bubble) + 70 * s
         speech(c, x - 150 * s, y - 330 * s, bw, 110 * s, bubble, pr(t, bubble_t, 0.3), size=int(50 * s), col=RD)
+
+
+# ---------------------------------------------------------------- episode run 13 Nov 2026: 7-Eleven (HOW THEY GOT SO BIG EP 5, examples/seven-eleven)
+# rubtext/ownertag = a word that a tiny eraser rubs out and rewrites (any held object's state tag, not only the parcel); citypin = map pin + name;
+# mini_store/store_stack = counts you can see as towers of tiny shops; yearcard = calendar page whose year is rubbed + rewritten (time jumps);
+# pan_trans(f, prev, p, dir) = TWO-CITY camera pan transition (use in compose for trans 'panR'/'panL'; pill band stays put).
+SP_BL_ = (150, 196, 255); SP_OR_ = (255, 196, 120)
+
+def rubtext(c, x, y, old, new, t, t_sw, size=46, col=MK, new_col=None, key="pm"):
+    """a word that a tiny eraser rubs out at t_sw (0.35 s) and the new word is written on"""
+    new_col = new_col or col
+    if t < t_sw or new is None:
+        if old: mtext(c, old, x, y, size, col, 1, key)
+        return
+    u = pr(t, t_sw, 0.35)
+    if u < 1:
+        if old: mtext(c, old, x, y, size, col, 1, key, a=1 - u)
+        f = font(key, size); wv = max(tw(f, old or "X"), 60)
+        ex = x - wv / 2 + wv * (0.5 + 0.5 * math.sin(u * 9))
+        c.drawRoundRect(R.MakeXYWH(ex - 26, y - size * 0.9, 52, size * 1.1), 8, 8, paint((60, 66, 84)))
+        c.drawRect(R.MakeXYWH(ex - 26, y + size * 0.05, 52, 12), paint((210, 210, 214)))
+    else:
+        mtext(c, new, x, y, size, new_col, pr(t, t_sw + 0.35, 0.35), key)
+
+def ownertag(c, x, y, t, t0, text, new=None, t_sw=1e9, col=RD, new_col=None, w=None):
+    """the OWNER tag hanging under the store on a string; its word is rubbed out and rewritten (the held object's state)"""
+    k = pr(t, t0, 0.4)
+    if k <= 0: return
+    f = font("pm", 42)
+    ww = w or max(tw(f, text), tw(f, new or "")) + 70
+    c.drawLine(x, y - 70, x, y - 30, stroke(MK, 4, k))
+    rr = R.MakeXYWH(x - ww / 2, y - 30, ww, 74)
+    c.drawRoundRect(rr, 14, 14, paint(WHITE, k)); c.drawRoundRect(rr, 14, 14, stroke(MK, 5, k))
+    c.drawCircle(x, y - 14, 6, stroke(MK, 3, k))
+    if k >= 1: rubtext(c, x, y + 26, text, new, t, t_sw, 40, col, new_col)
+
+def citypin(c, x, y, t, t0, name, col):
+    pin_m(c, x, y, t, t0, 1.0, col)
+    mtext(c, name, x, y + 60, 44, col, pr(t, t0 + 0.3, 0.3), "pm")
+
+def mini_store(c, x, y, s, col, k=1.0):
+    """a tiny shop icon (for counts): box + hatched awning stripe"""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k * s, k * s)
+    c.drawRect(R.MakeXYWH(-24, -40, 48, 40), paint(WHITE)); c.drawRect(R.MakeXYWH(-28, -52, 56, 14), paint(col, 0.6))
+    c.drawRect(R.MakeXYWH(-24, -40, 48, 40), stroke(MK, 3)); c.drawRect(R.MakeXYWH(-28, -52, 56, 14), stroke(MK, 3))
+    c.drawRect(R.MakeXYWH(4, -24, 12, 24), stroke(MK, 2)); c.restore()
+
+def store_stack(c, x, base, n, t, t0, col, step=0.05, cols=4):
+    """n tiny shops stacked into a tower, popping one by one"""
+    for i in range(n):
+        tk = t0 + i * step
+        if t < tk: continue
+        r_, q = divmod(i, cols)
+        mini_store(c, x + (q - (cols - 1) / 2) * 62, base - r_ * 56, 1.0, col, pop_(t, tk, 0.25))
+
+def grocery_m(c, x, y, kind, k):
+    """milk bottle / egg pair / bread loaf, drawn small, popping in"""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k, k)
+    if kind == "milk":
+        p = [(-34, 0), (-34, -110), (-18, -140), (-18, -170), (18, -170), (18, -140), (34, -110), (34, 0), (-34, 0)]
+        c.drawPath(_path(p), paint(WHITE)); c.drawRect(R.MakeXYWH(-34, -90, 68, 40), paint(SP_BL_, 0.8))
+        ink(c, [p, [(-22, -170), (22, -170)]], 1, MK, 6, pen_=False); mtext(c, "MILK", 0, -60, 22, BLU, 1, "pm")
+    elif kind == "eggs":
+        for dx in (-30, 30):
+            c.drawOval(R.MakeXYWH(dx - 28, -80, 56, 76), paint(EGG)); c.drawOval(R.MakeXYWH(dx - 28, -80, 56, 76), stroke(MK, 5))
+    else:
+        p = circ_pts(0, -40, 70, 180, 360, 24, ry=50) + [(70, 0), (-70, 0), (-70, -40)]
+        c.drawPath(_path(p), paint(SP_OR_, 0.7)); ink(c, [p], 1, MK, 6, pen_=False)
+        for dx in (-30, 0, 30): c.drawLine(dx - 10, -70, dx + 10, -50, stroke(MK, 4))
+    c.restore()
+
+def desk_m(c, x, y, t, t0, sign, sub):
+    """a planner's desk: table top + legs, a name sign standing on it"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    ink(c, [wob([(x - 260, y), (x + 260, y)], 901, 0.6), wob([(x - 230, y), (x - 230, y + 150)], 902, 0.4), wob([(x + 230, y), (x + 230, y + 150)], 903, 0.4)], k, MK, 8)
+    if k < 1: return
+    sw = 400; rr = R.MakeXYWH(x - sw / 2, y - 130, sw, 120)
+    c.drawRoundRect(rr, 10, 10, paint(WHITE)); c.drawRoundRect(rr, 10, 10, stroke(BLU, 5))
+    mtext(c, sign, x, y - 78, 40, BLU, pr(t, t0 + 0.4, 0.3), "pm"); mtext(c, sub, x, y - 30, 30, MK, pr(t, t0 + 0.6, 0.3), "kb")
+
+def license_m(c, x, y, t, t0, s=1.0, signed=0.0, tilt=-5, title="LICENSE"):
+    """a license document: title, three lines, a signature line that gets signed (signed 0..1)"""
+    k = pop_(t, t0, 0.35, 1.5)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k * s, k * s)
+    rr = R.MakeXYWH(-170, -120, 340, 240)
+    c.drawRect(R.MakeXYWH(-164, -112, 340, 240), paint((0, 0, 0), 0.10, blur=6)); c.drawRect(rr, paint(WHITE)); c.drawRect(rr, stroke(MK, 6))
+    mtext(c, title, 0, -66, 40, PU, 1, "pm")
+    for i in range(3): c.drawLine(-120, -24 + i * 28, 120, -24 + i * 28, stroke(LIGHT, 4))
+    c.drawLine(-120, 84, 120, 84, stroke(MK, 3))
+    if signed > 0:
+        pts = [(-110 + 220 * j / 30, 72 - 14 * math.sin(j * 0.9) - 6 * math.cos(j * 2.1)) for j in range(31)]
+        ink(c, [pts], signed, BLU, 5, pen_=False)
+    c.restore()
+
+def magnifier_m(c, x, y, r, k, col=MK):
+    if k <= 0: return
+    c.drawCircle(x, y, r * k, paint(SP_BL_, 0.25)); ink(c, [wob(circ_pts(x, y, r * k, -90, 270, 40), 921, 0.5)], 1, col, 8, pen_=False)
+    ink(c, [[(x + r * 0.7 * k, y + r * 0.7 * k), (x + r * 1.5 * k, y + r * 1.5 * k)]], 1, col, 14, pen_=False)
+
+def notebook_m(c, x, y, t, t0, lines_=3, label=None):
+    k = pr(t, t0, 0.4)
+    if k <= 0: return
+    rr = R.MakeXYWH(x - 120, y - 150, 240, 300)
+    c.drawRect(rr, paint(WHITE, k)); ink(c, [wob([(x - 120, y - 150), (x + 120, y - 150), (x + 120, y + 150), (x - 120, y + 150), (x - 120, y - 150)], 931, 0.5)], k, MK, 6)
+    for i in range(lines_):
+        c.drawLine(x - 90, y - 90 + i * 50, x + 30 + 50 * ((i * 7) % 3) / 3, y - 90 + i * 50, stroke(BLU, 5, pr(t, t0 + 0.3 + i * 0.15, 0.2)))
+    if label: mtext(c, label, x, y + 110, 34, RD, pr(t, t0 + 0.6, 0.3), "pm")
+
+def till_m(c, x, y, t, t0, s=1.0):
+    """a shop till with a small screen; a receipt grows out of its top"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    P = lambda pts: _sc(x, y, s, pts)
+    body = P([(-130, 0), (-110, -150), (110, -150), (130, 0), (-130, 0)])
+    scr = P([(-60, -150), (-50, -240), (90, -240), (80, -150)])
+    c.drawPath(_path(body), paint(WHITE, k)); c.drawPath(_path(scr), paint(SP_GR, 0.5 * k))
+    ink(c, [wob(body, 941, 0.5), wob(scr, 942, 0.4)], k, MK, 6)
+    if k >= 1:
+        for r_ in range(2):
+            for q in range(4): c.drawCircle(x + (-75 + q * 50) * s, y + (-95 + r_ * 45) * s, 9 * s, paint(MK))
+
+def risingline(c, x, y, w, h, t, t0, label, col=GR):
+    k = pr(t, t0, 0.8)
+    if k <= 0: return
+    pts = [(x + w * i / 8, y - h * (0.15 + 0.85 * (i / 8) ** 1.4) + (14 if i % 2 else 0)) for i in range(9)]
+    ink(c, [[(x, y + 10), (x + w + 20, y + 10)], [(x, y + 10), (x, y - h - 20)]], 1, MK, 5, pen_=False)
+    ink(c, [pts], k, col, 9, pen_=False)
+    if k >= 1: mtext(c, label, x + w / 2, y + 70, 44, col, pr(t, t0 + 0.8, 0.3), "pm")
+
+def yearcard(c, x, y, t, t0, text, col=MK, size=64, new=None, t_sw=1e9):
+    """a small torn-off calendar page with the year/month written on (rubbed and rewritten for a time jump)"""
+    k = pop_(t, t0, 0.3, 1.5)
+    if k <= 0: return
+    f = font("pm", size); wv = max(tw(f, text), tw(f, new or "")) + 60
+    c.save(); c.translate(x, y); c.scale(k, k)
+    rr = R.MakeXYWH(-wv / 2, -size, wv, size * 1.6)
+    c.drawRect(rr, paint(WHITE)); c.drawRect(R.MakeXYWH(-wv / 2, -size, wv, 22), paint(RD, 0.8)); c.drawRect(rr, stroke(MK, 5))
+    c.restore()
+    if k >= 1: rubtext(c, x, y + size * 0.42, text, new, t, t_sw, size, col)
+
+def pan_trans(f, prev, p, direction):
+    """camera pans across the board: direction +1 = toward Tokyo (content moves left), -1 = toward Dallas.
+    Pill + counter band (top 430 px) stays put; a light motion smear sells the move."""
+    u = eio(p); sh = int(W * u)
+    out = f.copy()
+    if direction > 0:
+        out[430:, : W - sh] = prev[430:, sh:]; out[430:, W - sh:] = f[430:, : sh] if sh > 0 else out[430:, W - sh:]
+    else:
+        out[430:, sh:] = prev[430:, : W - sh]; out[430:, :sh] = f[430:, W - sh:] if sh > 0 else out[430:, :sh]
+    if 0.05 < p < 0.95:
+        k = 9; out[430:] = sum(np.roll(out[430:], i * direction * -6, axis=1) for i in range(k)) / k
+    return out
