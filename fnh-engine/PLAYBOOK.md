@@ -367,6 +367,23 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
 - Sound: `place(x, t, xpos, gain, far, where)` + `reverb_returns()` (sfx_lib) = pan each dry effect to its on-screen x and send it to its place's room; set PLACE per shot
   and `place_at(t)` in mix.py (copy from episodes/33-vitamin-c-league/mix.py). New foley: whistle_blow, crowd(cheer), drumroll, boing_up, mat_land, bar_rattle, sneeze, boil.
 
+### Ep 34 (12 Nov, fifteenth ink episode, FIRST under the 11 Nov 35-50 s rule): THE LOOP ENDING, THE CHAAT STALL, the RUNNY-NOSE kit (`anim_props_lib34.py`, `engine/template/sfx_lib.py`)
+- 47 s total = 121 words / 11 lines / 17 shots (~2.8 s each). Payoff ('your nose thinks it's on fire') at 40 %, 'false alarm' at 56 %. A 45-s script still needs: hook question, one
+  'it's not X' flip, define the one term on sight, ONE metaphor (here a fire alarm in the nose), one safe tip, the send line. Cut everything else (age, treatments, history).
+- LOOP ENDING (craft skill): the last VO line names the frame-0 place ('...at every chaat stall'), then a 0.7 s logo beat, then a ~1 s TAIL shot that rebuilds frame 0's
+  composition with no caption; `loop_seam(f, first, t, END, 0.33)` (lib34) crossfades the last 0.33 s into frame 0 (compose() caches rs('S0', 0)); in mix.py no SFX crosses the
+  last 0.8 s and the room tone of the tail is the SAME noise as the opening (crossfaded), so the replay has no visual or audio jump. Copy the end of ep 34 anim_shots/mix.
+- Place: `set_chaat(t, blur, top_y, dim)` + `cart_front(f, CART)` (pani-puri cart at dusk: striped awning across the top 250-360 px, swaying bulb string, blurred shopfronts as
+  bokeh; Chubby at (540, 1520) s 1.38 behind a cart top at 1360 reads well; s 1.1 behind a 1300 cart hid his whole body in the first test).
+- Chubby runny-nose kit: `nose_xy(x, y, s, t, lean, squash)` = where his nose tip is; `drip(f, nx, ny, s, t, t0, period, amt)` = a mucus drip with anticipation (swell),
+  snap (lets go), gravity fall and a springy stub (follow-through); `flush(f, x, y, s, k, t)` = red cheeks + heat wiggles; `heat_lines`. Pale mucus vanished on skin: MUC is now a
+  clear green with a dark green outline. lib34 props: golgappa_el(bite, pani, mood), puri_stack_el, matka_el, tissue_box_el, tissue_el(crumpled), caps_el(mood, look, k) (capsaicin =
+  a red flame buddy), bell_el(lit) (fire-alarm bell), tap_el(open_k), helmet_el + ext_el (fireman Chubby), flower_ink_el (pollen = allergy icon), bowl_soup_el.
+- Board: a side-profile head with the nasal passage + a nerve to a 'heat sensor' bell (ep 34 anim_shots board_head) = reusable for any 'nerve in your nose / mouth' topic.
+- Sound: sfx_lib room 'street' (ir + room_tone), foley sniffle, tissue_pull, flame_whoosh, faucet.
+- Voice: SPD 0.9 'Shorts pace' A/B on identical text LOST (chunk20 4.485 -> 4.464, f0 15.4 -> 15.1): keep SPD 0.88 even for short videos. The hook rewrite 'Do you know why your
+  nose runs when you eat spicy food?' (verb early, food last) 4.40 -> 4.42 and b1 joined into one breath 4.42 -> 4.45.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

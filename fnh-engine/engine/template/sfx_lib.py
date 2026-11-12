@@ -957,6 +957,7 @@ def room_tone(kind, n_):
     if kind == "tv":   x = _lp(w, 2500) * 0.5 + 0.25 * np.sin(2 * np.pi * 60 * tt) + _bp(rng.standard_normal(n_), 4000, 9000) * 0.08 * (rng.random(n_) < 0.02)
     elif kind == "cap": x = _lp(w, 700) * 0.8 + 0.35 * np.sin(2 * np.pi * 120 * tt) * (0.8 + 0.2 * np.sin(2 * np.pi * 0.3 * tt))
     elif kind == "kit": x = _lp(w, 1800) * 0.4 + 0.2 * np.sin(2 * np.pi * 100 * tt)
+    elif kind == "street": x = _bp(w, 150, 1800) * (0.7 + 0.3 * np.sin(2 * np.pi * 0.17 * tt)) + 0.25 * _bp(rng.standard_normal(n_), 600, 2400) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.6 * tt) ** 8)   # ep 34: street murmur
     elif kind == "sea": x = _lp(w, 1200) * (0.4 + 0.6 * np.sin(np.pi * ((tt / 2.2) % 1)) ** 2)
     else:              x = _bp(w, 200, 2500) * 0.3                                    # the board: a quiet paper room
     return x / (np.abs(x).max() + 1e-9)
@@ -977,7 +978,8 @@ def ir(kind):
     """a synthetic stereo impulse response per place: early reflections (taps) + a diffuse decaying noise tail; L/R decorrelated."""
     spec = {"kit": dict(pre=0.008, rt=0.35, taps=((0.011, 0.5), (0.019, 0.35), (0.027, 0.25)), lp=6000),
             "stove": dict(pre=0.008, rt=0.45, taps=((0.012, 0.5), (0.021, 0.35), (0.031, 0.25)), lp=5000),
-            "stadium": dict(pre=0.03, rt=1.4, taps=((0.14, 0.45), (0.26, 0.28), (0.39, 0.14)), lp=2800)}[kind]
+            "stadium": dict(pre=0.03, rt=1.4, taps=((0.14, 0.45), (0.26, 0.28), (0.39, 0.14)), lp=2800),
+            "street": dict(pre=0.012, rt=0.55, taps=((0.045, 0.4), (0.075, 0.25), (0.11, 0.12)), lp=3600)}[kind]     # ep 34: open street, shopfront slaps
     n_ = int((spec["pre"] + spec["rt"] * 1.2) * SR); out = np.zeros((n_, 2), np.float32)
     tt = np.arange(n_) / SR
     for ch in range(2):
@@ -992,8 +994,8 @@ def ir(kind):
     return out
 
 
-WET = {"kit": -13, "stove": -11, "stadium": -10, "board": None}
-BUS = {k: np.zeros((NS, 2), np.float32) for k in ("kit", "stove", "stadium")}
+WET = {"kit": -13, "stove": -11, "stadium": -10, "street": -12, "board": None}
+BUS = {k: np.zeros((NS, 2), np.float32) for k in ("kit", "stove", "stadium", "street")}
 
 
 def place(x, t, xpos=540, gain=1.0, far=0.0, where=None):
@@ -1084,3 +1086,35 @@ def reverb_returns():
         h = ir(kind); wet = np.zeros_like(bus)
         for ch in range(2): wet[:, ch] = fftconvolve(bus[:, ch], h[:, ch])[:NS]
         sfx += wet.astype(np.float32)
+
+
+# ---- ep 34 foley (runny nose) ----
+def sniffle(level=-22, dur=0.35):
+    """a wet nose sniff: a short inhaled noise burst (band 1-5 kHz) with a fluttery wet edge."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = _bp(rng.standard_normal(n_), 1000, 5000) * np.sin(np.pi * np.clip(tt / dur, 0, 1)) ** 1.5 * (0.7 + 0.3 * np.sin(2 * np.pi * 38 * tt))
+    return _st2(x / (np.abs(x).max() + 1e-9) * db(level))
+
+
+def tissue_pull(level=-24):
+    """a tissue yanked out of a box: a soft paper zip (rising band noise) + a flap."""
+    n_ = int(0.28 * SR); tt = np.arange(n_) / SR
+    x = _bp(rng.standard_normal(n_), 1800, 7000) * np.exp(-((tt - 0.08) / 0.05) ** 2) + 0.5 * _bp(rng.standard_normal(n_), 300, 1500) * np.exp(-np.maximum(0, tt - 0.16) / 0.04) * (tt > 0.16)
+    return _st2(x / (np.abs(x).max() + 1e-9) * db(level))
+
+
+def flame_whoosh(level=-20, dur=0.8):
+    """flames catching: a low whoosh swelling + crackle sparks."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = _lp(rng.standard_normal(n_), 900) * np.minimum(1, tt / 0.12) * np.exp(-np.maximum(0, tt - 0.2) / 0.35)
+    x = x / (np.abs(x).max() + 1e-9) + 0.4 * _hp(rng.standard_normal(n_), 3000) * (rng.random(n_) < 0.004) * np.exp(-tt / 0.5)
+    return _st2(x / (np.abs(x).max() + 1e-9) * db(level))
+
+
+def faucet(level=-26, dur=1.5):
+    """a tap turned on: a squeak of the handle, then running water (band noise with a slow wobble)."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR
+    x = _bp(rng.standard_normal(n_), 500, 4000) * (0.8 + 0.2 * np.sin(2 * np.pi * 7 * tt)) * np.minimum(1, np.maximum(0, tt - 0.15) / 0.15) * np.clip((dur - tt) / 0.2, 0, 1)
+    sq = np.sin(2 * np.pi * (900 + 600 * tt) * tt) * np.exp(-tt / 0.06) * 0.6
+    y = x / (np.abs(x).max() + 1e-9) + sq
+    return _st2(y / (np.abs(y).max() + 1e-9) * db(level))
