@@ -76,6 +76,13 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 37. **Small words before a noun fuse on the American narrator too.** "…of card sales in fees" came back "and fees"; "pass the whole fee on"
     came back "the whole fiance" (12 Nov, usa_narr). Put the noun last or use a clearer joiner: "…of card sales as fees", "pass on the whole fee".
 
+38. **Say who found it, one level down.** A government report quoting a textbook is "auditors cite the research", not "auditors say" — open the
+    footnote before you attribute (12 Nov, GAO no-show rate). And a rule's floor isn't its price: if the law sets a *minimum* and lets the company
+    pay more, say "sets the minimum", and don't say "no cap" next to a company's own cap ("the law sets no limit" + the memo's limit). (12 Nov,
+    overbooking fresh-eyes review: both were must-fixes no gate catches.)
+39. **American narrator, American numbers** (`human_check` prints a `note number …` line; 12 Nov audit of the queue: 9 hits in 7 scripts, 7-Eleven d1 fixed, a UK-money line like "a hundred and three" pounds may stay — listen). Write "one thousand seventy-five", not "one thousand and seventy-five" (British "and"), and spell out
+    agencies that read as words ("The Associated Press", not "the AP"). (12 Nov review.)
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)
 - (9 Nov, Netflix) "Members are furious." → "Members start cancelling." (say what the record shows, and it sets up the count)

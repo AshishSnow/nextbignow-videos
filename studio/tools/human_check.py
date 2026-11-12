@@ -78,6 +78,10 @@ def voice_notes(path):
                 # "when I found out…") gives the narrator a life it doesn't have (rule 15); say it as an opinion or a hypothetical instead
                 mem = re.search(r"\bI (didn't|did not|never) (see|expect|know|realise|realize|think)\b|\bI (found out|learned|discovered|remember|used to)\b|\bwhen I\b|\bmy (mum|mom|dad|friend|wife|husband|kids?)\b", text, re.I)
                 if mem: out.append(f"memory {lid}: '{mem.group(0)}' reads as the narrator's own past — use a present opinion or a hypothetical ('That's the one I'd have missed.') (rule 15/29)")
+                # 12 Nov (fresh-eyes review, overbooking): the narrator is American (usa_narr) -> no British 'and' inside a number
+                # ("one thousand and seventy-five"); a year or "a hundred and fifty" said as a round amount is still flagged: listen.
+                brit = re.findall(r"\b(?:hundred|thousand|million|billion) and (?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\w+teen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b", text, re.I)
+                if brit: out.append(f"number {lid}: {brit} — British 'and' inside a number; the American narrator says 'one thousand seventy-five' (rule 39)")
     return out
 
 

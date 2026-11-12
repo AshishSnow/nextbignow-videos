@@ -1661,3 +1661,71 @@ def coin_hop(c, t, x0, x1, y, period=1.1, h=150, r=30, t_start=-9.0):
     if t < t_start: return
     u = ((t - t_start) % period) / period
     coin(c, x0 + (x1 - x0) * eio(u), y - 4 * h * u * (1 - u), r, spin=t * 6)
+
+
+# ---------------------------------------------------------------- overbooking kit (R&D writers' room 12 Nov 2026, HOW IT WORKS W7)
+def plane_m(c, x, y, t, t0, s=1.0, n=10, filled=0, extra=0, col=BLU, label=None):
+    """side-view airliner: fuselage, tail, wing; `n` windows = seats, the first `filled` hatched (taken); `extra` red stick
+    passengers queue on the steps beside it (tickets sold past the seats)"""
+    k = pr(t, t0, 0.6)
+    if k <= 0: return
+    L, Rr = x - 380 * s, x + 330 * s
+    body = [(L + 60 * s, y - 70 * s), (Rr - 40 * s, y - 70 * s), (Rr + 30 * s, y - 20 * s), (Rr - 40 * s, y + 45 * s),
+            (L + 40 * s, y + 45 * s), (L, y), (L + 60 * s, y - 70 * s)]
+    tail = [(L + 60 * s, y - 70 * s), (L + 10 * s, y - 190 * s), (L + 80 * s, y - 190 * s), (L + 160 * s, y - 70 * s)]
+    wing = [(x - 40 * s, y + 20 * s), (x - 150 * s, y + 140 * s), (x - 70 * s, y + 140 * s), (x + 60 * s, y + 20 * s)]
+    if k >= 1:
+        hatch(c, _path(tail + [tail[0]]), pr(t, t0 + 0.5, 0.3), col, gap=14, w=6, bbox=(L, y - 195 * s, L + 165 * s, y - 65 * s), seed=901, a=0.55)
+    ink(c, [wob(body, 900, 0.8), wob(tail, 902, 0.6), wob(wing, 903, 0.6), [(Rr - 30 * s, y - 45 * s), (Rr + 5 * s, y - 20 * s)]], k, MK, 7)
+    if k < 1: return
+    gap = (Rr - L - 200 * s) / max(1, n)
+    for i in range(n):
+        wx = L + 150 * s + i * gap; kk = pr(t, t0 + 0.55 + i * 0.03, 0.15)
+        if kk <= 0: continue
+        rr = R.MakeXYWH(wx - 14 * s, y - 42 * s, 28 * s, 34 * s)
+        if i < filled: c.drawRoundRect(rr, 10 * s, 10 * s, paint(col, 0.75 * kk))
+        c.drawRoundRect(rr, 10 * s, 10 * s, stroke(MK, 4, kk))
+    for j in range(extra):
+        px = Rr + 90 * s + j * 46 * s; py = y + 40 * s; kk = pr(t, t0 + 0.9 + j * 0.12, 0.2)
+        if kk <= 0: continue
+        c.drawCircle(px, py - 62 * s, 13 * s, stroke(RD, 5, kk))
+        ink(c, [[(px, py - 49 * s), (px, py - 10 * s)], [(px, py - 10 * s), (px - 12 * s, py + 15 * s)], [(px, py - 10 * s), (px + 12 * s, py + 15 * s)],
+                [(px - 15 * s, py - 38 * s), (px + 15 * s, py - 38 * s)]], kk, RD, 5, pen_=False)
+    if label: mtext(c, label, x, y + 230 * s, int(48 * s), col, pr(t, t0 + 0.7, 0.3), "pm")
+
+
+def boardpass_m(c, x, y, t, t0, s=1.0, seat="12C", stamp=None, stamp_t=None, col=BLU, tilt=-6):
+    """a boarding pass: stub line, a tiny plane, FLIGHT / SEAT fields; `stamp` (e.g. 'BUMPED') slams on at stamp_t"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(tilt); c.scale(s, s)
+    w, h = 520, 240
+    box = [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2)]
+    c.drawPath(_path(box), paint(WHITE, k))
+    ink(c, [wob(box, 911, 0.6)], k, MK, 7, pen_=False)
+    if k >= 1:
+        for yy in range(-h // 2 + 12, h // 2 - 8, 22): c.drawLine(w / 2 - 120, yy, w / 2 - 120, yy + 11, stroke(MK, 4))
+        c.drawPath(_path([(-w / 2 + 4, -h / 2 + 4), (w / 2 - 4, -h / 2 + 4), (w / 2 - 4, -h / 2 + 48), (-w / 2 + 4, -h / 2 + 48), (-w / 2 + 4, -h / 2 + 4)]), paint(col, 0.9))
+        mtext(c, "BOARDING PASS", -60, -h / 2 + 38, 30, WHITE, 1, "pm")
+        mtext(c, "FLIGHT", -160, 0, 30, MK, 1, "kb"); mtext(c, "OB 261", -160, 55, 46, MK, pr(t, t0 + 0.3, 0.3), "pm")
+        mtext(c, "SEAT", 30, 0, 30, MK, 1, "kb"); mtext(c, seat, 30, 55, 50, RD if seat in ("?", "??") else MK, pr(t, t0 + 0.4, 0.3), "pm")
+        ink(c, [[(w / 2 - 95, 25), (w / 2 - 25, 25)], [(w / 2 - 65, 25), (w / 2 - 80, 0)], [(w / 2 - 65, 25), (w / 2 - 80, 50)], [(w / 2 - 92, 25), (w / 2 - 100, 12)]], 1, col, 6, pen_=False)
+    c.restore()
+    if stamp and stamp_t is not None and t >= stamp_t:
+        stamp_m(c, x + 110 * s, y + 75 * s, stamp, pr(t, stamp_t, 0.35), size=int(52 * s))
+
+
+def gatedesk_m(c, x, y, t, t0, s=1.0, sign="GATE 12", bubble=None, bubble_t=None, col=OR):
+    """a gate desk with a little screen sign on a pole; optional speech bubble from the desk ('VOLUNTEERS?')"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    desk = [(x - 200 * s, y), (x - 200 * s, y - 150 * s), (x + 200 * s, y - 150 * s), (x + 200 * s, y), (x - 200 * s, y)]
+    top = [(x - 220 * s, y - 150 * s), (x + 220 * s, y - 150 * s)]
+    pole = [(x + 150 * s, y - 150 * s), (x + 150 * s, y - 330 * s)]
+    scr = [(x + 40 * s, y - 330 * s), (x + 260 * s, y - 330 * s), (x + 260 * s, y - 430 * s), (x + 40 * s, y - 430 * s), (x + 40 * s, y - 330 * s)]
+    if k >= 1: hatch(c, _path(desk), pr(t, t0 + 0.4, 0.3), col, gap=18, w=7, bbox=(x - 200 * s, y - 150 * s, x + 200 * s, y), seed=921, a=0.5)
+    ink(c, [wob(desk, 920, 0.6), top, pole, wob(scr, 922, 0.5)], k, MK, 7)
+    if k >= 1 and sign: mtext(c, sign, x + 150 * s, y - 365 * s, int(34 * s), BLU, pr(t, t0 + 0.5, 0.3), "pm")
+    if bubble and bubble_t is not None and t >= bubble_t:
+        bw = tw(font("pm", int(50 * s)), bubble) + 70 * s
+        speech(c, x - 150 * s, y - 330 * s, bw, 110 * s, bubble, pr(t, bubble_t, 0.3), size=int(50 * s), col=RD)

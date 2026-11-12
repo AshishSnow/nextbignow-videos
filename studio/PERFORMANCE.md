@@ -9,6 +9,22 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-12 ~08:50 IST (R&D run: writers' room, W7 overbooking)
+**Delivery (getScheduledPosts, 10–15 Nov IST):** same cart (10 Nov), Netflix (11 Nov), the owner's chair flip (11 Nov 21:56), **cash rewards
+(12 Nov 05:00, 424982411)** and a new owner post, **"sell me this pen" (12 Nov 07:22 IST, 425170804, bright look, not a studio episode)** — all
+PUBLISHED on Instagram + YouTube; no provider ERROR. Nothing scheduled after it. Note: the pen post and the chair flip have `isAiGenerated=false`
+on Instagram (owner's live posts; studio episodes keep it true — BRAND §2).
+**Analytics (IGRE 22 Oct → 12 Nov, YTVP):** every Instagram row is the same as the 03:05 IST pull to the view: **Netflix still 5 views / 25 %**
+(~52 h old), chair flip 6, same cart 154, Prime 634, exporting 1,733; cash rewards and the pen post have no row. YouTube (YTVP) rows still end at
+8 Nov (dropship 63 · 18 s, Prime 62 · 26 s, exporting 431 · 50 s).
+**Insight AS (12 Nov): the Metricool Instagram import has stalled since ~10 Nov, not the posts.** Two posts frozen at single digits for 2+ days
+while older rows don't move at all is an import pattern (insight AR's lag), not a 52-hour-old reel with 5 views — Netflix's IG link is live
+(PUBLISHED). Don't judge the whiteboard BIG, the American narrator or the colour spots until rows move; if Netflix is still at 5 on the next run,
+the owner should open the reel's Insights in the app (Metricool can't be fixed from here — read-only). Media-kit numbers below include the two
+frozen rows, so they understate.
+Media kit (last 10 IG reels with rows): avg **381 views** (median 225), 3-s rate 53.5 %, avg watch 16.1 s, 5.0 sends + saves + comments per
+1,000 reach — unchanged from the 03:05 IST pull (frozen import).
+
 ## Snapshot 2026-11-12 ~03:05 IST (episode run: HOW IT WORKS EP 6, cash pays card rewards)
 Delivery (getScheduledPosts 8–12 Nov): **every post PUBLISHED on both networks, no provider ERROR** — incl. the owner's live-session
 chair-flip (11 Nov 21:56 IST, bright explainer look, not a studio episode). Instagram (IGRE, pulled 21:20 UTC 11 Nov):

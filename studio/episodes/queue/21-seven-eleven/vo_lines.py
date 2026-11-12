@@ -27,7 +27,7 @@ LINES = [
     ('c2', 'In nineteen eighty-seven, the founding family takes the company private to stop a hostile takeover.', 0.97, 0.2, 0.6, 1.45, ['family', 'hostile'], 'low'),
     ('c3', "The price is about five billion dollars, and most of it's borrowed.", 0.97, 0.3, 0.6, 1.45, ['five', 'borrowed.:dn'], 'low'),
     ('c4', 'October nineteen ninety. Bankruptcy. But a rescue deal is already lined up, with your side.', 0.95, 0.4, 0.6, 1.35, ['Bankruptcy.', 'your'], 'low'),
-    ('d1', 'March nineteen ninety-one. Your side buys about seventy percent. Cost? Four hundred and thirty million dollars.', 0.97, 0.25, 0.8, 1.45, ['seventy', 'thirty'], 'low'),
+    ('d1', 'March nineteen ninety-one. Your side buys about seventy percent. Cost? Four hundred thirty million dollars.', 0.97, 0.25, 0.8, 1.45, ['seventy', 'thirty'], 'low'),
     ('d2', 'Dallas is back in profit by ninety-three. Fourteen years after the rescue, your side buys the rest.', 0.97, 0.35, 0.6, 1.45, ['profit', 'rest.:dn'], 'low'),
     ('d3', 'Today Japan has about twenty-two thousand of its stores. America and Canada together, nearly thirteen thousand.', 0.97, 0.3, 0.6, 1.45, ['twenty-two', 'thirteen'], 'low'),
     ('t1', 'Licensing your idea abroad? Check what your partner learns, not just what it pays.', 0.97, 0.35, 0.8, 1.45, ['Check', 'learns,'], 'low'),
