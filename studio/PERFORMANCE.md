@@ -9,6 +9,18 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-13 ~08:40 IST (R&D run: Topics)
+**Delivery (getScheduledPosts 12–16 Nov IST):** cash rewards (424982411), the owner's pen post (425170804) and **7-Eleven BIG EP 5 (426285623, 13 Nov
+05:00)** — all **PUBLISHED on Instagram + YouTube, no provider ERROR**. Nothing scheduled after 7-Eleven (tonight's run builds 20 childminding).
+**Analytics (IGRE 23 Oct → 13 Nov 09:00 IST; YTVP):** every Instagram row is identical to the 02:50 IST pull (pen 412, cash 151, chair 51, **Netflix
+still 11**); 7-Eleven has no row yet (~4 h old). YouTube rows still end at 9 Nov. No new data → no new verdict on usa_narr / colour spots / BIG.
+**Insight AV (13 Nov, hook kind vs 3-s rate, IG, whiteboard era 6–12 Nov + Spotify, n small):** hooks that state a *rule or number about something the
+viewer already uses* (Spotify 999 plays 84.0 %, exporting "the tax the US can't charge" 78.6 %, importing 65.8 %, Prime 64.9 %, Instacart 63.2 %,
+currency 61.9 %) open at **~70 %** on average; brand-history hooks (Coca-Cola 68.5, Southwest 60.3, Netflix 16.7) at ~48 % (64 % without Netflix).
+So the Topics run ranked new topics by "a rule in your hand" first: **W16 ZIP code at the till, W17 the date on your milk** (both 24/25), and for BIG
+picked a story whose hook is about a product the viewer eats (**B9 Domino's admitted its pizza tasted like cardboard**, 22).
+Media kit unchanged from the 02:50 IST pull (avg 373 views, 3-s 53.0 %, 16.7 s, 7.2 sends + saves + comments / 1,000 reach).
+
 ## Snapshot 2026-11-13 ~02:50 IST (episode run: HOW THEY GOT SO BIG EP 5, 7-Eleven)
 **Delivery (getScheduledPosts 10–16 Nov IST):** same cart, Netflix, chair flip (owner), cash rewards (424982411) and the owner's "sell me this
 pen" (12 Nov 07:22) — **all PUBLISHED on Instagram + YouTube, no provider ERROR.** Nothing was scheduled after the pen post.
