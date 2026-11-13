@@ -384,6 +384,15 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
 - Voice: SPD 0.9 'Shorts pace' A/B on identical text LOST (chunk20 4.485 -> 4.464, f0 15.4 -> 15.1): keep SPD 0.88 even for short videos. The hook rewrite 'Do you know why your
   nose runs when you eat spicy food?' (verb early, food last) 4.40 -> 4.42 and b1 joined into one breath 4.42 -> 4.45.
 
+### Ep 35 (13 Nov, sixteenth ink episode): THE BOXING RING, boxer buddies, SECONDARY ACTION, the foreground commentator (`anim_props_lib35.py`, `anim_fx.py`, `engine/template/sfx_lib.py`)
+- 46 s, 8 lines / 123 words / 16 shots. A 'more X than Y' LIST idea cut to ONE item + a twist (on paper vs in your body); payoff at 50 %. Nutrient numbers: also check ABSORPTION and PER SERVING before any 'x times more' line.
+- Place: `set_ring(t, blur, dim, flash)` + `ring_front(f, t, hits)` (spotlit arena, dotted crowd + camera flashes, back ropes/posts, front ropes that wobble after each hit time in `hits`); RING_FLOOR 1300. Boxers at feet y 1590, s 1.2. Any 'X vs Y' topic = a fight.
+- Composition fix found in the test frames: an announcer standing BETWEEN two boxers gets punched through. Put Chubby in the FOREGROUND outside the ropes (ep 35 `announcer`: (170, 1930) s 1.42, mic + `bowtie()`), drawn after ring_front = depth + he never blocks the action.
+- lib35 props: `boxer(f, x, y, s, t, kind="seed"|"milk", mood, look, punch, cuff, ko, struggle, slosh, raise_)` (ink limbs + gloves around a body element), seed_el(mood, look, hulled), milkglass_el(mood, look, level, slosh), glove_el, cuff_el (handcuffs), ca_el(cuffed, free) (calcium pebble), mic_el, til_bowl_el(label), spoon_til_el, laddoo_el, belt_el, `_seed_pts` (teardrop outline for the board). lib35 sets ACC to sesame gold: your anim_props6 overrides it.
+- SECONDARY ACTION (anim_fx): `sec_bounce(t, bpm, amp)` -> (dy, squash), `sec_tap(t, period)` -> 0..1 double-tap pulse, `sec_wobble(t, hits, amp)` = damped wobble after the latest hit. ONE per shot, subordinate, off in fast beats.
+- Sound: room_tone('arena') (crowd murmur; reverb 'stadium'); boxing bell = two clang(1250) at frame 0; KO = layered_hit + crowd(cheer); cuffs = lock_click + rattle (struggle) 8-10 dB under the hit.
+- Voice: a '...' beat before the BIG NUMBER ('over... eight times') was neutral-positive (i2 4.48 -> 4.49); keep the hook question itself in one breath.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

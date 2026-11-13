@@ -1,0 +1,29 @@
+{
+ "utmos": 4.499,
+ "utmos_chunk20": 4.497,
+ "utmos_line_mean": 4.474,
+ "utmos_lines": {
+  "i1": 4.49,
+  "i2": 4.49,
+  "a1": 4.46,
+  "a2": 4.46,
+  "b1": 4.49,
+  "b2": 4.46,
+  "c1": 4.44,
+  "c2": 4.49
+ },
+ "f0_median_hz": 130.0,
+ "f0_range_st": 16.0,
+ "words": 123,
+ "duration_s": 44.3,
+ "wpm_overall": 166.7,
+ "wpm_speaking": 177.0,
+ "pause_ratio": 0.058,
+ "asr_word_error_approx": 0.032,
+ "asr_bad_lines": [
+  [
+   "c2",
+   "Send this to the friend who thinks one, till Ludoo beats a glass of milk."
+  ]
+ ]
+}

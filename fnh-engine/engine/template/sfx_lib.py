@@ -958,6 +958,7 @@ def room_tone(kind, n_):
     elif kind == "cap": x = _lp(w, 700) * 0.8 + 0.35 * np.sin(2 * np.pi * 120 * tt) * (0.8 + 0.2 * np.sin(2 * np.pi * 0.3 * tt))
     elif kind == "kit": x = _lp(w, 1800) * 0.4 + 0.2 * np.sin(2 * np.pi * 100 * tt)
     elif kind == "street": x = _bp(w, 150, 1800) * (0.7 + 0.3 * np.sin(2 * np.pi * 0.17 * tt)) + 0.25 * _bp(rng.standard_normal(n_), 600, 2400) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.6 * tt) ** 8)   # ep 34: street murmur
+    elif kind == "arena": x = _bp(w, 250, 2600) * (0.65 + 0.35 * np.sin(2 * np.pi * 0.23 * tt) ** 2) + 0.2 * _bp(rng.standard_normal(n_), 900, 3200) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.9 * tt) ** 6)   # ep 35: boxing-arena crowd murmur
     elif kind == "sea": x = _lp(w, 1200) * (0.4 + 0.6 * np.sin(np.pi * ((tt / 2.2) % 1)) ** 2)
     else:              x = _bp(w, 200, 2500) * 0.3                                    # the board: a quiet paper room
     return x / (np.abs(x).max() + 1e-9)

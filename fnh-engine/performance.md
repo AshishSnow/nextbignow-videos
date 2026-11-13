@@ -10,6 +10,8 @@ How to refresh (Metricool, brand 7643474, last 21 days):
 - Only judge posts that are >= 48 h old (numbers keep growing for 2–3 days). Overwrite each row with fresh numbers.
 - Derived: hold = IGRE28 (share of viewers past 3 s); watch% = avg watch / video length; shares and saves per 1k reach.
 
+> 13 Nov 2026 16:00 IST run: NOT REFRESHED - the Metricool connector failed to connect for the whole run (ProtocolError). Rows below are from 12 Nov. YouTube Shorts-feed share (YTTS) and the Hindi Shorts' avg view % also n/a this run (last known: Shorts feed 4 of 77 views = 5.2 %, 14 Oct-12 Nov).
+
 ## Instagram reels (snapshot 12 Nov 2026 16:00 IST for eps 29-30 + Hindi rows; older rows from 11 Nov; eps 17-28 final; ep 29 ~47 h; ep 30 ~46 h; Hindi chai ~28 h)
 | posted (IST) | reel | len s | reach | views | avg watch s | 3-s hold % | likes | shares | saves | comments | style |
 |---|---|---|---|---|---|---|---|---|---|---|---|

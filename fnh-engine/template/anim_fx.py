@@ -982,3 +982,27 @@ def kin_word(f, text, x, y, t, t0, mode="pop", size=130, col=(46, 32, 26), fnt=N
                 ph = ((t * 0.9 + i * 0.37 + j * 0.5) % 1.0); bx = lx + dx; by = y - size * 0.55 - 120 * ph
                 P = np.array([(bx + 12 * math.sin(k * 0.9 + t * 4 + j * 2) + (j - 0.5) * 22, by - k * 9) for k in range(8)], np.int32)
                 cv2.polylines(f, [P], False, C(wc) if op * (1 - ph) > 0.5 else C((210, 186, 220)), 6, cv2.LINE_AA)
+
+
+# ---------------- SECONDARY ACTION (ep 35 craft skill; Disney principle 8): a small supporting behaviour that adds personality but never competes with the
+# main action. Rules: ONE per shot, clearly subordinate (smaller / lower / slower than the main move), the main action must still read with it removed,
+# drop it in fast beats (punch, take). Examples ep 35: boxers bounce + tap gloves, the commentator's free hand gestures, ropes wobble after a hit.
+def sec_bounce(t, bpm=150.0, amp=10.0, ph=0.0):
+    """a boxer's bounce on the toes: returns (dy, squash). Main action = the stance; this is the life under it."""
+    u = (t * bpm / 60.0 + ph) % 1.0
+    h_ = abs(math.sin(math.pi * u))
+    return -amp * h_, 0.06 * (1 - h_) ** 4
+
+
+def sec_tap(t, period=1.4, ph=0.0, width=0.18):
+    """a glove tap / fidget pulse 0..1 that happens once per `period` (two quick taps)."""
+    u = ((t / period) + ph) % 1.0
+    return max(0.0, 1 - abs(u - 0.1) / (width / 2)) + max(0.0, 1 - abs(u - 0.26) / (width / 2))
+
+
+def sec_wobble(t, t_hits, amp=1.0, freq=11.0, decay=4.5):
+    """a rope / spring wobble excited by the most recent hit time in t_hits (damped sine); 0 before any hit."""
+    past = [h_ for h_ in t_hits if h_ <= t]
+    if not past: return 0.0
+    dt = t - max(past)
+    return amp * math.exp(-decay * dt) * math.sin(freq * dt * 2 * math.pi / 4)
