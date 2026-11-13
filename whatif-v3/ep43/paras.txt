@@ -1,0 +1,18 @@
+This week, the world's inbox just... stopped. Outlook, Teams, Microsoft three sixty-five. Down, for more than a day. So here's the real question. What happens next time? And why does one company's bad day break everything?
+---
+It started around noon, Eastern time, on November twelfth. At the peak, more than a hundred and thirty thousand people reported problems on Downdetector. And that's just the people who bothered to report it.
+In the UK, schools, banks, hospitals, even a network used by Parliament were hit. Emails didn't vanish, but Microsoft had to hold them in a queue for up to forty-eight hours.
+[surprised] And the cause? Not hackers. Microsoft says a bunch of its servers unexpectedly went offline, and the rest got crushed by the extra load. One part fails, and everything piled on top of it falls too.
+---
+Here's why that's scary. Most of the internet now lives inside just three companies. Amazon, Microsoft and Google run more than sixty percent of the world's cloud.
+So when one of them sneezes, millions of businesses catch a cold. Your bank, your school, your airline. They don't own the system. They rent it.
+---
+And this keeps happening. July twenty twenty-four, one bad CrowdStrike update crashed about eight and a half million Windows computers. Flights were grounded. Hospitals went back to paper.
+October twenty twenty-five, Amazon's cloud went down for about fifteen hours. Apps, games, even smart beds stopped working. [chuckle] Yes, beds.
+---
+So what's next? Here's my prediction. These outages are going to get bigger, not smaller. Because we're putting more and more of the world, now including AI, into the same few data centers.
+Governments are already worried. In Europe, banks now have to prove they can survive if a big tech supplier fails. The UK is moving the same way.
+And companies will start paying for a plan B. A backup cloud, a backup way to talk, even plain old paper.
+---
+That's why people fear a big system collapsing. You don't notice it... until the day it's gone.
+So tell me. If the cloud went down for a whole week, what's the first thing in your life that would break?
