@@ -40,7 +40,7 @@ SPD = float(os.environ.get("SPD", "0.88")); PZ = float(os.environ.get("PZ", "1.6
 SPLIT = float(os.environ.get("SPLIT", "0.12"))   # per-sentence Kokoro calls + 0.12 s gap: UTMOS 4.23 -> 4.38 (27 Oct A/B)
 # ENGINE=chatterbox -> Chatterbox-Turbo (MIT, onnx q4) conditioned on our synthetic narrator (studio/voices/*.cbcond.npz);
 # it takes its pace and melody from the reference, so SPD/SPLIT don't apply (line pauses still do). See studio/VOICE.md.
-ENGINE = os.environ.get("ENGINE", "chatterbox"); CBV = os.environ.get("CBV", "usa_narr")   # usa_narr default since 12 Nov 2026 (owner: American accent); narrator_brisk default 6 Nov 2026 (Spotify + reselling A/B, VOICE.md); ENGINE=kokoro for the old voice
+ENGINE = os.environ.get("ENGINE", "chatterbox"); CBV = os.environ.get("CBV", "narrator_brisk")   # default since 6 Nov 2026 (Spotify + reselling A/B, VOICE.md); ENGINE=kokoro for the old voice
 _key = hashlib.md5(repr([L[:4] for L in LINES] + [EW, SPD, PZ, PMIN, VMIX, sorted(VOICES.items())] + ([SPLIT] if SPLIT > 0 else []) + ([ENGINE, CBV, sorted(CBVOICES.items())] if ENGINE != "kokoro" else [])).encode()).hexdigest()   # pauses are baked into the cache too
 _cache = f"{B}/work/flat_{_key}.npz"
 pieces, lines = [np.zeros(int(LEAD * SR), np.float32)], {}
@@ -123,6 +123,8 @@ def align(raw, lines):
 
 
 # ---- expressive prosody: wider pitch range, per-line register, stressed words, question rise / low settle ----
+if 'cb' in globals():   # free the TTS model before the heavy post chain (2+ min scripts got OOM-killed, 13 Nov)
+    del cb; import gc; gc.collect()
 if os.path.exists(_cache): words0 = list(_z["words0"])
 else:
     words0 = align(flat, lines); np.savez(_cache, flat=flat, lines=np.array(lines, dtype=object), words0=np.array(words0, dtype=object))

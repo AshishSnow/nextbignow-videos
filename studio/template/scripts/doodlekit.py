@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -500,6 +500,85 @@ def glasses_eye(c, x, y, s=1.0, seed=221, t=0.0):
 
 
 def shovel_hole(c, x, y, k=1.0, seed=231): pass
+
+
+def _mattress(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=(120, 190, 255), **kw):
+    """inflatable air mattress standing up like a character: puffy quilted rectangle with a valve."""
+    leg = 70 * s; cb = y - leg; ct = cb - 330 * s; w = 140 * s; puff = 1 + 0.02 * math.sin(t * 3)
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 50)
+    body = wrrect(x - w * puff, ct, x + w * puff, cb, 60 * s, seed, 2.4); ink(c, body, col, 9 * s)
+    c.save(); c.clipPath(body, doAntiAlias=True)
+    for j in range(1, 4): wline(c, quad_pts(x - w, ct + j * 82 * s, x + w, ct + j * 82 * s, 10 * s, 8), seed + j, 5 * s, shade(col, 0.7))
+    c.drawRect(skia.Rect.MakeLTRB(x - w * 1.1, ct, x - w * 0.55, cb), P(WHITE, 0.18)); c.restore(); ink(c, body, None, 9 * s)
+    ink(c, wellipse(x + w * 0.62, ct + 30 * s, 12 * s, 12 * s, seed + 3, 1), WHITE, 5 * s)
+    _arms(c, x - w + 6 * s, x + w - 6 * s, ct + 190 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 120 * s, s, look, blink, 42, 27, mood, seed + 9)
+    mouth(c, x, ct + 176 * s, s * 0.8, talk, mood, seed + 5)
+
+
+def cockroach(c, x, y, s=1.0, t=0.0, seed=241):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    for j in range(3):
+        for sx in (-1, 1):
+            a = math.sin(t * 20 + j + sx) * 8; wline(c, [(sx * 30, -20 + j * 30), (sx * 80, -40 + j * 40 + a), (sx * 100, -10 + j * 40 + a)], seed + j, 6)
+    ink(c, wellipse(0, 20, 50, 80, seed, 1.5), BROWN, 8); ink(c, wellipse(0, -70, 34, 28, seed + 1, 1), shade(BROWN, 0.8), 7)
+    wline(c, [(-14, -94), (-60, -170)], seed + 2, 5); wline(c, [(14, -94), (60, -170)], seed + 3, 5)
+    eyes(c, 0, -76, 0.55, (0, -0.3), False, 40, 26, "happy", seed + 4); c.restore()
+
+
+def camera(c, x, y, s=1.0, seed=251, flash=0.0):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-170, -100, 170, 120, 26, seed, 2), (60, 62, 70), 9); ink(c, wrrect(-80, -150, 40, -96, 10, seed + 1, 1.2), (60, 62, 70), 8)
+    ink(c, wellipse(0, 10, 80, 80, seed + 2, 1.5), GREY, 9); ink(c, wellipse(0, 10, 48, 48, seed + 3, 1.2), INK, 6)
+    c.drawCircle(-16, -8, 12, P(WHITE, 0.9)); ink(c, wrrect(100, -80, 150, -50, 6, seed + 4, 1), YEL, 5)
+    if flash > 0:
+        for j in range(8):
+            a = j / 8 * math.tau; wline(c, [(125 + math.cos(a) * 50, -65 + math.sin(a) * 50), (125 + math.cos(a) * 110, -65 + math.sin(a) * 110)], seed + j, 8, YEL, 1, flash)
+    c.restore()
+
+
+def photo(c, x, y, w, h, good=True, rot=0.0, seed=261, k=1.0):
+    """listing photo: good = bright room with bed + window; bad = dark, blurry, crooked."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(k, k)
+    ink(c, wrrect(-w / 2 - 16, -h / 2 - 16, w / 2 + 16, h / 2 + 40, 6, seed, 1.6), WHITE, 7)
+    inner = skia.Path(); inner.addRect(skia.Rect.MakeLTRB(-w / 2, -h / 2, w / 2, h / 2))
+    c.save(); c.clipPath(inner, doAntiAlias=True)
+    c.drawRect(skia.Rect.MakeLTRB(-w / 2, -h / 2, w / 2, h / 2), P((255, 236, 200) if good else (70, 66, 64)))
+    c.drawRect(skia.Rect.MakeLTRB(-w / 2, h * 0.15, w / 2, h / 2), P((230, 170, 110) if good else (52, 48, 46)))
+    ink(c, wrrect(w * 0.08, -h * 0.38, w * 0.4, -h * 0.02, 6, seed + 1, 1), SKY if good else (90, 96, 104), 5)
+    ink(c, wrrect(-w * 0.42, -h * 0.02, w * 0.02, h * 0.3, 10, seed + 2, 1), (255, 255, 255) if good else (120, 116, 110), 5)
+    ink(c, wrrect(-w * 0.42, -h * 0.12, -w * 0.28, h * 0.02, 6, seed + 3, 1), PNK if good else (100, 90, 90), 4)
+    if good:
+        for j in range(4): wline(c, [(w * 0.24, -h * 0.5), (w * (-0.1 + j * 0.15), h * 0.5)], seed + j, 5, YEL, 1, 0.35)
+    c.restore()
+    if not good:
+        c.drawRect(skia.Rect.MakeLTRB(-w / 2, -h / 2, w / 2, h / 2), P((20, 20, 20), 0.25))
+    c.restore()
+
+
+def binder(c, x, y, s=1.0, seed=271, n=6, k=1.0):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-230, -170, 230, 170, 16, seed, 2), (40, 70, 160), 9); wline(c, [(0, -170), (0, 170)], seed + 1, 8)
+    for r in range(3): ink(c, wellipse(0, -110 + r * 110, 12, 12, seed + r, 1), GREY, 5)
+    for i in range(min(n, int(n * k + 0.999))):
+        q, r = divmod(i, 3); cx = -115 + q * 230; cy = -105 + r * 105
+        ink(c, wrrect(cx - 90, cy - 44, cx + 90, cy + 44, 10, seed + i, 1.2), (YEL, GRN, PNK, ORG, SKY, PUR)[i % 6], 6)
+        c.drawRect(skia.Rect.MakeLTRB(cx - 90, cy - 26, cx + 90, cy - 10), P(INK, 0.8))
+        f = font(BLK_F, 22); c.drawString("MAXED", cx - f.measureText("MAXED") / 2, cy + 30, f, P(RED))
+    c.restore()
+
+
+def laptop(c, x, y, s=1.0, seed=281, title_="AirBed & Breakfast", k=1.0):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-260, -320, 260, 0, 18, seed, 2), (70, 72, 80), 9); ink(c, wrrect(-230, -295, 230, -25, 8, seed + 1, 1.2), WHITE, 0)
+    ink(c, wpoly([(-310, 0), (310, 0), (350, 50), (-350, 50)], seed + 2, 1.6, True, 60), GREY, 9)
+    if k > 0:
+        f = font(BLK_F, 34); c.drawString(title_, -f.measureText(title_) / 2, -240, f, P(RED, k))
+        for j in range(3):
+            bx = -200 + j * 140; ink(c, wrrect(bx, -200, bx + 120, -110, 8, seed + j, 1), SKY, 5)
+            f2 = font(BLK_F, 28); c.drawString("$80", bx + 30, -70, f2, P(INK, k))
+    c.restore()
 
 
 # ------------------------------------------------------------------ props
