@@ -69,6 +69,10 @@ No film grain, no bloom haze, no warm cast: whites stay white. `stage()` = clean
 band** (`say()` → y≈560, never on faces; `keep=True` only for a deliberate exception). One idea per frame, lots of empty space, the cast
 and the one prop in the lower half. New sets: add a palette + silhouette row to `CLEAN_SETS` instead of drawing a detailed room.
 
+- **Line boil (14 Nov 2026, childminding; from the owner's 13 Nov doodle look, which opened at 78 % past 3 s):** call `set_boil(1 + (n // 3) % 3)`
+  at the top of `rs()` (board.py) — every `wob()` marker line is re-inked in 3 slightly different variants cycling 8× a second, so a held drawing
+  breathes like hand-drawn animation instead of sitting frozen; `BOIL=0` in the environment turns it off for lab frames. Text and fills don't boil.
+
 ### 2c. Notebook look (owner, 7 Nov 2026: "make like this which looks real and realistic, paper texture, pencil animation")
 REJECTED by the owner 7 Nov 08:50 IST ("not looking authentic") — OFF; whiteboard stays until a new style is approved. Kit: `nbnkit/paper.py`, applied automatically by `anim.py` on top of a whiteboard-kit episode (`nbnkit/board.py`).
 Page = ruled notebook stock filmed on a phone (warm off-white, fibres, tooth, dotted rules, printed OOPSMYBUSINESS header with the series

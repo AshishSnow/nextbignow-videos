@@ -9,6 +9,29 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-14 ~03:00 IST (episode run: HOW TO START EP 9, childminding)
+**Delivery (getScheduledPosts 9–20 Nov IST):** dropship, Michelin (owner), Instacart, Netflix, chair flip (owner), cash rewards, pen (owner),
+7-Eleven (426285623) and the owner's **Black Friday "$5 for nothing" doodle (427192354, 13 Nov 22:20)** — **all PUBLISHED on Instagram + YouTube,
+no provider ERROR.** Nothing was scheduled after 22:20 IST 13 Nov.
+**Instagram (IGRE, 23 Oct → 14 Nov 02:40 IST):**
+| Post (IST) | Views | Reach | Avg watch s | 3-s % | Shares | Saves | Likes |
+|---|---|---|---|---|---|---|---|
+| 13 Nov 22:20 Black Friday "nothing" (owner, **DOODLE look**, ~4 h old) | 222 | 171 | **32.6** | **78.2** | 0 | 0 | 8 |
+| 13 Nov 05:00 7-Eleven BIG (board) | 142 | 128 | 12.0 | 39.5 | 1 | 0 | 0 |
+| 12 Nov 07:22 sell me this pen (owner) | 431 | 366 | 28.1 | 57.7 | 1 | 8 | 9 |
+| 12 Nov 05:00 cash rewards HIW (board) | 153 | 136 | 16.3 | 52.9 | 0 | 0 | 4 |
+| 11 Nov 05:00 Netflix BIG (board) | 12 | 7 | 16.7 | 28.6 | 0 | 0 | 0 |
+YouTube (YTVP) rows still end at 9 Nov (Instacart 48 · 25 s, Michelin 156 · 22 s, dropship 88 · 17 s) — no new YouTube verdict.
+**Insight AW (14 Nov): the owner's doodle opened at 78.2 % past 3 s with 32.6 s average watch in its first ~4 h** — the best 3-s rate since
+exporting (78.6 %) and the best watch time since Spotify, while the whiteboard BIG (7-Eleven) opened at 39.5 % / 12.0 s. Both the look (bright flat
+fills, objects with faces, line boil) and the hook ("Would you pay $5 for absolutely nothing?" — a yes/no about the viewer's own wallet) changed at
+once, so one post can't split them; insight AV already says rule-in-your-hand hooks open ~70 % on the whiteboard. **Whiteboard BIGs are now the
+weakest kind three posts running** (Netflix 28.6 %, 7-Eleven 39.5 %). Owner: the standing brief still says whiteboard is mandatory — if the doodle
+look should become the default, say so and the episode task will switch. This run kept the whiteboard and borrowed the doodle's **line boil**
+(every marker line re-inked in 3 variants, 8×/s) as a bridge; judge childminding's 3-s rate against importing/exporting (HOW TO, 65.8–78.6 %).
+Media kit (last 10 IG reels, 6–13 Nov): avg **211 views** (median 154), 3-s rate 51.1 %, avg watch 16.9 s, **9.7 sends + saves + comments per
+1,000 reach** (pen's 8 saves); YouTube last 10 Shorts with rows (to 9 Nov) avg 180 views (median 150).
+
 ## Snapshot 2026-11-13 ~08:40 IST (R&D run: Topics)
 **Delivery (getScheduledPosts 12–16 Nov IST):** cash rewards (424982411), the owner's pen post (425170804) and **7-Eleven BIG EP 5 (426285623, 13 Nov
 05:00)** — all **PUBLISHED on Instagram + YouTube, no provider ERROR**. Nothing scheduled after 7-Eleven (tonight's run builds 20 childminding).

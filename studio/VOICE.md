@@ -135,6 +135,12 @@ flat take; a line that lost > 0.15 is re-rendered at 0.6 (then 0.3) strength. UT
 Not adopted: a global pitch clip −7/+8 st (range fell to 15.0 st for the same gain); puck .1 blend as default (per-line mean equal
 ±0.005 on 3 scripts, worst line better on gas, worse on airline). Line-level noise: ±0.06 between identical runs. Cost +~40 s per VO.
 
+## Per-line tempo — 14 Nov 2026 (childminding, `tools/tempo.py --target`)
+usa_narr read this script at 149 wpm raw (163.5 speaking); trim_gaps → 159.2. Uniform atempo ×1.07 (7-Eleven method) → 170.6 wpm overall but
+it also speeds lines that are already fast (hook i1 216 → 231 wpm, 11 lines > 200). Per-line target 178 (clamp 1.00–1.10, cut mid-gap) →
+**166.7 wpm overall, 183.6 speaking, per-line UTMOS 4.443 (min 4.30) vs 4.439 (4.31) uniform, max line 216 wpm, 7 lines > 200, sd 22.3 vs 30.1.**
+F0 134.2 Hz, 17.1 st, low_fall −5.4; ASR flags only spelling (b2 "£103", e3 "startup"). Default from now: `--target 178`.
+
 ## Rules learned
 1. Never shift the whole voice up; use the blend for brightness (Kokoro lab, 26 Oct).
 2. Slower + longer pauses helps; per-sentence generation helps Kokoro (SPLIT 0.12).

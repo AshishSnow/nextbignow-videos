@@ -23,3 +23,14 @@ entitlement) https://www.coram.org.uk/wp-content/uploads/2026/03/Childcare-Surve
 24,700 childminders at 31 Mar 2026 (−630 in a year; official statistics 9 Jul 2026) ✓ vs 46,044 on the Early Years Register at 31 Aug 2015 ⚠ not
 like-for-like — "roughly halved" only, if used; since 1 Nov 2024 childminders may work entirely from non-domestic premises and up to 4 can work together.
 Topic overlap check: not in topics.md, not in the queue, not in the last 90 days of posts (Metricool pull 9 Nov).
+
+## Build re-verification (episode run, 13 Nov 2026 21:10 UTC — subagent on primary pages)
+All numbers unchanged: GOV.UK become-a-childminder (under 8 / more than 2 h a day / paid incl. in kind); exemptions page (updated 22 Oct 2026:
+babysitter 6pm–2am at the child's home, reciprocal swaps, a friend's kids "less than 3 hours a day"); fees (£35 / £103, metadata 27 Oct 2026);
+DBS news 9 Sep 2026 (enhanced £41 from 5 Oct 2026, was £49.50); EYFS childminders PDF (Sep 2026) paras 3.42, Annex A para 6 (12 h PFA), 3.50–3.53,
+3.89 (insurance); GP health declaration from GOV.UK (not the EYFS); start-up grant ran 30 Nov 2023 – 31 Mar 2025 (withdrawn 8 Oct 2025);
+childcare.gov "vary across the U.S.". **Fixes applied:** e2 re-worded to Childcare Act 2006 s.33(4)/(7)/(8) order — the offence (level 5 fine) arises
+when you keep childminding unregistered while an enforcement notice is in effect ("Ofsted can send you a notice to stop. Keep going after that,
+and it's a criminal offence. With a fine."); row 6 chip "OVER 2 H" (exactly 2 hours doesn't count). Watch item: a DfE consultation (closed
+14 Sep 2026) floated funding Early Years Register fees differently — nothing decided. The live register-childminder page didn't open (TNA snapshot
+14 Aug 2026 used for the 12-week line, which is only in the shots plan, not in the VO).

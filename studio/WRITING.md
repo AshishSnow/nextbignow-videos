@@ -85,6 +85,8 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 
 40. **A pronoun after a seat line points at the seat.** After "You want those American stores… Three moves take you…", "Where did *they* start?" reads as the Tokyo side, not the stores. Name the thing again ("Where did the stores start?"). (13 Nov, 7-Eleven build read-aloud.)
 
+41. **Say a penalty in the law's own order.** "You can be fined. Ignore a notice and it's an offence" sounds like two penalties; the Childcare Act makes it one chain (a notice first, then the offence, then the fine). Read the section, then say the chain: "Ofsted can send you a notice to stop. Keep going after that, and it's a criminal offence. With a fine." (14 Nov, childminding build fact-check.)
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
 - (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)
 - (9 Nov, Netflix) "Members are furious." → "Members start cancelling." (say what the record shows, and it sets up the count)

@@ -4,6 +4,7 @@
 # Childcare Act 2006 s.33, EYFS childminder framework Sep 2026, DBS fee news 9 Sep 2026, start-up grant page (closed), Coram Childcare Survey 2026,
 # childcare.gov). Education only, not legal advice; no income promises.
 SERIES = "HOW TO START"; PART = 0; EP = 9
+# Build edits 14 Nov (episode run): e2 re-worded to the Childcare Act s.33 order (notice first, then the offence + fine), per the build fact-check.
 LINES = [
     ("i1", "Do you know minding other people's kids for pay has a two-hour line?", 0.96, 0.6, +1.0, 1.45, ['two-hour', 'line?'], None),
     ("i2", "Cross it, and you need to register first. Then come the checks.", 0.96, 0.3, +0.8, 1.45, ['register', 'checks.:dn'], 'low'),
@@ -26,7 +27,7 @@ LINES = [
     ("d2", "Under-eights? Six at most. Only three can be reception age or younger. And just one baby.", 0.96, 0.25, +0.6, 1.45, ['Six', 'three', 'one'], 'low'),
     ("d3", "Your own kids count too, if they're under eight.", 0.95, 0.35, +0.6, 1.45, ['own', 'eight.:dn'], 'low'),
     ("e1", "The mistake to avoid? Starting first and registering later.", 0.96, 0.25, +0.8, 1.45, ['first', 'later.:dn'], 'low'),
-    ("e2", "You can be fined. Ignore an Ofsted notice to stop, and it's a criminal offence.", 0.96, 0.25, +0.6, 1.45, ['fined.', 'criminal'], 'low'),
+    ("e2", "Ofsted can send you a notice to stop. Keep going after that, and it's a criminal offence. With a fine.", 0.96, 0.25, +0.6, 1.45, ['notice', 'criminal'], 'low'),
     ("e3", "That six hundred pound start-up grant in older videos? It closed in March twenty twenty-five.", 0.96, 0.35, +0.6, 1.45, ['six', 'closed'], 'low'),
     ("f2", "Watching from America? Each state sets its own rules. Look yours up.", 0.96, 0.35, +0.6, 1.45, ['state', 'yours'], 'low'),
     ("t1", "So before you say yes, add up the hours. Two a day is the line.", 0.96, 0.35, +0.8, 1.45, ['hours.', 'Two'], 'low'),

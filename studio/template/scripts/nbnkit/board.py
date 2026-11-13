@@ -17,8 +17,18 @@ SL_COLS = [BLU, GR, PU, RD, OR]; SL_VALS = [10, 10, 15, 35, 30]; SL_NAMES = ["NE
 def _rng(seed): return np.random.default_rng(abs(int(seed * 9973)) % (2 ** 31))
 
 
+_BOIL = [0, 0.45]   # 14 Nov 2026 (childminding): LINE BOIL — state 0 = off; 1..n = which re-drawn variant of every marker line is shown
+
+
+def set_boil(state, strength=0.45):
+    """line boil (borrowed from the owner's 13 Nov doodle look, which opened at 78 % past 3 s): call once per frame from rs() with a state that
+    changes every few frames (e.g. 1 + (n // 3) % 3); every wob() line then gets a small extra wobble that differs per state, so a held drawing
+    looks re-inked by hand instead of frozen. state 0 turns it off (lab frames, contact sheets)."""
+    _BOIL[0] = int(state); _BOIL[1] = strength
+
+
 def wob(pts, seed=1, amp=2.2, step=26):
-    """resample a polyline and add a small hand wobble (deterministic)"""
+    """resample a polyline and add a small hand wobble (deterministic; plus the line boil when set_boil() is on)"""
     out = []; r = _rng(seed)
     for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
         d = math.hypot(x1 - x0, y1 - y0); n = max(1, int(d / step))
@@ -26,6 +36,9 @@ def wob(pts, seed=1, amp=2.2, step=26):
             k = i / n; out.append((x0 + (x1 - x0) * k, y0 + (y1 - y0) * k))
     out.append(pts[-1])
     noise = r.normal(0, amp, (len(out), 2)); noise = np.cumsum(noise, 0) * 0.35; noise -= np.linspace(noise[0], noise[-1], len(out))
+    if _BOIL[0] and len(out) > 2:
+        rb = _rng(seed * 31.7 + _BOIL[0] * 7.13); nb = np.cumsum(rb.normal(0, max(amp, 0.6), (len(out), 2)), 0) * 0.35 * _BOIL[1]
+        nb -= np.linspace(nb[0], nb[-1], len(out)); noise = noise + nb
     return [(x + nx, y + ny) for (x, y), (nx, ny) in zip(out, noise)]
 
 
@@ -1885,3 +1898,127 @@ def pan_trans(f, prev, p, direction):
     if 0.05 < p < 0.95:
         k = 9; out[430:] = sum(np.roll(out[430:], i * direction * -6, axis=1) for i in range(k)) / k
     return out
+
+
+# ---------------------------------------------------------------- 14 Nov 2026 (HOW TO START EP 9, childminding): held house with a gable clock +
+# rewritable door tag, small stick kids, baby basket, insurance shield, GP health form, plain notice letter, moon, price tag, hour blocks.
+TEALK = (40, 170, 170); YELK = (240, 196, 40)
+def home_m(c, x, y, s, t, t0, tag="?", new=None, t_sw=1e9, fill_t=-9.0, hours=2.0, col=GR, tag_col=RD, line_t=None):
+    """the held house: house_m + a wall clock in the gable (red wedge from 3 pm) + a door tag that is rubbed out and rewritten"""
+    house_m(c, x, y, s, t, t0, col)
+    clock_m(c, x, y - 128 * s, t, t0 + 0.25, r=30 * s, h0=15.0, hours=hours, fill_t=fill_t, col=RD)
+    if line_t is not None and t > line_t:   # the LINE: a thick red stroke out of the clock at the wedge's edge
+        a_ = math.radians((15 % 12) * 30 + hours * 30)
+        cx, cy = x, y - 128 * s
+        ink(c, [[(cx + 0.2 * 30 * s * math.sin(a_), cy - 0.2 * 30 * s * math.cos(a_)), (cx + 1.6 * 30 * s * math.sin(a_), cy - 1.6 * 30 * s * math.cos(a_))]],
+            pr(t, line_t, 0.3), RD, 12, pen_=False)
+    if tag is not None or new is not None:
+        ownertag(c, x, y - 112 * s + 40 + 60 * s, t, t0 + 0.4, tag or "", new, t_sw, tag_col, None)
+
+
+def kid_m(c, x, y, s, t, look=(0, 0), girl_=False, col=TEALK, hat=None, scarf=False, pose="stand", a=1.0):
+    """a small stick child (scale ~0.4-0.6 of an adult); optional little cap, or the hero's orange scarf (= yours)"""
+    if s <= 0: return
+    if girl_: girl(c, x, y, s, POSES[pose], Face("open", "smile", look=look), t, dress=col, scarf=ORANGE if scarf else None, a=a)
+    else: hero(c, x, y, s, POSES[pose], Face("open", "smile", look=look), t, scarf=ORANGE if scarf else col, a=a)
+    hy = y - 330 * s   # roughly the top of the head
+    if hat: c.drawPath(_path([(x - 40 * s, hy + 6 * s), (x, hy - 50 * s), (x + 40 * s, hy + 6 * s), (x - 40 * s, hy + 6 * s)]), paint(hat, a))
+
+
+def baby_m(c, x, y, s, t, t0):
+    """a baby in a tiny basket (no realistic child): half-oval basket, round head, bonnet arc"""
+    k = pr(t, t0, 0.4)
+    if k <= 0: return
+    ink(c, [wob(circ_pts(x, y, 90 * s, 0, 180, 24, ry=50 * s), 611, 0.5), [(x - 90 * s, y), (x + 90 * s, y)]], k, MK, 6)
+    if k >= 1:
+        hatch(c, _path(circ_pts(x, y, 88 * s, 0, 180, 20, ry=48 * s)), 1, YELK, gap=14, w=5, bbox=(x - 90 * s, y, x + 90 * s, y + 52 * s), a=0.5)
+        c.drawCircle(x - 20 * s, y - 24 * s, 34 * s, paint(WHITE)); c.drawCircle(x - 20 * s, y - 24 * s, 34 * s, stroke(MK, 5))
+        c.drawArc(R.MakeXYWH(x - 64 * s, y - 70 * s, 88 * s, 84 * s), 160, 200, False, stroke(PINK, 8))
+        c.drawCircle(x - 30 * s, y - 28 * s, 4, paint(MK)); c.drawCircle(x - 10 * s, y - 28 * s, 4, paint(MK))
+
+
+def shield_m(c, x, y, t, t0, s=1.0, col=BLU, label=None):
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    pts = _sc(x, y, s, [(-80, -100), (0, -130), (80, -100), (80, 0), (0, 110), (-80, 0), (-80, -100)])
+    if k > 0.6: hatch(c, _path(pts), pr(k, 0.6, 0.4), col, gap=16, w=6, bbox=(x - 90 * s, y - 140 * s, x + 90 * s, y + 120 * s), a=0.45)
+    ink(c, [wob(pts, 621, 0.6), [(x - 36 * s, y - 10 * s), (x - 6 * s, y + 24 * s), (x + 44 * s, y - 40 * s)]], k, MK, 7)
+    if label: mtext(c, label, x, y + 190 * s, int(44 * s), col, pr(t, t0 + 0.4, 0.3), "pm")
+
+
+def healthform_m(c, x, y, t, t0, s=1.0, sign_t=None, label="HEALTH FORM"):
+    w, h = 230 * s, 290 * s; k = pr(t, t0, 0.4)
+    if k <= 0: return
+    c.drawRect(R.MakeXYWH(x - w / 2, y - h / 2, w, h), paint(WHITE, k))
+    ink(c, [wob([(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)], 631, 0.6)], k, MK, 6, pen_=False)
+    ink(c, [[(x, y - h / 2 + 30 * s), (x, y - h / 2 + 84 * s)], [(x - 27 * s, y - h / 2 + 57 * s), (x + 27 * s, y - h / 2 + 57 * s)]], k, GR, 10, pen_=False)
+    for i in range(3): ink(c, [[(x - w / 2 + 26 * s, y - 20 * s + i * 40 * s), (x + w / 2 - 26 * s, y - 20 * s + i * 40 * s)]], k, LIGHT, 5, pen_=False)
+    if sign_t is not None and t > sign_t:
+        sig = [(x - 70 * s + 140 * s * i / 14, y + h / 2 - 50 * s + 14 * s * math.sin(i * 1.9)) for i in range(15)]
+        ink(c, [sig], pr(t, sign_t, 0.5), BLU, 5, pen_=False)
+    if label: mtext(c, label, x, y + h / 2 + 64 * s, int(40 * s), MK, pr(t, t0 + 0.4, 0.3), "pm")
+
+
+def notice_m(c, x, y, t, t0, s=1.0, head="NOTICE", body="STOP", col=RD):
+    w, h = 460 * s, 300 * s; k = pr(t, t0, 0.45)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(-3)
+    c.drawRect(R.MakeXYWH(-w / 2, -h / 2, w, h), paint(WHITE, k))
+    ink(c, [wob([(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2)], 641, 0.6)], k, MK, 6, pen_=False)
+    mtext(c, head, 0, -h / 2 + 70 * s, int(46 * s), MK, pr(t, t0 + 0.3, 0.3), "pm")
+    mtext(c, body, 0, 70 * s, int(110 * s), col, pr(t, t0 + 0.5, 0.35), "pm")
+    c.restore()
+
+
+def moon_m(c, x, y, r, k):
+    if k <= 0: return
+    p = skia.Path(); p.addCircle(x, y, r); q = skia.Path(); q.addCircle(x + r * 0.45, y - r * 0.2, r * 0.85)
+    m = skia.Op(p, q, skia.PathOp.kDifference_PathOp)
+    c.drawPath(m, paint(YELK, 0.6 * k)); c.drawPath(m, stroke(MK, 5, k))
+
+
+def pricetag_m(c, x, y, text, k, col=MK, tilt=-6, size=60, strike_t=None, t=0.0):
+    if k <= 0: return
+    f = font("pm", size); w = tw(f, text) + 80; h = size * 1.5
+    c.save(); c.translate(x, y); c.rotate(tilt); s_ = eback(min(1, k), 1.7); c.scale(s_, s_)
+    p = _path([(-w / 2, -h / 2), (w / 2 - 30, -h / 2), (w / 2, 0), (w / 2 - 30, h / 2), (-w / 2, h / 2), (-w / 2, -h / 2)])
+    c.drawPath(p, paint(WHITE)); c.drawPath(p, stroke(MK, 6)); c.drawCircle(w / 2 - 34, 0, 8, stroke(MK, 4))
+    c.drawString(text, -w / 2 + 28, size * 0.36, f, paint(col))
+    if strike_t is not None and t > strike_t:
+        ink(c, [[(-w / 2 + 14, 8), (w / 2 - 50, -10)]], pr(t, strike_t, 0.25), RD, 9, pen_=False)
+    c.restore()
+
+
+def hourbar_m(c, x, y, t, t0, n, fill_t=None, step=0.4, cell=150, line_at=None, line_t=None, cols=(GR, GR, RD)):
+    """a row of hour blocks (3 pm → 3 pm + n); blocks fill one by one; a red LINE is drawn after block `line_at`"""
+    x0 = x - cell * n / 2; k = pr(t, t0, 0.5)
+    grid = [[(x0, y), (x0 + cell * n, y), (x0 + cell * n, y + 110), (x0, y + 110), (x0, y)]] + [[(x0 + cell * i, y), (x0 + cell * i, y + 110)] for i in range(1, n)]
+    ink(c, [wob(g, 650 + i, 0.4) for i, g in enumerate(grid)], k, MK, 5, pen_=False)
+    for i in range(n + 1): mtext(c, f"{3 + i}PM", x0 + cell * i, y + 160, 34, LIGHT, k, "kb")
+    if fill_t is not None and k >= 1:
+        for i in range(n):
+            ki = pr(t, fill_t + i * step, 0.3)
+            if ki > 0: c.drawRect(R.MakeXYWH(x0 + cell * i + 8, y + 8, (cell - 16) * ki, 94), paint(cols[min(i, len(cols) - 1)], 0.5))
+    if line_at is not None and line_t is not None and t > line_t:
+        lx = x0 + cell * line_at
+        ink(c, [[(lx, y - 70), (lx, y + 180)]], pr(t, line_t, 0.3), RD, 14, pen_=False)
+
+
+def two_houses(c, x, y, t, t0, s=0.7):
+    house_m(c, x - 110, y, s, t, t0, BLU); house_m(c, x + 110, y, s, t, t0 + 0.15, OR)
+    if t > t0 + 0.5:
+        arrow_m(c, (x - 50, y - 210), (x + 50, y - 210), pr(t, t0 + 0.5, 0.3), MK, 7)
+        arrow_m(c, (x + 50, y - 170), (x - 50, y - 170), pr(t, t0 + 0.7, 0.3), MK, 7)
+
+
+def tick(c, x, y, k, col=GR, s=1.0):
+    if k <= 0: return
+    ink(c, [[(x - 30 * s, y), (x - 8 * s, y + 24 * s), (x + 36 * s, y - 34 * s)]], k, col, 12, pen_=False)
+
+
+def box3(c, x, y, t, t0, label, tick_t=None, w=280, h=300):
+    k = pr(t, t0, 0.4)
+    if k <= 0: return
+    ink(c, [wob([(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)], int(x) % 97, 0.6)], k, MK, 6, pen_=False)
+    mtext(c, label, x, y + h / 2 + 62, 42, MK, pr(t, t0 + 0.2, 0.3), "pm")
+    if tick_t is not None and t > tick_t: tick(c, x + w / 2 - 20, y - h / 2 + 10, pr(t, tick_t, 0.3), GR, 1.3)
