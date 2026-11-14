@@ -1,0 +1,50 @@
+{
+ "H1_strait": {
+  "title": "File:Strait of Hormuz (MODIS 2020-12-04).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Strait_of_Hormuz_%28MODIS_2020-12-04%29.jpg/1920px-Strait_of_Hormuz_%28MODIS_2020-12-04%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Strait_of_Hormuz_(MODIS_2020-12-04).jpg",
+  "author": "MODIS Land Rapid Response Team, NASA GSFC",
+  "license": "Public domain",
+  "file": "whatif/hormuz/img/H1_strait.jpg"
+ },
+ "H3_spr": {
+  "title": "File:United States Strategic Petroleum Reserve 102.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/United_States_Strategic_Petroleum_Reserve_102.jpg/1920px-United_States_Strategic_Petroleum_Reserve_102.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:United_States_Strategic_Petroleum_Reserve_102.jpg",
+  "author": "ENERGY.GOV",
+  "license": "Public domain",
+  "file": "whatif/hormuz/img/H3_spr.jpg"
+ },
+ "H4_gas2026": {
+  "title": "File:Gas Prices on Easter Sunday (2026).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Gas_Prices_on_Easter_Sunday_%282026%29.jpg/1920px-Gas_Prices_on_Easter_Sunday_%282026%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Gas_Prices_on_Easter_Sunday_(2026).jpg",
+  "author": "Rick Obst",
+  "license": "CC BY 4.0",
+  "file": "whatif/hormuz/img/H4_gas2026.jpg"
+ },
+ "H5_outofgas": {
+  "title": "File:Gas station attendants peer over their \"out of gas\" sign in Portland - NARA - 555434.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Gas_station_attendants_peer_over_their_%22out_of_gas%22_sign_in_Portland_-_NARA_-_555434.jpg/1920px-Gas_station_attendants_peer_over_their_%22out_of_gas%22_sign_in_Portland_-_NARA_-_555434.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Gas_station_attendants_peer_over_their_%22out_of_gas%22_sign_in_Portland_-_NARA_-_555434.jpg",
+  "author": "David Falconer",
+  "license": "Public domain",
+  "file": "whatif/hormuz/img/H5_outofgas.jpg"
+ },
+ "H6_shortage": {
+  "title": "File:GASOLINE SHORTAGE - NARA - 548053.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/GASOLINE_SHORTAGE_-_NARA_-_548053.jpg/1920px-GASOLINE_SHORTAGE_-_NARA_-_548053.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:GASOLINE_SHORTAGE_-_NARA_-_548053.jpg",
+  "author": "David Falconer",
+  "license": "Public domain",
+  "file": "whatif/hormuz/img/H6_shortage.jpg"
+ },
+ "H2_tanker": {
+  "title": "File:Solomon Sea (oil tanker), in the Solent, England.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Solomon_Sea_%28oil_tanker%29%2C_in_the_Solent%2C_England.jpg/1920px-Solomon_Sea_%28oil_tanker%29%2C_in_the_Solent%2C_England.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Solomon_Sea_(oil_tanker),_in_the_Solent,_England.jpg",
+  "author": "ITookSomePhotos",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/hormuz/img/H2_tanker.jpg"
+ }
+}
