@@ -82,3 +82,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 - 2026-11-14 POSTED doodle case study: Spanx — scissors, $5,000, ladies'-room demo (examples/spanx-scissors-doodle)
 - 2026-11-14 POSTED doodle: protein boom + RXBAR case study + 4 steps to start (examples/protein-boom-doodle)
 - 2026-11-14 POSTED doodle: Dubai chocolate (FIX) case study + 4 tricks; no music bed, 42px subtitles (examples/dubai-chocolate-doodle)
+- 2026-11-15 | CLAIMED (episode run 21:05 UTC 14 Nov, doodle case study) — Stanley Quencher: the cup Stanley stopped pushing, The Buy Guide's 5,000-cup order, the car-fire video + 4 tricks to sell your own product | stanley-cup-doodle | — | BUILDING
