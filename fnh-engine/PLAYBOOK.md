@@ -393,6 +393,22 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
 - Sound: room_tone('arena') (crowd murmur; reverb 'stadium'); boxing bell = two clang(1250) at frame 0; KO = layered_hit + crowd(cheer); cuffs = lock_click + rattle (struggle) 8-10 dB under the hit.
 - Voice: a '...' beat before the BIG NUMBER ('over... eight times') was neutral-positive (i2 4.48 -> 4.49); keep the hook question itself in one breath.
 
+### Ep 36 (14 Nov, seventeenth ink episode): INVOLUNTARY ACTION (the hiccup), THE HOUSE PARTY, board breathing + balloon stomach + cord doors (`anim_props_lib36.py`, `engine/template/sfx_lib.py`)
+- 49 s, 9 lines / 127 words / 18 shots (~2.7 s each). Flip at 3.8 s ('it's not the bubbles... it's your stomach'), the answer at ~42 %, the 'hic' explained at 61 %.
+- INVOLUNTARY ACTION (craft skill): `hic(t, times, amp, seed)` -> dict(dy, squash, lean, arm, hair, expr, brow, mouth, k) for chub(): a reflex has NO anticipation (unlike `take`):
+  2-frame jolt up, a 2-4 frame still hold, a 9-frame settle that sinks a little below rest, hair lags 3 frames, every repeat varies (amp, hold, head direction).
+  `hic_word(f, t, times, x, y)` = a 'hic!' that pops out on each. Use the same 2-frame snap with no wind-up for any reflex (the dome jerking, doors slamming, a flinch from heat).
+  Audio: `hic_sfx(level, pitch)` (no lead-in; vary pitch per hic). Watch out for ACCIDENTAL anticipation (nothing may move before the hit).
+- Place: `set_party(t, blur, top_y, dim, balloons)` + `party_front(f, top_y)` (warm evening living room, bunting at y 170-230 ABOVE the hook words, ink balloons that bob,
+  fairy lights, a striped aqua table). Chubby at (380, 1660) s 1.3 behind a table top at 1420 = big enough; table props at y ~1300-1390. Light wall -> use DARK text (INKC / ACC_S / red).
+- Drinking: ep 36 `drinker()` (anim_shots) = glass at the mouth with ra=(150, -128), hold_off=(-38, -18), glass rotated +32 (top toward the mouth); sip 0 = at the chest.
+- lib36 props: fizzy_glass_el(level) (generic, no brand), soda_bottle_el, balloon36_el + balloon_bob (secondary action), board torso `board_torso(... lung_k, drop, bulge, st_r, nerve_k)`
+  with `dome_pts(drop, bulge)` (the diaphragm breathes: drop 0..1), a stomach that inflates like a balloon under it, the nerve with alarm pulses; `cord_doors(f, t, cx, cy, shut)` (vocal cords
+  as two swing doors); `ultrasound(f, t, cx, cy, k, hics)` (a dark fan with a curled baby that jolts). Ep 36 `x_belly()` = an x-ray window on Chubby's belly drawn in the BOARD language
+  (paper + blue/red ink): the dark-navy version read as a plate in the test frames.
+- Sound: room tone + reverb 'party' (chatter, far clinks; a living room), `fizz_pour`.
+- Voice: PZ 1.2 neutral-positive on one script (line mean +0.015); re-test before changing voice.env. One interjection ('Hic!') per video at most.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

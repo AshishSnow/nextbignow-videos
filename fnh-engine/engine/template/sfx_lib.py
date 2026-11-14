@@ -959,6 +959,7 @@ def room_tone(kind, n_):
     elif kind == "kit": x = _lp(w, 1800) * 0.4 + 0.2 * np.sin(2 * np.pi * 100 * tt)
     elif kind == "street": x = _bp(w, 150, 1800) * (0.7 + 0.3 * np.sin(2 * np.pi * 0.17 * tt)) + 0.25 * _bp(rng.standard_normal(n_), 600, 2400) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.6 * tt) ** 8)   # ep 34: street murmur
     elif kind == "arena": x = _bp(w, 250, 2600) * (0.65 + 0.35 * np.sin(2 * np.pi * 0.23 * tt) ** 2) + 0.2 * _bp(rng.standard_normal(n_), 900, 3200) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.9 * tt) ** 6)   # ep 35: boxing-arena crowd murmur
+    elif kind == "party": x = _bp(w, 220, 2400) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.31 * tt) ** 2) + 0.18 * _bp(rng.standard_normal(n_), 700, 2800) * (0.5 + 0.5 * np.sin(2 * np.pi * 1.3 * tt) ** 8) + _bp(rng.standard_normal(n_), 3000, 7000) * 0.3 * (rng.random(n_) < 0.0004)   # ep 36: house party chatter + far clinks
     elif kind == "sea": x = _lp(w, 1200) * (0.4 + 0.6 * np.sin(np.pi * ((tt / 2.2) % 1)) ** 2)
     else:              x = _bp(w, 200, 2500) * 0.3                                    # the board: a quiet paper room
     return x / (np.abs(x).max() + 1e-9)
@@ -980,6 +981,7 @@ def ir(kind):
     spec = {"kit": dict(pre=0.008, rt=0.35, taps=((0.011, 0.5), (0.019, 0.35), (0.027, 0.25)), lp=6000),
             "stove": dict(pre=0.008, rt=0.45, taps=((0.012, 0.5), (0.021, 0.35), (0.031, 0.25)), lp=5000),
             "stadium": dict(pre=0.03, rt=1.4, taps=((0.14, 0.45), (0.26, 0.28), (0.39, 0.14)), lp=2800),
+            "party": dict(pre=0.009, rt=0.5, taps=((0.013, 0.5), (0.022, 0.35), (0.034, 0.22)), lp=5200),     # ep 36: a living room full of people (soft furnishings)
             "street": dict(pre=0.012, rt=0.55, taps=((0.045, 0.4), (0.075, 0.25), (0.11, 0.12)), lp=3600)}[kind]     # ep 34: open street, shopfront slaps
     n_ = int((spec["pre"] + spec["rt"] * 1.2) * SR); out = np.zeros((n_, 2), np.float32)
     tt = np.arange(n_) / SR
@@ -995,8 +997,8 @@ def ir(kind):
     return out
 
 
-WET = {"kit": -13, "stove": -11, "stadium": -10, "street": -12, "board": None}
-BUS = {k: np.zeros((NS, 2), np.float32) for k in ("kit", "stove", "stadium", "street")}
+WET = {"kit": -13, "stove": -11, "stadium": -10, "street": -12, "party": -12, "board": None}
+BUS = {k: np.zeros((NS, 2), np.float32) for k in ("kit", "stove", "stadium", "street", "party")}
 
 
 def place(x, t, xpos=540, gain=1.0, far=0.0, where=None):
@@ -1119,3 +1121,25 @@ def faucet(level=-26, dur=1.5):
     sq = np.sin(2 * np.pi * (900 + 600 * tt) * tt) * np.exp(-tt / 0.06) * 0.6
     y = x / (np.abs(x).max() + 1e-9) + sq
     return _st2(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+# ---- ep 36 foley (hiccups) ----
+def hic_sfx(level=-18, pitch=1.0):
+    """a HICCUP: a sharp 50 ms in-breath (rising band noise) cut off by a glottal CLICK (the cords slamming) + a short low thump (the diaphragm jerk).
+    Like the animation (ep 36 craft skill), no lead-in: the sound starts at full tilt. pitch varies each hic so a run never repeats."""
+    n1 = int(0.05 * SR); t1 = np.arange(n1) / SR
+    br = _bp(rng.standard_normal(n1), 900 * pitch, 3200 * pitch) * (t1 / 0.05) ** 0.5
+    n2 = int(0.09 * SR); t2 = np.arange(n2) / SR
+    click = np.zeros(n2); click[:int(0.004 * SR)] = rng.standard_normal(int(0.004 * SR)) * 1.6
+    click = _bp(click, 1200, 6000)
+    voc = np.sin(2 * np.pi * 330 * pitch * t2) * np.exp(-t2 / 0.02) * 0.6                     # the tiny voiced 'ic' after the click
+    thump = np.sin(2 * np.pi * np.cumsum(110 * pitch * np.exp(-t2 / 0.05) + 50) / SR) * np.exp(-t2 / 0.035) * 0.9
+    y = np.concatenate([br * 0.5, click + voc + thump])
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level), 40)
+
+
+def fizz_pour(level=-26, dur=1.2):
+    """soda poured / glugged: the fizz crackle with a low glug underneath."""
+    a = fizz(level, dur); g = glug(level - 4, max(2, int(dur / 0.25)), 0.22)
+    n_ = max(len(a), len(g)); out = np.zeros((n_, 2), np.float32); out[:len(a)] += a; out[:len(g)] += g
+    return out
