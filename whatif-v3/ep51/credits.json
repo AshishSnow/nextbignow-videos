@@ -1,0 +1,50 @@
+{
+ "B1_nyse": {
+  "title": "File:New York Stock Exchange Facade 2015.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/New_York_Stock_Exchange_Facade_2015.jpg/1920px-New_York_Stock_Exchange_Facade_2015.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:New_York_Stock_Exchange_Facade_2015.jpg",
+  "author": "Jeffrey Zeldman from Manhattan, USA",
+  "license": "CC BY 2.0",
+  "file": "whatif/aibubble/img/B1_nyse.jpg"
+ },
+ "B2_wall2000": {
+  "title": "File:Wall Street Sign - with Stop Sign - Circa 2000.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Wall_Street_Sign_-_with_Stop_Sign_-_Circa_2000.jpg/1920px-Wall_Street_Sign_-_with_Stop_Sign_-_Circa_2000.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Wall_Street_Sign_-_with_Stop_Sign_-_Circa_2000.jpg",
+  "author": "Thermidor2",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/aibubble/img/B2_wall2000.jpg"
+ },
+ "B3_wallmono": {
+  "title": "File:Monochrome wall street sign (Unsplash).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Monochrome_wall_street_sign_%28Unsplash%29.jpg/1920px-Monochrome_wall_street_sign_%28Unsplash%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Monochrome_wall_street_sign_(Unsplash).jpg",
+  "author": "Chris Li chrisli",
+  "license": "CC0",
+  "file": "whatif/aibubble/img/B3_wallmono.jpg"
+ },
+ "B4_tickers": {
+  "title": "File:Tickers (8085342806).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tickers_%288085342806%29.jpg/1920px-Tickers_%288085342806%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tickers_(8085342806).jpg",
+  "author": "Francisco Gonzalez",
+  "license": "CC BY 2.0",
+  "file": "whatif/aibubble/img/B4_tickers.jpg"
+ },
+ "B6_chip": {
+  "title": "File:AMD Fiji GPU package with GPU, HBM memory and interposer.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/AMD_Fiji_GPU_package_with_GPU%2C_HBM_memory_and_interposer.jpg/1920px-AMD_Fiji_GPU_package_with_GPU%2C_HBM_memory_and_interposer.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:AMD_Fiji_GPU_package_with_GPU,_HBM_memory_and_interposer.jpg",
+  "author": "C. Spille/pcgameshardware.de",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/aibubble/img/B6_chip.jpg"
+ },
+ "B5_gpu": {
+  "title": "File:BalticServers data center.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/BalticServers_data_center.jpg/1920px-BalticServers_data_center.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg",
+  "author": "BalticServers.com",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/grid/img/R6_servers.jpg"
+ }
+}
