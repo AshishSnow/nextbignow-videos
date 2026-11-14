@@ -1,0 +1,58 @@
+{
+ "G1_sat": {
+  "title": "File:GPS Block IIIA.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/GPS_Block_IIIA.jpg/1920px-GPS_Block_IIIA.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:GPS_Block_IIIA.jpg",
+  "author": "U.S. Air Force",
+  "license": "Public domain",
+  "file": "whatif/gps/img/G1_sat.jpg"
+ },
+ "G2_launch": {
+  "title": "File:GPS III-SV09 Launches from Cape Canaveral Space Force Station (9496887).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/GPS_III-SV09_Launches_from_Cape_Canaveral_Space_Force_Station_%289496887%29.jpg/1920px-GPS_III-SV09_Launches_from_Cape_Canaveral_Space_Force_Station_%289496887%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:GPS_III-SV09_Launches_from_Cape_Canaveral_Space_Force_Station_(9496887).jpg",
+  "author": "U.S. Space Force photo by Gwendolyn Kurzen",
+  "license": "Public domain",
+  "file": "whatif/gps/img/G2_launch.jpg"
+ },
+ "G3_tartu": {
+  "title": "File:Approach lighting system of Tartu Airport.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Approach_lighting_system_of_Tartu_Airport.jpg/1920px-Approach_lighting_system_of_Tartu_Airport.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Approach_lighting_system_of_Tartu_Airport.jpg",
+  "author": "Ivo Kruusam\u00e4gi",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/gps/img/G3_tartu.jpg"
+ },
+ "G4_cockpit": {
+  "title": "File:Boeing 707-123B cockpit, Deutsches Museum.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Boeing_707-123B_cockpit%2C_Deutsches_Museum.jpg/1920px-Boeing_707-123B_cockpit%2C_Deutsches_Museum.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Boeing_707-123B_cockpit,_Deutsches_Museum.jpg",
+  "author": "Wilfredor",
+  "license": "CC0",
+  "file": "whatif/gps/img/G4_cockpit.jpg"
+ },
+ "G5_radar": {
+  "title": "File:Tarmo bridge radar display.JPG",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Tarmo_bridge_radar_display.JPG/1920px-Tarmo_bridge_radar_display.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Tarmo_bridge_radar_display.JPG",
+  "author": "MKFI",
+  "license": "Public domain",
+  "file": "whatif/gps/img/G5_radar.jpg"
+ },
+ "G6_plane": {
+  "title": "File:Airplane Landing in Toronto (cropped).JPG",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Airplane_Landing_in_Toronto_%28cropped%29.JPG/1920px-Airplane_Landing_in_Toronto_%28cropped%29.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Airplane_Landing_in_Toronto_(cropped).JPG",
+  "author": "MarcusObal",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/gps/img/G6_plane.jpg"
+ },
+ "G7_bornholm": {
+  "title": "File:Swans in the fog, Bornholm.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Swans_in_the_fog%2C_Bornholm.jpg/1920px-Swans_in_the_fog%2C_Bornholm.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Swans_in_the_fog,_Bornholm.jpg",
+  "author": "Socket0",
+  "license": "CC0",
+  "file": "whatif/gps/img/G7_bornholm.jpg"
+ }
+}

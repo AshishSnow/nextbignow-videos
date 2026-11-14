@@ -1,0 +1,14 @@
+Two passenger jets fly to a small airport in Estonia. And both of them turn around. Not because of weather. Because someone was jamming their GPS. [dramatic] So what happens if GPS goes down?
+---
+Here's the thing. GPS isn't just your maps app. It's about thirty satellites run by the U.S. Space Force, beaming down a super weak signal. And that signal doesn't just tell you where you are. It tells banks, cell towers and power grids what time it is, down to a millionth of a second.
+---
+Back to Estonia. It was April twenty twenty-four. The airport in Tartu used a landing approach that needed GPS. So when the signal got jammed, the planes simply couldn't come in. They flew back to Helsinki, and Finnair shut the whole route down for a month.
+---
+And it's getting worse. In just the first two months of this year, pilots in Lithuania reported around three hundred GPS interference incidents. Near Denmark's Bornholm island, jamming has already hit a record, almost double all of last year. And on one day in July, there was no usable signal across a whole stretch of the Baltic Sea. European officials blame Russia.
+---
+Now imagine a full outage. The British government studied exactly that. Losing satellite navigation for one week would cost the UK about seven and a half billion pounds. That's over a billion pounds a day. And the biggest hit wasn't maps. It was emergency services.
+---
+So is there a backup? Kind of. Planes have older radio beacons. Ships have radar and compasses. Some countries are looking at an old ground-based system called eLoran. But your phone, your car, most of your apps? They have nothing else.
+---
+So here's my prediction. GPS doesn't switch off worldwide. Too many people depend on it, including every big military. But jamming becomes normal near borders and war zones. More cancelled flights, more ships showing up in the wrong place, and a race to build backups. The next big business? Navigation that doesn't need space.
+And tell me. Could you find your way home without GPS? Yes or no, in the comments.
