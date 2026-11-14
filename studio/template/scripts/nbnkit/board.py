@@ -2022,3 +2022,120 @@ def box3(c, x, y, t, t0, label, tick_t=None, w=280, h=300):
     ink(c, [wob([(x - w / 2, y - h / 2), (x + w / 2, y - h / 2), (x + w / 2, y + h / 2), (x - w / 2, y + h / 2), (x - w / 2, y - h / 2)], int(x) % 97, 0.6)], k, MK, 6, pen_=False)
     mtext(c, label, x, y + h / 2 + 62, 42, MK, pr(t, t0 + 0.2, 0.3), "pm")
     if tick_t is not None and t > tick_t: tick(c, x + w / 2 - 20, y - h / 2 + 10, pr(t, tick_t, 0.3), GR, 1.3)
+
+
+# ---------------------------------------------------------------- 14 Nov 2026 (R&D writers' room: 24 ZIP code HIW + 25 Domino's BIG):
+# pizza in an open box (rewritable lid sticky), ketchup bottle, a five-box ZIP keypad screen, a dashed road that draws itself between two
+# points, a gas pump. No brand marks anywhere (plain white box, no domino tile, no red/blue trade dress).
+CHEESE = (250, 214, 120); CRUST = (214, 150, 70)
+def pizza_m(c, x, y, t, t0, s=1.0, open_=1.0, slices=8, garlic=False, sad=False, col=RD, lid_text=None):
+    """an open pizza box seen from the front-top: box base + lid swung up by `open_`; a round pizza with hatched sauce/cheese, pepperoni
+    dots, slice lines; garlic=True sprinkles green herb ticks on the crust; sad=True draws a pale, flat pizza (grey hatch, no toppings);
+    lid_text = a word written on the inside of the lid (e.g. 'CARDBOARD?' / 'NEW RECIPE')"""
+    k = pr(t, t0, 0.55)
+    if k <= 0: return
+    P = lambda pts: _sc(x, y, s, pts)
+    base = P([(-230, 0), (-230, -40), (230, -40), (230, 0), (-230, 0)])
+    lh = 300 * open_
+    lid = P([(-230, -40), (-230, -40 - lh), (230, -40 - lh), (230, -40)])
+    c.drawPath(_path(base), paint(WHITE, k))
+    if open_ > 0.05:
+        c.drawPath(_path(lid + [lid[0]]), paint(WHITE, k))
+    ink(c, [wob(base, 1101, 0.5)] + ([wob(lid, 1102, 0.6)] if open_ > 0.05 else []), k, MK, 7)
+    if k < 1: return
+    r = 175 * s; cy = y - 40 * s - r * 0.42 * 0.55 + 40 * s   # the pizza rests on the base, its front rim just over the box's front edge
+    # the pizza sits in the base, drawn as an ellipse peeking over the front edge
+    rim = circ_pts(x, cy - 40 * s, r, ry=r * 0.42)
+    inner = circ_pts(x, cy - 40 * s, r * 0.84, ry=r * 0.42 * 0.84)
+    c.drawPath(_path(rim), paint(CRUST if not sad else (200, 190, 175), 0.9))
+    c.drawPath(_path(inner), paint(CHEESE if not sad else (232, 228, 218)))
+    if not sad:
+        hatch(c, _path(inner), pr(t, t0 + 0.4, 0.4), col, gap=22, w=6, bbox=(x - r, cy - 40 * s - r * 0.5, x + r, cy - 40 * s + r * 0.5), seed=1103, a=0.35)
+        for i, (dx, dy) in enumerate(((-80, -10), (40, -30), (90, 15), (-20, 25), (-110, 20), (20, -5))):
+            c.drawCircle(x + dx * s, cy - 40 * s + dy * s, 17 * s, paint(col, 0.9 * pr(t, t0 + 0.5 + 0.06 * i, 0.2)))
+    ink(c, [wob(rim, 1104, 0.6), wob(inner, 1105, 0.5)], 1, MK, 5, pen_=False)
+    for i in range(slices // 2):
+        a0 = math.radians(180 * i / (slices // 2))
+        dx, dy = r * 0.84 * math.cos(a0), r * 0.84 * 0.42 * math.sin(a0)
+        c.drawLine(x - dx, cy - 40 * s - dy, x + dx, cy - 40 * s + dy, stroke(MK, 3, 0.45))
+    if garlic and not sad:
+        for i in range(14):
+            a0 = 2 * math.pi * i / 14
+            px, py = x + r * 0.92 * math.cos(a0), cy - 40 * s + r * 0.42 * 0.92 * math.sin(a0)
+            c.drawLine(px - 6, py - 3, px + 6, py + 3, stroke(GR, 5, pr(t, t0 + 0.6 + 0.03 * i, 0.2)))
+    if lid_text and open_ > 0.5:
+        mtext(c, lid_text, x, y - (40 + lh * 0.55) * s, int(64 * s), col, pr(t, t0 + 0.5, 0.4), "pm")
+
+
+def ketchup_m(c, x, y, t, t0, s=1.0, col=RD):
+    """a plain squeeze bottle (no label art): rounded body hatched red, a cap and nozzle, the word written on a white band"""
+    k = pop_(t, t0, 0.3, 1.6)
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k * s, k * s)
+    body = [(-60, 0), (-70, -170), (-50, -210), (50, -210), (70, -170), (60, 0), (-60, 0)]
+    cap = [(-34, -210), (-34, -250), (34, -250), (34, -210)]; noz = [(-10, -250), (-4, -290), (4, -290), (10, -250)]
+    c.drawPath(_path(body), paint(WHITE)); hatch(c, _path(body), 1, col, gap=14, w=6, bbox=(-70, -210, 70, 0), seed=1111, a=0.7)
+    c.drawRect(R.MakeXYWH(-64, -135, 128, 56), paint(WHITE))
+    ink(c, [wob(body, 1112, 0.5), wob(cap, 1113, 0.4), wob(noz, 1114, 0.3)], 1, MK, 6, pen_=False)
+    c.restore()
+    mtext(c, "SAUCE", x, y - 95 * s * k, int(30 * s), col, pr(t, t0 + 0.2, 0.3), "pm")
+
+
+def zippad_m(c, x, y, t, t0, digits="", step=0.18, s=1.0, prompt="ZIP CODE?", hot=None, col=BLU):
+    """a card-terminal screen asking for a ZIP: prompt on top, five boxes; `digits` are typed in one by one every `step` s after t0+0.5;
+    hot = (t_on) makes the five boxes glow red from that time (the 'this is personal information' beat)"""
+    k = pr(t, t0, 0.45)
+    if k <= 0: return
+    P = lambda pts: _sc(x, y, s, pts)
+    scr = P([(-250, -170), (250, -170), (250, 110), (-250, 110), (-250, -170)])
+    c.drawPath(_path(scr), paint(WHITE, k)); ink(c, [wob(scr, 1121, 0.6)], k, MK, 7)
+    if k < 1: return
+    mtext(c, prompt, x, y - 95 * s, int(46 * s), MK, pr(t, t0 + 0.3, 0.3), "pm")
+    glow = hot is not None and t >= hot
+    for i in range(5):
+        bx = x + (-200 + i * 100) * s
+        box = [(bx - 38 * s, y - 40 * s), (bx + 38 * s, y - 40 * s), (bx + 38 * s, y + 60 * s), (bx - 38 * s, y + 60 * s), (bx - 38 * s, y - 40 * s)]
+        if glow: c.drawPath(_path(box), paint(RD, 0.18 + 0.1 * math.sin(6 * (t - hot))))
+        ink(c, [box], 1, RD if glow else MK, 5, pen_=False)
+        if i < len(digits) and t >= t0 + 0.5 + step * i:
+            mtext(c, digits[i], bx, y + 42 * s, int(70 * s), col, pr(t, t0 + 0.5 + step * i, 0.12), "pm")
+
+
+def road_m(c, a, b, t, t0, d=1.2, col=MK, w=8, bend=0.35, dash=True, seed=1131):
+    """a winding road drawn on from a to b (two parallel wobbly lines with a dashed centre line); the pen rides the tip"""
+    k = pr(t, t0, d)
+    if k <= 0: return
+    (x0, y0), (x1, y1) = a, b
+    mx, my = (x0 + x1) / 2 + (y1 - y0) * bend, (y0 + y1) / 2 - (x1 - x0) * bend
+    pts = []
+    for i in range(41):
+        u = i / 40
+        pts.append(((1 - u) ** 2 * x0 + 2 * (1 - u) * u * mx + u * u * x1, (1 - u) ** 2 * y0 + 2 * (1 - u) * u * my + u * u * y1))
+    def off(o):
+        out = []
+        for i, (px, py) in enumerate(pts):
+            qx, qy = pts[min(i + 1, 40)] if i < 40 else pts[i]; rx, ry = pts[max(i - 1, 0)]
+            tx, ty = qx - rx, qy - ry; L = math.hypot(tx, ty) or 1
+            out.append((px - ty / L * o, py + tx / L * o))
+        return out
+    ink(c, [wob(off(-22), seed, 0.8), wob(off(22), seed + 1, 0.8)], k, col, w)
+    if dash and k > 0.2:
+        n = int(40 * k)
+        for i in range(0, n - 1, 3):
+            c.drawLine(pts[i][0], pts[i][1], pts[i + 1][0], pts[i + 1][1], stroke(OR, 6))
+
+
+def gaspump_m(c, x, y, t, t0, s=1.0, col=GR, screen="ZIP?"):
+    """a plain fuel pump: tall box with a screen (prompt written on it), hose and nozzle hooked on the side; green hatch on the lower panel"""
+    k = pr(t, t0, 0.5)
+    if k <= 0: return
+    P = lambda pts: _sc(x, y, s, pts)
+    body = P([(-90, 0), (-90, -360), (90, -360), (90, 0), (-90, 0)])
+    scr = P([(-60, -320), (60, -320), (60, -240), (-60, -240), (-60, -320)])
+    low = P([(-90, -140), (90, -140), (90, 0), (-90, 0), (-90, -140)])
+    hose = P([(90, -200), (150, -180), (165, -90), (140, -20)])
+    noz = P([(80, -260), (125, -250), (125, -215), (95, -215)])
+    c.drawPath(_path(body), paint(WHITE, k))
+    if k >= 1: hatch(c, _path(low), pr(t, t0 + 0.4, 0.3), col, gap=18, w=6, bbox=(x - 90 * s, y - 140 * s, x + 90 * s, y), seed=1141, a=0.5)
+    ink(c, [wob(body, 1142, 0.5), wob(scr, 1143, 0.4), wob(hose, 1144, 0.8), wob(noz, 1145, 0.4)], k, MK, 7)
+    if k >= 1 and screen: mtext(c, screen, x, y - 262 * s, int(44 * s), BLU, pr(t, t0 + 0.5, 0.3), "pm")

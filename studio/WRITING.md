@@ -87,7 +87,22 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 
 41. **Say a penalty in the law's own order.** "You can be fined. Ignore a notice and it's an offence" sounds like two penalties; the Childcare Act makes it one chain (a notice first, then the offence, then the fine). Read the section, then say the chain: "Ofsted can send you a notice to stop. Keep going after that, and it's a criminal offence. With a fine." (14 Nov, childminding build fact-check.)
 
+42. **British everyday words don't belong to the American narrator.** "At the till" can be heard as "until", "loads of" and "puts it down to"
+    read British. Say "at the register / checkout", "lots of", "credits". `human_check.py` prints a `note british …` line (14 Nov, ZIP review;
+    0 hits in the other 26 queued + done scripts). A line set in the UK may keep a UK word — listen.
+43. **A court's ruling isn't a verdict on the story.** On an appeal from a demurrer the court rules on the *law* and takes the shopper's claim as
+    true. Don't say "Who was right? The court sided with her" — say the question it answered: "The question for the court: is a ZIP code
+    personal information? … said yes." And keep each exception to the state that has it ("California lets the store ask"). (14 Nov, ZIP review.)
+44. **The seat's year must come before the work it watches.** If a move took "about two years" and ended in Dec 2009, a seat that opens in 2009
+    makes the years not add up for a listener: open the seat in 2008 and say the bad year in present tense ("This year, its stores are selling
+    about five percent less"). And "the same American stores" points at nothing if no stores were named — say "its American stores" and let the
+    chip carry the jargon (same-store sales). (14 Nov, Domino's review.)
+45. **"Do you know your X…" can sound finished halfway.** "Do you know your ZIP code…" is heard as "do you know what your ZIP is?" before the
+    turn. Put a verb in front of the noun: "Do you know *typing* your ZIP at checkout can lead a store to your door?" (14 Nov, ZIP review.)
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
+- (14 Nov, ZIP) "Who was right? In twenty eleven, California's top court sided with her." → "The question for the court: is a ZIP code personal information? In twenty eleven, California's top court said yes." (rule 43)
+- (14 Nov, Domino's) "Then Patrick Doyle, who runs the American stores, looks into the lens." → "Then the boss of its American stores speaks. Patrick Doyle." (rule 6; and "looks into the lens" wasn't in any source)
 - (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)
 - (9 Nov, Netflix) "Members are furious." → "Members start cancelling." (say what the record shows, and it sets up the count)
 - (8 Nov, cash rewards) "Each cash-paying household sent about a hundred and fifty dollars a year to card users." → "Debit counted as cash. … A home with no credit card paid credit card users about a hundred and fifty dollars a year." (rule 27)

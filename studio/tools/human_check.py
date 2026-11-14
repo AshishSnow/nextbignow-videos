@@ -82,6 +82,10 @@ def voice_notes(path):
                 # ("one thousand and seventy-five"); a year or "a hundred and fifty" said as a round amount is still flagged: listen.
                 brit = re.findall(r"\b(?:hundred|thousand|million|billion) and (?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\w+teen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b", text, re.I)
                 if brit: out.append(f"number {lid}: {brit} — British 'and' inside a number; the American narrator says 'one thousand seventy-five' (rule 39)")
+                # 14 Nov (fresh-eyes review, ZIP code): British everyday words in an American narrator's mouth ('at the till' can be heard
+                # as 'until'; 'loads of', 'puts it down to'); a UK-set line may keep them — listen. Note only, not a gate.
+                ukw = re.findall(r"\b(?:till|tills|loads of|petrol|queue|queues|queueing|fortnight|whilst|trolley|motorway|mobile phone|chemist|put it down to|puts it down to|high street|cashpoint|car park)\b", text, re.I)
+                if ukw: out.append(f"british {lid}: {sorted(set(w.lower() for w in ukw))} — the narrator is American: 'register / checkout', 'lots of', 'credits' (rule 42)")
     return out
 
 

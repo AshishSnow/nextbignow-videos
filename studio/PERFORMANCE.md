@@ -9,6 +9,17 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-14 ~08:15 IST (R&D run: writers' room, B9 Domino's + W16 ZIP code)
+**Delivery (getScheduledPosts 12–15 Nov IST):** cash rewards, pen (owner), 7-Eleven, Black Friday doodle (owner), **childminding HOW TO START EP 9 (427512909, 14 Nov 05:00)** and the owner's
+**Airbnb cereal doodle (427664882, 14 Nov 07:35)** — all **PUBLISHED on Instagram + YouTube, no provider ERROR**. Nothing scheduled after 07:35 IST 14 Nov.
+**Analytics (IGRE 24 Oct → 14 Nov 08:30 IST; YTVP):** every Instagram row is identical to the 02:40 IST pull (Black Friday doodle 222 · 78.2 % · 32.6 s, 7-Eleven 142 · 39.5 %,
+pen 431); childminding and the Airbnb doodle have no rows yet. YouTube rows still end at 9 Nov (Metricool import lag, insight AS). No new verdict; media kit unchanged
+(last 10 IG reels avg 211 views, 3-s 51.1 %, 16.9 s, 9.7 sends + saves + comments / 1,000 reach).
+**Insight AX (14 Nov, for the writers' room):** with whiteboard BIGs the weakest kind three posts running (Netflix 28.6 %, 7-Eleven 39.5 %) and rule-in-your-hand hooks
+opening ~70 % (AV), the next BIG (25 Domino's) opens on something the viewer eats and a customer's own words on TV, not on a company's name; judge it against
+7-Eleven's 39.5 % and the HIW average. The owner has now posted two doodle-look reels in a row (Black Friday, Airbnb) — compare their 3-s rates with childminding's
+(whiteboard + line boil) on the next pull before changing the look.
+
 ## Snapshot 2026-11-14 ~03:00 IST (episode run: HOW TO START EP 9, childminding)
 **Delivery (getScheduledPosts 9–20 Nov IST):** dropship, Michelin (owner), Instacart, Netflix, chair flip (owner), cash rewards, pen (owner),
 7-Eleven (426285623) and the owner's **Black Friday "$5 for nothing" doodle (427192354, 13 Nov 22:20)** — **all PUBLISHED on Instagram + YouTube,
