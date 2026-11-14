@@ -1,0 +1,34 @@
+{
+ "K1_coin": {
+  "title": "File:Physical bitcoin statistic coin.JPG",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Physical_bitcoin_statistic_coin.JPG/1920px-Physical_bitcoin_statistic_coin.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Physical_bitcoin_statistic_coin.JPG",
+  "author": "AntanaCoins",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/btc/img/K1_coin.jpg"
+ },
+ "K2_farm": {
+  "title": "File:Bitcoin mining farm.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bitcoin_mining_farm.jpg/1920px-Bitcoin_mining_farm.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Bitcoin_mining_farm.jpg",
+  "author": "Marko Ahtisaari",
+  "license": "CC BY 2.0",
+  "file": "whatif/btc/img/K2_farm.jpg"
+ },
+ "K3_laptop": {
+  "title": "File:Bitcoin on Laptop Keyboard.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Bitcoin_on_Laptop_Keyboard.jpg/1920px-Bitcoin_on_Laptop_Keyboard.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Bitcoin_on_Laptop_Keyboard.jpg",
+  "author": "Satheesh Sankaran",
+  "license": "CC BY 2.0",
+  "file": "whatif/btc/img/K3_laptop.jpg"
+ },
+ "K4_hand": {
+  "title": "File:Holding Bitcoin cryptocurrency coin.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Holding_Bitcoin_cryptocurrency_coin.jpg/1920px-Holding_Bitcoin_cryptocurrency_coin.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Holding_Bitcoin_cryptocurrency_coin.jpg",
+  "author": "Satheesh Sankaran",
+  "license": "CC BY 2.0",
+  "file": "whatif/btc/img/K4_hand.jpg"
+ }
+}
