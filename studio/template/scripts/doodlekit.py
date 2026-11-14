@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "cup": _cup, "flask": _flask}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -976,6 +976,139 @@ def coin_rain(c, t, t0, n=10, seed=171, y_end=1400):
         c.save(); c.translate(x, y); c.rotate(u * 200 * (1 if i % 2 else -1))
         ink(c, wrrect(-60, -30, 60, 30, 6, seed + i, 1), (140, 214, 140), 6); f = font(BLK_F, 34); c.drawString("$", -10, 12, f, P(DGRN))
         c.restore()
+
+
+# ------------------------------------------------------------------ 15 Nov 2026 (Stanley cup case study): generic tumbler + old bottle + props
+MINT = (140, 214, 196); LILAC = (196, 170, 240); PEACH = (255, 186, 150); SLATE = (120, 140, 166)
+
+
+def _cup(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=MINT, soot=0.0, ice=False, **kw):
+    """generic big tumbler character: tapered body, side handle, lid + straw (no logo, any pastel colour); soot 0..1 = scorch marks."""
+    leg = 70 * s; cb = y - leg; ct = cb - 400 * s; wt, wb = 125 * s, 92 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 40)
+    hx = x + (wt + wb) / 2 - 6 * s
+    wline(c, [(hx - 10 * s, ct + 70 * s), (hx + 70 * s, ct + 80 * s), (hx + 80 * s, ct + 200 * s), (hx + 55 * s, ct + 290 * s), (hx - 20 * s, ct + 300 * s)], seed + 3, 30 * s, INK)
+    wline(c, [(hx - 10 * s, ct + 70 * s), (hx + 70 * s, ct + 80 * s), (hx + 80 * s, ct + 200 * s), (hx + 55 * s, ct + 290 * s), (hx - 20 * s, ct + 300 * s)], seed + 3, 16 * s, shade(col, 0.85))
+    body = wpoly([(x - wt, ct + 30 * s), (x + wt, ct + 30 * s), (x + wb, cb), (x - wb, cb)], seed, 2.2, True, 40); ink(c, body, col, 9 * s)
+    wline(c, [(x - wt + 34 * s, ct + 70 * s), (x - wb + 30 * s, cb - 40 * s)], seed + 4, 12 * s, WHITE, 1.2, 0.8)
+    wline(c, [(x - wb - 4 * s, cb - 60 * s), (x + wb + 4 * s, cb - 60 * s)], seed + 5, 5 * s, shade(col, 0.7))
+    sx = x + 30 * s
+    wline(c, [(sx, ct), (sx + 20 * s, ct - 150 * s), (sx + 60 * s, ct - 170 * s)], seed + 6, 26 * s, INK)
+    wline(c, [(sx, ct), (sx + 20 * s, ct - 150 * s), (sx + 60 * s, ct - 170 * s)], seed + 6, 13 * s, (250, 250, 250))
+    ink(c, wrrect(x - wt - 12 * s, ct - 14 * s, x + wt + 12 * s, ct + 40 * s, 16 * s, seed + 1, 1.6), (225, 225, 230), 8 * s)
+    if ice:
+        for j, (dx, dy) in enumerate(((-150, -120), (170, -60), (-190, 40))):
+            ink(c, wrrect(x + dx * s - 30 * s, ct + dy * s - 30 * s, x + dx * s + 30 * s, ct + dy * s + 30 * s, 8 * s, seed + 20 + j, 1.4), (210, 240, 255), 6 * s)
+            wline(c, [(x + dx * s - 14 * s, ct + dy * s - 12 * s), (x + dx * s + 4 * s, ct + dy * s - 16 * s)], seed + 24 + j, 4 * s, WHITE)
+    if soot > 0:
+        for j in range(7):
+            ex = x + (h01(j, seed + 31) - 0.5) * 1.5 * wb; ey = ct + 80 * s + h01(j, seed + 37) * 260 * s
+            c.drawPath(wellipse(ex, ey, 34 * s, 9 * s, seed + 40 + j, 2), P((70, 70, 76), 0.3 * soot))
+    _arms(c, x - wt + 10 * s, x + wt - 10 * s, ct + 210 * s, arms, t, s, seed + 7)
+    eyes(c, x - 6 * s, ct + 130 * s, s * 0.9, look, blink, 40, 26, mood, seed + 9)
+    mouth(c, x - 6 * s, ct + 190 * s, s * 0.7, talk, mood, seed + 5)
+
+
+def _flask(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=SLATE, **kw):
+    """old vacuum bottle character (generic, slate blue, NOT hammertone green): tall cylinder, cup-cap, carry handle, little moustache."""
+    leg = 70 * s; cb = y - leg; ct = cb - 440 * s; w = 92 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 36)
+    wline(c, [(x + w, ct + 120 * s), (x + w + 46 * s, ct + 150 * s), (x + w + 46 * s, ct + 300 * s), (x + w, ct + 330 * s)], seed + 3, 14 * s)
+    ink(c, wrrect(x - w, ct + 60 * s, x + w, cb, 28 * s, seed, 2.2), col, 9 * s)
+    for yy in (ct + 120 * s, cb - 50 * s): wline(c, [(x - w + 6 * s, yy), (x + w - 6 * s, yy)], seed + int(yy), 5 * s, shade(col, 0.7))
+    ink(c, wrrect(x - w * 0.62, ct + 20 * s, x + w * 0.62, ct + 66 * s, 8 * s, seed + 1, 1.2), (90, 90, 100), 7 * s)
+    ink(c, wrrect(x - w - 6 * s, ct - 60 * s, x + w + 6 * s, ct + 24 * s, 18 * s, seed + 2, 1.6), shade(col, 0.8), 8 * s)
+    _arms(c, x - w + 6 * s, x + w - 6 * s, ct + 260 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 190 * s, s * 0.8, look, blink, 36, 24, mood, seed + 9)
+    wline(c, [(x - 44 * s, ct + 236 * s), (x - 10 * s, ct + 226 * s), (x, ct + 234 * s), (x + 10 * s, ct + 226 * s), (x + 44 * s, ct + 236 * s)], seed + 11, 10 * s)
+    mouth(c, x, ct + 266 * s, s * 0.6, talk, mood, seed + 5)
+
+
+def hardhat(c, x, y, s=1.0, seed=501, col=YEL):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-120, 0), (-110, -70), (-60, -120), (0, -134), (60, -120), (110, -70), (120, 0)], seed, 2, True, 30), col, 9)
+    ink(c, wrrect(-160, -10, 160, 20, 10, seed + 1, 1.4), col, 8); wline(c, [(0, -130), (0, -10)], seed + 2, 6, shade(col, 0.7)); c.restore()
+
+
+def tent(c, x, y, s=1.0, seed=511, col=ORG):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-170, 0), (0, -230), (170, 0)], seed, 2, True, 40), col, 9); ink(c, wpoly([(-40, 0), (0, -120), (40, 0)], seed + 1, 1.4, True, 20), shade(col, 0.6), 7)
+    wline(c, [(0, -230), (0, -280)], seed + 2, 7); c.restore()
+
+
+def car(c, x, y, s=1.0, seed=521, burnt=0.0, t=0.0, col=SKY):
+    """side-view family car on (x, y); burnt 0..1 greys it out with scorch + rising smoke (calm aftermath, nobody hurt)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    body = col if burnt < 0.5 else (92, 92, 100)
+    ink(c, wpoly([(-300, -50), (-300, -150), (-180, -170), (-110, -270), (120, -270), (200, -170), (300, -150), (300, -50)], seed, 2.4, True, 40), body, 10)
+    for wx0, wx1 in ((-150, -10), (20, 150)): ink(c, wpoly([(wx0, -180), (wx0 + 30, -250), (wx1 - 10, -250), (wx1 + 20, -180)], seed + wx0, 1.6, True, 30), (60, 60, 66) if burnt >= 0.5 else (200, 235, 255), 7)
+    for wx in (-180, 180): ink(c, wellipse(wx, -40, 60, 60, seed + wx, 1.4), INK, 0); ink(c, wellipse(wx, -40, 24, 24, seed + wx + 1, 1), GREY, 0)
+    if burnt > 0:
+        for j in range(5):
+            u = (t * 0.35 + j * 0.2) % 1.0
+            c.drawPath(wellipse(-60 + j * 40 + 30 * math.sin(t * 2 + j), -300 - 320 * u, 50 + 60 * u, 40 + 40 * u, seed + 50 + j, 2), P((120, 120, 128), 0.5 * (1 - u) * burnt))
+        for j in range(6): c.drawPath(wellipse(-250 + j * 95, -110 - (j % 2) * 40, 40, 20, seed + 60 + j, 2), P((40, 40, 44), 0.5 * burnt))
+    c.restore()
+
+
+def clog(c, x, y, s=1.0, seed=531, col=GRN):
+    """plain rubber clog (generic: no vent-hole pattern, no badge)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-170, 0), (-170, -60), (-120, -120), (40, -130), (140, -100), (180, -40), (170, 0)], seed, 2, True, 40), col, 9)
+    wline(c, [(-140, -70), (-200, -40), (-170, 0)], seed + 1, 12, INK); ink(c, wrrect(-180, -12, 180, 14, 10, seed + 2, 1.2), shade(col, 0.7), 7)
+    c.restore()
+
+
+def crates(c, x, y, cols=4, rows=3, k=1.0, seed=541, label="CUPS", gone=0):
+    """stack of shipping boxes standing on (x, y); k grows the stack row by row, gone removes boxes from the top."""
+    n = cols * rows; show = min(n, int(n * k + 0.999)) - gone; bw, bh = 150, 110
+    for i in range(max(0, show)):
+        r, q = i // cols, i % cols; bx = x + (q - (cols - 1) / 2) * bw; by = y - r * bh
+        ink(c, wrrect(bx - bw / 2 + 6, by - bh, bx + bw / 2 - 6, by, 8, seed + i, 1.4), TAN, 7)
+        wline(c, [(bx - 30, by - bh + 2), (bx - 30, by - 4)], seed + 100 + i, 4, shade(TAN, 0.7))
+        text(c, label, bx + 18, by - bh / 2 + 12, 24, INK, BLK_F)
+
+
+def blog_window(c, x, y, s=1.0, k=1.0, seed=551, title_="THE BUY GUIDE", t=0.0):
+    """generic browser window of a shopping blog: header, a cup photo, hearts."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-260, -200, 260, 200, 20, seed, 2), WHITE, 9); ink(c, wrrect(-260, -200, 260, -140, 20, seed + 1, 1.2), (236, 236, 240), 7)
+    for j in range(3): ink(c, wellipse(-226 + j * 30, -170, 9, 9, seed + j, 0.6), (RED, YEL, GRN)[j], 0)
+    text(c, title_, 0, -88, 38, INK, BLK_F, maxw=470)
+    ink(c, wrrect(-220, -50, 20, 170, 12, seed + 4, 1.2), PNK, 6)
+    _cup(c, -100, 170, 0.42, t, 0, (0, 0), "happy", "down", False, False, seed + 5, col=LILAC)
+    for j in range(3):
+        hy = -20 + j * 70; h = skia.Path(); h.moveTo(110, hy); h.cubicTo(80, hy - 30, 60, hy + 10, 110, hy + 40); h.cubicTo(160, hy + 10, 140, hy - 30, 110, hy); c.drawPath(h, P(RED))
+        wline(c, [(150, hy + 10), (220, hy + 10)], seed + 10 + j, 6, GREY)
+    c.restore()
+
+
+def swatch_fan(c, x, y, cols, k=1.0, seed=561):
+    """fan of colour chips (limited colour drops)."""
+    n = len(cols)
+    for i, col in enumerate(cols):
+        u = min(1.0, max(0.0, k * n - i))
+        if u <= 0: continue
+        a = (-40 + 80 * i / max(1, n - 1)) * eout(u)
+        c.save(); c.translate(x, y); c.rotate(a); ink(c, wrrect(-46, -300, 46, 0, 14, seed + i, 1.4), col, 7); ink(c, wellipse(0, -30, 10, 10, seed + 20 + i, 0.6), WHITE, 4); c.restore()
+
+
+def link_chain(c, x, y, s=1.0, seed=571, k=1.0):
+    """two interlocked links = affiliate link."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k); c.rotate(-30)
+    for dx in (-60, 60): ink(c, wrrect(dx - 90, -45, dx + 90, 45, 45, seed + dx, 1.6), None, 22, BLU)
+    c.restore()
+
+
+def stopwatch(c, x, y, s=1.0, seed=581, t=0.0, k=1.0):
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-24, -190, 24, -150, 6, seed, 1), INK, 0); ink(c, wellipse(0, 0, 150, 150, seed + 1, 2), WHITE, 10)
+    for j in range(12): a = j * math.pi / 6; wline(c, [(120 * math.cos(a), 120 * math.sin(a)), (138 * math.cos(a), 138 * math.sin(a))], seed + j, 5)
+    a = t * 4 - math.pi / 2; wline(c, [(0, 0), (100 * math.cos(a), 100 * math.sin(a))], seed + 30, 9, RED)
+    c.restore()
 
 
 def finish(img, flash=0.0):

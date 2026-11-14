@@ -9,6 +9,28 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-15 ~02:45 IST (episode run: doodle case study #5, Stanley cup)
+**Delivery (getScheduledPosts 13–18 Nov IST):** 7-Eleven, Black Friday doodle (owner), childminding, Airbnb cereal doodle (427664882), **Spanx doodle (427817388, 14 Nov 13:47)**,
+**protein boom doodle (428011055, 19:22)** and **Dubai chocolate doodle (428188321, 23:08)** — all **PUBLISHED on Instagram + YouTube, no provider ERROR.** Nothing scheduled after 23:08 IST.
+**Instagram (IGRE, pulled 02:40 IST 15 Nov; ages approx.):**
+| Post (IST) | Look | Views | Reach | Avg watch s | 3-s % | Shares | Saves | Likes |
+|---|---|---|---|---|---|---|---|---|
+| 14 Nov 23:08 Dubai chocolate (~3 h) | doodle case study | 6 | 4 | 2.0 | 0.0 | 0 | 0 | 0 |
+| 14 Nov 19:22 protein boom (~7 h) | doodle case study | 181 | 163 | 12.9 | 58.0 | 0 | 0 | 4 |
+| 14 Nov 13:47 Spanx (~13 h) | doodle case study | 218 | 198 | 19.8 | 74.4 | 0 | 0 | 3 |
+| 14 Nov 07:35 Airbnb $40 cereal (~19 h) | doodle case study | **1,565** | 1,330 | **47.3** | 70.9 | 5 | 4 | 38 |
+| 14 Nov 05:00 childminding HOW TO (~22 h) | whiteboard + boil | 186 | 166 | 17.1 | 67.9 | 0 | 0 | 3 |
+| 13 Nov 22:20 Black Friday $5 nothing (~28 h) | doodle | **1,751** | 1,545 | 39.5 | **79.3** | 2 | 1 | 58 |
+| 13 Nov 05:00 7-Eleven BIG | whiteboard | 144 | 129 | 11.8 | 38.9 | 1 | 0 | 0 |
+YouTube (YTVP) rows still end at 9 Nov (Metricool import lag, insight AS) — no YouTube verdict on the doodle look yet.
+**Insight AY (15 Nov): doodle vs older looks.** The four doodle posts old enough to read (Dubai excluded) average **929 views, 3-s 70.7 %, 29.9 s watch**;
+the last five whiteboard posts (Instacart → childminding) average **130 views, 3-s 50.3 %, 15.6 s**. Inside the doodle set the split is the HOOK:
+the two **"Would you pay $X for …?" price-on-an-object hooks** (Black Friday, Airbnb) got **1,751 / 1,565 views and 39–47 s watch**; the two "Why …?" hooks
+(Spanx 74.4 % / 19.8 s, protein trend-first 58.0 % / 12.9 s) stopped at ~200 views. Small n and different ages (Airbnb/BF ~19–28 h, protein ~7 h), so it's a lead, not proof.
+**Upgrade chosen for this run (measurable):** hook = a "Would you pay $45 for a cup…?" price question with the object + the price on screen at frame 0
+(test: 3-s rate and avg watch vs Spanx 74.4 % / 19.8 s and protein 58.0 % / 12.9 s at a similar age; target ≥ 70 % and ≥ 30 s).
+Media kit (last 10 IG reels, 11–14 Nov, incl. the 3-h Dubai row): avg **469 views**, 3-s 53.3 %, avg watch 19.9 s.
+
 ## Snapshot 2026-11-14 ~08:15 IST (R&D run: writers' room, B9 Domino's + W16 ZIP code)
 **Delivery (getScheduledPosts 12–15 Nov IST):** cash rewards, pen (owner), 7-Eleven, Black Friday doodle (owner), **childminding HOW TO START EP 9 (427512909, 14 Nov 05:00)** and the owner's
 **Airbnb cereal doodle (427664882, 14 Nov 07:35)** — all **PUBLISHED on Instagram + YouTube, no provider ERROR**. Nothing scheduled after 07:35 IST 14 Nov.
