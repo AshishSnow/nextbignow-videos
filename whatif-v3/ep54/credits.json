@@ -1,0 +1,34 @@
+{
+ "F1_virus": {
+  "title": "File:Colorized transmission electron micrograph of Avian influenza A H5N1 viruses.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Colorized_transmission_electron_micrograph_of_Avian_influenza_A_H5N1_viruses.jpg/1920px-Colorized_transmission_electron_micrograph_of_Avian_influenza_A_H5N1_viruses.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Colorized_transmission_electron_micrograph_of_Avian_influenza_A_H5N1_viruses.jpg",
+  "author": "Photo Credit: Cynthia Goldsmith\nContent Providers: CDC/ Courtesy of Cynthia Gold",
+  "license": "Public domain",
+  "file": "whatif/flu/img/F1_virus.jpg"
+ },
+ "F2_cows": {
+  "title": "File:Dunnum Family's Top of the Town dairy farm near Westby in Vernon County, Wisconsin.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Dunnum_Family%27s_Top_of_the_Town_dairy_farm_near_Westby_in_Vernon_County%2C_Wisconsin.jpg/1920px-Dunnum_Family%27s_Top_of_the_Town_dairy_farm_near_Westby_in_Vernon_County%2C_Wisconsin.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Dunnum_Family%27s_Top_of_the_Town_dairy_farm_near_Westby_in_Vernon_County,_Wisconsin.jpg",
+  "author": "Carol M. Highsmith",
+  "license": "Public domain",
+  "file": "whatif/flu/img/F2_cows.jpg"
+ },
+ "F3_eggs": {
+  "title": "File:2016-366-351 It's 12 of One, 2 Half Dozen of The Other (31321387560).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/2016-366-351_It%27s_12_of_One%2C_2_Half_Dozen_of_The_Other_%2831321387560%29.jpg/1920px-2016-366-351_It%27s_12_of_One%2C_2_Half_Dozen_of_The_Other_%2831321387560%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:2016-366-351_It%27s_12_of_One,_2_Half_Dozen_of_The_Other_(31321387560).jpg",
+  "author": "cogdogblog",
+  "license": "CC0",
+  "file": "whatif/flu/img/F3_eggs.jpg"
+ },
+ "F4_hens": {
+  "title": "File:Veterinary Services (35197544171).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Veterinary_Services_%2835197544171%29.jpg/1920px-Veterinary_Services_%2835197544171%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Veterinary_Services_(35197544171).jpg",
+  "author": "APHIS.gov",
+  "license": "Public domain",
+  "file": "whatif/flu/img/F4_hens.jpg"
+ }
+}
