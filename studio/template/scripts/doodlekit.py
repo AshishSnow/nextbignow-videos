@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -688,6 +688,91 @@ def ticket(c, x, y, s=1.0, rot=0.0, seed=371):
     ink(c, wrrect(-170, -70, 170, 70, 12, seed, 1.6), (120, 200, 255), 8); wline(c, [(70, -70), (70, 70)], seed + 1, 4, WHITE)
     f = font(BLK_F, 30); c.drawString("1ST CLASS", -150, -10, f, P(INK)); f2 = font(BLK_F, 22); c.drawString("ANYWHERE", -150, 30, f2, P(INK, 0.7))
     c.restore()
+
+
+def _tub(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=(40, 40, 52), label="PROTEIN", **kw):
+    """protein powder tub character: wide jar, screw lid, scoop poking out, big label band."""
+    leg = 70 * s; cb = y - leg; ct = cb - 300 * s; w = 140 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 50)
+    ink(c, wrrect(x - w, ct, x + w, cb, 30 * s, seed, 2.2), col, 9 * s)
+    ink(c, wrrect(x - w - 10 * s, ct - 50 * s, x + w + 10 * s, ct + 10 * s, 14 * s, seed + 1, 1.6), (240, 80, 60), 8 * s)
+    for j in range(7): wline(c, [(x - w + 20 * s + j * 38 * s, ct - 44 * s), (x - w + 20 * s + j * 38 * s, ct + 4 * s)], seed + j, 3 * s, shade((240, 80, 60), 0.7))
+    band = wrrect(x - w + 14 * s, ct + 150 * s, x + w - 14 * s, ct + 240 * s, 10 * s, seed + 2, 1.4); ink(c, band, (255, 214, 40), 6 * s)
+    f = font(BLK_F, 42 * s); tw = f.measureText(label); f = f if tw < 2 * w - 50 * s else font(BLK_F, 42 * s * (2 * w - 50 * s) / tw)
+    c.drawString(label, x - min(tw, 2 * w - 50 * s) / 2, ct + 210 * s, f, P(INK))
+    _arms(c, x - w + 6 * s, x + w - 6 * s, ct + 130 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 64 * s, s * 0.9, look, blink, 40, 26, mood, seed + 9)
+    mouth(c, x, ct + 114 * s, s * 0.7, talk, mood, seed + 5)
+
+
+def _pbar(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=(250, 250, 246), lines_=("EGG WHITES", "DATES", "NUTS"), **kw):
+    """protein bar character standing up: plain wrapper with crimped ends, ingredients printed big on the front."""
+    leg = 70 * s; cb = y - leg; ct = cb - 380 * s; w = 100 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 34)
+    body = wpoly([(x - w, ct + 20 * s), (x + w, ct + 20 * s), (x + w, cb - 20 * s), (x - w, cb - 20 * s)], seed, 2, True, 40); ink(c, body, col, 9 * s)
+    for yy, d in ((ct + 20 * s, -1), (cb - 20 * s, 1)):
+        pts = [(x - w + i * (2 * w) / 8, yy + d * (14 if i % 2 else 2) * s) for i in range(9)]
+        wline(c, pts, seed + int(yy), 7 * s)
+    f = font(BLK_F, 30 * s)
+    for i, l in enumerate(lines_):
+        tw = f.measureText(l); ff = f if tw < 2 * w - 20 * s else font(BLK_F, 30 * s * (2 * w - 20 * s) / tw)
+        c.drawString(l, x - min(tw, 2 * w - 20 * s) / 2, ct + 230 * s + i * 40 * s, ff, P(INK))
+    _arms(c, x - w + 4 * s, x + w - 4 * s, ct + 170 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 100 * s, s * 0.8, look, blink, 36, 24, mood, seed + 9)
+    mouth(c, x, ct + 150 * s, s * 0.6, talk, mood, seed + 5)
+
+
+def pint(c, x, y, s=1.0, seed=381, col=(255, 150, 190), label="PROTEIN"):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-110, -240), (110, -240), (90, 0), (-90, 0)], seed, 2, True, 40), col, 9)
+    ink(c, wrrect(-120, -280, 120, -230, 12, seed + 1, 1.4), WHITE, 8)
+    f = font(BLK_F, 34); c.drawString(label, -f.measureText(label) / 2, -110, f, P(WHITE)); c.restore()
+
+
+def pocket(c, x, y, s=1.0, seed=391):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-200, 0), (0, -150), (200, 0)], seed, 2, True, 40), (245, 220, 170), 9)
+    for j, col in enumerate((GRN, RED, (240, 200, 160))): ink(c, wellipse(-80 + j * 70, -30, 50, 22, seed + j, 1), col, 5)
+    c.restore()
+
+
+def bowl(c, x, y, s=1.0, seed=401):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    for j, (bx, col) in enumerate(((-90, GRN), (-20, (240, 200, 160)), (60, ORG), (120, RED))): ink(c, wellipse(bx, -70, 60, 34, seed + j, 1), col, 5)
+    ink(c, wpoly([(-230, -60), (230, -60), (150, 40), (-150, 40)], seed + 5, 2, True, 50), WHITE, 9); c.restore()
+
+
+def kettlebell(c, x, y, s=1.0, seed=411):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    wline(c, quad_pts(-60, -150, 60, -150, -110, 10), seed, 24, INK); ink(c, wellipse(0, -60, 110, 100, seed + 1, 2), (60, 62, 70), 9)
+    f = font(BLK_F, 40); c.drawString("16", -24, -40, f, P(WHITE)); c.restore()
+
+
+def cookie(c, x, y, s=1.0, seed=421):
+    c.save(); c.translate(x, y); c.scale(s, s); ink(c, wellipse(0, 0, 120, 110, seed, 3), (220, 160, 90), 9)
+    for j in range(6): c.drawCircle(-60 + (j * 47) % 120, -50 + (j * 37) % 100, 14, P(BROWN))
+    c.restore()
+
+
+def nutrition(c, x, y, s=1.0, seed=431, grams="10g", hl=0.0):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-200, -260, 200, 260, 8, seed, 1.6), WHITE, 8)
+    f = font(BLK_F, 40); c.drawString("Nutrition Facts", -180, -200, f, P(INK)); wline(c, [(-180, -180), (180, -180)], seed + 1, 10)
+    rows = [("Calories", "200"), ("Fat", "7g"), ("Carbs", "20g"), ("Protein", grams)]
+    for i, (a_, b_) in enumerate(rows):
+        yy = -110 + i * 80; f2 = font(BLK_F if a_ == "Protein" else XB_F, 40); c.drawString(a_, -180, yy, f2, P(INK)); c.drawString(b_, 180 - f2.measureText(b_), yy, f2, P(INK))
+        wline(c, [(-180, yy + 22), (180, yy + 22)], seed + i, 3, GREY)
+    if hl > 0: scribble(c, 0, 128, 220, 50, hl, RED, 8, seed + 9)
+    c.restore()
+
+
+def stall(c, x, y, s=1.0, seed=441, sign="SAMPLES"):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    for sx in (-1, 1): wline(c, [(sx * 230, 0), (sx * 230, -420)], seed + sx, 10)
+    ink(c, wpoly([(-270, -420), (270, -420), (230, -320), (-230, -320)], seed, 2, True, 60), RED, 9)
+    for j in range(5): c.drawRect(skia.Rect.MakeLTRB(-230 + j * 92, -410, -230 + j * 92 + 46, -330), P(WHITE, 0.85))
+    ink(c, wrrect(-260, -200, 260, -140, 8, seed + 2, 1.4), (200, 150, 100), 8)
+    f = font(BLK_F, 40); c.drawString(sign, -f.measureText(sign) / 2, -240, f, P(INK)); c.restore()
 
 
 # ------------------------------------------------------------------ props
