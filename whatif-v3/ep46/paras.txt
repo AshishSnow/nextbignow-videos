@@ -1,0 +1,16 @@
+July tenth, twenty twenty-four. Seven p.m., in Virginia. Sixty data centers vanished from the power grid. All at the same time. [dramatic] So what happens when AI starts eating the power grid?
+---
+This is Ashburn, Virginia. People call it Data Center Alley. It's one of the biggest clusters of data centers on the planet, and it runs a huge chunk of the internet you use every day.
+---
+That night, one small part failed on a big power line. The grid flickered for a split second. And to protect themselves, all sixty data centers switched over to their own backup power. Fifteen hundred megawatts of demand, gone. That's enough electricity for hundreds of thousands of homes.
+Suddenly the grid had way too much power and nowhere to send it. Operators had to scramble to cut supply and keep the lights on for everyone else. No blackout. But it was close.
+---
+Here's why that's scary. Data centers already use about six percent of all the electricity in America. BloombergNEF says that could hit twenty percent by twenty thirty-five. One in every five units of power, just for data centers.
+Look at this government map. Every yellow dot is a data center. And they all hang on the same power lines as your house.
+---
+And somebody has to pay for it. In America's biggest power grid, which covers Pennsylvania, Ohio, Maryland and more, the price to keep backup power plants ready jumped from about twenty-nine dollars to two hundred seventy, in a single year. The market's own watchdog says data centers drove close to half of those costs. And that lands on regular people's power bills.
+---
+So tech companies are hunting for power anywhere they can find it. In Texas, data centers have asked to plug in almost five times the state's record power use. And Microsoft signed a deal to restart a reactor at Three Mile Island. Yes, that Three Mile Island. The site of America's worst nuclear accident.
+---
+So here's my prediction. The grid doesn't collapse overnight. But places like Virginia and Texas get a lot more close calls. Bills keep climbing. And soon, big data centers get told one thing. Bring your own power, or wait in line.
+And tell me. Would you pay a higher power bill so AI can keep running? Yes or no, in the comments.

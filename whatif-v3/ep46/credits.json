@@ -1,0 +1,58 @@
+{
+ "R3_tmi": {
+  "title": "File:Three Mile Island (color).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Three_Mile_Island_%28color%29.jpg/1920px-Three_Mile_Island_%28color%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Three_Mile_Island_(color).jpg",
+  "author": "United States Department of Energy",
+  "license": "Public domain",
+  "file": "whatif/grid/img/R3_tmi.jpg"
+ },
+ "R5_tower": {
+  "title": "File:Pylon 1402-0112.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Pylon_1402-0112.jpg/1920px-Pylon_1402-0112.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Pylon_1402-0112.jpg",
+  "author": "Mozzihh",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/grid/img/R5_tower.jpg"
+ },
+ "R6_servers": {
+  "title": "File:BalticServers data center.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/BalticServers_data_center.jpg/1920px-BalticServers_data_center.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg",
+  "author": "BalticServers.com",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/grid/img/R6_servers.jpg"
+ },
+ "R13_dcmap": {
+  "title": "File:Data center infrastructure in the United States.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Data_center_infrastructure_in_the_United_States.jpg/1920px-Data_center_infrastructure_in_the_United_States.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Data_center_infrastructure_in_the_United_States.jpg",
+  "author": "DOE/National Renewable Energy Laboratory (NREL)",
+  "license": "Public domain",
+  "file": "whatif/grid/img/R13_dcmap.jpg"
+ },
+ "R7_meter": {
+  "title": "File:Siemens household electricity meter electromechanical induction type.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Siemens_household_electricity_meter_electromechanical_induction_type.jpg/1920px-Siemens_household_electricity_meter_electromechanical_induction_type.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Siemens_household_electricity_meter_electromechanical_induction_type.jpg",
+  "author": "RobbieIanMorrison",
+  "license": "CC BY 4.0",
+  "file": "whatif/grid/img/R7_meter.jpg"
+ },
+ "R9_bulb": {
+  "title": "File:Light bulb Edison 2.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Light_bulb_Edison_2.jpg/1920px-Light_bulb_Edison_2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Light_bulb_Edison_2.jpg",
+  "author": "Thomas Edison (reprinted by the Norris Peters Co.)",
+  "license": "Public domain",
+  "file": "whatif/grid/img/R9_bulb.jpg"
+ },
+ "R10_skyline": {
+  "title": "File:Lower Manhattan night skyline 20261003 \u2013 1.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Lower_Manhattan_night_skyline_20261003_%E2%80%93_1.jpg/1920px-Lower_Manhattan_night_skyline_20261003_%E2%80%93_1.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Lower_Manhattan_night_skyline_20261003_%E2%80%93_1.jpg",
+  "author": "VynedJ",
+  "license": "CC BY 4.0",
+  "file": "whatif/grid/img/R10_skyline.jpg"
+ }
+}
