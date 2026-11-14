@@ -279,7 +279,7 @@ def strike(c, x0, y, x1, k=1.0, col=RED, w=12, seed=3):
 
 
 # ------------------------------------------------------------------ transcript strip (torn paper at the top)
-def strip(c, words, t_cursor=True, y0=262, size=50, t=0.0):
+def strip(c, words, t_cursor=True, y0=262, size=42, t=0.0):
     """words: list of display words already spoken (typewriter reveal). Two lines max, left aligned, inside the safe zone."""
     if not words: return
     lines = wrap(" ".join(words), TYPE_F, size, 860)[-2:]; f = font(TYPE_F, size); lh = size * 1.32
@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -775,6 +775,56 @@ def stall(c, x, y, s=1.0, seed=441, sign="SAMPLES"):
     f = font(BLK_F, 40); c.drawString(sign, -f.measureText(sign) / 2, -240, f, P(INK)); c.restore()
 
 
+def _choc(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, crack=0.0, **kw):
+    """thick chocolate bar character (grid of squares); crack 0..1 splits the top-right corner off and shows the green filling."""
+    leg = 70 * s; cb = y - leg; ct = cb - 380 * s; w = 140 * s; MIL = (120, 70, 40)
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 50)
+    body = wrrect(x - w, ct, x + w, cb, 24 * s, seed, 2.2); ink(c, body, MIL, 9 * s)
+    for q in range(2):
+        for r in range(3):
+            if crack > 0 and q == 1 and r == 0: continue
+            ink(c, wrrect(x - w + 24 * s + q * (w - 10 * s), ct + 22 * s + r * 116 * s, x - w + 24 * s + q * (w - 10 * s) + w - 34 * s, ct + 22 * s + r * 116 * s + 100 * s, 10 * s, seed + q * 3 + r, 1.2), shade(MIL, 1.18), 5 * s)
+    if crack > 0:
+        u = ease(crack); gx, gy = x + 10 * s, ct
+        fill = wpoly([(gx, gy + 10 * s), (x + w, gy + 10 * s), (x + w, gy + 130 * s), (gx, gy + 130 * s)], seed + 7, 2, True, 30); ink(c, fill, (150, 200, 60), 6 * s)
+        for j in range(6): wline(c, [(gx + 10 * s + j * 22 * s, gy + 30 * s), (gx + 20 * s + j * 22 * s, gy + 110 * s)], seed + j, 4 * s, (220, 170, 90))
+        c.save(); c.translate(x + w * 0.55 + 90 * s * u, ct + 60 * s - 120 * s * u); c.rotate(28 * u)
+        ink(c, wrrect(-w * 0.45, -60 * s, w * 0.45, 60 * s, 12 * s, seed + 9, 1.6), MIL, 7 * s); ink(c, wrrect(-w * 0.45, 30 * s, w * 0.45, 60 * s, 8 * s, seed + 10, 1), (150, 200, 60), 4 * s); c.restore()
+    _arms(c, x - w + 6 * s, x + w - 6 * s, ct + 190 * s, arms, t, s, seed + 7)
+    eyes(c, x - 10 * s, ct + 190 * s, s * 0.9, look, blink, 40, 26, mood, seed + 11)
+    mouth(c, x - 10 * s, ct + 246 * s, s * 0.7, talk, mood, seed + 5)
+
+
+def _pista(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, **kw):
+    """pistachio character: beige split shell with a green nut peeking out."""
+    leg = 70 * s; cb = y - leg; cy = cb - 150 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 40)
+    ink(c, wellipse(x, cy, 130 * s, 160 * s, seed, 2.4), (236, 214, 170), 9 * s)
+    ink(c, wellipse(x + 10 * s, cy - 20 * s, 80 * s, 110 * s, seed + 1, 2), (140, 196, 70), 7 * s)
+    wline(c, quad_pts(x - 40 * s, cy - 150 * s, x - 30 * s, cy + 150 * s, 40 * s, 8), seed + 2, 6 * s, shade((236, 214, 170), 0.7))
+    _arms(c, x - 120 * s, x + 120 * s, cy + 30 * s, arms, t, s, seed + 7)
+    eyes(c, x + 10 * s, cy - 40 * s, s * 0.85, look, blink, 34, 24, mood, seed + 9)
+    mouth(c, x + 10 * s, cy + 14 * s, s * 0.65, talk, mood, seed + 5)
+
+
+def phone_video(c, x, y, s=1.0, seed=451, t=0.0, views=None, k=1.0, play=True):
+    """phone showing a short video (generic: no app logos) with a heart + view counter."""
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-160, -300, 160, 300, 40, seed, 2), INK, 9); ink(c, wrrect(-140, -270, 140, 270, 22, seed + 1, 1.2), (40, 40, 52), 0)
+    _choc(c, 0, 230, 0.48, t, 0, (0, 0), "happy", "down", False, False, seed + 2, crack=0.5 + 0.5 * math.sin(t * 3) if play else 1.0)
+    h = skia.Path(); h.moveTo(110, -60); h.cubicTo(80, -90, 60, -50, 110, -20); h.cubicTo(160, -50, 140, -90, 110, -60); c.drawPath(h, P(RED))
+    if views: f = font(BLK_F, 30); c.drawString(views, -f.measureText(views) / 2, -220, f, P(WHITE))
+    c.restore()
+
+
+def scooter(c, x, y, s=1.0, seed=461):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    for wx in (-120, 120): ink(c, wellipse(wx, -40, 40, 40, seed + wx, 1.2), INK, 0)
+    ink(c, wpoly([(-170, -60), (150, -60), (120, -120), (-140, -120)], seed, 2, True, 40), RED, 8)
+    ink(c, wrrect(-170, -250, -30, -120, 12, seed + 1, 1.4), ORG, 8); text(c, "DELIVERY", -100, -175, 22, WHITE, BLK_F)
+    wline(c, [(110, -120), (130, -220), (100, -230)], seed + 2, 9); c.restore()
+
+
 # ------------------------------------------------------------------ props
 def building(c, x, y, w=360, h=520, col=SKY, seed=31, label=None, lit=True):
     """office tower standing on (x, y)."""
@@ -880,7 +930,10 @@ def cart(c, x, y, s=1.0, seed=121, items=True):
 def store(c, x, y, w=760, h=420, seed=131, sign=None):
     ink(c, wpoly([(x - w / 2, y), (x - w / 2, y - h), (x + w / 2, y - h), (x + w / 2, y)], seed, 2.4, True, 60), (236, 236, 228), 9)
     ink(c, wpoly([(x - w / 2 - 20, y - h), (x - w / 2 - 20, y - h - 70), (x + w / 2 + 20, y - h - 70), (x + w / 2 + 20, y - h)], seed + 1, 2, True, 60), RED, 9)
-    if sign: f = font(BLK_F, 50); c.drawString(sign, x - f.measureText(sign) / 2, y - h - 18, f, P(WHITE))
+    if sign:
+        f = font(BLK_F, 50); tw = f.measureText(sign)
+        if tw > w - 20: f = font(BLK_F, 50 * (w - 20) / tw); tw = w - 20
+        c.drawString(sign, x - tw / 2, y - h - 18, f, P(WHITE))
     ink(c, wrrect(x - 110, y - 190, x + 110, y, 6, seed + 2, 1.4), SKY, 8); wline(c, [(x, y - 190), (x, y)], seed + 3, 6)
     for sx in (-1, 1):
         for q in range(2): ink(c, wrrect(x + sx * (170 + q * 120) - 50, y - 300, x + sx * (170 + q * 120) + 50, y - 220, 8, seed + q * 3 + sx, 1.2), SKY, 6)
