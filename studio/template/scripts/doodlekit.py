@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -578,6 +578,115 @@ def laptop(c, x, y, s=1.0, seed=281, title_="AirBed & Breakfast", k=1.0):
         for j in range(3):
             bx = -200 + j * 140; ink(c, wrrect(bx, -200, bx + 120, -110, 8, seed + j, 1), SKY, 5)
             f2 = font(BLK_F, 28); c.drawString("$80", bx + 30, -70, f2, P(INK, k))
+    c.restore()
+
+
+def _fax(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, **kw):
+    """old office fax machine character: beige body, paper tray, handset, a page curling out."""
+    leg = 70 * s; cb = y - leg; ct = cb - 220 * s; w = 170 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 60)
+    ink(c, wpoly([(x - w, cb), (x - w, ct + 40 * s), (x - w * 0.6, ct), (x + w, ct), (x + w, cb)], seed, 2.2, True, 40), (232, 222, 196), 9 * s)
+    ink(c, wrrect(x - w * 0.9, ct - 70 * s, x + w * 0.3, ct + 6 * s, 30 * s, seed + 1, 1.6), (120, 116, 108), 8 * s)        # handset
+    pg = math.sin(t * 3) * 6 * s
+    ink(c, wpoly([(x + w * 0.35, ct + 4 * s), (x + w * 0.95, ct + 4 * s), (x + w * 0.9 + pg, ct - 120 * s), (x + w * 0.4 + pg, ct - 110 * s)], seed + 2, 1.4, True, 40), WHITE, 6 * s)
+    for j in range(3): wline(c, [(x + w * 0.47 + pg, ct - 90 * s + j * 26 * s), (x + w * 0.83 + pg, ct - 94 * s + j * 26 * s)], seed + j, 3 * s, GREY)
+    for q in range(3):
+        for r in range(2): ink(c, wrrect(x + w * 0.3 + q * 34 * s, ct + 120 * s + r * 34 * s, x + w * 0.3 + q * 34 * s + 24 * s, ct + 120 * s + r * 34 * s + 24 * s, 4 * s, seed + q + r, 0.8), WHITE, 4 * s)
+    _arms(c, x - w + 6 * s, x + w - 6 * s, ct + 130 * s, arms, t, s, seed + 7)
+    eyes(c, x - 60 * s, ct + 90 * s, s * 0.9, look, blink, 40, 26, mood, seed + 9)
+    mouth(c, x - 60 * s, ct + 150 * s, s * 0.7, talk, mood, seed + 5)
+
+
+def _scissors(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, snip=0.0, **kw):
+    """standing scissors character: two blades (open by snip 0..1) and two finger loops as the 'head'."""
+    leg = 60 * s; cb = y - leg; piv = cb - 230 * s; a = math.radians(8 + 22 * snip)
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 30)
+    for sx in (-1, 1):
+        tip = (x + sx * math.sin(a) * 260 * s, piv + math.cos(a) * 0 - 0 * s)
+        bl = [(x, piv), (x + sx * math.sin(a) * 250 * s - sx * 10 * s, piv - math.cos(a) * 250 * s), (x + sx * math.sin(a) * 250 * s + sx * 18 * s, piv - math.cos(a) * 240 * s), (x + sx * 26 * s, piv + 10 * s)]
+        ink(c, wpoly(bl, seed + sx, 1.4, True, 40), (210, 214, 222), 8 * s)
+        lx = x + sx * 70 * s; ly = piv + 110 * s
+        wline(c, [(x + sx * 12 * s, piv + 10 * s), (lx, ly - 40 * s)], seed + sx + 4, 22 * s, RED, 1)
+        ink(c, wellipse(lx, ly, 52 * s, 64 * s, seed + sx + 6, 1.6), RED, 9 * s); ink(c, wellipse(lx, ly, 30 * s, 40 * s, seed + sx + 8, 1.2), PAPER, 6 * s)
+    ink(c, wellipse(x, piv, 16 * s, 16 * s, seed + 3, 1), GREY, 6 * s)
+    _arms(c, x - 110 * s, x + 110 * s, piv + 90 * s, arms, t, s, seed + 7)
+    eyes(c, x, piv - 60 * s, s * 0.8, look, blink, 34, 24, mood, seed + 9)
+    mouth(c, x, piv - 14 * s, s * 0.6, talk, mood, seed + 5)
+
+
+def pants(c, x, y, s=1.0, seed=291, col=WHITE):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-120, -260), (120, -260), (140, 240), (30, 240), (0, -60), (-30, 240), (-140, 240)], seed, 2, True, 50), col, 9)
+    wline(c, [(-120, -220), (120, -220)], seed + 1, 5, GREY); c.drawCircle(0, -240, 8, P(GREY)); c.restore()
+
+
+def stockings(c, x, y, s=1.0, seed=301, cut=0.0):
+    """footless tan stockings on a hanger; cut 0..1 removes the feet (the snip)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    wline(c, [(-150, -300), (0, -360), (150, -300), (-150, -300)], seed, 7, GREY); wline(c, [(0, -360), (0, -400), (24, -420)], seed + 1, 7, GREY)
+    for sx in (-1, 1):
+        L = 300 if cut < 0.5 else 230
+        pth = wpoly([(sx * 20, -300), (sx * 110, -300), (sx * 95, -300 + L), (sx * 35, -300 + L)], seed + sx, 1.6, True, 40); ink(c, pth, (232, 190, 150), 7)
+        if cut < 0.5: ink(c, wellipse(sx * 75, -300 + L + 10, 50, 26, seed + sx + 3, 1.2), (232, 190, 150), 7)
+        else:
+            fy = -300 + 240 + 140 * min(1, (cut - 0.5) * 2); ink(c, wellipse(sx * 90, fy + 60, 50, 26, seed + sx + 3, 1.2), (232, 190, 150), 6, a=1 - (cut - 0.5))
+    c.restore()
+
+
+def book(c, x, y, s=1.0, title_="PATENTS", seed=311, col=(40, 90, 170)):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-150, -200, 150, 200, 12, seed, 2), col, 9); wline(c, [(-120, -200), (-120, 200)], seed + 1, 6, shade(col, 0.6))
+    f = font(BLK_F, 40); tw = f.measureText(title_); c.drawString(title_, 15 - tw / 2, -60, f, P(WHITE))
+    f2 = font(BLK_F, 24); c.drawString("& TRADEMARKS", 15 - f2.measureText("& TRADEMARKS") / 2, -20, f2, P(YEL)); c.restore()
+
+
+def plane(c, x, y, s=1.0, rot=-12, seed=321):
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s, s)
+    ink(c, wrrect(-220, -40, 220, 40, 40, seed, 2), WHITE, 9)
+    ink(c, wpoly([(-40, 0), (60, 0), (-40, 160), (-90, 160)], seed + 1, 1.4, True, 40), SKY, 8); ink(c, wpoly([(-40, 0), (60, 0), (-40, -150), (-90, -150)], seed + 2, 1.4, True, 40), SKY, 8)
+    ink(c, wpoly([(-200, -20), (-170, -20), (-210, -120), (-240, -120)], seed + 3, 1.2, True, 40), RED, 7)
+    for j in range(5): c.drawCircle(-100 + j * 50, -8, 9, P(SKY))
+    c.restore()
+
+
+def restroom_door(c, x, y, s=1.0, seed=331, open_=0.0):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-170, 0), (-170, -520), (170, -520), (170, 0)], seed, 2, True, 50), (200, 170, 140), 9)
+    ink(c, wrrect(-80, -440, 80, -330, 10, seed + 1, 1.2), WHITE, 7)
+    f = font(BLK_F, 34); c.drawString("LADIES", -f.measureText("LADIES") / 2, -372, f, P(PNK))
+    c.drawCircle(120, -250, 14, P(INK)); c.restore()
+
+
+def register(c, x, y, s=1.0, seed=341, open_=0.0):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-200, 0), (-200, -180), (200, -180), (200, 0)], seed, 2, True, 50), (110, 200, 160), 9)
+    ink(c, wpoly([(-150, -180), (-120, -320), (150, -320), (170, -180)], seed + 1, 2, True, 50), (90, 180, 140), 9)
+    ink(c, wrrect(-110, -300, 120, -240, 8, seed + 2, 1), INK, 0); f = font(BLK_F, 40); c.drawString("$$$", -40, -255, f, P(GRN))
+    for q in range(4):
+        for r in range(2): ink(c, wrrect(-120 + q * 64, -220 + r * 40, -80 + q * 64, -190 + r * 40, 4, seed + q + r, 0.8), WHITE, 4)
+    ink(c, wrrect(-210, 0, 210, 60 + 50 * open_, 8, seed + 5, 1.4), (90, 180, 140), 8); c.restore()
+
+
+def envelope(c, x, y, s=1.0, seed=351, heart=True):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-200, -130, 200, 130, 10, seed, 2), WHITE, 9); wline(c, [(-196, -126), (0, 20), (196, -126)], seed + 1, 7)
+    if heart:
+        h = skia.Path(); h.moveTo(0, 90); h.cubicTo(-90, 30, -50, -40, 0, -5); h.cubicTo(50, -40, 90, 30, 0, 90); c.drawPath(h, P(RED))
+    c.restore()
+
+
+def magazine(c, x, y, s=1.0, seed=361, head="MAGAZINE", line2="YOUNGEST SELF-MADE"):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-200, -270, 200, 270, 8, seed, 2), (255, 220, 60), 9)
+    f = font(ANTON_F, 70); c.drawString(head, -f.measureText(head) / 2, -170, f, P(RED))
+    ink(c, wellipse(0, 20, 110, 130, seed + 1, 2), (255, 236, 210), 7)
+    f2 = font(BLK_F, 26); c.drawString(line2, -f2.measureText(line2) / 2, 210, f2, P(INK)); c.restore()
+
+
+def ticket(c, x, y, s=1.0, rot=0.0, seed=371):
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s, s)
+    ink(c, wrrect(-170, -70, 170, 70, 12, seed, 1.6), (120, 200, 255), 8); wline(c, [(70, -70), (70, 70)], seed + 1, 4, WHITE)
+    f = font(BLK_F, 30); c.drawString("1ST CLASS", -150, -10, f, P(INK)); f2 = font(BLK_F, 22); c.drawString("ANYWHERE", -150, 30, f2, P(INK, 0.7))
     c.restore()
 
 
