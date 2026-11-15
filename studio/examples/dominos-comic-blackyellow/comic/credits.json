@@ -1,0 +1,32 @@
+{
+ "pizza": {
+  "author": "Luke",
+  "license": "Public domain",
+  "title": "File:Closeup of a pepperoni pizza.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Closeup_of_a_pepperoni_pizza.jpg"
+ },
+ "office": {
+  "author": "Chris McKenna",
+  "license": "CC BY-SA 4.0",
+  "title": "File:Volunteers working at WMUK.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Volunteers_working_at_WMUK.jpg"
+ },
+ "oven": {
+  "author": "Angkeet",
+  "license": "CC BY-SA 4.0",
+  "title": "File:Pepperoni Pizza - Rannaghor.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Pepperoni_Pizza_-_Rannaghor.jpg"
+ },
+ "cheese": {
+  "author": "Famartin",
+  "license": "CC BY-SA 4.0",
+  "title": "File:2021-01-02 21 05 00 A container of Severino Pasta Company Cheese-stuffed Shells with Marinara covered with Kraft Finely Shredded Mozzarella Cheese after heating in the Franklin Farm section of Oak Hill, Fairfax County, Virginia.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:2021-01-02_21_05_00_A_container_of_Severino_Pasta_Company_Cheese-stuffed_Shells_with_Marinara_covered_with_Kraft_Finely_Shredded_Mozzarella_Cheese_after_heating_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg"
+ },
+ "sauce": {
+  "author": "Dennis Klein klein2",
+  "license": "CC0",
+  "title": "File:Fresh Tomato Sauce (Unsplash).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Fresh_Tomato_Sauce_(Unsplash).jpg"
+ }
+}
