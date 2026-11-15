@@ -4,7 +4,7 @@ hatched ground band, object characters with eyes and stick limbs, torn-paper tra
 hand-drawn speech bubbles, scribble circles and arrows. Our own drawing code, generic objects only — no logos, no brand trade dress.
 Skia. Used by exec() from anim_shots.py (needs W, H; defines BOIL which the renderer sets per frame).
 """
-import math, os
+import math, os, re
 import numpy as np, skia, cv2
 
 W, H = 1080, 1920
@@ -842,6 +842,32 @@ def cover_title(c, kicker, title, k=1.0, y=640, col=RED, seed=501):
         c.drawString(l, -f.measureText(l) / 2, yy + 92 + i * lh, f, P(col if i == len(lines) - 1 else INK))
     wline(c, [(-w / 2 + 50, h / 2 - 26), (w / 2 - 50, h / 2 - 32)], seed + 3, 10, YEL, 1.2)
     c.restore()
+
+
+def strip_chunk(c, words, hl=(), y0=268, size=40, t=0.0, maxw=760, seed=40):
+    """Subtitle v2 (learned from the owner's 15 Nov reference reel): a SMALL torn-paper strip that types only the current 2-5 word
+    chunk in uppercase typewriter letters, with the key word(s) under a yellow marker highlight. Centred at x=540."""
+    if not words: return
+    f = font(TYPE_F, size); sp = f.measureText(" ")
+    toks = [w.upper() for w in words]; widths = [f.measureText(w) for w in toks]
+    lines, cur, cw = [], [], 0
+    for i, (w, ww) in enumerate(zip(toks, widths)):
+        if cur and cw + sp + ww > maxw: lines.append(cur); cur, cw = [], 0
+        cur.append(i); cw += (sp if cw else 0) + ww
+    if cur: lines.append(cur)
+    lines = lines[-2:]; lh = size * 1.35
+    bw = max(sum(widths[i] for i in L) + sp * (len(L) - 1) for L in lines) + 70; bh = lh * len(lines) + 34
+    x0, x1, y1 = 540 - bw / 2, 540 + bw / 2, y0 + bh
+    top = [(x, y0 + (3 if (int(x) // 23) % 2 else -2)) for x in np.arange(x0, x1 + 1, 23)]
+    bot = [(x, y1 + (5 if (int(x) // 19) % 2 else -4)) for x in np.arange(x1, x0 - 1, -19)]
+    pth = wpoly(top + bot, seed, 0.4, True, 400)
+    c.save(); c.translate(0, 6); c.drawPath(pth, P(INK, 0.14)); c.restore(); c.drawPath(pth, P((255, 254, 248))); c.drawPath(pth, S((205, 205, 200), 2))
+    for li, L in enumerate(lines):
+        lw = sum(widths[i] for i in L) + sp * (len(L) - 1); xx = 540 - lw / 2; yy = y0 + 17 + size * 0.98 + li * lh
+        for i in L:
+            if re.sub(r"[^a-z0-9$%]", "", words[i].lower()) in hl:
+                c.drawRect(skia.Rect.MakeLTRB(xx - 4, yy - size * 0.62, xx + widths[i] + 4, yy + size * 0.12), P((255, 222, 40), 0.85))
+            c.drawString(toks[i], xx, yy, f, P(INK)); xx += widths[i] + sp
 
 
 # ------------------------------------------------------------------ props

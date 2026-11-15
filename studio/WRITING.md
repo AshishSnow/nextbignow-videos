@@ -126,3 +126,19 @@ Wikipedia: Signs of AI writing (WikiProject AI Cleanup) · Kobak et al. 2024, ar
 NPR, "7 tips for writing a script" (17 Feb 2023) · UF/IFAS EDIS WC193, writing for broadcast · Jenny Hoyos via vidIQ · MrBeast production memo
 (Simon Willison excerpts, Sep 2024) · Drew & Grimes 1987, *Communication Research* 14(4) · ElevenLabs docs: numbers/symbols, pauses.
 Research run 6 Nov 2026; full links in the RND.md log line of that date.
+
+## Learned from the owner's reference reel (15 Nov 2026 — doodle tech-news explainer he sent: "see their animation style and story writing, learn")
+Script moves that make it feel human and keep people watching:
+1. **News hook + personal stake in 2 lines.** Line 1 = the surprising fact ("Microsoft just patented a way to train its AI on your gaming PC while you're not using it. And the patent just got approved."). Line 2 = the viewer's own question ("So, is your graphics card about to start working for Microsoft?").
+2. **"Here's how it works:"** — the mechanism in 2-3 tiny steps, before any opinion.
+3. **Ask the viewer's questions out loud, one by one, and answer each in one or two short lines** ("Will Windows just switch this on by itself? Nothing says so." / "Will you get paid? Maybe."). Honest uncertainty ("nothing says so", "no number given") sounds human and builds trust.
+4. **Do the math for them with everyday units** ("an extra 250 watts, 4 hours a day, is about $5.50 a month on your power bill").
+5. **"The upside? … The catch? …"** — one line each, balanced.
+6. **Real reactions** — quote 1-2 real people (from documents/comments you can source) for humour.
+7. **Kill the obvious myth** ("And no, it's not behind yesterday's outage.").
+8. **Callback ending** that returns to line 2 ("So tonight, your graphics card still works for just one person: you."), then a short CTA.
+Animation moves:
+- **One set per section that evolves beat by beat** (same piggy bank stays while dollars fly in, a claims list appears, "0 $" is stamped) instead of a hard cut on every line; a new prop or annotation every 1-2 s.
+- **A recurring plain "you" character** (stick person) who reacts.
+- **Red-marker annotations** drawn on the scene: strike-throughs, circles, ticks, question marks.
+- **Subtitles: small torn strip, 2-5 words at a time, uppercase typewriter, key word under a yellow highlighter** (doodlekit.strip_chunk + anim_shots.chunk_now; highlight = the line's stressed words + any number).

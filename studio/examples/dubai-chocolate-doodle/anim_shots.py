@@ -31,12 +31,14 @@ def lt(t, sid): return t - SHOT[sid]["start"]
 
 
 # ======================================================================== drawing
-import skia, runpy
+import skia, runpy, re
 exec(open(f"{_D}/doodlekit.py").read())
 SURF = skia.Surface(W, H)
 COVER = ("A pregnant snack craving helped cause a", "GLOBAL PISTACHIO SHORTAGE?")   # (kicker, TITLE) shown on frame 0 and the cover
 COVER_T = 2.6
-_VL = {l[0]: l[1] for l in runpy.run_path(f"{B}/scripts/vo_lines.py")["LINES"]}
+_VLL = runpy.run_path(f"{B}/scripts/vo_lines.py")["LINES"]
+_VL = {l[0]: l[1] for l in _VLL}
+_HL = {l[0]: {re.sub(r"[^a-z0-9$%]", "", w.lower()) for w in l[6]} for l in _VLL}
 DISP = {"i3": "Imagine you're her. You charge about $20 a bar, and almost nobody will pay it.",
         "i4": "Then 1 video changes everything. I'll show you what happened, then 4 tricks you can steal for your own food business.",
         "a1": "Meet Sarah Hamouda. In 2021 she was pregnant in Dubai, and she craved something oddly specific.",
@@ -50,6 +52,24 @@ _ORDER = [l for l in LINES]
 _LW = {}
 for _w in WORDS: _LW.setdefault(_w["line"], []).append(_w["t"])
 CHOC_L = {"a6"}; PIS_L = {"c4"}
+
+
+def chunk_now(t):
+    """current 2-5 word subtitle chunk (breaks at punctuation), typed as spoken; returns (words, highlight set)."""
+    cur = None
+    for lid in _ORDER:
+        if LINES[lid]["start"] - 0.05 <= t: cur = lid
+    if cur is None: return [], set()
+    d = DISP.get(cur, _VL.get(cur, LINES[cur].get("text", ""))).split(); ts = _LW.get(cur, [])
+    k = sum(1 for x in ts if x <= t + 0.04); K = max(1, len(ts))
+    n = len(d) if t > LINES[cur]["end"] else max(1, math.ceil(k / K * len(d)))
+    chunks, c0 = [], 0
+    for i, w in enumerate(d):
+        if i - c0 + 1 >= 5 or w[-1:] in ".?!,:;" or i == len(d) - 1:
+            chunks.append((c0, i + 1)); c0 = i + 1
+    for a_, b_ in chunks:
+        if a_ < n <= b_: hl = set(_HL.get(cur, set())) | {re.sub(r"[^a-z0-9$%]", "", x.lower()) for x in d if any(ch.isdigit() for ch in x)}; return d[a_:n], hl
+    return [], set()
 
 
 def spoken_words(t):
@@ -382,7 +402,7 @@ def _draw(sid, t, n):
     if COVER and t < COVER_T:   # big hook title on frame 0 = the grid cover (owner 15 Nov)
         kk = 1.0 if t < COVER_T - 0.35 else 1.0 - ease((t - (COVER_T - 0.35)) / 0.35)
         cover_title(c, COVER[0], COVER[1], kk, 700)
-    strip(c, spoken_words(t), True, 262, 42, t)
+    _cw, _hl = chunk_now(t); strip_chunk(c, _cw, _hl, 268, 40, t)
     return SURF.makeImageSnapshot().toarray(colorType=skia.kRGBA_8888_ColorType)[..., :3].astype(np.float32) / 255
 
 
