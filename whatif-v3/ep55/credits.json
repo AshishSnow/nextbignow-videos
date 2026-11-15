@@ -1,0 +1,26 @@
+{
+ "C1_bsod": {
+  "title": "File:CrowdStrike BSOD at LGA.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/CrowdStrike_BSOD_at_LGA.jpg/1920px-CrowdStrike_BSOD_at_LGA.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:CrowdStrike_BSOD_at_LGA.jpg",
+  "author": "Smishra1",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/cloud/img/C1_bsod.jpg"
+ },
+ "C2_fax": {
+  "title": "File:Samsung SF-370 fax machine with inkjet printing on normal paper (edited, no BG).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Samsung_SF-370_fax_machine_with_inkjet_printing_on_normal_paper_%28edited%2C_no_BG%29.jpg/1920px-Samsung_SF-370_fax_machine_with_inkjet_printing_on_normal_paper_%28edited%2C_no_BG%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Samsung_SF-370_fax_machine_with_inkjet_printing_on_normal_paper_(edited,_no_BG).jpg",
+  "author": "File:Samsung SF-370 fax with inkjet printing.jpg: Pittigrilli\nderivative work: P",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/cloud/img/C2_fax.jpg"
+ },
+ "C3_servers": {
+  "title": "File:BalticServers data center.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/BalticServers_data_center.jpg/1920px-BalticServers_data_center.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg",
+  "author": "BalticServers.com",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/grid/img/R6_servers.jpg"
+ }
+}
