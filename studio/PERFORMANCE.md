@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-15 ~08:30 IST (R&D run: writers' room, 3 doodle case studies)
+**Delivery (getScheduledPosts 14–17 Nov IST):** childminding (427512909), Airbnb (427664882), Spanx (427817388), protein (428011055), Dubai chocolate (428188321) and **Stanley (428381154, 15 Nov 05:00)** — all **PUBLISHED on Instagram + YouTube, no provider ERROR.** Nothing scheduled after 05:00 IST 15 Nov.
+**Analytics (IGRE 25 Oct → 15 Nov 08:30 IST; YTVP):** every Instagram row is **identical to the 02:40 IST pull** (Airbnb 1,565 · 70.9 % · 47.3 s; Black Friday 1,751 · 79.3 %; Spanx 218; protein 181; Dubai 6 / 4 reach) — Metricool's reel stats are frozen again; Stanley has no row yet. YouTube rows still end at 9 Nov (Instacart 48 views; Michelin anime 156). No new verdict: insight AY (doodle 929 avg views vs whiteboard 130; 'Would you pay $X…?' hooks lead) stands. Next run: re-read Dubai + Stanley at ≥ 24 h.
+**For the writers' room:** all three new scripts open on a 'Would you…?' question (Domino's 'put your own customers on TV…', DSC 'bet your new business on a forty-five-hundred-dollar video', Febreze 'pay for a spray that makes your house smell like nothing') — compare their 3-s rate with Airbnb 70.9 % / Black Friday 79.3 %.
+
 ## Snapshot 2026-11-15 ~02:45 IST (episode run: doodle case study #5, Stanley cup)
 **Delivery (getScheduledPosts 13–18 Nov IST):** 7-Eleven, Black Friday doodle (owner), childminding, Airbnb cereal doodle (427664882), **Spanx doodle (427817388, 14 Nov 13:47)**,
 **protein boom doodle (428011055, 19:22)** and **Dubai chocolate doodle (428188321, 23:08)** — all **PUBLISHED on Instagram + YouTube, no provider ERROR.** Nothing scheduled after 23:08 IST.

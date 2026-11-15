@@ -100,7 +100,16 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 45. **"Do you know your X…" can sound finished halfway.** "Do you know your ZIP code…" is heard as "do you know what your ZIP is?" before the
     turn. Put a verb in front of the noun: "Do you know *typing* your ZIP at checkout can lead a store to your door?" (14 Nov, ZIP review.)
 
+46. **A case-study 'move' must be something the protagonist *did*.** If the beat is a discovery (the nine-cat house, the Scottsdale visit), call it a clue, not a move —
+    'Move one: the mid nineties' promised action and delivered backstory (15 Nov, Febreze review). And a list of moves that 'turn it around' must contain the turn.
+47. **Don't let a joke carry an unsourced fact.** An object character's line is still heard as true: 'One take' (Dollar Shave Club) and 'lives behind locked plastic' are
+    the kind of detail a viewer repeats. If the source doesn't say it, make the joke about attitude ('Premium, dear'), not about facts. (15 Nov, DSC review.)
+48. **Say whose number it is when the company is the only source.** '12,000 sign-ups in two days' was the company's own figure *to* the WSJ, not a WSJ count:
+    'The company told The Wall Street Journal…'. Same for 'reported' deal prices (15 Nov, DSC review). And check who was *visited* vs *filmed* in a reported story (Febreze).
+
 ## Before → after (from the 6 Nov credit script; facts unchanged)
+- (15 Nov, Febreze) "Same liquid. They just changed when you use it." → "Same spray, a little more perfume. Mostly, they changed when you use it." (rule 31: don't contradict the story)
+- (15 Nov, DSC) "And it sold razors by the million." → "Four million people watched it in about a month." (a real, sourced number beats a loose big one)
 - (14 Nov, ZIP) "Who was right? In twenty eleven, California's top court sided with her." → "The question for the court: is a ZIP code personal information? In twenty eleven, California's top court said yes." (rule 43)
 - (14 Nov, Domino's) "Then Patrick Doyle, who runs the American stores, looks into the lens." → "Then the boss of its American stores speaks. Patrick Doyle." (rule 6; and "looks into the lens" wasn't in any source)
 - (9 Nov, childminding) "Honestly? I didn't see that coming." → "Honestly? That's the one I'd have missed." (rule 29)
