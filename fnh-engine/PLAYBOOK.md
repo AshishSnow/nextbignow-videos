@@ -409,6 +409,19 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
 - Sound: room tone + reverb 'party' (chatter, far clinks; a living room), `fizz_pour`.
 - Voice: PZ 1.2 neutral-positive on one script (line mean +0.015); re-test before changing voice.env. One interjection ('Hic!') per video at most.
 
+### Ep 38 (15 Nov, eighteenth ink episode): Chubby's MOUTH-WATERING acting, the KITCHEN-IN-YOUR-BODY metaphor, SOUND PERSPECTIVE (`anim_props_lib38.py`, `engine/template/sfx_lib.py`, voice.env)
+- 50.0 s, 9 lines / 134 words / 16 shots. Payoff ('cuts starch into sugar') at 42 %, a home test you can try today (chew a plain roti -> it tastes a little sweet), the acid twist at ~70 %.
+  END = LINES['c2']['end'] + 1.33 in anim_shots (0.6 s logo + a 0.63 s loop tail) keeps a 48.7 s VO inside 50 s.
+- Acting kit (lib38): `mouth_xy(x, y, s, t, lean, squash)` (from nose_xy), `drool(f, mx, my, s, t, t0, period, amt)` (lib34 drip re-coloured as clear saliva),
+  `lick(f, mx, my, s, t, t0, dur)` (tongue tip sweeps the top lip), `gulp(t, t0)` -> dict(dy, squash, k) + `gulp_mark(f, x, y, s, k)`, `scent(f, src, dst, t, t0, k)` = an aroma
+  ribbon that HOOKS the nose (draw it AFTER chub so it lands on the nose tip, or it disappears behind the face). In head close-ups (chub_head_only s 2.3-2.6) the mouth
+  corner is at about (hx + 30 s, hy + 74 s); a drool from the nose area reads as snot (ep 34!), so check it in the test frames.
+- Props (ink): jalebi_el, tray38_el, toque_el + `brain_chef()` (the brain as head chef), ticket_el(text), scissors_el(open_k), amylase_el (water-drop prep cook), roti_el(bite)
+  (squash it to 0.42 height to lie flat on a worktop), `starch_chain(f, x0, y, n, t, t0, cut_k)` (beige beads snipped into saffron PAIRS = maltose). lib38 sets ACC to saffron.
+  A busy shop shelf behind kinetic hook words needs `hook_band()` (a feathered paper band, ep 38 anim_shots) or the words don't read.
+- Sound: `persp(x, d)` / `flyby(x, t0, dur, x0, x1, cents)` (sfx_lib, see improvements G), place 'shop' (ir + room_tone), foley slurp, lick, tap_run, chef_bell, gas_light.
+- Voice: PZ 1.2 is now voice.env (neutral-positive on two scripts).
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with

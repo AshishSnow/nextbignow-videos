@@ -1143,3 +1143,115 @@ def fizz_pour(level=-26, dur=1.2):
     a = fizz(level, dur); g = glug(level - 4, max(2, int(dur / 0.25)), 0.22)
     n_ = max(len(a), len(g)); out = np.zeros((n_, 2), np.float32); out[:len(a)] += a; out[:len(g)] += g
     return out
+
+
+# ================= ep 38: SOUND PERSPECTIVE = DISTANCE BY FILTERING + DOPPLER FLY-BYS (craft skill) =================
+# A far sound is quieter (about -6 dB per doubling of distance), darker (the highs go first: low-pass ~11 kHz near, ~5 kHz mid, ~3 kHz far) and wetter
+# (reverb 10-15 % near, 20-30 % mid, 35-45 % far, with a longer pre-delay); a near sound is loud, bright and dry. A fly-by = a level swell on an S-curve,
+# pitch UP while it approaches and DOWN as it leaves (Doppler: f' = f * c / (c - v_r)), brightest at the closest point.
+# Sources: DSU 'Distance perception' lecture (DAD 422, 2025: -6 dB / doubling; near/mid/far LPF + wet + pre-delay table), iZotope 'What is mix depth'
+# ('to push something toward the back of a mix, I can filter out its highs'; dry vs wet contrast), K. Collins, Designing Sound 2013 'Auditory perspective'
+# (near = mostly direct sound, far = mostly reflections). Use: place(persp(x, d), t, xpos, far=d) for anything that happens away from the camera
+# (a voice from the kitchen, a thing in the background), flyby(x, t0, dur, x0, x1) for anything that whooshes past the camera.
+def persp(x, d=0.0):
+    """distance 0 (at the mic) .. 1 (far end of the room): level -12 dB, low-pass 11 kHz -> 3 kHz; combine with place(..., far=d) for the wet send."""
+    y = x.mean(1) if x.ndim == 2 else x
+    fc = 11000 * (3000 / 11000) ** clamp(d)
+    y = signal.sosfilt(signal.butter(2, fc, "low", fs=SR, output="sos"), y) * db(-12 * clamp(d))
+    return y.astype(np.float32)
+
+
+def flyby(x, t0, dur, x0=60, x1=1020, cents=180, near=0.0, where=None):
+    """DOPPLER fly-by: the effect x travels from screen x0 to x1 over dur seconds (closest at the middle): pitch +cents on approach -> -cents leaving
+    (smooth arctan curve, like a real pass), level on an S-curve swell, brighter + drier at the closest point; placed with pan following x."""
+    y = x.mean(1) if x.ndim == 2 else x
+    n_ = int(dur * SR)
+    if len(y) < n_: y = np.pad(y, (0, n_ - len(y)))
+    y = y[:n_]
+    u = np.linspace(-1, 1, n_)
+    ratio = 2 ** (-cents / 1200 * (2 / math.pi) * np.arctan(4 * u))               # >1 approaching, <1 leaving
+    pos = np.cumsum(ratio); pos = pos / pos[-1] * (n_ - 1)                          # time-varying resample = the pitch bend
+    z = np.interp(pos, np.arange(n_), y)
+    prox = np.exp(-(u / 0.45) ** 2)                                                # 1 at the closest point
+    dark = signal.sosfilt(signal.butter(2, 2600, "low", fs=SR, output="sos"), z)
+    z = (dark * (1 - prox) + z * prox) * (db(-12) + (1 - db(-12)) * prox)
+    seg = max(1, n_ // 6)
+    for k in range(6):                                                              # pan follows the path in 6 steps
+        a, b = k * seg, n_ if k == 5 else (k + 1) * seg
+        xp = x0 + (x1 - x0) * (k + 0.5) / 6
+        place(z[a:b].astype(np.float32), t0 + a / SR, xp, far=0.6 * (1 - float(prox[(a + b) // 2])), where=where)
+
+
+_ir_prev38 = ir
+def ir(kind):
+    if kind == "shop":                                                              # ep 38: a small sweet shop (glass cases, tiled floor, bright)
+        kind2 = dict(pre=0.007, rt=0.42, taps=((0.010, 0.55), (0.017, 0.4), (0.026, 0.25)), lp=6500)
+        n_ = int((kind2["pre"] + kind2["rt"] * 1.2) * SR); out = np.zeros((n_, 2), np.float32); tt = np.arange(n_) / SR
+        for ch in range(2):
+            r = np.random.default_rng(138 + ch)
+            tail = r.standard_normal(n_) * np.exp(-6.9 * np.maximum(0, tt - kind2["pre"]) / kind2["rt"]) * (tt >= kind2["pre"])
+            tail = signal.sosfilt(signal.butter(2, kind2["lp"], "low", fs=SR, output="sos"), tail); tail = tail / (np.sqrt(np.sum(tail ** 2)) + 1e-9) * 0.6
+            for d_, a_ in kind2["taps"]:
+                k = int((d_ + 0.004 * ch) * SR)
+                if k < n_: tail[k] += a_
+            out[:, ch] = tail
+        return out
+    return _ir_prev38(kind)
+
+
+WET["shop"] = -12; BUS["shop"] = np.zeros((NS, 2), np.float32)
+_rt_prev38 = room_tone
+def room_tone(kind, n_):
+    if kind == "shop":                                                              # ep 38: sweet-shop murmur + the glass case's fridge hum + far street
+        tt = np.arange(n_) / SR; w = rng.standard_normal(n_)
+        x = _bp(w, 200, 2200) * (0.55 + 0.45 * np.sin(2 * np.pi * 0.21 * tt) ** 2) * 0.7 + 0.22 * np.sin(2 * np.pi * 100 * tt) + 0.1 * np.sin(2 * np.pi * 200 * tt) \
+            + 0.2 * _lp(rng.standard_normal(n_), 400)
+        return x / (np.abs(x).max() + 1e-9)
+    return _rt_prev38(kind, n_)
+
+
+def slurp(level=-22, dur=0.45):
+    """ep 38: sucking back drool: a narrow noise band that sweeps up 800 -> 3000 Hz with a wet flutter."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR; w = rng.standard_normal(n_)
+    y = np.zeros(n_)
+    for k in range(6):
+        a, b = k * n_ // 6, (k + 1) * n_ // 6; f0 = 800 + 2200 * (k + 0.5) / 6
+        y[a:b] = _bp(w, f0 * 0.8, f0 * 1.25)[a:b]
+    y *= (0.6 + 0.4 * np.sin(2 * np.pi * 34 * tt)) * np.sin(np.pi * tt / dur) ** 0.7
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def lick(level=-24, dur=0.3):
+    """ep 38: a lip lick: two short wet clicks + a soft swish."""
+    n_ = int(dur * SR); y = _bp(rng.standard_normal(n_), 1500, 5000) * np.exp(-np.arange(n_) / (0.08 * SR)) * 0.5
+    for c in (0.02, 0.2):
+        i = int(c * SR); m = int(0.006 * SR); y[i:i + m] += _hp(rng.standard_normal(m), 2500) * 1.4
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def tap_run(level=-26, dur=1.2):
+    """ep 38: a tap opening and water running (gland taps): a rising hiss into a steady trickle with tiny drips."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR; w = rng.standard_normal(n_)
+    y = _bp(w, 900, 6000) * np.clip(tt / 0.25, 0, 1) * (0.8 + 0.2 * np.sin(2 * np.pi * 7 * tt))
+    for j in range(int(dur * 9)):
+        i = int(rng.uniform(0.1, dur - 0.05) * SR); m = int(0.012 * SR); y[i:i + m] += np.sin(2 * np.pi * rng.uniform(1200, 2400) * np.arange(m) / SR) * np.exp(-np.arange(m) / (0.003 * SR)) * 0.8
+    y *= np.clip((dur - tt) / 0.15, 0, 1)
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def chef_bell(level=-20):
+    """ep 38: the kitchen ORDER bell (a counter bell: one bright ding with a metallic partial)."""
+    n_ = int(1.2 * SR); tt = np.arange(n_) / SR
+    y = sum(a * np.sin(2 * np.pi * f * tt) * np.exp(-tt / d) for f, a, d in ((2637, 1.0, 0.5), (3951, 0.45, 0.25), (6210, 0.25, 0.12), (1318, 0.2, 0.6)))
+    y[:int(0.002 * SR)] += _hp(rng.standard_normal(int(0.002 * SR)), 3000)
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def gas_light(level=-22):
+    """ep 38: a gas stove lighting: igniter clicks then a soft 'whumpf' + a low flame roar."""
+    n_ = int(1.1 * SR); tt = np.arange(n_) / SR; y = np.zeros(n_)
+    for c in (0.0, 0.12, 0.24):
+        i = int(c * SR); m = int(0.008 * SR); y[i:i + m] += _hp(rng.standard_normal(m), 3000) * 0.9
+    i = int(0.3 * SR); w = rng.standard_normal(n_ - i)
+    y[i:] += _lp(w, 900) * (np.clip(np.arange(n_ - i) / (0.06 * SR), 0, 1) * np.exp(-np.arange(n_ - i) / (0.5 * SR)) * 0.9 + 0.25)
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
