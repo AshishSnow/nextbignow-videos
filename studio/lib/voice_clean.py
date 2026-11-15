@@ -83,9 +83,13 @@ def clean(x, tempo=1.0, deess_target=-11.0, verbose=True, ratio=2.2):
     if verbose:
         print(f"  de-ess: max reduction {20*np.log10(g.min()):.1f} dB, active {(g < 0.89).mean()*100:.1f}% of time")
     # 6. codec cleanup + adaptive tilt: bright/fizzy voices get their 7 kHz+ sheen pulled toward a natural level
-    f_, t_, Z = signal.stft(x, SR, nperseg=2048, noverlap=1568); P = np.abs(Z) ** 2
-    lo = P[(f_ >= 100) & (f_ < 1000)].sum(0) + 1e-20; hi = P[(f_ >= 7000) & (f_ < 12000)].sum(0) + 1e-20
-    tot = 10 * np.log10(P.sum(0) + 1e-20); vo_ = (tot > np.percentile(tot, 95) - 18) & (lo / (P.sum(0) + 1e-20) > 0.5)
+    # chunked STFT (float32): the one-shot version OOM-killed 8+ min voiceovers (15 Nov 2026)
+    LO, HI, PS = [], [], []; CH = SR * 60
+    for c0 in range(0, len(x), CH):
+        f_, t_, Z = signal.stft(x[c0:c0 + CH].astype(np.float32), SR, nperseg=2048, noverlap=1568); P = (np.abs(Z) ** 2).astype(np.float32); del Z
+        LO.append(P[(f_ >= 100) & (f_ < 1000)].sum(0)); HI.append(P[(f_ >= 7000) & (f_ < 12000)].sum(0)); PS.append(P.sum(0)); del P
+    lo = np.concatenate(LO) + 1e-20; hi = np.concatenate(HI) + 1e-20; Psum = np.concatenate(PS)
+    tot = 10 * np.log10(Psum + 1e-20); vo_ = (tot > np.percentile(tot, 95) - 18) & (lo / (Psum + 1e-20) > 0.5)
     fizz = 10 * np.log10(np.median(hi[vo_] / lo[vo_])) if vo_.any() else -36.0
     tilt = float(np.clip(-33.0 - fizz, -5.0, 0.0))
     if tilt < -0.2: x = signal.sosfilt(shelf_hi(6500, tilt), x)
@@ -96,7 +100,7 @@ def clean(x, tempo=1.0, deess_target=-11.0, verbose=True, ratio=2.2):
     e = env_rms(x, 10); pk = np.percentile(e, 95); fl = pk * 10 ** (-40 / 20)
     open_ = e > fl
     hold = int(0.09 * SR); look = int(0.015 * SR)
-    o = np.convolve(open_.astype(float), np.ones(hold + look), "full")[look:look + len(x)] > 0
+    o = signal.oaconvolve(open_.astype(np.float32), np.ones(hold + look, np.float32), "full")[look:look + len(x)] > 0.5
     ge = np.where(o, 1.0, 10 ** (-30 / 20))
     x = x * smooth_gain(ge, 3, 60)
     # 8. peak
