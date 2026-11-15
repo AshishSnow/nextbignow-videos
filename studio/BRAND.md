@@ -96,3 +96,11 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
 - **Milestones:** media kit (1 page: premise, series, hero, audience, avg views, engagement, top videos, a sample integration
   storyboard, disclosure + brand-safety rules) at ~1,000 followers; start pitching best-fit categories at ~5–10K followers or when
   the last-15 average passes ~5K views; apply for YPP at 500 subs + 3M Shorts views in 90 days (ALGORITHM.md carries an Aug 2026 report that the bar for new channels rises to 20M Shorts views from 1 Feb 2027; check YouTube Help before relying on either number).
+
+## Logo + colour rotation (owner, 15 Nov 2026)
+- Logo = the "OMB!" comic badge (studio/brand/logo/, source omb_variants.py). Owner: "4th one good but don't use red only".
+- Owner: "In next video use different color ... different different color with different combinations."
+  Every new video uses a DIFFERENT main colour combination from the last one (check the previous episode's palette in topics.md):
+  1 blue + yellow · 2 teal + orange · 3 purple + lime · 4 green + pink · 5 black + yellow · 6 orange + navy (then repeat).
+  Use the pair for backgrounds, big titles, stat cards and the logo/badge in that video; keep black ink outlines and cream paper.
+  Log the combo used in the topics.md line.
