@@ -151,3 +151,8 @@ Animation moves:
 - **A recurring plain "you" character** (stick person) who reacts.
 - **Red-marker annotations** drawn on the scene: strike-throughs, circles, ticks, question marks.
 - **Subtitles: small torn strip, 2-5 words at a time, uppercase typewriter, key word under a yellow highlighter** (doodlekit.strip_chunk + anim_shots.chunk_now; highlight = the line's stressed words + any number).
+
+## Length (owner, 15 Nov 2026: "don't make too much length, make it according to shorts")
+- Target 50-75 s of voice, hard cap 90 s. Roughly 130-190 spoken words, ~16-22 short lines.
+- Shape: hook + viewer's question (2 lines) -> the story's 4-5 key beats (problem, surprising move, chaos/low point, result) -> 2-3 quick moves (one line each) -> CTA (1-2 lines).
+- Keep the reference-reel tricks but pick only the 2-3 that fit (e.g. one "Did it work?" Q&A, one everyday-math line, the callback ending). Cut side details, object-character lines to 1, and never repeat a number.
