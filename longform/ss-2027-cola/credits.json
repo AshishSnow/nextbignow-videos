@@ -1,0 +1,50 @@
+{
+ "L1_ssa": {
+  "title": "File:Social Security Administration Building - panoramio.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Social_Security_Administration_Building_-_panoramio.jpg/1920px-Social_Security_Administration_Building_-_panoramio.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Social_Security_Administration_Building_-_panoramio.jpg",
+  "author": "Corey Coyle",
+  "license": "CC BY 3.0",
+  "file": "whatif/cola/img/L1_ssa.jpg"
+ },
+ "L3_grocery": {
+  "title": "File:Women grocery shopping.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Women_grocery_shopping.jpg/1920px-Women_grocery_shopping.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Women_grocery_shopping.jpg",
+  "author": "Bill Branson (Photographer)",
+  "license": "Public domain",
+  "file": "whatif/cola/img/L3_grocery.jpg"
+ },
+ "L4_pharmacy": {
+  "title": "File:52nd MDG Pharmacy (7580222).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/52nd_MDG_Pharmacy_%287580222%29.jpg/1920px-52nd_MDG_Pharmacy_%287580222%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:52nd_MDG_Pharmacy_(7580222).jpg",
+  "author": "U.S. Air Force photo by Senior Airman Jessica Sanchez-Chen",
+  "license": "Public domain",
+  "file": "whatif/cola/img/L4_pharmacy.jpg"
+ },
+ "D4_dollar": {
+  "title": "File:United States one dollar bill, obverse.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/United_States_one_dollar_bill%2C_obverse.jpg/1920px-United_States_one_dollar_bill%2C_obverse.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:United_States_one_dollar_bill,_obverse.jpg",
+  "author": "",
+  "license": "Public domain",
+  "file": "whatif/debt/img/D4_dollar.jpg"
+ },
+ "S6_dome": {
+  "title": "File:US Capitol dome Jan 2006.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/US_Capitol_dome_Jan_2006.jpg/1920px-US_Capitol_dome_Jan_2006.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:US_Capitol_dome_Jan_2006.jpg",
+  "author": "Diliff",
+  "license": "CC BY 2.5",
+  "file": "whatif/ssa/img/S6_dome.jpg"
+ },
+ "L2_poster": {
+  "title": "File:Poster, \"Hold on to Your Social Security Card\" - NARA - 514504.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Poster%2C_%22Hold_on_to_Your_Social_Security_Card%22_-_NARA_-_514504.jpg/1920px-Poster%2C_%22Hold_on_to_Your_Social_Security_Card%22_-_NARA_-_514504.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Poster,_%22Hold_on_to_Your_Social_Security_Card%22_-_NARA_-_514504.jpg",
+  "author": "Unknown authorUnknown author or not provided",
+  "license": "Public domain",
+  "file": "whatif/cola/img/L2_poster.jpg"
+ }
+}
