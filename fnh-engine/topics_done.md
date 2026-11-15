@@ -66,3 +66,4 @@ intro so viewers instantly know what the video is about.
 - 39-vital-signs (FULL 16:9 YouTube video, 4:49, Hindi Bunty v4, comic style) — 15 Nov; YT Metricool 428906526 19:30 (upload re-encoded crf20 to fit GitHub 100MB)
 - 2026-11-15 | Short #40 | बादाम का छिलका फेंकते हो? (soaked almond skin; Taylor 2018 Eur J Nutr soaking RCT, PMC4276397 skin flavonoids) | comic style | IG+YT 2026-11-15 21:10 (new logo B)
 - 2026-11-15 | Short #41 | खाने के बाद ठंडा पानी = चर्बी? (myth; Mayo Clinic water-with-meals) | comic, mint/multi-colour, logo B | IG+YT 2026-11-15 22:30
+- 2026-11-15 | Short #42 | मछली के बाद दूध = सफ़ेद दाग? (myth; vitiligo autoimmune) | comic, real cut-outs, phone-crop safe titles | pending approval
