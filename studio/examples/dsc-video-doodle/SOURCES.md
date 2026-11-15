@@ -1,0 +1,9 @@
+# SOURCES — Dollar Shave Club "the $4,500 video" (doodle case study + 4 moves) · re-verified 15 Nov 2026 + fresh-eyes fact-check (1 must-fix applied: e1 income promise; should-fixes a6, b5, c4, c8, t1, i2 applied)
+- Fortune, 10 Mar 2015: https://fortune.com/2015/03/10/dollar-shave-club-founding/amp — "I spent about $4,500 on it."; directed by "a friend of mine who I had studied improv comedy with in New York"; "shot it in about eight hours in the original warehouse in Gardena, Calif."; "razors are really expensive in the store."; "The site crashed because of the traffic ... we ran out of inventory in the first six hours."; labels "hurling them over the fence at night".
+- WSJ, 12 Apr 2012 (Yahoo republish): https://ca.finance.yahoo.com/news/a-david-and-gillette-story.html — "12,000 people signed up in the first 48 hours"; "some four million views"; "The twin-blade plan costs $1 a month plus $2 in shipping."
+- TechCrunch, 6 Mar 2012: https://techcrunch.com/2012/03/06/dollar-shave-club/amp/ — launch day.
+- Emory Magazine 2018: https://news.emory.edu/features/2018/06/life-unscripted — friend's father-in-law at a cocktail party, warehouse full of razor blades; improv.
+- Entrepreneur 2017: https://www.entrepreneur.com/growing-a-business/how-dollar-shave-clubs-founder-built-a-1-billion-company/290539 — party / father-in-law; marketing jobs + night improv.
+- VentureBeat, Jul 2016: https://venturebeat.com/technology/unilever-buys-on-demand-toiletry-service-dollar-shave-club-for-reportedly-1-billion — "reportedly for $1 billion"; terms not disclosed; "3.2 million members".
+- Progressive Grocer 2016: https://progressivegrocer.com/unilever-buys-dollar-shave-club — 3.2 million members; "media reports peg the cash deal to worth about $1 billion".
+Our comparison (not a claim): ~$3 a month is "less than one fancy coffee". Object-character lines a3/b4/c9 are jokes.

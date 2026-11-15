@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -868,6 +868,119 @@ def strip_chunk(c, words, hl=(), y0=268, size=40, t=0.0, maxw=760, seed=40):
             if re.sub(r"[^a-z0-9$%]", "", words[i].lower()) in hl:
                 c.drawRect(skia.Rect.MakeLTRB(xx - 4, yy - size * 0.62, xx + widths[i] + 4, yy + size * 0.12), P((255, 222, 40), 0.85))
             c.drawString(toks[i], xx, yy, f, P(INK)); xx += widths[i] + sp
+
+
+# ------------------------------------------------------------------ razors + launch-video props (Dollar Shave Club episode, 15 Nov 2026)
+def _razor(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, fancy=False, case=False, shades=False, **kw):
+    """razor character: tall handle body with a wide twin-blade head on top. fancy = chrome + gold + monocle (pricey store razor);
+    case = locked plastic display case around it. Generic doodle, no brand."""
+    leg = 60 * s; cb = y - leg; ht = cb - 330 * s; hw = 62 * s
+    body_col = (200, 206, 216) if fancy else ORG; trim = (236, 186, 40) if fancy else BLU
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 28)
+    ink(c, wrrect(x - hw, ht, x + hw, cb, 40 * s, seed, 2), body_col, 9 * s)
+    for j in range(4): wline(c, [(x - hw + 16 * s, cb - 60 * s - j * 30 * s), (x + hw - 16 * s, cb - 60 * s - j * 30 * s)], seed + 20 + j, 4 * s, shade(body_col, 0.75))
+    wline(c, [(x, ht + 4 * s), (x, ht - 40 * s)], seed + 1, 22 * s, trim, 1)
+    hx0, hx1, hy0, hy1 = x - 170 * s, x + 170 * s, ht - 120 * s, ht - 36 * s
+    ink(c, wrrect(hx0, hy0, hx1, hy1, 22 * s, seed + 2, 1.6), trim, 9 * s)
+    for j in range(2): wline(c, [(hx0 + 26 * s, hy0 + 26 * s + j * 28 * s), (hx1 - 26 * s, hy0 + 26 * s + j * 28 * s)], seed + 3 + j, 6 * s, (235, 240, 248), 1)
+    if fancy:
+        for gx in (hx0 + 30 * s, hx1 - 30 * s): c.drawCircle(gx, hy1 - 14 * s, 7 * s, P(WHITE))
+    _arms(c, x - hw + 4 * s, x + hw - 4 * s, ht + 170 * s, arms, t, s, seed + 7)
+    eyes(c, x, ht + 70 * s, s * 0.75, look, blink, 30, 22, mood, seed + 9)
+    mouth(c, x, ht + 130 * s, s * 0.6, talk, mood, seed + 5)
+    if fancy:
+        ink(c, wellipse(x + 15 * s, ht + 70 * s, 30 * s, 30 * s, seed + 30, 1), None, 6 * s, (236, 186, 40))
+        wline(c, [(x + 44 * s, ht + 80 * s), (x + 60 * s, ht + 200 * s)], seed + 31, 3 * s, (236, 186, 40))
+    if shades:
+        for sx in (-1, 1): ink(c, wrrect(x + sx * 15 * s - 26 * s, ht + 52 * s, x + sx * 15 * s + 26 * s, ht + 88 * s, 10 * s, seed + 40 + sx, 0.8), INK, 4 * s)
+        wline(c, [(x - 12 * s, ht + 62 * s), (x + 12 * s, ht + 62 * s)], seed + 43, 4 * s)
+    if case:
+        ink(c, wrrect(x - 240 * s, hy0 - 60 * s, x + 240 * s, y + 10 * s, 20 * s, seed + 50, 1.6), None, 7 * s, (120, 170, 220))
+        for j in range(3): wline(c, [(x - 200 * s + j * 40 * s, hy0 - 20 * s), (x - 230 * s + j * 40 * s, hy0 + 80 * s)], seed + 51 + j, 5 * s, WHITE, 1, 0.7)
+        padlock(c, x + 190 * s, y - 200 * s, s * 0.8, 1.0, seed + 55)
+
+
+def fence(c, x0, x1, y, h=420, seed=601, col=(120, 124, 134)):
+    """chain-link fence on the ground line y (posts + diamond mesh)."""
+    for px in np.arange(x0, x1 + 1, (x1 - x0) / 4): wline(c, [(px, y), (px, y - h)], seed + int(px), 12, col)
+    wline(c, [(x0, y - h), (x1, y - h)], seed + 1, 10, col)
+    for k in np.arange(x0, x1, 46):
+        wline(c, [(k, y), (min(x1, k + h * 0.5), y - h)], seed + int(k), 3, col, 1, 0.8)
+        wline(c, [(k + 46, y), (max(x0, k + 46 - h * 0.5), y - h)], seed + int(k) + 3, 3, col, 1, 0.8)
+
+
+def label_stack(c, x, y, n=6, s=1.0, seed=611, rot=0.0):
+    """bundle of white shipping labels with barcode lines."""
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s, s)
+    for i in range(n):
+        ink(c, wrrect(-90, -60 - i * 12, 90, 60 - i * 12, 8, seed + i, 1.2), WHITE, 5)
+    for j in range(7): wline(c, [(-60 + j * 18, -40 - (n - 1) * 12), (-60 + j * 18, 20 - (n - 1) * 12)], seed + 20 + j, 4 + (j % 2) * 3, INK, 0.5)
+    c.restore()
+
+
+def clapper(c, x, y, s=1.0, open_=0.0, seed=621):
+    """film clapperboard; open_ 0..1 lifts the striped clapstick."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-150, -20, 150, 170, 10, seed, 1.6), (40, 40, 52), 8)
+    for j in range(3): wline(c, [(-120, 40 + j * 40), (120, 40 + j * 40)], seed + j, 4, WHITE)
+    c.save(); c.translate(-150, -20); c.rotate(-30 * open_)
+    ink(c, wrrect(0, -60, 300, 0, 6, seed + 5, 1.2), WHITE, 8)
+    for j in range(5): ink(c, wpoly([(10 + j * 60, -58), (40 + j * 60, -58), (20 + j * 60, -2), (-10 + j * 60, -2)], seed + 6 + j, 0.8, True, 30), INK, 0)
+    c.restore(); c.restore()
+
+
+def mailbox(c, x, y, s=1.0, flag=0.0, seed=631, col=BLU):
+    """curbside mailbox on a post standing on (x, y); flag 0..1 raises the red flag."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    wline(c, [(0, 0), (0, -200)], seed, 18, BROWN)
+    pth = skia.Path(); pth.moveTo(-130, -200); pth.lineTo(-130, -300); pth.cubicTo(-130, -390, 130, -390, 130, -300); pth.lineTo(130, -200); pth.close()
+    ink(c, pth, col, 9)
+    c.save(); c.translate(120, -300); c.rotate(-90 * flag); wline(c, [(0, 0), (0, -90)], seed + 2, 9, RED); ink(c, wrrect(0, -90, 50, -55, 4, seed + 3, 0.8), RED, 5); c.restore()
+    c.restore()
+
+
+def coffee(c, x, y, s=1.0, seed=641):
+    """takeaway coffee cup (generic, no logo), bottom at (x, y)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-80, 0), (80, 0), (100, -260), (-100, -260)], seed, 1.6, True, 40), WHITE, 8)
+    ink(c, wrrect(-96, -190, 96, -110, 6, seed + 1, 1), BROWN, 6)
+    ink(c, wrrect(-116, -300, 116, -258, 14, seed + 2, 1), (60, 60, 70), 7)
+    for j in range(3): wline(c, quad_pts(-40 + j * 40, -330, -30 + j * 40, -420, 20, 6), seed + 5 + j, 5, GREY, 2.5, 0.8)
+    c.restore()
+
+
+def crash_window(c, x, y, s=1.0, t=0.0, seed=651, k=1.0, title_="CHECKOUT"):
+    """browser window (generic) with a big red X and smoke puffs = site crashed."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-260, -200, 260, 200, 20, seed, 1.6), WHITE, 9); ink(c, wrrect(-260, -200, 260, -140, 20, seed + 1, 1.2), GREY, 7)
+    for j, col in enumerate((RED, YEL, GRN)): c.drawCircle(-220 + j * 36, -170, 11, P(col))
+    text(c, title_, 0, -60, 34, GREY, BLK_F)
+    wline(c, [(-90, -20), (90, 150)], seed + 3, 22, RED); wline(c, [(90, -20), (-90, 150)], seed + 4, 22, RED)
+    for j in range(4):
+        u = (t * 0.7 + j * 0.25) % 1.0
+        ink(c, wellipse(-120 + j * 80 + 20 * math.sin(t * 2 + j), -230 - 160 * u, 40 + 30 * u, 34 + 26 * u, seed + 10 + j, 2), (150, 150, 160), 0, INK, 0.5 * (1 - u))
+    c.restore()
+
+
+def crowd(c, x, y, n=30, cols=8, k=1.0, seed=661, s=1.0):
+    """grid of tiny smiling heads = members / sign-ups; k 0..1 = fraction shown."""
+    m = int(n * k)
+    for i in range(m):
+        cx = x + (i % cols - (cols - 1) / 2) * 92 * s; cy = y - (i // cols) * 96 * s
+        ink(c, wellipse(cx, cy, 36 * s, 38 * s, seed + i, 1.2), (PNK, SKY, YEL, GRN, ORG, PUR)[i % 6], 6 * s)
+        c.drawCircle(cx - 12 * s, cy - 6 * s, 5 * s, P(INK)); c.drawCircle(cx + 12 * s, cy - 6 * s, 5 * s, P(INK))
+        wline(c, quad_pts(cx - 14 * s, cy + 10 * s, cx + 14 * s, cy + 10 * s, 10 * s, 5), seed + i + 50, 4 * s)
+
+
+def billboard(c, x, y, s=1.0, word="AD $$$", seed=671, col=RED):
+    """roadside billboard on two legs standing on (x, y)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    for lx in (-120, 120): wline(c, [(lx, 0), (lx, -220)], seed + lx, 14, BROWN)
+    ink(c, wrrect(-230, -440, 230, -210, 12, seed, 1.6), col, 9)
+    sz = 70
+    while sz > 30 and font(BLK_F, sz).measureText(word) > 410: sz -= 4
+    f = font(BLK_F, sz); c.drawString(word, -f.measureText(word) / 2, -300, f, P(WHITE)); c.restore()
 
 
 # ------------------------------------------------------------------ props
