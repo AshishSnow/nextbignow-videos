@@ -825,6 +825,25 @@ def scooter(c, x, y, s=1.0, seed=461):
     wline(c, [(110, -120), (130, -220), (100, -230)], seed + 2, 9); c.restore()
 
 
+def cover_title(c, kicker, title, k=1.0, y=640, col=RED, seed=501):
+    """Big hook title card for frame 0 / the grid cover (owner 15 Nov: "first image need to be title so it attracts people").
+    Sits inside the 3:4 profile-grid crop (y 240..1680) and below the top safe zone; centred at x=540."""
+    if k <= 0: return
+    lines = wrap(title, MARK_F, 108, 860)[:3]; f = font(MARK_F, 108); lh = 112
+    fk = font(HAND_F, 46); kw = fk.measureText(kicker) if kicker else 0
+    w = max([f.measureText(l) for l in lines] + [kw]) + 90; h = lh * len(lines) + (70 if kicker else 0) + 70
+    c.save(); c.translate(540, y); c.rotate(-2); c.scale(k, k)
+    c.save(); c.translate(10, 14); c.drawPath(wrrect(-w / 2, -h / 2, w / 2, h / 2, 26, seed, 2.2), P(INK, 0.18)); c.restore()
+    ink(c, wrrect(-w / 2, -h / 2, w / 2, h / 2, 26, seed, 2.2), WHITE, 10)
+    yy = -h / 2 + 40
+    if kicker:
+        c.drawString(kicker, -kw / 2, yy + 34, fk, P(INK)); yy += 70
+    for i, l in enumerate(lines):
+        c.drawString(l, -f.measureText(l) / 2, yy + 92 + i * lh, f, P(col if i == len(lines) - 1 else INK))
+    wline(c, [(-w / 2 + 50, h / 2 - 26), (w / 2 - 50, h / 2 - 32)], seed + 3, 10, YEL, 1.2)
+    c.restore()
+
+
 # ------------------------------------------------------------------ props
 def building(c, x, y, w=360, h=520, col=SKY, seed=31, label=None, lit=True):
     """office tower standing on (x, y)."""

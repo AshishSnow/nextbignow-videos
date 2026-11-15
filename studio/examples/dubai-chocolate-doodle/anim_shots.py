@@ -34,6 +34,8 @@ def lt(t, sid): return t - SHOT[sid]["start"]
 import skia, runpy
 exec(open(f"{_D}/doodlekit.py").read())
 SURF = skia.Surface(W, H)
+COVER = ("A pregnant snack craving helped cause a", "GLOBAL PISTACHIO SHORTAGE?")   # (kicker, TITLE) shown on frame 0 and the cover
+COVER_T = 2.6
 _VL = {l[0]: l[1] for l in runpy.run_path(f"{B}/scripts/vo_lines.py")["LINES"]}
 DISP = {"i3": "Imagine you're her. You charge about $20 a bar, and almost nobody will pay it.",
         "i4": "Then 1 video changes everything. I'll show you what happened, then 4 tricks you can steal for your own food business.",
@@ -104,7 +106,7 @@ def S_i1(c, t, n):
     cr = pr(t, 0.2, 0.5)
     char(c, "choc", 380, 1440, 1.15, t, 0, (0.5, -0.3), "shock" if cr > 0.5 else "happy", "shrug", blink=blink(t), crack=cr)
     for i in range(3): char(c, "pista", 760 + (i - 1) * 110, 1440, 0.42, t, 0, (-0.5, -0.3), "shock", "up", walk=True, blink=False, shadow_w=0.6) if t > 0.6 + i * 0.2 else None
-    tape(c, "1 BAR + A PISTACHIO SHORTAGE?!", 540, 600, 46, -3, pop_k(t, 0.05, 0.25), seed=3)
+    tape(c, "1 BAR + A PISTACHIO SHORTAGE?!", 540, 600, 46, -3, pop_k(t, COVER_T, 0.25), seed=3)
 
 
 def S_i2(c, t, n):
@@ -377,6 +379,9 @@ def _draw(sid, t, n):
     sh = SHOT[sid]; u = (t - sh["start"]) / max(0.5, sh["end"] - sh["start"])
     z = 1.0 + 0.03 * u; c.translate(W / 2, H * 0.55); c.scale(z, z); c.translate(-W / 2, -H * 0.55)
     RENDER[sid](c, t, n); c.restore()
+    if COVER and t < COVER_T:   # big hook title on frame 0 = the grid cover (owner 15 Nov)
+        kk = 1.0 if t < COVER_T - 0.35 else 1.0 - ease((t - (COVER_T - 0.35)) / 0.35)
+        cover_title(c, COVER[0], COVER[1], kk, 700)
     strip(c, spoken_words(t), True, 262, 42, t)
     return SURF.makeImageSnapshot().toarray(colorType=skia.kRGBA_8888_ColorType)[..., :3].astype(np.float32) / 255
 
