@@ -1,0 +1,42 @@
+{
+ "A1_controllers": {
+  "title": "File:AirTraffic-8.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/AirTraffic-8.jpg/1920px-AirTraffic-8.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:AirTraffic-8.jpg",
+  "author": "Work of the United States Federal Government under the terms of 17 U.S.C. \u00a7 105",
+  "license": "Public domain",
+  "file": "whatif/atc/img/A1_controllers.jpg"
+ },
+ "A2_tower": {
+  "title": "File:FAA Air Traffic Control Tower at MSP Airport (50258861466).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/FAA_Air_Traffic_Control_Tower_at_MSP_Airport_%2850258861466%29.jpg/1920px-FAA_Air_Traffic_Control_Tower_at_MSP_Airport_%2850258861466%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:FAA_Air_Traffic_Control_Tower_at_MSP_Airport_(50258861466).jpg",
+  "author": "Tony Webster",
+  "license": "CC BY-SA 2.0",
+  "file": "whatif/atc/img/A2_tower.jpg"
+ },
+ "A3_board": {
+  "title": "File:2025 AC Strike YYZ cancellation board 2.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/2025_AC_Strike_YYZ_cancellation_board_2.jpg/1920px-2025_AC_Strike_YYZ_cancellation_board_2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:2025_AC_Strike_YYZ_cancellation_board_2.jpg",
+  "author": "OhanaUnitedTalk page",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/atc/img/A3_board.jpg"
+ },
+ "A4_radar": {
+  "title": "File:FAA radar (Bennett, Colorado).JPG",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/FAA_radar_%28Bennett%2C_Colorado%29.JPG/1920px-FAA_radar_%28Bennett%2C_Colorado%29.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:FAA_radar_(Bennett,_Colorado).JPG",
+  "author": "Jeffrey Beall",
+  "license": "CC BY 4.0",
+  "file": "whatif/atc/img/A4_radar.jpg"
+ },
+ "A5_tower": {
+  "title": "File:FAA Air Traffic Control Tower at MSP Airport (50258861466).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/FAA_Air_Traffic_Control_Tower_at_MSP_Airport_%2850258861466%29.jpg/1920px-FAA_Air_Traffic_Control_Tower_at_MSP_Airport_%2850258861466%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:FAA_Air_Traffic_Control_Tower_at_MSP_Airport_(50258861466).jpg",
+  "author": "Tony Webster",
+  "license": "CC BY-SA 2.0",
+  "file": "whatif/atc/img/A2_tower.jpg"
+ }
+}
