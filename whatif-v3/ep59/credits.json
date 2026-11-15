@@ -1,0 +1,42 @@
+{
+ "K1_tower": {
+  "title": "File:SpaceX Starbase Launch Site Early 2026.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/SpaceX_Starbase_Launch_Site_Early_2026.jpg/1920px-SpaceX_Starbase_Launch_Site_Early_2026.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:SpaceX_Starbase_Launch_Site_Early_2026.jpg",
+  "author": "NOAA / NODD",
+  "license": "Public domain",
+  "file": "whatif/ship/img/K1_tower.jpg"
+ },
+ "K2_boosterland": {
+  "title": "File:Falcon 9 first stage at LZ-1(two).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Falcon_9_first_stage_at_LZ-1%28two%29.jpg/1920px-Falcon_9_first_stage_at_LZ-1%28two%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Falcon_9_first_stage_at_LZ-1(two).jpg",
+  "author": "SpaceX Photos",
+  "license": "CC0",
+  "file": "whatif/ship/img/K2_boosterland.jpg"
+ },
+ "K3_droneship": {
+  "title": "File:Falcon 9 first stage landing on Droneship.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Falcon_9_first_stage_landing_on_Droneship.jpg/1920px-Falcon_9_first_stage_landing_on_Droneship.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Falcon_9_first_stage_landing_on_Droneship.jpg",
+  "author": "SpaceX",
+  "license": "CC0",
+  "file": "whatif/ship/img/K3_droneship.jpg"
+ },
+ "K4_shuttle": {
+  "title": "File:Space Shuttle Atlantis launches from KSC on STS-132.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Space_Shuttle_Atlantis_launches_from_KSC_on_STS-132.jpg/1920px-Space_Shuttle_Atlantis_launches_from_KSC_on_STS-132.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Space_Shuttle_Atlantis_launches_from_KSC_on_STS-132.jpg",
+  "author": "NASA",
+  "license": "Public domain",
+  "file": "whatif/ship/img/K4_shuttle.jpg"
+ },
+ "K5_superheavy": {
+  "title": "File:Starship Booster Return on Final Approach (54063904149).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Starship_Booster_Return_on_Final_Approach_%2854063904149%29.jpg/1920px-Starship_Booster_Return_on_Final_Approach_%2854063904149%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Starship_Booster_Return_on_Final_Approach_(54063904149).jpg",
+  "author": "Steve Jurvetson",
+  "license": "CC BY 2.0",
+  "file": "whatif/ship/img/K5_superheavy.jpg"
+ }
+}
