@@ -1,0 +1,34 @@
+{
+ "N1_applepark": {
+  "title": "File:Aerial view of Apple Park dllu.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Aerial_view_of_Apple_Park_dllu.jpg/1920px-Aerial_view_of_Apple_Park_dllu.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Apple_Park_dllu.jpg",
+  "author": "Daniel L. Lu (user:dllu)",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/ceo/img/N1_applepark.jpg"
+ },
+ "N2_chairs": {
+  "title": "File:Empty Chairs.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Empty_Chairs.jpg/1920px-Empty_Chairs.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Empty_Chairs.jpg",
+  "author": "Kullatan Kin",
+  "license": "CC0",
+  "file": "whatif/ceo/img/N2_chairs.jpg"
+ },
+ "N3_tickers": {
+  "title": "File:Tickers (8085342806).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tickers_%288085342806%29.jpg/1920px-Tickers_%288085342806%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tickers_(8085342806).jpg",
+  "author": "Francisco Gonzalez",
+  "license": "CC BY 2.0",
+  "file": "whatif/aibubble/img/B4_tickers.jpg"
+ },
+ "N4_servers": {
+  "title": "File:BalticServers data center.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/BalticServers_data_center.jpg/1920px-BalticServers_data_center.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg",
+  "author": "BalticServers.com",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/grid/img/R6_servers.jpg"
+ }
+}
