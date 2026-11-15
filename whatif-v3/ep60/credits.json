@@ -1,0 +1,50 @@
+{
+ "M1_phonehand": {
+  "title": "File:Black smartphone in hand (Unsplash).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Black_smartphone_in_hand_%28Unsplash%29.jpg/1920px-Black_smartphone_in_hand_%28Unsplash%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Black_smartphone_in_hand_(Unsplash).jpg",
+  "author": "Dennis Cort\u00e9s cortes",
+  "license": "CC0",
+  "file": "whatif/meta/img/M1_phonehand.jpg"
+ },
+ "M2_photographer": {
+  "title": "File:Smartphone photographer (Unsplash).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Smartphone_photographer_%28Unsplash%29.jpg/1920px-Smartphone_photographer_%28Unsplash%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Smartphone_photographer_(Unsplash).jpg",
+  "author": "James Sutton jamessutton_photography",
+  "license": "CC0",
+  "file": "whatif/meta/img/M2_photographer.jpg"
+ },
+ "M3_camera": {
+  "title": "File:Cameraception (Unsplash).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Cameraception_%28Unsplash%29.jpg/1920px-Cameraception_%28Unsplash%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Cameraception_(Unsplash).jpg",
+  "author": "Ryan Hafey ryanhafey",
+  "license": "CC0",
+  "file": "whatif/meta/img/M3_camera.jpg"
+ },
+ "M4_rome": {
+  "title": "File:Colosseo 2020.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1920px-Colosseo_2020.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg",
+  "author": "FeaturedPics",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/meta/img/M4_rome.jpg"
+ },
+ "M5_servers": {
+  "title": "File:BalticServers data center.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/BalticServers_data_center.jpg/1920px-BalticServers_data_center.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg",
+  "author": "BalticServers.com",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/grid/img/R6_servers.jpg"
+ },
+ "D4_dollar": {
+  "title": "File:United States one dollar bill, obverse.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/United_States_one_dollar_bill%2C_obverse.jpg/1920px-United_States_one_dollar_bill%2C_obverse.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:United_States_one_dollar_bill,_obverse.jpg",
+  "author": "",
+  "license": "Public domain",
+  "file": "whatif/debt/img/D4_dollar.jpg"
+ }
+}
