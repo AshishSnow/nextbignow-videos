@@ -120,15 +120,17 @@ def quote(c, x, y, w, h, rot, k, lines, who):
 def sc_hook(c, t, S):
     td = ph("domino's did"); tp = ph('on purpose'); tj = ph('sales jumped')
     dark(c, t)
-    caption(c, 'WOULD YOU AIR THIS?', LX, 330, 1.0, col=YEL, size=32)
-    tv(c, 110, 470, 860, 600, 1.0, t, 'pizza', rot=-2)
+    caption(c, 'WOULD YOU AIR THIS?', LX, 300, 1.0, col=YEL, size=30)
+    title(c, 'THE CARDBOARD', 540, 470, 112, CREAM, 1.0, 'c', rot=-2)
+    title(c, 'COMEBACK', 540, 610, 150, YEL, 1.0, 'c', rot=-2)
+    tv(c, 170, 690, 740, 470, 1.0, t, 'pizza', rot=-2)
     credit(c, 'pizza')
     if t < td - 0.1:
-        bubble(c, 610, 1215, 760, 200, '"LIKE CARDBOARD!"', (420, 1080), 1.0, size=60)
+        bubble(c, 600, 1290, 740, 180, '"LIKE CARDBOARD!"', (430, 1160), 1.0, size=56)
     else:
-        title(c, "DOMINO'S DID.", 540, 1290, 130, YEL, pr(t, td - 0.1, 0.35), 'c', rot=-3)
-    if t > tp - 0.2: burst(c, 860, 450, 135, 'ON PURPOSE', pr(t, tp - 0.2, 0.3), size=32, col=KINK, txt=YEL, rot=8)
-    if t > tj - 0.3: burst(c, 470, 760, 170, 'SALES UP!', pr(t, tj - 0.3, 0.35), size=54, col=YEL, txt=CREAM, rot=-6)
+        title(c, "DOMINO'S DID.", 540, 1330, 120, YEL, pr(t, td - 0.1, 0.35), 'c', rot=-3)
+    if t > tp - 0.2: burst(c, 880, 720, 125, 'ON PURPOSE', pr(t, tp - 0.2, 0.3), size=30, col=KINK, txt=YEL, rot=8)
+    if t > tj - 0.3: burst(c, 470, 920, 160, 'SALES UP!', pr(t, tj - 0.3, 0.35), size=52, col=YEL, txt=CREAM, rot=-6)
 
 
 def sc_slide(c, t, S):
