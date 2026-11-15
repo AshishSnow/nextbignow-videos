@@ -158,11 +158,11 @@ def _make_page():
     return skia.Image.fromarray(img, colorType=skia.kRGBA_8888_ColorType)
 
 
-def page(c, tint=None):
+def page(c, tint=None, a=0.10):
     global _PAGE
     if _PAGE is None: _PAGE = _make_page()
     c.drawImage(_PAGE, 0, 0)
-    if tint: c.drawRect(skia.Rect.MakeWH(W, H), P(tint, 0.10))
+    if tint: c.drawRect(skia.Rect.MakeWH(W, H), P(tint, a))
 
 
 def hatch(c, clip_path, gap=22, w=4, col=INK, ang=45, a=0.85):
@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -1139,3 +1139,135 @@ def coin_rain(c, t, t0, n=10, seed=171, y_end=1400):
 def finish(img, flash=0.0):
     if flash: img = img * (1 - flash) + flash
     return np.clip(img, 0, 1)
+
+
+# ------------------------------------------------------------------ spray bottle + cats + bed (Febreze episode, 16 Nov 2026; black + yellow theme)
+def _spray(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, label="SMELL KILLER", flower=False, mist=0.0, body=WHITE, head=YEL, **kw):
+    """generic trigger spray bottle character (no brand shape/colours): rounded bottle, black neck, yellow trigger head, tape label.
+    flower = perfume flower on the label (after the fix); mist 0..1 = puff from the nozzle."""
+    leg = 80 * s; cb = y - leg; ct = cb - 300 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 34)
+    bot = wrrect(x - 112 * s, ct, x + 112 * s, cb, 44 * s, seed, 2.2); ink(c, bot, body, 9 * s)
+    ink(c, wrrect(x - 44 * s, ct - 56 * s, x + 44 * s, ct + 6 * s, 10 * s, seed + 1, 1.4), INK, 7 * s)           # neck
+    hd = wpoly([(x - 70 * s, ct - 56 * s), (x - 70 * s, ct - 150 * s), (x + 90 * s, ct - 150 * s), (x + 150 * s, ct - 120 * s),
+                (x + 150 * s, ct - 96 * s), (x + 40 * s, ct - 96 * s), (x + 30 * s, ct - 56 * s)], seed + 2, 1.8, True, 40); ink(c, hd, head, 8 * s)
+    wline(c, [(x + 10 * s, ct - 96 * s), (x + 40 * s, ct - 20 * s), (x + 64 * s, ct - 30 * s), (x + 50 * s, ct - 96 * s)], seed + 3, 8 * s)  # trigger
+    if mist > 0:
+        for j in range(5):
+            u = (mist + j * 0.17) % 1.0; r = (14 + 40 * u) * s
+            ink(c, wellipse(x + (170 + 160 * u) * s, ct - (110 + 30 * math.sin(j * 2.1)) * s, r, r * 0.8, seed + 10 + j, 1.2), WHITE, 5 * s, INK, 1 - u * 0.8)
+    lab = wrrect(x - 92 * s, cb - 132 * s, x + 92 * s, cb - 54 * s, 10 * s, seed + 4, 1.2); ink(c, lab, YEL, 6 * s)
+    f = font(BLK_F, 30 * s); tw = f.measureText(label)
+    if tw > 170 * s: f = font(BLK_F, 30 * s * 170 * s / tw); tw = 170 * s
+    c.drawString(label, x - tw / 2, cb - 82 * s, f, P(INK))
+    if flower:
+        fx, fy = x + 70 * s, cb - 150 * s
+        for j in range(5):
+            a = j * math.tau / 5; ink(c, wellipse(fx + math.cos(a) * 26 * s, fy + math.sin(a) * 26 * s, 20 * s, 20 * s, seed + 20 + j, 1), WHITE, 5 * s)
+        ink(c, wellipse(fx, fy, 16 * s, 16 * s, seed + 26, 1), YEL, 5 * s)
+    _arms(c, x - 108 * s, x + 108 * s, ct + 130 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 70 * s, s, look, blink, 40, 26, mood, seed + 9)
+    mouth(c, x, ct + 122 * s, s * 0.8, talk, mood, seed + 5)
+
+
+def _cat(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=GREY, smug=False, **kw):
+    """round doodle cat (no legs needed): body blob, ears, whiskers, curling tail. smug = half-closed eyes + chin up."""
+    by = y - 120 * s
+    tail = [(x + 110 * s, by + 60 * s), (x + 190 * s, by + 10 * s + 14 * math.sin(t * 4 + seed) * s), (x + 170 * s, by - 80 * s), (x + 210 * s, by - 120 * s)]
+    wline(c, tail, seed + 1, 30 * s, INK, 1.2); wline(c, tail, seed + 1, 18 * s, col, 1.2)
+    ink(c, wellipse(x, by + 20 * s, 130 * s, 110 * s, seed, 2), col, 9 * s)
+    hy = by - 90 * s
+    for sx in (-1, 1): ink(c, wpoly([(x + sx * 40 * s, hy - 60 * s), (x + sx * 92 * s, hy - 120 * s), (x + sx * 100 * s, hy - 30 * s)], seed + 2 + sx, 1.4, True, 30), col, 8 * s)
+    ink(c, wellipse(x, hy, 100 * s, 78 * s, seed + 5, 1.8), col, 9 * s)
+    for sx in (-1, 1):
+        for j in (-1, 1): wline(c, [(x + sx * 40 * s, hy + 22 * s), (x + sx * 120 * s, hy + (22 + j * 16) * s)], seed + 6 + j, 4 * s)
+    if smug:
+        for sx in (-1, 1): wline(c, [(x + sx * 46 * s - 18 * s, hy - 12 * s), (x + sx * 46 * s + 18 * s, hy - 12 * s)], seed + 8 + sx, 7 * s)
+        wline(c, [(x - 16 * s, hy + 26 * s), (x, hy + 34 * s), (x + 16 * s, hy + 26 * s)], seed + 9, 5 * s)
+    else:
+        eyes(c, x, hy - 8 * s, s * 0.62, look, blink, 44, 24, mood, seed + 9); mouth(c, x, hy + 30 * s, s * 0.5, talk, mood, seed + 10)
+    ink(c, wellipse(x, hy + 14 * s, 9 * s, 7 * s, seed + 11, 0.5), PNK, 4 * s)
+
+
+def stink(c, x, y, k=1.0, seed=0, col=(116, 128, 52), n=3, h=160, t=0.0, w=9):
+    """wavy rising smell lines; k = opacity / how strong (fade to 0 = nose stops noticing)."""
+    if k <= 0: return
+    for j in range(n):
+        xx = x + (j - (n - 1) / 2) * 46
+        pts = [(xx + 18 * math.sin(i * 1.3 + t * 5 + j), y - i * h / 6) for i in range(7)]
+        wline(c, pts, seed + j, w, col, 1.2, a=min(1.0, k))
+
+
+def bed(c, x, y, s=1.0, tuck=1.0, seed=0, sheet=WHITE, cover=YEL):
+    """side-view doodle bed: headboard, mattress, comforter that snaps flat as tuck 0..1 (wrinkled -> neat)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-330, -330, -280, 0, 10, seed, 1.6), BROWN, 8); ink(c, wrrect(280, -170, 320, 0, 10, seed + 1, 1.6), BROWN, 8)
+    ink(c, wrrect(-300, -170, 300, -100, 14, seed + 2, 1.6), sheet, 8)
+    ink(c, wellipse(-210, -200, 70, 36, seed + 3, 1.4), WHITE, 7)
+    wob = (1 - tuck) * 26
+    cov = wpoly([(-150, -190 + wob), (-40, -200 - wob), (80, -186 + wob), (300, -196), (310, -96), (-150, -96)], seed + 4, 2 + 6 * (1 - tuck), True, 30)
+    ink(c, cov, cover, 8)
+    for j in range(3): wline(c, [(-120 + j * 140, -170), (-80 + j * 140, -120)], seed + 5 + j, 4, shade(cover, 0.7), a=1 - tuck)
+    c.restore()
+
+
+def house(c, x, y, w=520, h=440, seed=0, wall=WHITE, roof=INK, door=YEL):
+    """simple house front; returns the 6 window centres (2 rows x 3) for pop-in heads."""
+    ink(c, wrrect(x - w / 2, y - h, x + w / 2, y, 8, seed, 2), wall, 9)
+    ink(c, wpoly([(x - w / 2 - 40, y - h + 6), (x, y - h - 200), (x + w / 2 + 40, y - h + 6)], seed + 1, 2, True, 50), roof, 9)
+    ink(c, wrrect(x - 50, y - 170, x + 50, y, 8, seed + 2, 1.4), door, 8)
+    wins = []
+    for r in range(2):
+        for q in (-1, 1):
+            cx, cy = x + q * 160, y - h + 110 + r * 160; ink(c, wrrect(cx - 62, cy - 52, cx + 62, cy + 52, 6, seed + 3 + r * 2 + q, 1.4), (255, 246, 200), 7); wins.append((cx, cy))
+    return wins
+
+
+def nose_dial(c, x, y, s=1.0, level=1.0, seed=0):
+    """big doodle nose + a volume knob beside it turned down to `level` (1 = full, 0 = off)."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wpoly([(-40, -200), (10, -200), (90, 40), (60, 90), (-60, 90), (-90, 50)], seed, 2, True, 40), (255, 224, 196), 9)
+    for sx in (-1, 1): ink(c, wellipse(sx * 30, 64, 16, 10, seed + sx, 0.6), INK, 0)
+    kx, ky = 260, -40; ink(c, wellipse(kx, ky, 90, 90, seed + 3, 1.6), YEL, 9)
+    a = math.radians(-220 + 260 * level); wline(c, [(kx, ky), (kx + 70 * math.cos(a), ky + 70 * math.sin(a))], seed + 4, 10)
+    f = font(BLK_F, 34); c.drawString("SMELL", kx - f.measureText("SMELL") / 2, ky + 140, f, P(INK))
+    c.restore()
+
+
+def confetti(c, x, y, t, t0, n=18, seed=0, spread=320):
+    if t < t0: return
+    u = min(1.0, (t - t0) / 0.9)
+    for i in range(n):
+        a = -math.pi / 2 + (h01(i, seed) - 0.5) * 2.2; r = spread * eout(u) * (0.5 + h01(i + 5, seed) * 0.6)
+        px, py = x + math.cos(a) * r, y + math.sin(a) * r + 300 * u * u
+        c.save(); c.translate(px, py); c.rotate(t * 300 * (1 if i % 2 else -1)); col = (YEL, INK, RED, WHITE)[i % 4]
+        c.drawRect(skia.Rect.MakeLTRB(-12, -6, 12, 6), P(col, 1 - 0.6 * u)); c.restore()
+
+
+def bars(c, x, y, vals, k=1.0, seed=0, col=YEL, w=110, gap=40, hmax=360, labels=None):
+    """simple bar chart on a baseline at y; vals 0..1; k grows the bars."""
+    n = len(vals); x0 = x - (n * w + (n - 1) * gap) / 2
+    wline(c, [(x0 - 30, y), (x0 + n * (w + gap) + 10, y)], seed, 8)
+    for i, v in enumerate(vals):
+        hh = max(4, hmax * v * k); bx = x0 + i * (w + gap)
+        ink(c, wrrect(bx, y - hh, bx + w, y, 6, seed + i, 1.4), col, 8)
+        if labels: text(c, labels[i], bx + w / 2, y + 50, 34, INK, BLK_F)
+
+
+def cover_by(c, kicker, title, k=1.0, y=700, seed=501):
+    """BLACK + YELLOW cover (owner 15 Nov theme): charcoal page with halftone dots, yellow title card, black type, red marker underline."""
+    if k <= 0: return
+    c.save(); c.drawRect(skia.Rect.MakeWH(W, H), P((30, 30, 34), 0.96 * min(1, k)))
+    for yy in range(0, H, 36):
+        for xx in range(0 if (yy // 36) % 2 else 18, W, 36): c.drawCircle(xx, yy, 5, P((60, 60, 66), min(1, k)))
+    lines = wrap(title, MARK_F, 112, 860)[:3]; f = font(MARK_F, 112); lh = 118
+    fk = font(BLK_F, 44); kw = fk.measureText(kicker) if kicker else 0
+    w = max([f.measureText(l) for l in lines] + [kw]) + 90; h = lh * len(lines) + (80 if kicker else 0) + 70
+    c.translate(540, y); c.rotate(-2); c.scale(k, k)
+    c.save(); c.translate(12, 16); c.drawPath(wrrect(-w / 2, -h / 2, w / 2, h / 2, 26, seed, 2.2), P((0, 0, 0), 0.45)); c.restore()
+    ink(c, wrrect(-w / 2, -h / 2, w / 2, h / 2, 26, seed, 2.2), (255, 214, 0), 10)
+    yy = -h / 2 + 44
+    if kicker: c.drawString(kicker, -kw / 2, yy + 34, fk, P(INK)); yy += 80
+    for i, l in enumerate(lines): c.drawString(l, -f.measureText(l) / 2, yy + 92 + i * lh, f, P(INK))
+    wline(c, [(-w / 2 + 60, h / 2 - 30), (w / 2 - 60, h / 2 - 38)], seed + 3, 12, RED, 1.2)
+    c.restore()

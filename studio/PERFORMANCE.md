@@ -9,6 +9,23 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-16 ~03:00 IST (episode run: Febreze, first SHORTS-LENGTH doodle)
+**Delivery (getScheduledPosts 13–20 Nov IST):** every post 13–15 Nov is **PUBLISHED on Instagram + YouTube, no provider ERROR** (7-Eleven, Black Friday, childminding, Airbnb, Spanx, protein, Dubai, Stanley 428381154, DSC 428575653, Pet Rock comic 428759777). Pending: owner's bus long-form (YT only, 429019020, 16 Nov 19:30) and Domino's comic (IG 429175031 + YT 429175075, 16 Nov 17:10).
+**Instagram (IGRE, pulled ~02:50 IST 16 Nov; views · reach · avg watch s · 3-s % · shares · saves · likes):**
+| post | look / length | views | reach | watch | 3-s | sh | sv | likes |
+|---|---|---|---|---|---|---|---|---|
+| 15 Nov 16:10 Pet Rock (~11 h) | comic, 2:08 | **1,567** | 1,351 | 33.0 | 65.3 | 0 | 2 | 63 |
+| 15 Nov 09:50 Dollar Shave Club (~17 h) | doodle, 3:09 | 11 | 7 | 3.4 | 20.0 | 0 | 0 | 1 |
+| 15 Nov 05:00 Stanley (~22 h) | doodle, 2:48 | 223 | 198 | 25.1 | 60.0 | 0 | 0 | 2 |
+| 14 Nov 23:08 Dubai chocolate | doodle | 16 | 9 | 19.2 | 11.1 | 0 | 0 | 0 |
+| 14 Nov 19:22 protein | doodle | 197 | 177 | 12.4 | 57.4 | 0 | 0 | 5 |
+| 14 Nov 13:47 Spanx | doodle | 225 | 206 | 19.2 | 72.8 | 0 | 0 | 3 |
+| 14 Nov 07:35 Airbnb cereal (owner) | doodle | **1,598** | 1,360 | **47.0** | 71.1 | 5 | 4 | 39 |
+| 13 Nov 22:20 Black Friday (owner) | doodle | **1,756** | 1,550 | 39.4 | **79.1** | 2 | 1 | 58 |
+**YouTube (YTVP):** rows still stop at 12 Nov in Metricool (pen 5 views) — no read on the doodles yet.
+**Insight AZ (long vs short doodle case studies):** the two ~3-min doodles we built (Stanley 2:48, DSC 3:09) sit at 223 and 11 views with 60 % / 20 % past 3 s and 25 s / 3 s watch (≈15 % of the video). The owner's shorter doodles and the 2:08 comic, all opening on a one-line question, reached 1,567–1,756 views with 65–79 % past 3 s and 33–47 s watch. DSC's 11 views after 17 h looks like a held-back reel (insight 8), not just a weak hook. Length isn't proven to be the cause (n is tiny, ages differ), but every winner is shorter, so the owner's 15 Nov length rule fits the data.
+**Upgrade this run (measurable):** first OMB doodle cut to Shorts length (≈80 s video, 20 lines, ~220 words, was 166–189 s) + a 'Would you pay for…?' hook on an everyday object + the black + yellow theme + separate IG/YT safe-zone cuts. **Judge at ≥ 24 h vs Stanley (60.0 % / 25.1 s): target ≥ 75 % past 3 s and avg watch ≥ 35 s (≥ 45 % of the video).**
+
 ## Snapshot 2026-11-15 ~08:30 IST (R&D run: writers' room, 3 doodle case studies)
 **Delivery (getScheduledPosts 14–17 Nov IST):** childminding (427512909), Airbnb (427664882), Spanx (427817388), protein (428011055), Dubai chocolate (428188321) and **Stanley (428381154, 15 Nov 05:00)** — all **PUBLISHED on Instagram + YouTube, no provider ERROR.** Nothing scheduled after 05:00 IST 15 Nov.
 **Analytics (IGRE 25 Oct → 15 Nov 08:30 IST; YTVP):** every Instagram row is **identical to the 02:40 IST pull** (Airbnb 1,565 · 70.9 % · 47.3 s; Black Friday 1,751 · 79.3 %; Spanx 218; protein 181; Dubai 6 / 4 reach) — Metricool's reel stats are frozen again; Stanley has no row yet. YouTube rows still end at 9 Nov (Instacart 48 views; Michelin anime 156). No new verdict: insight AY (doodle 929 avg views vs whiteboard 130; 'Would you pay $X…?' hooks lead) stands. Next run: re-read Dubai + Stanley at ≥ 24 h.
