@@ -1,0 +1,26 @@
+{
+ "E1_fed": {
+  "title": "File:Eccles Building (26088200676).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Eccles_Building_%2826088200676%29.jpg/1920px-Eccles_Building_%2826088200676%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Eccles_Building_(26088200676).jpg",
+  "author": "Federalreserve",
+  "license": "Public domain",
+  "file": "whatif/fed/img/E1_fed.jpg"
+ },
+ "E2_homes": {
+  "title": "File:Edgewater Estates - Winter in Maple Grove, Minnesota - Suburban Houses (40423461672).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Edgewater_Estates_-_Winter_in_Maple_Grove%2C_Minnesota_-_Suburban_Houses_%2840423461672%29.jpg/1920px-Edgewater_Estates_-_Winter_in_Maple_Grove%2C_Minnesota_-_Suburban_Houses_%2840423461672%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Edgewater_Estates_-_Winter_in_Maple_Grove,_Minnesota_-_Suburban_Houses_(40423461672).jpg",
+  "author": "Tony Webster from Minneapolis, Minnesota, United States",
+  "license": "CC BY 2.0",
+  "file": "whatif/fed/img/E2_homes.jpg"
+ },
+ "E3_framing": {
+  "title": "File:2024-08-23 17 17 14 A new wood-frame house being built along Perry Drive in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/2024-08-23_17_17_14_A_new_wood-frame_house_being_built_along_Perry_Drive_in_the_Mountainview_section_of_Ewing_Township%2C_Mercer_County%2C_New_Jersey.jpg/1920px-2024-08-23_17_17_14_A_new_wood-frame_house_being_built_along_Perry_Drive_in_the_Mountainview_section_of_Ewing_Township%2C_Mercer_County%2C_New_Jersey.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:2024-08-23_17_17_14_A_new_wood-frame_house_being_built_along_Perry_Drive_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+  "author": "Famartin",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/fed/img/E3_framing.jpg"
+ }
+}
