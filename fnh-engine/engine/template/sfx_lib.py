@@ -1255,3 +1255,36 @@ def gas_light(level=-22):
     i = int(0.3 * SR); w = rng.standard_normal(n_ - i)
     y[i:] += _lp(w, 900) * (np.clip(np.arange(n_ - i) / (0.06 * SR), 0, 1) * np.exp(-np.arange(n_ - i) / (0.5 * SR)) * 0.9 + 0.25)
     return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+# ---------------- ep 44: NEW ROOM 'lineup' (police lineup: bare concrete, early slaps, bright 0.5 s tail) + room tones 'lineup' (fluorescent buzz) and 'winter' (kitchen + wind behind glass) ----------------
+_ir_prev44 = ir
+def ir(kind):
+    if kind == "lineup":                                                            # bare concrete + glass: early slaps, a bright 0.5 s tail
+        n_ = int(0.62 * SR); out = np.zeros((n_, 2), np.float32); tt = np.arange(n_) / SR
+        for ch in range(2):
+            r = np.random.default_rng(144 + ch)
+            tail = r.standard_normal(n_) * np.exp(-6.9 * np.maximum(0, tt - 0.006) / 0.5) * (tt >= 0.006)
+            tail = signal.sosfilt(signal.butter(2, 7500, "low", fs=SR, output="sos"), tail); tail = tail / (np.sqrt(np.sum(tail ** 2)) + 1e-9) * 0.55
+            for d_, a_ in ((0.006, 0.6), (0.011, 0.45), (0.014, 0.35), (0.023, 0.2)):
+                k = int((d_ + 0.003 * ch) * SR); tail[k] += a_
+            out[:, ch] = tail
+        return out
+    return _ir_prev44(kind)
+
+
+WET["lineup"] = -11; BUS["lineup"] = np.zeros((NS, 2), np.float32)
+_rt_prev44 = room_tone
+def room_tone(kind, n_):
+    if kind == "lineup":                                                            # fluorescent strip light: 120 Hz + harmonics buzz + ventilation hiss
+        tt = np.arange(n_) / SR
+        x = (0.3 * np.sin(2 * np.pi * 120 * tt) + 0.12 * np.sin(2 * np.pi * 240 * tt) + 0.06 * np.sign(np.sin(2 * np.pi * 120 * tt)) * 0.4
+             + _bp(rng.standard_normal(n_), 300, 3000) * 0.35)
+        return x / (np.abs(x).max() + 1e-9)
+    if kind == "winter":                                                            # the lunch table in winter: a soft kitchen room + wind behind glass
+        tt = np.arange(n_) / SR
+        x = _lp(rng.standard_normal(n_), 1500) * 0.35 + _bp(rng.standard_normal(n_), 250, 900) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.13 * tt) ** 2) * 0.6
+        return x / (np.abs(x).max() + 1e-9)
+    return _rt_prev44(kind, n_)
+
+

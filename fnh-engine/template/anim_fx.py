@@ -934,7 +934,9 @@ def kin_word(f, text, x, y, t, t0, mode="pop", size=130, col=(46, 32, 26), fnt=N
     mode: 'pop' (entrance only) | 'stink' (letters bob + sway out of phase, smell wisps rise off them) | 'shake' (vibration = loud / alarm) |
     'blow' (from t1 the letters are pushed away from src=(sx, sy), nearest first, spinning + fading = beaten by something) |
     'drop' (from t1 they fall, bounce once and lie tilted = deflated / busted) | 'sneak' (they tiptoe in sideways from the left, low, one hop each) |
-    'breathe' (the whole word swells and shrinks slowly, like lungs) | 'parch' (ep 31: from t1 the word dries out - sags, cracks, crumbs fall = thirsty / dry)."""
+    'breathe' (the whole word swells and shrinks slowly, like lungs) | 'parch' (ep 31: from t1 the word dries out - sags, cracks, crumbs fall = thirsty / dry) |
+    'shiver' (ep 44: COLD - every letter trembles fast and small, out of phase, a snow cap sits on each letter and a short icicle grows under every
+    other one; use it on 'cold / winter / frozen' words)."""
     if t < t0 or op <= 0: return
     gl = [_kin_glyph(ch, size, col, fnt, stroke, stroke_col) for ch in text]
     ws = [g[1] + track for g in gl]; tot = sum(ws); cx = x - tot / 2
@@ -966,7 +968,17 @@ def kin_word(f, text, x, y, t, t0, mode="pop", size=130, col=(46, 32, 26), fnt=N
         if mode == "parch":                                   # ep 31: the word DRIES OUT - it sags + shrinks a little, cracks, and crumbs fall off it
             u = clamp((t - (t1 if t1 is not None else ti + 0.35)) / 1.2)
             s *= 1 - 0.07 * u * amp; dy += 10 * u * amp + 3 * math.sin(t * 2 + i); rot = 4 * amp * u * math.sin(i * 2.1 + 0.5)
+        if mode == "shiver":                                  # ep 44: cold = a small, fast, out-of-phase tremble (smaller than 'shake')
+            dx = 3.2 * amp * math.sin(t * 41 + i * 2.3); dy += 2.0 * amp * math.cos(t * 37 + i * 1.7); rot = 1.6 * amp * math.sin(t * 29 + i)
         if o > 0.01: rot_comp(f, el, lx + dx, y + dy, rot, s, o, 0.0)
+        if mode == "shiver" and q > 0.6 and ch.strip() and ch not in "?=!.,":
+            cx0, cy0 = lx + dx, y + dy - size * 0.40; wcap = max(10, int(ws[i] * 0.34))
+            cv2.ellipse(f, (int(cx0), int(cy0)), (wcap, max(5, int(size * 0.07))), 0, 180, 360, C((252, 253, 255)), -1, cv2.LINE_AA)
+            cv2.ellipse(f, (int(cx0), int(cy0)), (wcap, max(5, int(size * 0.07))), 0, 180, 360, C((120, 160, 200)), 2, cv2.LINE_AA)
+            if i % 2 == 1:
+                L = size * 0.16 * clamp((t - ti - 0.3) / 0.8); bx, by = lx + dx + ws[i] * 0.12, y + dy + size * 0.36
+                P = np.array([(bx - 5, by), (bx + 5, by), (bx, by + L)], np.int32)
+                cv2.fillPoly(f, [P], C((214, 236, 252)), cv2.LINE_AA); cv2.polylines(f, [P], True, C((120, 160, 200)), 2, cv2.LINE_AA)
         if mode == "parch" and u > 0.05:
             rng_ = np.random.default_rng(97 + i); cx0 = lx + dx; cy0 = y + dy
             if i % 2 == 0:                                      # ONE thin crack on every other letter (more = unreadable, ep 31 test frames)
@@ -1006,3 +1018,27 @@ def sec_wobble(t, t_hits, amp=1.0, freq=11.0, decay=4.5):
     if not past: return 0.0
     dt = t - max(past)
     return amp * math.exp(-decay * dt) * math.sin(freq * dt * 2 * math.pi / 4)
+
+
+# ---------------- THE SILHOUETTE REVEAL (ep 44 craft skill: suspense staging + light): show the SHAPE first, the detail later ----------------
+# Sources: wolfcrow 'How great films use shadows and silhouettes' (silhouettes 'emphasize the overall shape and form without showing details';
+# light the background, keep the subject unlit); ASC 'Terror through lighting' (Roy Wagner: 'the audience instinctively wants to know what's going on
+# in that darkness'; a full reveal lets the audience relax); CG-Wire staging (one focal point; rim/backlight separates the subject). Rules used:
+# (1) the silhouette must read from its outline alone (pick the pose / prop with the clearest shape), (2) a thin rim light on one side separates it
+# from a dim background, (3) hold the dark shape long enough for the question to form (~1 s), (4) reveal on the WORD that names it, with a light
+# switch-on (flash + the pool turns warm), (5) after the reveal, the lit subject is the brightest thing in the frame.
+def silhouette_reveal(f, el, x, y, k, s=1.0, rot=0.0, dark=(38, 36, 48), rim=(255, 236, 190), rim_w=5, rim_dir=(-1, -1), op=1.0):
+    """draw `el` at (x, y) as a SILHOUETTE (flat dark fill + a rim light on the rim_dir side) for k = 0, cross-fading to the lit element by k = 1.
+    Use with a dim set (k 0) and a lamp_pool / flash on the reveal word (k 0 -> 1 over ~3 frames)."""
+    pm, a = scale_el(el, s)
+    if k < 0.999:
+        h, w = a.shape; pad = rim_w * 3 + 4
+        A = np.zeros((h + 2 * pad, w + 2 * pad), np.float32); A[pad:pad + h, pad:pad + w] = a
+        sh = np.roll(np.roll(A, int(-rim_dir[1] * rim_w), 0), int(-rim_dir[0] * rim_w), 1)
+        rimm = np.clip(A - sh, 0, 1)                                                   # the edge facing the light
+        rimm = cv2.GaussianBlur(rimm, (0, 0), 1.2)
+        rgb = np.ones((h + 2 * pad, w + 2 * pad, 3), np.float32) * (np.array(C(dark), np.float32))
+        rgb = rgb * (1 - rimm[..., None]) + np.array(C(rim), np.float32) * rimm[..., None]
+        sil = (rgb * A[..., None], A)
+        rot_comp(f, sil, x, y, rot, 1.0, op * (1 - k), 0.0)
+    if k > 0.001: rot_comp(f, (pm, a), x, y, rot, 1.0, op * k, 0.0)

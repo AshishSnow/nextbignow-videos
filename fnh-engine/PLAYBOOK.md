@@ -422,6 +422,15 @@ EXPLANATION on a white blueprint board that draws itself, while Chubby INK keeps
 - Sound: `persp(x, d)` / `flyby(x, t0, dur, x0, x1, cents)` (sfx_lib, see improvements G), place 'shop' (ir + room_tone), foley slurp, lick, tap_run, chef_bell, gas_light.
 - Voice: PZ 1.2 is now voice.env (neutral-positive on two scripts).
 
+### Ep 44 (16 Nov, nineteenth ink episode): THE SILHOUETTE REVEAL, THE LINEUP ROOM, Detective Chubby, kin_word 'shiver' (`anim_fx.py`, `anim_props_lib44.py`, `engine/template/sfx_lib.py`)
+- 46.3 s, 9 lines / 127 words / 16 shots. A myth about a daily Indian habit (the shape of the owner's 11.8k chai-paani reel): payoff 'caused by viruses' at 21 %, one safe tip, a send line aimed at one person ('the CURD POLICE').
+- `silhouette_reveal(f, el, x, y, k, s, rot, dark, rim, rim_w, rim_dir)` (anim_fx) = k 0: a flat dark shape with a rim light on one side; k 1: the lit element. Dim the set (set_lineup(dim=0.75)), hold the shape ~1 s with a '?', then k 0 -> 1 in ~3 frames ON the word that names it + a flash + `lamp_pool`. Pick the pose with the clearest outline.
+- `kin_word(..., mode="shiver")` = COLD words: small fast out-of-phase tremble + a snow cap on each letter + icicles under every other one.
+- Place: `set_lineup(t, dim)` (lib44: slate wall with height lines + numbers, strip light, dark floor at LINE_FLOOR 1480; slot marks at x 330 / 750) + `lamp_pool(f, x, y, r, amt)`; `suspect(f, el, x, s, t, num, sweat, op)` = any food/germ in a lineup with ink legs + a placard. Sound: sfx_lib room 'lineup' (concrete slaps + bright 0.5 s tail; room tone = fluorescent buzz) and room tone 'winter' (kitchen + wind behind glass).
+- lib44 props: curd_el(mood, look, frost, empty) (steel katori of dahi; frost 0..1 = fridge-cold), virus_el(mood, look, ph) (the cold virus: olive body, rust-knob stalks), card_el(n), `fedora(f, x, y, s, lean, tip)` (Detective Chubby; tip 0..1 = hat tip), soap_foam, sneeze_spray (droplets carrying mini viruses). Ep 44 anim_shots: `detective()`, `aunty()` (other people: arm toward the left = la), `set_winter()` (snow in the lunch window), the sink close-up with the mirror reflection.
+- Arms: for a front-facing chub, `ra` is the SCREEN-RIGHT arm and `la` the screen-left one (found in the test frames: the aunty's STOP palm pointed away from Chubby).
+- Voice: hook question at speed 0.97 (+0.04); never stress a wh-word at a line start ('whoever' 4.06); a whole-take SPD 0.893 alternate can win on one script (chunk20 +0.031) - use it as a comp take, not a default.
+
 ### Chubby v3 (28 Oct, `template/fnh_char_v3.py` — built first, superseded the same day by Chubby INK above)
 Pixar-style kid: big lidded hazel eyes with two catchlights, thick shaped eyebrows, button nose, blush + freckles, a mouth with teeth
 and tongue, a messy hair mop; neck + shoulders; cream chef's APRON over the mint hoodie (signature), rolled sleeves, HANDS with
