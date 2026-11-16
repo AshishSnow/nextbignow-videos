@@ -1,0 +1,50 @@
+{
+ "Y1_probe": {
+  "title": "File:Voyager spacecraft.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Voyager_spacecraft.jpg/1920px-Voyager_spacecraft.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Voyager_spacecraft.jpg",
+  "author": "NASA/JPL",
+  "license": "Public domain",
+  "file": "whatif/voyager/img/Y1_probe.jpg"
+ },
+ "Y2_record": {
+  "title": "File:The Sounds of Earth Record Cover - GPN-2000-001978.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/The_Sounds_of_Earth_Record_Cover_-_GPN-2000-001978.jpg/1920px-The_Sounds_of_Earth_Record_Cover_-_GPN-2000-001978.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Sounds_of_Earth_Record_Cover_-_GPN-2000-001978.jpg",
+  "author": "NASA/JPL",
+  "license": "Public domain",
+  "file": "whatif/voyager/img/Y2_record.jpg"
+ },
+ "Y3_bluedot": {
+  "title": "File:Pale Blue Dot from Voyager 1 - PIA23645.png",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Pale_Blue_Dot_from_Voyager_1_-_PIA23645.png/1920px-Pale_Blue_Dot_from_Voyager_1_-_PIA23645.png",
+  "page": "https://commons.wikimedia.org/wiki/File:Pale_Blue_Dot_from_Voyager_1_-_PIA23645.png",
+  "author": "NASA/JPL-Caltech",
+  "license": "Public domain",
+  "file": "whatif/voyager/img/Y3_bluedot.png"
+ },
+ "Y4_dish": {
+  "title": "File:Canberra Deep Dish Communications Complex - GPN-2000-000502.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Canberra_Deep_Dish_Communications_Complex_-_GPN-2000-000502.jpg/1920px-Canberra_Deep_Dish_Communications_Complex_-_GPN-2000-000502.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Canberra_Deep_Dish_Communications_Complex_-_GPN-2000-000502.jpg",
+  "author": "NASA",
+  "license": "Public domain",
+  "file": "whatif/voyager/img/Y4_dish.jpg"
+ },
+ "Y5_launch": {
+  "title": "File:Titan 3E with Voyager 1.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Titan_3E_with_Voyager_1.jpg/1920px-Titan_3E_with_Voyager_1.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Titan_3E_with_Voyager_1.jpg",
+  "author": "NASA",
+  "license": "Public domain",
+  "file": "whatif/voyager/img/Y5_launch.jpg"
+ },
+ "Y6_jpl": {
+  "title": "File:Voyager 1 Launch.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Voyager_1_Launch.jpg/1920px-Voyager_1_Launch.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Voyager_1_Launch.jpg",
+  "author": "NASA on The Commons",
+  "license": "Public domain",
+  "file": "whatif/voyager/img/Y6_jpl.jpg"
+ }
+}
