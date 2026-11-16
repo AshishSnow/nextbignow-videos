@@ -31,7 +31,11 @@ def load_rgba(p, h=None, w=None):
     return np.array(im)
 
 WM2 = WM + '2'
-BOTTLE = load_rgba('/home/claude/studio/assets/43/st_pump.png', h=560)
+A43 = '/home/claude/studio/assets/43/'
+BUCKET = load_rgba(A43 + 'st_bucket.png', h=620)
+TAP = load_rgba(A43 + 'st_tap.png', h=640)
+COCO = load_rgba(A43 + 'st_cocooil.png', h=560)
+CARD = load_rgba(A43 + 'card_shower.png', w=860)
 
 @functools.lru_cache(maxsize=16)
 def paper(tint=None, dots='D9C9A0'):
@@ -265,7 +269,7 @@ def credit_img(txt):
     im = Image.new('RGBA', (bb[2] + 20, bb[3] + 12), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     d.text((10, 4), txt, font=f, fill=(28, 22, 20, 190)); return np.array(im.rotate(90, expand=True))
 
-CREDIT = 'Photo: Mezoneni (CC BY-SA 4.0) / Wikimedia Commons'
+CREDIT = 'Photos: Fola01 (CC0), Phu Thinh Co (CC BY-SA 2.0), Miguel Andrade (PD) / Wikimedia Commons'
 
 # --- FNH logo B (verified-leaf bubble) override
 _LBS = cairo.ImageSurface.create_from_png('/home/claude/studio/fnh_logoB_2048.png')

@@ -118,36 +118,25 @@ SC = {l['id']: l for l in TL}
 
 def sc_h1(fr, T, t, l):
     fr[:] = paper('2D6CDF')
-    overlay(fr, cairo_layer(lambda c: (bucket(c, CX - 40, 1050, 1.05 * ent(T + .5), T, 'FF8C1A'), mug(c, 830, 1200, .7, T))))
+    sticker(fr, BUCKET, CX - 30, 1060, T, 0, .95 * ent(T + .5), -3)
+    overlay(fr, cairo_layer(lambda c: steam_puffs(c, CX - 30, 780, 1.5, T, 5, 1.0)))
+    if t > 1.2: sticker(fr, TAP, 860, 900, T, 1, .42 * ent(t - 1.2), 8)
     if V == 'yt':
         title(fr, 'गरम पानी से नहाना = गलती?', 520, T + 1.0, 100, 'FFC93C', -2.5)
     else:
         title(fr, 'सर्दी में खौलता पानी?', 520, T + 1.0, 110, 'FFFFFF', -2.5)
-    tape(fr, 'भाप देखकर ही मज़ा!', CX, 1360, t - 3.5, 'FFC93C', 50, rot=-3)
+    tape(fr, 'भाप देखकर ही मज़ा!', CX, 1310, t - 3.5, 'FFC93C', 50, rot=-3)
 
 def sc_h2(fr, T, t, l):
     dx, dy = shake(T, l['start'] + .05, .4, 20)
     fr[:] = paper('E63946')
     if t < .12: fr[:] = (fr * .3 + 255 * .7).astype(np.uint8)
-    def dr(c):
-        c.save(); c.translate(CX + dx, 1020 + dy)
-        def arm():
-            c.new_path(); c.move_to(-380, -80); c.curve_to(-100, -100, 150, -90, 300, -80); c.curve_to(400, -80, 400, 80, 300, 80); c.curve_to(150, 90, -100, 100, -380, 80); c.close_path()
-        shadowed(c, arm, 'E8B48F')
-        c.save(); arm(); c.clip()
-        n = int(clamp((t - 2.0) / 3.0) * 26); rnd = np.random.default_rng(9)
-        for k in range(n):
-            px, py = rnd.uniform(-340, 300), rnd.uniform(-60, 60)
-            c.move_to(px, py); c.line_to(px + 22, py - 6); c.line_to(px + 30, py + 8); c.line_to(px + 6, py + 10); c.close_path(); c.set_source_rgba(1, 1, 1, .9); c.fill()
-        c.restore(); c.restore()
-        if t > 4.6:
-            for k in range(3):
-                a = T * 10 + k * 2; c.move_to(CX - 120 + k * 120, 860); c.line_to(CX - 100 + k * 120 + 14 * math.sin(a), 800); ink(c, 8); c.stroke()
-    overlay(fr, cairo_layer(dr))
+    sticker(fr, CARD, CX + dx, 960 + dy, T, 2, .95, -3)
+    overlay(fr, cairo_layer(lambda c: steam_puffs(c, CX + 200, 820, 1.2, T, 4, .9)))
     title(fr, 'पर रुको!', 500, t, 160, 'FFC93C', -4)
-    tape(fr, 'स्किन खिंची-खिंची?', 330, 700, t - 1.0, 'FFFFFF', 46, rot=-4)
-    tape(fr, 'सफ़ेद पपड़ी, खुजली?', 760, 1240, t - 3.6, 'FFC93C', 46, rot=3)
-    burst(fr, '?!', 880, 780, t - 5.6, 80, '2D6CDF', LUCKY, 80)
+    tape(fr, 'स्किन खिंची-खिंची?', 330, 1250, t - 1.0, 'FFFFFF', 46, rot=-4)
+    tape(fr, 'सफ़ेद पपड़ी, खुजली?', 760, 1330, t - 3.6, 'FFC93C', 46, rot=3)
+    burst(fr, '?!', 880, 720, t - 5.6, 80, '2D6CDF', LUCKY, 80)
 
 def sc_s1(fr, T, t, l):
     fr[:] = paper('3FAE5A')
@@ -160,10 +149,11 @@ def sc_s2(fr, T, t, l):
     dx, dy = shake(T, l['start'] + 1.0, .35, 14)
     fr[:] = paper('FF6B5B')
     oil = 1 - clamp((t - .8) / 2.0)
-    overlay(fr, cairo_layer(lambda c: skin_section(c, CX + dx, 1040 + dy, T, oil=oil, escape=clamp((t - 3.4) / 2.4), hotwash=clamp(t / .5) * (1 - clamp((t - 3.0) / .8)))))
+    overlay(fr, cairo_layer(lambda c: skin_section(c, CX + dx, 1110 + dy, T, oil=oil, escape=clamp((t - 3.4) / 2.4), hotwash=clamp(t / .5) * (1 - clamp((t - 3.0) / .8)))))
+    sticker(fr, TAP, 860, 760, T, 3, .34, -12, t)
     title(fr, 'गरम पानी = तेल साफ़!', 500, t, 108, 'FFFFFF', -2)
-    tape(fr, 'परत कमज़ोर', 330, 1330, t - 3.2, 'FFC93C', 50, rot=-3)
-    tape(fr, 'नमी उड़ गई!', 760, 1330, t - 4.8, 'FFFFFF', 50, rot=3)
+    tape(fr, 'परत कमज़ोर', 330, 1340, t - 3.2, 'FFC93C', 50, rot=-3)
+    tape(fr, 'नमी उड़ गई!', 760, 1340, t - 4.8, 'FFFFFF', 50, rot=3)
 
 def sc_s3(fr, T, t, l):
     fr[:] = paper('8E5CD9')
@@ -186,33 +176,31 @@ def sc_s3(fr, T, t, l):
 
 def sc_s4(fr, T, t, l):
     fr[:] = paper('17A2B8')
-    overlay(fr, cairo_layer(lambda c: (head_hair(c, CX, 1060, 1.3, T, frizz=clamp((t - 2.6) / 2.0)),
-                                        steam_puffs(c, CX, 760, 1.0, T, 3, clamp((t - 1.5) / .5) * (1 - clamp((t - 3.4) / .6))))))
+    sticker(fr, CARD, CX, 980, T, 4, .9, 3, t)
+    overlay(fr, cairo_layer(lambda c: steam_puffs(c, 640, 800, 1.1, T, 4, .9)))
     title(fr, 'बालों के साथ भी!', 500, t, 120, 'FFFFFF', -2)
-    tape(fr, 'रूखे, बेजान, उलझे', CX, 1390, t - 3.4, 'FFC93C', 50, rot=-2)
+    tape(fr, 'सिर पर तेज़ गरम पानी', 380, 1230, t - 1.4, 'FFC93C', 44, rot=-3)
+    tape(fr, 'रूखे, बेजान, उलझे', 720, 1330, t - 3.4, 'FFFFFF', 48, rot=2)
 
 def sc_w1(fr, T, t, l):
     fr[:] = paper('9BDB6A')
-    def dr(c):
-        bucket(c, 330, 950, .55, T, '2D6CDF', hot=.35)
-        thermo(c, 600, 930, .5 * ent(t - 1.2), T, .45)
-        clock(c, 820, 920, 110 * ent(t - 3.8), T, clamp((t - 4.0) / 1.6))
-    overlay(fr, cairo_layer(dr))
-    if t > 6.0: sticker(fr, BOTTLE, 520, 1150, T, 0, .4 * ent(t - 6.0), -6)
+    sticker(fr, BUCKET, 330, 960, T, 5, .42, -3, t)
+    overlay(fr, cairo_layer(lambda c: (steam_puffs(c, 330, 840, .7, T, 3, .35), thermo(c, 600, 930, .5 * ent(t - 1.2), T, .45),
+                                        clock(c, 820, 920, 110 * ent(t - 3.8), T, clamp((t - 4.0) / 1.6)))))
+    if t > 6.0: sticker(fr, COCO, 560, 1200, T, 6, .42 * ent(t - 6.0), -4)
     title(fr, 'तो करना क्या है?', 500, t, 116, 'FFFFFF', -2)
     tape(fr, 'गुनगुना पानी', 330, 1170, t - 1.3, 'FFC93C', 46, rot=-4)
     tape(fr, '5-10 मिनट', 820, 1100, t - 4.4, 'FFFFFF', 46, rot=4)
-    tape(fr, 'गीली स्किन पर तेल!', 720, 1290, t - 8.6, 'E63946', 46, rot=-2, tcol='FFFFFF')
+    tape(fr, 'गीली स्किन पर तेल!', 800, 1340, t - 8.6, 'E63946', 42, rot=-2, tcol='FFFFFF')
 
 def sc_e1(fr, T, t, l):
     fr[:] = paper('FF8A5B')
+    sticker(fr, TAP, CX + 60, 1000, T, 7, .7, -4)
+    sticker(fr, BUCKET, 330, 1150, T, 8, .4, 4)
     def dr(c):
-        c.rectangle(200, 700, 680, 660); c.set_source_rgba(*hx('CFEFFF')); c.fill_preserve(); ink(c, 9); c.stroke()
-        for k in range(5): c.move_to(200, 830 + k * 110); c.line_to(880, 830 + k * 110); c.set_source_rgba(*hx('9FC9E0')); c.set_line_width(4); c.stroke()
-        bucket(c, 540, 1180, .5, T, 'FF8C1A')
-        for k in range(9):
-            ph = (T * .35 + k / 9) % 1
-            c.arc(220 + (k * 77) % 640, 1280 - ph * 600, 60 + 50 * ph, 0, 2 * math.pi); c.set_source_rgba(1, 1, 1, .55 * clamp((t - 1.5) / 1.5)); c.fill()
+        for k in range(10):
+            ph = (T * .35 + k / 10) % 1
+            c.arc(180 + (k * 83) % 720, 1320 - ph * 650, 70 + 60 * ph, 0, 2 * math.pi); c.set_source_rgba(1, 1, 1, .6 * clamp((t - 1.0) / 1.5)); c.fill()
     overlay(fr, cairo_layer(dr))
     title(fr, 'भेजो उस दोस्त को', 500, t, 108, 'FFFFFF', -2)
     burst(fr, 'बाथरूम = सौना!', CX, 1000, t - 3.6, 140, 'E63946', HI_B, 46)
