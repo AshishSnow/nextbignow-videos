@@ -95,3 +95,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 - 2026-11-16 | QUEUED (R&D writers' room, doodle case study, SHORTS) — Poppi: the vinegar soda PepsiCo did a ~$2B deal for (prebiotic soda trend + 3 moves) (queue/28-poppi-vinegar-soda) | — | REVIEWED
 - 2026-11-16 | QUEUED (R&D writers' room, doodle case study, SHORTS) — Liquid Death: the ad came before the water (sober-curious trend + 3 moves) (queue/29-liquid-death-ad) | — | REVIEWED
 - 2026-11-16 | QUEUED (R&D writers' room, doodle case study, SHORTS) — Gymshark: the pizza driver's garage gym brand (gym boom + 3 moves) (queue/30-gymshark-garage) | — | REVIEWED
+- 2026-11-16 SCHEDULED (17 Nov 10:05 IST) comic Short, black+yellow, IG/YT cuts: budget-airline fee traps ($19 flight, $99 gate bag; Frontier + Senate report + Ryanair FY26) | flight-fees (66 s) | Metricool 430117807 IG + 430117930 YT

@@ -1,0 +1,6 @@
+- Frontier bag fees by purchase point (carry-on $29-$69 at booking; $99-$115 at gate; route-dependent, one-way): Upgraded Points, updated 10 Jun 2026 https://upgradedpoints.com/travel/airlines/frontier-airlines-baggage-fees/ ; NerdWallet (fees highest at gate), 21 Oct 2026.
+- Gate-agent bag commissions (Frontier up to $10/bag; Spirit up to $5) and seat fee rises (Frontier priciest extra-legroom seat $50 in 2018 -> $141 in 2023): US Senate PSI majority staff report "The Sky's the Limit", 26 Nov 2024 https://www.hsgac.senate.gov/wp-content/uploads/2024.11.25-Majority-Staff-Report-The-Skys-the-Limit-The-Rise-of-Junk-Fees-in-American-Travel-1.pdf
+- Ryanair airport check-in fee £55 per passenger: travellon.com Ryanair fees list, 5 Oct 2026; Ryanair check-in 2026 guide.
+- Ryanair FY26 (to 31 Mar 2026): fares +10% to c.€51; ancillary revenue +6% to €4.99bn (€24 per passenger); 208.4m passengers: Ryanair FY26 results, 18 May 2026 https://investor.ryanair.com/wp-content/uploads/2026/05/FY26-Ryanair-Results.pdf
+- (Context, not in script) Spirit Airlines ceased operations 2 May 2026: Aviation Week.
+NOTE: "$19 flight + $99 gate bag" is an illustrative example built from published fee ranges; say "can" not "always".
