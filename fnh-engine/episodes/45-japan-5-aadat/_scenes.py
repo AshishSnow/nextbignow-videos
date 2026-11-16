@@ -100,6 +100,7 @@ BENTO = opt(A45 + 'card_bowls.png', w=840)
 TRAIN = opt(A45 + 'card_train.png', w=840)
 CHOP = opt(A45 + 'card_chop.png', w=420)
 THALI = load_rgba('/home/claude/studio/assets/41/st_thali.png', w=760)
+GIRL = load_rgba(A45 + 'st_girl.png', h=760)
 
 SC = {l['id']: l for l in TL}
 
@@ -109,17 +110,17 @@ def habit_head(fr, n, t, label, col):
     put_rgba(fr, ttext(label, 84, HI_B, 'FFFFFF'), 640, 520, back((t - .3) / .3) * min(1.0, 560 / ttext(label, 84, HI_B, 'FFFFFF').shape[1]), clamp((t - .3) / .1), -2)
 
 def sc_h1(fr, T, t, l):
-    fr[:] = paper('E63946')
+    fr[:] = paper('5EC8F2')
     def dr(c):
         for k in range(5):
-            num_badge(c, 200 + k * 170, 820 + 40 * math.sin(T * 3 + k), 70, k + 1, ['FFC93C', '3FAE5A', '2D6CDF', '8E5CD9', 'FF8C1A'][k], back((t - .5 - .15 * k) / .3))
-        person(c, CX, 1170, 1.0, '2D6CDF', T)
+            num_badge(c, 200 + k * 170, 690 + 40 * math.sin(T * 3 + k), 70, k + 1, ['FFC93C', '3FAE5A', '2D6CDF', '8E5CD9', 'FF8C1A'][k], back((t - .5 - .15 * k) / .3))
     overlay(fr, cairo_layer(dr))
     for k in range(5):
-        if t > .5 + .15 * k: put_rgba(fr, ttext(str(k + 1), 80, LUCKY, 'FFFFFF', sw=7), 200 + k * 170, 828 + 40 * math.sin(T * 3 + k), back((t - .5 - .15 * k) / .3), 1.0, -4)
+        if t > .5 + .15 * k: put_rgba(fr, ttext(str(k + 1), 80, LUCKY, 'FFFFFF', sw=7), 200 + k * 170, 698 + 40 * math.sin(T * 3 + k), back((t - .5 - .15 * k) / .3), 1.0, -4)
+    sticker(fr, GIRL, CX, 1090, T, 9, .95 * ent(T + .6), -2)
     if V == 'yt': title(fr, 'बिना जिम पतले कैसे?', 520, T + 1.0, 112, 'FFC93C', -2.5)
     else: title(fr, '5 जापानी आदतें', 520, T + 1.0, 130, 'FFFFFF', -2.5)
-    tape(fr, 'बिना जिम के पतले!', CX, 1380 - 50, t - 2.0, 'FFC93C', 50, rot=-3)
+    tape(fr, 'बिना जिम के पतले!', 760, 1330, t - 2.0, 'FFC93C', 48, rot=-3)
 
 def sc_h2(fr, T, t, l):
     dx, dy = shake(T, l['start'] + 3.1, .35, 16)

@@ -264,7 +264,7 @@ def credit_img(txt):
     im = Image.new('RGBA', (bb[2] + 20, bb[3] + 12), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     d.text((10, 4), txt, font=f, fill=(28, 22, 20, 190)); return np.array(im.rotate(90, expand=True))
 
-CREDIT = 'Photos: Ganesh Mohan T, Matti Blume (CC BY-SA 4.0), Shisma (CC BY 4.0), fto mizno (CC BY 2.0) / Wikimedia Commons'
+CREDIT = 'Photos: Ganesh Mohan T, Matti Blume (CC BY-SA 4.0), Shisma (CC BY 4.0), fto mizno (CC BY 2.0), Basile Morin (CC BY-SA 4.0) / Wikimedia Commons'
 
 # --- FNH logo B (verified-leaf bubble) override
 _LBS = cairo.ImageSurface.create_from_png('/home/claude/studio/fnh_logoB_2048.png')
