@@ -68,3 +68,4 @@ intro so viewers instantly know what the video is about.
 - 2026-11-15 | Short #41 | खाने के बाद ठंडा पानी = चर्बी? (myth; Mayo Clinic water-with-meals) | comic, mint/multi-colour, logo B | IG+YT 2026-11-15 22:30
 - 2026-11-15 | Short #42 | मछली के बाद दूध = सफ़ेद दाग? (myth; vitiligo autoimmune) | comic, real cut-outs, phone-crop safe titles | IG+YT scheduled 2026-11-16 07:00
 - 2026-11-16 | Short #43 | सर्दी में खौलता पानी से नहाना (skin oil barrier; Cleveland Clinic/derm tips) | comic, IG + YT versions, real cut-outs | IG 14:22 + YT 14:24 2026-11-16
+CLAIMED 2026-11-16 15:55 IST | 44-curd-winter-cold | Does eating curd in winter give you a cold?
