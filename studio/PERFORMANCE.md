@@ -9,6 +9,11 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-16 ~08:30 IST (R&D run: writers' room, 3 Shorts-length doodle case studies)
+**Delivery (getScheduledPosts 15–19 Nov IST):** Stanley (428381154), DSC (428575653) and Pet Rock comic (428759777) — **PUBLISHED on Instagram + YouTube, no provider ERROR.** Pending (no ERROR): Domino's comic IG 429175031 + YT 429175075 (16 Nov 17:10), owner's bus long-form YT 429019020 (16 Nov 19:30), **Febreze Shorts-length doodle IG 429326446 + YT 429326553 (17 Nov 00:00)**.
+**Analytics (IGRE 26 Oct → 16 Nov; YTVP):** every Instagram row is **identical to the ~02:50 IST pull** (Pet Rock 1,567 · 65.3 % · 33.0 s; DSC 11 · 20 %; Stanley 223 · 60 %; Airbnb 1,598; Black Friday 1,756) — Metricool's reel stats are frozen again between runs. YouTube rows still stop at 12 Nov (pen 5 views). **No new verdict on long vs short doodles:** insight AZ stands (the ~3-min doodles 223 / 11 views, 60 % / 20 % past 3 s; the owner's shorter doodles + the 2:08 comic 1,567–1,756 views, 65–79 %). The first true Shorts-length doodle (Febreze, 80.8 s) posts 17 Nov 00:00 IST — read it at ≥ 24 h before the next long-vs-short call.
+**For the writers' room:** the three new scripts (28 Poppi, 29 Liquid Death, 30 Gymshark) are all ~72–74 s estimated and open on a 'Would you…?' / 'Could a…?' question — compare their 3-s rate with Febreze and with Airbnb 71.1 % / Black Friday 79.1 %.
+
 ## Snapshot 2026-11-16 ~03:00 IST (episode run: Febreze, first SHORTS-LENGTH doodle)
 **Delivery (getScheduledPosts 13–20 Nov IST):** every post 13–15 Nov is **PUBLISHED on Instagram + YouTube, no provider ERROR** (7-Eleven, Black Friday, childminding, Airbnb, Spanx, protein, Dubai, Stanley 428381154, DSC 428575653, Pet Rock comic 428759777). Pending: owner's bus long-form (YT only, 429019020, 16 Nov 19:30) and Domino's comic (IG 429175031 + YT 429175075, 16 Nov 17:10).
 **Instagram (IGRE, pulled ~02:50 IST 16 Nov; views · reach · avg watch s · 3-s % · shares · saves · likes):**

@@ -123,6 +123,21 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 - "So Experian says your card can look heavily used, even when you pay in full." → "Experian says that can make your card look heavily used. Even when you pay in full."
 - "Slice two. Your mix of cards and loans. Ten percent again." → "Next: the mix. Cards, a car loan, maybe a mortgage. Another ten percent."
 
+49. **A settlement isn't a payment, and a lawsuit's subject isn't your adjective.** A *preliminary* approval is "agreed to pay … to settle", never "paid" or
+    "settled for"; say "denied liability" (the order's words) next to the amount. And don't praise the very claim that was sued over — "gut-friendly
+    soda" right before "buyers sued over the gut-health claims" contradicts itself and repeats the claim; say the category ("prebiotic soda"). (16 Nov, Poppi review.)
+50. **"Before it existed" vs "before it was on sale".** A 3D render and a video before launch don't prove no product had been made; say what the source says
+    ("before you could buy a can"). Same for "sold" vs "made": the cover "he SOLD the ad before the water" was false — nothing was sold. (16 Nov, Liquid Death review.)
+51. **A catch must carry the company's stated reason.** "Loud brands stumble too" blamed the marketing for a market exit the company put down to moving all
+    production home; give the exit, its full scope ("outside America, Britain too") and their reason in one short line. And a "move" that the founder
+    never made (pre-orders) is advice wearing the story's clothes — swap it for something he did (counting who asked where to buy). (16 Nov, Liquid Death review.)
+52. **Don't add a time of day, a vehicle or a word like 'record' the source doesn't have.** "A hundred days of sales, before lunch" (no time in the sources),
+    a pizza *bike* (nobody says how he delivered), "record" profit year (the source says 13th straight year of growth). The everyday-math line can be ours;
+    the scenery around it can't. And a US voice saying "three hundred pounds" can sound like weight: say "British pounds" once. (16 Nov, Gymshark review.)
+53. **Line limits for Chatterbox are now printed.** `human_check.py` notes every line over 14 words or over 2 sentences (questions count: "Did it work? Over a
+    million views. Before…" is 3), and prints an estimated length (0.335 s/word + 0.15 s/line, calibrated on Febreze: 226 words / 20 lines → 78.7 s real VO).
+    `--strict` FAILS above 90 s (`--long-ok` only for an owner-approved long-form). Aim for 130–190 words (≤ ~200 lands near 70 s).
+
 ## The checker (`tools/human_check.py`)
 H1 tells ≤ 1 per 150 words · H2 openers (top ≤ 15 %, But/So/And ≤ 20 %) · H3 no skeleton > 3× · H4 sentence-length CV ≥ 0.45, no flat run of 4,
 nothing > 18 words · H5 contractions ≥ 0.9, abstract nouns ≤ 3 per 100 words, no "-ing" tails · H6 one human reaction. Thresholds are style
@@ -153,6 +168,6 @@ Animation moves:
 - **Subtitles: small torn strip, 2-5 words at a time, uppercase typewriter, key word under a yellow highlighter** (doodlekit.strip_chunk + anim_shots.chunk_now; highlight = the line's stressed words + any number).
 
 ## Length (owner, 15 Nov 2026: "don't make too much length, make it according to shorts")
-- Target 50-75 s of voice, hard cap 90 s. Roughly 130-190 spoken words, ~16-22 short lines.
+- Target 50-75 s of voice, hard cap 90 s. Roughly 130-190 spoken words, ~16-22 short lines. (Measured 16 Nov: the real usa_narr pace is ~0.35 s/word incl. pauses — Febreze's 226 words ran 78.7 s — so ~200 words still lands near 70 s; `human_check.py --strict` prints the estimate and fails above 90 s, rule 53.)
 - Shape: hook + viewer's question (2 lines) -> the story's 4-5 key beats (problem, surprising move, chaos/low point, result) -> 2-3 quick moves (one line each) -> CTA (1-2 lines).
 - Keep the reference-reel tricks but pick only the 2-3 that fit (e.g. one "Did it work?" Q&A, one everyday-math line, the callback ending). Cut side details, object-character lines to 1, and never repeat a number.

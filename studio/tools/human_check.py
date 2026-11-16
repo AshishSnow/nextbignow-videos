@@ -138,7 +138,17 @@ def main():
     print(f"\nstats: {nW} words, {len(S)} sentences, CV {cv:.2f}, contractions {crate:.2f}, tells/150w {per150:.1f}, top opener '{top}' {topr:.0%}, But/So/And {bsa:.0%}")
     for f in flags: print("  - " + f)
     for n in voice_notes(path): print("  note " + n)
+    # Shorts length gate (owner 15 Nov 2026: "make it according to shorts") + Chatterbox line limits (16 Nov R&D run)
+    est = nW * 0.335 + 0.15 * len(L)         # calibrated 16 Nov on the Febreze Short: 226 words, 20 lines -> 78.7 s real usa_narr VO (story_check 0.40 s/word runs ~15 % long)
+    for i, t in L:
+        n = len(words(t)); ns = len(sentences(t))
+        if n > 14 or ns > 2: print(f"  note line {i}: {n} words / {ns} sentences — Chatterbox can truncate lines over ~14 words or 2 sentences; split it")
+    long_fail = est > 90
+    print(f"  length ~{est:.0f} s estimated ({nW} words, {len(L)} lines) — Shorts target 50-75 s, hard cap 90 s" + ("  ** OVER THE CAP **" if long_fail else ""))
     ok = sum(G.values()); print(f"\n{ok}/{len(G)} human-voice gates passed (H1–H6) — studio/WRITING.md")
+    if long_fail and strict and "--long-ok" not in sys.argv:
+        print("LENGTH GATE FAIL: estimated > 90 s — cut lines (WRITING.md 'Length'); pass --long-ok only for an owner-approved long-form script")
+        sys.exit(1)
     sys.exit(0 if ok == len(G) or not strict else 1)
 
 
