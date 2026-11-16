@@ -1,0 +1,106 @@
+{
+ "V1_virus": {
+  "title": "File:Measles virus.JPG",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Measles_virus.JPG/1920px-Measles_virus.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Measles_virus.JPG",
+  "author": "CDC / Cynthia S. Goldsmith",
+  "license": "Public domain",
+  "file": "whatif/measles/img/V1_virus.jpg"
+ },
+ "V2_room": {
+  "title": "File:A waiting room at a medical healthcare clinic, doctor's office, hospital.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/A_waiting_room_at_a_medical_healthcare_clinic%2C_doctor%27s_office%2C_hospital.jpg/1920px-A_waiting_room_at_a_medical_healthcare_clinic%2C_doctor%27s_office%2C_hospital.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:A_waiting_room_at_a_medical_healthcare_clinic,_doctor%27s_office,_hospital.jpg",
+  "author": "Harrison Keely",
+  "license": "CC BY 4.0",
+  "file": "whatif/measles/img/V2_room.jpg"
+ },
+ "V3_class": {
+  "title": "File:Orbe - Chantemerle - salle de classe 2.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Orbe_-_Chantemerle_-_salle_de_classe_2.jpg/1920px-Orbe_-_Chantemerle_-_salle_de_classe_2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Orbe_-_Chantemerle_-_salle_de_classe_2.jpg",
+  "author": "Abaddon1337",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/measles/img/V3_class.jpg"
+ },
+ "V4_brooklyn": {
+  "title": "File:Brooklyn-Manhattan-Williamsburg-Bridges at Sunset 2021-06-15 19-31.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Brooklyn-Manhattan-Williamsburg-Bridges_at_Sunset_2021-06-15_19-31.jpg/1920px-Brooklyn-Manhattan-Williamsburg-Bridges_at_Sunset_2021-06-15_19-31.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Brooklyn-Manhattan-Williamsburg-Bridges_at_Sunset_2021-06-15_19-31.jpg",
+  "author": "Axel Tschentscher",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/measles/img/V4_brooklyn.jpg"
+ },
+ "V5_toronto": {
+  "title": "File:Toronto skyline viewed from Trillium Park.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Toronto_skyline_viewed_from_Trillium_Park.jpg/1920px-Toronto_skyline_viewed_from_Trillium_Park.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Toronto_skyline_viewed_from_Trillium_Park.jpg",
+  "author": "Maksim Sokolov (maxergon.com)",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/measles/img/V5_toronto.jpg"
+ },
+ "V6_syringe": {
+  "title": "File:Syringe Needle IV.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Syringe_Needle_IV.jpg/1920px-Syringe_Needle_IV.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Syringe_Needle_IV.jpg",
+  "author": "Psychonaught",
+  "license": "Public domain",
+  "file": "whatif/measles/img/V6_syringe.jpg"
+ },
+ "V7_philly": {
+  "title": "File:Philadelphia from South Street Bridge July 2016 panorama 2.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Philadelphia_from_South_Street_Bridge_July_2016_panorama_2.jpg/1920px-Philadelphia_from_South_Street_Bridge_July_2016_panorama_2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Philadelphia_from_South_Street_Bridge_July_2016_panorama_2.jpg",
+  "author": "King of Hearts",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/measles/img/V7_philly.jpg"
+ },
+ "L1_texas": {
+  "title": "File:The Gaines County Courthouse in Seminole, Texas LCCN2014631702.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/The_Gaines_County_Courthouse_in_Seminole%2C_Texas_LCCN2014631702.jpg/1920px-The_Gaines_County_Courthouse_in_Seminole%2C_Texas_LCCN2014631702.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:The_Gaines_County_Courthouse_in_Seminole,_Texas_LCCN2014631702.jpg",
+  "author": "Carol M. Highsmith",
+  "license": "Public domain",
+  "file": "whatif/mlong/img/L1_texas.jpg"
+ },
+ "L2_lancaster": {
+  "title": "File:Lancaster County PA farmland from airplane.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Lancaster_County_PA_farmland_from_airplane.jpg/1920px-Lancaster_County_PA_farmland_from_airplane.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Lancaster_County_PA_farmland_from_airplane.jpg",
+  "author": "Dough4872",
+  "license": "Public domain",
+  "file": "whatif/mlong/img/L2_lancaster.jpg"
+ },
+ "L3_hosp": {
+  "title": "File:Hospital corridor of Sir Ganga Ram Hospital.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Hospital_corridor_of_Sir_Ganga_Ram_Hospital.jpg/1920px-Hospital_corridor_of_Sir_Ganga_Ram_Hospital.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Hospital_corridor_of_Sir_Ganga_Ram_Hospital.jpg",
+  "author": "Nalbarian",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/mlong/img/L3_hosp.jpg"
+ },
+ "L5_paho": {
+  "title": "File:Pan American Health Organization building.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Pan_American_Health_Organization_building.jpg/1920px-Pan_American_Health_Organization_building.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Pan_American_Health_Organization_building.jpg",
+  "author": "Ruhrfisch (talk)",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/mlong/img/L5_paho.jpg"
+ },
+ "L6_utah": {
+  "title": "File:Hildale, Utah.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Hildale%2C_Utah.jpg/1920px-Hildale%2C_Utah.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Hildale,_Utah.jpg",
+  "author": "No machine-readable author provided. Ricardo630 assumed (based on copyright clai",
+  "license": "CC BY-SA 2.5",
+  "file": "whatif/mlong/img/L6_utah.jpg"
+ },
+ "L7_sc": {
+  "title": "File:Greenville - Downtown buildings.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Greenville_-_Downtown_buildings.jpg/1920px-Greenville_-_Downtown_buildings.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Greenville_-_Downtown_buildings.jpg",
+  "author": "P. Hughes",
+  "license": "CC BY 4.0",
+  "file": "whatif/mlong/img/L7_sc.jpg"
+ }
+}
