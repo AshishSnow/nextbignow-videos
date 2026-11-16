@@ -9,6 +9,14 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-17 ~03:15 IST (episode run: Liquid Death, Shorts-length doodle #2)
+- Delivery: every post 13 Nov–17 Nov 00:00 IST is PUBLISHED on IG + YT (Febreze IG + YT cuts at 00:00, flight fees 20:45, Domino's 10:05, bus long-form 19:30); no provider ERROR.
+- IG reels, last 21 days (views · avg watch s · 3-s rate): owner-led short doodles/comics still lead — Pet Rock 1,786 · 29.9 · 59 %, Black Friday 1,757 · 39.3 · 79 %, Airbnb cereal 1,601 · 46.9 · 71 %.
+  Our long (~3 min) doodle case studies: Stanley 242 · 24.1 · 59 %, DSC 13 · 3.3 · 43 %, Dubai chocolate 16 · 19.2 · 11 %, Spanx 226 · 19.1 · 73 %, protein 198 · 12.3 · 57 %.
+  New short ones are too fresh to judge (Domino's comic 244 · 17.5 · 50 %, flight fees 144 · 15.8 · 40 % after < 1 day; Febreze 3 views after 3 h).
+- Read: short (≤ 90 s) + a "Would you pay $X for…?" hook is the pattern behind every 1.5k+ post; long doodles lose most viewers by 25 s.
+- **Upgrade this run (measurable):** tighter Short — 74 s VO (Febreze 78.7 s) with the price question on the cover AND in line 1 ("$1.4 BILLION FOR WATER IN A CAN?"), plus a second evolving set every ~7 s (10 sets vs 8). Target ≥ 70 % past 3 s and ≥ 35 s avg watch on IG; compare with Febreze after 24 h.
+
 ## Snapshot 2026-11-16 ~08:30 IST (R&D run: writers' room, 3 Shorts-length doodle case studies)
 **Delivery (getScheduledPosts 15–19 Nov IST):** Stanley (428381154), DSC (428575653) and Pet Rock comic (428759777) — **PUBLISHED on Instagram + YouTube, no provider ERROR.** Pending (no ERROR): Domino's comic IG 429175031 + YT 429175075 (16 Nov 17:10), owner's bus long-form YT 429019020 (16 Nov 19:30), **Febreze Shorts-length doodle IG 429326446 + YT 429326553 (17 Nov 00:00)**.
 **Analytics (IGRE 26 Oct → 16 Nov; YTVP):** every Instagram row is **identical to the ~02:50 IST pull** (Pet Rock 1,567 · 65.3 % · 33.0 s; DSC 11 · 20 %; Stanley 223 · 60 %; Airbnb 1,598; Black Friday 1,756) — Metricool's reel stats are frozen again between runs. YouTube rows still stop at 12 Nov (pen 5 views). **No new verdict on long vs short doodles:** insight AZ stands (the ~3-min doodles 223 / 11 views, 60 % / 20 % past 3 s; the owner's shorter doodles + the 2:08 comic 1,567–1,756 views, 65–79 %). The first true Shorts-length doodle (Febreze, 80.8 s) posts 17 Nov 00:00 IST — read it at ≥ 24 h before the next long-vs-short call.

@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -1271,3 +1271,134 @@ def cover_by(c, kicker, title, k=1.0, y=700, seed=501):
     for i, l in enumerate(lines): c.drawString(l, -f.measureText(l) / 2, yy + 92 + i * lh, f, P(INK))
     wline(c, [(-w / 2 + 60, h / 2 - 30), (w / 2 - 60, h / 2 - 38)], seed + 3, 12, RED, 1.2)
     c.restore()
+
+
+# ---------------------------------------------------------------- 17 Nov 2026 (Liquid Death 'ad before the water'): generic tall can, fridge, festival stage,
+# social post card, dotted 'render' can, investor door, store shelf, two-continent map. No brand art: the can is plain grey/white with a tape label.
+def _tallcan(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, label="WATER", col=(214, 218, 226), loud=False, **kw):
+    """plain tall can (tallboy) character: ribbed top, tape label; loud = angry eyebrows + zigzag 'personality' stripes (no real can art)."""
+    leg = 80 * s; cb = y - leg; ct = cb - 380 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 34)
+    body = wrrect(x - 100 * s, ct, x + 100 * s, cb, 30 * s, seed, 2.0); ink(c, body, col, 9 * s)
+    if loud:
+        c.save(); c.clipPath(body, doAntiAlias=True)
+        for j in range(3):
+            yy = ct + (230 + j * 34) * s
+            wline(c, [(x - 110 * s + i * 40 * s, yy + (-12 if i % 2 else 12) * s) for i in range(7)], seed + 30 + j, 9 * s, (255, 214, 0) if j % 2 == 0 else RED, 0.8)
+        c.restore(); ink(c, body, None, 9 * s)
+    ink(c, wrrect(x - 86 * s, ct - 26 * s, x + 86 * s, ct + 8 * s, 12 * s, seed + 1, 1.2), shade(col, 0.82), 7 * s)
+    wline(c, [(x - 20 * s, ct - 12 * s), (x + 24 * s, ct - 12 * s)], seed + 2, 6 * s)      # tab
+    lab = wrrect(x - 80 * s, cb - 120 * s, x + 80 * s, cb - 50 * s, 8 * s, seed + 4, 1.2); ink(c, lab, WHITE, 6 * s)
+    f = font(BLK_F, 34 * s); tw = f.measureText(label)
+    if tw > 140 * s: f = font(BLK_F, 34 * s * 140 * s / tw); tw = 140 * s
+    c.drawString(label, x - tw / 2, cb - 72 * s, f, P(INK))
+    _arms(c, x - 98 * s, x + 98 * s, ct + 190 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 90 * s, s, look, blink, 40, 26, mood, seed + 9)
+    if loud:
+        for sx in (-1, 1): wline(c, [(x + sx * 70 * s, ct + 44 * s), (x + sx * 14 * s, ct + 64 * s)], seed + 12 + sx, 10 * s)
+    mouth(c, x, ct + 150 * s, s * 0.8, talk, mood, seed + 5)
+
+
+def bottle(c, x, y, s=1.0, seed=0, col=(150, 96, 60), k=1.0, a=1.0):
+    """generic glass bottle (no label art)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wpoly([(-34, 0), (-34, -150), (-14, -190), (-14, -250), (14, -250), (14, -190), (34, -150), (34, 0)], seed, 1.4, True, 30), col, 7, INK, a)
+    ink(c, wrrect(-26, -120, 26, -60, 6, seed + 1, 0.8), CREAM, 4, INK, a)
+    c.restore()
+
+
+def fridge(c, x, y, w=520, h=860, open_=1.0, seed=0, body=WHITE):
+    """drinks fridge seen from the front, door swung open by open_ (0..1). Returns the 3 shelf y values."""
+    x0, y0, x1, y1 = x - w / 2, y - h, x + w / 2, y
+    ink(c, wrrect(x0, y0, x1, y1, 28, seed, 2), body, 9)
+    ink(c, wrrect(x0 + 26, y0 + 26, x1 - 26, y1 - 26, 14, seed + 1, 1.4), (226, 240, 250), 6)
+    shelves = [y0 + 300, y0 + 560, y1 - 40]
+    for j, sy in enumerate(shelves): wline(c, [(x0 + 30, sy), (x1 - 30, sy)], seed + 2 + j, 7)
+    if open_ < 1:   # door panel folding from the right hinge
+        dw = w * (1 - ease(open_))
+        ink(c, wrrect(x1 - dw, y0, x1, y1, 24, seed + 5, 1.6), body, 9)
+        if dw > 40: wline(c, [(x1 - dw + 30, y0 + 360), (x1 - dw + 30, y0 + 520)], seed + 6, 12)
+    return shelves
+
+
+def stage(c, x, y, t, seed=0, lights=True):
+    """outdoor festival stage: roof truss, two speaker stacks, coloured lights."""
+    w, h = 900, 560
+    ink(c, wpoly([(x - w / 2, y - 120), (x + w / 2, y - 120), (x + w / 2, y), (x - w / 2, y)], seed, 2, True, 60), (60, 60, 68), 9)
+    for sx in (-1, 1): wline(c, [(x + sx * (w / 2 - 30), y - 120), (x + sx * (w / 2 - 30), y - h)], seed + sx, 12)
+    ink(c, wpoly([(x - w / 2 - 20, y - h), (x + w / 2 + 20, y - h), (x + w / 2 - 20, y - h - 70), (x - w / 2 + 20, y - h - 70)], seed + 3, 1.8, True, 60), INK, 0)
+    if lights:
+        for j in range(6):
+            lx = x - 300 + j * 120; on = (int(t * 4) + j) % 3 != 0
+            ink(c, wellipse(lx, y - h + 24, 24, 24, seed + 10 + j, 1), [(255, 214, 0), RED, SKY][j % 3] if on else GREY, 5)
+    for sx in (-1, 1):
+        bx = x + sx * (w / 2 - 110)
+        ink(c, wrrect(bx - 70, y - 300, bx + 70, y - 120, 8, seed + 20 + sx, 1.4), (40, 40, 48), 8)
+        for q in range(2): ink(c, wellipse(bx, y - 255 + q * 85, 36 + 4 * math.sin(t * 20), 36 + 4 * math.sin(t * 20), seed + 24 + q + sx, 1), GREY, 6)
+
+
+def drum(c, x, y, s=1.0, seed=0):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    ink(c, wrrect(-90, -110, 90, 0, 14, seed, 1.4), RED, 8); ink(c, wellipse(0, -110, 90, 22, seed + 1, 1), WHITE, 7)
+    c.restore()
+
+
+def post_card(c, x, y, s=1.0, seed=0, views=None, k=1.0, t=0.0, img=None, likes=0.0):
+    """generic social-media post card (no app logo): avatar dot, two text bars, a picture area (img(c) draws into it), heart + view counter."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-260, -330, 260, 330, 22, seed, 2), WHITE, 8)
+    ink(c, wellipse(-210, -280, 26, 26, seed + 1, 0.8), (255, 214, 0), 5)
+    wline(c, [(-170, -290), (40, -290)], seed + 2, 10, INK); wline(c, [(-170, -262), (-40, -262)], seed + 3, 7, GREY)
+    ink(c, wrrect(-230, -230, 230, 170, 10, seed + 4, 1.2), (40, 40, 52), 6)
+    if img: c.save(); c.clipRect(skia.Rect.MakeLTRB(-226, -226, 226, 166)); img(c); c.restore()
+    h = skia.Path(); hx, hy = -200, 236; h.moveTo(hx, hy); h.cubicTo(hx - 34, hy - 34, hx - 60, hy + 10, hx, hy + 44); h.cubicTo(hx + 60, hy + 10, hx + 34, hy - 34, hx, hy)
+    c.drawPath(h, P(RED if likes > 0 else WHITE)); c.drawPath(h, S(INK, 5))
+    if views: f = font(BLK_F, 40); c.drawString(views, 230 - f.measureText(views), 262, f, P(INK))
+    c.restore()
+
+
+def render_can(c, x, y, s=1.0, fill=0.0, seed=0, label="WATER"):
+    """a can that exists only as a picture: dashed outline + construction lines; fill 0..1 turns it into a real (solid) can."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    body = wrrect(-100, -400, 100, 0, 30, seed, 1.6 if fill > 0.5 else 0.6)
+    if fill > 0:
+        c.save(); c.clipRect(skia.Rect.MakeLTRB(-120, -400 * fill, 120, 10)); c.drawPath(body, P((214, 218, 226))); c.restore()
+    pnt = S(SKY if fill < 1 else INK, 7); pnt.setPathEffect(skia.DashPathEffect.Make([20, 14], 0)) if fill < 1 else None; c.drawPath(body, pnt)
+    if fill < 1:
+        for yy in (-300, -200, -100): wline(c, [(-140, yy), (140, yy)], seed + yy, 3, SKY, 0.6, 0.6)
+    f = font(BLK_F, 36); c.drawString(label, -f.measureText(label) / 2, -150, f, P(INK if fill >= 1 else SKY))
+    c.restore()
+
+
+def door(c, x, y, w=170, h=330, shut=1.0, seed=0, col=(150, 96, 60)):
+    """office door; shut 0 = open (dark gap), 1 = slammed shut."""
+    ink(c, wrrect(x - w / 2 - 14, y - h - 14, x + w / 2 + 14, y, 6, seed, 1.4), (60, 60, 68), 8)
+    dw = w * (0.25 + 0.75 * ease(shut))
+    ink(c, wrrect(x - w / 2, y - h, x - w / 2 + dw, y, 4, seed + 1, 1.2), col, 7)
+    if shut > 0.6: ink(c, wellipse(x + w / 2 - 28, y - h / 2, 10, 10, seed + 2, 0.5), (255, 214, 0), 4)
+
+
+def shelf(c, x, y, n_full, w=760, seed=0, rows=2, per=6, label="WATER"):
+    """store shelf unit; n_full (float) cans appear left to right, row by row."""
+    ink(c, wrrect(x - w / 2, y - 250 * rows - 30, x + w / 2, y, 12, seed, 1.8), (236, 236, 228), 9)
+    for r in range(rows):
+        sy = y - 20 - r * 250; wline(c, [(x - w / 2 + 10, sy), (x + w / 2 - 10, sy)], seed + 1 + r, 9)
+        for i in range(per):
+            k = min(1.0, max(0.0, n_full - (r * per + i)))
+            if k <= 0: continue
+            cx = x - w / 2 + 70 + i * (w - 140) / max(1, per - 1)
+            c.save(); c.translate(cx, sy); c.scale(back(k) * 0.42, back(k) * 0.42)
+            ink(c, wrrect(-100, -400, 100, 0, 30, seed + 9 + i, 1.4), (214, 218, 226), 12)
+            ink(c, wrrect(-80, -130, 80, -60, 8, seed + 20 + i, 1), WHITE, 8); c.restore()
+
+
+def two_lands(c, t, seed=0, k=1.0):
+    """simple two-continent map: a left blob tagged later as AMERICA, a right blob (BRITAIN + EUROPE), wavy ocean between."""
+    c.drawRect(skia.Rect.MakeLTRB(60, 700, 1020, 1380), P((150, 205, 245), 0.55 * k))
+    for j in range(5): wline(c, [(420 + i * 30, 820 + j * 110 + 10 * math.sin(i + t * 2)) for i in range(8)], seed + j, 4, (70, 140, 210), 1, 0.7 * k)
+    am = wpoly([(90, 760), (330, 730), (400, 880), (360, 1060), (300, 1200), (220, 1330), (150, 1180), (100, 980)], seed + 10, 3, True, 50)
+    eu = wpoly([(760, 760), (840, 740), (860, 820), (990, 830), (1000, 1000), (930, 1120), (800, 1080), (760, 960)], seed + 11, 3, True, 50)
+    uk = wpoly([(680, 800), (720, 780), (730, 880), (690, 930), (660, 870)], seed + 12, 2, True, 30)
+    for pth in (am, eu, uk): ink(c, pth, (120, 196, 110), 8, INK, k)
