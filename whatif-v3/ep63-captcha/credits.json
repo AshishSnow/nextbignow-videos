@@ -1,0 +1,26 @@
+{
+ "C1_keyboard": {
+  "title": "File:HP Pavilion Computer laptop keyboard closeup.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/HP_Pavilion_Computer_laptop_keyboard_closeup.jpg/1920px-HP_Pavilion_Computer_laptop_keyboard_closeup.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:HP_Pavilion_Computer_laptop_keyboard_closeup.jpg",
+  "author": "Carissa Rogers",
+  "license": "CC BY 2.0",
+  "file": "whatif/captcha/img/C1_keyboard.jpg"
+ },
+ "C2_laptop": {
+  "title": "File:Unisys PowerPort laptop computer from 1990s, probably Pentium (or II) processor, in Lanzarote Aeronautical Museum in 2022 (cropped and removed BG).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Unisys_PowerPort_laptop_computer_from_1990s%2C_probably_Pentium_%28or_II%29_processor%2C_in_Lanzarote_Aeronautical_Museum_in_2022_%28cropped_and_removed_BG%29.jpg/1920px-Unisys_PowerPort_laptop_computer_from_1990s%2C_probably_Pentium_%28or_II%29_processor%2C_in_Lanzarote_Aeronautical_Museum_in_2022_%28cropped_and_removed_BG%29.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Unisys_PowerPort_laptop_computer_from_1990s,_probably_Pentium_(or_II)_processor,_in_Lanzarote_Aeronautical_Museum_in_2022_(cropped_and_removed_BG).jpg",
+  "author": "Photograph by Mike Peel (www.mikepeel.net).",
+  "license": "CC BY-SA 4.0",
+  "file": "whatif/captcha/img/C2_laptop.jpg"
+ },
+ "C3_server": {
+  "title": "File:BalticServers data center.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/BalticServers_data_center.jpg/1920px-BalticServers_data_center.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg",
+  "author": "BalticServers.com",
+  "license": "CC BY-SA 3.0",
+  "file": "whatif/captcha/img/C3_server.jpg"
+ }
+}

@@ -1,0 +1,8 @@
+What if clicking "I'm not a robot"... handed a hacker your bank password?
+This is real, and it's everywhere. It's called ClickFix. You open a normal-looking website, and a box pops up. "Verify you are human." But instead of pictures of traffic lights, it gives you three easy steps. Press Windows and R. Press Control and V. Press Enter.
+That's it. You just hacked yourself.
+Here's the trick. When you clicked that box, the site secretly copied a command to your clipboard. Windows plus R opens a little Run window. Control V pastes the command. Enter runs it. In seconds, malware grabs your saved passwords, your banking logins, even your crypto.
+And it works way too well. Microsoft says this trick was behind forty-seven percent of the attacks its experts handled in twenty twenty-five. More than regular phishing emails. One security team found over seventeen thousand infected websites showing the fake check.
+So here's the rule. A real CAPTCHA will never ask you to press keys or paste anything. Ever. If it does, close the tab.
+Already did it? Disconnect from the internet, run a security scan, and change your passwords from a different device.
+Would you have fallen for it? Yes or no. And send this to the one person in your family who clicks everything.
