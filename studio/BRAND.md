@@ -97,8 +97,8 @@ Not legal advice; when a real deal arrives, the brand's contract and the disclos
   storyboard, disclosure + brand-safety rules) at ~1,000 followers; start pitching best-fit categories at ~5–10K followers or when
   the last-15 average passes ~5K views; apply for YPP at 500 subs + 3M Shorts views in 90 days (ALGORITHM.md carries an Aug 2026 report that the bar for new channels rises to 20M Shorts views from 1 Feb 2027; check YouTube Help before relying on either number).
 
-## Logo + theme (owner, 15 Nov 2026 — FINAL)
-- Logo = the "slipping B" OMB badge, BLACK + YELLOW (studio/brand/logo/final_black_yellow/, source omb_slip.py + omb_slip_final.py).
-- Owner: "our theme be like black and yellow" -> every OopsMyBusiness video now uses the black + yellow theme
-  (black/charcoal backgrounds with dark halftone, yellow #FFD600 titles/stat cards/bursts, cream tape captions, black ink outlines).
-  This REPLACES the old per-video colour rotation. A third accent (cream/white) is fine; no extra brand colours.
+## Logo + theme (owner 15 Nov, REVISED 17 Nov 2026)
+- Logo = the "slipping B" OMB badge, BLACK + YELLOW (studio/brand/logo/final_black_yellow/).
+- 17 Nov: the all-dark black+yellow comic flopped (IG 144-244 views, 50-60% swipe vs 1.6-1.8k for cream comic). Owner approved:
+  CREAM COMIC PAPER base (newsprint 252,241,210 + halftone) with BLACK ink + YELLOW (#FFD600) as the accent pair
+  (titles, stat cards, bursts, highlights). No full-screen dark or flat-yellow frames; every scene carries a real cut-out object (sticker border) that keeps moving.
