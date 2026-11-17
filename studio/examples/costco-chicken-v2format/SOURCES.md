@@ -1,0 +1,5 @@
+- $4.99 since 2009; rivals raised to $5.99: Fox Business, 9 Jun 2020 (https://www.foxbusiness.com/money/costco-rotisserie-chicken-price); Tribune Media Wire via FOX 17, 11 Oct 2019.
+- CFO Richard Galanti, 2015 earnings call: willing to "eat... $30 to $40 million a year in gross margin by keeping it at $4.99" (Fox Business 2020; FOX 17 2019).
+- Nebraska complex (Fremont; hatchery, feed mill, processing): $450M, ~2M birds/week, ~100M/yr: Tribune/FOX 17, 11 Oct 2019 (https://fox17online.com/2019/10/11/costco-builds-giant-poultry-complex-to-keep-its-rotisserie-chickens-at-4-99). (WSJ figure $300M also reported — script uses $450M from the plant coverage.)
+- 157.4M rotisserie chickens sold FY2025: Mashed citing Costco investor disclosure (https://www.mashed.com/2094759/costco-rotisserie-chickens-sold-2025).
+- "Come in for the chicken, leave with a full cart" = loss-leader logic, phrased as Costco's bet (not a quote).
