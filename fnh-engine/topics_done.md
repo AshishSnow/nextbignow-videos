@@ -72,4 +72,4 @@ intro so viewers instantly know what the video is about.
 - 2026-11-16 | Short #44 | मच्छर सिर्फ़ आपको क्यों काटते हैं? (Rockefeller 2022 nylon-stocking study; UW colour study) | comic, real cut-outs, IG + YT versions | IG 16:42 + YT 16:44 2026-11-16
 - 2026-11-16 | Short #45 | जापानी लोगों की 5 आदतें — बिना जिम पतले (hara hachi bu, small bowls, slow eating, walking, Metabo law) | listicle, IG + YT versions, first comment | IG 20:58 + YT 21:00 2026-11-16
 - 2026-11-16 | Short #46 | खाने/नींबू पानी के बाद तुरंत ब्रश? (acid softens enamel, wait 30-60 min) | comic, 6 real cut-outs, IG + YT versions | IG 22:40 + YT 22:42 2026-11-16
-- 2026-11-17 | Short #47 | हिचकी = कोई याद कर रहा? (diaphragm spasm; Osborne 68 yrs; NEJM 1971 sugar 19/20) | comic, flowing bg, IG + YT | pending approval
+- 2026-11-17 | Short #47 | हिचकी = कोई याद कर रहा? (diaphragm spasm; Osborne 68 yrs; NEJM 1971 sugar 19/20) | comic, flowing bg, IG + YT | IG 12:22 + YT 12:24 2026-11-17
