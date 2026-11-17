@@ -137,6 +137,7 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 53. **Line limits for Chatterbox are now printed.** `human_check.py` notes every line over 14 words or over 2 sentences (questions count: "Did it work? Over a
     million views. Before…" is 3), and prints an estimated length (0.335 s/word + 0.15 s/line, calibrated on Febreze: 226 words / 20 lines → 78.7 s real VO).
     `--strict` FAILS above 90 s (`--long-ok` only for an owner-approved long-form). Aim for 130–190 words (≤ ~200 lands near 70 s).
+54. **Timing isn't motive, and a cottage-food rule is about selling.** "The surprising move: go thick while everyone goes thin" made Hoka's sole a reaction to the barefoot craze; the founders said it wasn't. Say it as timing ("The odd timing? Thin shoes were the big craze."). And "some states ban hot sauce from home kitchens" overstated a rule that only stops you *selling* it as a cottage food. Also: "his longtime pepper farm" sounded like he owned it — it was a supplier. (17 Nov, Hoka + Sriracha reviews.)
 
 ## The checker (`tools/human_check.py`)
 H1 tells ≤ 1 per 150 words · H2 openers (top ≤ 15 %, But/So/And ≤ 20 %) · H3 no skeleton > 3× · H4 sentence-length CV ≥ 0.45, no flat run of 4,

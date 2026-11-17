@@ -9,6 +9,12 @@ Update every run (Metricool `getAnalyticsDataByMetrics`, brand 7643430, last 21 
 - Instagram numbers for posts published the same day are usually empty — read them the next run.
 Add new rows, refresh rows younger than 7 days, then rewrite the **Insights** section from the data.
 
+## Snapshot 2026-11-17 ~08:25 IST (R&D run: writers' room — 31 Sriracha + 32 Hoka queued)
+- **Delivery (getScheduledPosts 16–18 Nov IST):** all PUBLISHED, no provider ERROR — bus long-form YT (429019020, 16 Nov 19:30), Domino's comic IG+YT (10:05), flight fees IG+YT (20:45), Febreze IG 429326446 + YT 429326553 (17 Nov 00:00), **Liquid Death IG 430707192 + YT 430707438 (17 Nov 05:00)**.
+- **IG (IGRE, 27 Oct → 17 Nov):** rows identical to the 03:15 IST pull (Pet Rock 1,786 · 29.9 s · 58.8 %; Black Friday 1,757 · 39.3 · 79.0 %; Airbnb 1,601 · 46.9 · 71.0 %); Febreze still **3 views** after ~8 h → the IG reel stats look frozen again; Liquid Death has no row yet.
+- **YT (YTVP):** newest row is DSC (15 Nov) — no rows yet for Domino's comic, flight fees, Febreze or Liquid Death.
+- **Long vs short doodle case studies:** long (~2–3 min) — IG views/3-s: Stanley 242 · 59 %, Spanx 226 · 72.5 %, protein 198 · 57 %, DSC 13 · 43 %, Dubai 16 · 11 %; YT views/avg s: Spanx 1,226 · 45, protein 1,045 · 41, Stanley 230 · 53, DSC 1 · 4, Dubai 1 · 33. Short (≤ 90 s) — Febreze IG 3 views (frozen), Liquid Death none yet. **No fair long-vs-short read yet**; next run compare Febreze + Liquid Death IG 3-s rate against Spanx 72.5 % / Stanley 59 % once rows move.
+
 ## Snapshot 2026-11-17 ~03:15 IST (episode run: Liquid Death, Shorts-length doodle #2)
 - Delivery: every post 13 Nov–17 Nov 00:00 IST is PUBLISHED on IG + YT (Febreze IG + YT cuts at 00:00, flight fees 20:45, Domino's 10:05, bus long-form 19:30); no provider ERROR.
 - IG reels, last 21 days (views · avg watch s · 3-s rate): owner-led short doodles/comics still lead — Pet Rock 1,786 · 29.9 · 59 %, Black Friday 1,757 · 39.3 · 79 %, Airbnb cereal 1,601 · 46.9 · 71 %.
