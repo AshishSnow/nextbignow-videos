@@ -1288,3 +1288,66 @@ def room_tone(kind, n_):
     return _rt_prev44(kind, n_)
 
 
+
+
+# ================= ep 48: SOUND OCCLUSION (craft skill) =================
+# A sound with something solid between it and the listener loses its HIGHS first (low frequencies bend around / pass through), gets quieter by how dense the
+# barrier is, and its reverb comes from the room it is IN (the far room), not ours; obstruction (a partial barrier) only dulls the direct sound. Thin cloth =
+# small loss; a wall / a body = big loss + a low resonance. Sources: Audiokinetic Wwise docs 'Obstruction and occlusion' (occlusion = both direct and reflected
+# paths filtered; obstruction = direct only); Steam Audio docs ('transmission' = frequency-dependent loss through a material: low / mid / high bands);
+# A. Farnell, Designing Sound (MIT Press 2010) - walls act as low-pass filters. Use: place(occlude(x, 'cloth'), t, xpos, far=0.4) for the party outside the
+# tent; occlude(x, 'body') for a sound heard from inside the body (a swallow in the throat on the board). Materials below: (cut-off Hz, dB loss, resonance Hz).
+OCC = {"cloth": (2600, -5, None), "door": (1400, -9, None), "glass": (2000, -8, None), "wall": (800, -14, 160), "body": (550, -10, 210), "water": (400, -12, 300)}
+
+
+def occlude(x, material="wall", amt=1.0):
+    """muffle an effect as if heard through `material` (amt 0..1 blends from clear to fully occluded)."""
+    y = x.mean(1) if x.ndim == 2 else x
+    fc, loss, res = OCC[material]
+    fc = 16000 * (fc / 16000) ** clamp(amt)
+    z = signal.sosfilt(signal.butter(4, fc, "low", fs=SR, output="sos"), y)
+    if res:                                                                        # the barrier's own boomy body (a wall thumps, a body is 'chesty')
+        z = z + 0.6 * clamp(amt) * signal.sosfilt(signal.butter(2, [res * 0.7, res * 1.4], "band", fs=SR, output="sos"), y)
+    return (z * db(loss * clamp(amt))).astype(np.float32)
+
+
+def far_cheer(level=-30, dur=1.5):
+    """ep 48: a far crowd whoop (a baraat outside): a swelling formant-ish noise band."""
+    n_ = int(dur * SR); tt = np.arange(n_) / SR; w = rng.standard_normal(n_)
+    y = (_bp(w, 500, 1200) + 0.6 * _bp(rng.standard_normal(n_), 1400, 2600)) * np.sin(np.pi * tt / dur) ** 1.5
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def firecracker(level=-22):
+    """ep 48: a far firecracker: a sharp noise crack + a short rumble."""
+    n_ = int(0.5 * SR); tt = np.arange(n_) / SR
+    y = _hp(rng.standard_normal(n_), 600) * np.exp(-tt / 0.012) + 0.5 * _lp(rng.standard_normal(n_), 200) * np.exp(-tt / 0.15)
+    return mono(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+_ir_prev48 = ir
+def ir(kind):
+    if kind == "tent":                                                              # ep 48: a wedding shamiana: cloth walls absorb, a carpet, lots of people = short, dark
+        spec = dict(pre=0.010, rt=0.38, taps=((0.016, 0.35), (0.027, 0.22)), lp=4200)
+        n_ = int((spec["pre"] + spec["rt"] * 1.2) * SR); out = np.zeros((n_, 2), np.float32); tt = np.arange(n_) / SR
+        for ch in range(2):
+            r = np.random.default_rng(148 + ch)
+            tail = r.standard_normal(n_) * np.exp(-6.9 * np.maximum(0, tt - spec["pre"]) / spec["rt"]) * (tt >= spec["pre"])
+            tail = signal.sosfilt(signal.butter(2, spec["lp"], "low", fs=SR, output="sos"), tail); tail = tail / (np.sqrt(np.sum(tail ** 2)) + 1e-9) * 0.6
+            for d_, a_ in spec["taps"]:
+                k = int((d_ + 0.004 * ch) * SR); tail[k] += a_
+            out[:, ch] = tail
+        return out
+    return _ir_prev48(kind)
+
+
+WET["tent"] = -12; BUS["tent"] = np.zeros((NS, 2), np.float32)
+_rt_prev48 = room_tone
+def room_tone(kind, n_):
+    if kind == "tent":                                                              # ep 48: wedding chatter inside + the crowd OUTSIDE heard through the cloth (occluded)
+        tt = np.arange(n_) / SR; w = rng.standard_normal(n_)
+        inside = _bp(w, 220, 2600) * (0.6 + 0.4 * np.sin(2 * np.pi * 0.27 * tt) ** 2) * 0.6 + _bp(rng.standard_normal(n_), 3000, 7000) * 0.25 * (rng.random(n_) < 0.0005)
+        outside = occlude(_bp(rng.standard_normal(n_), 300, 3000) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.11 * tt) ** 4), "cloth") * 1.4
+        x = inside + outside
+        return x / (np.abs(x).max() + 1e-9)
+    return _rt_prev48(kind, n_)
