@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -1402,3 +1402,138 @@ def two_lands(c, t, seed=0, k=1.0):
     eu = wpoly([(760, 760), (840, 740), (860, 820), (990, 830), (1000, 1000), (930, 1120), (800, 1080), (760, 960)], seed + 11, 3, True, 50)
     uk = wpoly([(680, 800), (720, 780), (730, 880), (690, 930), (660, 870)], seed + 12, 2, True, 30)
     for pth in (am, eu, uk): ink(c, pth, (120, 196, 110), 8, INK, k)
+
+
+# ---------------------------------------------------------------- 18 Nov 2026 (Hoka 'clown shoes'): generic chunky running shoe character, thin barefoot-style
+# shoe, mountain with a downhill trail, clown nose, start line + cones, plain stick runner, permit park sign, tower with a plain boot icon.
+# No brand marks: no logos, stripes or real colourways — the shoe is a plain sneaker with a puffy white sole and a tape label.
+def _chunkyshoe(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, label="SHOE", upper=(120, 200, 255), sole=WHITE, nose=0.0, **kw):
+    """chunky running shoe character: oversized puffy sole (two wobbly layers), low upper with laces, eyes on the toe box, stick arms.
+    nose 0..1 = a red clown nose pops onto the toe."""
+    sy = y - 20 * s
+    sl = wpoly([(x - 250 * s, sy - 30 * s), (x - 240 * s, sy - 150 * s), (x + 210 * s, sy - 150 * s), (x + 290 * s, sy - 110 * s), (x + 300 * s, sy - 40 * s), (x + 250 * s, sy)], seed, 2.2, True, 50)
+    ink(c, sl, sole, 9 * s)
+    wline(c, [(x - 236 * s, sy - 80 * s), (x + 286 * s, sy - 76 * s)], seed + 1, 6 * s, shade(sole, 0.7))
+    up = wpoly([(x - 240 * s, sy - 150 * s), (x - 250 * s, sy - 330 * s), (x - 150 * s, sy - 370 * s), (x - 40 * s, sy - 330 * s), (x + 120 * s, sy - 260 * s),
+                (x + 250 * s, sy - 200 * s), (x + 270 * s, sy - 150 * s)], seed + 2, 2.2, True, 50)
+    ink(c, up, upper, 9 * s)
+    for j in range(4):   # laces
+        lx = x - 120 * s + j * 50 * s; wline(c, [(lx - 26 * s, sy - 300 * s + j * 22 * s), (lx + 26 * s, sy - 270 * s + j * 22 * s)], seed + 3 + j, 6 * s, WHITE)
+    ink(c, wpoly([(x - 250 * s, sy - 330 * s), (x - 262 * s, sy - 380 * s), (x - 200 * s, sy - 392 * s), (x - 150 * s, sy - 370 * s)], seed + 8, 1.4, True, 30), shade(upper, 0.8), 7 * s)
+    lab = wrrect(x - 210 * s, sy - 220 * s, x - 60 * s, sy - 170 * s, 8 * s, seed + 9, 1.0); ink(c, lab, ORG, 5 * s)
+    f = font(BLK_F, 30 * s); tw = f.measureText(label)
+    if tw > 130 * s: f = font(BLK_F, 30 * s * 130 * s / tw); tw = 130 * s
+    c.drawString(label, x - 135 * s - tw / 2, sy - 184 * s, f, P(INK))
+    eyes(c, x + 110 * s, sy - 236 * s, s * 0.8, look, blink, 40, 26, mood, seed + 11)
+    mouth(c, x + 190 * s, sy - 176 * s, s * 0.6, talk, mood, seed + 12)
+    if nose > 0: ink(c, wellipse(x + 262 * s, sy - 190 * s, 40 * s * nose, 38 * s * nose, seed + 13, 1.2), RED, 6 * s)
+    _arms(c, x - 200 * s, x + 40 * s, sy - 250 * s, arms, t, s * 0.9, seed + 14)
+    if walk or kw.get("legs", True): _legs(c, x, sy - 2, y + 6 * s, s * 0.7, t, walk, seed + 16, 120)
+
+
+def thin_shoe(c, x, y, s=1.0, seed=0, col=(196, 196, 204), rot=0.0, k=1.0):
+    """flat barefoot-style shoe (toe-slipper) standing on (x, y)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    ink(c, wpoly([(-170, 0), (-176, -16), (180, -16), (196, -4), (180, 0)], seed, 1.2, True, 40), INK, 0)
+    ink(c, wpoly([(-170, -14), (-176, -86), (-110, -100), (-20, -70), (110, -60), (186, -40), (190, -14)], seed + 1, 1.8, True, 40), col, 7)
+    for j in range(5): ink(c, wellipse(130 + j * 14 - 30, -44 - (j % 2) * 4, 12, 16, seed + 2 + j, 0.6), shade(col, 0.85), 4)
+    c.restore()
+
+
+def mountain(c, x, y, w=900, h=640, seed=0, snow=True, trail=1.0):
+    """big doodle mountain on (x, y) with a dashed downhill trail drawn on (trail 0..1)."""
+    ink(c, wpoly([(x - w / 2, y), (x - 60, y - h), (x + 30, y - h + 60), (x + 110, y - h + 10), (x + w / 2, y)], seed, 3, True, 60), (150, 200, 150), 9)
+    if snow: ink(c, wpoly([(x - 160, y - h + 220), (x - 60, y - h), (x + 30, y - h + 60), (x + 110, y - h + 10), (x + 200, y - h + 200), (x + 120, y - h + 170), (x + 40, y - h + 230), (x - 50, y - h + 180)], seed + 1, 2, True, 50), WHITE, 7)
+    pts = quad_pts(x - 40, y - h + 60, x + w / 2 - 80, y - 20, 160, 22)
+    m = int(len(pts) * trail)
+    for i in range(0, max(0, m - 1), 2): wline(c, [pts[i], pts[i + 1]], seed + 10 + i, 8, BROWN)
+
+
+def cone(c, x, y, s=1.0, seed=0, num=None, k=1.0):
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-70, -16, 70, 6, 6, seed, 1), ORG, 6)
+    ink(c, wpoly([(-50, -14), (-12, -150), (12, -150), (50, -14)], seed + 1, 1.4, True, 40), ORG, 7)
+    wline(c, [(-34, -70), (34, -70)], seed + 2, 12, WHITE)
+    if num: text(c, num, 0, -170, 54, INK, MARK_F)
+    c.restore()
+
+
+def start_line(c, y=1300, seed=0):
+    """chequered start line across the ground."""
+    for i in range(27):
+        for r in range(2):
+            if (i + r) % 2 == 0: c.drawRect(skia.Rect.MakeXYWH(i * 40, y + r * 26, 40, 26), P(INK, 0.85))
+    wline(c, [(-10, y), (W + 10, y)], seed, 6); wline(c, [(-10, y + 52), (W + 10, y + 52)], seed + 1, 6)
+
+
+def runner(c, x, y, t, s=1.0, seed=0, col=BLU, name=None, chunky=True, k=1.0, speed=1.0, mood="happy", bounce=0.0):
+    """plain stick runner mid-stride (no likeness); chunky = puffy white soles; bounce = cloud bounce height."""
+    if k <= 0: return
+    ph = t * 11 * speed + seed
+    yy = y - abs(math.sin(ph)) * (14 + bounce) * s
+    c.save(); c.translate(x, yy); c.scale(s * k, s * k)
+    for j in (0, 1):
+        a = math.sin(ph + j * math.pi)
+        fx, fy = a * 70, -10 - max(0, -a) * 40
+        wline(c, [(0, -150), (a * 30, -80), (fx, fy)], seed + j, 9)
+        if chunky: ink(c, wrrect(fx - 34, fy - 6, fx + 44, fy + 22, 10, seed + 3 + j, 1), WHITE, 6)
+        else: ink(c, wellipse(fx + 8, fy + 4, 26, 9, seed + 3 + j, 1), INK, 0)
+        b = math.sin(ph + j * math.pi + math.pi)
+        wline(c, [(0, -270), (b * 50, -220), (b * 70 + 20, -250)], seed + 5 + j, 8)
+    ink(c, wpoly([(-30, -300), (30, -300), (26, -150), (-26, -150)], seed + 7, 1.4, True, 30), col, 7)
+    ink(c, wellipse(0, -350, 44, 46, seed + 8, 1.2), (255, 224, 196), 7)
+    c.drawCircle(10, -358, 6, P(INK)); c.drawCircle(30, -358, 6, P(INK))
+    wline(c, quad_pts(4, -332, 32, -332, 8 if mood == "happy" else -6, 5), seed + 9, 4)
+    c.restore()
+    if name: tape(c, name, x, y + 46, 30, -3, k, seed=seed)
+
+
+def park_sign(c, x, y, s=1.0, seed=0, word="CITY PARK", k=1.0):
+    """generic wooden park sign on two posts standing on (x, y)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for lx in (-110, 110): ink(c, wrrect(lx - 14, -260, lx + 14, 0, 4, seed + lx, 1), BROWN, 6)
+    ink(c, wrrect(-200, -400, 200, -230, 16, seed, 1.6), (90, 160, 90), 9)
+    ink(c, wrrect(-180, -382, 180, -248, 10, seed + 1, 1), None, 4, WHITE)
+    sz = 62
+    while sz > 28 and font(BLK_F, sz).measureText(word) > 330: sz -= 4
+    f = font(BLK_F, sz); c.drawString(word, -f.measureText(word) / 2, -295, f, P(WHITE))
+    c.restore()
+
+
+def clipboard(c, x, y, s=1.0, seed=0, head="PERMIT", k=1.0, ticks=0):
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-150, -200, 150, 200, 14, seed, 1.6), BROWN, 8)
+    ink(c, wrrect(-124, -170, 124, 180, 6, seed + 1, 1.2), WHITE, 6)
+    ink(c, wrrect(-60, -222, 60, -176, 10, seed + 2, 1), GREY, 6)
+    f = font(BLK_F, 44); c.drawString(head, -f.measureText(head) / 2, -110, f, P(INK))
+    for j in range(4):
+        yy = -50 + j * 56; wline(c, [(-70, yy), (100, yy)], seed + 3 + j, 4, GREY)
+        ink(c, wrrect(-110, yy - 18, -84, yy + 8, 4, seed + 9 + j, 0.6), WHITE, 4)
+        if j < ticks: wline(c, [(-112, yy - 6), (-100, yy + 8), (-78, yy - 26)], seed + 20 + j, 6, GRN)
+    c.restore()
+
+
+def boot_tower(c, x, y, w=320, h=600, seed=0, label="DECKERS"):
+    """office tower with a plain boot outline on its sign (generic, no brand marks)."""
+    building(c, x, y, w, h, (210, 214, 224), seed, None, True)
+    ink(c, wrrect(x - 130, y - h - 150, x + 130, y - h - 20, 12, seed + 3, 1.4), WHITE, 8)
+    ink(c, wpoly([(x - 70, y - h - 50), (x - 66, y - h - 130), (x - 20, y - h - 130), (x - 16, y - h - 80), (x + 60, y - h - 70), (x + 70, y - h - 50)], seed + 4, 1.2, True, 30), TAN, 6)
+    tape(c, label, x, y - h - 190, 40, -3, 1.0, seed=seed + 5)
+
+
+def money_stack(c, x, y, n, s=1.0, seed=0):
+    """pile of green bill bricks standing on (x, y); n = number of bricks."""
+    for i in range(int(n)):
+        yy = y - 30 * s - i * 34 * s; xx = x + (h01(i, seed) - 0.5) * 16 * s
+        ink(c, wrrect(xx - 90 * s, yy - 16 * s, xx + 90 * s, yy + 16 * s, 5 * s, seed + i, 1), (140, 214, 140), 5 * s)
+        c.drawCircle(xx, yy, 9 * s, P(DGRN))
+
+
+def speed_lines(c, x, y, n=4, length=160, seed=0, col=RED, k=1.0):
+    for i in range(n):
+        yy = y + (i - n / 2) * 34; l = length * (0.6 + 0.4 * h01(i, seed)) * k
+        wline(c, [(x - l, yy), (x, yy)], seed + i, 7, col)
