@@ -1,0 +1,4 @@
+- Stock ~ $70 peak 2007, ~ $1 in 2008; 2008 net loss $185M; cut dress shoes, golf cleats, heels: The Fifth Person, 25 Jul 2025 (https://fifthperson.com/crocs-turnaround-from-ugly-shoe-fad-to-growth-star)
+- Jibbitz revenue 2024 ~$271M: Crocs Q4/FY2024 earnings presentation; The Fifth Person
+- FY2025 Crocs Brand revenue $3,326M: Crocs 8-K, 12 Feb 2026 (https://www.sec.gov/Archives/edgar/data/1334036/000133403626000004/croxq42025-pressrelease.htm). Company GAAP net loss 2025 (HEYDUDE impairment) not used.
+- "Cut its line to one clog": Stratrix.
