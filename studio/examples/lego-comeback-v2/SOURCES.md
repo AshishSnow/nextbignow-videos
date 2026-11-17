@@ -1,0 +1,6 @@
+- 2003 sales -25%, record pre-tax loss ~DKK 1.4bn: LEGO Company release 8 Jan 2004 (repost https://tech-insider.org/lego-mindstorms/research/2004/0108.html)
+- 2004: costs cut DKK 1,523m (20%); decision to sell LEGOLAND parks: LEGO Annual Report 2004 release 6 Apr 2005 (https://tech-insider.org/lego-mindstorms/research/2005/0406.html)
+- 2004 net loss DKK 1.93bn (~$320M), €255M "biggest ever annual loss": NBC News/AP 2006 (https://www.nbcnews.com/id/wbna11367083); Irish Times 7 Apr 2005
+- Return to profit 2005 (net DKK 505m); 4 Legoland parks sold to Blackstone for €375M: NBC News/AP
+- 2025: revenue DKK 83.5bn (+12%), net profit DKK 16.7bn (~$2.5bn), consumer sales +16% vs toy market +7%: LEGO Group release 10 Mar 2026
+- Theme parks/video games/clothes expansion: Irish Times (parks); tweakyourbiz (games, clothing) — general.

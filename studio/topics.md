@@ -101,3 +101,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 - 2026-11-17 | QUEUED (R&D writers' room, doodle case study, SHORTS) — Huy Fong Sriracha: the hot sauce that never paid for an ad (spicy-food trend + 3 moves) (queue/31-sriracha-no-ads) | — | REVIEWED
 - 2026-11-17 | QUEUED (R&D writers' room, doodle case study, SHORTS) — Hoka: the 'clown shoes' that sell $2.6B a year (running-club boom + 3 moves) (queue/32-hoka-clown-shoes) | — | REVIEWED
 - 2026-11-17 SCHEDULED (19:30 IST) V2 FORMAT cream comic + real cut-outs: Costco $4.99 rotisserie chicken (loss leader, $450M Nebraska plant, 157M sold FY25) | costco-chicken (58 s VO / 59.8 s) | Metricool 431021615 IG + 431021691 YT
+- 2026-11-17 SCHEDULED (18 Nov 19:30 IST) V2 FORMAT: Lego comeback (2004 record loss -> 2025 ~$2.5B profit; did less) | lego-comeback (54.5 s VO / 56.3 s) | Metricool 431468918 IG + 431469154 YT
