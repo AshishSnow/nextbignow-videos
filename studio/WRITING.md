@@ -1,5 +1,7 @@
 # WRITING.md — write like a person talking (owner, 6 Nov 2026: "research how to write like a human")
 
+> **Read SCRIPT_FEEL.md first (18 Nov 2026):** story *shape* (but/therefore, one open loop, picture per line, build-up + reveal, callback ending). This file is the sentence-level layer.
+
 Every script passes `python3 studio/tools/human_check.py <vo_lines.py> --strict` (6/6 gates) **before** `make_vo.py`, on top of
 story_check (R/S gates). The first credit-score script (shipped 6 Nov) scored **1/6**: it had perfect contractions and varied sentence
 length, and still sounded like AI because of *templates* ("Slice one. … Slice two. …"), *stock signposts* ("Picture this", "here's the
