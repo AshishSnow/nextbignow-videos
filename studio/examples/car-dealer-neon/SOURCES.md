@@ -1,0 +1,5 @@
+- "5% new car margin, 50% service margin": Erin Kerrigan (Kerrigan Advisors) to CNBC, Robert Ferris, 19 Aug 2026 (https://www.kerriganadvisors.com/in-the-news/autos-car-dealerships-are-relying-more-on-parts-and-service-for-profits)
+- Asbury Automotive F&I ~4% of revenue, 23% of gross profit (Jan-Jun 2026), per the company: same CNBC article
+- Chain service centers as drivers' primary service provider 20% (2020) -> 42% (2025): Ducker Carlisle 2026 report, via the same CNBC article
+- Dealers' service and parts sales > $164B in 2025: NADA Data 2025 full-year report (https://www.nada.org/NADADATA/)
+- $30,000 car and ~$1,500 are our worked example of the 5% figure (said as "say you buy", "around").
