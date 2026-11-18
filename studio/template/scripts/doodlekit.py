@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -1537,3 +1537,172 @@ def speed_lines(c, x, y, n=4, length=160, seed=0, col=RED, k=1.0):
     for i in range(n):
         yy = y + (i - n / 2) * 34; l = length * (0.6 + 0.4 * h01(i, seed)) * k
         wline(c, [(x - l, yy), (x, yy)], seed + i, 7, col)
+
+
+# ---------------------------------------------------------------- 19 Nov 2026: hot-sauce episode props (generic objects only — no rooster, no green cap, no label art)
+def _sauce(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, label="HOT SAUCE", col=(226, 46, 38), cap=WHITE, **kw):
+    """generic squeeze-bottle hot sauce character: tapered red body, white flip cap + nozzle, tape label, stick arms + legs."""
+    leg = 80 * s; cb = y - leg; ct = cb - 420 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 34)
+    body = wpoly([(x - 110 * s, cb), (x - 118 * s, cb - 250 * s), (x - 70 * s, ct + 40 * s), (x + 70 * s, ct + 40 * s), (x + 118 * s, cb - 250 * s), (x + 110 * s, cb)], seed, 2.0, True, 40)
+    ink(c, body, col, 9 * s)
+    wline(c, [(x - 70 * s, cb - 330 * s), (x - 84 * s, cb - 210 * s)], seed + 1, 7 * s, WHITE, a=0.7)   # shine
+    ink(c, wrrect(x - 70 * s, ct - 10 * s, x + 70 * s, ct + 46 * s, 12 * s, seed + 2, 1.2), cap, 8 * s)
+    ink(c, wpoly([(x - 22 * s, ct - 8 * s), (x - 10 * s, ct - 80 * s), (x + 10 * s, ct - 80 * s), (x + 22 * s, ct - 8 * s)], seed + 3, 1.0, True, 20), cap, 7 * s)
+    lab = wrrect(x - 92 * s, cb - 140 * s, x + 92 * s, cb - 62 * s, 8 * s, seed + 4, 1.2); ink(c, lab, WHITE, 6 * s)
+    f = font(BLK_F, 32 * s); tw = f.measureText(label)
+    if tw > 160 * s: f = font(BLK_F, 32 * s * 160 * s / tw); tw = 160 * s
+    c.drawString(label, x - tw / 2, cb - 88 * s, f, P(INK))
+    _arms(c, x - 112 * s, x + 112 * s, cb - 230 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 120 * s, s * 0.9, look, blink, 38, 24, mood, seed + 9)
+    mouth(c, x, ct + 186 * s, s * 0.75, talk, mood, seed + 5)
+
+
+def chili(c, x, y, s=1.0, rot=0.0, seed=0, col=(226, 46, 38), k=1.0):
+    """curved chili pepper with a green stem."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    ink(c, wpoly([(-20, -70), (24, -66), (36, -10), (24, 60), (-6, 120), (-30, 150), (-24, 100), (-24, 20)], seed, 1.6, True, 30), col, 7)
+    ink(c, wpoly([(-22, -70), (-10, -96), (8, -100), (24, -66)], seed + 1, 1.0, True, 20), DGRN, 6)
+    wline(c, [(0, -96), (6, -130), (20, -140)], seed + 2, 7, DGRN)
+    c.restore()
+
+
+def freighter(c, x, y, s=1.0, t=0.0, seed=0, name="HUY FONG", k=1.0):
+    """cargo freighter on waves (bobbing), name painted on the hull as plain text."""
+    if k <= 0: return
+    bob = math.sin(t * 2.2 + seed) * 8
+    c.save(); c.translate(x, y + bob); c.rotate(math.sin(t * 1.7) * 1.5); c.scale(s * k, s * k)
+    ink(c, wpoly([(-400, -140), (400, -140), (330, 0), (-350, 0)], seed, 2.4, True, 60), (60, 70, 92), 9)
+    wline(c, [(-390, -110), (392, -110)], seed + 1, 8, RED)
+    for j in range(4): ink(c, wrrect(-300 + j * 120, -230, -200 + j * 120, -140, 6, seed + 2 + j, 1.2), (ORG, BLU, YEL, GRN)[j], 6)
+    ink(c, wrrect(190, -330, 330, -140, 10, seed + 7, 1.6), WHITE, 8)
+    for j in range(3): ink(c, wrrect(206 + j * 42, -300, 236 + j * 42, -270, 4, seed + 8 + j, 0.8), SKY, 4)
+    ink(c, wrrect(270, -400, 310, -330, 6, seed + 12, 1.0), RED, 6)
+    text(c, name, -20, -40, 54, WHITE, BLK_F)
+    c.restore()
+    for j in range(5):   # waves
+        wx = x - 520 * s + j * 260 * s + 30 * math.sin(t * 2 + j)
+        wline(c, [(wx, y + 30), (wx + 60 * s, y + 6), (wx + 120 * s, y + 30), (wx + 180 * s, y + 6)], seed + 20 + j, 8, BLU)
+
+
+def van(c, x, y, s=1.0, t=0.0, seed=0, col=BLU, k=1.0, drive=0.0, load=True):
+    """boxy delivery van seen from the side, standing on (x, y); drive>0 = bounce + speed lines."""
+    if k <= 0: return
+    bounce = abs(math.sin(t * 14)) * 6 * drive
+    c.save(); c.translate(x, y - bounce); c.scale(s * k, s * k)
+    ink(c, wpoly([(-280, -60), (-280, -300), (120, -300), (200, -200), (280, -170), (280, -60)], seed, 2.2, True, 50), col, 9)
+    ink(c, wpoly([(130, -280), (190, -205), (130, -205)], seed + 1, 1.0, True, 20), SKY, 6)
+    wline(c, [(-30, -290), (-30, -70)], seed + 2, 6)
+    if load: text(c, "CHILI SAUCE", -150, -170, 40, WHITE, BLK_F)
+    for wx in (-170, 170):
+        ink(c, wellipse(wx, -50, 56, 56, seed + 3 + wx, 1.4), INK, 0)
+        ink(c, wellipse(wx, -50, 24, 24, seed + 5 + wx, 0.8), GREY, 5)
+    c.restore()
+    if drive > 0: speed_lines(c, x - 330 * s, y - 220 * s, 4, 150, seed + 9, INK, drive)
+
+
+def listing(c, x, y, s=1.0, seed=0, price="$70", k=1.0, sold=0.0):
+    """generic online-auction listing card (no site branding): photo of a red sauce bottle, '28 OZ', big price, BUY NOW button."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-260, -330, 260, 330, 22, seed, 2), WHITE, 9)
+    ink(c, wrrect(-220, -290, 220, 20, 12, seed + 1, 1.4), (236, 240, 246), 6)
+    ink(c, wpoly([(-56, 0), (-60, -130), (-36, -200), (36, -200), (60, -130), (56, 0)], seed + 2, 1.4, True, 30), (226, 46, 38), 7)
+    ink(c, wrrect(-36, -230, 36, -196, 6, seed + 3, 0.8), WHITE, 5)
+    text(c, "HOT SAUCE, 28 OZ", 0, 76, 34, INK, BLK_F)
+    text(c, price, -60, 176, 92, RED, ANTON_F)
+    ink(c, wrrect(70, 130, 230, 200, 30, seed + 4, 1.2), BLU, 6); text(c, "BUY NOW", 150, 178, 30, WHITE, BLK_F)
+    text(c, "ONLINE LISTING, 2023", 0, 282, 28, (120, 120, 128), BLK_F)
+    c.restore()
+
+
+def menu(c, x, y, s=1.0, seed=0, k=1.0, n_hot=0):
+    """restaurant menu card: dish lines, the first n_hot get a red chili icon."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-230, -340, 230, 340, 18, seed, 2), CREAM, 9)
+    text(c, "MENU", 0, -260, 64, INK, MARK_F)
+    for j in range(7):
+        yy = -170 + j * 72
+        wline(c, [(-170, yy), (90 + (j % 3) * 20, yy)], seed + 1 + j, 9, (120, 110, 100))
+        if j < n_hot: chili(c, 160, yy - 6, 0.32, 40, seed + 10 + j)
+    c.restore()
+
+
+def farm(c, x, y, w=700, seed=0, label="PEPPER FARM", k=1.0, rows=4, crop=True, gone=0.0):
+    """pepper field: barn on the left, rows of chili plants; gone 0..1 greys the plants out (bad harvest)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k, k)
+    ink(c, wpoly([(-w / 2, -40), (-w / 2, -260), (-w / 2 + 110, -340), (-w / 2 + 220, -260), (-w / 2 + 220, -40)], seed, 2, True, 40), RED, 9)
+    ink(c, wrrect(-w / 2 + 70, -150, -w / 2 + 150, -40, 6, seed + 1, 1), WHITE, 6)
+    for r in range(rows):
+        yy = -40 - r * 50
+        wline(c, [(-w / 2 + 250, yy), (w / 2, yy)], seed + 2 + r, 7, BROWN)
+        if crop:
+            for j in range(6):
+                px = -w / 2 + 280 + j * 75 + (r % 2) * 30
+                ink(c, wellipse(px, yy - 22, 24, 20, seed + 10 + r * 9 + j, 1), shade(DGRN, 1 - 0.3 * gone) if gone < 0.5 else (170, 160, 120), 5)
+                if gone < 0.5: ink(c, wellipse(px + 10, yy - 8, 8, 14, seed + 50 + r * 9 + j, 0.6), (226, 46, 38), 3)
+    if label: tape(c, label, 0, 30, 34, 2, 1.0, WHITE, INK, seed + 99)
+    c.restore()
+
+
+def gavel(c, x, y, s=1.0, seed=0, hit=0.0, k=1.0):
+    """judge's gavel over a sound block; hit 0..1 swings it down."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-120, -30, 120, 10, 10, seed, 1.4), BROWN, 7)
+    c.save(); c.translate(80, -60); c.rotate(-35 * (1 - ease(hit)))
+    wline(c, [(0, 0), (-200, -150)], seed + 1, 18, BROWN)
+    ink(c, wrrect(-260, -230, -150, -100, 14, seed + 2, 1.2), shade(BROWN, 0.8), 8)
+    c.restore()
+    if hit > 0.9:
+        for a_ in (-50, 0, 50): wline(c, [(math.sin(math.radians(a_)) * 140, -40 - math.cos(math.radians(a_)) * 60), (math.sin(math.radians(a_)) * 200, -60 - math.cos(math.radians(a_)) * 100)], seed + 5 + a_, 7, RED)
+    c.restore()
+
+
+def jury_box(c, x, y, s=1.0, seed=0, t=0.0, k=1.0):
+    """jury box: wooden rail with a row of plain doodle heads."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for j in range(6):
+        hx = -250 + j * 100; hy = -230 + (j % 2) * 16
+        ink(c, wellipse(hx, hy, 40, 44, seed + j, 1.2), (255, 224, 196), 7)
+        eyes(c, hx, hy - 4, 0.36, (0.3, 0), (int(t * 12 + j * 5) % 41) in (0, 1), 40, 22, "neutral", seed + 20 + j)
+    ink(c, wrrect(-320, -170, 320, 0, 10, seed + 9, 2), BROWN, 9)
+    for j in range(5): wline(c, [(-260 + j * 130, -160), (-260 + j * 130, -10)], seed + 30 + j, 6, shade(BROWN, 0.7))
+    text(c, "JURY", 0, -64, 50, WHITE, BLK_F)
+    c.restore()
+
+
+def raincloud(c, x, y, s=1.0, t=0.0, seed=0, k=1.0, storm=True):
+    """grey storm cloud with falling rain dashes and a zigzag bolt."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for j in range(14):
+        rx = -150 + (j * 53) % 300; ry = ((t * 600 + j * 97) % 260)
+        wline(c, [(rx, 40 + ry), (rx - 12, 80 + ry)], seed + j, 6, BLU)
+    for (cx, cy, r) in ((-90, 0, 80), (0, -40, 100), (100, 0, 80), (0, 30, 90)):
+        ink(c, wellipse(cx, cy, r * 1.1, r, seed + 40 + cx, 1.6), (150, 156, 170), 9)
+    ink(c, wellipse(0, 10, 180, 60, seed + 50, 1.0), (150, 156, 170), 0)
+    if storm and int(t * 3) % 3 == 0:
+        ink(c, wpoly([(20, 60), (-20, 150), (16, 150), (-26, 250), (60, 130), (20, 130), (50, 60)], seed + 60, 1, True, 20), YEL, 6)
+    c.restore()
+
+
+def stove(c, x, y, s=1.0, seed=0, k=1.0, banned=0.0):
+    """home kitchen stove with a pot; banned 0..1 draws a red no-circle over it."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-200, -300, 200, 0, 16, seed, 2), WHITE, 9)
+    for j in range(3): ink(c, wellipse(-110 + j * 110, -60, 26, 26, seed + 1 + j, 1), GREY, 6)
+    ink(c, wrrect(-130, -300, 130, -290, 4, seed + 5, 1), INK, 0)
+    ink(c, wpoly([(-120, -300), (-110, -440), (110, -440), (120, -300)], seed + 6, 1.6, True, 30), (90, 96, 110), 8)
+    ink(c, wrrect(-130, -460, 130, -430, 8, seed + 7, 1), (70, 76, 90), 7)
+    for j in range(3): wline(c, [(-50 + j * 50, -480), (-40 + j * 50, -530), (-50 + j * 50, -580)], seed + 8 + j, 6, GREY)
+    tape(c, "HOME KITCHEN", 0, -170, 34, -2, 1.0, CREAM, INK, seed + 20)
+    if banned > 0:
+        ink(c, wellipse(0, -270, 300 * ease(banned), 300 * ease(banned), seed + 30, 2.2), None, 22, RED)
+        wline(c, [(-210 * ease(banned), -480 * ease(banned) + (-270) * (1 - ease(banned)) + 0), (210 * ease(banned), -60)], seed + 31, 22, RED)
+    c.restore()
