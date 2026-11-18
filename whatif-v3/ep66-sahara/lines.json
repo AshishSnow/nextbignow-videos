@@ -1,0 +1,122 @@
+[
+ {
+  "tag": "intrigued",
+  "text": "He got lost in the Sahara for nine days...",
+  "ex": 0.6,
+  "cfg": 0.4,
+  "t": 0.8,
+  "gap": 0.15
+ },
+ {
+  "tag": "disbelief",
+  "text": "and survived on bats.",
+  "ex": 1.0,
+  "cfg": 0.35,
+  "t": 0.9,
+  "gap": 0.45
+ },
+ {
+  "tag": "explaining",
+  "text": "How? An empty shrine for shade, raw bats for food, and his own urine for water.",
+  "ex": 0.5,
+  "cfg": 0.45,
+  "t": 0.75,
+  "gap": 0.45
+ },
+ {
+  "tag": "tense, building",
+  "text": "Then a sandstorm hits. Eight hours.",
+  "ex": 0.95,
+  "cfg": 0.35,
+  "t": 0.9,
+  "gap": 0.5
+ },
+ {
+  "tag": "quiet, grim",
+  "text": "When it ends... the trail is gone.",
+  "ex": 0.35,
+  "cfg": 0.5,
+  "t": 0.7,
+  "gap": 0.3
+ },
+ {
+  "tag": "curious",
+  "text": "He finds an empty shrine, and hides from the sun.",
+  "ex": 0.55,
+  "cfg": 0.45,
+  "t": 0.8,
+  "gap": 0.3
+ },
+ {
+  "tag": "whisper",
+  "text": "Bats live in the roof.",
+  "ex": 0.4,
+  "cfg": 0.5,
+  "t": 0.75,
+  "gap": 0.35
+ },
+ {
+  "tag": "deadpan",
+  "text": "So he eats them. Raw.",
+  "ex": 0.5,
+  "cfg": 0.5,
+  "t": 0.7,
+  "gap": 0.5
+ },
+ {
+  "tag": "hopeful",
+  "text": "He writes SOS in the sand.",
+  "ex": 0.7,
+  "cfg": 0.4,
+  "t": 0.85,
+  "gap": 0.3
+ },
+ {
+  "tag": "crushed",
+  "text": "Planes fly over... and miss him.",
+  "ex": 0.45,
+  "cfg": 0.5,
+  "t": 0.75,
+  "gap": 0.55
+ },
+ {
+  "tag": "hopeful, warm",
+  "text": "On day nine, a little girl herding goats spots him.",
+  "ex": 0.75,
+  "cfg": 0.4,
+  "t": 0.85,
+  "gap": 0.35
+ },
+ {
+  "tag": "amazed",
+  "text": "He's wandered about one hundred eighty miles, all the way into Algeria.",
+  "ex": 0.8,
+  "cfg": 0.4,
+  "t": 0.85,
+  "gap": 0.3
+ },
+ {
+  "tag": "grim",
+  "text": "He's lost thirty-three pounds.",
+  "ex": 0.5,
+  "cfg": 0.5,
+  "t": 0.75,
+  "gap": 0.5
+ },
+ {
+  "tag": "proud",
+  "text": "And later? He ran that same race again. Six more times.",
+  "ex": 0.85,
+  "cfg": 0.4,
+  "t": 0.85,
+  "gap": 0.45
+ },
+ {
+  "tag": "challenge",
+  "text": "So... would you have survived?",
+  "ex": 0.8,
+  "cfg": 0.4,
+  "t": 0.85,
+  "gap": 0.3
+ }
+]
