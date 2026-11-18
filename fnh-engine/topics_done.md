@@ -78,3 +78,4 @@ intro so viewers instantly know what the video is about.
 - 2026-11-17 | Short #49 | खाते ही सो जाना = मोटापा? (not direct fat; acidity when lying; Vujović 2022 Cell Metab late eating; 2-3 h, walk, left side) | comic, title-first hook, IG + YT | IG 431743366 22:36 + YT 431743510 22:38 2026-11-17
 - 2026-11-18 | Short #50 | सोते-सोते झटका क्यों? (hypnic jerk ~70%; muscles relax, brain thinks falling; ancestor-tree theory; triggers caffeine/stress/fatigue/late workout) | real Mixkit footage cut-outs + Mixkit/Kenney SFX + custom thumb | IG 432444761 12:22 + YT 432444816 12:24
 - 2026-11-18 | Short #51 | दूध वाली चाय — फ़ायदा गायब? (casein blocks tea flavonoids; Lorenz 2007 Eur Heart J, proof at end) | Mixkit video cards + Mixkit/Kenney SFX + thumb | IG 432584585 15:13 + YT 432584684 15:15
+CLAIMED 2026-11-18 16:05 IST | 52-water-standing | Does drinking water standing up hurt your knees?
