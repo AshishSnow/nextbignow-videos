@@ -1,0 +1,106 @@
+[
+ {
+  "tag": "hyped, confident",
+  "text": "G T A six is about to make a lot of people rich.",
+  "ex": 0.75,
+  "cfg": 0.4,
+  "t": 0.85,
+  "gap": 0.15
+ },
+ {
+  "tag": "excited reveal",
+  "text": "And it drops tomorrow.",
+  "ex": 0.95,
+  "cfg": 0.35,
+  "t": 0.9,
+  "gap": 0.45
+ },
+ {
+  "tag": "fast, listing",
+  "text": "Not just Rockstar. Streamers, YouTubers... even the guys who clip their videos.",
+  "ex": 0.65,
+  "cfg": 0.4,
+  "t": 0.8,
+  "gap": 0.4
+ },
+ {
+  "tag": "leaning in",
+  "text": "Here's how we know.",
+  "ex": 0.5,
+  "cfg": 0.45,
+  "t": 0.75,
+  "gap": 0.35
+ },
+ {
+  "tag": "storyteller",
+  "text": "Back in twenty thirteen, G T A five made one billion dollars... in three days.",
+  "ex": 0.7,
+  "cfg": 0.4,
+  "t": 0.8,
+  "gap": 0.4
+ },
+ {
+  "tag": "amazed",
+  "text": "Then it never stopped selling. Two hundred thirty million copies.",
+  "ex": 0.75,
+  "cfg": 0.4,
+  "t": 0.85,
+  "gap": 0.4
+ },
+ {
+  "tag": "impressed",
+  "text": "Eight years later, it was still the number one game on Twitch. Two point one billion hours watched.",
+  "ex": 0.6,
+  "cfg": 0.45,
+  "t": 0.8,
+  "gap": 0.4
+ },
+ {
+  "tag": "playful",
+  "text": "Most of that? Roleplay servers. Regular people playing cops, robbers and taxi drivers... live, all day.",
+  "ex": 0.7,
+  "cfg": 0.4,
+  "t": 0.85,
+  "gap": 0.45
+ },
+ {
+  "tag": "serious, big news",
+  "text": "Now one Wall Street bank thinks G T A six could sell forty five million copies on day one.",
+  "ex": 0.65,
+  "cfg": 0.45,
+  "t": 0.8,
+  "gap": 0.3
+ },
+ {
+  "tag": "punchy",
+  "text": "That's four times G T A five's record.",
+  "ex": 0.9,
+  "cfg": 0.35,
+  "t": 0.9,
+  "gap": 0.4
+ },
+ {
+  "tag": "knowing",
+  "text": "And every one of those players is gonna want to watch it too.",
+  "ex": 0.6,
+  "cfg": 0.45,
+  "t": 0.8,
+  "gap": 0.35
+ },
+ {
+  "tag": "urgent, motivating",
+  "text": "So whoever posts G T A six content in week one... catches the biggest wave.",
+  "ex": 0.85,
+  "cfg": 0.35,
+  "t": 0.85,
+  "gap": 0.45
+ },
+ {
+  "tag": "direct question",
+  "text": "Would you start a G T A six channel?",
+  "ex": 0.7,
+  "cfg": 0.4,
+  "t": 0.8,
+  "gap": 0.3
+ }
+]
