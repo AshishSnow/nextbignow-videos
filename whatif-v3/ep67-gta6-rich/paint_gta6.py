@@ -348,15 +348,6 @@ def frame(c, t):
         neon(c, 'GTA 6', 640, 250, ss(.1, .7, t) * 1.0, sk=-.08)
         small(c, 'IS ABOUT TO MAKE PEOPLE', 760, ss(.6, 1.2, t))
         neon(c, 'RICH', 930, 170, ss(wat('rich', 0) - .25, wat('rich', 0) + .2, t), top=YEL, bot=GREEN, glowc=GREEN)
-        k = ss(S[1] - .2, S[1] + .3, t)                   # calendar card: tomorrow
-        if card(c, W / 2, 1160, 380, 280, k, rot=-4, fill=CREAM, tilt=40):
-            c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeLTRB(-210, -150, 210, -60), 34, 34), P((230, 40, 90)))
-            c.drawRect(skia.Rect.MakeLTRB(-210, -95, 210, -60), P((230, 40, 90)))
-            f = F(ANTON, 52); c.drawString('NOV', -f.measureText('NOV') / 2, -82, f, P(CREAM))
-            f = F(ANTON, 170); c.drawString('19', -f.measureText('19') / 2, 120, f, P(DEEP))
-            c.restore()
-        chipk = ss(wat('tomorrow', 1) - .1, wat('tomorrow', 1) + .25, t)
-        if chipk > 0: chip(c, 'TOMORROW', W / 2, 1360, (230, 40, 90), a=chipk, f=LBL)
     elif t < s2:                                          # 1: who gets rich - three phones
         k0 = t - s1
         vgrad(c, [(30, 10, 70), (120, 30, 140), (255, 110, 120)], [0, .6, 1])

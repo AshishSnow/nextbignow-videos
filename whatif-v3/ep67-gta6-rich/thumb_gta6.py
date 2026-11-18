@@ -18,7 +18,7 @@ c.restore()
 rim = skia.Paint(); rim.setImageFilter(skia.ImageFilters.Blur(10, 10))
 c.saveLayer(None, rim); G.person(c, 330, 1560, 1.97, G.TEAL, 'streamer', 0, .9); c.restore()
 G.person(c, 336, 1560, 1.9, (28, 8, 40), 'streamer', 0, 1)             # character with teal rim light
-G.chip(c, 'DROPS TOMORROW', W / 2, 330, (230, 40, 90), f=G.LBL)
+G.chip(c, 'NOT JUST ROCKSTAR', W / 2, 330, (230, 40, 90), f=G.LBL)
 G.neon(c, 'GTA 6 WILL', 560, 210, 1, sk=-.06)
 G.neon(c, 'MAKE THEM RICH', 760, 150, 1, top=G.YEL, bot=G.GREEN, glowc=G.GREEN)
 G.grain(c, .14); c.drawImage(G.WM, 0, 0)

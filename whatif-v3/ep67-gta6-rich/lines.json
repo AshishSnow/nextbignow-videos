@@ -5,15 +5,15 @@
   "ex": 0.75,
   "cfg": 0.4,
   "t": 0.85,
-  "gap": 0.15
+  "gap": 0.4
  },
  {
   "tag": "excited reveal",
-  "text": "And it drops tomorrow.",
+  "text": "",
   "ex": 0.95,
   "cfg": 0.35,
   "t": 0.9,
-  "gap": 0.45
+  "gap": 0
  },
  {
   "tag": "fast, listing",

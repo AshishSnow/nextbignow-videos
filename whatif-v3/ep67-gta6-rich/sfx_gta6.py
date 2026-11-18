@@ -48,7 +48,6 @@ put(1206 if False else 1196, s9, B - 15, 20, s10 - s9 + .3, fi=.6, fo=.5, lp=500
 # opening: title hit + cash
 put(790, -.05, B - 14, fo=.2); put(1991, .3, B - 24, 3, 3.5, fi=.3, fo=1.0)
 put(1989, wat('rich', 0) - .05, B - 9)                                     # money bag drop on RICH
-put(2354, S[1] - .1, B - 12); put(1999, wat('tomorrow', 1), B - 13)        # calendar pop + coin on TOMORROW
 # three phones pop in
 for kw, i in (('streamers', 2357), ('youtubers', 2354), ('clip', 1133)): put(i, wat(kw, 2) - .3, B - 12)
 # rewind to 2013
