@@ -105,24 +105,24 @@ def building(c, x, y, w, h, col, sign, sign_col, t, glass=True):
 
 # ------------------------------------------------------------------ scenes (each: fn(c, t) draws 1080x1920)
 def s_showroom(c, t):
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, 1100), [(18, 12, 34), (38, 22, 66)]))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, 1100), [(255, 248, 235), (225, 240, 255)]))
     wx, wy, ww, wh = 60, 470, 960, 560
     skyline(c, wx, wy, ww, wh, t)
-    for i in range(1, 4): c.drawRect(skia.Rect.MakeXYWH(wx + i * ww / 4 - 7, wy, 14, wh), P((24, 16, 44)))
-    c.drawRect(skia.Rect.MakeXYWH(wx, wy + wh * 0.38, ww, 12), P((24, 16, 44)))
+    for i in range(1, 4): c.drawRect(skia.Rect.MakeXYWH(wx + i * ww / 4 - 7, wy, 14, wh), P((255, 255, 255))); c.drawRect(skia.Rect.MakeXYWH(wx + i * ww / 4 - 7, wy, 14, wh), S(INK, 4))
+    c.drawRect(skia.Rect.MakeXYWH(wx, wy + wh * 0.38, ww, 12), P((255, 255, 255))); c.drawRect(skia.Rect.MakeXYWH(wx, wy + wh * 0.38, ww, 12), S(INK, 4))
     c.drawRect(skia.Rect.MakeXYWH(wx - 11, wy - 11, ww + 22, wh + 22), S(INK, 6))
     fl = 1.0 if (t % 3.1) > 0.12 else 0.35
-    c.drawRoundRect(skia.Rect.MakeXYWH(70, 250, 940, 200), 30, 30, P((10, 6, 20), 0.75))
-    neon_text(c, 'YOUR DEALER BARELY', 540, 335, 70, (255, 60, 200), fl)
-    neon_text(c, 'PROFITS ON THE CAR', 540, 420, 70, (80, 220, 255), 1.0)
+    board(c, 70, 250, 940, 200)
+    neon_text(c, 'YOUR DEALER BARELY', 540, 340, 70, (255, 70, 90))
+    neon_text(c, 'PROFITS ON THE CAR', 540, 425, 70, (30, 160, 255), 1.0)
     fy = wy + wh + 10
-    c.drawRect(skia.Rect.MakeXYWH(0, fy, W, H - fy), LG((0, fy), (0, H), [(60, 30, 90), (24, 14, 40)]))
-    for i in range(-8, 9): c.drawLine(540 + i * 40, fy, 540 + i * 260, H, S((255, 150, 255), 2, 0.12))
-    for yy in [fy + 40, fy + 110, fy + 210, fy + 350, fy + 540, fy + 800]: c.drawLine(0, yy, W, yy, S((255, 150, 255), 2, 0.10))
-    for sx in (360, 720): light_cone(c, sx, 0, 60, 520, fy + 240, (255, 210, 255), 0.13)
+    c.drawRect(skia.Rect.MakeXYWH(0, fy, W, H - fy), LG((0, fy), (0, H), [(225, 245, 252), (150, 210, 235)]))
+    for i in range(-8, 9): c.drawLine(540 + i * 40, fy, 540 + i * 260, H, S((255, 255, 255), 3, 0.6))
+    for yy in [fy + 40, fy + 110, fy + 210, fy + 350, fy + 540, fy + 800]: c.drawLine(0, yy, W, yy, S((255, 255, 255), 3, 0.55))
+    for sx in (360, 720): light_cone(c, sx, 0, 60, 520, fy + 240, (255, 255, 220), 0.18)
     lamp(c, 120, 1200, 0.9)
-    inked(c, skia.Rect.MakeXYWH(20, 1200, 360, 40), LG((0, 1200), (0, 1240), [(120, 70, 50), (70, 40, 30)]), 6)
-    c.drawRect(skia.Rect.MakeXYWH(40, 1240, 320, 200), P((60, 34, 26))); c.drawRect(skia.Rect.MakeXYWH(40, 1240, 320, 200), S(INK, 6))
+    inked(c, skia.Rect.MakeXYWH(20, 1200, 360, 40), LG((0, 1200), (0, 1240), [(235, 170, 110), (200, 130, 75)]), 6)
+    c.drawRect(skia.Rect.MakeXYWH(40, 1240, 320, 200), P((200, 125, 70))); c.drawRect(skia.Rect.MakeXYWH(40, 1240, 320, 200), S(INK, 6))
     person(c, 250, 1460, 0.56, (70, 140, 255), (235, 235, 245), pants=(50, 50, 70), mood='worried', look=(0.6, 0.8), sweat=3, t=t,
            arm_r=(10, 250), arm_l=(70, 255), tie=(230, 40, 60), shirt=(250, 250, 255), blink=blinking(t, 1))
     coin(c, 330, 1192, 18)
@@ -130,15 +130,14 @@ def s_showroom(c, t):
     car(c, 560 + off, 1460, 800, t=t)
     person(c, 880 + off, 1800, 0.74, (255, 140, 40), (36, 44, 90), mood='happy', look=(-0.5, -0.4), t=t,
            arm_r=(150, -170 + 12 * math.sin(t * 5)), arm_l=(-30, 230), prop=(1, keys), blink=blinking(t))
-    c.drawRect(skia.Rect.MakeWH(W, H), P((255, 40, 180), 0.05))
 
 
 def s_price(c, t):
     t0 = ph('say you buy'); t5 = ph('five percent')
-    c.drawRect(skia.Rect.MakeWH(W, H), RG(540, 800, 1300, [(70, 30, 110), (20, 10, 36)]))
-    for sx in (300, 540, 780): light_cone(c, sx, 0, 40, 380, 1500, (255, 220, 255), 0.10)
-    c.drawRect(skia.Rect.MakeXYWH(0, 1300, W, 620), LG((0, 1300), (0, H), [(70, 34, 100), (20, 10, 34)]))
-    c.drawOval(skia.Rect.MakeXYWH(140, 1340, 800, 160), P((255, 120, 220), 0.25, 40))
+    c.drawRect(skia.Rect.MakeWH(W, H), RG(540, 800, 1300, [(255, 255, 255), (150, 215, 255)]))
+    for sx in (300, 540, 780): light_cone(c, sx, 0, 40, 380, 1500, (255, 255, 200), 0.18)
+    c.drawRect(skia.Rect.MakeXYWH(0, 1300, W, 620), LG((0, 1300), (0, H), [(200, 235, 250), (120, 190, 230)]))
+    c.drawOval(skia.Rect.MakeXYWH(140, 1340, 800, 160), P((255, 255, 255), 0.6, 40))
     car(c, 540, 1380, 900, t=t)
     # hanging price tag (string from the ceiling)
     sw = 6 * math.sin(t * 1.7)
@@ -163,17 +162,19 @@ def s_price(c, t):
 
 def s_office(c, t):
     t15 = ph('fifteen hundred'); tb = ph('pay its bills')
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(16, 12, 30), (34, 20, 50)]))
-    wr = skia.Rect.MakeXYWH(560, 360, 440, 520); c.save(); c.clipRect(wr); skyline(c, 560, 360, 440, 520, t, 9); c.restore(); c.drawRect(wr, S((30, 20, 50), 18)); c.drawRect(wr, S(INK, 6))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(255, 236, 205), (250, 210, 170)]))
+    wr = skia.Rect.MakeXYWH(560, 360, 440, 520); c.save(); c.clipRect(wr); skyline(c, 560, 360, 440, 520, t, 9); c.restore(); c.drawRect(wr, S((255, 255, 255), 18)); c.drawRect(wr, S(INK, 6))
     for i in range(5):
         r = skia.Rect.MakeXYWH(60 + i * 90, 420, 70, 300); inked(c, r, P([(150, 60, 70), (60, 90, 150), (90, 150, 90), (160, 120, 50), (100, 60, 140)][i]), 5)
     inked(c, skia.Rect.MakeXYWH(40, 720, 460, 24), P((70, 40, 30)), 5)
     lamp(c, 210, 1150, 1.2)
-    inked(c, skia.Rect.MakeXYWH(30, 1150, 1020, 50), LG((0, 1150), (0, 1200), [(130, 80, 55), (80, 45, 30)]), 7)
-    c.drawRect(skia.Rect.MakeXYWH(60, 1200, 960, 700), P((60, 34, 26))); c.drawRect(skia.Rect.MakeXYWH(60, 1200, 960, 700), S(INK, 7))
+    inked(c, skia.Rect.MakeXYWH(30, 1150, 1020, 50), LG((0, 1150), (0, 1200), [(235, 170, 110), (200, 130, 75)]), 7)
+    c.drawRect(skia.Rect.MakeXYWH(60, 1200, 960, 700), P((200, 125, 70))); c.drawRect(skia.Rect.MakeXYWH(60, 1200, 960, 700), S(INK, 7))
     person(c, 560, 1560, 0.8, (70, 140, 255), (235, 235, 245), pants=(50, 50, 70), mood='worried', look=(-0.4, 0.9), sweat=3, t=t,
            arm_r=(-40, 260), arm_l=(40, 260), tie=(230, 40, 60), shirt=(250, 250, 255), blink=blinking(t, 2))
-    inked(c, skia.Rect.MakeXYWH(30, 1150, 1020, 50), LG((0, 1150), (0, 1200), [(130, 80, 55), (80, 45, 30)]), 7)
+    c.drawRect(skia.Rect.MakeXYWH(60, 1200, 960, 700), P((200, 125, 70))); c.drawRect(skia.Rect.MakeXYWH(60, 1200, 960, 700), S(INK, 7))
+    for i in range(3): c.drawRect(skia.Rect.MakeXYWH(120 + i * 300, 1290, 240, 160), S((150, 85, 40), 6))
+    inked(c, skia.Rect.MakeXYWH(30, 1150, 1020, 50), LG((0, 1150), (0, 1200), [(235, 170, 110), (200, 130, 75)]), 7)
     k = pr(t, t15 - 0.4, 0.8)
     for i in range(int(7 * k)): coin(c, 380, 1135 - i * 14, 30)
     if t > t15 - 0.2: sticky(c, 390, 980, 0.8, -6, '$1,500', size=56)
@@ -187,14 +188,14 @@ def s_office(c, t):
 
 def s_hall(c, t):
     tf = ph('the finance office'); tl = ph('your loan'); tw = ph('extended warranties'); tp = ph('protection plans')
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(20, 12, 40), (40, 20, 60)]))
-    c.drawPath(path([(0, 0), (300, 500), (300, 1300), (0, 1920)]), P((30, 18, 54))); c.drawPath(path([(1080, 0), (780, 500), (780, 1300), (1080, 1920)]), P((30, 18, 54)))
-    c.drawPath(path([(0, 1920), (300, 1300), (780, 1300), (1080, 1920)]), LG((0, 1300), (0, 1920), [(60, 30, 80), (20, 10, 30)]))
-    for i in range(5): c.drawLine(300 + i * 120, 1300, -400 + i * 470, 1920, S((255, 150, 255), 2, 0.1))
-    for sx in (200, 880): c.drawCircle(sx, 600, 40, P((255, 60, 200), 0.6, 30))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(225, 238, 255), (200, 225, 250)]))
+    c.drawPath(path([(0, 0), (300, 500), (300, 1300), (0, 1920)]), P((180, 210, 245))); c.drawPath(path([(0, 0), (300, 500), (300, 1300), (0, 1920)]), S(INK, 5)); c.drawPath(path([(1080, 0), (780, 500), (780, 1300), (1080, 1920)]), P((180, 210, 245))); c.drawPath(path([(1080, 0), (780, 500), (780, 1300), (1080, 1920)]), S(INK, 5))
+    c.drawPath(path([(0, 1920), (300, 1300), (780, 1300), (1080, 1920)]), LG((0, 1300), (0, 1920), [(240, 220, 190), (210, 175, 130)]))
+    for i in range(5): c.drawLine(300 + i * 120, 1300, -400 + i * 470, 1920, S((150, 110, 70), 3, 0.5))
+    for sx in (200, 880): c.drawCircle(sx, 600, 40, P((255, 240, 160), 0.9, 30))
     k = pr(t, tf - 0.6, 1.2)
     door_glow(c, 380, 720, 320, 580, k)
-    neon_text(c, 'FINANCE', 540, 650, 84, (255, 200, 60), 1.0 if (t % 2.2) > 0.1 else 0.4)
+    neon_text(c, 'FINANCE', 540, 650, 92, (255, 200, 40))
     person(c, 230, 1800, 0.72, (255, 140, 40), (36, 44, 90), mood='happy', look=(0.9, -0.3), t=t,
            arm_r=(60, 200), arm_l=(-40, 220), prop=(1, keys), blink=blinking(t))
     paper(c, 780, 1050, -8, 'LOAN', pr(t, tl - 0.3, 0.4), t)
@@ -204,8 +205,8 @@ def s_hall(c, t):
 
 def s_fin(c, t):
     t4 = ph('four percent'); t23 = ph('twenty three percent')
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(40, 26, 14), (70, 40, 20)]))
-    c.drawCircle(540, 900, 900, P((255, 190, 80), 0.25, 120))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(255, 245, 210), (255, 215, 140)]))
+    c.drawCircle(540, 900, 900, P((255, 255, 230), 0.5, 120))
     def d(cc):
         ctext(cc, 'ASBURY AUTOMOTIVE', 410, 70, 42, (255, 255, 255))
         ctext(cc, 'FINANCE OFFICE, JAN-JUN 2026', 410, 115, 28, (200, 200, 230), 'Montserrat-ExtraBold.ttf')
@@ -213,11 +214,12 @@ def s_fin(c, t):
         bar(cc, 490, 470, 200, 250, (255, 210, 60), 'OF PROFIT', '23%', pr(t, t23 - 0.3, 0.7))
         cc.drawRect(skia.Rect.MakeXYWH(90, 470, 640, 6), P((220, 220, 240)))
     screen(c, 130, 300, 820, 560, d, (255, 200, 80))
-    inked(c, skia.Rect.MakeXYWH(40, 1300, 1000, 50), LG((0, 1300), (0, 1350), [(140, 90, 50), (90, 50, 30)]), 7)
-    c.drawRect(skia.Rect.MakeXYWH(70, 1350, 940, 600), P((70, 40, 24))); c.drawRect(skia.Rect.MakeXYWH(70, 1350, 940, 600), S(INK, 7))
+    inked(c, skia.Rect.MakeXYWH(40, 1300, 1000, 50), LG((0, 1300), (0, 1350), [(240, 180, 110), (205, 140, 80)]), 7)
+    c.drawRect(skia.Rect.MakeXYWH(70, 1350, 940, 600), P((210, 140, 80))); c.drawRect(skia.Rect.MakeXYWH(70, 1350, 940, 600), S(INK, 7))
     person(c, 760, 1700, 0.68, (60, 200, 120), (40, 40, 60), pants=(30, 30, 46), mood='happy', look=(-0.6, 0.2), t=t,
            arm_r=(-60, 230), arm_l=(-160, 220), tie=(255, 200, 60), shirt=(250, 250, 255), blink=blinking(t, 3))
-    inked(c, skia.Rect.MakeXYWH(40, 1300, 1000, 50), LG((0, 1300), (0, 1350), [(140, 90, 50), (90, 50, 30)]), 7)
+    c.drawRect(skia.Rect.MakeXYWH(70, 1350, 940, 600), P((210, 140, 80))); c.drawRect(skia.Rect.MakeXYWH(70, 1350, 940, 600), S(INK, 7))
+    inked(c, skia.Rect.MakeXYWH(40, 1300, 1000, 50), LG((0, 1300), (0, 1350), [(240, 180, 110), (205, 140, 80)]), 7)
     sc = skia.Path(); sc.moveTo(160, 1290); sc.cubicTo(200, 1500, 120, 1650, 300, 1900); sc.lineTo(420, 1900); sc.cubicTo(250, 1650, 330, 1500, 290, 1290); sc.close()
     inked(c, sc, P((252, 248, 236)), 5)
     for i in range(10): c.drawLine(200 + i * 4, 1330 + i * 55, 260 + i * 6, 1330 + i * 55, S((170, 170, 190), 5))
@@ -226,21 +228,21 @@ def s_fin(c, t):
 
 def s_bay(c, t):
     t5 = ph('five percent on the car'); t50 = ph('fifty percent')
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, 1100), [(8, 20, 34), (20, 40, 70)]))
-    for i in range(7): c.drawRect(skia.Rect.MakeXYWH(i * 160, 520, 150, 500), P((14, 30, 52))); c.drawRect(skia.Rect.MakeXYWH(i * 160, 520, 150, 500), S((40, 90, 130), 4))
-    c.drawRoundRect(skia.Rect.MakeXYWH(60, 250, 960, 220), 30, 30, P((4, 10, 18), 0.8))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, 1100), [(225, 245, 255), (175, 220, 245)]))
+    for i in range(7): c.drawRect(skia.Rect.MakeXYWH(i * 160, 520, 150, 500), P((205, 230, 248))); c.drawRect(skia.Rect.MakeXYWH(i * 160, 520, 150, 500), S((90, 140, 190), 5))
+    board(c, 60, 250, 960, 220)
     if t < t5 - 0.2:
-        neon_text(c, 'THE SERVICE BAY', 540, 395, 84, (40, 230, 255), 1.0 if (t % 2.3) > 0.1 else 0.3)
+        neon_text(c, 'THE SERVICE BAY', 540, 395, 84, (30, 170, 255))
     else:
         k5 = pr(t, t5 - 0.2, 0.3); k50 = pr(t, t50 - 0.1, 0.25)
-        neon_text(c, '5% CAR', 300, 400, 80, (255, 70, 90), k5 * (1 - 0.6 * k50))
+        neon_text(c, '5% CAR', 300, 400, 80, (255, 70, 90), k5 * (1 - 0.5 * k50))
         if k50 > 0:
-            neon_text(c, '50%', 760, 420, 150, (80, 255, 140), k50 * (1.0 if (t % 1.9) > 0.06 else 0.5))
-            neon_text(c, 'SERVICE', 760, 300, 46, (80, 255, 140), k50)
+            neon_text(c, '50%', 760, 425, 150, (40, 220, 110), k50)
+            neon_text(c, 'SERVICE', 760, 300, 46, (40, 220, 110), k50)
     fy = 1020
-    c.drawRect(skia.Rect.MakeXYWH(0, fy, W, H - fy), LG((0, fy), (0, H), [(40, 60, 80), (14, 20, 30)]))
-    for i in range(-8, 9): c.drawLine(540 + i * 40, fy, 540 + i * 260, H, S((120, 220, 255), 2, 0.1))
-    for sx in (300, 780): light_cone(c, sx, 0, 50, 460, fy + 200, (190, 240, 255), 0.13)
+    c.drawRect(skia.Rect.MakeXYWH(0, fy, W, H - fy), LG((0, fy), (0, H), [(215, 230, 240), (150, 180, 200)]))
+    for i in range(-8, 9): c.drawLine(540 + i * 40, fy, 540 + i * 260, H, S((255, 255, 255), 3, 0.6))
+    for sx in (300, 780): light_cone(c, sx, 0, 50, 460, fy + 200, (255, 255, 220), 0.2)
     lift = 60 * eo(pr(t, ph('stop two'), 1.5))
     for px in (330, 760):
         c.drawRect(skia.Rect.MakeXYWH(px - 22, 760, 44, 420), LG((px - 22, 0), (px + 22, 0), [(255, 200, 40), (200, 140, 0)])); c.drawRect(skia.Rect.MakeXYWH(px - 22, 760, 44, 420), S(INK, 6))
@@ -272,7 +274,7 @@ def s_bay(c, t):
 
 def s_board(c, t):
     tb = ph('sixty four billion')
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(10, 16, 40), (40, 20, 70)]))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(30, 150, 240), (150, 215, 255)]))
     def d(cc):
         k = pr(t, tb - 0.5, 0.4)
         neon_text(cc, '$164 BILLION', 420, 215, 100, (80, 255, 140), cl(k * 2))
@@ -280,26 +282,26 @@ def s_board(c, t):
         ctext(cc, 'DEALER SERVICE + PARTS, 2025', 420, 300, 34, (210, 210, 240), 'Montserrat-ExtraBold.ttf')
         ctext(cc, 'NADA DATA 2025', 420, 350, 24, (150, 150, 190), 'Montserrat-ExtraBold.ttf')
     screen(c, 120, 300, 840, 400, d, (80, 255, 140))
-    c.drawRect(skia.Rect.MakeXYWH(0, 1150, W, 770), LG((0, 1150), (0, H), [(50, 40, 80), (16, 12, 28)]))
-    for i in range(-8, 9): c.drawLine(540 + i * 40, 1150, 540 + i * 260, H, S((160, 160, 255), 2, 0.1))
+    c.drawRect(skia.Rect.MakeXYWH(0, 1150, W, 770), LG((0, 1150), (0, H), [(120, 125, 140), (80, 85, 100)]))
+    for i in range(-8, 9): c.drawLine(540 + i * 40, 1150, 540 + i * 260, H, S((255, 255, 255), 3, 0.5))
     for row, (y, s, n) in enumerate([(1080, 0.24, 6), (1260, 0.32, 5), (1500, 0.42, 4)]):
         for i in range(n):
             x = (i + 0.5) * W / n + 60 * math.sin(t * 0.8 + row) - (t * 60 * (row + 1)) % (W / n)
             small_car(c, x, y + 100 * s, s, [(232, 38, 60), (40, 120, 230), (250, 190, 40), (60, 190, 120), (200, 80, 200)][(i + row) % 5], t)
-    c.drawCircle(540, 1000, 500, P((80, 255, 140), 0.08, 90))
+    c.drawCircle(540, 300, 400, P((255, 255, 255), 0.3, 90))
 
 
 def s_street(c, t):
     t42 = ph('forty two percent'); t20 = ph('up from twenty')
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, 1200), [(40, 20, 90), (200, 70, 140), (255, 160, 110)], [0, 0.6, 1]))
-    c.drawCircle(540, 1080, 170, P((255, 220, 150)))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, 1200), [(20, 130, 235), (90, 190, 250), (200, 238, 255)], [0, 0.6, 1]))
+    c.drawCircle(880, 240, 90, P((255, 255, 230))); c.drawCircle(880, 240, 200, P((255, 255, 220), 0.5, 70)); cloud(c, 120, 300 + 10 * math.sin(t), 0.6)
     rnd = random.Random(6); x = -20
     while x < W:
-        bw = rnd.randint(70, 140); bh = rnd.uniform(150, 420); c.drawRect(skia.Rect.MakeXYWH(x, 1180 - bh, bw, bh), P((60, 26, 90))); x += bw + 6
+        bw = rnd.randint(70, 140); bh = rnd.uniform(150, 420); c.drawRect(skia.Rect.MakeXYWH(x, 1180 - bh, bw, bh), P((160, 200, 240))); c.drawRect(skia.Rect.MakeXYWH(x, 1180 - bh, bw, bh), S((90, 140, 200), 3)); x += bw + 6
     building(c, 30, 900, 470, 420, (90, 90, 150), 'DEALER', (200, 120, 255), t, True)
     building(c, 640, 1000, 400, 320, (170, 90, 60), 'QUICK OIL', (255, 170, 60), t, False)
-    c.drawRect(skia.Rect.MakeXYWH(0, 1320, W, 600), LG((0, 1320), (0, H), [(50, 40, 70), (20, 16, 30)]))
-    for i in range(8): c.drawRect(skia.Rect.MakeXYWH(i * 150 - (t * 120) % 150, 1590, 80, 14), P((255, 220, 120), 0.8))
+    c.drawRect(skia.Rect.MakeXYWH(0, 1320, W, 600), LG((0, 1320), (0, H), [(110, 115, 130), (70, 75, 90)]))
+    for i in range(8): c.drawRect(skia.Rect.MakeXYWH(i * 150 - (t * 120) % 150, 1590, 80, 14), P((255, 255, 255), 0.95))
     for i in range(3):
         kk = ((t * 0.28 + i * 0.33) % 1.0)
         x = 120 + 700 * eio(kk); y = 1480 - 90 * kk
@@ -314,32 +316,32 @@ def s_street(c, t):
 
 
 def s_desk(c, t):
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(22, 14, 44), (50, 26, 70)]))
-    c.drawRoundRect(skia.Rect.MakeXYWH(140, 270, 800, 180), 30, 30, P((10, 6, 20), 0.75))
-    neon_text(c, 'THE CAR GETS YOU IN', 540, 340, 58, (255, 60, 200), 1.0)
-    neon_text(c, 'SERVICE PAYS THE BILLS', 540, 420, 58, (80, 255, 140), pr(t, ph('the oil changes') - 0.2, 0.3))
-    c.drawRect(skia.Rect.MakeXYWH(0, 1010, W, 910), LG((0, 1010), (0, H), [(60, 30, 90), (24, 14, 40)]))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (0, H), [(230, 245, 255), (200, 228, 252)]))
+    board(c, 140, 270, 800, 180)
+    neon_text(c, 'THE CAR GETS YOU IN', 540, 345, 52, (255, 70, 90), 1.0)
+    neon_text(c, 'SERVICE PAYS THE BILLS', 540, 425, 52, (40, 200, 110), pr(t, ph('the oil changes') - 0.2, 0.3))
+    c.drawRect(skia.Rect.MakeXYWH(0, 1010, W, 910), LG((0, 1010), (0, H), [(225, 245, 252), (150, 210, 235)]))
     car(c, 540, 960, 640, t=t, refl=False)
     person(c, 790, 1560, 0.66, (70, 140, 255), (235, 235, 245), mood='happy', look=(-0.7, 0), t=t, arm_r=(-120, 140), arm_l=(-60, 220),
            tie=(40, 200, 255), shirt=(250, 250, 255), blink=blinking(t, 5))
-    inked(c, skia.Rect.MakeXYWH(470, 1380, 560, 50), LG((0, 1300), (0, 1350), [(120, 70, 140), (80, 40, 100)]), 6)
-    c.drawRect(skia.Rect.MakeXYWH(490, 1430, 520, 560), P((70, 36, 90))); c.drawRect(skia.Rect.MakeXYWH(490, 1430, 520, 560), S(INK, 6))
+    inked(c, skia.Rect.MakeXYWH(470, 1380, 560, 50), LG((0, 1380), (0, 1430), [(90, 180, 255), (40, 130, 220)]), 6)
+    c.drawRect(skia.Rect.MakeXYWH(490, 1430, 520, 560), P((40, 120, 210))); c.drawRect(skia.Rect.MakeXYWH(490, 1430, 520, 560), S(INK, 6))
     person(c, 250, 1800, 0.74, (255, 140, 40), (36, 44, 90), mood='happy', look=(0.7, -0.2), t=t, arm_r=(200, -60), arm_l=(-30, 230), prop=(1, keys), blink=blinking(t))
 
 
 def s_doors(c, t):
     tw = ph('where do you'); td = ph('dealer or'); ts = ph('down the street')
-    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (W, 0), [(60, 20, 110), (40, 16, 60), (120, 50, 20)]))
-    c.drawRoundRect(skia.Rect.MakeXYWH(90, 260, 900, 190), 30, 30, P((10, 6, 20), 0.75))
-    neon_text(c, 'WHERE DO YOU GET', 540, 340, 62, (255, 255, 255), pr(t, tw - 0.3, 0.3))
-    neon_text(c, 'YOURS SERVICED?', 540, 425, 62, (255, 220, 80), pr(t, tw, 0.3))
+    c.drawRect(skia.Rect.MakeWH(W, H), LG((0, 0), (W, 0), [(200, 190, 255), (240, 245, 255), (255, 220, 170)]))
+    board(c, 90, 260, 900, 190)
+    neon_text(c, 'WHERE DO YOU GET', 540, 345, 62, (30, 160, 255), pr(t, tw - 0.3, 0.3))
+    neon_text(c, 'YOURS SERVICED?', 540, 428, 62, (255, 190, 30), pr(t, tw, 0.3))
     for (x, col, lab, k) in ((70, (170, 110, 255), 'DEALER', pr(t, td - 0.3, 0.3)), (590, (255, 160, 60), 'LOCAL SHOP', pr(t, ts - 0.5, 0.3))):
         g = skia.Rect.MakeXYWH(x, 640, 420, 560)
         c.drawRect(g.makeOutset(30, 30), P(col, 0.25 + 0.35 * k, 60))
         inked(c, g, LG((0, 640), (0, 1200), [tuple(min(255, v + 40) for v in col), tuple(int(v * 0.5) for v in col)]), 8)
         for j in range(8): c.drawLine(x, 640 + j * 70, x + 420, 640 + j * 70, S(INK, 4, 0.5))
-        neon_text(c, lab, x + 210, 600, 56, col, max(0.35, k))
-    c.drawRect(skia.Rect.MakeXYWH(0, 1200, W, 720), LG((0, 1200), (0, H), [(50, 30, 70), (20, 14, 30)]))
+        neon_text(c, lab, x + 210, 600, 56, col, max(0.5, k))
+    c.drawRect(skia.Rect.MakeXYWH(0, 1200, W, 720), LG((0, 1200), (0, H), [(225, 240, 252), (170, 205, 230)]))
     look = (-0.9, -0.3) if (t % 2.4) < 1.2 else (0.9, -0.3)
     person(c, 540, 1800, 0.8, (255, 140, 40), (36, 44, 90), mood='worried', look=look, sweat=2, t=t, arm_r=(-10, -300), arm_l=(-40, 230), blink=blinking(t))
 
@@ -376,7 +378,12 @@ def frame(t):
     if t > END:
         r = 1500 * eio(pr(t, END, 0.8)); c.drawCircle(540, 900, r, P((10, 6, 20)))
     c.restore()
-    vignette(c); grain(c, int(t * FPS) % 11, 0.05)
+    rnd = random.Random(i * 7 + 1)
+    for k in range(9):
+        x, y = rnd.uniform(80, 1000), rnd.uniform(260, 1250); ph_ = (t * rnd.uniform(0.5, 0.9) + rnd.random()) % 1.0
+        sparkle(c, x, y, rnd.uniform(16, 34), max(0.0, math.sin(ph_ * math.pi)) ** 2)
+    vignette(c, 0.12)
+    c.drawRect(skia.Rect.MakeXYWH(14, 14, W - 28, H - 28), S((255, 255, 255), 28)); c.drawRect(skia.Rect.MakeXYWH(28, 28, W - 56, H - 56), S(INK, 8))
     return s
 
 
@@ -412,9 +419,18 @@ def subs(c, t, y):
             return
 
 
+_sat, _con = 1.25, 1.06
+_lr, _lg, _lb = 0.2126, 0.7152, 0.0722
+SAT = []
+for r_, row in enumerate(((1, 0, 0), (0, 1, 0), (0, 0, 1))):
+    cs = [(_lr, _lg, _lb)[k] * (1 - _sat) + row[k] * _sat for k in range(3)]
+    SAT += [v * _con for v in cs] + [0, (1 - _con) * 0.5]
+SAT += [0, 0, 0, 1, 0]
+
+
 def both(t):
     """returns (ig_rgba, yt_rgba) numpy frames."""
-    base = frame(t).makeImageSnapshot()
+    raw = frame(t).makeImageSnapshot(); gs = skia.Surface(W, H); gp = skia.Paint(ColorFilter=skia.ColorFilters.Matrix(SAT)); gs.getCanvas().drawImage(raw, 0, 0, skia.SamplingOptions(), gp); base = gs.makeImageSnapshot()
     ig = skia.Surface(W, H); c = ig.getCanvas(); c.drawImage(base, 0, 0)
     if 0.3 < t < END + 0.1: subs(c, t, 1442)
     yt = skia.Surface(W, H); c = yt.getCanvas()

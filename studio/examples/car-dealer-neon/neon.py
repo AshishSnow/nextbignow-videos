@@ -62,13 +62,39 @@ def light_cone(c, x, y, w0, w1, h, rgb, a=0.22):
 
 
 def neon_text(c, s, x, y, size, rgb, flick=1.0, fontname='Montserrat-Black.ttf', rot=0):
-    f = font(fontname, size); tw = f.measureText(s)
+    """DAY look: bold comic lettering - colour fill, thick ink outline, hard drop shadow, white shine."""
+    f = font(fontname, size); tw = f.measureText(s); a = max(0.0, min(1.0, flick))
     c.save(); c.translate(x, y); c.rotate(rot)
-    for r, a in ((34, 0.55), (14, 0.8)):
-        c.drawString(s, -tw / 2, 0, f, P(rgb, a * flick, r))
-    c.drawString(s, -tw / 2, 0, f, S(tuple(min(255, v + 120) for v in rgb), size * 0.05, flick))
-    c.drawString(s, -tw / 2, 0, f, P((255, 255, 255), 0.85 * flick))
+    c.drawString(s, -tw / 2 + size * 0.06, size * 0.07, f, P(INK, 0.85 * a))
+    c.drawString(s, -tw / 2, 0, f, S(INK, size * 0.16, a))
+    c.drawString(s, -tw / 2, 0, f, P(rgb, a))
+    c.save(); c.clipRect(skia.Rect.MakeXYWH(-tw / 2 - 10, -size * 0.75, tw + 20, size * 0.28)); c.drawString(s, -tw / 2, 0, f, P((255, 255, 255), 0.35 * a)); c.restore()
     c.restore(); return tw
+
+
+def board(c, x, y, w, h, col=(255, 255, 255)):
+    r = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(x, y, w, h), 30, 30)
+    c.drawRRect(r.makeOffset(10, 12) if hasattr(r, 'makeOffset') else r, P(INK, 0.25, 6)); inked(c, r, P(col), 7)
+
+
+def sparkle(c, x, y, r, a=1.0):
+    if a <= 0: return
+    c.drawCircle(x, y, r * 0.9, P((255, 255, 255), 0.45 * a, r * 0.6))
+    for ang in (0, 90):
+        c.save(); c.translate(x, y); c.rotate(ang)
+        p = skia.Path(); p.moveTo(0, -r); p.quadTo(r * 0.12, -r * 0.12, r, 0); p.quadTo(r * 0.12, r * 0.12, 0, r); p.quadTo(-r * 0.12, r * 0.12, -r, 0); p.quadTo(-r * 0.12, -r * 0.12, 0, -r); p.close()
+        c.drawPath(p, P((255, 255, 255), a)); c.restore()
+
+
+def cloud(c, x, y, s):
+    c.save(); c.translate(x, y); c.scale(s, s)
+    p = skia.Path()
+    for (cx, cy, r) in ((0, 0, 80), (90, -40, 100), (200, -10, 85), (280, 20, 60), (-80, 25, 55)): p.addCircle(cx, cy, r)
+    p.addRect(skia.Rect.MakeXYWH(-130, 20, 470, 60))
+    p2 = skia.Op(p, skia.Path(), skia.PathOp.kUnion_PathOp) or p
+    c.drawPath(p2, P((255, 255, 255))); c.drawPath(p2, S((120, 170, 220), 5))
+    c.drawRect(skia.Rect.MakeXYWH(-130, 50, 470, 30), P((215, 235, 252)))
+    c.restore()
 
 
 def grain(c, seed=1, a=0.06):
@@ -233,19 +259,20 @@ def sticky(c, x, y, s, rot, txt, size=60, col=(255, 236, 90), tc=(220, 30, 40)):
 
 # ------------------------------------------------------------------ scenes
 def skyline(c, x0, y0, w, h, t, seed=4):
+    """DAY: bright blue sky, white clouds, sun sparkle, pastel city with white windows."""
     c.save(); c.clipRect(skia.Rect.MakeXYWH(x0, y0, w, h))
-    c.drawRect(skia.Rect.MakeXYWH(x0, y0, w, h), LG((0, y0), (0, y0 + h), [(40, 20, 90), (150, 40, 150), (255, 120, 150), (255, 190, 120)], [0, 0.45, 0.8, 1]))
-    c.drawCircle(x0 + w * 0.68, y0 + h * 0.62, 120, RG(x0 + w * 0.68, y0 + h * 0.62, 120, [(255, 240, 170), (255, 170, 120)]))
-    for i in range(5): c.drawRect(skia.Rect.MakeXYWH(x0, y0 + h * 0.6 + i * 16, w, 6), P((150, 40, 150), 0.6))
+    c.drawRect(skia.Rect.MakeXYWH(x0, y0, w, h), LG((0, y0), (0, y0 + h), [(20, 130, 235), (70, 180, 250), (170, 225, 255), (225, 245, 255)], [0, 0.4, 0.8, 1]))
+    c.drawCircle(x0 + w * 0.78, y0 + h * 0.18, 70, P((255, 255, 230))); c.drawCircle(x0 + w * 0.78, y0 + h * 0.18, 160, P((255, 255, 220), 0.5, 60))
     rnd = random.Random(seed)
-    for layer, (col, base, hmax) in enumerate([((70, 30, 110), 0.55, 0.45), ((30, 16, 60), 0.72, 0.55)]):
+    for k in range(3): cloud(c, x0 + (k * 0.36 + 0.05) * w + 20 * math.sin(t * 0.2 + k), y0 + h * (0.22 + 0.12 * (k % 2)), 0.55 + 0.15 * (k % 2))
+    for layer, (col, hmax, win) in enumerate([((150, 195, 240), 0.5, (230, 245, 255)), ((90, 150, 220), 0.6, (255, 255, 255))]):
         x = x0 - 20
         while x < x0 + w:
-            bw = rnd.randint(50, 120); bh = h * rnd.uniform(0.15, hmax)
-            r = skia.Rect.MakeXYWH(x, y0 + h - bh, bw, bh); c.drawRect(r, P(col))
+            bw = rnd.randint(50, 120); bh = h * rnd.uniform(0.18, hmax)
+            r = skia.Rect.MakeXYWH(x, y0 + h - bh, bw, bh); c.drawRect(r, P(col)); c.drawRect(r, S((60, 100, 170), 3))
             for wy in range(int(y0 + h - bh + 16), int(y0 + h), 26):
                 for wx in range(int(x + 10), int(x + bw - 10), 22):
-                    if rnd.random() < 0.35: c.drawRect(skia.Rect.MakeXYWH(wx, wy, 9, 12), P((255, 210, 120) if layer else (255, 150, 220), 0.8 if layer else 0.5))
+                    if rnd.random() < 0.55: c.drawRect(skia.Rect.MakeXYWH(wx, wy, 9, 12), P(win, 0.9))
             x += bw + rnd.randint(0, 12)
     c.restore()
 
