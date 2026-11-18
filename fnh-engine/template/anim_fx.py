@@ -1042,3 +1042,29 @@ def silhouette_reveal(f, el, x, y, k, s=1.0, rot=0.0, dark=(38, 36, 48), rim=(25
         sil = (rgb * A[..., None], A)
         rot_comp(f, sil, x, y, rot, 1.0, op * (1 - k), 0.0)
     if k > 0.001: rot_comp(f, (pm, a), x, y, rot, 1.0, op * k, 0.0)
+
+
+# ---------------- THE FOLLOW CAMERA (ep 52 craft skill: a pan / tilt that FOLLOWS a moving subject) ----------------
+# Rules (GMTK 'How to make a good 2D camera'; Arem Kim / Sony Imageworks layout tips, CG Channel 2018; Unity Cinemachine follow tuning):
+# - LOOK-AHEAD: frame space in front of the subject's motion ('shift the camera in front of the character'), more when it moves faster (up to a cap);
+# - DAMPING: the camera eases toward its target and trails a little ('ease between its current position and the character's position');
+# - START LATE: 'camera movement is delayed by a few frames' behind the subject, and it has weight (slow start) -> no mechanical lock-on;
+# - DEAD ZONE: small subject moves inside a window don't move the camera (no jiggle); per-axis damping (vertical can lag more).
+def follow_cam(t, subj, t0, t_end=None, lag=0.22, lead=180.0, vmax=900.0, dead=40.0, delay=3 / 24, lo=None, hi=None, step=1 / 96):
+    """1-D follow camera for a subject path subj(t) -> position (px on the tall canvas). Returns the camera centre at time t.
+    Integrated deterministically from t0 (every frame recomputes the same answer, so parallel renders agree). lead = look-ahead px at vmax (px/s),
+    lag = damping time constant (s), dead = dead-zone half width (px), delay = the camera starts this long after t0. lo / hi clamp the camera (canvas edges)."""
+    def target(u):
+        v = (subj(u + 1 / 48) - subj(u - 1 / 48)) * 24.0
+        return subj(u) + lead * clamp(v / vmax, -1.0, 1.0)
+    cam_ = target(t0)
+    u = t0; te = t if t_end is None else min(t, t_end)
+    a = 1 - math.exp(-step / max(1e-3, lag))
+    while u < te:
+        u += step
+        if u < t0 + delay: continue
+        e = target(u) - cam_
+        if abs(e) > dead: cam_ += (e - math.copysign(dead, e)) * a
+    if lo is not None: cam_ = max(lo, cam_)
+    if hi is not None: cam_ = min(hi, cam_)
+    return cam_
