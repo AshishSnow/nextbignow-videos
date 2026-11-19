@@ -1,0 +1,142 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Hackers are now cooking supermarket freezers.",
+  "start": 0.0,
+  "dur": 2.568
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know what happens when someone hacks the fridge... at your grocery store?",
+  "start": 2.748,
+  "dur": 4.626
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "A freezer is supposed to sit at minus eighteen degrees.",
+  "start": 7.524,
+  "dur": 3.471
+ },
+ {
+  "i": 3,
+  "tag": "reveal",
+  "text": "These hit fifty.",
+  "start": 11.175,
+  "dur": 1.054
+ },
+ {
+  "i": 4,
+  "tag": "excited",
+  "text": "That's a hundred and twenty-two Fahrenheit.",
+  "start": 12.428,
+  "dur": 2.133
+ },
+ {
+  "i": 5,
+  "tag": "story",
+  "text": "Nobody broke in. Nobody cut the power.",
+  "start": 14.712,
+  "dur": 2.716
+ },
+ {
+  "i": 6,
+  "tag": "serious",
+  "text": "Hackers just logged into the cooling controls online...",
+  "start": 17.608,
+  "dur": 3.501
+ },
+ {
+  "i": 7,
+  "tag": "punchline",
+  "text": "and turned up the heat.",
+  "start": 21.309,
+  "dur": 1.374
+ },
+ {
+  "i": 8,
+  "tag": "excited",
+  "text": "In France, around seven hundred food sites got hit in one weekend.",
+  "start": 22.982,
+  "dur": 4.05
+ },
+ {
+  "i": 9,
+  "tag": "story",
+  "text": "Meat, ice cream, milk... all thrown away. And at least fifteen fires.",
+  "start": 27.183,
+  "dur": 4.389
+ },
+ {
+  "i": 10,
+  "tag": "tease",
+  "text": "Then, three weeks later...",
+  "start": 31.752,
+  "dur": 1.498
+ },
+ {
+  "i": 11,
+  "tag": "hype",
+  "text": "it happened again. Nine countries. Over a hundred stores. Overnight.",
+  "start": 33.51,
+  "dur": 3.82
+ },
+ {
+  "i": 12,
+  "tag": "deadpan",
+  "text": "One store manager said, everything is destroyed.",
+  "start": 37.51,
+  "dur": 3.505
+ },
+ {
+  "i": 13,
+  "tag": "friend",
+  "text": "So what happens next?",
+  "start": 41.235,
+  "dur": 1.295
+ },
+ {
+  "i": 14,
+  "tag": "story",
+  "text": "Germany's cyber agency says lots of cooling systems are still wide open.",
+  "start": 42.71,
+  "dur": 5.226
+ },
+ {
+  "i": 15,
+  "tag": "serious",
+  "text": "And it's not just supermarkets. Warehouses. Medicine storage. Delivery trucks.",
+  "start": 48.116,
+  "dur": 5.982
+ },
+ {
+  "i": 16,
+  "tag": "story",
+  "text": "So the next big hack might not steal your password...",
+  "start": 54.299,
+  "dur": 2.861
+ },
+ {
+  "i": 17,
+  "tag": "punchline",
+  "text": "it might melt your groceries.",
+  "start": 57.339,
+  "dur": 1.849
+ },
+ {
+  "i": 18,
+  "tag": "question",
+  "text": "Would you still trust the frozen aisle?",
+  "start": 59.488,
+  "dur": 1.919
+ },
+ {
+  "i": 19,
+  "tag": "friend",
+  "text": "Comment yes or no.",
+  "start": 61.557,
+  "dur": 1.201
+ }
+]
