@@ -112,3 +112,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 - 2026-11-19 | QUEUED (R&D writers' room, doodle case study, SHORTS, SEASONAL 22 Nov–15 Dec) — Yankee Candle: too broke for a Christmas present -> melted crayons -> a $1.75B brand (holiday candle season + 3 moves) (queue/33-yankee-crayon-candle) | — | REVIEWED
 - 2026-11-19 gift card breakage (43% unused, avg $244, Starbucks ~$222M FY2025), DAY COMIC look, 61 s, IG+YT
 - 2026-11-19 returns ($850B 2025, 66% cost, liquidation pallets, '90% nothing wrong'), DAY COMIC look, 65 s, IG+YT
+- 2026-11-20 | CLAIMED (episode run 21:05 UTC 19 Nov, doodle case study, Shorts length) — Vinted: too many clothes to move -> a €1.1B-a-year app (secondhand boom + 3 moves) (REVIEWED queue/34-vinted-too-many-clothes) | vinted-closet-doodle | — | building
