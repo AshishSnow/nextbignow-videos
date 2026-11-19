@@ -1,0 +1,163 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Your phone is about to get replaced...",
+  "start": 0.0,
+  "dur": 1.946
+ },
+ {
+  "i": 1,
+  "tag": "reveal",
+  "text": "by your glasses.",
+  "start": 2.126,
+  "dur": 0.998
+ },
+ {
+  "i": 2,
+  "tag": "question",
+  "text": "Do you know what happens when your screen moves right in front of your eyes?",
+  "start": 3.324,
+  "dur": 3.82
+ },
+ {
+  "i": 3,
+  "tag": "excited",
+  "text": "Smart glasses are blowing up.",
+  "start": 7.294,
+  "dur": 1.582
+ },
+ {
+  "i": 4,
+  "tag": "story",
+  "text": "Six million sold last year...",
+  "start": 9.026,
+  "dur": 1.822
+ },
+ {
+  "i": 5,
+  "tag": "reveal",
+  "text": "twenty million this year.",
+  "start": 11.028,
+  "dur": 1.233
+ },
+ {
+  "i": 6,
+  "tag": "tease",
+  "text": "And by twenty thirty?",
+  "start": 12.461,
+  "dur": 1.356
+ },
+ {
+  "i": 7,
+  "tag": "hype",
+  "text": "Seventy-five million a year.",
+  "start": 14.077,
+  "dur": 1.512
+ },
+ {
+  "i": 8,
+  "tag": "story",
+  "text": "Samsung's pair is about to drop. A camera, Google's AI built in, and up to nine hours of battery.",
+  "start": 15.769,
+  "dur": 7.301
+ },
+ {
+  "i": 9,
+  "tag": "aside",
+  "text": "And Apple's glasses are expected right after.",
+  "start": 23.25,
+  "dur": 2.661
+ },
+ {
+  "i": 10,
+  "tag": "friend",
+  "text": "So what changes?",
+  "start": 26.031,
+  "dur": 1.138
+ },
+ {
+  "i": 11,
+  "tag": "story",
+  "text": "Directions float right on the street in front of you.",
+  "start": 27.349,
+  "dur": 2.664
+ },
+ {
+  "i": 12,
+  "tag": "story",
+  "text": "Someone talks to you in Spanish...",
+  "start": 30.193,
+  "dur": 1.916
+ },
+ {
+  "i": 13,
+  "tag": "excited",
+  "text": "and you read it in English. Live.",
+  "start": 32.29,
+  "dur": 1.946
+ },
+ {
+  "i": 14,
+  "tag": "story",
+  "text": "Texts pop up in the corner of your eye.",
+  "start": 34.386,
+  "dur": 2.127
+ },
+ {
+  "i": 15,
+  "tag": "punchline",
+  "text": "No phone. No looking down.",
+  "start": 36.692,
+  "dur": 2.078
+ },
+ {
+  "i": 16,
+  "tag": "serious",
+  "text": "And who loses?",
+  "start": 39.071,
+  "dur": 1.09
+ },
+ {
+  "i": 17,
+  "tag": "story",
+  "text": "Phone cases. Screen repair shops.",
+  "start": 40.36,
+  "dur": 2.221
+ },
+ {
+  "i": 18,
+  "tag": "deadpan",
+  "text": "Maybe even the selfie stick.",
+  "start": 42.762,
+  "dur": 1.969
+ },
+ {
+  "i": 19,
+  "tag": "tease",
+  "text": "Still think it's hype?",
+  "start": 44.951,
+  "dur": 1.325
+ },
+ {
+  "i": 20,
+  "tag": "story",
+  "text": "Meta's camera glasses already sold millions. People wear them like normal sunglasses.",
+  "start": 46.536,
+  "dur": 5.919
+ },
+ {
+  "i": 21,
+  "tag": "question",
+  "text": "So... would you trade your phone for glasses?",
+  "start": 52.635,
+  "dur": 2.311
+ },
+ {
+  "i": 22,
+  "tag": "friend",
+  "text": "Comment yes or no.",
+  "start": 55.096,
+  "dur": 1.201
+ }
+]
