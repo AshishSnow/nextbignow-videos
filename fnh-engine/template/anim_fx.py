@@ -1068,3 +1068,149 @@ def follow_cam(t, subj, t0, t_end=None, lag=0.22, lead=180.0, vmax=900.0, dead=4
     if lo is not None: cam_ = max(lo, cam_)
     if hi is not None: cam_ = min(hi, cam_)
     return cam_
+
+
+# ---------------- ep 54: LIQUID FX ANIMATION (2D effects animation of water; J. Gilland 'Elemental Magic'; Animateducated 'EFX water splash' 2013) ----------------
+# splash_crown / pour_stream / fly_drops2 / ripples: splashes curve UP and OUT, uneven timing per tongue + drop, drops keep the splash's energy at the break,
+# big / medium / small drops, micro-splashes + ripples that slow down at the end; a pour NARROWS as it falls and wobbles in waves that travel down it.
+# Colours default to the ep 52 water blue (WAT / WAT_S / WAT_H, defined in lib52/lib54; pass col / rim for acid, milk, oil...).
+
+
+def _blend(f, ov, op):
+    if op >= 0.999: f[:] = ov
+    else: f[:] = f * (1 - op) + ov * op
+
+def ripples(f, x, y, t, t0, r=80, n=3, col=None, op=1.0, squash=0.28, life=1.1):
+    """rings that spread from a landing point and SLOW DOWN (ease-out) while they fade; each ring starts a little later (uneven)."""
+    u = t - t0
+    if u < 0: return
+    col = col or WAT_S
+    for j in range(n):
+        v = (u - 0.09 * j * (1 + 0.3 * j)) / (life * (0.8 + 0.25 * j))
+        if v <= 0 or v >= 1: continue
+        rr = r * (0.3 + 1.6 * (1 - (1 - v) ** 3))
+        a = (1 - v) ** 1.5 * op
+        ov = f.copy()
+        cv2.ellipse(ov, (int(x), int(y)), (int(rr), max(2, int(rr * squash))), 0, 0, 360, C(col), max(2, int(r * 0.05)), cv2.LINE_AA)
+        f[:] = f * (1 - a) + ov * a
+
+
+def splash_crown(f, x, y, t, t0, r=80, col=None, rim=None, seed=0, n=9, op=1.0, g=None, spread=1.0):
+    """a SPLASH where something lands in water / hits a surface at (x, y) at t0. Tongues curve up and OUT along arcs, each with its own speed;
+    near its peak each tongue's tip breaks off as a drop that keeps the tongue's velocity, falls, and makes a micro-splash; ripples close it."""
+    u = t - t0
+    if u < 0 or u > 1.6: return
+    col = col or WAT; rim = rim or WAT_S
+    rng = np.random.default_rng(seed + 541)
+    g = g or r * 38.0
+    ov = f.copy()
+    bw = r * (0.55 + 0.75 * (1 - (1 - clamp(u / 0.18)) ** 2)); ba = clamp(1 - (u - 0.35) / 0.5)          # the flat base oval
+    if ba > 0:
+        cv2.ellipse(ov, (int(x), int(y)), (int(bw), max(3, int(bw * 0.26))), 0, 0, 360, C(col), -1, cv2.LINE_AA)
+        cv2.ellipse(ov, (int(x), int(y)), (int(bw), max(3, int(bw * 0.26))), 0, 0, 360, C(rim), max(2, int(r * 0.05)), cv2.LINE_AA)
+    for i in range(n):
+        side = -1 if i % 2 == 0 else 1
+        a = side * (0.25 + 0.85 * rng.random()) * spread                       # angle from vertical, OUT to both sides
+        sp = r * rng.uniform(6.5, 10.5) * (1.15 - 0.3 * abs(a))                 # uneven launch speeds
+        vx, vy = sp * math.sin(a), -sp * math.cos(a)
+        x0 = x + side * bw * rng.uniform(0.25, 0.8)
+        tpk = -vy / g; tb = tpk * rng.uniform(0.75, 1.05)                       # breaks off near the peak
+        dl = rng.uniform(0.0, 0.05)                                             # staggered start
+        uu = u - dl
+        if uu <= 0: continue
+        wd = r * rng.choice([0.16, 0.11, 0.07])                                 # big / medium / small
+        if uu < tb:                                                             # the TONGUE: a tapered arc from the base to its tip
+            P = []
+            for q in np.linspace(0, 1, 9):
+                tq = uu * q
+                P.append((x0 + vx * tq * 0.85, y + vy * tq + 0.5 * g * tq * tq))
+            for k in range(len(P) - 1):
+                w = max(2, int(wd * (0.4 + 0.9 * k / (len(P) - 1)) * 1.4))
+                cv2.line(ov, (int(P[k][0]), int(P[k][1])), (int(P[k + 1][0]), int(P[k + 1][1])), C(col), w, cv2.LINE_AA)
+            cv2.circle(ov, (int(P[-1][0]), int(P[-1][1])), max(3, int(wd * 0.9)), C(col), -1, cv2.LINE_AA)
+            cv2.circle(ov, (int(P[-1][0]), int(P[-1][1])), max(3, int(wd * 0.9)), C(rim), 2, cv2.LINE_AA)
+        else:                                                                   # the DROP: same energy, ballistic, then a micro-splash
+            td = uu
+            px, py = x0 + vx * td * 0.85, y + vy * td + 0.5 * g * td * td
+            land = y + r * 0.15 * side * 0.5
+            if py < land:
+                rr = max(3, int(wd * 0.85))
+                cv2.ellipse(ov, (int(px), int(py)), (rr, int(rr * 1.25)), math.degrees(math.atan2(vy + g * td, vx)) - 90, 0, 360, C(col), -1, cv2.LINE_AA)
+                cv2.ellipse(ov, (int(px), int(py)), (rr, int(rr * 1.25)), math.degrees(math.atan2(vy + g * td, vx)) - 90, 0, 360, C(rim), 2, cv2.LINE_AA)
+                cv2.circle(ov, (int(px - rr * 0.3), int(py - rr * 0.35)), max(1, rr // 3), C(WAT_H), -1, cv2.LINE_AA)
+            else:                                                               # where it lands: a tiny crown + one ripple
+                tl = (-vy + math.sqrt(max(0.0, vy * vy + 2 * g * (land - y)))) / g
+                ms = uu - tl
+                if 0 <= ms < 0.25:
+                    lx = x0 + vx * tl * 0.85
+                    for sg in (-1, 1):
+                        cv2.line(ov, (int(lx), int(land)), (int(lx + sg * wd * 2.2 * (0.4 + ms * 4)), int(land - wd * 2.0 * (1 - ms * 4) * 1.4)), C(col), max(2, int(wd * 0.5)), cv2.LINE_AA)
+    _blend(f, ov, op)
+    ripples(f, x, y + 4, t, t0 + 0.3, r * 1.2, 3, rim, op * 0.8)
+
+
+def pour_stream(f, x0, y0, x1, y1, t, w=26, col=None, rim=None, head=1.0, tail=0.0, seed=0, op=1.0, land=True):
+    """a POUR from a spout (x0, y0) landing at (x1, y1): a parabola that NARROWS as it falls (it speeds up), with wobble waves travelling down;
+    head 0..1 = how far the front has fallen (start of the pour), tail 0..1 = how much has already left the spout (end of the pour)."""
+    col = col or WAT; rim = rim or WAT_S
+    if head <= tail + 1e-3: return
+    N = 40
+    qs = np.linspace(tail, head, N)
+    P = []; Wd = []
+    for q in qs:
+        px = x0 + (x1 - x0) * (1 - (1 - q) ** 2)                               # leaves sideways, then falls (ballistic look)
+        py = y0 + (y1 - y0) * q * q
+        wob = 0.10 * w * math.sin(q * 18 - t * 22 + seed) * q
+        P.append((px + wob, py)); Wd.append(w * (1 / math.sqrt(1 + 6 * q)) * (0.75 + 0.25 * math.sin(q * 11 - t * 17 + seed)))
+    L, R_ = [], []
+    for i, (p, ww) in enumerate(zip(P, Wd)):
+        j = min(i + 1, N - 1); k = max(i - 1, 0)
+        dx, dy = P[j][0] - P[k][0], P[j][1] - P[k][1]; nn = math.hypot(dx, dy) + 1e-6
+        nx, ny = -dy / nn, dx / nn
+        L.append((p[0] + nx * ww / 2, p[1] + ny * ww / 2)); R_.append((p[0] - nx * ww / 2, p[1] - ny * ww / 2))
+    poly = np.int32(np.round(np.array(L + R_[::-1])))
+    ov = f.copy()
+    cv2.fillPoly(ov, [poly], C(col), cv2.LINE_AA)
+    cv2.polylines(ov, [poly], True, C(rim), 3, cv2.LINE_AA)
+    hl = np.int32([(p[0] - ww * 0.18, p[1]) for p, ww in zip(P, Wd)][2:-2])
+    if len(hl) > 1: cv2.polylines(ov, [hl], False, C(WAT_H), max(2, int(w * 0.12)), cv2.LINE_AA)
+    _blend(f, ov, op)
+    if land and head >= 0.999 and tail < 0.95:                                 # continuous small splash where it lands
+        rng = np.random.default_rng(seed + 7)
+        for j in range(6):
+            ph = (t * rng.uniform(2.6, 3.8) + rng.random()) % 1
+            a = (-1 if j % 2 else 1) * rng.uniform(0.3, 1.1)
+            sp = w * rng.uniform(2.5, 4.2)
+            px = x1 + math.sin(a) * sp * ph * 1.4; py = y1 - math.cos(a) * sp * ph * 2.4 + 0.5 * w * 9 * ph * ph
+            rr = max(2, int(w * rng.choice([0.22, 0.15, 0.1]) * (1 - ph * 0.5)))
+            cv2.circle(f, (int(px), int(py)), rr, C(col), -1, cv2.LINE_AA); cv2.circle(f, (int(px), int(py)), rr, C(rim), 1, cv2.LINE_AA)
+        cv2.ellipse(f, (int(x1), int(y1)), (int(w * 1.3), int(w * 0.35)), 0, 0, 360, C(col), -1, cv2.LINE_AA)
+        cv2.ellipse(f, (int(x1), int(y1)), (int(w * 1.3), int(w * 0.35)), 0, 0, 360, C(rim), 2, cv2.LINE_AA)
+
+
+def fly_drops2(f, x, y, vx, vy, t, t0, n=7, r=10, seed=0, col=None, rim=None, g=1900.0, floor=None, op=1.0):
+    """a spray of drops thrown from (x, y) at t0 with a mean velocity (vx, vy) px/s: each drop gets its own speed + size (uneven), falls on gravity,
+    stretches along its path, and pops into a micro-splash at floor."""
+    u = t - t0
+    if u < 0: return
+    col = col or WAT; rim = rim or WAT_S
+    rng = np.random.default_rng(seed + 99)
+    for j in range(n):
+        dvx, dvy = vx * rng.uniform(0.6, 1.3) + rng.uniform(-120, 120), vy * rng.uniform(0.6, 1.25) + rng.uniform(-90, 90)
+        uu = u - rng.uniform(0, 0.06)
+        if uu < 0: continue
+        px, py = x + dvx * uu, y + dvy * uu + 0.5 * g * uu * uu
+        rr = r * rng.choice([1.3, 0.9, 0.6])
+        if floor is not None and py > floor:
+            tl = (-dvy + math.sqrt(max(0.0, dvy * dvy + 2 * g * (floor - y)))) / g; ms = uu - tl
+            if ms < 0.22:
+                lx = x + dvx * tl
+                for sg in (-1, 1): cv2.line(f, (int(lx), int(floor)), (int(lx + sg * rr * 2 * (0.5 + ms * 5)), int(floor - rr * 2 * (1 - ms * 4.5))), C(col), max(2, int(rr * 0.5)), cv2.LINE_AA)
+            continue
+        if py > H + 50: continue
+        vyy = dvy + g * uu; ang = math.degrees(math.atan2(vyy, dvx)) - 90
+        st = 1 + min(0.8, math.hypot(dvx, vyy) / 2600)
+        ov = f.copy()
+        cv2.ellipse(ov, (int(px), int(py)), (max(2, int(rr)), max(2, int(rr * st))), ang, 0, 360, C(col), -1, cv2.LINE_AA)
+        cv2.ellipse(ov, (int(px), int(py)), (max(2, int(rr)), max(2, int(rr * st))), ang, 0, 360, C(rim), 2, cv2.LINE_AA)
+        _blend(f, ov, op)

@@ -1351,3 +1351,18 @@ def room_tone(kind, n_):
         x = inside + outside
         return x / (np.abs(x).max() + 1e-9)
     return _rt_prev48(kind, n_)
+
+
+# ---------------- ep 54 foley ----------------
+def splash_sfx(level=-20, size=1.0, seed=0):
+    """ep 54 (liquid FX in sound): a SPLASH = impact (short low thump + a bright noise burst that dies in ~0.15 s) then droplets landing at
+    UNEVEN times (random gaps, random pitch, the late ones quieter) - the sound twin of 'every drop has its own speed'."""
+    r_ = np.random.default_rng(seed + 54); n_ = int((0.25 + 0.5 * size) * SR); t2 = np.arange(n_) / SR
+    y = _bp(r_.standard_normal(n_), 700, 6500) * np.exp(-t2 / (0.05 + 0.05 * size)) * 0.9
+    y += np.sin(2 * np.pi * (120 - 60 * t2) * t2) * np.exp(-t2 / 0.06) * 0.6 * size
+    for j in range(int(4 + 6 * size)):
+        t0_ = r_.uniform(0.06, 0.2 + 0.45 * size); f0 = r_.uniform(900, 2600); i0 = int(t0_ * SR); m = min(n_ - i0, int(0.05 * SR))
+        if m <= 0: continue
+        tt_ = np.arange(m) / SR
+        y[i0:i0 + m] += np.sin(2 * np.pi * (f0 + 1800 * tt_ / 0.05) * tt_) * np.exp(-tt_ / 0.012) * r_.uniform(0.15, 0.45) * (1 - t0_ / (0.8 + size))
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
