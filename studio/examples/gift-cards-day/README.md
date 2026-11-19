@@ -1,0 +1,1 @@
+# Gift card breakage (19 Nov 2026): DAY COMIC look #2 (after car dealer did better). render_gift.py = car-dealer render_neon.py helpers + scenes_gift.py scenes. Same voice/mix/encode pipeline as examples/car-dealer-neon.
