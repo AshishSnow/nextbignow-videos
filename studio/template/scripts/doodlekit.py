@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -1705,4 +1705,217 @@ def stove(c, x, y, s=1.0, seed=0, k=1.0, banned=0.0):
     if banned > 0:
         ink(c, wellipse(0, -270, 300 * ease(banned), 300 * ease(banned), seed + 30, 2.2), None, 22, RED)
         wline(c, [(-210 * ease(banned), -480 * ease(banned) + (-270) * (1 - ease(banned)) + 0), (210 * ease(banned), -60)], seed + 31, 22, RED)
+    c.restore()
+
+
+# ---------------------------------------------------------------- 20 Nov 2026: secondhand-closet episode props (generic objects only — no app logo, no brand colour, no app UI)
+def tee(c, x, y, s=1.0, col=BLU, rot=0.0, seed=0, k=1.0, kind="tee"):
+    """flat doodle garment centred on (x, y): kind tee | dress | sock | jacket | jeans."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    if kind == "tee":
+        ink(c, wpoly([(-60, -80), (-110, -50), (-90, -10), (-62, -24), (-62, 80), (62, 80), (62, -24), (90, -10), (110, -50), (60, -80), (24, -66), (-24, -66)], seed, 1.6, True, 30), col, 7)
+    elif kind == "dress":
+        ink(c, wpoly([(-36, -90), (36, -90), (44, -30), (100, 90), (-100, 90), (-44, -30)], seed, 1.6, True, 30), col, 7)
+        wline(c, [(-44, -30), (44, -30)], seed + 1, 5)
+    elif kind == "sock":
+        ink(c, wpoly([(-30, -90), (30, -90), (30, 30), (80, 50), (80, 90), (-30, 90)], seed, 1.4, True, 30), col, 7)
+        wline(c, [(-30, -60), (30, -60)], seed + 1, 5, WHITE)
+    elif kind == "jeans":
+        ink(c, wpoly([(-60, -90), (60, -90), (70, 90), (14, 90), (0, -10), (-14, 90), (-70, 90)], seed, 1.6, True, 30), col, 7)
+    else:   # jacket: tee shape, longer, zip line
+        ink(c, wpoly([(-62, -90), (-116, -54), (-110, 60), (-80, 60), (-66, -20), (-66, 96), (66, 96), (66, -20), (80, 60), (110, 60), (116, -54), (62, -90), (20, -70), (-20, -70)], seed, 1.6, True, 30), col, 7)
+        wline(c, [(0, -70), (0, 96)], seed + 1, 5)
+    c.restore()
+
+
+def hanger(c, x, y, s=1.0, seed=0):
+    """wire hanger: hook at (x, y), shoulders below."""
+    c.save(); c.translate(x, y); c.scale(s, s)
+    wline(c, [(0, 0), (10, -18), (0, -34), (-12, -22)], seed, 6, (90, 90, 100))
+    wline(c, [(0, 0), (-90, 50), (90, 50), (0, 0)], seed + 1, 6, (90, 90, 100))
+    c.restore()
+
+
+_CLOTH_COLS = [BLU, RED, YEL, GRN, PNK, PUR, ORG, TEAL, (120, 120, 132)]
+
+
+def closet(c, x, y, w=460, h=760, seed=0, bulge=0.0, open_=0.0, t=0.0, spill=0.0, tags=0.0):
+    """wardrobe standing on (x, y). bulge 0..1 = doors strain (wobble + gap), open_ 0..1 = doors swing open showing a jammed rail;
+    spill 0..1 = a pile of clothes slides out to the floor; tags 0..1 = little price tags appear on the hanging clothes."""
+    x0, x1, y0 = x - w / 2, x + w / 2, y - h
+    ink(c, wrrect(x0 - 16, y0 - 30, x1 + 16, y0 + 10, 8, seed, 1.4), shade(BROWN, 0.8), 8)          # crown
+    ink(c, wrrect(x0, y0, x1, y, 10, seed + 1, 2.0), shade(BROWN, 1.25), 9)                           # carcass
+    ink(c, wrrect(x0 + 18, y0 + 18, x1 - 18, y - 18, 6, seed + 2, 1.2), (60, 46, 40), 6)              # dark inside
+    wline(c, [(x0 + 30, y0 + 70), (x1 - 30, y0 + 70)], seed + 3, 8, GREY)                             # rail
+    if open_ > 0.05 or spill > 0:
+        n = 9
+        for i in range(n):
+            gx = x0 + 60 + i * (w - 120) / (n - 1) + math.sin(t * 3 + i) * 3
+            hanger(c, gx, y0 + 70, 0.5, seed + 10 + i)
+            kind = ("tee", "dress", "jacket", "tee", "jeans", "dress", "tee", "jacket", "tee")[i]
+            tee(c, gx, y0 + 180, 0.62, _CLOTH_COLS[i % len(_CLOTH_COLS)], (h01(i, seed) - 0.5) * 10, seed + 30 + i, 1.0, kind)
+            if tags > 0 and i % 2 == 0:
+                kk = min(1.0, max(0.0, tags * 3 - i / 4))
+                if kk > 0:
+                    c.save(); c.translate(gx + 20, y0 + 250); c.scale(back(kk), back(kk))
+                    ink(c, wpoly([(-24, -18), (24, -18), (34, 0), (24, 18), (-24, 18)], seed + 50 + i, 0.8, True, 20), YEL, 5)
+                    f = font(BLK_F, 20); c.drawString("$", -6, 7, f, P(INK)); c.restore()
+        for j in range(5):   # jammed lower pile
+            tee(c, x0 + 80 + j * (w - 160) / 4, y - 120 - (j % 2) * 40, 0.7, _CLOTH_COLS[(j + 3) % len(_CLOTH_COLS)], (j - 2) * 14, seed + 60 + j, 1.0, ("jeans", "tee", "sock", "tee", "jacket")[j])
+    # doors
+    wob = bulge * math.sin(t * 22) * 6
+    for side in (-1, 1):
+        hinge = x0 if side < 0 else x1
+        dw = (w / 2) * (1 - 0.82 * ease(open_))
+        gap = bulge * 14
+        if side < 0: dx0, dx1 = hinge - (w / 2 - dw) * 0.6 * ease(open_), hinge + dw - gap
+        else: dx0, dx1 = hinge - dw + gap, hinge + (w / 2 - dw) * 0.6 * ease(open_)
+        dx0 += side * -wob if side < 0 else wob; dx1 += wob * side
+        ink(c, wrrect(min(dx0, dx1), y0 + 4 - bulge * 6, max(dx0, dx1), y - 4 + bulge * 6, 8, seed + 70 + side, 1.6 + bulge), shade(BROWN, 1.45), 9)
+        if open_ < 0.4: c.drawCircle((dx1 - 26) if side < 0 else (dx0 + 26), y0 + h / 2, 11, P(YEL))
+    if bulge > 0.2 and open_ < 0.3:   # a sleeve + sock poke out of the gap
+        tee(c, x + 6, y0 + h * 0.42, 0.5, RED, 80 + wob * 3, seed + 80, 1.0, "sock")
+        tee(c, x - 4, y0 + h * 0.7, 0.46, BLU, -70, seed + 81, 1.0, "tee")
+    if spill > 0:
+        for j in range(8):
+            u = min(1.0, max(0.0, spill * 1.6 - j * 0.08))
+            if u <= 0: continue
+            px = x + (j - 3.5) * 70 + (h01(j, seed + 5) - 0.5) * 40
+            py = y0 + h * 0.5 + (y - 30 - (j % 3) * 36 - (y0 + h * 0.5)) * eout(u)
+            tee(c, px, py, 0.7, _CLOTH_COLS[(j + 1) % len(_CLOTH_COLS)], (h01(j, seed) - 0.5) * 120 * u, seed + 90 + j, 1.0, ("tee", "sock", "dress", "jeans", "tee", "jacket", "sock", "tee")[j])
+
+
+def moving_box(c, x, y, s=1.0, seed=0, label="MOVING", stuffed=0.0, k=1.0):
+    """cardboard box standing on (x, y); stuffed 0..1 = flaps pushed open by clothes poking out."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-150, -220, 150, 0, 6, seed, 1.6), TAN, 9)
+    a = 18 + 40 * stuffed
+    for sd in (-1, 1):
+        c.save(); c.translate(sd * 150, -220); c.rotate(-sd * a)
+        ink(c, wpoly([(0, 0), (-sd * 150, 0), (-sd * 150, -50), (0, -50)], seed + sd + 3, 1.2, True, 30), shade(TAN, 0.92), 8); c.restore()
+    if stuffed > 0:
+        for j in range(3): tee(c, -70 + j * 70, -240 - 20 * stuffed, 0.55, _CLOTH_COLS[j + 1], (j - 1) * 25, seed + 10 + j, 1.0, ("tee", "sock", "dress")[j])
+    ink(c, wrrect(-100, -130, 100, -80, 4, seed + 7, 0.8), (230, 214, 170), 0)
+    f = font(MARK_F, 40); c.drawString(label, -f.measureText(label) / 2, -90, f, P(INK))
+    c.restore()
+
+
+def browser(c, x, y, w=620, h=480, seed=0, k=1.0, n_thumbs=0, title_=None, fly=0.0):
+    """plain 2008-style web page frame (grey bar, three dots) with clothing thumbnails popping in; fly 0..1 = thumbnails lift off."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k, k)
+    ink(c, wrrect(-w / 2, -h / 2, w / 2, h / 2, 14, seed, 1.6), WHITE, 9)
+    ink(c, wrrect(-w / 2, -h / 2, w / 2, -h / 2 + 60, 10, seed + 1, 1.0), (214, 214, 220), 7)
+    for j in range(3): c.drawCircle(-w / 2 + 34 + j * 30, -h / 2 + 30, 9, P((RED, YEL, GRN)[j]))
+    ink(c, wrrect(-w / 2 + 130, -h / 2 + 16, w / 2 - 30, -h / 2 + 46, 8, seed + 2, 0.8), WHITE, 4)
+    if title_:
+        f = font(MARK_F, 54); c.drawString(title_, -f.measureText(title_) / 2, -h / 2 + 130, f, P(INK))
+    kinds = ("tee", "dress", "jacket", "jeans", "sock", "tee")
+    for i in range(min(6, int(n_thumbs + 0.999))):
+        kk = min(1.0, n_thumbs - i)
+        r_, q = divmod(i, 3); tx = -w / 2 + 110 + q * (w - 220) / 2; ty = -h / 2 + 210 + r_ * 150
+        if fly > 0: tx += fly * (q - 1) * 260; ty -= fly * (300 + 80 * r_)
+        ink(c, wrrect(tx - 70, ty - 60, tx + 70, ty + 60, 8, seed + 10 + i, 1.0), CREAM, 5)
+        tee(c, tx, ty, 0.42 * back(kk), _CLOTH_COLS[i], 0, seed + 20 + i, 1.0, kinds[i])
+    c.restore()
+
+
+_EU_PINS = [(620, 700, "VILNIUS"), (430, 880, "PARIS"), (570, 860, "MUNICH"), (380, 730, "LONDON")]
+
+
+def euro_map(c, x, y, s=1.0, seed=0, t=0.0, pins=0.0, sf=0.0, gone=0.0, k=1.0):
+    """rough doodle map (Europe blob right, US coast left, ocean between). pins 0..4 pop in the European pins, sf 0..1 draws a dotted
+    route to a 'SAN FRANCISCO' pin; gone 0..1 = all pins except Vilnius drop away."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k); c.translate(-540, -900)
+    c.drawRect(skia.Rect.MakeLTRB(60, 560, 1020, 1240), P((170, 215, 245), 0.6))
+    for j in range(4): wline(c, [(140 + i * 26, 680 + j * 150 + 10 * math.sin(i + t * 2)) for i in range(6)], seed + j, 4, (80, 150, 210), 1, 0.7)
+    ink(c, wpoly([(330, 640), (470, 600), (640, 640), (700, 760), (660, 900), (560, 980), (430, 960), (340, 880), (360, 760)], seed + 10, 3.0, True, 50), (196, 232, 160), 8)
+    ink(c, wpoly([(60, 700), (150, 690), (180, 860), (140, 1000), (60, 1040)], seed + 11, 3.0, True, 50), (232, 214, 160), 8)
+    for i, (px, py, nm) in enumerate(_EU_PINS):
+        kk = min(1.0, max(0.0, pins - i))
+        if i > 0 and gone > 0: py += 400 * ease(min(1.0, max(0.0, gone * 1.5 - (i - 1) * 0.2))); kk *= 1.0 if py < 1200 else 0.0
+        if kk <= 0: continue
+        c.save(); c.translate(px, py); c.scale(back(kk), back(kk))
+        ink(c, wpoly([(0, 0), (-22, -40), (-18, -62), (0, -72), (18, -62), (22, -40)], seed + 20 + i, 1.0, True, 20), RED if i else GRN, 6)
+        c.drawCircle(0, -52, 8, P(WHITE)); c.restore()
+        f = font(BLK_F, 26); c.drawString(nm, px - f.measureText(nm) / 2, py + 34, f, P(INK, kk))
+    if sf > 0:
+        n = int(sf * 14)
+        for j in range(n):
+            u = j / 14; px = 620 - 510 * u; py = 700 - 220 * math.sin(math.pi * u) + 200 * u
+            c.drawCircle(px, py, 7, P(RED))
+        if sf >= 1:
+            fy = 900 + (400 * ease(min(1.0, gone * 1.5)) if gone > 0 else 0)
+            if fy < 1200:
+                ink(c, wpoly([(110, fy), (88, fy - 40), (92, fy - 62), (110, fy - 72), (128, fy - 62), (132, fy - 40)], seed + 30, 1.0, True, 20), RED, 6)
+                f = font(BLK_F, 26); c.drawString("SAN FRANCISCO", 40, fy + 34, f, P(INK))
+    c.restore()
+
+
+def money_fire(c, x, y, s=1.0, t=0.0, seed=0, burn=0.0, k=1.0):
+    """bill stack on (x, y) with doodle flames (burn 0..1 grows flames and shrinks the stack)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    money_stack(c, 0, 0, max(1, int(7 - 5 * burn)), 1.0, seed)
+    if burn > 0:
+        for j in range(5):
+            fx = -90 + j * 45; fh = (90 + 60 * h01(j, seed + int(t * 10))) * burn; fy = -30 - 34 * max(1, int(7 - 5 * burn))
+            ink(c, wpoly([(fx - 30, fy), (fx - 20, fy - fh * 0.6), (fx, fy - fh), (fx + 18, fy - fh * 0.55), (fx + 30, fy)], seed + 40 + j, 2.0, True, 20), (255, 150, 30), 6)
+            ink(c, wpoly([(fx - 14, fy), (fx, fy - fh * 0.5), (fx + 14, fy)], seed + 50 + j, 1.4, True, 20), YEL, 0)
+    c.restore()
+
+
+def fee_tag(c, x, y, s=1.0, seed=0, word="SELLER FEE", k=1.0, rot=-6):
+    """big swing price tag with a string hole and a word on it."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    ink(c, wpoly([(-200, -70), (170, -70), (240, 0), (170, 70), (-200, 70)], seed, 1.8, True, 40), YEL, 9)
+    c.drawCircle(176, 0, 14, P(WHITE)); wline(c, [(190, 0), (260, -60), (300, -40)], seed + 1, 5)
+    sz = 56
+    while sz > 26 and font(BLK_F, sz).measureText(word) > 330: sz -= 4
+    f = font(BLK_F, sz); c.drawString(word, -20 - f.measureText(word) / 2, sz * 0.36, f, P(INK)); c.restore()
+
+
+def ledger(c, x, y, s=1.0, seed=0, rows=0.0, k=1.0):
+    """spiral notebook with sale rows (item ... price) filling in, each ticked."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-200, -260, 200, 260, 14, seed, 1.6), WHITE, 9)
+    for j in range(7): c.drawCircle(-200, -220 + j * 70, 12, P(GREY)); 
+    f = font(MARK_F, 40); c.drawString("SALES LOG", -f.measureText("SALES LOG") / 2, -190, f, P(INK))
+    items = [("JACKET", "$25"), ("JEANS", "$12"), ("DRESS", "$18"), ("BOOTS", "$30"), ("SCARF", "$6")]
+    for j in range(min(5, int(rows + 0.999))):
+        a = min(1.0, rows - j); yy = -120 + j * 72
+        wline(c, [(-170, yy + 14), (170, yy + 14)], seed + 10 + j, 3, GREY)
+        f2 = font(HAND_F, 36); c.drawString(items[j][0], -160, yy, f2, P(INK, a)); c.drawString(items[j][1], 70, yy, f2, P(INK, a))
+        wline(c, [(140, yy - 10), (152, yy + 4), (176, yy - 26)], seed + 20 + j, 6, GRN, a=a)
+    c.restore()
+
+
+def _hoodie(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=(150, 152, 164), **kw):
+    """generic grey hoodie hanging on a wire hanger (no logo): hood ring with a face inside, sleeves = stick-ish arms, a pouch pocket.
+    (x, y) = bottom hem; it sways."""
+    sw = math.sin(t * 2.4 + seed) * 3
+    c.save(); c.translate(x, y - 560 * s); c.rotate(sw); c.translate(-x, -(y - 560 * s))
+    top = y - 520 * s
+    hanger(c, x, top - 10 * s, 1.5 * s, seed + 1)
+    body = wpoly([(x - 150 * s, top + 70 * s), (x + 150 * s, top + 70 * s), (x + 170 * s, y - 40 * s), (x + 150 * s, y), (x - 150 * s, y), (x - 170 * s, y - 40 * s)], seed, 2.0, True, 40)
+    ink(c, body, col, 9 * s)
+    ink(c, wrrect(x - 100 * s, y - 190 * s, x + 100 * s, y - 70 * s, 20 * s, seed + 2, 1.2), shade(col, 0.88), 7 * s)   # pouch
+    for sx in (-1, 1):   # drawstrings
+        wline(c, [(x + sx * 30 * s, top + 140 * s), (x + sx * 34 * s, top + 240 * s)], seed + 3 + sx, 5 * s, WHITE)
+    ink(c, wellipse(x, top + 40 * s, 120 * s, 110 * s, seed + 5, 2.0), col, 9 * s)          # hood
+    ink(c, wellipse(x, top + 50 * s, 82 * s, 76 * s, seed + 6, 1.4), (255, 236, 214), 7 * s)   # face opening
+    # sleeves as arms (thick), hands = stick hands from limb()
+    pre = ARM_PRESETS.get(arms, ARM_PRESETS["down"]) if isinstance(arms, str) else arms
+    for (dx, dy), sx in zip(pre, (-1, 1)):
+        sx0 = x + sx * 150 * s; sy0 = top + 110 * s
+        ex = sx0 + dx * s * 1.1; ey = sy0 + dy * s * 1.1 + 60 * s
+        wline(c, [(sx0, sy0), ((sx0 + ex) / 2 + sx * 20 * s, (sy0 + ey) / 2), (ex, ey)], seed + 8 + sx, 46 * s, INK)
+        wline(c, [(sx0, sy0), ((sx0 + ex) / 2 + sx * 20 * s, (sy0 + ey) / 2), (ex, ey)], seed + 8 + sx, 30 * s, col)
+    eyes(c, x, top + 36 * s, s * 0.8, look, blink, 36, 20, mood, seed + 9)
+    mouth(c, x, top + 84 * s, s * 0.6, talk, mood, seed + 10)
     c.restore()
