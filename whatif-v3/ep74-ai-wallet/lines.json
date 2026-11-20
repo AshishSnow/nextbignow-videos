@@ -1,0 +1,100 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Your AI can now spend your money.",
+  "start": 0.0,
+  "dur": 1.752
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know what happens when ChatGPT gets your wallet?",
+  "start": 1.932,
+  "dur": 3.444
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "OpenAI just launched ChatGPT Wallet in the U.S.",
+  "start": 5.525,
+  "dur": 4.08
+ },
+ {
+  "i": 3,
+  "tag": "excited",
+  "text": "You tell the AI what you want... and it actually buys it for you.",
+  "start": 9.785,
+  "dur": 3.927
+ },
+ {
+  "i": 4,
+  "tag": "serious",
+  "text": "It never sees your card number. It uses a secret token instead.",
+  "start": 13.863,
+  "dur": 4.509
+ },
+ {
+  "i": 5,
+  "tag": "story",
+  "text": "And every single purchase needs your face or fingerprint.",
+  "start": 18.572,
+  "dur": 3.588
+ },
+ {
+  "i": 6,
+  "tag": "tease",
+  "text": "But here's the twist...",
+  "start": 22.34,
+  "dur": 1.411
+ },
+ {
+  "i": 7,
+  "tag": "reveal",
+  "text": "United Airlines, Amazon and eBay are already blocking AI shoppers.",
+  "start": 24.01,
+  "dur": 4.961
+ },
+ {
+  "i": 8,
+  "tag": "deadpan",
+  "text": "And right now, AI agents made about five hundred food delivery orders in a whole week. Tiny.",
+  "start": 29.172,
+  "dur": 7.415
+ },
+ {
+  "i": 9,
+  "tag": "friend",
+  "text": "So what happens next?",
+  "start": 36.807,
+  "dur": 1.295
+ },
+ {
+  "i": 10,
+  "tag": "story",
+  "text": "Stores will have to choose. Let AI shoppers in... or lose them to someone who does.",
+  "start": 38.282,
+  "dur": 5.88
+ },
+ {
+  "i": 11,
+  "tag": "punchline",
+  "text": "The next big shopping war might not be for you. It might be for your AI.",
+  "start": 44.342,
+  "dur": 5.26
+ },
+ {
+  "i": 12,
+  "tag": "question",
+  "text": "Would you let AI buy stuff for you?",
+  "start": 49.902,
+  "dur": 1.897
+ },
+ {
+  "i": 13,
+  "tag": "friend",
+  "text": "Comment yes or no.",
+  "start": 51.949,
+  "dur": 1.201
+ }
+]
