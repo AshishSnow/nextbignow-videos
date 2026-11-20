@@ -1,0 +1,4 @@
+- Food retail profit margins in 2025: 2.1% ("Food retail profit margins in 2025 were up slightly at 2.1%"): FMI, Stats and facts from the Food Retailing Industry Speaks / operations benchmarking report, 7 Jul 2026 https://www.fmi.org/blog/view/fmi-blog/2026/07/07/stats-and-facts-from-fmi-s-signature-operations-benchmarking-report
+- Walmart global advertising revenue fiscal 2026 ~ $6.4B (full year), reported from Walmart's 19 Feb 2026 earnings: PPC Land, 22 Feb 2026 https://ppc.land/walmart-connect-hits-41-growth-as-ad-business-nears-6-4b/ ; Digital Commerce 360, 23 Feb 2026 https://www.digitalcommerce360.com/2026/02/23/walmart-online-sales-ecommerce-ai-q4-fy26/
+- Walmart membership fees exceeded $4.3B in fiscal 2026: Digital Commerce 360, 23 Feb 2026 (same link).
+- "$100 cart -> about $2" is our worked example of 2.1%.
