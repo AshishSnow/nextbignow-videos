@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie, "candle": _candle}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -1918,4 +1918,164 @@ def _hoodie(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=(150, 
         wline(c, [(sx0, sy0), ((sx0 + ex) / 2 + sx * 20 * s, (sy0 + ey) / 2), (ex, ey)], seed + 8 + sx, 30 * s, col)
     eyes(c, x, top + 36 * s, s * 0.8, look, blink, 36, 20, mood, seed + 9)
     mouth(c, x, top + 84 * s, s * 0.6, talk, mood, seed + 10)
+    c.restore()
+
+
+# ---------------------------------------------------------------- 21 Nov 2026: holiday-candle episode props (generic objects only — no candle-brand jar shape, lid, label or colours)
+def flame(c, x, y, s=1.0, t=0.0, seed=0, k=1.0):
+    """flickering teardrop flame; (x, y) = wick tip."""
+    if k <= 0: return
+    fl = 1.0 + 0.08 * math.sin(t * 23 + seed) + 0.05 * math.sin(t * 37 + seed * 3)
+    c.save(); c.translate(x, y); c.scale(s * k, s * k * fl); c.rotate(4 * math.sin(t * 9 + seed))
+    ink(c, wpoly([(0, -110), (34, -40), (30, -6), (0, 8), (-30, -6), (-34, -40)], seed, 1.4, True, 30), ORG, 6)
+    ink(c, wpoly([(0, -62), (16, -24), (0, 0), (-16, -24)], seed + 1, 1.0, True, 20), YEL, 0)
+    c.restore()
+
+
+def _candle(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=(230, 70, 70), lit=True, **kw):
+    """generic glass tumbler candle character: straight-sided clear glass (no lid, no label shape), coloured wax, wick + flame,
+    face on the wax, stick arms + legs. (x, y) = feet."""
+    leg = 70 * s; cb = y - leg; ct = cb - 300 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 40)
+    glass = wrrect(x - 140 * s, ct, x + 140 * s, cb, 26 * s, seed, 2.0)
+    ink(c, glass, (226, 240, 248), 9 * s)
+    ink(c, wrrect(x - 122 * s, ct + 50 * s, x + 122 * s, cb - 16 * s, 18 * s, seed + 1, 1.4), col, 0)
+    ink(c, wellipse(x, ct + 52 * s, 122 * s, 18 * s, seed + 2, 1.0), shade(col, 1.18), 5 * s)
+    wline(c, [(x - 110 * s, ct + 30 * s), (x - 116 * s, cb - 40 * s)], seed + 3, 8 * s, WHITE, a=0.75)   # glass shine
+    ink(c, glass, None, 9 * s)
+    wline(c, [(x, ct + 50 * s), (x + 4 * s, ct + 6 * s)], seed + 4, 7 * s)
+    if lit: flame(c, x + 4 * s, ct + 6 * s, s * 0.9, t, seed + 5)
+    _arms(c, x - 136 * s, x + 136 * s, cb - 150 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 140 * s, s * 0.85, look, blink, 40, 24, mood, seed + 9)
+    mouth(c, x, ct + 208 * s, s * 0.7, talk, mood, seed + 10)
+
+
+def jar_candle(c, x, y, s=1.0, col=(230, 70, 70), t=0.0, seed=0, k=1.0, lit=True, label=None):
+    """plain prop version of the glass tumbler candle (no face). (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k); c.translate(-x, -y)
+    ct = y - 200
+    glass = wrrect(x - 90, ct, x + 90, y, 18, seed, 1.6)
+    ink(c, glass, (226, 240, 248), 7)
+    ink(c, wrrect(x - 78, ct + 36, x + 78, y - 12, 12, seed + 1, 1.2), col, 0)
+    wline(c, [(x - 70, ct + 22), (x - 74, y - 30)], seed + 3, 6, WHITE, a=0.75)
+    ink(c, glass, None, 7)
+    wline(c, [(x, ct + 36), (x + 3, ct + 6)], seed + 4, 5)
+    if lit: flame(c, x + 3, ct + 6, 0.6, t, seed + 5)
+    if label: tape(c, label, x, y + 40, 30, -2, 1.0, WHITE, INK, seed + 6)
+    c.restore()
+
+
+def crayon(c, x, y, s=1.0, rot=0.0, col=RED, seed=0, k=1.0):
+    """a single wax crayon (paper wrap + cone tip), centre (x, y)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    ink(c, wpoly([(-90, -18), (60, -18), (100, 0), (60, 18), (-90, 18)], seed, 1.0, True, 20), col, 6)
+    ink(c, wrrect(-70, -20, 40, 20, 4, seed + 1, 0.8), shade(col, 0.8), 5)
+    wline(c, [(-56, -10), (26, -10)], seed + 2, 4, WHITE, a=0.6)
+    c.restore()
+
+
+CRAYON_COLS = [(238, 58, 56), (255, 138, 28), (255, 212, 38), (58, 196, 104), (48, 136, 255), (140, 92, 255), (255, 110, 170)]
+
+
+def crayon_box(c, x, y, s=1.0, seed=0, k=1.0, n=6):
+    """open box of crayons standing on (x, y)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for j in range(n):
+        cx = -100 + j * 40
+        c.save(); c.translate(cx, -230); c.rotate(-90); crayon(c, 0, 0, 0.75, 0, CRAYON_COLS[j % 7], seed + j); c.restore()
+    ink(c, wpoly([(-140, 0), (-150, -200), (150, -200), (140, 0)], seed + 10, 1.6, True, 30), YEL, 9)
+    ink(c, wpoly([(-150, -200), (-60, -150), (60, -150), (150, -200), (150, -120), (-150, -120)], seed + 11, 1.2, True, 30), (60, 170, 90), 7)
+    c.restore()
+
+
+def melt_pot(c, x, y, s=1.0, t=0.0, seed=0, melt=0.0, k=1.0):
+    """saucepan with melting crayon swirl; melt 0..1 = crayons -> liquid colour. (x, y) = pot bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(160, -150, 330, -120, 12, seed + 1, 1.2), (70, 76, 90), 7)   # handle
+    pot = wpoly([(-170, -170), (170, -170), (150, 0), (-150, 0)], seed, 1.6, True, 30)
+    ink(c, pot, (120, 128, 142), 9)
+    c.save(); c.clipPath(wrrect(-158, -168, 158, -120, 20, seed + 2, 0), doAntiAlias=True)
+    for j in range(5): c.drawRect(skia.Rect.MakeLTRB(-160 + j * 64, -170, -96 + j * 64, -110), P(CRAYON_COLS[j], 0.35 + 0.65 * melt))
+    c.restore()
+    for j in range(4 - int(melt * 4)):
+        crayon(c, -90 + j * 60, -190, 0.6, -60 + j * 35, CRAYON_COLS[j + 1], seed + 5 + j)
+    if melt > 0.2:
+        for j in range(3): wline(c, [(-60 + j * 60, -200), (-50 + j * 60, -250 - 10 * math.sin(t * 4 + j)), (-60 + j * 60, -300)], seed + 9 + j, 6, GREY, a=0.8)
+    c.restore()
+
+
+def gift_box(c, x, y, s=1.0, seed=0, k=1.0, col=RED, ribbon=YEL, q=False):
+    """wrapped present standing on (x, y); q = big '?' on it (no money for it)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-130, -230, 130, 0, 12, seed, 1.6), col, 9)
+    ink(c, wrrect(-150, -280, 150, -220, 12, seed + 1, 1.4), shade(col, 1.15), 9)
+    c.drawRect(skia.Rect.MakeLTRB(-20, -276, 20, -4), P(ribbon)); wline(c, [(-20, -276), (-20, -4)], seed + 2, 5); wline(c, [(20, -276), (20, -4)], seed + 3, 5)
+    for sx in (-1, 1): ink(c, wellipse(sx * 46, -310, 50, 30, seed + 4 + sx, 1.2), ribbon, 7)
+    if q: text(c, "?", 70, -60, 110, WHITE, MARK_F)
+    c.restore()
+
+
+def mill(c, x, y, s=1.0, seed=0, k=1.0, t=0.0):
+    """old brick mill building with rows of arched windows and a tall chimney; (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wpoly([(250, -480), (250, -760), (320, -760), (320, -480)], seed + 1, 1.6, True, 40), (178, 84, 64), 9)
+    for i in range(3):
+        u = ((t * 0.4 + i / 3) % 1.0); r = 30 + 40 * u
+        ink(c, wellipse(285 + 30 * u, -800 - 220 * u, r, r * 0.8, seed + 2 + i, 2), (236, 236, 240), 6, a=1 - u * 0.7)
+    ink(c, wpoly([(-380, 0), (-380, -480), (380, -480), (380, 0)], seed, 2.2, True, 60), (200, 96, 72), 9)
+    ink(c, wpoly([(-400, -480), (-400, -530), (400, -530), (400, -480)], seed + 3, 1.6, True, 60), (150, 70, 56), 8)
+    for r_ in range(3):
+        for q in range(6):
+            wx = -320 + q * 128; wy = -420 + r_ * 130
+            ink(c, wrrect(wx - 34, wy - 40, wx + 34, wy + 40, 26, seed + 10 + r_ * 6 + q, 1.0), SKY, 6)
+    for j in range(8): wline(c, [(-380, -40 - j * 56), (-360, -40 - j * 56)], seed + 40 + j, 4, shade((200, 96, 72), 0.7))
+    c.restore()
+
+
+def wick(c, x, y, s=1.0, seed=0, k=1.0, lead=False, t=0.0):
+    """a candle wick on a metal tab; lead=True shows a grey metal core line inside."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wellipse(0, 0, 60, 16, seed, 1), GREY, 6)
+    wline(c, [(0, -6), (4, -200), (-2, -330)], seed + 1, 22, (245, 240, 225))
+    wline(c, [(0, -6), (4, -200), (-2, -330)], seed + 1, 0.1)
+    for j in range(8): wline(c, [(-11, -20 - j * 38), (11, -40 - j * 38)], seed + 3 + j, 3, (180, 170, 150))
+    if lead: wline(c, [(0, -10), (3, -200), (-1, -320)], seed + 12, 6, (90, 96, 110))
+    c.restore()
+
+
+def safety_label(c, x, y, s=1.0, seed=0, k=1.0, n=3):
+    """warning label card with up to 3 round pictograms: eye (burn within sight), flame + house (away from things that burn), child (away from kids)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-330, -150, 330, 150, 20, seed, 1.6), WHITE, 9)
+    text(c, "CAUTION", 0, -96, 44, RED, BLK_F)
+    for j in range(min(3, n)):
+        cx = -210 + j * 210; cy = 30
+        ink(c, wellipse(cx, cy, 80, 80, seed + 1 + j, 1.2), CREAM, 7)
+        if j == 0:
+            ink(c, wpoly([(cx - 55, cy), (cx, cy - 30), (cx + 55, cy), (cx, cy + 30)], seed + 5, 1, True, 30), WHITE, 6); c.drawCircle(cx, cy, 15, P(INK))
+        elif j == 1:
+            flame(c, cx, cy + 40, 0.55, 0, seed + 6)
+        else:
+            c.drawCircle(cx, cy - 34, 16, P(INK)); wline(c, [(cx, cy - 18), (cx, cy + 20)], seed + 7, 8); wline(c, [(cx - 20, cy + 50), (cx, cy + 20), (cx + 20, cy + 50)], seed + 8, 7)
+            wline(c, [(cx - 56, cy + 56), (cx + 56, cy - 56)], seed + 9, 9, RED)
+    c.restore()
+
+
+def permit_doc(c, x, y, s=1.0, seed=0, k=1.0, stamped=0.0):
+    """state seller's permit sheet (generic), with a round seal; stamped 0..1 pops a green APPROVED-style tick."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k); c.rotate(4)
+    ink(c, wrrect(-170, -220, 170, 220, 12, seed, 1.4), CREAM, 8)
+    text(c, "SELLER'S", 0, -150, 40, INK, BLK_F); text(c, "PERMIT", 0, -104, 40, INK, BLK_F)
+    for j in range(4): wline(c, [(-120, -40 + j * 46), (120, -40 + j * 46)], seed + 1 + j, 5, GREY)
+    ink(c, wellipse(90, 160, 44, 44, seed + 7, 1.2), YEL, 6)
+    if stamped > 0: wline(c, [(-120, 150), (-80, 190), (0, 90)][:2 + (stamped > 0.5)], seed + 8, 14, GRN)
     c.restore()
