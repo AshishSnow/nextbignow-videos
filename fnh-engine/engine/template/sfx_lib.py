@@ -1366,3 +1366,34 @@ def splash_sfx(level=-20, size=1.0, seed=0):
         tt_ = np.arange(m) / SR
         y[i0:i0 + m] += np.sin(2 * np.pi * (f0 + 1800 * tt_ / 0.05) * tt_) * np.exp(-tt_ / 0.012) * r_.uniform(0.15, 0.45) * (1 - t0_ / (0.8 + size))
     return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+# ---------------- ep 57 foley (knuckle cracking): knuckle_pop (cavitation = a 1-2 ms click + 8 ms bright burst + a tiny finger knock, no lead-in, varied per seed), mri_knock (hum + gradient-coil knocking), page_flip ----------------
+def knuckle_pop(level=-18, seed=0, size=1.0):
+    """ep 57: a KNUCKLE CRACK = cavitation, so it is FAST: a 1-2 ms broadband click (the pocket snapping open), an 8 ms bright 2-6 kHz burst, and a tiny damped
+    'knock' of the finger (280-420 Hz, ~20 ms). No lead-in (a snap has no anticipation); every crack varies in pitch + brightness (seed)."""
+    r_ = np.random.default_rng(seed + 570); n_ = int(0.09 * SR); t2 = np.arange(n_) / SR
+    click = np.zeros(n_); k = int(0.0015 * SR); click[:k] = r_.standard_normal(k) * np.linspace(1, 0, k)
+    burst = _bp(r_.standard_normal(n_), 2000 * r_.uniform(0.9, 1.2), 6000) * np.exp(-t2 / (0.006 * size)) * 0.7
+    f0 = r_.uniform(280, 420); knock = np.sin(2 * np.pi * f0 * t2) * np.exp(-t2 / (0.018 * size)) * 0.55
+    y = click * 1.2 + burst + knock
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def mri_knock(level=-30, dur=2.0, rate=7.0, f0=1100):
+    """ep 57: an MRI scanner = a steady low hum + loud rhythmic knocking bursts (gradient coils), heard in the room."""
+    n_ = int(dur * SR); t2 = np.arange(n_) / SR
+    hum = np.sin(2 * np.pi * 60 * t2) * 0.25 + _lp(rng.standard_normal(n_), 400) * 0.2
+    gate = ((t2 * rate) % 1 < 0.35).astype(float)
+    knock = np.sign(np.sin(2 * np.pi * f0 * t2)) * gate * 0.35
+    y = hum + _bp(knock, 400, 4000)
+    fd = int(0.05 * SR); y[:fd] *= np.linspace(0, 1, fd); y[-fd:] *= np.linspace(1, 0, fd)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def page_flip(level=-28):
+    n_ = int(0.12 * SR); t2 = np.arange(n_) / SR
+    y = _bp(rng.standard_normal(n_), 1500, 7000) * np.sin(np.pi * t2 / t2[-1]) ** 2
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+

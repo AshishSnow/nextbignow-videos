@@ -1,0 +1,3 @@
+CAPTION: see Metricool draft https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=5473340925991013703 (first line: 'Does cracking your knuckles cause arthritis?'); suggested slot 20 Nov 19:31 IST
+FIRST COMMENT: Be honest: who in your house yells 'stop cracking your knuckles!' - nani, mom, or you? And how many times a day do you crack yours?
+MUSIC TO ADD IN-APP: soft - playful / quirky pizzicato or ukulele comedy (a nani-scolds-you gag + a calm board explainer; the knuckle pops must stay audible); search 'playful pizzicato', 'quirky ukulele', 'funny cartoon'; volume 50-60.
