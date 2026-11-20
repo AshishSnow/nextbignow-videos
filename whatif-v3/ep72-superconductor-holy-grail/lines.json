@@ -1,0 +1,107 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Scientists just found what's blocking the holy grail of electricity.",
+  "start": 0.0,
+  "dur": 3.91
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know what happens if wires stop wasting power?",
+  "start": 4.09,
+  "dur": 3.036
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "Right now, about five percent of America's electricity is lost... just traveling through power lines.",
+  "start": 7.275,
+  "dur": 6.715
+ },
+ {
+  "i": 3,
+  "tag": "excited",
+  "text": "Superconductors fix that. Zero resistance. Zero waste.",
+  "start": 14.171,
+  "dur": 3.705
+ },
+ {
+  "i": 4,
+  "tag": "deadpan",
+  "text": "The problem? Most only work at minus two hundred sixty degrees Celsius.",
+  "start": 18.026,
+  "dur": 5.152
+ },
+ {
+  "i": 5,
+  "tag": "excited",
+  "text": "Now scientists in Europe built a brand new measuring tool...",
+  "start": 23.398,
+  "dur": 3.303
+ },
+ {
+  "i": 6,
+  "tag": "reveal",
+  "text": "and found the electron pairs that carry the current... survive at room temperature.",
+  "start": 26.851,
+  "dur": 4.942
+ },
+ {
+  "i": 7,
+  "tag": "tease",
+  "text": "So why don't they work?",
+  "start": 31.993,
+  "dur": 1.523
+ },
+ {
+  "i": 8,
+  "tag": "serious",
+  "text": "The pairs are there. They just don't move together. Like a crowd with no rhythm.",
+  "start": 33.776,
+  "dur": 4.875
+ },
+ {
+  "i": 9,
+  "tag": "punchline",
+  "text": "Get them in sync... and room-temperature superconductors might finally happen.",
+  "start": 38.851,
+  "dur": 5.138
+ },
+ {
+  "i": 10,
+  "tag": "friend",
+  "text": "So what happens next?",
+  "start": 44.29,
+  "dur": 1.295
+ },
+ {
+  "i": 11,
+  "tag": "hype",
+  "text": "Power lines with zero waste. Floating trains. Cheaper MRI machines. Faster quantum computers.",
+  "start": 45.765,
+  "dur": 6.638
+ },
+ {
+  "i": 12,
+  "tag": "serious",
+  "text": "It's not solved yet. But for the first time, scientists know exactly where to look.",
+  "start": 52.583,
+  "dur": 5.614
+ },
+ {
+  "i": 13,
+  "tag": "question",
+  "text": "Would this change the world more than AI?",
+  "start": 58.398,
+  "dur": 2.041
+ },
+ {
+  "i": 14,
+  "tag": "friend",
+  "text": "Comment yes or no.",
+  "start": 60.589,
+  "dur": 1.201
+ }
+]
