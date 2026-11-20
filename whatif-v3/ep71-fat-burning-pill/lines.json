@@ -1,0 +1,135 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Scientists found a pill that burns fat... without eating less.",
+  "start": 0.0,
+  "dur": 3.515
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know what happens when your body just... burns more?",
+  "start": 3.695,
+  "dur": 3.296
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "Drugs like Ozempic work by making you less hungry.",
+  "start": 7.142,
+  "dur": 3.262
+ },
+ {
+  "i": 3,
+  "tag": "serious",
+  "text": "But some people lose muscle too. And the weight often comes back.",
+  "start": 10.584,
+  "dur": 4.19
+ },
+ {
+  "i": 4,
+  "tag": "excited",
+  "text": "Now scientists at UC Berkeley tested an old compound called TOFA.",
+  "start": 14.973,
+  "dur": 4.674
+ },
+ {
+  "i": 5,
+  "tag": "story",
+  "text": "Obese mice ate the exact same food...",
+  "start": 19.798,
+  "dur": 2.509
+ },
+ {
+  "i": 6,
+  "tag": "reveal",
+  "text": "and still lost eighteen percent of their body weight.",
+  "start": 22.486,
+  "dur": 2.604
+ },
+ {
+  "i": 7,
+  "tag": "excited",
+  "text": "Their bodies burned up to eighteen percent more energy.",
+  "start": 25.29,
+  "dur": 2.815
+ },
+ {
+  "i": 8,
+  "tag": "tease",
+  "text": "And the muscle?",
+  "start": 28.255,
+  "dur": 0.934
+ },
+ {
+  "i": 9,
+  "tag": "deadpan",
+  "text": "It stayed.",
+  "start": 29.45,
+  "dur": 0.831
+ },
+ {
+  "i": 10,
+  "tag": "hype",
+  "text": "Mix it with Ozempic-style drugs... and the results got even better.",
+  "start": 30.501,
+  "dur": 4.053
+ },
+ {
+  "i": 11,
+  "tag": "story",
+  "text": "And when treatment stopped, the weight didn't rush back.",
+  "start": 34.734,
+  "dur": 2.978
+ },
+ {
+  "i": 12,
+  "tag": "friend",
+  "text": "So what happens next?",
+  "start": 37.891,
+  "dur": 1.295
+ },
+ {
+  "i": 13,
+  "tag": "serious",
+  "text": "Here's the catch. It's only been tested in male mice.",
+  "start": 39.367,
+  "dur": 3.594
+ },
+ {
+  "i": 14,
+  "tag": "story",
+  "text": "No human trials yet. So nobody knows the right dose, or if it's safe long term.",
+  "start": 43.161,
+  "dur": 5.634
+ },
+ {
+  "i": 15,
+  "tag": "story",
+  "text": "But if it works in people...",
+  "start": 48.975,
+  "dur": 1.527
+ },
+ {
+  "i": 16,
+  "tag": "punchline",
+  "text": "the next weight loss pill might not make you eat less. It might make you burn more.",
+  "start": 50.682,
+  "dur": 5.401
+ },
+ {
+  "i": 17,
+  "tag": "question",
+  "text": "Would you try it?",
+  "start": 56.383,
+  "dur": 0.961
+ },
+ {
+  "i": 18,
+  "tag": "friend",
+  "text": "Comment yes or no.",
+  "start": 57.494,
+  "dur": 1.201
+ }
+]
