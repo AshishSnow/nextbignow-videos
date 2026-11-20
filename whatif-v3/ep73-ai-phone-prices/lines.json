@@ -1,0 +1,114 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "AI is making your next phone more expensive.",
+  "start": 0.0,
+  "dur": 2.646
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know why your next phone or laptop might cost way more?",
+  "start": 2.826,
+  "dur": 3.547
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "Every phone and laptop needs memory chips. RAM.",
+  "start": 6.523,
+  "dur": 3.45
+ },
+ {
+  "i": 3,
+  "tag": "serious",
+  "text": "But AI data centers are buying those chips first... and paying way more for them.",
+  "start": 10.153,
+  "dur": 5.706
+ },
+ {
+  "i": 4,
+  "tag": "excited",
+  "text": "So the big chipmakers are moving their factories to AI.",
+  "start": 16.058,
+  "dur": 3.356
+ },
+ {
+  "i": 5,
+  "tag": "story",
+  "text": "The result? Memory prices roughly doubled.",
+  "start": 19.564,
+  "dur": 2.661
+ },
+ {
+  "i": 6,
+  "tag": "reveal",
+  "text": "Phone prices jumped about twenty-five to thirty percent in a year.",
+  "start": 22.405,
+  "dur": 3.961
+ },
+ {
+  "i": 7,
+  "tag": "excited",
+  "text": "Laptop makers raised prices up to twenty percent.",
+  "start": 26.566,
+  "dur": 2.933
+ },
+ {
+  "i": 8,
+  "tag": "deadpan",
+  "text": "And phones under two hundred dollars? They're disappearing from shelves.",
+  "start": 29.65,
+  "dur": 4.519
+ },
+ {
+  "i": 9,
+  "tag": "tease",
+  "text": "Some brands even plan to put used, recycled memory into cheap phones.",
+  "start": 34.389,
+  "dur": 5.46
+ },
+ {
+  "i": 10,
+  "tag": "friend",
+  "text": "So what happens next?",
+  "start": 40.109,
+  "dur": 1.295
+ },
+ {
+  "i": 11,
+  "tag": "serious",
+  "text": "One of the biggest chipmakers just said the next two years will be even tighter.",
+  "start": 41.584,
+  "dur": 5.109
+ },
+ {
+  "i": 12,
+  "tag": "story",
+  "text": "Prices could keep climbing until mid twenty twenty-eight.",
+  "start": 46.893,
+  "dur": 3.221
+ },
+ {
+  "i": 13,
+  "tag": "punchline",
+  "text": "So if you need a new phone or laptop... waiting might cost you more.",
+  "start": 50.295,
+  "dur": 4.857
+ },
+ {
+  "i": 14,
+  "tag": "question",
+  "text": "Would you buy now, or wait?",
+  "start": 55.452,
+  "dur": 1.458
+ },
+ {
+  "i": 15,
+  "tag": "friend",
+  "text": "Comment now, or wait.",
+  "start": 57.06,
+  "dur": 1.258
+ }
+]
