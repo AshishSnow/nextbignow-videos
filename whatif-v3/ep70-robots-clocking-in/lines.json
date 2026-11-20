@@ -1,0 +1,135 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Robots just started clocking in... for real jobs.",
+  "start": 0.0,
+  "dur": 3.259
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know what happens when a robot takes the shift next to you?",
+  "start": 3.439,
+  "dur": 3.591
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "One robot company just built its one thousandth humanoid...",
+  "start": 7.18,
+  "dur": 4.027
+ },
+ {
+  "i": 3,
+  "tag": "reveal",
+  "text": "and it's already moving car parts in a BMW factory.",
+  "start": 11.387,
+  "dur": 3.489
+ },
+ {
+  "i": 4,
+  "tag": "excited",
+  "text": "Another robot has moved over a hundred thousand boxes in a real warehouse.",
+  "start": 15.076,
+  "dur": 4.752
+ },
+ {
+  "i": 5,
+  "tag": "story",
+  "text": "And in China, one company sold nine hundred robots in six months...",
+  "start": 19.978,
+  "dur": 4.5
+ },
+ {
+  "i": 6,
+  "tag": "reveal",
+  "text": "and wants five thousand this year.",
+  "start": 24.658,
+  "dur": 1.696
+ },
+ {
+  "i": 7,
+  "tag": "hype",
+  "text": "Now Tesla is building a factory line for a million robots a year.",
+  "start": 26.555,
+  "dur": 3.981
+ },
+ {
+  "i": 8,
+  "tag": "friend",
+  "text": "So why now?",
+  "start": 30.716,
+  "dur": 0.914
+ },
+ {
+  "i": 9,
+  "tag": "serious",
+  "text": "Robots don't get tired.",
+  "start": 31.81,
+  "dur": 1.72
+ },
+ {
+  "i": 10,
+  "tag": "deadpan",
+  "text": "No breaks. No sick days.",
+  "start": 33.73,
+  "dur": 1.948
+ },
+ {
+  "i": 11,
+  "tag": "excited",
+  "text": "Three shifts, every single day.",
+  "start": 35.898,
+  "dur": 1.678
+ },
+ {
+  "i": 12,
+  "tag": "story",
+  "text": "Tesla's boss says one could cost around thirty thousand dollars.",
+  "start": 37.726,
+  "dur": 3.706
+ },
+ {
+  "i": 13,
+  "tag": "tease",
+  "text": "So what happens next?",
+  "start": 41.612,
+  "dur": 1.412
+ },
+ {
+  "i": 14,
+  "tag": "story",
+  "text": "First, the boring jobs go. Lifting. Sorting. Carrying boxes.",
+  "start": 43.284,
+  "dur": 4.476
+ },
+ {
+  "i": 15,
+  "tag": "serious",
+  "text": "Then someone has to fix the robots, train them, and run them.",
+  "start": 47.94,
+  "dur": 3.783
+ },
+ {
+  "i": 16,
+  "tag": "punchline",
+  "text": "And that might be the next big job.",
+  "start": 51.924,
+  "dur": 2.182
+ },
+ {
+  "i": 17,
+  "tag": "question",
+  "text": "So be honest... would you work next to a robot?",
+  "start": 54.406,
+  "dur": 2.787
+ },
+ {
+  "i": 18,
+  "tag": "friend",
+  "text": "Comment yes or no.",
+  "start": 57.343,
+  "dur": 1.201
+ }
+]

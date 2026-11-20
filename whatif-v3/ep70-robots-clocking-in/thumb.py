@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/robots/scenes.py').read().split("if __name__")[0])
+fr = np.zeros((H, W, 3), np.uint8); fr[:] = paper('FF8C1A', .75); rays(fr, 1.0, 'FFFFFF', .14, cy=1150)
+overlay(fr, cairo_layer(lambda c: (timeclock(c, 300, 1150, .9, 1.0), conveyor(c, 1420, 0))))
+put_rgba(fr, load_st('robot', h=900), 760, 1060, 1.0, 1.0, 3)
+burst(fr, 'CLOCKED IN!', 320, 840, 1.0, r=150, col=RED, size=40, rot=-8)
+title(fr, 'ROBOTS ARE', 500, 1.0, size=150, fill='FFFFFF', rot=-3)
+title(fr, 'TAKING SHIFTS', 680, 1.0, size=125, fill=YEL, rot=-3)
+logo(fr); Image.fromarray(fr).save('/home/claude/robots/out/thumb_robots.jpg', quality=95)
