@@ -1,4 +1,4 @@
-# NextBigNow short-script framework v2 (Nov 21 2026)
+# NextBigNow short-script framework v3 (Nov 21 2026)
 
 v1 came from the "EXACTLY How to Write INSANELY Good YouTube Scripts" video. v1 still holds where it doesn't conflict with this file.
 v2 adds our own Instagram data (Nov 1-21) and research on how 2026 Shorts and Reels are ranked.
@@ -119,3 +119,72 @@ A topic is only a GO if it has all of these:
 4. Loop check: read the last line, then the first line, as one sentence.
 5. Swipe check, line by line: "If I were bored, would I swipe here?" If yes, cut that line or add a but.
 6. After posting, log the 3-s view rate and average watch for that hook formula. Change one variable per video.
+
+## 6. v3 additions from primary sources (creators + platforms)
+
+### Jenny Hoyos (shorts averaging ~10M views; Creator Science podcast, TED)
+
+- **Structure:** HOOK (a few seconds), then FORESHADOW (2 lines, 3 s or less, setting an expectation they want resolved), then TRANSITION, then BODY (but/therefore), then PAYOFF.
+- **Write the last line FIRST.** End right after the payoff: "Whatever you say you're gonna do, you end it right after you do it."
+  - Cutting 1 second from one ending took retention from 83% to 88%, and that video took off.
+- **Reading level:** 5th grade or below. The top shorts she checked scored near 1st grade. Explain any jargon word in plain words.
+- **Visible mechanism:** numbered steps, a counter, or "3 things" so viewers know how far they are from the end.
+- **Length:** about 34 s is her sweet spot on YouTube.
+- **Breakout targets:** about 85% viewed vs swiped (platform average about 70%), and 90%+ average viewed.
+- **Idea filter:** strong hook? clear mechanism? will people rewatch?
+
+### Kallaway (hook framework)
+
+- **Hook = curiosity loop in 3 moves:**
+  1. **Context lean:** the topic is instantly clear, plus common ground (a benefit or pain, a familiar reference, or a metaphor).
+  2. **Scroll-stop interjection:** a short line with "but / however / yet".
+  3. **Contrarian snapback:** the payoff turns opposite to the lean, and the payoff must be real.
+- **Visual hook beats spoken:** 3-5 bold words on screen plus moderate motion (not chaos, not still).
+  - The on-screen text must state the context, not repeat the voice.
+- **First "hit of value" within about 4 s.**
+- **Staccato:** shortest sentences at the start, longer later.
+- **Familiar comparisons make new topics feel safe.** Say "bigger than an IMAX", "the size of a school bus", or a known brand or person. Verbal only: no logos on screen.
+
+### MrBeast production memo
+
+- Show, don't tell: stop saying what they'll see and show it.
+- Stair-step the stakes: each beat bigger than the last.
+- Never signal the ending early. Endings must be abrupt; a strong payoff lifts retention.
+- Keep it simple enough for 50M people to understand.
+
+### Zack D. Films ("How Stitches Work": 31 s, 253M views)
+
+- One question stated in the first second. The video ends the moment it is answered.
+
+### YouTube (Todd Sherman, Shorts lead) and Paddy Galloway (3.3B-view study)
+
+- "The audience is the algorithm."
+  - Every Short gets a seed test.
+  - Performance is "whether people are choosing to watch and not skip" in the feed.
+- Galloway's study:
+  - Shorts under 60% viewed vs swiped rarely did well; the best were at 70-90%.
+  - Shorts with average watch above 50 s averaged 4.1M views. Holding people matters, not raw length.
+- No magic posting time or quota. Original content is prioritized; re-uploads risk being treated as spam.
+
+### South Park rule
+
+- Beats connect with BUT or THEREFORE, never "and then". Each scene causes or complicates the next.
+
+## 7. The v3 template (fill in, in this order)
+
+1. **LAST LINE** (payoff + loop into line 1): written first.
+2. **HOOK**
+   - Line 1: context lean in 12 words or fewer, "you" or a picture-able paradox.
+   - Line 2: BUT, an interjection of 6 words or fewer.
+   - Line 3: snapback, the real surprise.
+3. **FORESHADOW** (3 s or less): what they'll get by staying, plus a visible mechanism ("3 clues", a countdown, a number climbing).
+4. **BODY:** 3-4 beats chained BUT / SO.
+   - Stakes rise each beat.
+   - One fact and at most one number per line, said with a familiar comparison.
+5. **PAYOFF:** the "what happens next" reveal.
+6. **CUT:** end on the payoff line, with no sign-off.
+
+### Checks
+
+- Run `tools/script_check.py`: 95-125 words, grade 5 or below, line 1 at most 12 words, no weak opener, 2+ "but".
+- Read it aloud and cut 20%.
