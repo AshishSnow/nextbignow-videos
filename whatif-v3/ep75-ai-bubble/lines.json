@@ -1,0 +1,114 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "The Fed just named AI the number one risk to the money system.",
+  "start": 0.0,
+  "dur": 3.828
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know what happens if the AI boom goes bust?",
+  "start": 4.008,
+  "dur": 2.931
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "The New York Fed asked big banks and investment funds what scares them most.",
+  "start": 7.089,
+  "dur": 4.702
+ },
+ {
+  "i": 3,
+  "tag": "reveal",
+  "text": "Eighty-seven percent said AI.",
+  "start": 11.971,
+  "dur": 1.687
+ },
+ {
+  "i": 4,
+  "tag": "tease",
+  "text": "Back in the spring? Only fifty.",
+  "start": 13.858,
+  "dur": 2.092
+ },
+ {
+  "i": 5,
+  "tag": "serious",
+  "text": "Here's why. Companies borrowed over six hundred eighty billion dollars to build AI data centers.",
+  "start": 16.21,
+  "dur": 7.165
+ },
+ {
+  "i": 6,
+  "tag": "excited",
+  "text": "In twenty twenty-three, it was just one hundred thirty billion.",
+  "start": 23.575,
+  "dur": 3.402
+ },
+ {
+  "i": 7,
+  "tag": "story",
+  "text": "Add the leases and promises... and it's over two trillion dollars.",
+  "start": 27.127,
+  "dur": 4.136
+ },
+ {
+  "i": 8,
+  "tag": "tease",
+  "text": "And some of that money goes in circles.",
+  "start": 31.443,
+  "dur": 2.311
+ },
+ {
+  "i": 9,
+  "tag": "deadpan",
+  "text": "Big tech helps fund smaller AI companies... who spend it right back on big tech.",
+  "start": 34.014,
+  "dur": 6.001
+ },
+ {
+  "i": 10,
+  "tag": "friend",
+  "text": "So what happens next?",
+  "start": 40.235,
+  "dur": 1.295
+ },
+ {
+  "i": 11,
+  "tag": "story",
+  "text": "If AI keeps making money, nothing breaks.",
+  "start": 41.711,
+  "dur": 2.758
+ },
+ {
+  "i": 12,
+  "tag": "serious",
+  "text": "But if profits disappoint, stocks could drop... and banks are tied to almost a trillion dollars of it.",
+  "start": 44.648,
+  "dur": 6.907
+ },
+ {
+  "i": 13,
+  "tag": "punchline",
+  "text": "The Fed isn't saying it'll pop. It's saying everyone is watching.",
+  "start": 51.755,
+  "dur": 4.586
+ },
+ {
+  "i": 14,
+  "tag": "question",
+  "text": "So... boom or bubble?",
+  "start": 56.641,
+  "dur": 1.359
+ },
+ {
+  "i": 15,
+  "tag": "friend",
+  "text": "Comment boom, or bubble.",
+  "start": 58.15,
+  "dur": 1.303
+ }
+]

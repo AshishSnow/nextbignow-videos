@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/bubble/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('F87171', '450A0A', cy=1150); rays(fr, 0.3, YEL, .14, cy=1150)
+overlay(fr, cairo_layer(lambda c: balloon(c, CX - 80, 1130, 240, 0.2, pin=.6)))
+put_rgba(fr, ttext('AI', 150, LUCKY, 'FFFFFF', shadow=False), CX - 80, 1130, 1.0, 1.0, 0)
+vignette(fr, .3)
+big_word(fr, 'AI BUBBLE', 470, 200, 'FFFFFF', -3)
+big_word(fr, 'ABOUT TO POP?', 680, 150, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/bubble/out/thumb_bubble.jpg', quality=95)
