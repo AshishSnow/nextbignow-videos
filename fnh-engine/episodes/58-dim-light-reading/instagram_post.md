@@ -1,0 +1,3 @@
+CAPTION: see Metricool draft https://app.metricool.com/planner/calendar?blogId=7643474&openWithPostUuid=-1803847225811974618 (first line: 'Does reading in dim light ruin your eyes?'); suggested slot 21 Nov 16:50 IST (any evening slot works; 19:00-21:00 IST is the usual peak)
+FIRST COMMENT: Be honest: did someone at home ever tell you 'you'll ruin your eyes!' for reading in dim light? Mom, nani, or a teacher?
+MUSIC TO ADD IN-APP: soft - warm acoustic guitar / gentle piano that brightens (a candlelit night that ends in a sunny park); search 'soft acoustic', 'warm piano', 'sunny morning'; volume 50-60.
