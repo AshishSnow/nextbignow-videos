@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie, "candle": _candle}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie, "candle": _candle, "tender": _tender}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -2078,4 +2078,170 @@ def permit_doc(c, x, y, s=1.0, seed=0, k=1.0, stamped=0.0):
     for j in range(4): wline(c, [(-120, -40 + j * 46), (120, -40 + j * 46)], seed + 1 + j, 5, GREY)
     ink(c, wellipse(90, 160, 44, 44, seed + 7, 1.2), YEL, 6)
     if stamped > 0: wline(c, [(-120, 150), (-80, 190), (0, 90)][:2 + (stamped > 0.5)], seed + 8, 14, GRN)
+    c.restore()
+
+
+# ---------------------------------------------------------------- 22 Nov 2026 (Dave's Hot Chicken doodle): parking-lot pop-up kit
+def _tender(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=(222, 140, 52), sweat=True, **kw):
+    """generic fried chicken tender character (no brand box/colours): long knobbly golden-orange body with crumb bumps, a sweat drop,
+    face, stick arms + legs. (x, y) = feet."""
+    leg = 70 * s; cb = y - leg; ct = cb - 380 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 36)
+    pts = []
+    for j in range(28):
+        a = j / 28 * 2 * math.pi; rx = 118 * s; ry = 200 * s
+        bump = 1 + 0.07 * math.sin(a * 7 + seed) + 0.04 * math.sin(a * 13 + seed * 2)
+        pts.append((x + math.cos(a) * rx * bump * (1 - 0.12 * math.sin(a)), (ct + cb) / 2 + math.sin(a) * ry * bump))
+    body = wpoly(pts, seed, 1.6, True, 30)
+    ink(c, body, col, 9 * s)
+    for j in range(9):   # crumbs
+        cx = x + (h01(j, seed) - 0.5) * 160 * s; cy = ct + 40 * s + h01(j + 9, seed) * 300 * s
+        c.drawCircle(cx, cy, 7 * s, P(shade(col, 0.8)))
+    wline(c, [(x - 70 * s, ct + 80 * s), (x - 84 * s, ct + 200 * s)], seed + 1, 8 * s, (255, 220, 150), a=0.8)
+    if sweat:
+        yy = ct + 30 * s + (t * 60 % 40) * s
+        ink(c, wpoly([(x + 120 * s, yy - 30 * s), (x + 138 * s, yy + 6 * s), (x + 120 * s, yy + 18 * s), (x + 102 * s, yy + 6 * s)], seed + 2, 0.6, True, 10), SKY, 5 * s)
+    _arms(c, x - 112 * s, x + 112 * s, cb - 170 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 130 * s, s * 0.85, look, blink, 38, 24, mood, seed + 9)
+    mouth(c, x, ct + 200 * s, s * 0.7, talk, mood, seed + 10)
+
+
+def fryer(c, x, y, s=1.0, seed=0, k=1.0, t=0.0, bubbling=True):
+    """small countertop basket fryer (generic steel box, oil window, basket handle). (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-150, -220, 150, 0, 16, seed, 1.6), (200, 204, 212), 8)
+    ink(c, wrrect(-120, -250, 120, -200, 10, seed + 1, 1.2), (226, 168, 60), 7)   # oil
+    if bubbling:
+        for j in range(4):
+            u = (t * 1.6 + j * 0.25) % 1.0
+            ink(c, wellipse(-80 + j * 54, -250 - 30 * u, 10 + 4 * u, 10 + 4 * u, seed + 2 + j, 0.4), None, 4, (226, 168, 60), a=1 - u)
+    wline(c, [(40, -240), (90, -330), (200, -330)], seed + 6, 10)   # basket handle
+    ink(c, wrrect(-90, -150, 90, -60, 10, seed + 7, 1.0), INK, 5)
+    text(c, "FRYER", 0, -92, 40, WHITE, BLK_F)
+    for sx in (-1, 1): ink(c, wrrect(sx * 120 - 16, -8, sx * 120 + 16, 16, 4, seed + 8 + sx, 0.6), INK, 0)
+    c.restore()
+
+
+def heat_lamp(c, x, y, s=1.0, seed=0, k=1.0, on=True, t=0.0):
+    """pole heat lamp with a cone shade and an orange glow. (x, y) = base."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    wline(c, [(0, 0), (0, -380), (90, -440)], seed, 10)
+    ink(c, wpoly([(40, -470), (170, -420), (150, -380), (60, -400)], seed + 1, 1.2, True, 20), (200, 204, 212), 7)
+    if on:
+        g = 0.35 + 0.1 * math.sin(t * 5)
+        ink(c, wpoly([(80, -390), (150, -380), (190, -230), (30, -250)], seed + 2, 1.5, True, 30), ORG, 0, a=g)
+    ink(c, wellipse(0, 0, 70, 16, seed + 3, 1.0), INK, 0)
+    c.restore()
+
+
+def folding_table(c, x, y, w=360, seed=0, k=1.0, col=WHITE, tag=None):
+    """plain folding table (top + X legs). (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k, k)
+    ink(c, wrrect(-w / 2, -170, w / 2, -136, 8, seed, 1.2), col, 7)
+    for sx in (-1, 1):
+        wline(c, [(sx * (w / 2 - 30), -136), (-sx * (w / 2 - 70), 0)], seed + sx, 7)
+    if tag: tape(c, tag, 0, -100, 26, 2, 1.0, WHITE, INK, seed + 3)
+    c.restore()
+
+
+def parking_lot(c, y=1440, seed=0, k=1.0, t=0.0, bulbs=0.0, pole=True, bays=4):
+    """asphalt band with white painted bay lines, a light pole; bulbs 0..1 draws a string of party bulbs."""
+    if k <= 0: return
+    c.drawRect(skia.Rect.MakeLTRB(0, y - 30, W, y + 120), P((120, 122, 130), 0.35 * k))
+    for j in range(bays + 1):
+        x = 60 + j * (W - 120) / bays
+        wline(c, [(x, y + 110), (x + 30, y - 10)], seed + j, 9, WHITE, a=k)
+    if pole:
+        wline(c, [(980, y), (980, 620)], seed + 20, 12, (90, 92, 100))
+        ink(c, wrrect(900, 590, 1000, 630, 10, seed + 21, 1.0), (200, 204, 212), 6)
+    if bulbs > 0:
+        pts = quad_pts(80, 640, 980, 640, 120, 18)
+        n = int(len(pts) * min(1, bulbs))
+        if n > 1: wline(c, pts[:n], seed + 22, 4)
+        for j, (bx, by) in enumerate(pts[:n:2]):
+            on = 0.7 + 0.3 * math.sin(t * 4 + j)
+            c.drawCircle(bx, by + 22, 16, P(YEL, on)); c.drawCircle(bx, by + 22, 16, S(INK, 4))
+
+
+def heat_meter(c, x, y, s=1.0, seed=0, k=1.0, lvl=0.0, labels=("NO SPICE", "REAPER")):
+    """semicircle 7-notch heat gauge, green to red, needle at lvl 0..1."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    cols = [(120, 200, 120), (180, 214, 90), (255, 212, 38), (255, 170, 30), (255, 138, 28), (238, 90, 50), (200, 30, 30)]
+    for j in range(7):
+        a0 = math.pi + j * math.pi / 7; a1 = a0 + math.pi / 7
+        pts = [(0, 0)] + [(math.cos(a0 + (a1 - a0) * q / 6) * 260, math.sin(a0 + (a1 - a0) * q / 6) * 260) for q in range(7)]
+        ink(c, wpoly(pts, seed + j, 1.2, True, 40), cols[j], 6)
+    a = math.pi + math.pi * max(0, min(1, lvl))
+    wline(c, [(0, 0), (math.cos(a) * 220, math.sin(a) * 220)], seed + 9, 14)
+    c.drawCircle(0, 0, 22, P(INK))
+    text(c, labels[0], -200, 60, 30, INK, BLK_F); text(c, labels[1], 200, 60, 30, RED, BLK_F)
+    c.restore()
+
+
+def chef_hat(c, x, y, s=1.0, seed=0, k=1.0):
+    """white chef's toque; (x, y) = band bottom centre (sits on a head top)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-60, -50, 60, 0, 8, seed, 1.0), WHITE, 6)
+    for dx, r in ((-50, 50), (0, 62), (50, 50)): ink(c, wellipse(dx, -90, r, r, seed + dx, 1.2), WHITE, 6)
+    c.restore()
+
+
+def magnifier(c, x, y, s=1.0, seed=0, k=1.0, rot=-30):
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    wline(c, [(0, 90), (0, 260)], seed, 22, BROWN)
+    ink(c, wellipse(0, 0, 90, 90, seed + 1, 1.2), (226, 240, 248), 12)
+    c.restore()
+
+
+def tender_box(c, x, y, s=1.0, seed=0, k=1.0, col=WHITE):
+    """plain kraft/white takeout tray with two tenders + fries (no brand colours). (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for j in range(2):
+        ink(c, wpoly([(-70 + j * 60, -70), (-50 + j * 60, -150), (-10 + j * 60, -150), (0 + j * 60, -70)], seed + j, 2.0, True, 20), (222, 140, 52), 6)
+    for j in range(5): wline(c, [(30 + j * 14, -70), (36 + j * 14, -140 + (j % 2) * 16)], seed + 4 + j, 8, YEL)
+    ink(c, wpoly([(-110, -80), (110, -80), (90, 0), (-90, 0)], seed + 2, 1.2, True, 20), (210, 170, 120), 7)
+    c.restore()
+
+
+def store_front(c, x, y, s=1.0, seed=0, k=1.0, sign="HOT CHICKEN", t=0.0, awn=RED):
+    """small generic restaurant front (no brand): box, plain awning, window, door, hand-lettered sign. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k); c.translate(-x, -y)
+    ink(c, wrrect(x - 150, y - 300, x + 150, y, 8, seed, 1.4), CREAM, 8)
+    ink(c, wpoly([(x - 168, y - 300), (x + 168, y - 300), (x + 150, y - 236), (x - 150, y - 236)], seed + 1, 1.2, True, 30), awn, 7)
+    for q in range(4): c.drawRect(skia.Rect.MakeLTRB(x - 140 + q * 76, y - 294, x - 104 + q * 76, y - 244), P(WHITE, 0.85))
+    ink(c, wrrect(x - 130, y - 370, x + 130, y - 310, 8, seed + 5, 1.0), WHITE, 6)
+    text(c, sign, x, y - 326, 30, INK, BLK_F, maxw=240)
+    ink(c, wrrect(x - 126, y - 210, x + 20, y - 80, 6, seed + 2, 1.0), SKY, 6)
+    ink(c, wrrect(x + 44, y - 210, x + 124, y, 6, seed + 4, 1.0), BROWN, 6)
+    c.restore()
+
+
+def health_permit(c, x, y, s=1.0, seed=0, k=1.0, stamped=0.0, head=("HEALTH", "PERMIT")):
+    """generic health-permit sheet (no agency seal), stamped 0..1 draws a green tick."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k); c.rotate(4)
+    ink(c, wrrect(-170, -220, 170, 220, 12, seed, 1.4), CREAM, 8)
+    text(c, head[0], 0, -150, 44, INK, BLK_F); text(c, head[1], 0, -100, 44, INK, BLK_F)
+    for j in range(4): wline(c, [(-120, -40 + j * 46), (120, -40 + j * 46)], seed + 1 + j, 5, GREY)
+    ink(c, wellipse(90, 160, 44, 44, seed + 7, 1.2), YEL, 6)
+    if stamped > 0: wline(c, [(-120, 150), (-80, 190), (0, 90)][:2 + (stamped > 0.5)], seed + 8, 14, GRN)
+    c.restore()
+
+
+def doc_stack(c, x, y, s=1.0, seed=0, k=1.0, label="DISCLOSURE"):
+    """thick stack of paper documents with a cover sheet (generic). (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for j in range(9):
+        ink(c, wrrect(-170 + (j % 2) * 6, -30 - j * 26, 170 + (j % 2) * 6, -4 - j * 26, 4, seed + j, 0.8), WHITE, 5)
+    ink(c, wrrect(-180, -360, 180, -250, 8, seed + 20, 1.2), BLU, 7)
+    text(c, label, 0, -290, 40, WHITE, BLK_F, maxw=320)
     c.restore()
