@@ -1,0 +1,107 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "There's a fire on your stove... you might not be able to see.",
+  "start": 0.0,
+  "dur": 3.2
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know what happens when your stove runs on hydrogen?",
+  "start": 3.38,
+  "dur": 3.227
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "Hydrogen is the clean fuel everyone's betting on. It burns into... water.",
+  "start": 6.758,
+  "dur": 5.558
+ },
+ {
+  "i": 3,
+  "tag": "reveal",
+  "text": "But a pure hydrogen flame can be almost invisible.",
+  "start": 12.496,
+  "dur": 3.066
+ },
+ {
+  "i": 4,
+  "tag": "tease",
+  "text": "So why do some look bright orange? Here's the weird part.",
+  "start": 15.762,
+  "dur": 3.77
+ },
+ {
+  "i": 5,
+  "tag": "excited",
+  "text": "It's salt. Sea salt, blowing in from the ocean.",
+  "start": 19.791,
+  "dur": 2.517
+ },
+ {
+  "i": 6,
+  "tag": "story",
+  "text": "Scientists in Australia watched hydrogen burners for two weeks. Same settings, every single day.",
+  "start": 22.458,
+  "dur": 6.893
+ },
+ {
+  "i": 7,
+  "tag": "reveal",
+  "text": "The orange glow changed by more than twenty-eight times... just because of the wind.",
+  "start": 29.531,
+  "dur": 5.243
+ },
+ {
+  "i": 8,
+  "tag": "deadpan",
+  "text": "Wind from the sea? Bright flame. Wind from inland? Barely there.",
+  "start": 34.974,
+  "dur": 4.311
+ },
+ {
+  "i": 9,
+  "tag": "serious",
+  "text": "And a hydrogen cooktop gave off less light than a normal gas stove... even on a good day.",
+  "start": 39.505,
+  "dur": 6.386
+ },
+ {
+  "i": 10,
+  "tag": "friend",
+  "text": "So what happens next?",
+  "start": 46.091,
+  "dur": 1.295
+ },
+ {
+  "i": 11,
+  "tag": "story",
+  "text": "Future hydrogen stoves can't count on your eyes.",
+  "start": 47.566,
+  "dur": 3.015
+ },
+ {
+  "i": 12,
+  "tag": "punchline",
+  "text": "They'll need sensors that see heat and ultraviolet light... so nobody touches a fire they can't see.",
+  "start": 50.761,
+  "dur": 7.371
+ },
+ {
+  "i": 13,
+  "tag": "question",
+  "text": "Would you cook on a flame you can't see?",
+  "start": 58.433,
+  "dur": 1.885
+ },
+ {
+  "i": 14,
+  "tag": "friend",
+  "text": "Comment yes or no.",
+  "start": 60.467,
+  "dur": 1.201
+ }
+]
