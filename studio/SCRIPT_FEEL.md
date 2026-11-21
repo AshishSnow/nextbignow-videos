@@ -42,6 +42,16 @@ The hook also often answered its own question in line 2, so there was no reason 
    got prettier. Crocs just stopped apologizing for it."). The CTA is one short question that *continues* the story, not
    "like and follow". Never talk after the payoff. Source: Social Media Examiner; Kineclip, "loop ending".
 
+## Owner's Shorts playbook v2 (21 Nov 2026, from creator + platform sources he researched) - OVERRIDES length/ending rules above
+1. **Write the last line first.** Then build backwards; the video ENDS the moment the payoff lands (no recap, no "comment yes/no" voice line; put the question in the caption / on screen).
+2. **Order:** hook -> max 2 lines setup (<=3 s) -> story beats -> payoff. Target **30-45 s** (sweet spot ~34 s). Cutting 1 s off an ending can lift retention 5 points.
+3. **Hook in 3 moves:** topic instantly clear -> short "but..." -> the real surprise. First useful fact by ~4 s.
+4. **5th-grade reading level or lower.** Short words, short sentences. Compare new ideas to something familiar.
+5. **Connect beats with "but" / "so", never "and then".** Raise the stakes every beat. Show, don't tell.
+6. **Never hint the end is coming** ("finally", "to wrap up"). Stop abruptly on the strongest line so the loop restarts.
+7. **On-screen text (3-5 words) matters more than the voice.** Visible progress helps ("3 clues") when the format allows.
+8. **Target retention 70-90% viewed**; under 60% rarely spreads. Every Short gets a small test audience; it only spreads if they watch instead of swiping.
+
 ## Owner's reference: "write like a human" (21 Nov 2026, from a creator's script-writing breakdown he shared)
 Never name or mention the reference in our scripts. What we take from it, cut down for 45-60 s Shorts:
 
