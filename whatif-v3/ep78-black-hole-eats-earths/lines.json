@@ -1,0 +1,100 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Our galaxy's black hole eats an Earth's worth of gas... about every ten years.",
+  "start": 0.0,
+  "dur": 4.786
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Do you know who's feeding the monster in the middle of the Milky Way?",
+  "start": 4.966,
+  "dur": 3.358
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "It's called Sagittarius A star. Four million times heavier than the Sun.",
+  "start": 8.474,
+  "dur": 4.81
+ },
+ {
+  "i": 3,
+  "tag": "tease",
+  "text": "For years, astronomers watched strange glowing gas clouds diving toward it. Nobody knew where they came from.",
+  "start": 13.464,
+  "dur": 8.065
+ },
+ {
+  "i": 4,
+  "tag": "reveal",
+  "text": "Now they found the culprit. Two giant stars, so close they're touching.",
+  "start": 21.789,
+  "dur": 4.176
+ },
+ {
+  "i": 5,
+  "tag": "excited",
+  "text": "Their winds blast out at thousands of kilometers per second... and smash into each other.",
+  "start": 26.165,
+  "dur": 5.395
+ },
+ {
+  "i": 6,
+  "tag": "story",
+  "text": "That crash squeezes gas into clumps... each about as heavy as Earth.",
+  "start": 31.711,
+  "dur": 4.381
+ },
+ {
+  "i": 7,
+  "tag": "deadpan",
+  "text": "And then they fall. Straight toward the black hole.",
+  "start": 36.271,
+  "dur": 2.885
+ },
+ {
+  "i": 8,
+  "tag": "serious",
+  "text": "Scientists say one clump every ten years is enough to keep it fed.",
+  "start": 39.376,
+  "dur": 4.55
+ },
+ {
+  "i": 9,
+  "tag": "friend",
+  "text": "So what happens next?",
+  "start": 44.126,
+  "dur": 1.295
+ },
+ {
+  "i": 10,
+  "tag": "story",
+  "text": "Bigger telescopes are coming, and astronomers expect to find more of these gas streams.",
+  "start": 45.601,
+  "dur": 5.73
+ },
+ {
+  "i": 11,
+  "tag": "punchline",
+  "text": "Which means we're about to watch a black hole's dinner... almost in real time.",
+  "start": 51.511,
+  "dur": 5.446
+ },
+ {
+  "i": 12,
+  "tag": "question",
+  "text": "Would you want to see it up close?",
+  "start": 57.257,
+  "dur": 1.615
+ },
+ {
+  "i": 13,
+  "tag": "friend",
+  "text": "Comment yes or no.",
+  "start": 59.022,
+  "dur": 1.201
+ }
+]

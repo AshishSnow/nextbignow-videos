@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/bh/scenes.py').read().split("if __name__")[0])
+fr = np.zeros((H, W, 3), np.uint8); space(fr, 0.4, '0B1026')
+overlay(fr, cairo_layer(lambda c: blackhole(c, CX, 1180, 190, 0.4)))
+put_rgba(fr, glow_outline(load_st('earth', w=300), 12, (160, 220, 255)), 830, 900, 1.0, 1.0, 0)
+overlay(fr, cairo_layer(lambda c: arrow(c, 760, 1010, 640, 1080, RED, 26)))
+big_word(fr, 'IT EATS', 470, 200, 'FFFFFF', -3)
+big_word(fr, 'EARTHS?!', 680, 200, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/bh/out/thumb_bh.jpg', quality=95)
