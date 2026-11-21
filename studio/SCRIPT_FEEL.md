@@ -42,7 +42,21 @@ The hook also often answered its own question in line 2, so there was no reason 
    got prettier. Crocs just stopped apologizing for it."). The CTA is one short question that *continues* the story, not
    "like and follow". Never talk after the payoff. Source: Social Media Examiner; Kineclip, "loop ending".
 
+## Owner's reference: "write like a human" (21 Nov 2026, from a creator's script-writing breakdown he shared)
+Never name or mention the reference in our scripts. What we take from it, cut down for 45-60 s Shorts:
+
+1. **Write for one viewer.** Ours: a US/EU adult who pays for groceries, flights, movies and never thinks about who profits. Use their life (their card, their cart, their seat), not industry words.
+2. **Hook = 5 jobs in ~8 s:** (a) confirm the click: say the title; (b) credibility: name the source ("Delta's own report"); (c) a twist they haven't heard; (d) why it matters *to them*; (e) tension: promise a payoff that comes later.
+3. **Strongest point first.** Lead the body with the biggest, weirdest number, not the setup. Weaker facts follow.
+4. **Curiosity gaps.** Answer one question and open the next. Never list all the facts in one go.
+5. **Each point = context → what it means for you → tie back to the big idea.**
+6. **Rehook every ~10 s in a Short** (every 30-40 s in long videos): "But why would a bank pay that much?", "And it's still growing.", "Here's the wild part."
+7. **Emotional variety, in waves:** surprise → disbelief → a little humor → "aha". Zoom in on an everyday detail (coffee, groceries), then zoom out to the billions.
+8. **Outro:** one-line summary, then help them *picture* using it next time ("next time you pick a card for the points..."), then one easy action (yes/no comment).
+9. **Match our own best voice.** Car dealer (1,520 views, 37 s avg) is the house style: short spoken sentences, "you", contractions, one joke-ish line, a callback ending.
+
 ## Pre-voice checklist (run before showing the owner)
+- Hook does all 5 jobs (click, credibility, twist, why-you, tension)? Strongest number in the first 15 s? A rehook roughly every 10 s?
 - [ ] Hook = title spoken + the strangest true detail; line 2 = main point with the *how* still open.
 - [ ] Swap test: no two adjacent beats could trade places.
 - [ ] Count but/so turns: at least 3 in the body.
