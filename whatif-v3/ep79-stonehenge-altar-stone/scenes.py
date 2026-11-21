@@ -4,7 +4,7 @@ from kit import *
 D = '/home/claude/altar'
 L = json.load(open(D + '/lines.json'))
 S = [l['start'] for l in L]; E = [l['start'] + l['dur'] for l in L]
-END = E[-1] + 0.3; TOTAL = END + 2.6
+END = E[-1] + 0.3; TOTAL = END + 1.6
 def wt(i, frac): return S[i] + L[i]['dur'] * frac
 def wfind(i, word):
     tx = L[i]['text'].lower(); k = tx.find(word.lower()); return wt(i, k / max(1, len(tx)))
@@ -77,40 +77,39 @@ def s_hook(fr, T):
     if ph is not None: put_rgba(fr, ph, CX, 1000, back(clamp(T / .35)), 1.0, -2)
     sk(fr, st('stone', w=520), 720, 1260, T, 0, 1.0, -6, T - .4)
     tape(fr, "STONEHENGE'S 6-TON STONE", CX, 470, T, col='FFFFFF', size=54, font=LUCKY, rot=-2)
-    title(fr, 'LOST ITS HOME', 600, T - .15, size=124, fill=YEL, rot=-3)
-    if T > wfind(0, 'again'): burst(fr, 'AGAIN!', 250, 1290, T - wfind(0, 'again'), r=105, col=RED, size=48, rot=-10)
+    if T > wfind(0, 'nowhere') - .3: title(fr, 'FROM NOWHERE?', 600, T - wfind(0, 'nowhere') + .3, size=124, fill=YEL, rot=-3)
 
 def s_question(fr, T):
     lt = T - S[1]; bg(fr, T, 'B9D3C2')
-    ph = photo('scot', 800, 560, (.5, .5))
+    ph = photo('trilithon', 800, 560, (.5, .5))
     if ph is not None: put_rgba(fr, ph, CX, 1010, back(clamp(lt / .35)), 1.0, 2)
-    tape(fr, 'SCIENTISTS WERE SURE', CX, 470, lt, col='FFFFFF', size=58, font=LUCKY, rot=-2)
-    title(fr, 'SCOTLAND?', 600, lt - .15, size=130, fill=YEL)
-    if T > wfind(1, 'no.'): xstamp(fr, CX, 1010, T - wfind(1, 'no.'), 1.3)
+    tape(fr, 'SCIENTISTS SOLVED IT?', CX, 470, lt, col='FFFFFF', size=58, font=LUCKY, rot=-2)
+    title(fr, 'CASE CLOSED?', 600, lt - .15, size=120, fill=YEL)
+    if T > wfind(2, 'apart'): xstamp(fr, CX, 1010, T - wfind(2, 'apart'), 1.3)
 
 def s_altar(fr, T):
-    lt = T - S[2]; bg(fr, T)
+    lt = T - S[3]; bg(fr, T)
     ph = photo('altar', 820, 560, (.5, .6))
     if ph is not None: put_rgba(fr, ph, CX, 1030, back(clamp(lt / .35)), 1.0, -1)
     tape(fr, 'THE ALTAR STONE', CX, 470, lt, col=RED, size=66, font=LUCKY, rot=-2, tcol='FFFFFF')
-    if T > wfind(2, 'six'): stat(fr, '6 TONS', 'SANDSTONE SLAB', 300, 640, T - wfind(2, 'six'), YEL, -4, 110)
-    if T > wfind(2, 'sixteen'): stat(fr, '16 FT', 'LONG', 790, 640, T - wfind(2, 'sixteen'), RED, 3, 110)
-    if T > wfind(2, 'center'): chip(fr, 'DEAD CENTER OF THE CIRCLE', CX, 1360, T - wfind(2, 'center'), 'FFFFFF', 40, -2)
+    if T > wfind(3, 'altar'): stat(fr, '6 TONS', 'SANDSTONE SLAB', 300, 640, T - wfind(3, 'altar'), YEL, -4, 110)
+    if T > wfind(3, 'pickup'): stat(fr, '16 FT', 'PICKUP-TRUCK LONG', 790, 640, T - wfind(3, 'pickup'), RED, 3, 110)
+    if T > wfind(3, 'middle'): chip(fr, 'DEAD CENTER OF THE CIRCLE', CX, 1360, T - wfind(3, 'middle'), 'FFFFFF', 40, -2)
 
 def s_2024(fr, T):
-    lt = T - S[3]; bg(fr, T, 'C9DDF0')
+    lt = T - S[4]; bg(fr, T, 'C9DDF0')
     x0, y0, x1, y1 = route(fr, T, 1)
     tape(fr, 'STONEHENGE', x0 - 40, y0 + 70, lt, col='FFFFFF', size=40, font=LUCKY, rot=2)
     tape(fr, 'NE SCOTLAND', x1, y1 - 70, lt - .6, col=CYAN, size=40, font=LUCKY, rot=-2)
     tape(fr, '2024 STUDY SAID...', CX, 470, lt, col='FFFFFF', size=58, font=LUCKY, rot=-2)
-    tm = wfind(3, 'over')
+    tm = wfind(4, 'four hundred')
     if T > tm:
         n = int(460 * eout(clamp((T - tm) / 1.0))); title(fr, f'{n}+ MILES', 600, T - tm, size=120, fill=YEL)
 
 def s_drag(fr, T):
-    lt = T - S[4]; bg(fr, T, 'C9DDF0')
+    lt = T - S[5]; bg(fr, T, 'C9DDF0')
     x0, y0, x1, y1 = route(fr, T, 1)
-    u = ease(clamp(lt / max(1, L[4]['dur'])))
+    u = ease(clamp(lt / max(1, L[5]['dur'])))
     x, y = bez(u, x0, y0, x1, y1)
     def rope(c):
         c.move_to(x, y); c.line_to(x + 150, y - 120); c.set_source_rgba(*hx('8B5A2B')); c.set_line_width(8); c.stroke()
@@ -118,14 +117,14 @@ def s_drag(fr, T):
     s_ = st('stone', w=300)
     if s_ is not None: sticker(fr, s_, x, y, T, 0, 1.0, -8 + 4 * math.sin(T * 6), 1.0, 4)
     tape(fr, 'DRAG 6 TONS...', CX, 470, lt, col=RED, size=64, font=LUCKY, rot=-2, tcol='FFFFFF')
-    if T > wfind(4, 'across'): title(fr, 'ACROSS HALF OF BRITAIN', 600, T - wfind(4, 'across'), size=92, fill=YEL)
+    if T > wfind(5, 'across'): title(fr, 'ACROSS HALF OF BRITAIN', 600, T - wfind(5, 'across'), size=92, fill=YEL)
 
 def s_twist(fr, T):
-    lt = T - S[5]; bg(fr, T, 'E8C9A0'); rays(fr, T, 'FFFFFF', .1)
+    lt = T - S[6]; bg(fr, T, 'E8C9A0'); rays(fr, T, 'FFFFFF', .1)
     ph = photo('orkney', 820, 420, (.5, .5))
     if ph is not None and lt < 2.2: put_rgba(fr, ph, CX, 1000, back(clamp(lt / .3)), 1.0, -2)
-    tape(fr, "BUT HERE'S THE TWIST", CX, 470, lt, col=RED, size=62, font=LUCKY, rot=-2, tcol='FFFFFF')
-    ts = wfind(5, 'seventy')
+    tape(fr, 'BUT THEN...', CX, 470, lt, col=RED, size=62, font=LUCKY, rot=-2, tcol='FFFFFF')
+    ts = wfind(6, 'seventy')
     if T > ts:
         stat(fr, '70 SAMPLES', 'FROM THAT EXACT AREA', CX, 600, T - ts, YEL, -3, 110)
         if lt >= 2.2: grid70(fr, T, ts + .2)
@@ -152,30 +151,30 @@ def s_home(fr, T):
     s = st('stone', w=600)
     if s is not None: put_rgba(fr, glow_outline(s, 14, (255, 255, 255)), CX, 1050, back(clamp(lt / .35)), 1.0, -4 + 2 * math.sin(T * 2))
     tape(fr, 'MOST FAMOUS ROCK IN BRITAIN', CX, 470, lt, col='FFFFFF', size=50, font=LUCKY, rot=-2)
-    if T > wfind(8, 'no home'): title(fr, 'NO HOME AGAIN', 600, T - wfind(8, 'no home'), size=118, fill=YEL)
-    if T > wfind(8, 'no home'): burst(fr, '?', 830, 1300 - 80, T - wfind(8, 'no home') - .2, r=90, col=RED, size=90)
+    if T > wfind(8, 'homeless'): title(fr, 'HOMELESS AGAIN', 600, T - wfind(8, 'homeless'), size=118, fill=YEL)
+    if T > wfind(8, 'homeless'): burst(fr, '?', 830, 1300 - 80, T - wfind(8, 'homeless') - .2, r=90, col=RED, size=90)
 
 def s_next(fr, T):
     lt = T - S[9]; fr[:] = paper(RED, .8); rays(fr, T, 'FFFFFF', .14)
     title(fr, 'SO WHAT', 860, lt, size=170, fill='FFFFFF'); title(fr, 'HAPPENS NEXT?', 1060, lt - .15, size=130, fill=YEL)
 
 def s_hunt(fr, T):
-    lt = T - S[10]; bg(fr, T, 'B9D3C2')
+    lt = T - S[9]; bg(fr, T, 'B9D3C2')
     tape(fr, 'THE NEW HUNT', CX, 470, lt, col=RED, size=66, font=LUCKY, rot=-2, tcol='FFFFFF')
     for k, (w_, nm, lab_, x, y, r) in enumerate((('england', 'england', 'NORTHERN ENGLAND', 330, 760, -4), ('scotland', 'scot2', 'OTHER PARTS OF SCOTLAND', 760, 1000, 3), ('ireland', 'ireland', 'IRELAND?', 330, 1260, -2))):
-        tk = wfind(10, w_) - .2
+        tk = wfind(9, w_) - .2
         if T > tk:
             ph = photo(nm, 470, 300, (.5, .5))
             if ph is not None: put_rgba(fr, ph, x, y, back(clamp((T - tk) / .3)), 1.0, r)
             chip(fr, lab_, x, y + 175, T - tk - .1, [YEL, CYAN, 'FFFFFF'][k], 36, r)
 
 def s_quarry(fr, T):
-    lt = T - S[11]; bg(fr, T, 'E8C9A0'); rays(fr, T, 'FFFFFF', .1)
+    lt = T - S[10]; bg(fr, T, 'E8C9A0'); rays(fr, T, 'FFFFFF', .1)
     ph = photo('trilithon', 820, 560, (.5, .5))
     if ph is not None: put_rgba(fr, ph, CX, 1030, 1.0 + .04 * lt, 1.0, 2)
     tape(fr, 'FIND THE QUARRY', CX, 470, lt, col='FFFFFF', size=62, font=LUCKY, rot=-2)
-    if T > wfind(11, 'who'): title(fr, 'WHO MOVED IT?', 600, T - wfind(11, 'who'), size=112, fill=YEL)
-    if T > wfind(11, 'how'): burst(fr, 'HOW?', 820, 1320, T - wfind(11, 'how'), r=110, col=RED, size=56)
+    if T > wfind(10, 'learns'): title(fr, 'HOW THEY MOVED IT', 600, T - wfind(10, 'learns'), size=100, fill=YEL)
+    if T > wfind(10, 'moved'): burst(fr, 'HOW?', 820, 1320, T - wfind(10, 'moved'), r=110, col=RED, size=56)
 
 def s_end(fr, T):
     lt = T - S[12]; bg(fr, T, 'C9DDF0')
@@ -186,16 +185,24 @@ def s_end(fr, T):
         burst(fr, 'YES', 230, 1280, T - S[13], r=100, col=GREEN, size=54, rot=-8)
         burst(fr, 'NO', 850, 1280, T - S[13] - .15, r=100, col=RED, size=54, rot=8)
 
+def s_loop(fr, T):
+    lt = T - S[11]; bg(fr, T); rays(fr, T, 'FFFFFF', .12)
+    ph = photo('stonehenge', 820, 560, (.5, .55))
+    if ph is not None: put_rgba(fr, ph, CX, 1000, 1.0, 1.0, -2)
+    sk(fr, st('stone', w=520), 720, 1260, T, 0, 1.0, -6, lt)
+    tape(fr, 'UNTIL THEN...', CX, 470, lt, col=RED, size=58, font=LUCKY, rot=-2, tcol='FFFFFF')
+    if T > wfind(11, 'nowhere') - .3: title(fr, 'FROM NOWHERE?', 600, T - wfind(11, 'nowhere') + .3, size=124, fill=YEL, rot=-3)
+
 def frame(T, plat='ig'):
     fr = np.zeros((H, W, 3), np.uint8)
-    seq = [(S[1], s_hook), (S[2], s_question), (S[3], s_altar), (S[4], s_2024), (S[5], s_drag), (S[6], s_twist), (S[7], s_print), (S[8], s_zero),
-           (S[9], s_home), (S[10], s_next), (S[11], s_hunt), (S[12], s_quarry), (END, s_end)]
+    seq = [(S[1], s_hook), (S[3], s_question), (S[4], s_altar), (S[5], s_2024), (S[6], s_drag), (S[7], s_twist), (S[8], s_zero),
+           (S[9], s_home), (S[10], s_hunt), (S[11], s_quarry), (END, s_loop)]
     for t1, fn in seq:
         if T < t1: fn(fr, T); break
     else:
         s_cta(fr, T, plat); return fr
     dx = dy = 0
-    for at in (wfind(1, 'no.'), S[7] + .1, wfind(5, 'twist')):
+    for at in (wfind(2, 'apart'), S[7] + .1, wfind(6, 'but')):
         a, b = shake(T, at); dx += a; dy += b
     if dx or dy: fr[:] = cv2.warpAffine(fr, np.float32([[1, 0, dx], [0, 1, dy]]), (W, H), borderMode=cv2.BORDER_REFLECT)
     if T < END: credit(fr, 'Images: Wikimedia Commons (credits in description)')

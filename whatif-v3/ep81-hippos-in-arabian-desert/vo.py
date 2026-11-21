@@ -7,18 +7,16 @@ TAGS={"story":("mix_michael_puck",1.0,0,0.18),"excited":("hype",1.05,1,0.15),"de
  "tease":("calm",0.97,-1.5,0.26),"reveal":("hype",1.02,1.5,0.2),"serious":("calm",0.97,0,0.2),"hype":("hype",1.05,1.5,0.18),
  "aside":("calm",1.05,-2.5,0.12),"friend":("mix_michael_puck",1.02,0,0.18),"punchline":("calm",0.93,1,0.3),"question":("mix_michael_puck",1.03,0.5,0.15)}
 CHAIN="highpass=f=80,lowpass=f=9500,equalizer=f=200:t=q:w=1:g=1.5,equalizer=f=6500:t=q:w=1.5:g=-4,deesser=i=0.6:m=0.5:f=0.5,afftdn=nf=-40,agate=threshold=0.012:ratio=6:attack=4:release=180:range=0.02,acompressor=threshold=-18dB:ratio=2.5:attack=8:release=120:knee=4"
-L=[("hype","The Arabian desert... once had hippos. And people hunting them."),
-("question","Wait... hippos? In Saudi Arabia?"),
-("story","A hundred twenty-five thousand years ago, this sand was a lake shore. Lake Mundafan."),
-("tease","Archaeologists dug up an ancient campsite there. Over five thousand stone tools."),
-("reveal","And the bones show what was on the menu. Hippos. Ostriches. Camels. Gazelles. Buffalo."),
-("excited","But here's the twist. On some spear points, they found traces of a plant used for arrow poison."),
-("deadpan","No proof of a poison kill yet. But still... that's a hundred twenty-five thousand years ago."),
-("serious","It means Arabia wasn't just a hallway for early humans. When it rained, people lived here."),
-("friend","So what happens next?"),
-("story","Scientists have spotted thousands of ancient lake beds across Arabia from space."),
-("punchline","Each one could be hiding a camp like this... under the sand."),
-("question","Would you dig for one?"),("friend","Comment yes or no.")]
+L=[("hype","What if you dug in the Saudi desert... and hit a hippo?"),
+("question","Sounds fake. But it's real."),
+("story","A hundred twenty-five thousand years ago, this sand was a lake. Hippos swam in it."),
+("tease","And people camped right on the shore. Three clues prove it."),
+("reveal","Clue one. Over five thousand stone tools, in one spot."),
+("story","Clue two. Bones. Hippo, ostrich, camel, buffalo. All butchered."),
+("excited","But clue three is the creepy one. Traces of a plant hunters used for poison arrows."),
+("serious","So this wasn't a desert people ran through. It was a home."),
+("friend","And from space, scientists have spotted thousands more old lakes."),
+("punchline","Any one could hide the next camp. You'd just have to dig in the Saudi desert.")]
 SR=48000; parts=[]; lines=[]; t=0.0
 for i,(tag,text) in enumerate(L):
     v,sp,g,pa=TAGS[tag]; a,sr=k.create(text,voice=VO[v],speed=sp*0.88,lang="en-us")

@@ -7,19 +7,18 @@ TAGS={"story":("mix_michael_puck",1.0,0,0.18),"excited":("hype",1.05,1,0.15),"de
  "tease":("calm",0.97,-1.5,0.26),"reveal":("hype",1.02,1.5,0.2),"serious":("calm",0.97,0,0.2),"hype":("hype",1.05,1.5,0.18),
  "aside":("calm",1.05,-2.5,0.12),"friend":("mix_michael_puck",1.02,0,0.18),"punchline":("calm",0.93,1,0.3),"question":("mix_michael_puck",1.03,0.5,0.15)}
 CHAIN="highpass=f=80,lowpass=f=9500,equalizer=f=200:t=q:w=1:g=1.5,equalizer=f=6500:t=q:w=1.5:g=-4,deesser=i=0.6:m=0.5:f=0.5,afftdn=nf=-40,agate=threshold=0.012:ratio=6:attack=4:release=180:range=0.02,acompressor=threshold=-18dB:ratio=2.5:attack=8:release=120:knee=4"
-L=[("hype","Stonehenge's six-ton mystery stone just lost its home... again."),
-("question","Scientists were sure it came from Scotland. Now? They say no."),
-("story","It's called the Altar Stone. Six tons, sixteen feet long, lying right in the center."),
-("tease","In 2024, a study traced it to northeast Scotland. Over four hundred sixty miles away."),
-("deadpan","Which meant ancient people dragged six tons... across half of Britain."),
-("reveal","But here's the twist. A new team collected seventy rock samples from that exact area."),
-("excited","They checked the grains, the minerals, the chemistry. A full geological fingerprint."),
+L=[("hype","Stonehenge has a six-ton stone... that came from nowhere."),
+("question","But wait. Didn't scientists solve this?"),
+("tease","They thought so. Then it all fell apart."),
+("story","It's called the Altar Stone. Long as a pickup truck. Lying right in the middle."),
+("reveal","In 2024, a study traced it to northeast Scotland. Four hundred sixty miles away."),
+("deadpan","So ancient people dragged six tons... across half of Britain?"),
+("excited","But then a new team grabbed seventy rocks from that exact spot."),
 ("punchline","Zero matches. Not one."),
-("serious","So the most famous rock in Britain... has no home again."),
-("friend","So what happens next?"),
-("story","Geologists are now hunting in northern England, other parts of Scotland, and even Ireland."),
-("punchline","Find the quarry, and we finally learn who moved it... and how."),
-("question","Do you think they'll ever find it?"),("friend","Comment yes or no.")]
+("serious","So the most famous rock in Britain is homeless again."),
+("story","Now the hunt moves to northern England, other parts of Scotland, even Ireland."),
+("excited","Whoever finds it finally learns how they moved it."),
+("friend","Until then, Stonehenge has a six-ton stone... that came from nowhere.")]
 SR=48000; parts=[]; lines=[]; t=0.0
 for i,(tag,text) in enumerate(L):
     v,sp,g,pa=TAGS[tag]; a,sr=k.create(text,voice=VO[v],speed=sp*0.88,lang="en-us")

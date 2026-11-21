@@ -7,18 +7,15 @@ TAGS={"story":("mix_michael_puck",1.0,0,0.18),"excited":("hype",1.05,1,0.15),"de
  "tease":("calm",0.97,-1.5,0.26),"reveal":("hype",1.02,1.5,0.2),"serious":("calm",0.97,0,0.2),"hype":("hype",1.05,1.5,0.18),
  "aside":("calm",1.05,-2.5,0.12),"friend":("mix_michael_puck",1.02,0,0.18),"punchline":("calm",0.93,1,0.3),"question":("mix_michael_puck",1.03,0.5,0.15)}
 CHAIN="highpass=f=80,lowpass=f=9500,equalizer=f=200:t=q:w=1:g=1.5,equalizer=f=6500:t=q:w=1.5:g=-4,deesser=i=0.6:m=0.5:f=0.5,afftdn=nf=-40,agate=threshold=0.012:ratio=6:attack=4:release=180:range=0.02,acompressor=threshold=-18dB:ratio=2.5:attack=8:release=120:knee=4"
-L=[("hype","Scientists cracked open a rock from the bottom of the ocean... and found two hundred forty-five animals living inside."),
-("question","And mining companies want to scoop up billions of these rocks."),
-("story","They're called nodules. Potato-sized lumps on the Pacific floor, up to four miles down."),
-("tease","They grow so slowly, one can take millions of years to form."),
-("reveal","Researchers examined two hundred forty-four of them. Inside, they counted over four thousand tiny animals."),
-("excited","One single nodule held two hundred forty-five. A whole hidden city... in one rock."),
-("deadpan","And these animals weren't the same as the ones living in the mud around them."),
-("serious","Why does that matter? Because these rocks are packed with metals for batteries."),
-("friend","So what happens next?"),
-("story","The U.S. could certify its first commercial deep-sea mining permit as soon as December."),
-("punchline","Which means some of these tiny worlds could be scooped up... before we even know what lives there."),
-("question","Should we mine the deep sea for batteries?"),("friend","Comment yes or no.")]
+L=[("hype","You crack open a rock... and it is full of animals."),
+("question","Not fossils. Real animals. Two hundred forty-five, in one rock."),
+("tease","And companies want to dig up billions of these. Here's the catch."),
+("story","They're called nodules. Potato-sized rocks, four miles down on the Pacific floor."),
+("reveal","Scientists opened two hundred forty-four. Over four thousand tiny animals inside."),
+("deadpan","But they weren't the same animals living in the mud around them. Different neighbors."),
+("serious","So why dig them up? They're packed with metals for batteries."),
+("excited","And the U.S. could approve its first commercial deep-sea mining permit as soon as December."),
+("punchline","Which means whole tiny cities could get scooped up... before anyone knows what lives inside.")]
 SR=48000; parts=[]; lines=[]; t=0.0
 for i,(tag,text) in enumerate(L):
     v,sp,g,pa=TAGS[tag]; a,sr=k.create(text,voice=VO[v],speed=sp*0.88,lang="en-us")

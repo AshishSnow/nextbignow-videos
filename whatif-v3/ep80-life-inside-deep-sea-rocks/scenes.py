@@ -4,7 +4,7 @@ from kit import *
 D = '/home/claude/nod'
 L = json.load(open(D + '/lines.json'))
 S = [l['start'] for l in L]; E = [l['start'] + l['dur'] for l in L]
-END = E[-1] + 0.3; TOTAL = END + 2.6
+END = E[-1] + 0.3; TOTAL = END + 1.6
 def wt(i, frac): return S[i] + L[i]['dur'] * frac
 def wfind(i, word):
     tx = L[i]['text'].lower(); k = tx.find(word.lower()); return wt(i, k / max(1, len(tx)))
@@ -76,30 +76,30 @@ def counter(fr, T, t0, dur, n0, n1, cy, size=150, fill=YEL, suffix=''):
 
 def s_hook(fr, T):
     deep(fr, T)
-    tc = wfind(0, 'found')
+    tc = wfind(0, 'full')
     op = ease(clamp((T - tc + .6) / .8))
     nd = st('nodule', w=460)
     if op < 1 and nd is not None:
         put_rgba(fr, nd, CX + 8 * math.sin(T * 30) * (op > 0), 1080, 1.0 + .5 * op, 1.0 - op, 3 * math.sin(T * 2))
     if op > 0: overlay(fr, cairo_layer(lambda c: xsection(c, CX, 1080, 300 * op + 1, T, 60, op)))
-    tape(fr, 'A ROCK FROM THE OCEAN FLOOR', CX, 470, T, col='FFFFFF', size=50, font=LUCKY, rot=-2)
-    tw = wfind(0, 'two hundred')
+    tape(fr, 'A ROCK FULL OF ANIMALS', CX, 470, T, col='FFFFFF', size=54, font=LUCKY, rot=-2)
+    tw = wfind(1, 'two hundred')
     if T > tw: counter(fr, T, tw, 1.2, 0, 245, 610, 130, YEL, ' ANIMALS')
-    if T > wfind(0, 'inside'): burst(fr, 'INSIDE!', 840, 1380, T - wfind(0, 'inside'), r=105, col=RED, size=46)
+    if T > wfind(1, 'fossils'): burst(fr, 'NOT FOSSILS', 850, 1250, T - wfind(1, 'fossils'), r=120, col=RED, size=36)
 
 def s_question(fr, T):
-    lt = T - S[1]; deep(fr, T)
+    lt = T - S[2]; deep(fr, T)
     ph = photo('seafloor', 820, 560, (.5, .5))
     if ph is not None: put_rgba(fr, ph, CX, 1020, back(clamp(lt / .35)), 1.0, -2)
-    tape(fr, 'MINING COMPANIES WANT', CX, 470, lt, col=RED, size=58, font=LUCKY, rot=-2, tcol='FFFFFF')
-    if T > wfind(1, 'billions'): title(fr, 'BILLIONS OF THEM', 600, T - wfind(1, 'billions'), size=112, fill=YEL)
+    tape(fr, 'COMPANIES WANT TO DIG', CX, 470, lt, col=RED, size=58, font=LUCKY, rot=-2, tcol='FFFFFF')
+    if T > wfind(2, 'billions'): title(fr, 'BILLIONS OF THEM', 600, T - wfind(2, 'billions'), size=112, fill=YEL)
 
 def s_nodule(fr, T):
-    lt = T - S[2]; deep(fr, T, '0A2E4C', '01060F')
+    lt = T - S[3]; deep(fr, T, '0A2E4C', '01060F')
     sk(fr, st('nodule', w=520), 440, 1050, T, 0, 1.0, -4, lt)
     tape(fr, "THEY'RE CALLED NODULES", CX, 470, lt, col='FFFFFF', size=56, font=LUCKY, rot=-2)
-    if T > wfind(2, 'potato'): chip(fr, 'POTATO-SIZED', 440, 1340, T - wfind(2, 'potato'), YEL, 44, -3)
-    td = wfind(2, 'four miles')
+    if T > wfind(3, 'potato'): chip(fr, 'POTATO-SIZED', 440, 1340, T - wfind(3, 'potato'), YEL, 44, -3)
+    td = wfind(3, 'four miles')
     def gauge(c):
         x = 900; c.rectangle(x - 14, 760, 28, 640); c.set_source_rgba(*hx('FFFFFF', .2)); c.fill()
         u = clamp((T - td + 1) / 1.5); c.rectangle(x - 14, 700, 28, 700 * u); c.set_source_rgba(*hx(CYAN)); c.fill()
@@ -126,13 +126,13 @@ def s_study(fr, T):
             if on <= 0: continue
             c.save(); c.translate(x, y); c.scale(on, on * .8); c.arc(0, 0, 20, 0, 2 * math.pi); c.restore()
             c.set_source_rgba(*hx('3B2A1E')); c.fill_preserve(); ink(c, 3); c.stroke()
-        ti = wfind(4, 'inside')
+        ti = wfind(4, 'four thousand')
         if T > ti:
             for k in range(int(clamp((T - ti) / 2) * 120)):
                 rng = np.random.default_rng(k); critter(c, rng.uniform(100, 980), rng.uniform(740, 1520), T, k, .8)
     overlay(fr, cairo_layer(dr))
     tape(fr, 'RESEARCHERS OPENED', CX, 470, lt, col='FFFFFF', size=58, font=LUCKY, rot=-2)
-    ti = wfind(4, 'inside')
+    ti = wfind(4, 'four thousand')
     if T < ti: counter(fr, T, wfind(4, 'two hundred'), 1.0, 0, 244, 600, 120, YEL, ' NODULES')
     else: counter(fr, T, ti, 1.4, 0, 4139, 600, 120, YEL, ' ANIMALS')
 
@@ -144,7 +144,7 @@ def s_city(fr, T):
     if T > wfind(5, 'city'): burst(fr, 'WOW', 860, 1380, T - wfind(5, 'city') - .3, r=95, col=RED, size=50)
 
 def s_diff(fr, T):
-    lt = T - S[6]; deep(fr, T)
+    lt = T - S[5]; deep(fr, T)
     def dr(c):
         c.rectangle(80, 760, 430, 560); c.set_source_rgba(*hx('7A5C3E')); c.fill_preserve(); ink(c, 6); c.stroke()
         for k in range(14):
@@ -153,11 +153,11 @@ def s_diff(fr, T):
     overlay(fr, cairo_layer(dr))
     chip(fr, 'MUD', 295, 1380, lt, 'FFFFFF', 44, -3); chip(fr, 'NODULE', 790, 1380, lt - .2, YEL, 44, 3)
     tape(fr, 'DIFFERENT ANIMALS', CX, 470, lt, col=RED, size=62, font=LUCKY, rot=-2, tcol='FFFFFF')
-    if T > wfind(6, 'same'): burst(fr, 'NOT THE SAME', CX, 660, T - wfind(6, 'same'), r=150, col=YEL, size=40, rot=-4)
+    if T > wfind(5, 'same'): burst(fr, 'NOT THE SAME', CX, 660, T - wfind(5, 'same'), r=150, col=YEL, size=40, rot=-4)
 
 def s_metals(fr, T):
-    lt = T - S[7]; deep(fr, T, '1B2A4C', '05070F')
-    tb = wfind(7, 'packed')
+    lt = T - S[6]; deep(fr, T, '1B2A4C', '05070F')
+    tb = wfind(6, 'packed')
     sk(fr, st('nodule', w=300), 250, 1060, T, 0, 1.0, -6, lt)
     def bat(c):
         u = ease(clamp((T - tb) / 1.6)); x, y, w, h = 520, 860, 420, 380
@@ -175,7 +175,7 @@ def s_metals(fr, T):
     tape(fr, 'WHY DOES THAT MATTER?', CX, 470, lt, col='FFFFFF', size=58, font=LUCKY, rot=-2)
     if T > tb: title(fr, 'BATTERY METALS', 600, T - tb, size=110, fill=YEL)
     for k, m in enumerate(('NICKEL', 'COBALT', 'MANGANESE')):
-        tk = wfind(7, 'batteries') + k * .25
+        tk = wfind(6, 'batteries') + k * .25
         if T > tk: chip(fr, m, [230, CX, 850][k], 1340 + (k % 2) * 60, T - tk, [CYAN, 'FFFFFF', YEL][k], 38, [-4, 2, -2][k])
 
 def s_next(fr, T):
@@ -183,7 +183,7 @@ def s_next(fr, T):
     title(fr, 'SO WHAT', 860, lt, size=170, fill='FFFFFF'); title(fr, 'HAPPENS NEXT?', 1060, lt - .15, size=130, fill=YEL)
 
 def s_permit(fr, T):
-    lt = T - S[9]; fr[:] = paper('E8DCC0', .5); rays(fr, T, 'FFFFFF', .1)
+    lt = T - S[7]; fr[:] = paper('E8DCC0', .5); rays(fr, T, 'FFFFFF', .1)
     def doc(c):
         c.save(); c.translate(CX, 1060); c.rotate(-.05)
         c.rectangle(-270 + 12, -340 + 14, 540, 680); c.set_source_rgba(0, 0, 0, .35); c.fill()
@@ -193,14 +193,14 @@ def s_permit(fr, T):
         c.restore()
     overlay(fr, cairo_layer(doc))
     tape(fr, 'DEEP-SEA MINING PERMIT', CX, 760, lt, col='FFFFFF', size=50, font=LUCKY, rot=-4)
-    tape(fr, 'THE U.S. COULD CERTIFY', CX, 470, lt, col='FFFFFF', size=58, font=LUCKY, rot=-2)
-    if T > wfind(9, 'first'): title(fr, 'ITS FIRST ONE', 600, T - wfind(9, 'first'), size=112, fill=YEL)
-    td = wfind(9, 'december')
+    tape(fr, 'THE U.S. COULD APPROVE', CX, 470, lt, col='FFFFFF', size=58, font=LUCKY, rot=-2)
+    if T > wfind(7, 'first'): title(fr, 'ITS FIRST ONE', 600, T - wfind(7, 'first'), size=112, fill=YEL)
+    td = wfind(7, 'december')
     if T > td: burst(fr, 'DEC?', 780, 1260, T - td, r=130, col=RED, size=60, rot=-8)
 
 def s_scoop(fr, T):
-    lt = T - S[10]; deep(fr, T)
-    u = clamp(lt / max(1, L[10]['dur']))
+    lt = T - S[8]; deep(fr, T)
+    u = clamp(lt / max(1, L[8]['dur']))
     cx_ = lerp(-150, W + 150, u)
     def dr(c):
         c.rectangle(0, 1230, W, 400); c.set_source_rgba(*hx('4A3A2A')); c.fill()
@@ -216,8 +216,8 @@ def s_scoop(fr, T):
         c.move_to(cx_, 1060); c.line_to(cx_ - 60, 640); c.set_source_rgba(*hx('1C1614')); c.set_line_width(10); c.stroke()
     overlay(fr, cairo_layer(dr))
     tape(fr, 'SCOOPED UP...', CX, 470, lt, col=RED, size=64, font=LUCKY, rot=-2, tcol='FFFFFF')
-    if T > wfind(10, 'before'): title(fr, 'BEFORE WE KNOW', 600, T - wfind(10, 'before'), size=104, fill=YEL)
-    if T > wfind(10, 'lives'): chip(fr, 'WHAT LIVES THERE', CX, 1440 - 640 + 60, T - wfind(10, 'lives'), 'FFFFFF', 44, 2)
+    if T > wfind(8, 'before'): title(fr, 'BEFORE ANYONE KNOWS', 600, T - wfind(8, 'before'), size=104, fill=YEL)
+    if T > wfind(8, 'lives'): chip(fr, 'WHAT LIVES INSIDE', CX, 1440 - 640 + 60, T - wfind(8, 'lives'), 'FFFFFF', 44, 2)
 
 def s_end(fr, T):
     lt = T - S[11]; deep(fr, T)
@@ -229,14 +229,14 @@ def s_end(fr, T):
 
 def frame(T, plat='ig'):
     fr = np.zeros((H, W, 3), np.uint8)
-    seq = [(S[1], s_hook), (S[2], s_question), (S[3], s_nodule), (S[4], s_slow), (S[5], s_study), (S[6], s_city), (S[7], s_diff), (S[8], s_metals),
-           (S[9], s_next), (S[10], s_permit), (S[11], s_scoop), (END, s_end)]
+    seq = [(S[2], s_hook), (S[3], s_question), (S[4], s_nodule), (S[5], s_study), (S[6], s_diff), (S[7], s_metals),
+           (S[8], s_permit), (END, s_scoop)]
     for t1, fn in seq:
         if T < t1: fn(fr, T); break
     else:
         s_cta(fr, T, plat); return fr
     dx = dy = 0
-    for at in (wfind(0, 'found'), wfind(5, 'city'), wfind(9, 'december')):
+    for at in (wfind(0, 'full'), wfind(5, 'same'), wfind(7, 'december')):
         a, b = shake(T, at); dx += a; dy += b
     if dx or dy: fr[:] = cv2.warpAffine(fr, np.float32([[1, 0, dx], [0, 1, dy]]), (W, H), borderMode=cv2.BORDER_REFLECT)
     if T < END: credit(fr, 'Images: Wikimedia Commons (credits in description)')

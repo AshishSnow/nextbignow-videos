@@ -4,7 +4,7 @@ from kit import *
 D = '/home/claude/hippo'
 L = json.load(open(D + '/lines.json'))
 S = [l['start'] for l in L]; E = [l['start'] + l['dur'] for l in L]
-END = E[-1] + 0.3; TOTAL = END + 2.6
+END = E[-1] + 0.3; TOTAL = END + 1.6
 def wt(i, frac): return S[i] + L[i]['dur'] * frac
 def wfind(i, word):
     tx = L[i]['text'].lower(); k = tx.find(word.lower()); return wt(i, k / max(1, len(tx)))
@@ -67,19 +67,25 @@ def card(fr, items, T, t0, cx=CX, cy=1020):
 
 def s_hook(fr, T):
     wet = ease(clamp((T - 1.2) / 1.2)); sky(fr, T, wet); land(fr, T, wet)
-    tape(fr, 'THE ARABIAN DESERT', CX, 470, T, col='FFFFFF', size=62, font=LUCKY, rot=-2)
-    th = wfind(0, 'hippos')
-    if T < th: sk(fr, st('camel', w=420), 380, 1020, T, 0, 1.0, 3, T)
+    tape(fr, 'DIG IN THE SAUDI DESERT...', CX, 470, T, col='FFFFFF', size=58, font=LUCKY, rot=-2)
+    th = wfind(0, 'hippo')
+    if T < th + .3:
+        def dig(c):
+            c.save(); c.rectangle(0, 1150, W, 500); c.clip()
+            u = clamp(T / max(.5, th)); c.arc(CX, 1290, 60 + 200 * u, 0, 2 * math.pi); c.set_source_rgba(*hx('8A5A2B')); c.fill_preserve(); ink(c, 6); c.stroke(); c.restore()
+            for k in range(8):
+                f = ((T * 1.6 + k / 8) % 1); x = CX + (k - 3.5) * 40 * f; y = 1180 - 260 * math.sin(f * math.pi)
+                c.arc(x, y, 12, 0, 2 * math.pi); c.set_source_rgba(*hx('C9913F')); c.fill()
+        overlay(fr, cairo_layer(dig))
     if T > th:
-        title(fr, 'HAD HIPPOS', 600, T - th, size=130, fill=YEL)
+        title(fr, '...HIT A HIPPO?', 600, T - th, size=120, fill=YEL)
         sk(fr, st('hippo', w=520), 600, 1050, T, 0, 1.0, -4, T - th)
-    if T > wfind(0, 'hunting'): burst(fr, 'HUNTED!', 230, 860, T - wfind(0, 'hunting'), r=110, col=RED, size=44, rot=-8)
 
 def s_question(fr, T):
     lt = T - S[1]; sky(fr, T); land(fr, T)
     sk(fr, st('hippo', w=420), CX, 1020, T, 0, 1.0, 6, lt)
-    title(fr, 'HIPPOS?', 470, lt, size=150, fill='FFFFFF', rot=-3)
-    if T > wfind(1, 'saudi'): title(fr, 'IN SAUDI ARABIA?', 640, T - wfind(1, 'saudi'), size=96, fill=YEL)
+    title(fr, 'SOUNDS FAKE?', 470, lt, size=130, fill='FFFFFF', rot=-3)
+    if T > wfind(1, 'real'): title(fr, "IT'S REAL", 640, T - wfind(1, 'real'), size=120, fill=YEL)
     burst(fr, '?!', 860, 1300, lt - .3, r=90, col=RED, size=80)
 
 def s_lake(fr, T):
@@ -87,41 +93,42 @@ def s_lake(fr, T):
     counter_t = wfind(2, 'hundred')
     if T > counter_t:
         v = int(125000 * eout(clamp((T - counter_t) / 1.2))); title(fr, f'{v:,} YEARS AGO', 470, T - counter_t, size=88, fill='FFFFFF', rot=-2)
-    if T > wfind(2, 'lake shore'): title(fr, 'A LAKE SHORE', 610, T - wfind(2, 'lake shore'), size=110, fill=YEL)
-    if T > wfind(2, 'mundafan'): chip(fr, 'LAKE MUNDAFAN', CX, 1320, T - wfind(2, 'mundafan'), CYAN, 46, -2)
+    if T > wfind(2, 'lake'): title(fr, 'WAS A LAKE', 610, T - wfind(2, 'lake'), size=120, fill=YEL)
+    if T > wfind(2, 'hippos swam'): chip(fr, 'HIPPOS SWAM HERE', CX, 1320, T - wfind(2, 'hippos swam'), CYAN, 46, -2)
 
 def s_camp(fr, T):
-    lt = T - S[3]; sky(fr, T, .6); land(fr, T, .6, 1300)
+    lt = T - S[4]; sky(fr, T, .6); land(fr, T, .6, 1300)
     sk(fr, st('point', w=300), 300, 1000, T, 0, 1.0, -12, lt - .2)
     sk(fr, st('point', w=260), 560, 1060, T, 1, 1.0, 18, lt - .4)
     sk(fr, st('point', w=280), 810, 990, T, 2, 1.0, -4, lt - .6)
-    tape(fr, 'AN ANCIENT CAMPSITE', CX, 470, lt, col='FFFFFF', size=60, font=LUCKY, rot=-2)
-    tf = wfind(3, 'five thousand')
+    tape(fr, 'CLUE 1: STONE TOOLS', CX, 470, lt, col='FFFFFF', size=60, font=LUCKY, rot=-2)
+    tf = wfind(4, 'five thousand')
     if T > tf:
         v = int(5511 * eout(clamp((T - tf) / 1.0))); title(fr, f'{v:,} STONE TOOLS', 610, T - tf, size=96, fill=YEL)
 
 def s_menu(fr, T):
-    lt = T - S[4]; fr[:] = paper('E8C9A0', .6); rays(fr, T, 'FFFFFF', .1)
-    items = [('hippos', 'HIPPOS', 'hippo'), ('ostriches', 'OSTRICHES', 'ostrich'), ('camels', 'CAMELS', 'camel'), ('gazelles', 'GAZELLES', 'gazelle'), ('buffalo', 'BUFFALO', 'buffalo')]
-    card(fr, items, T, [wfind(4, w_) - .1 for w_, _, _ in items])
-    tape(fr, "WHAT WAS ON THE MENU", CX, 470, lt, col=RED, size=58, font=LUCKY, rot=-2, tcol='FFFFFF')
+    lt = T - S[5]; fr[:] = paper('E8C9A0', .6); rays(fr, T, 'FFFFFF', .1)
+    items = [('hippo,', 'HIPPO', 'hippo'), ('ostrich', 'OSTRICH', 'ostrich'), ('camel', 'CAMEL', 'camel'), ('buffalo', 'BUFFALO', 'buffalo')]
+    card(fr, items, T, [wfind(5, w_) - .1 for w_, _, _ in items])
+    tape(fr, "CLUE 2: BONES", CX, 470, lt, col=RED, size=62, font=LUCKY, rot=-2, tcol='FFFFFF')
+    if T > wfind(5, 'butchered'): burst(fr, 'BUTCHERED', 830, 1330, T - wfind(5, 'butchered'), r=125, col=RED, size=36, rot=8)
 
 def s_poison(fr, T):
-    lt = T - S[5]; fr[:] = paper('C9E4B4', .55); rays(fr, T, 'FFFFFF', .1)
-    tape(fr, "BUT HERE'S THE TWIST", CX, 470, lt, col=RED, size=62, font=LUCKY, rot=-2, tcol='FFFFFF')
+    lt = T - S[6]; fr[:] = paper('C9E4B4', .55); rays(fr, T, 'FFFFFF', .1)
+    tape(fr, 'CLUE 3: THE CREEPY ONE', CX, 470, lt, col=RED, size=56, font=LUCKY, rot=-2, tcol='FFFFFF')
     sk(fr, st('point', w=340), 330, 960, T, 0, 1.0, -30, lt - .3)
-    tp = wfind(5, 'plant')
+    tp = wfind(6, 'plant')
     if T > tp:
         ph = photo('acok', 420, 420, (.5, .5))
         if ph is not None: put_rgba(fr, ph, 780, 980, back(clamp((T - tp) / .3)), 1.0, 4)
-    if T > wfind(5, 'poison'):
-        title(fr, 'ARROW POISON', 620, T - wfind(5, 'poison'), size=116, fill=YEL)
+    if T > wfind(6, 'poison'):
+        title(fr, 'ARROW POISON', 620, T - wfind(6, 'poison'), size=116, fill=YEL)
         def drip(c):
             for k in range(4):
-                f = ((T - wfind(5, 'poison')) * .9 + k / 4) % 1; x = 380 + 30 * k - 40; y = 1180 + f * 200
+                f = ((T - wfind(6, 'poison')) * .9 + k / 4) % 1; x = 380 + 30 * k - 40; y = 1180 + f * 200
                 c.arc(x, y, 14 * (1 - f * .4), 0, 2 * math.pi); c.set_source_rgba(*hx(GREEN, 1 - f)); c.fill()
         overlay(fr, cairo_layer(drip))
-    chip(fr, 'TRACES ON SPEAR POINTS', CX, 1330, T - wfind(5, 'spear'), 'FFFFFF', 40, 2)
+    chip(fr, 'TRACES ON STONE POINTS', CX, 1330, T - wfind(6, 'traces'), 'FFFFFF', 40, 2)
 
 def s_proof(fr, T):
     lt = T - S[6]; fr[:] = paper('E8DCC0', .5)
@@ -131,7 +138,7 @@ def s_proof(fr, T):
     if T > tw: stat(fr, '125,000', 'YEARS AGO', CX, 640, T - tw, RED, -3, 140)
 
 def s_hall(fr, T):
-    lt = T - S[7]; rain = clamp((T - wfind(7, 'rained')) / .5) if T > wfind(7, 'rained') else 0
+    lt = T - S[7]; rain = clamp((T - wfind(7, 'home')) / .5) if T > wfind(7, 'home') else 0
     sky(fr, T, .2 + .6 * rain); land(fr, T, .8 * rain)
     def corridor(c):
         a = 1 - rain
@@ -144,14 +151,14 @@ def s_hall(fr, T):
                 c.move_to(x, y); c.rel_line_to(-8, 34); c.set_source_rgba(.3, .5, .9, .6 * rain); c.set_line_width(4); c.stroke()
     overlay(fr, cairo_layer(corridor))
     tape(fr, 'NOT JUST A HALLWAY', CX, 470, lt, col='FFFFFF', size=60, font=LUCKY, rot=-2)
-    if T > wfind(7, 'rained'): title(fr, 'PEOPLE LIVED HERE', 610, T - wfind(7, 'rained'), size=100, fill=YEL)
+    if T > wfind(7, 'home'): title(fr, 'IT WAS A HOME', 610, T - wfind(7, 'home'), size=100, fill=YEL)
 
 def s_next(fr, T):
     lt = T - S[8]; fr[:] = paper(RED, .8); rays(fr, T, 'FFFFFF', .14)
     title(fr, 'SO WHAT', 860, lt, size=170, fill='FFFFFF'); title(fr, 'HAPPENS NEXT?', 1060, lt - .15, size=130, fill=YEL)
 
 def s_space(fr, T):
-    lt = T - S[9]; fr[:] = paper('0B1026', .9)
+    lt = T - S[8]; fr[:] = paper('0B1026', .9)
     ph = photo('sat', 820, 820, (.5, .5))
     if ph is not None: put_rgba(fr, ph, CX, 1040, back(clamp(lt / .35)), 1.0, -2)
     def dots(c):
@@ -161,18 +168,18 @@ def s_space(fr, T):
             c.set_source_rgba(*hx(CYAN)); c.fill_preserve(); ink(c, 3); c.stroke()
     overlay(fr, cairo_layer(dots))
     tape(fr, 'SPOTTED FROM SPACE', CX, 470, lt, col='FFFFFF', size=62, font=LUCKY, rot=-2)
-    if T > wfind(9, 'thousands'): title(fr, 'THOUSANDS OF OLD LAKES', 610, T - wfind(9, 'thousands'), size=86, fill=YEL)
+    if T > wfind(8, 'thousands'): title(fr, 'THOUSANDS OF OLD LAKES', 610, T - wfind(8, 'thousands'), size=86, fill=YEL)
 
 def s_hidden(fr, T):
-    lt = T - S[10]; sky(fr, T); land(fr, T, 0, 1000)
+    lt = T - S[9]; sky(fr, T); land(fr, T, 0, 1000)
     def dig(c):
         c.save(); c.rectangle(0, 1100, W, 500); c.clip()
         u = clamp(lt / 2.0); c.arc(CX, 1260, 210 * u + 1, 0, 2 * math.pi); c.set_source_rgba(*hx('8A5A2B')); c.fill(); c.restore()
     overlay(fr, cairo_layer(dig))
     if lt > .8: sk(fr, st('point', w=200), CX - 60, 1260, T, 0, 1.0, -30, lt - .8)
     if lt > 1.1: sk(fr, st('point', w=170), CX + 80, 1290, T, 1, 1.0, 25, lt - 1.1)
-    tape(fr, 'EACH ONE COULD HIDE A CAMP', CX, 470, lt, col='FFFFFF', size=52, font=LUCKY, rot=-2)
-    if T > wfind(10, 'sand'): title(fr, 'UNDER THE SAND', 610, T - wfind(10, 'sand'), size=110, fill=YEL)
+    tape(fr, 'ANY ONE COULD HIDE A CAMP', CX, 470, lt, col='FFFFFF', size=52, font=LUCKY, rot=-2)
+    if T > wfind(9, 'dig'): title(fr, 'DIG IN THE DESERT...', 610, T - wfind(9, 'dig'), size=96, fill=YEL)
 
 def s_end(fr, T):
     lt = T - S[11]; sky(fr, T, .5); land(fr, T, .5)
@@ -182,16 +189,26 @@ def s_end(fr, T):
         burst(fr, 'YES', 230, 1330, T - S[12], r=100, col=GREEN, size=54, rot=-8)
         burst(fr, 'NO', 850, 1330, T - S[12] - .15, r=100, col=RED, size=54, rot=8)
 
+def s_clues(fr, T):
+    lt = T - S[3]; sky(fr, T, .7); land(fr, T, .7)
+    tape(fr, 'PEOPLE CAMPED HERE', CX, 470, lt, col='FFFFFF', size=60, font=LUCKY, rot=-2)
+    tc = wfind(3, 'three')
+    if T > tc:
+        title(fr, '3 CLUES', 610, T - tc, size=130, fill=YEL)
+        for k in range(3):
+            t_ = T - tc - .15 * k
+            if t_ > 0: burst(fr, str(k + 1), 250 + k * 290, 1000, t_, r=110, col=[RED, CYAN, YEL][k], size=90, rot=[-8, 4, -3][k])
+
 def frame(T, plat='ig'):
     fr = np.zeros((H, W, 3), np.uint8)
-    seq = [(S[1], s_hook), (S[2], s_question), (S[3], s_lake), (S[4], s_camp), (S[5], s_menu), (S[6], s_poison), (S[7], s_proof), (S[8], s_hall),
-           (S[9], s_next), (S[10], s_space), (S[11], s_hidden), (END, s_end)]
+    seq = [(S[1], s_hook), (S[2], s_question), (S[3], s_lake), (S[4], s_clues), (S[5], s_camp), (S[6], s_menu), (S[7], s_poison), (S[8], s_hall),
+           (S[9], s_space), (END, s_hidden)]
     for t1, fn in seq:
         if T < t1: fn(fr, T); break
     else:
         s_cta(fr, T, plat); return fr
     dx = dy = 0
-    for at in (wfind(0, 'hippos'), wfind(5, 'twist'), wfind(5, 'poison')):
+    for at in (wfind(0, 'hippo'), wfind(6, 'creepy'), wfind(6, 'poison')):
         a, b = shake(T, at); dx += a; dy += b
     if dx or dy: fr[:] = cv2.warpAffine(fr, np.float32([[1, 0, dx], [0, 1, dy]]), (W, H), borderMode=cv2.BORDER_REFLECT)
     if T < END: credit(fr, 'Images: Wikimedia Commons (credits in description)')

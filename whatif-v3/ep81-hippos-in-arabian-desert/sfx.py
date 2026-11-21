@@ -8,13 +8,14 @@ def snd(i):
     if i not in C:
         subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', M % i, '-ac', '1', '-ar', str(SR), '/tmp/s.wav'], check=True); C[i] = sf.read('/tmp/s.wav', dtype='float32')[0]
     return C[i]
-EV = [(0.05, '1202', .45), (.3, '1177', .3), (1.2, '2604', .35), (wfind(0, 'hippos'), '788', .5), (wfind(0, 'hunting'), '2364', .45),
- (S[1] - .1, '2627', .45), (wfind(1, 'saudi'), '2357', .4), (S[2] - .1, '1461', .45), (wfind(2, 'hundred'), '1092', .35), (wfind(2, 'lake shore'), '1185', .35),
- (S[3] - .1, '2627', .45), (S[3] + .2, '1494', .35), (S[3] + .4, '1494', .35), (S[3] + .6, '1494', .35), (wfind(3, 'five thousand'), '790', .4)] + [
- (wfind(4, w) - .1, '2358', .4) for w in ('hippos', 'ostriches', 'camels', 'gazelles', 'buffalo')] + [
- (S[5] - .1, '1461', .45), (wfind(5, 'twist'), '788', .5), (wfind(5, 'poison'), '1143', .45), (S[6] - .1, '1471', .4), (wfind(6, 'hundred'), '2357', .4),
- (S[7] - .1, '2627', .45), (wfind(7, 'rained'), '1471', .4), (S[8] - .05, '790', .45), (S[9] - .1, '1471', .45), (wfind(9, 'thousands'), '2604', .4)] + [(S[9] + 1.0 + k * .2, '2354', .12) for k in range(10)] + [
- (S[10] - .1, '1494', .45), (wfind(10, 'sand'), '2357', .4), (S[11] - .1, '1202', .4), (S[12], '2364', .45), (S[12] + .15, '2364', .45), (END, '1471', .5), (END + .3, '2068', .45)]
+EV = [(0.05, '1202', .45)] + [(.2 + k * .45, '1494', .3) for k in range(4)] + [(wfind(0, 'hippo'), '788', .5),
+ (S[1] - .1, '2627', .45), (wfind(1, 'real'), '1143', .45), (S[2] - .1, '1461', .45), (wfind(2, 'hundred'), '1092', .35), (wfind(2, 'lake'), '1185', .35),
+ (S[3] - .1, '2627', .45), (wfind(3, 'three'), '2357', .4), (wfind(3, 'three') + .15, '2357', .35), (wfind(3, 'three') + .3, '2357', .35),
+ (S[4] - .1, '1461', .45), (S[4] + .2, '1494', .35), (S[4] + .4, '1494', .35), (wfind(4, 'five thousand'), '790', .4)] + [
+ (wfind(5, w) - .1, '2358', .4) for w in ('hippo,', 'ostrich', 'camel', 'buffalo')] + [(wfind(5, 'butchered'), '1143', .45),
+ (S[6] - .1, '1461', .45), (wfind(6, 'creepy'), '788', .5), (wfind(6, 'poison'), '1143', .45),
+ (S[7] - .1, '2627', .45), (wfind(7, 'home'), '1471', .4), (S[8] - .1, '1471', .45), (wfind(8, 'thousands'), '2604', .4)] + [(S[8] + 1.0 + k * .2, '2354', .12) for k in range(10)] + [
+ (S[9] - .1, '1494', .45), (wfind(9, 'dig'), '2357', .4), (END, '1471', .5)]
 N = int((TOTAL + .5) * SR); fx = np.zeros(N, np.float32)
 for t, i, g in EV:
     a = snd(i)[:int(2.2 * SR)].copy(); n = min(len(a), N - int(t * SR)); fo = int(.15 * SR)

@@ -2,99 +2,85 @@
  {
   "i": 0,
   "tag": "hype",
-  "text": "Stonehenge's six-ton mystery stone just lost its home... again.",
+  "text": "Stonehenge has a six-ton stone... that came from nowhere.",
   "start": 0.0,
-  "dur": 4.221
+  "dur": 3.456
  },
  {
   "i": 1,
   "tag": "question",
-  "text": "Scientists were sure it came from Scotland. Now? They say no.",
-  "start": 4.401,
-  "dur": 3.961
+  "text": "But wait. Didn't scientists solve this?",
+  "start": 3.636,
+  "dur": 2.166
  },
  {
   "i": 2,
-  "tag": "story",
-  "text": "It's called the Altar Stone. Six tons, sixteen feet long, lying right in the center.",
-  "start": 8.511,
-  "dur": 5.736
+  "tag": "tease",
+  "text": "They thought so. Then it all fell apart.",
+  "start": 5.951,
+  "dur": 2.699
  },
  {
   "i": 3,
-  "tag": "tease",
-  "text": "In 2024, a study traced it to northeast Scotland. Over four hundred sixty miles away.",
-  "start": 14.427,
-  "dur": 7.865
+  "tag": "story",
+  "text": "It's called the Altar Stone. Long as a pickup truck. Lying right in the middle.",
+  "start": 8.911,
+  "dur": 4.929
  },
  {
   "i": 4,
-  "tag": "deadpan",
-  "text": "Which meant ancient people dragged six tons... across half of Britain.",
-  "start": 22.552,
-  "dur": 4.732
+  "tag": "reveal",
+  "text": "In 2024, a study traced it to northeast Scotland. Four hundred sixty miles away.",
+  "start": 14.02,
+  "dur": 6.631
  },
  {
   "i": 5,
-  "tag": "reveal",
-  "text": "But here's the twist. A new team collected seventy rock samples from that exact area.",
-  "start": 27.504,
-  "dur": 5.567
+  "tag": "deadpan",
+  "text": "So ancient people dragged six tons... across half of Britain?",
+  "start": 20.85,
+  "dur": 4.35
  },
  {
   "i": 6,
   "tag": "excited",
-  "text": "They checked the grains, the minerals, the chemistry. A full geological fingerprint.",
-  "start": 33.271,
-  "dur": 4.945
+  "text": "But then a new team grabbed seventy rocks from that exact spot.",
+  "start": 25.42,
+  "dur": 3.404
  },
  {
   "i": 7,
   "tag": "punchline",
   "text": "Zero matches. Not one.",
-  "start": 38.366,
+  "start": 28.974,
   "dur": 2.046
  },
  {
   "i": 8,
   "tag": "serious",
-  "text": "So the most famous rock in Britain... has no home again.",
-  "start": 40.712,
-  "dur": 3.687
+  "text": "So the most famous rock in Britain is homeless again.",
+  "start": 31.319,
+  "dur": 3.301
  },
  {
   "i": 9,
-  "tag": "friend",
-  "text": "So what happens next?",
-  "start": 44.599,
-  "dur": 1.295
+  "tag": "story",
+  "text": "Now the hunt moves to northern England, other parts of Scotland, even Ireland.",
+  "start": 34.821,
+  "dur": 5.26
  },
  {
   "i": 10,
-  "tag": "story",
-  "text": "Geologists are now hunting in northern England, other parts of Scotland, and even Ireland.",
-  "start": 46.074,
-  "dur": 6.192
+  "tag": "excited",
+  "text": "Whoever finds it finally learns how they moved it.",
+  "start": 40.261,
+  "dur": 2.618
  },
  {
   "i": 11,
-  "tag": "punchline",
-  "text": "Find the quarry, and we finally learn who moved it... and how.",
-  "start": 52.446,
-  "dur": 4.326
- },
- {
-  "i": 12,
-  "tag": "question",
-  "text": "Do you think they'll ever find it?",
-  "start": 57.072,
-  "dur": 1.595
- },
- {
-  "i": 13,
   "tag": "friend",
-  "text": "Comment yes or no.",
-  "start": 58.818,
-  "dur": 1.201
+  "text": "Until then, Stonehenge has a six-ton stone... that came from nowhere.",
+  "start": 43.029,
+  "dur": 4.5
  }
 ]

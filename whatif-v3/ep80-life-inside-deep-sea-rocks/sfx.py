@@ -8,13 +8,13 @@ def snd(i):
     if i not in C:
         subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', M % i, '-ac', '1', '-ar', str(SR), '/tmp/s.wav'], check=True); C[i] = sf.read('/tmp/s.wav', dtype='float32')[0]
     return C[i]
-EV = [(0.05, '1202', .45), (.3, '1177', .3), (wfind(0, 'found') - .3, '1143', .55), (wfind(0, 'two hundred'), '790', .35), (wfind(0, 'inside'), '788', .45),
- (S[1] - .1, '2627', .45), (wfind(1, 'billions'), '2357', .4), (S[2] - .1, '1461', .45), (wfind(2, 'potato'), '2358', .4), (wfind(2, 'four miles') - .8, '2627', .4),
- (S[3] - .1, '1471', .4), (wfind(3, 'millions'), '2604', .4), (S[4] - .1, '2627', .45)] + [(S[4] + .3 + k * .22, '2354', .12) for k in range(8)] + [
- (wfind(4, 'inside'), '2357', .45), (S[5] - .1, '1461', .45), (wfind(5, 'city'), '788', .5), (S[6] - .1, '2627', .45), (wfind(6, 'same'), '2364', .45),
- (S[7] - .1, '1471', .4), (wfind(7, 'packed'), '1143', .45), (wfind(7, 'batteries'), '2358', .35), (wfind(7, 'batteries') + .25, '2358', .35), (wfind(7, 'batteries') + .5, '2358', .35),
- (S[8] - .05, '790', .45), (S[9] - .1, '1461', .45), (wfind(9, 'first'), '2357', .4), (wfind(9, 'december'), '788', .5),
- (S[10] - .1, '1143', .45), (wfind(10, 'before'), '2604', .4), (S[11] - .1, '1202', .4), (S[12], '2364', .45), (S[12] + .15, '2364', .45), (END, '1471', .5), (END + .3, '2068', .45)]
+EV = [(0.05, '1202', .45), (.3, '1177', .3), (wfind(0, 'full') - .6, '1143', .55), (wfind(1, 'fossils'), '788', .45), (wfind(1, 'two hundred'), '790', .35),
+ (S[2] - .1, '2627', .45), (wfind(2, 'billions'), '2357', .4), (wfind(2, 'catch'), '2364', .4), (S[3] - .1, '1461', .45), (wfind(3, 'potato'), '2358', .4), (wfind(3, 'four miles') - .8, '2627', .4),
+ (S[4] - .1, '2627', .45)] + [(S[4] + .3 + k * .22, '2354', .12) for k in range(8)] + [
+ (wfind(4, 'four thousand'), '2357', .45), (S[5] - .1, '1461', .45), (wfind(5, 'same'), '2364', .45),
+ (S[6] - .1, '1471', .4), (wfind(6, 'packed'), '1143', .45), (wfind(6, 'batteries'), '2358', .35), (wfind(6, 'batteries') + .25, '2358', .35), (wfind(6, 'batteries') + .5, '2358', .35),
+ (S[7] - .1, '1461', .45), (wfind(7, 'first'), '2357', .4), (wfind(7, 'december'), '788', .5),
+ (S[8] - .1, '1143', .45), (wfind(8, 'before'), '2604', .4), (END, '1471', .5)]
 N = int((TOTAL + .5) * SR); fx = np.zeros(N, np.float32)
 for t, i, g in EV:
     a = snd(i)[:int(2.2 * SR)].copy(); n = min(len(a), N - int(t * SR)); fo = int(.15 * SR)
