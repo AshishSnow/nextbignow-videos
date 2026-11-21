@@ -1,0 +1,72 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "That energy drink in your hand? Heart researchers just flagged it.",
+  "start": 0.0,
+  "dur": 3.701
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Not for the sugar. For your heart.",
+  "start": 3.881,
+  "dur": 1.808
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "They dug through nine years of FDA safety reports. Twenty-eight thousand of them.",
+  "start": 5.84,
+  "dur": 5.622
+ },
+ {
+  "i": 3,
+  "tag": "reveal",
+  "text": "Reports on energy drinks and stimulant supplements mentioned heart attacks over four times more often.",
+  "start": 11.642,
+  "dur": 6.303
+ },
+ {
+  "i": 4,
+  "tag": "excited",
+  "text": "But cardiac arrest? Eleven times. That's when your heart just... stops.",
+  "start": 18.145,
+  "dur": 4.246
+ },
+ {
+  "i": 5,
+  "tag": "serious",
+  "text": "And almost half those heart reports came from people eighteen to thirty-four.",
+  "start": 22.541,
+  "dur": 4.93
+ },
+ {
+  "i": 6,
+  "tag": "deadpan",
+  "text": "Now, reports aren't proof. Nobody knows yet if the drink caused it.",
+  "start": 27.671,
+  "dur": 4.853
+ },
+ {
+  "i": 7,
+  "tag": "story",
+  "text": "But some cans pack three hundred milligrams of caffeine. The daily limit for most adults is four hundred.",
+  "start": 32.744,
+  "dur": 7.213
+ },
+ {
+  "i": 8,
+  "tag": "tease",
+  "text": "So researchers want bigger studies. And there's still no U.S. age limit to buy them.",
+  "start": 40.136,
+  "dur": 6.105
+ },
+ {
+  "i": 9,
+  "tag": "punchline",
+  "text": "So before you crack open the next one... take a look.",
+  "start": 46.501,
+  "dur": 3.617
+ }
+]
