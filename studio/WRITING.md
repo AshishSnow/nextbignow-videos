@@ -142,6 +142,11 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
 54. **Timing isn't motive, and a cottage-food rule is about selling.** "The surprising move: go thick while everyone goes thin" made Hoka's sole a reaction to the barefoot craze; the founders said it wasn't. Say it as timing ("The odd timing? Thin shoes were the big craze."). And "some states ban hot sauce from home kitchens" overstated a rule that only stops you *selling* it as a cottage food. Also: "his longtime pepper farm" sounded like he owned it — it was a supplier. (17 Nov, Hoka + Sriracha reviews.)
 55. **Name who got paid, and don't say a date that will go stale.** After a founder sells, "another buyer pays $1.75B" and "its owner said…" read as money/news about the founder: name the owner ("Owner Newell…") and add "Not to Mike." if it's a later sale. In seasonal scripts that may post weeks later, never say "last December" — keep the date on the tape. And put "The surprising move?" on the beat that is actually counter-intuitive (no seller fees), not the expected one (layoffs). Write ≤ ~225 words: `story_check.py`'s length estimate runs ~11 s above human_check's, and its 90-s cap is the one that binds. (19 Nov, Yankee Candle + Vinted reviews.)
 
+56. **Check who said the quote and what the brag really was.** "Target, we're in produce…" was the brand's first employee, not the founder; "I own my own sneaker
+    line" was a joke about a co-branded shoe (say "he joked"); "I don't even like chicken" is a cofounder *recalling* the chef ("a friend recalls"). A
+    detail from today's menu (a waiver for the hottest level) can't sit in the 2017 scene — tag it TODAY. And a rule's timing is its own: acidified-food
+    makers file the process before they *pack*, not "before the first sale"; a pop-up permit can be city *or* county. (21 Nov, Grillo's + Dave's reviews.)
+
 ## The checker (`tools/human_check.py`)
 H1 tells ≤ 1 per 150 words · H2 openers (top ≤ 15 %, But/So/And ≤ 20 %) · H3 no skeleton > 3× · H4 sentence-length CV ≥ 0.45, no flat run of 4,
 nothing > 18 words · H5 contractions ≥ 0.9, abstract nouns ≤ 3 per 100 words, no "-ing" tails · H6 one human reaction. Thresholds are style
