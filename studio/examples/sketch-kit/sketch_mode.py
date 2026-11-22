@@ -33,7 +33,9 @@ def neon_text(c, s, x, y, size, rgb, flick=1.0, fontname=None, rot=0):
     col, it = _tone(rgb)
     if rgb == (255, 255, 255): col = INK_D
     f = serif(size * 0.95, 700 if not it else 400, it); tw = f.measureText(s); a = max(0.0, min(1.0, flick))
-    while tw > 900 and f.getSize() > 20: f = serif(f.getSize() * 0.94, 700 if not it else 400, it); tw = f.measureText(s)
+    lim = 900
+    if _LB[0] and abs(x - (_LB[0][0] + _LB[0][2] / 2)) < 8 and _LB[0][1] - 20 < y < _LB[0][1] + _LB[0][3] + 20: lim = min(lim, _LB[0][2] - 70)
+    while tw > lim and f.getSize() > 20: f = serif(f.getSize() * 0.94, 700 if not it else 400, it); tw = f.measureText(s)
     c.save(); c.translate(x, y); c.rotate(rot); c.drawString(s, -tw / 2, 0, f, P(col, a)); c.restore(); return tw
 
 
@@ -44,7 +46,11 @@ def ctext(c, s, x, y, size, rgb, fn='Montserrat-Black.ttf', a=1.0):
     c.drawString(s, x - f.measureText(s) / 2, y, f, P(col, a))
 
 
+_LB = [None]
+
+
 def board(c, x, y, w, h, col=(255, 255, 255)):
+    _LB[0] = (x, y, w, h)
     r = skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(x, y, w, h), 6, 6)
     c.drawRRect(r, P(col if col != (255, 255, 255) else (252, 250, 244)))
     c.drawRRect(r, S(INK_D, 3)); c.drawRRect(skia.RRect.MakeRectXY(skia.Rect.MakeXYWH(x + 8, y + 8, w - 16, h - 16), 4, 4), S(INK_D, 1.2, 0.7))
@@ -53,6 +59,14 @@ def board(c, x, y, w, h, col=(255, 255, 255)):
 def screen(c, x, y, w, h, draw, glowc=None, on=1.0):
     board(c, x - 16, y - 16, w + 32, h + 32)
     c.save(); c.clipRect(skia.Rect.MakeXYWH(x, y, w, h)); c.translate(x, y); draw(c); c.restore()
+
+
+_person_full = person
+
+
+def person(c, x, y, s, *a, **k):
+    if y > 1520: return          # bottom zone is covered by IG/YT captions + buttons: skip decorative mascot
+    _person_full(c, x, y, s, *a, **k)
 
 
 def sparkle(c, x, y, r, a=1.0): pass
@@ -131,9 +145,6 @@ def both(t):
     base = skia.Image.fromarray(np.ascontiguousarray(rgba), colorType=skia.kRGBA_8888_ColorType)
     ig = skia.Surface(W, H); c = ig.getCanvas(); c.drawImage(base, 0, 0)
     if 0.3 < t < END + 0.1: subs(c, t, 1442)
-    yt = skia.Surface(W, H); c = yt.getCanvas()
-    c.drawRect(skia.Rect.MakeWH(W, H), P((236, 232, 222)))
-    c.save(); c.translate(450 - 450 * 0.85, 250 - 250 * 0.85); c.scale(0.85, 0.85)
-    c.drawRect(skia.Rect.MakeWH(W, H), P((0, 0, 0), 0.25, 24)); c.drawImage(base, 0, 0); c.restore()
+    yt = skia.Surface(W, H); c = yt.getCanvas(); c.drawImage(base, 0, 0)
     if 0.3 < t < END + 0.1: subs(c, t, 1320)
     return ig.makeImageSnapshot(), yt.makeImageSnapshot()
