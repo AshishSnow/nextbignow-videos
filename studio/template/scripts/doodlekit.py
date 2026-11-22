@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie, "candle": _candle, "tender": _tender}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie, "candle": _candle, "tender": _tender, "pickle": _pickle}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -2244,4 +2244,187 @@ def doc_stack(c, x, y, s=1.0, seed=0, k=1.0, label="DISCLOSURE"):
         ink(c, wrrect(-170 + (j % 2) * 6, -30 - j * 26, 170 + (j % 2) * 6, -4 - j * 26, 4, seed + j, 0.8), WHITE, 5)
     ink(c, wrrect(-180, -360, 180, -250, 8, seed + 20, 1.2), BLU, 7)
     text(c, label, 0, -290, 40, WHITE, BLK_F, maxw=320)
+    c.restore()
+
+
+# ---------------------------------------------------------------- 23 Nov 2026 (Grillo's pickle doodle): pickle kit — generic, no brand art
+PKL = (112, 170, 64); PKL_D = (70, 120, 40); BRINE = (214, 232, 170)
+
+
+def _pickle_body(c, x, cy, rx, ry, seed, s, col=PKL, rot=0.0):
+    """bumpy dill-spear body (long lumpy oval with warts + seed stripe). centre (x, cy)."""
+    c.save(); c.translate(x, cy); c.rotate(rot)
+    pts = []
+    for j in range(32):
+        a = j / 32 * 2 * math.pi
+        bump = 1 + 0.05 * math.sin(a * 9 + seed) + 0.03 * math.sin(a * 17 + seed * 3)
+        pts.append((math.cos(a) * rx * bump * (1 - 0.10 * math.sin(a)), math.sin(a) * ry * bump))
+    body = wpoly(pts, seed, 1.4, True, 30); ink(c, body, col, 9 * s)
+    c.save(); c.clipPath(body, doAntiAlias=True)
+    c.drawRect(skia.Rect.MakeLTRB(-rx * 1.2, -ry * 1.2, -rx * 0.45, ry * 1.2), P(shade(col, 0.82)))
+    c.restore(); ink(c, body, None, 9 * s)
+    for j in range(10):   # warts
+        wx = (h01(j, seed) - 0.5) * rx * 1.3; wy = (h01(j + 10, seed) - 0.5) * ry * 1.6
+        c.drawCircle(wx, wy, 6 * s, P(PKL_D))
+    c.restore()
+
+
+def _pickle(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=PKL, **kw):
+    """generic dill pickle character: lumpy green spear standing upright, face, stick arms + legs. (x, y) = feet."""
+    leg = 70 * s; cb = y - leg; ct = cb - 400 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 34)
+    _pickle_body(c, x, (ct + cb) / 2, 105 * s, 205 * s, seed, s, col)
+    _arms(c, x - 100 * s, x + 100 * s, cb - 180 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 130 * s, s * 0.85, look, blink, 38, 24, mood, seed + 9)
+    mouth(c, x, ct + 200 * s, s * 0.7, talk, mood, seed + 10)
+
+
+def pickle_spear(c, x, y, s=1.0, rot=0.0, seed=0, k=1.0):
+    """a plain pickle spear prop (no face). (x, y) = centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    _pickle_body(c, 0, 0, 34, 110, seed, 0.6, PKL, rot)
+    c.restore()
+
+
+def pickle_jar(c, x, y, s=1.0, seed=0, k=1.0, label="PICKLES"):
+    """generic glass shelf jar with a metal lid and pickles inside. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    jar = wrrect(-110, -300, 110, 0, 34, seed, 1.4)
+    ink(c, jar, BRINE, 8)
+    c.save(); c.clipPath(jar, doAntiAlias=True)
+    for j in range(4): _pickle_body(c, -66 + j * 44, -150 + (j % 2) * 20, 22, 110, seed + 3 + j, 0.5, PKL, (j - 1.5) * 6)
+    c.restore(); ink(c, jar, None, 8)
+    ink(c, wrrect(-96, -340, 96, -296, 10, seed + 1, 1.2), (190, 194, 204), 7)
+    ink(c, wrrect(-90, -200, 90, -120, 8, seed + 2, 1.0), CREAM, 6)
+    text(c, label, 0, -148, 30, INK, BLK_F, maxw=170)
+    c.restore()
+
+
+def pickle_tub(c, x, y, s=1.0, seed=0, k=1.0, label="PICKLES", frost=0.0):
+    """generic clear plastic deli tub (no brand art): slightly tapered, white lid, spears + brine inside;
+    frost 0..1 adds cold snowflake-dots. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    tub = wpoly([(-120, -260), (120, -260), (100, 0), (-100, 0)], seed, 1.4, True, 30)
+    ink(c, tub, (232, 244, 214), 8)
+    c.save(); c.clipPath(tub, doAntiAlias=True)
+    for j in range(5): _pickle_body(c, -80 + j * 40, -110, 20, 120, seed + 3 + j, 0.5, PKL, (j - 2) * 5)
+    c.restore(); ink(c, tub, None, 8)
+    ink(c, wrrect(-134, -292, 134, -252, 12, seed + 1, 1.2), WHITE, 8)
+    ink(c, wrrect(-80, -170, 80, -110, 8, seed + 2, 1.0), WHITE, 5)
+    text(c, label, 0, -128, 26, PKL_D, BLK_F, maxw=150)
+    if frost > 0:
+        for j in range(7):
+            fx = (h01(j, seed + 40) - 0.5) * 260; fy = -300 - h01(j + 7, seed + 40) * 140
+            r = 14 * frost
+            for a in range(3):
+                an = a * math.pi / 3
+                wline(c, [(fx - r * math.cos(an), fy - r * math.sin(an)), (fx + r * math.cos(an), fy + r * math.sin(an))], seed + 50 + j, 4, SKY)
+    c.restore()
+
+
+def pickle_cart(c, x, y, s=1.0, seed=0, k=1.0, sign="2 FOR $1", t=0.0):
+    """small wooden street cart: plank box on two wheels, push handle, umbrella, chalk sign, a bucket of spears. (x, y) = ground centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for wx in (-150, 150):
+        ink(c, wellipse(wx, -60, 60, 60, seed + wx, 1.2), (90, 70, 50), 8)
+        c.drawCircle(wx, -60, 14, P(INK))
+    box = wrrect(-230, -330, 230, -90, 10, seed, 1.6); ink(c, box, (196, 140, 84), 9)
+    for j in range(3): wline(c, [(-224, -270 + j * 60), (224, -270 + j * 60)], seed + 2 + j, 4, (130, 86, 46))
+    wline(c, [(230, -250), (330, -300), (380, -300)], seed + 6, 12)   # handle
+    wline(c, [(-150, -330), (-150, -620)], seed + 7, 10)   # umbrella pole
+    ink(c, wpoly([(-400, -600), (-150, -720), (100, -600)], seed + 8, 1.6, True, 30), (240, 240, 232), 8)
+    for j in range(4): wline(c, [(-150, -720), (-400 + j * 166, -600)], seed + 9 + j, 4, GRN)
+    ink(c, wrrect(30, -480, 250, -340, 10, seed + 14, 1.2), (40, 44, 48), 8)   # chalkboard
+    text(c, sign, 140, -392, 40, WHITE, MARK_F, maxw=200)
+    ink(c, wpoly([(-200, -430), (-60, -430), (-74, -330), (-186, -330)], seed + 15, 1.2, True, 20), (190, 194, 204), 7)   # bucket
+    for j in range(3): _pickle_body(c, -160 + j * 40, -440, 18, 60, seed + 16 + j, 0.5, PKL, (j - 1) * 14)
+    c.restore()
+
+
+def garlic(c, x, y, s=1.0, seed=0, k=1.0):
+    """fresh garlic bulb. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wpoly([(0, -200), (-30, -150), (-90, -120), (-100, -50), (-60, 0), (60, 0), (100, -50), (90, -120), (30, -150)], seed, 1.6, True, 20), (248, 244, 230), 8)
+    for dx in (-40, 0, 40): wline(c, [(0, -170), (dx * 1.4, -70), (dx, -4)], seed + 3 + dx, 4, GREY)
+    wline(c, [(0, -200), (6, -240)], seed + 7, 6)
+    c.restore()
+
+
+def oil_bottle(c, x, y, s=1.0, seed=0, k=1.0, label="GARLIC OIL"):
+    """cheap plastic oil bottle with a yellow liquid and label. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wpoly([(-80, -240), (-40, -300), (-30, -360), (30, -360), (40, -300), (80, -240), (80, 0), (-80, 0)], seed, 1.4, True, 20), (250, 214, 90), 8)
+    ink(c, wrrect(-34, -400, 34, -356, 8, seed + 1, 1.0), RED, 6)
+    ink(c, wrrect(-70, -190, 70, -90, 8, seed + 2, 1.0), WHITE, 5)
+    text(c, label, 0, -128, 24, INK, BLK_F, maxw=130)
+    c.restore()
+
+
+def sneaker(c, x, y, s=1.0, seed=0, k=1.0, pickles=True):
+    """generic low-top sneaker (no brand stripes/swoosh), cream upper with little pickle prints. (x, y) = sole bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-260, -50, 250, 0, 22, seed, 1.4), WHITE, 8)   # sole
+    up = wpoly([(-250, -50), (-240, -170), (-150, -210), (-60, -300), (20, -290), (60, -200), (220, -150), (250, -50)], seed + 1, 1.6, True, 30)
+    ink(c, up, (246, 238, 214), 8)
+    if pickles:
+        c.save(); c.clipPath(up, doAntiAlias=True)
+        for j in range(6): _pickle_body(c, -200 + j * 80, -110 - (j % 2) * 60, 14, 30, seed + 4 + j, 0.4, PKL, 30)
+        c.restore(); ink(c, up, None, 8)
+    for j in range(4): wline(c, [(-60 + j * 26, -270 + j * 22), (10 + j * 26, -250 + j * 22)], seed + 12 + j, 5)
+    c.restore()
+
+
+def chips_bag(c, x, y, s=1.0, seed=0, k=1.0, label="PICKLE CHIPS", col=PKL):
+    """generic crinkly chip bag. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wpoly([(-140, -380), (-100, -360), (-60, -384), (0, -362), (60, -384), (100, -360), (140, -380), (130, -10), (90, 0), (40, -12), (-20, 0), (-80, -12), (-130, 0)], seed, 1.6, True, 20), col, 8)
+    ink(c, wellipse(0, -200, 100, 80, seed + 1, 1.4), (250, 220, 120), 6)
+    text(c, label, 0, -190, 30, INK, BLK_F, maxw=170)
+    c.restore()
+
+
+def letter(c, x, y, s=1.0, seed=0, k=1.0, head="DREAM JOB", lines=5, rot=-4):
+    """a plain application/letter sheet with a heading. (x, y) = centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    ink(c, wrrect(-200, -260, 200, 260, 10, seed, 1.4), WHITE, 8)
+    text(c, head, 0, -180, 46, INK, BLK_F, maxw=340)
+    for j in range(lines): wline(c, [(-150, -100 + j * 52), (150 - (j % 3) * 40, -100 + j * 52)], seed + 1 + j, 5, GREY)
+    c.restore()
+
+
+def recipe_card(c, x, y, s=1.0, seed=0, k=1.0, rot=5):
+    """old index card: GRANDPA'S RECIPE, a dill sprig, stains. (x, y) = centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    ink(c, wrrect(-230, -150, 230, 150, 8, seed, 1.4), (250, 240, 206), 8)
+    wline(c, [(-210, -80), (210, -80)], seed + 1, 4, RED)
+    text(c, "GRANDPA'S RECIPE", 0, -98, 36, INK, HAND_F, maxw=400)
+    for j in range(4): wline(c, [(-190, -20 + j * 40), (170 - (j % 2) * 60, -20 + j * 40)], seed + 2 + j, 4, (110, 120, 150))
+    ink(c, wellipse(150, 100, 34, 26, seed + 8, 1.0), (220, 200, 150), 0)
+    wline(c, [(-170, 120), (-120, 70)], seed + 9, 5, PKL_D)
+    for j in range(4): wline(c, [(-170 + j * 12, 120 - j * 12), (-160 + j * 12, 96 - j * 12)], seed + 10 + j, 3, PKL_D)
+    c.restore()
+
+
+def state_card(c, x, y, s=1.0, seed=0, k=1.0, name="TEXAS", ok=True, note=None, mark=1.0):
+    """a plain card naming a state with a big green tick (ok) or red X; note = small line under. (x, y) = centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-200, -190, 200, 190, 16, seed, 1.4), WHITE, 8)
+    text(c, name, 0, -110, 56, INK, BLK_F, maxw=360)
+    if mark > 0:
+        if ok: wline(c, [(-80, 20), (-20, 80), (90, -40)][:2 + (mark > 0.5)], seed + 1, 18, GRN)
+        else:
+            wline(c, [(-80, -40), (80, 100)], seed + 1, 18, RED)
+            if mark > 0.5: wline(c, [(80, -40), (-80, 100)], seed + 2, 18, RED)
+    if note: text(c, note, 0, 160, 24, INK, BLK_F, maxw=370)
     c.restore()
