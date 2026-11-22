@@ -1,0 +1,728 @@
+{
+"lines": {
+"i1": {
+"start": 0.0,
+"end": 2.56,
+"text": "Do you know if eating carrots can actually make you see better?"
+},
+"i2": {
+"start": 2.86,
+"end": 9.8,
+"text": "Your mom says yes, even in the dark. But that story started as a wartime cover-up."
+},
+"a1": {
+"start": 10.38,
+"end": 14.1,
+"text": "In nineteen-forty, British pilots kept shooting down planes at night."
+},
+"a1q": {
+"start": 14.16,
+"end": 18.38,
+"text": "And the papers said, they eat loads of carrots!"
+},
+"a2": {
+"start": 18.96,
+"end": 23.5,
+"text": "The real secret was a brand-new radar in the plane. The carrots? Just a cover story."
+},
+"b1": {
+"start": 24.1,
+"end": 31.22,
+"text": "Carrots do help a bit. Your body turns them into vitamin A, and your eyes need it to see in dim light."
+},
+"b2": {
+"start": 31.86,
+"end": 37.6,
+"text": "But extra carrots won't give you night vision. They only help if you're short on vitamin A."
+},
+"c1": {
+"start": 38.38,
+"end": 42.38,
+"text": "And if things still look blurry, carrots won't fix that. It's time to get your eyes checked."
+},
+"c2": {
+"start": 43.2,
+"end": 48.96,
+"text": "Send this to the mom who still says, eat your carrots, you'll see in the dark!"
+}
+},
+"words": [
+{
+"line": "i1",
+"w": "Do",
+"t": 0.0
+},
+{
+"line": "i1",
+"w": "you",
+"t": 0.117
+},
+{
+"line": "i1",
+"w": "know",
+"t": 0.227
+},
+{
+"line": "i1",
+"w": "if",
+"t": 0.337
+},
+{
+"line": "i1",
+"w": "eating",
+"t": 0.446
+},
+{
+"line": "i1",
+"w": "carrots",
+"t": 0.721
+},
+{
+"line": "i1",
+"w": "can",
+"t": 1.161
+},
+{
+"line": "i1",
+"w": "actually",
+"t": 1.271
+},
+{
+"line": "i1",
+"w": "make",
+"t": 1.49
+},
+{
+"line": "i1",
+"w": "you",
+"t": 1.655
+},
+{
+"line": "i1",
+"w": "see",
+"t": 1.82
+},
+{
+"line": "i1",
+"w": "better?",
+"t": 2.18
+},
+{
+"line": "i2",
+"w": "Your",
+"t": 2.86
+},
+{
+"line": "i2",
+"w": "mom",
+"t": 2.86
+},
+{
+"line": "i2",
+"w": "says",
+"t": 3.493
+},
+{
+"line": "i2",
+"w": "yes,",
+"t": 4.0
+},
+{
+"line": "i2",
+"w": "even",
+"t": 4.39
+},
+{
+"line": "i2",
+"w": "in",
+"t": 4.557
+},
+{
+"line": "i2",
+"w": "the",
+"t": 4.669
+},
+{
+"line": "i2",
+"w": "dark.",
+"t": 4.78
+},
+{
+"line": "i2",
+"w": "But",
+"t": 6.56
+},
+{
+"line": "i2",
+"w": "that",
+"t": 6.766
+},
+{
+"line": "i2",
+"w": "story",
+"t": 7.075
+},
+{
+"line": "i2",
+"w": "started",
+"t": 7.693
+},
+{
+"line": "i2",
+"w": "as",
+"t": 8.208
+},
+{
+"line": "i2",
+"w": "a",
+"t": 8.414
+},
+{
+"line": "i2",
+"w": "wartime",
+"t": 8.62
+},
+{
+"line": "i2",
+"w": "cover-up.",
+"t": 9.2
+},
+{
+"line": "a1",
+"w": "In",
+"t": 10.38
+},
+{
+"line": "a1",
+"w": "nineteen-forty,",
+"t": 10.39
+},
+{
+"line": "a1",
+"w": "British",
+"t": 11.458
+},
+{
+"line": "a1",
+"w": "pilots",
+"t": 11.84
+},
+{
+"line": "a1",
+"w": "kept",
+"t": 12.848
+},
+{
+"line": "a1",
+"w": "shooting",
+"t": 13.52
+},
+{
+"line": "a1",
+"w": "down",
+"t": 13.657
+},
+{
+"line": "a1",
+"w": "planes",
+"t": 13.725
+},
+{
+"line": "a1",
+"w": "at",
+"t": 13.884
+},
+{
+"line": "a1",
+"w": "night.",
+"t": 13.953
+},
+{
+"line": "a1q",
+"w": "And",
+"t": 14.16
+},
+{
+"line": "a1q",
+"w": "the",
+"t": 14.305
+},
+{
+"line": "a1q",
+"w": "papers",
+"t": 14.82
+},
+{
+"line": "a1q",
+"w": "said,",
+"t": 15.409
+},
+{
+"line": "a1q",
+"w": "they",
+"t": 15.852
+},
+{
+"line": "a1q",
+"w": "eat",
+"t": 16.294
+},
+{
+"line": "a1q",
+"w": "loads",
+"t": 16.883
+},
+{
+"line": "a1q",
+"w": "of",
+"t": 17.325
+},
+{
+"line": "a1q",
+"w": "carrots!",
+"t": 17.62
+},
+{
+"line": "a2",
+"w": "The",
+"t": 18.96
+},
+{
+"line": "a2",
+"w": "real",
+"t": 18.96
+},
+{
+"line": "a2",
+"w": "secret",
+"t": 19.349
+},
+{
+"line": "a2",
+"w": "was",
+"t": 19.933
+},
+{
+"line": "a2",
+"w": "a",
+"t": 20.225
+},
+{
+"line": "a2",
+"w": "brand-new",
+"t": 20.322
+},
+{
+"line": "a2",
+"w": "radar",
+"t": 21.1
+},
+{
+"line": "a2",
+"w": "in",
+"t": 21.433
+},
+{
+"line": "a2",
+"w": "the",
+"t": 21.529
+},
+{
+"line": "a2",
+"w": "plane.",
+"t": 21.624
+},
+{
+"line": "a2",
+"w": "The",
+"t": 22.1
+},
+{
+"line": "a2",
+"w": "carrots?",
+"t": 22.1
+},
+{
+"line": "a2",
+"w": "Just",
+"t": 22.701
+},
+{
+"line": "a2",
+"w": "a",
+"t": 22.811
+},
+{
+"line": "a2",
+"w": "cover",
+"t": 22.92
+},
+{
+"line": "a2",
+"w": "story.",
+"t": 23.117
+},
+{
+"line": "b1",
+"w": "Carrots",
+"t": 24.1
+},
+{
+"line": "b1",
+"w": "do",
+"t": 24.473
+},
+{
+"line": "b1",
+"w": "help",
+"t": 24.656
+},
+{
+"line": "b1",
+"w": "a",
+"t": 24.838
+},
+{
+"line": "b1",
+"w": "bit.",
+"t": 24.96
+},
+{
+"line": "b1",
+"w": "Your",
+"t": 25.548
+},
+{
+"line": "b1",
+"w": "body",
+"t": 25.8
+},
+{
+"line": "b1",
+"w": "turns",
+"t": 25.966
+},
+{
+"line": "b1",
+"w": "them",
+"t": 26.173
+},
+{
+"line": "b1",
+"w": "into",
+"t": 26.256
+},
+{
+"line": "b1",
+"w": "vitamin",
+"t": 26.38
+},
+{
+"line": "b1",
+"w": "A,",
+"t": 27.142
+},
+{
+"line": "b1",
+"w": "and",
+"t": 27.48
+},
+{
+"line": "b1",
+"w": "your",
+"t": 27.533
+},
+{
+"line": "b1",
+"w": "eyes",
+"t": 27.612
+},
+{
+"line": "b1",
+"w": "need",
+"t": 27.744
+},
+{
+"line": "b1",
+"w": "it",
+"t": 27.823
+},
+{
+"line": "b1",
+"w": "to",
+"t": 27.875
+},
+{
+"line": "b1",
+"w": "see",
+"t": 27.928
+},
+{
+"line": "b1",
+"w": "in",
+"t": 27.981
+},
+{
+"line": "b1",
+"w": "dim",
+"t": 28.06
+},
+{
+"line": "b1",
+"w": "light.",
+"t": 29.127
+},
+{
+"line": "b2",
+"w": "But",
+"t": 31.86
+},
+{
+"line": "b2",
+"w": "extra",
+"t": 32.04
+},
+{
+"line": "b2",
+"w": "carrots",
+"t": 32.371
+},
+{
+"line": "b2",
+"w": "won't",
+"t": 32.758
+},
+{
+"line": "b2",
+"w": "give",
+"t": 32.924
+},
+{
+"line": "b2",
+"w": "you",
+"t": 33.09
+},
+{
+"line": "b2",
+"w": "night",
+"t": 33.2
+},
+{
+"line": "b2",
+"w": "vision.",
+"t": 33.729
+},
+{
+"line": "b2",
+"w": "They",
+"t": 34.92
+},
+{
+"line": "b2",
+"w": "only",
+"t": 35.38
+},
+{
+"line": "b2",
+"w": "help",
+"t": 35.84
+},
+{
+"line": "b2",
+"w": "if",
+"t": 36.3
+},
+{
+"line": "b2",
+"w": "you're",
+"t": 36.607
+},
+{
+"line": "b2",
+"w": "short",
+"t": 37.22
+},
+{
+"line": "b2",
+"w": "on",
+"t": 37.289
+},
+{
+"line": "b2",
+"w": "vitamin",
+"t": 37.324
+},
+{
+"line": "b2",
+"w": "A.",
+"t": 37.497
+},
+{
+"line": "c1",
+"w": "And",
+"t": 38.38
+},
+{
+"line": "c1",
+"w": "if",
+"t": 38.43
+},
+{
+"line": "c1",
+"w": "things",
+"t": 38.606
+},
+{
+"line": "c1",
+"w": "still",
+"t": 38.739
+},
+{
+"line": "c1",
+"w": "look",
+"t": 38.827
+},
+{
+"line": "c1",
+"w": "blurry,",
+"t": 38.96
+},
+{
+"line": "c1",
+"w": "carrots",
+"t": 39.769
+},
+{
+"line": "c1",
+"w": "won't",
+"t": 40.376
+},
+{
+"line": "c1",
+"w": "fix",
+"t": 40.68
+},
+{
+"line": "c1",
+"w": "that.",
+"t": 40.835
+},
+{
+"line": "c1",
+"w": "It's",
+"t": 41.105
+},
+{
+"line": "c1",
+"w": "time",
+"t": 41.26
+},
+{
+"line": "c1",
+"w": "to",
+"t": 41.363
+},
+{
+"line": "c1",
+"w": "get",
+"t": 41.431
+},
+{
+"line": "c1",
+"w": "your",
+"t": 41.5
+},
+{
+"line": "c1",
+"w": "eyes",
+"t": 41.569
+},
+{
+"line": "c1",
+"w": "checked.",
+"t": 41.74
+},
+{
+"line": "c2",
+"w": "Send",
+"t": 43.2
+},
+{
+"line": "c2",
+"w": "this",
+"t": 43.689
+},
+{
+"line": "c2",
+"w": "to",
+"t": 43.926
+},
+{
+"line": "c2",
+"w": "the",
+"t": 44.045
+},
+{
+"line": "c2",
+"w": "mom",
+"t": 44.282
+},
+{
+"line": "c2",
+"w": "who",
+"t": 44.875
+},
+{
+"line": "c2",
+"w": "still",
+"t": 45.113
+},
+{
+"line": "c2",
+"w": "says,",
+"t": 45.468
+},
+{
+"line": "c2",
+"w": "eat",
+"t": 46.18
+},
+{
+"line": "c2",
+"w": "your",
+"t": 46.421
+},
+{
+"line": "c2",
+"w": "carrots,",
+"t": 46.581
+},
+{
+"line": "c2",
+"w": "you'll",
+"t": 47.144
+},
+{
+"line": "c2",
+"w": "see",
+"t": 47.384
+},
+{
+"line": "c2",
+"w": "in",
+"t": 47.625
+},
+{
+"line": "c2",
+"w": "the",
+"t": 47.786
+},
+{
+"line": "c2",
+"w": "dark!",
+"t": 47.947
+}
+],
+"dur": 48.96,
+"LEAD": 0.25
+}
