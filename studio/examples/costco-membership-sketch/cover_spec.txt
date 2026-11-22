@@ -1,0 +1,3 @@
+COSTCO'S REAL $$$
+is your card?!
+R.member_card(c, 470, 1100, 560, -8, 0.3, 0.8); R.hotdog(c, 420, 1430, 1.0, -6)

@@ -1,0 +1,3 @@
+STARBUCKS HOLDS
+$1.75 BILLION?!
+R.app_phone(c, 470, 1150, 0.95, 0.3); R.coffee(c, 220, 1350, 0.9, -8, 0.3)
