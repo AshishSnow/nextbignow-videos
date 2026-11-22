@@ -137,3 +137,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 - 2026-11-23 Amazon = cloud with a store (AWS 57% of 2025 operating income, 18% of sales), SKETCH, 33 s (437578568 / 437578628)
 - 2026-11-23 Costco membership (fees $5.3B vs net profit $8.1B FY25), SKETCH, 36 s (437587199 / 437587258)
 - 2026-11-23 Starbucks holds $1.75B stored value + loyalty (FY25 10-K), SKETCH, 28 s (437596936 / 437597027)
+- 2026-11-23 | CLAIMED (episode run 21:05 UTC 22 Nov, doodle case study, Shorts length ≤ 60 s) — Grillo's Pickles: Nike said no, so he sold pickles from a cart (pickle-flavor craze + 3 moves) (REVIEWED queue/35-grillos-pickle-cart, cut to ~60 s) | grillos-pickle-doodle | — | building
