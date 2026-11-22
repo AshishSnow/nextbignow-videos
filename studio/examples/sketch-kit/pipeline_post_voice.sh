@@ -29,6 +29,8 @@ import numpy as np, skia, $MOD as R
 raw=R.frame(1.8).makeImageSnapshot(); arr=raw.toarray(colorType=skia.kRGBA_8888_ColorType)[:,:,:3]
 from PIL import Image; Image.fromarray(R._ink(np.ascontiguousarray(arr))).save('thumbnail_$SLUG.png'); print('thumb ok')
 EOF
+if [ -f cover_spec.txt ]; then python3 /home/claude/studio/cover.py $PWD ${R%.py} "$(sed -n 1p cover_spec.txt)" "$(sed -n 2p cover_spec.txt)" "$(sed -n 3p cover_spec.txt)" $PWD/cover_$SLUG.png 2>&1 | grep -v Fontconfig; fi
+[ -f cover_$SLUG.png ] && cp cover_$SLUG.png thumbnail_$SLUG.png && echo 'using cover v3'
 N=$(python3 $R nframes 2>/dev/null | tail -n 1); Q=$(( (N + 2) / 3 )); echo "frames $N"
 rm -f out/*.mp4 out/*.png work/ig.txt work/yt.txt work/*_cat.mp4
 for i in 0 1 2; do a=$((i*Q)); b=$(( (i+1)*Q )); [ $b -gt $N ] && b=$N; python3 $R range $a $b > work/r$i.log 2>&1 & done
@@ -37,7 +39,7 @@ for v in ig yt; do ls out/${v}_0*.mp4 | sort | sed "s#^#file '$PWD/#;s#\$#'#" > 
 ffmpeg -nostdin -v error -y -f concat -safe 0 -i work/$v.txt -c copy work/${v}_cat.mp4; done
 mkdir -p final
 for v in ig yt; do
- if [ $v = yt ]; then IN="-i work/yt_cat.mp4 -loop 1 -t 0.2 -i thumbnail_$SLUG.png"; FC="[1:v]scale=1080:1920,setsar=1,fps=30[t];[0:v][t]overlay=eof_action=pass:enable='lt(t,0.2)'[v]"; AI=2; else IN="-i work/ig_cat.mp4"; FC="[0:v]null[v]"; AI=1; fi
+ if [ $v = yt ]; then IN="-i work/yt_cat.mp4 -loop 1 -t 0.25 -i thumbnail_$SLUG.png"; FC="[1:v]scale=1080:1920,setsar=1,fps=30[t];[0:v][t]overlay=eof_action=pass:enable='lt(t,0.25)'[v]"; AI=2; else IN="-i work/ig_cat.mp4"; FC="[0:v]null[v]"; AI=1; fi
  ffmpeg -nostdin -v error -y $IN -filter_complex "$FC" -map "[v]" -c:v libx264 -b:v 9000k -preset slow -pass 1 -passlogfile work/p_$v -an -f mp4 /dev/null
  ffmpeg -nostdin -v error -y $IN -i mix.wav -filter_complex "$FC" -map "[v]" -map $AI:a -c:v libx264 -b:v 9000k -preset slow -pass 2 -passlogfile work/p_$v -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -movflags +faststart final/${SLUG}_$v.mp4
 done

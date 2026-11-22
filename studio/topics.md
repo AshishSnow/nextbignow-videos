@@ -129,3 +129,8 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 - 2026-11-22 HP printer ink (supplies $10.9B vs consumer printers $1.2B; CEO "bad investment"), SKETCH, 36 s (437268108 / 437268140)
 - 2026-11-22 IKEA meatballs (museum: "full stomachs stay longer and buy more"; ~1B meatballs; ~5% food margin), SKETCH, 34 s (437272762 / 437272793)
 - 2026-11-22 Santa red suit myth (Coke's own site: red coat before Sundblom; ads 1931-1964), SKETCH, 38 s (437278707 / 437278746)
+- 2026-11-22 COVER v3 for grid (2-line serif headline in 3:4 crop, gold disc + hero prop, shocked mascot); IG videoThumbnailUrl + YT first frame; applied to BF/printer/IKEA/Santa
+- 2026-11-23 Chick-fil-A closed Sundays (~$7.7M vs McD ~$4.1M per store, QSR; CEO "I never have"), SKETCH, 39 s (437329222 / 437329256)
+- 2026-11-23 Disney parks vs movies (Experiences OI $10.0B vs Entertainment $4.7B FY25), SKETCH, 36 s (437334391 / 437334425)
+- 2026-11-23 LEGO biggest tire maker (381M toy tires, Guinness; ERJ), SKETCH, 30 s (437338979 / 437339009)
+- 2026-11-23 Netflix competes with sleep (Hastings 2017 "and we're winning!"), SKETCH, 35 s (437344093 / 437344123)
