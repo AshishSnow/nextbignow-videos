@@ -147,6 +147,18 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     detail from today's menu (a waiver for the hottest level) can't sit in the 2017 scene — tag it TODAY. And a rule's timing is its own: acidified-food
     makers file the process before they *pack*, not "before the first sale"; a pop-up permit can be city *or* county. (21 Nov, Grillo's + Dave's reviews.)
 
+57. **No stall in seconds 5–16: the story starts on an action, the trend comes after the result.** On 4 of 6 posted Shorts-length doodles
+    (Liquid Death, Hoka, Sriracha, Yankee; avg watch 12–15 s of ~80 s — Vinted lost them earlier on an abstract hook, Febreze later) the
+    *average* viewer left during exactly the block we always put third: a trend statistic with a named source ("Gallup says…", "One menu tracker says…") and/or a "Place, year." / "Meet X." / "Rewind." line
+    (estimated start 9–17 s). The doodles that held 18–47 s (Airbnb $40 cereal, $5 nothing, Spanx, Stanley) went from hook straight into a person
+    doing something. Kallaway's rule says the same: join beats with "but"/"therefore", never "and then" — a stat between the hook and the
+    story is an "and then". So: (1) after the 2–3 hook lines, the next line is the protagonist *doing* something ("No Nike job? So Travis grabs
+    grandpa's recipe…"), place + year go on the tape label; (2) the trend line moves to after the result as the "why now" bridge into YOUR moves
+    ("So why start yours now? Gym memberships just hit a record."); (3) source names stay on the chip/caption. `human_check.py --strict` now
+    FAILS a stat / named-source / date-place line starting in the first ~16 s (STALL gate; `--stall-ok` only for an owner-approved exception).
+    Evidence is n = 6 and confounded with length — the test is Poppi/Gymshark/Grillo's avg watch vs the short-doodle median ~14 s (22 Nov R&D,
+    `lab/story/shorts_leak_audit.py`).
+
 ## The checker (`tools/human_check.py`)
 H1 tells ≤ 1 per 150 words · H2 openers (top ≤ 15 %, But/So/And ≤ 20 %) · H3 no skeleton > 3× · H4 sentence-length CV ≥ 0.45, no flat run of 4,
 nothing > 18 words · H5 contractions ≥ 0.9, abstract nouns ≤ 3 per 100 words, no "-ing" tails · H6 one human reaction. Thresholds are style

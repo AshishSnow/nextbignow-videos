@@ -14,11 +14,9 @@ SERIES = "HOW THEY GOT SO BIG"; PART = 0; EP = 0   # build run takes the next fr
 CBVOICES = {"b4": "usa_young"}
 LINES = [
     ('i1', 'Nike turned down his dream job. Guess what he sold instead?', 0.97, 0.25, +0.8, 1.45, ['Nike', 'instead?'], None),
-    ('i2', 'Pickles, from a cart. Your three moves are at the end.', 0.97, 0.3, +0.8, 1.45, ['Pickles,', 'three'], 'low'),
-    ('a1', 'You want proof pickles are hot? Pickle chips, beer, even smoothies.', 0.97, 0.25, +0.8, 1.45, ['proof', 'smoothies.'], None),
-    ('a2', 'Circana says pickle snacks grew about thirty percent in a year.', 0.97, 0.3, +0.8, 1.45, ['thirty', 'year.'], 'low'),
-    ('b1', 'Boston, two thousand eight. Meet Travis Grillo.', 0.97, 0.25, +0.8, 1.45, ['Boston,', 'Grillo.'], None),
-    ('b2', "So he grabs grandpa's recipe, about a hundred years old.", 0.97, 0.25, +0.8, 1.45, ["grandpa's", 'hundred'], None),
+    ('i2', 'Pickles. You want to sell your own?', 0.97, 0.15, +0.8, 1.45, ['Pickles.', 'own?'], None),
+    ('i3', 'Three moves at the end.', 0.97, 0.3, +0.8, 1.45, ['Three'], 'low'),
+    ('b1', "No Nike job? So Travis Grillo grabs grandpa's pickle recipe, about a century old.", 0.97, 0.25, +0.8, 1.45, ['Nike', 'century'], None),
     ('b3', 'Two spears for a dollar, from a cart on Boston Common.', 0.97, 0.3, +0.8, 1.45, ['Two', 'dollar,'], 'low'),
     ('b4', 'Shelf? Not for me.', 1.0, 0.25, +1.2, 1.5, ['Shelf?', 'Not'], None),
     ('c1', 'The surprising move? Skip the pickle aisle and stay cold.', 0.97, 0.25, +0.8, 1.45, ['aisle', 'cold.'], None),
@@ -27,6 +25,8 @@ LINES = [
     ('d2', 'His answer: "I kept my eye on quality." Good call.', 1.0, 0.3, +0.8, 1.45, ['quality."', 'Good'], 'low'),
     ('e1', 'Did it work? Later, about seven thousand stores carry it.', 0.97, 0.25, +0.8, 1.45, ['work?', 'seven'], None),
     ('e2', "Then King's Hawaiian buys it, for a price nobody shared.", 0.97, 0.3, +0.8, 1.45, ['buys', 'nobody'], 'low'),
+    ('a1', "And pickles right now? They're in chips, beer, even smoothies.", 0.97, 0.25, +0.8, 1.45, ['now?', 'smoothies.'], None),
+    ('a2', 'Circana says pickle snacks grew about thirty percent in a year.', 0.97, 0.3, +0.8, 1.45, ['thirty', 'year.'], 'low'),
     ('m1', 'Your moves. One: shelf-stable jars count as acidified foods to the FDA.', 0.97, 0.25, +0.8, 1.45, ['shelf-stable', 'acidified'], None),
     ('m2', 'Register, and file your process before you pack. Fridge pickles skip that.', 0.97, 0.25, +0.8, 1.45, ['file', 'skip'], None),
     ('m3', "Two: a home kitchen? Texas lets you sell pickles from one, Michigan doesn't.", 0.97, 0.25, +0.8, 1.45, ['home', "doesn't."], None),

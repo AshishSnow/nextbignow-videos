@@ -1,7 +1,7 @@
 # shots — 35 Grillo's "Nike said no, so he sold pickles from a cart" (DOODLE case study, SHORTS length; reference examples/yankee-candle-doodle + vinted-closet-doodle + dsc-video-doodle)
 COVER = ("NIKE SAID NO", "SO HE SOLD PICKLES FROM A CART")
 Look: LIGHT page (white graph paper, wobbly black ink, yellow highlighter — the Yankee/Hoka look), chunked torn-strip subtitles
-(strip_chunk + chunk_now), NO music — SFX only. Recurring plain "YOU" stick doodle (tape "YOU") from i1. One set per section that
+(strip_chunk + chunk_now), NO music — SFX only. Recurring plain "YOU" stick doodle (tape "YOU") from i2. One set per section that
 evolves; something new every 1–2 s; red marker on top. Cover: cream page, big black title + yellow swipe, the drawn hero = a little
 wooden pushcart with a bucket of green pickle spears and a "2 FOR $1" sign (no brand tub, no swoosh).
 Director's brief — the ONE moment: c1→c2, the pickle tub leaves the warm shelf (red X) and lands in a fridge next to a steak; frost puffs.
@@ -15,14 +15,12 @@ Existing: char, stamp, tape, calendar, store, building, factory, money_stack, ch
 
 | Line | Set (evolves) | Props pop in | Tape / stamp | Red marker | SFX |
 |---|---|---|---|---|---|
-| **SET 1 — YOU and the "NO" letter (i1–a2)** | | | | | |
+| **SET 1 — Travis, the "NO" letter and YOU (i1–i3)** | | | | | |
 | i1 | stick doodle (tape "TRAVIS") opens an envelope; the letter says a giant "NO" (text "NIKE", no logo); a dream-cloud sneaker pops; a big "?" | — | stamp "NO" | red circle round "NO" | paper rip, boop |
-| i2 | a tiny pushcart rolls in, pickle bucket bouncing | three empty boxes "1 2 3" on a price tag | tape "3 MOVES" | arrow to the cart | cart squeak, pop |
-| a1 | YOU (tape "YOU") steps in; the letter turns into a snack aisle; pickle chips, a pickle beer can, a pickle smoothie pop in one by one | — | — | tick, tick, tick | pop ×3 |
-| a2 | a bar chart: "PICKLE SNACKS" bar shoots up past "ALL SNACKS" | chip "PICKLE-FLAVOR SNACK SALES +30% IN A YEAR vs +3.8% ALL SNACKS (CIRCANA via WSJ, AUG 2026)" | — | circle "+30%" | whoosh up, ding |
-| **SET 2 — Boston Common, 2008 (b1–b4)** | | | | | |
-| b1 | YOU fades; a park path, trees, a city skyline doodle; stick doodle with tape "TRAVIS GRILLO" folds the "NO" letter into a pocket | — | tape "BOSTON · 2008" | arrow to Travis | birds, city hum |
-| b2 | an old recipe card floats down (grandpa doodle in the corner, plain hat) | jar of dill + garlic sketches | tape "GRANDPA'S RECIPE · ~100 YEARS OLD" | circle "~100" | paper flutter |
+| i2 | a tiny pushcart rolls in, pickle bucket bouncing; YOU (tape "YOU") pops up beside the cart | — | — | arrow to the cart | cart squeak, pop |
+| i3 | three empty boxes "1 2 3" drop onto the cart's price tag | — | tape "3 MOVES" | tick ×3 | thud ×3 |
+| **SET 2 — Boston Common, 2008 (b1, b3–b4)** | | | | | |
+| b1 | YOU fades; a park path, trees, a city skyline doodle; stick doodle with tape "TRAVIS GRILLO" folds the "NO" letter into a pocket; an old recipe card floats down into his hand (grandpa doodle in the corner, plain hat) | jar of dill + garlic sketches | tape "BOSTON · 2008" then tape "GRANDPA'S RECIPE · ~100 YEARS OLD" | circle "~100" | birds, paper flutter |
 | b3 | the pushcart parks on the path; a hand sign "2 SPEARS · $1"; one customer, then three | coins drop in a cup | tape "BOSTON COMMON" | underline "$1" | coin clink ×2, crunch |
 | b4 | pickle character pops up from the bucket, side-eyes a dusty jar on a warm shelf | — | — | red "?" by the shelf | boing |
 | **SET 3 — the cold move (c1–d2)** | | | | | |
@@ -30,9 +28,11 @@ Existing: char, stamp, tape, calendar, store, building, factory, money_stack, ch
 | c2 | **(the moment)** a fridge door swings open: the tub lands on a produce shelf (tape "TARGET"), then a second tub next to a steak (tape "KROGER") — text tapes only, no store logos | frost puff | tape "PRODUCE · EVEN MEAT" | circle the tub by the steak | fridge thunk, hum |
 | d1 | a buyer doodle (tape "BUYER") holds out a bottle "GARLIC OIL" and a "$ SAVE" tag | fresh garlic bulb on the left | — | red "?" | paper shuffle |
 | d2 | Travis pushes the cheap jar away; quote card appears | chip "\"I KEPT MY EYE ON QUALITY.\" — TRAVIS GRILLO (CCSU, 2019)" | stamp "NO" (callback to i1, now on the buyer's jar) | tick on fresh garlic | stamp, ding |
-| **SET 4 — the map (e1–e2)** | | | | | |
+| **SET 4 — the map, then the snack aisle now (e1–a2)** | | | | | |
 | e1 | zoom out from the fridge to a US map; little fridge icons pop up across it | counter "~7,000 STORES" | tape "BY 2019" | circle the counter | pop pop pop, ding |
 | e2 | a handshake over the map; price tag flips to "?" | — | tape "2021 · KING'S HAWAIIAN BUYS IT · TERMS NOT DISCLOSED" | red "?" on the price tag | paper slide, low thud |
+| a1 | (the US map from e1–e2 rolls up into a snack aisle) YOU (tape "YOU") steps in — the "why now" bridge into YOUR moves; pickle chips, a pickle beer can, a pickle smoothie pop in one by one | — | — | tick, tick, tick | pop ×3 |
+| a2 | a bar chart: "PICKLE SNACKS" bar shoots up past "ALL SNACKS" | chip "PICKLE-FLAVOR SNACK SALES +30% IN A YEAR vs +3.8% ALL SNACKS (CIRCANA via WSJ, AUG 2026)" | — | circle "+30%" | whoosh up, ding |
 | **SET 5 — YOU's kitchen (m1–m4)** | | | | | |
 | m1 | YOU at a counter with a shelf jar; an "FDA" clipboard slides in | pH strip "≤ 4.6" | tape "1 · MOST SHELF PICKLES = ACIDIFIED FOODS (FDA)" | circle "ACIDIFIED" | pen scratch |
 | m2 | form pages stack: "REGISTER" + "FILE YOUR PROCESS BEFORE YOU PACK"; then a fridge tub skips past them | — | tape "FRIDGE PICKLES: NOT THIS FEDERAL RULE · STATE RULES STILL APPLY" | tick on the forms, arrow for the tub | paper stack, whoosh |

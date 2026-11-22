@@ -9,6 +9,12 @@ Gates (H1–H6):
   H4 rhythm     sentence-length CV ≥ 0.45; no run of 4 sentences within ±2 words; no sentence > 18 words (Provost; NPR; UF/IFAS)
   H5 talk       contraction rate ≥ 0.9 (NPR; UF/IFAS); ≤ 3 abstract nouns per 100 words; no ", verb-ing …" tail clause (Reinhart 2025)
   H6 person     the narrator has a point of view at least once: an "I"/"I'd"/"me"/"honestly"/"my" line or a plain opinion ("that's wild", "fair?")
+Extra gates in --strict (printed separately, so the H-score stays /6):
+  LENGTH        estimated voice > 90 s (owner 15 Nov 2026)
+  STALL         a 'stall' line in the 3rd line … ~16 s window: a statistic, a named source ("Circana says"), or a date/place/"Meet X"
+                opener (R&D 22 Nov 2026: on 4 of 6 posted Shorts-length doodles the average viewer left during exactly that
+                trend-stat / "Place, year." block, 9-17 s in — WRITING.md rule 57). Move the trend after the result, put place + year
+                on the tape label, start the story on an action.
 """
 import re, sys, ast, math, statistics as st
 
@@ -89,6 +95,26 @@ def voice_notes(path):
     return out
 
 
+STALL_STAT = re.compile(r"\b(percent|times (faster|more|bigger)|a record|according to|tracker|survey|study|data shows?)\b|\b[A-Z][A-Za-z]+ (says|said|reports)\b(?! no\b)")
+STALL_OPEN = re.compile(r"^(rewind|meet\b|it'?s (nineteen|two thousand|twenty)|in (nineteen|two thousand)|(early|mid|late)[- ](nineteen|twenty|\w+ties)|"
+                        r"[A-Z][a-z]+(?: [A-Z][a-z]+)?(?:, [A-Z][a-z]+)?, (nineteen|two thousand|twenty)\w*)|\bmeet [A-Z]", re.I)
+
+
+def stall_lines(L, window=16.0):
+    """R&D 22 Nov 2026 (lab/story/shorts_leak_audit.py): lines that start inside the early window (after the 2 hook lines) and stall the story."""
+    out, t = [], 0.0
+    for k, (i, txt) in enumerate(L):
+        if k >= 2 and t < window:
+            why = []
+            if STALL_STAT.search(txt) or (re.search(r"\b(grew|grow|grows|rose|jumped|fell|doubled|tripled)\b", txt, re.I)
+                                          and any(w.lower() in NUMW or w.lower() == "half" for w in words(txt))):
+                why.append("statistic / named source")
+            if STALL_OPEN.search(txt.strip()): why.append("date / place / 'Meet X' opener")
+            if why: out.append((i, round(t, 1), " + ".join(why), txt))
+        t += len(words(txt)) * 0.335 + 0.15
+    return out
+
+
 def main():
     path = sys.argv[1]; strict = "--strict" in sys.argv
     L = load(path); text = " ".join(t for _, t in L); low = text.lower()
@@ -145,7 +171,12 @@ def main():
         if n > 14 or ns > 2: print(f"  note line {i}: {n} words / {ns} sentences — Chatterbox can truncate lines over ~14 words or 2 sentences; split it")
     long_fail = est > 90
     print(f"  length ~{est:.0f} s estimated ({nW} words, {len(L)} lines) — Shorts target 50-75 s, hard cap 90 s" + ("  ** OVER THE CAP **" if long_fail else ""))
-    ok = sum(G.values()); print(f"\n{ok}/{len(G)} human-voice gates passed (H1–H6) — studio/WRITING.md")
+    stalls = stall_lines(L)
+    for i, t0, why, txt in stalls: print(f"  STALL line {i} (~{t0:.0f} s): {why}: {txt!r} — WRITING rule 57: move the trend after the result; place/year on the tape, not spoken first")
+    ok = sum(G.values()); print(f"\n{ok}/{len(G)} human-voice gates passed (H1–H6) — studio/WRITING.md" + (f"; STALL gate: {len(stalls)} line(s)" if stalls else "; STALL gate PASS"))
+    if stalls and strict and "--stall-ok" not in sys.argv:
+        print("STALL GATE FAIL: a stat / source / date-place line in the first ~16 s (rule 57) — reorder; --stall-ok only for an owner-approved exception")
+        sys.exit(1)
     if long_fail and strict and "--long-ok" not in sys.argv:
         print("LENGTH GATE FAIL: estimated > 90 s — cut lines (WRITING.md 'Length'); pass --long-ok only for an owner-approved long-form script")
         sys.exit(1)

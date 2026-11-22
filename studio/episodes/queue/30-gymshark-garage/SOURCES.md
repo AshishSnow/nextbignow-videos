@@ -26,3 +26,6 @@ Key sources:
 
 Not used: "£1,000 savings" (single source); who taught him to sew (sources disagree); "sold out"/"site crashed" at BodyPower (not found — the crash was Black Friday 2015); Lewis Morgan's exit sum (sources disagree); 2026 stake buyback talks (good follow-up).
 Safety: no Gymshark shark logo, product designs or photos; Francis = plain stick doodle with a name tape; no income promise ("the company says").
+
+
+**22 Nov 2026 R&D reorder (rule 54):** a1 (gym-membership record, HFA) now plays after c2 as 'So why start yours now?'; b1 says 'Ben's nineteen and delivers pizzas at night in Birmingham, England' (same facts). No new facts.
