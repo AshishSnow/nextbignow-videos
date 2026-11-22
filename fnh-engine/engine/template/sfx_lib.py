@@ -1397,3 +1397,42 @@ def page_flip(level=-28):
     return _st(y / (np.abs(y).max() + 1e-9) * db(level))
 
 
+
+
+# ================= ep 59: THE SPINNING NEWSPAPER sound twin (paper_spin) + old-film crackle, far propeller drone, radar ping =================
+def paper_spin(dur=0.9, turns=4, level=-22):
+    """ep 59 craft sound twin: a SPINNING NEWSPAPER. Paper flutter = band noise amplitude-modulated at the rotation rate (2 flaps per turn), the rate
+    follows the same cubic ease-out as spin_paper() (fast -> 0), pitch/brightness falls with it; it lands with a paper THUMP + a short rustle."""
+    n_ = int((dur + 0.5) * SR); tt = np.arange(n_) / SR
+    u = np.clip(tt / dur, 0, 1)
+    rate = turns * 3 * (1 - u) ** 2 / dur * 2.0                                 # flaps per second (2 per turn)
+    ph = 2 * np.pi * np.cumsum(rate) / SR
+    flap = (0.5 + 0.5 * np.cos(ph)) ** 3
+    hi = _bp(rng.standard_normal(n_), 1200, 7000); lo = _bp(rng.standard_normal(n_), 250, 1800)
+    bright = (1 - u)
+    y = (hi * bright + lo * (0.6 + 0.4 * bright)) * flap * (tt < dur) * (0.3 + 0.7 * np.sin(np.pi * np.clip(u * 1.2, 0, 1)) ** 0.5)
+    k = int(dur * SR); m = n_ - k; t2 = np.arange(m) / SR
+    y[k:] += _lp(rng.standard_normal(m), 400) * np.exp(-t2 / 0.05) * 2.2 + _bp(rng.standard_normal(m), 2000, 6000) * np.exp(-t2 / 0.12) * 0.6
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
+def film_crackle(n_):
+    """old newsreel: sparse dust clicks + a faint 50 Hz-ish projector rumble."""
+    tt = np.arange(n_) / SR
+    clicks = (rng.random(n_) < 0.0006).astype(float); clicks = _bp(np.convolve(clicks, np.exp(-np.arange(60) / 8), "same"), 1500, 8000)
+    return clicks + 0.15 * _lp(rng.standard_normal(n_), 200) + 0.05 * np.sin(2 * np.pi * 48 * tt)
+
+
+def drone(n_, f0=88):
+    """a far propeller-plane drone (two detuned buzzes, slow beating), low-passed by distance."""
+    tt = np.arange(n_) / SR
+    y = np.sign(np.sin(2 * np.pi * f0 * tt)) * 0.5 + np.sign(np.sin(2 * np.pi * (f0 * 1.03) * tt)) * 0.5
+    return _lp(y, 700) * (0.7 + 0.3 * np.sin(2 * np.pi * 0.4 * tt))
+
+
+def radar_ping(level=-24):
+    n_ = int(0.9 * SR); t2 = np.arange(n_) / SR
+    y = np.sin(2 * np.pi * 1450 * t2) * np.exp(-t2 / 0.18) + 0.3 * np.sin(2 * np.pi * 2900 * t2) * np.exp(-t2 / 0.08)
+    return _st(y / (np.abs(y).max() + 1e-9) * db(level))
+
+
