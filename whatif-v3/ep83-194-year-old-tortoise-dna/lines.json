@@ -1,0 +1,79 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "This tortoise is a hundred ninety-four. But part of him still acts young.",
+  "start": 0.0,
+  "dur": 4.06
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "How? Scientists just read his DNA.",
+  "start": 4.24,
+  "dur": 2.297
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "His name is Jonathan. He hatched before the first photo of a person was ever taken.",
+  "start": 6.688,
+  "dur": 5.947
+ },
+ {
+  "i": 3,
+  "tag": "story",
+  "text": "His kind usually lives about a hundred years. He nearly doubled it.",
+  "start": 12.814,
+  "dur": 4.606
+ },
+ {
+  "i": 4,
+  "tag": "deadpan",
+  "text": "So scientists swabbed his cheek. First try? Mouth bacteria.",
+  "start": 17.6,
+  "dur": 4.562
+ },
+ {
+  "i": 5,
+  "tag": "excited",
+  "text": "But try two worked. Two hundred eighty-seven rare gene changes tied to aging.",
+  "start": 22.383,
+  "dur": 4.922
+ },
+ {
+  "i": 6,
+  "tag": "reveal",
+  "text": "In genes that fix broken DNA and protect chromosome tips.",
+  "start": 27.454,
+  "dur": 4.111
+ },
+ {
+  "i": 7,
+  "tag": "punchline",
+  "text": "And the switches on his cell batteries? Still neat, like a young tortoise.",
+  "start": 31.765,
+  "dur": 4.902
+ },
+ {
+  "i": 8,
+  "tag": "serious",
+  "text": "Now, it's one tortoise. Nobody knows yet if these genes caused his long life.",
+  "start": 36.967,
+  "dur": 5.772
+ },
+ {
+  "i": 9,
+  "tag": "tease",
+  "text": "So next, scientists want his blood. Because his secret might show how all of us age.",
+  "start": 42.939,
+  "dur": 6.015
+ },
+ {
+  "i": 10,
+  "tag": "friend",
+  "text": "Not bad for a guy older than the camera.",
+  "start": 49.215,
+  "dur": 2.223
+ }
+]
