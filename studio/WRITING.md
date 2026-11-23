@@ -159,6 +159,12 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     Evidence is n = 6 and confounded with length — the test is Poppi/Gymshark/Grillo's avg watch vs the short-doodle median ~14 s (22 Nov R&D,
     `lab/story/shorts_leak_audit.py`).
 
+58. **Order the beats by the company's own timeline, and never invent the comeback moment.** The Scrub Daddy draft said "it sits in that box for
+    years… one day he scrubs his hands with it" — but the hand scrubber came *first* (2006), the "no" from body shops (2007) put it in the scrap
+    box, and the real comeback was lawn furniture in fall 2011 (scrubdaddy.com/about + Fortune). Open the "our story"/"about" page and line the
+    beats up by year before writing; a spoken "no" from customers is the low point most founder stories already have. And use a name exactly as
+    the source gives it ("Raising Cane", not "Cane"). (23 Nov, both fresh-eyes reviews.)
+
 ## The checker (`tools/human_check.py`)
 H1 tells ≤ 1 per 150 words · H2 openers (top ≤ 15 %, But/So/And ≤ 20 %) · H3 no skeleton > 3× · H4 sentence-length CV ≥ 0.45, no flat run of 4,
 nothing > 18 words · H5 contractions ≥ 0.9, abstract nouns ≤ 3 per 100 words, no "-ing" tails · H6 one human reaction. Thresholds are style
