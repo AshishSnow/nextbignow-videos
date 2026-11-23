@@ -84,9 +84,9 @@ def mix(voice_path, out_path):
     # scene changes: whoosh on every cut
     for t0, _ in R.SCENES[1:]: put(whoosh(), t0 - 0.12, -17, rnd.uniform(-0.5, 0.5), rate=rnd.uniform(0.9, 1.1))
     put(load('switch3'), 0.05, -16)
-    for i, w in enumerate(('print for', 'print plus')): put(load('cardPlace1' if i else 'cardPlace3'), ph(w) - 0.15, -14, (-0.2, 0.4)[i])
-    put(load('click2'), ph('you picked') + 0.3, -14); put(ching(), ph('eighty four'), -13)
-    for i in range(3): put(load('cardSlide1'), ph('now look') + 0.3 + i * 0.15, -18, -0.4 + i * 0.4)
+    for i, w in enumerate(('online fifty', 'print one', 'print plus')): put(load('cardPlace1' if i % 2 else 'cardPlace3'), ph(w) - 0.15, -14, (-0.4, 0, 0.4)[i])
+    put(impact(), ph('smartest'), -11, duck=False); put(ching(), ph('eighty four'), -13)
+    put(load('switch7'), ph('and print alone') - 0.1, -15)
     put(impact(), ph('zero percent'), -10, duck=False)
     put(load('bookFlip1'), ph('took it away') - 0.1, -13); put(whoosh(0.6), ph('took it away') + 0.2, -15)
     put(impact(), ph('choice flipped'), -10, duck=False)

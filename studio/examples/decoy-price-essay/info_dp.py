@@ -96,29 +96,29 @@ def pg(c, *a, **k): page(c, *a, label='N° 02 — ESSAY', **k)
 # ------------------------------------------------------------------ scenes
 def s_pick(c, t):
     pg(c, False, num=num(1), prog=t / DUR)
-    headline(c, [[('WHICH ONE', False)], [('WOULD YOU', False), ('BUY?', True)]], 150, 520, 132, 1.0)
-    for i, w in enumerate(('online', 'print for', 'print plus')):
-        k = 1.0 if i == 0 else pr(t, ph(w) - 0.15, 0.35)
-        card(c, i, XS[i], 1000, k)
+    headline(c, [[('THE PRICE', False)], [('NOBODY', False), ('BUYS.', True)]], 150, 520, 140, 1.0)
+    for i, w in enumerate(('online fifty', 'print one', 'print plus')):
+        tw = ph(w); on = t > tw - 0.15
+        card(c, i, XS[i], 1000 - 30 * eo(pr(t, tw - 0.15, 0.3)) * (1 - pr(t, tw + 0.6, 0.3)), 1.0, dim=not on)
 
 
 def s_you(c, t):
     t0 = SCENES[1][0]; t84 = ph('eighty four')
     pg(c, True, num=num(2), prog=t / DUR)
-    headline(c, [[('YOU PICKED', False)], [('THIS ONE,', True), ('RIGHT?', False)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5), dark=True)
+    headline(c, [[('MOST PEOPLE', False)], [('PICKED', False), ('THIS ONE.', True)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5), dark=True)
     for i in range(3): card(c, i, XS[i], 930, 1.0, hl=(i == 2), dim=(i < 2))
     k = pr(t, t0 + 0.3, 0.6)
     if k > 0:   # hand-drawn ring around the bundle
         p = skia.Path(); p.addOval(skia.Rect.MakeXYWH(XS[2] - 175, 710, 350, 440))
         meas = skia.PathMeasure(p, False); seg = skia.Path(); meas.getSegment(0, meas.getLength() * eo(k), seg, True); c.drawPath(seg, S(CREAM_T, 7))
     if t > t84 - 0.2:
-        pop(c, pr(t, t84 - 0.2, 0.4), 300, 1290, lambda: (c.drawString('84%', 150, 1340, anton(130), P(ACC[0])), body(c, 'of students did too', 390, 1320, 38, CREAM_T, 'SemiBold')))
+        pop(c, pr(t, t84 - 0.2, 0.4), 300, 1290, lambda: (c.drawString('84%', 150, 1340, anton(130), P(ACC[0])), body(c, 'of students did too', 410, 1320, 38, CREAM_T, 'SemiBold')))
 
 
 def s_zero(c, t):
     t0 = SCENES[2][0]; tz = ph('zero percent')
     pg(c, False, num=num(3), prog=t / DUR)
-    headline(c, [[('NOBODY PICKED', False)], [('THE', False), ('MIDDLE ONE.', True)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5))
+    headline(c, [[('AND PRINT', False)], [('ALONE?', True), ('NOBODY.', False)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5))
     bars(c, [16, 0, 84], pr(t, t0 + 0.2, 0.8), hl=1 if t > tz - 0.2 else 2)
     if t > tz - 0.2:
         k = pr(t, tz - 0.2, 0.4); c.drawCircle(150 + 270 + 100, 1290, 80 * eback(k), S(ACC[0], 8))
@@ -143,7 +143,7 @@ def s_decoy(c, t):
     t0 = SCENES[4][0]; td = ph("it's a decoy"); tu = ph('free upgrade')
     pg(c, False, num=num(5), prog=t / DUR)
     headline(c, [[("IT'S CALLED A", False)], [('DECOY.', True)]], 150, 520, 132, pr(t, td - 0.4, 0.5) if t > td - 0.6 else 0.0)
-    if t < td - 0.4: headline(c, [[('THAT USELESS', False)], [('MIDDLE OPTION?', False)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5))
+    if t < td - 0.4: headline(c, [[('THAT USELESS', False)], [('OPTION?', False)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5))
     k = pr(t, td - 0.3, 0.5)
     if k < 1: card(c, 1, 540, 1000, 1.0 - k)
     if k > 0: pop(c, k, 540, 1000, lambda: duck(c, 520, 1020, 1.25))
@@ -156,7 +156,7 @@ def s_end(c, t):
     t0 = SCENES[5][0]; ts = ph('doing all')
     if t < ts - 0.3:
         pg(c, False, num=num(6), prog=t / DUR)
-        headline(c, [[('NEXT TIME YOU SEE', False)], [('THREE', False), ('PRICES...', True)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5))
+        headline(c, [[('SO THE PRICE', False)], [('NOBODY', False), ('BUYS?', True)]], 150, 520, 132, pr(t, t0 + 0.05, 0.5))
         for i in range(3): card(c, i, XS[i], 1000, 1.0, dim=(i != 1))
     else:
         pg(c, False, num=num(7), prog=t / DUR, fill=ACC[0])
@@ -167,8 +167,8 @@ def s_end(c, t):
         duck(c, 560, 1120, 0.95, (250, 246, 236))
 
 
-SCENES = [(0.0, s_pick), (ph('you picked') - 0.15, s_you), (ph('now look') - 0.15, s_zero), (ph('so why') - 0.15, s_flip),
-          (ph('that useless') - 0.15, s_decoy), (ph('so next time') - 0.15, s_end)]
+SCENES = [(0.0, s_pick), (ph('in a test') - 0.15, s_you), (ph('and print alone') - 0.15, s_zero), (ph('so why') - 0.15, s_flip),
+          (ph('that useless') - 0.15, s_decoy), (ph('so the price') - 0.15, s_end)]
 DARK_S = {1, 3}
 SHAKES = [(ph('eighty four'), 8, 0.3), (ph('zero percent'), 10, 0.35), (ph('choice flipped'), 10, 0.35), (ph("it's a decoy"), 10, 0.35), (ph('doing all'), 12, 0.4)]
 TR = 0.3
