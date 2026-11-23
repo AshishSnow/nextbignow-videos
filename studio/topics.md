@@ -151,3 +151,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-24 | CASE STUDY N°01 (red): Huy Fong sriracha, no ads + one farm | posted 13:20 IST
 2026-11-24 | BUSINESS IDEA N°01 (green): holiday light installation (CPSC 160/day, ~$440 avg install) | ESSAY | IG 438931798 / YT 438932056, 24 Nov 16:20 IST
 2026-11-24 | MONEY EXPLAINED N°01 (blue): Visa never lends a dollar, $20.1B profit FY25, 257.5B transactions | ESSAY | IG 438932253 / YT 438932755, 24 Nov 19:20 IST
+2026-11-24 | FOUNDER MINDSET N°01 (orange): Bezos regret minimization / age-80 test | ESSAY | IG 439060972 / YT 439061078, 24 Nov 04:00 IST (owner's time); green moved to 23 Nov 21:58, blue to 24 Nov 00:00 (owner)
