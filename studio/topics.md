@@ -148,3 +148,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-23 | Kobe Mamba Mentality (owner's topic) | infographic paper look + dark quote card | posted 22:20 IST
 2026-11-23 | Purple Cow (Godin 2003), interactive hook | NEW ESSAY look (cream/dark alternating, Anton + accent block, ends full-accent) | posted 2026-11-24 07:20 IST
 2026-11-23 | Decoy pricing (Ariely / Economist offer) | ESSAY look, accent RED | posted 2026-11-24 10:20 IST
+2026-11-24 | CASE STUDY N°01 (red): Huy Fong sriracha, no ads + one farm | posted 13:20 IST

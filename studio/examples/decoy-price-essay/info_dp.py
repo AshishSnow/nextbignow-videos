@@ -5,7 +5,7 @@ from essay_lib import *
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 T = Timing(HERE); ph = T.ph; END, DUR = T.END, T.DUR
-ACC[0] = (214, 52, 44)
+ACC[0] = (138, 66, 214)
 NS = 7
 OPTS = [('ONLINE', '$59'), ('PRINT', '$125'), ('PRINT + ONLINE', '$125')]
 XS = [215, 540, 865]
@@ -90,7 +90,7 @@ def duck(c, x, y, s=1.0, col=None):
     c.restore()
 
 
-def pg(c, *a, **k): page(c, *a, label='N° 02 — ESSAY', **k)
+def pg(c, *a, **k): page(c, *a, label='MIND TRICKS — N° 02', **k)
 
 
 # ------------------------------------------------------------------ scenes
@@ -105,14 +105,14 @@ def s_pick(c, t):
 def s_you(c, t):
     t0 = SCENES[1][0]; t84 = ph('eighty four')
     pg(c, True, num=num(2), prog=t / DUR)
-    headline(c, [[('MOST PEOPLE', False)], [('PICKED', False), ('THIS ONE.', True)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5), dark=True)
+    headline(c, [[('84% PICKED', False)], [('THE', False), ('BUNDLE.', True)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5), dark=True)
     for i in range(3): card(c, i, XS[i], 930, 1.0, hl=(i == 2), dim=(i < 2))
     k = pr(t, t0 + 0.3, 0.6)
     if k > 0:   # hand-drawn ring around the bundle
         p = skia.Path(); p.addOval(skia.Rect.MakeXYWH(XS[2] - 175, 710, 350, 440))
         meas = skia.PathMeasure(p, False); seg = skia.Path(); meas.getSegment(0, meas.getLength() * eo(k), seg, True); c.drawPath(seg, S(CREAM_T, 7))
     if t > t84 - 0.2:
-        pop(c, pr(t, t84 - 0.2, 0.4), 300, 1290, lambda: (c.drawString('84%', 150, 1340, anton(130), P(ACC[0])), body(c, 'of students did too', 410, 1320, 38, CREAM_T, 'SemiBold')))
+        body(c, "Dan Ariely's test with students", 150, 1260, 38, CREAM_T, 'SemiBold', a=pr(t, t84 - 0.2, 0.4))
 
 
 def s_zero(c, t):
@@ -126,21 +126,21 @@ def s_zero(c, t):
 
 
 def s_flip(c, t):
-    t0 = SCENES[3][0]; tf = ph('choice flipped'); t68 = ph('sixty eight')
+    t0 = SCENES[3][0]; tf = ph('dropped to'); t68 = ph('dropped to')
     pg(c, True, num=num(4), prog=t / DUR)
     if t < tf + 0.1:
         headline(c, [[('SO HE', False), ('DELETED', True)], [('THE MIDDLE ONE.', False)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5), dark=True)
         for i in range(3):
             if i == 1:
-                u = eo(pr(t, ph('took it away') + 0.2, 0.6)); c.save(); c.translate(0, 600 * u); card(c, 1, XS[1], 1000, 1.0, cross=pr(t, ph('took it away') - 0.1, 0.4)); c.restore()
+                u = eo(pr(t, ph('so he deleted') + 0.5, 0.6)); c.save(); c.translate(0, 600 * u); card(c, 1, XS[1], 1000, 1.0, cross=pr(t, ph('so he deleted') + 0.1, 0.4)); c.restore()
             else: card(c, i, XS[i], 1000, 1.0)
     else:
-        headline(c, [[('AND THE CHOICE', False)], [('FLIPPED.', True)]], 150, 520, 120, pr(t, tf, 0.5), dark=True)
+        headline(c, [[('AND THE BUNDLE', False)], [('CRASHED.', True)]], 150, 520, 120, pr(t, tf, 0.5), dark=True)
         bars(c, [68, None, 32], pr(t, t68 - 0.3, 0.8), hl=0, dark=True, labels=('ONLINE', '', 'PRINT+ONLINE'))
 
 
 def s_decoy(c, t):
-    t0 = SCENES[4][0]; td = ph("it's a decoy"); tu = ph('free upgrade')
+    t0 = SCENES[4][0]; td = ph('is a decoy'); tu = ph('free upgrade')
     pg(c, False, num=num(5), prog=t / DUR)
     headline(c, [[("IT'S CALLED A", False)], [('DECOY.', True)]], 150, 520, 132, pr(t, td - 0.4, 0.5) if t > td - 0.6 else 0.0)
     if t < td - 0.4: headline(c, [[('THAT USELESS', False)], [('OPTION?', False)]], 150, 520, 120, pr(t, t0 + 0.05, 0.5))
@@ -167,10 +167,10 @@ def s_end(c, t):
         duck(c, 560, 1120, 0.95, (250, 246, 236))
 
 
-SCENES = [(0.0, s_pick), (ph('in a test') - 0.15, s_you), (ph('and print alone') - 0.15, s_zero), (ph('so why') - 0.15, s_flip),
+SCENES = [(0.0, s_pick), (ph('dan ariely') - 0.15, s_you), (ph('print alone') - 0.15, s_zero), (ph('so he deleted') - 0.15, s_flip),
           (ph('that useless') - 0.15, s_decoy), (ph('so the price') - 0.15, s_end)]
 DARK_S = {1, 3}
-SHAKES = [(ph('eighty four'), 8, 0.3), (ph('zero percent'), 10, 0.35), (ph('choice flipped'), 10, 0.35), (ph("it's a decoy"), 10, 0.35), (ph('doing all'), 12, 0.4)]
+SHAKES = [(ph('eighty four'), 8, 0.3), (ph('zero percent'), 10, 0.35), (ph('dropped to'), 10, 0.35), (ph('is a decoy'), 10, 0.35), (ph('doing all'), 12, 0.4)]
 TR = 0.3
 
 
@@ -194,7 +194,7 @@ def frame(t):
 
 def cover(out):
     s = skia.Surface(W, H); c = s.getCanvas()
-    page(c, False, label='OOPS, MY BUSINESS', num='N° 02')
+    page(c, False, label='MIND TRICKS', num='N° 02')
     headline(c, [[('THE PRICE', False)], [('NOBODY', False), ('BUYS.', True)]], 150, 540, 160, 1.0, maxw=800)
     for i in range(3): card(c, i, XS[i], 1030, 1.0, cross=1.0 if i == 1 else 0.0)
     s.makeImageSnapshot().save(out, skia.kPNG)
