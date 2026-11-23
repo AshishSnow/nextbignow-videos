@@ -146,3 +146,4 @@ Owner: "improve design like that, and don't put my character". Reference: clean 
   quick-glance table, small white-pill subtitles (y 1440). No character at all. Example: studio/examples/yue-yuen-infographic/info_yy.py
 - Standalone renderer (no ink pass). YT = same frames + cover overlay first 0.25 s.
 - 23 Nov update (owner: "use that font and color and paper style"): default THEME=paper = Libre Caslon serif (line 2 italic deep red), charcoal/deep red/gold on textured cream paper. OMB_THEME=flat gives the Inter/navy version.
+- 23 Nov: ESSAY look (owner reference carousel): studio/template/essay_lib.py — cream/dark alternating slides, accent grid lines, Anton caps + accent highlight block, engraved hatched illustrations, final full-accent slide. Accent colour per video. Example examples/purple-cow-essay.
