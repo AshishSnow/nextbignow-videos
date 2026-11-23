@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "A giant ring of wind above the North Pole just broke.",
+  "start": 0.0,
+  "dur": 3.083
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "But this time, it broke earlier than ever recorded.",
+  "start": 3.263,
+  "dur": 2.834
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "It's called the polar vortex. Think of a spinning fence that keeps freezing air locked over the Arctic.",
+  "start": 6.247,
+  "dur": 6.431
+ },
+ {
+  "i": 3,
+  "tag": "reveal",
+  "text": "On November tenth, those winds flipped. The earliest flip since records began in 1958, by almost three weeks.",
+  "start": 12.858,
+  "dur": 8.204
+ },
+ {
+  "i": 4,
+  "tag": "tease",
+  "text": "So where does all that freezing air go? Wherever the jet stream bends.",
+  "start": 21.263,
+  "dur": 4.491
+ },
+ {
+  "i": 5,
+  "tag": "serious",
+  "text": "After past breakdowns, parts of the eastern U.S., northern Europe and Asia usually turned colder the next month.",
+  "start": 26.014,
+  "dur": 8.616
+ },
+ {
+  "i": 6,
+  "tag": "excited",
+  "text": "And it takes two to six weeks to reach the ground. That's right now... through December.",
+  "start": 34.83,
+  "dur": 4.816
+ },
+ {
+  "i": 7,
+  "tag": "deadpan",
+  "text": "But it's not a promise. Some breakdowns barely change the weather.",
+  "start": 39.795,
+  "dur": 4.38
+ },
+ {
+  "i": 8,
+  "tag": "friend",
+  "text": "So if your December gets brutal... blame the wind nineteen miles up.",
+  "start": 44.396,
+  "dur": 4.395
+ }
+]
