@@ -145,3 +145,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-23 | Rolex owned by a charity (Hans Wilsdorf Foundation) | infographic paper look | posted 16:20 IST
 2026-11-23 | Yue Yuen sneaker maker | infographic paper look | posted 10:20 IST
 2026-11-23 | Scrub Daddy: the foam 3M left behind (queue/38 research) | infographic paper look | posted 19:20 IST
+2026-11-23 | Kobe Mamba Mentality (owner's topic) | infographic paper look + dark quote card | posted 22:20 IST
