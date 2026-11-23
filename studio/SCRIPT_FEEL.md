@@ -131,3 +131,10 @@ What changed:
 - VideoToBlog, "Steal cinema story principles for retention" (show, intention + obstacle, cause + effect).
 - Christy Tucker, "Voice-over scripts: writing style tips"; The MX Group, "How to write for the human ear".
 - The owner's reference reel (18 Nov): brief → style frames → precise feedback → animate.
+
+## Owner reference reel, 23 Nov 2026 (tech-news explainer): what we took
+- Hook: "We all know A, B, C... but have you heard of X?" + stakes + one question the video answers ("So who really makes your sneakers?").
+- Rehook with tiny Q&A beats: "Who buys it? North America? Not yet." / "Rivals on the shelf? Same maker behind them."
+- End by answering the opening question, split or twisted; careful attribution ("the company says").
+- Layout: explainer object CENTERED, new set every line, objects with eyes/legs, boxing ring for head-to-heads. OMB mascot stays SMALL (person s~0.23 at x112,y1500) beside the subtitle strip; never the big centre character. Cover mascot is small too.
+- First built: projects/yue-yuen (sneaker maker for Nike + Adidas), 39 s.

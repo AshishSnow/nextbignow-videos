@@ -1,0 +1,3 @@
+WHO MAKES
+your sneakers?
+R.factory(c, 470, 1330, 1.0, 0.3); R.sneaker(c, 470, 1500, 0.9, -6, (230, 50, 60), None, True); R.sneaker(c, 190, 1170, 0.5, 8, (60, 120, 220), None, True); R.sneaker(c, 790, 1150, 0.5, -8, (212, 160, 46), None, True)
