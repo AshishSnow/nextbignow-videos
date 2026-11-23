@@ -152,3 +152,9 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-24 | BUSINESS IDEA N°01 (green): holiday light installation (CPSC 160/day, ~$440 avg install) | ESSAY | IG 438931798 / YT 438932056, 24 Nov 16:20 IST
 2026-11-24 | MONEY EXPLAINED N°01 (blue): Visa never lends a dollar, $20.1B profit FY25, 257.5B transactions | ESSAY | IG 438932253 / YT 438932755, 24 Nov 19:20 IST
 2026-11-24 | FOUNDER MINDSET N°01 (orange): Bezos regret minimization / age-80 test | ESSAY | IG 439060972 / YT 439061078, 24 Nov 04:00 IST (owner's time); green moved to 23 Nov 21:58, blue to 24 Nov 00:00 (owner)
+2026-11-24 | CASE STUDY N°02 (red): Raising Cane's lowest grade (queue/37) | ESSAY | IG 439239661 / YT 439239738, 24 Nov 09:12 IST
+2026-11-24 | MIND TRICKS N°03 (purple): endowed progress, car wash stamps 19% vs 34% | ESSAY | IG 439243506 / YT 439243643, 13:33
+2026-11-24 | BUSINESS IDEA N°02 (green): mobile notary (FL $10 cap, travel fees) | ESSAY | IG 439247610 / YT 439247678, 16:50
+2026-11-24 | MONEY EXPLAINED N°02 (blue): Google pays Apple ~$20B default search | ESSAY | IG 439252177 / YT 439252257, 18:45
+2026-11-24 | FOUNDER MINDSET N°02 (orange): Sara Blakely's dinner failure question | ESSAY | IG 439256049 / YT 439256187, 21:52
+2026-11-24 | CASE STUDY N°03 (red): Dollar Shave Club $4,500 video (queue/27) | ESSAY | IG 439260304 / YT 439260396, 23:33
