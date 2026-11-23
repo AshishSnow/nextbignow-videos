@@ -1214,3 +1214,49 @@ def fly_drops2(f, x, y, vx, vy, t, t0, n=7, r=10, seed=0, col=None, rim=None, g=
         cv2.ellipse(ov, (int(px), int(py)), (max(2, int(rr)), max(2, int(rr * st))), ang, 0, 360, C(col), -1, cv2.LINE_AA)
         cv2.ellipse(ov, (int(px), int(py)), (max(2, int(rr)), max(2, int(rr * st))), ang, 0, 360, C(rim), 2, cv2.LINE_AA)
         _blend(f, ov, op)
+
+
+# ---- ep 60 craft: STEAM FROM HOT FOOD (effects animation; Clip Studio Tips "animated hot steam": a wave floating up a simple centreline,
+# fade the top, grey/glow blend not flat white) -> food_steam(f, x, y, t, w, h, n, s, seed, amt, col, ink, period, sway); ink=None auto-adds a faint
+# ink curl on light backgrounds (the glow alone vanished on the noon dhaba in the first test frame). ----
+def food_steam(f, x, y, t, w=120, h=420, n=4, s=1.0, seed=0, amt=1.0, col=(255, 250, 244), ink=None, period=2.6, sway=1.0):
+    """STEAM rising off hot food at (x, y) (the food surface). n ribbons; each one is a wave travelling up a simple centreline: it fades in at the
+    base, widens + slows + sways more as it climbs, breaks into separate wisps in its upper half and fades out at the top. Every ribbon has its
+    own (uneven) cycle so the steam never pulses together. Lighten blend (glows on dark sets); ink > 0 adds a faint warm-ink curl stroke so
+    it still reads on white paper."""
+    if amt <= 0.01: return
+    if ink is None:                                                     # auto: on a light background the glow alone vanishes -> add the ink curl
+        yy0, yy1 = int(max(0, y - h)), int(max(1, y)); xx0, xx1 = int(max(0, x - w)), int(min(W, x + w))
+        ink = 0.55 if float(f[yy0:yy1:8, xx0:xx1:8].mean()) > 0.62 else 0.0
+    x0, x1 = int(max(0, x - w - 140 * s)), int(min(W, x + w + 140 * s)); y0, y1 = int(max(0, y - h * 1.05)), int(min(H, y + 20))
+    if x1 <= x0 or y1 <= y0: return
+    L = np.zeros((y1 - y0, x1 - x0), np.float32); Li = np.zeros_like(L)
+    rng = np.random.default_rng(seed)
+    for i in range(n):
+        per = period * rng.uniform(0.8, 1.25); off = rng.uniform(0, per); bx = x + rng.uniform(-w / 2, w / 2); ph0 = rng.uniform(0, 6.28)
+        life = ((t + off) % per) / per                                  # 0..1 over this ribbon's cycle
+        head = min(1.0, life * 1.6)                                     # how far up the ribbon has reached
+        tail = max(0.0, life * 1.6 - 0.75)                              # the bottom lets go late in the cycle (the ribbon detaches + rises)
+        m = 26; pts = []
+        for j in range(m + 1):
+            v = tail + (head - tail) * j / m
+            amp = (6 + 46 * v * v) * s * sway
+            wav = math.sin(v * 7.5 - t * (2.6 - 1.2 * v) + ph0)       # the wave travels up, slower near the top
+            pts.append((bx - x0 + amp * wav + 18 * s * v * math.sin(t * 0.7 + ph0), y - y0 - v * h, v))
+        for j in range(m):
+            v = pts[j][2]
+            if v > 0.5 and math.sin(v * 19 + t * 1.6 + ph0 * 3) > 0.45: continue            # breaks into separate wisps higher up
+            a = min(1.0, v / 0.12) * (1 - v) ** 1.4                                          # fade in at the base, out at the top
+            wd = max(2, int((10 + 34 * v) * s))                                              # widens as it climbs
+            p0, p1 = (int(pts[j][0]), int(pts[j][1])), (int(pts[j + 1][0]), int(pts[j + 1][1]))
+            cv2.line(L, p0, p1, float(a), wd, cv2.LINE_AA)
+            if ink > 0 and v < 0.8: cv2.line(Li, p0, p1, float(a), max(1, int(3 * s)), cv2.LINE_AA)
+    L = cv2.GaussianBlur(L, (0, 0), 7 * s) * (0.55 + 0.35 * (ink > 0)) * amt
+    roi = f[y0:y1, x0:x1]
+    c = np.array(C(col), np.float32)
+    roi[:] = 1 - (1 - roi) * (1 - L[..., None] * c)                                          # lighten / screen
+    if ink > 0:
+        Li = cv2.GaussianBlur(Li, (0, 0), 0.8) * ink * amt
+        roi[:] = roi * (1 - Li[..., None]) + np.array(C((150, 136, 128)), np.float32) * Li[..., None]
+
+
