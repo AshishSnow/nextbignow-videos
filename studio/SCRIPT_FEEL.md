@@ -138,3 +138,10 @@ What changed:
 - End by answering the opening question, split or twisted; careful attribution ("the company says").
 - Layout: explainer object CENTERED, new set every line, objects with eyes/legs, boxing ring for head-to-heads. OMB mascot stays SMALL (person s~0.23 at x112,y1500) beside the subtitle strip; never the big centre character. Cover mascot is small too.
 - First built: projects/yue-yuen (sneaker maker for Nike + Adidas), 39 s.
+
+## OMB LOOK v3 (owner 23 Nov 2026): flat-vector INFOGRAPHIC, NO mascot
+Owner: "improve design like that, and don't put my character". Reference: clean product infographic.
+- studio/template/info_lib.py: navy/blue/red/yellow/sky on warm off-white, bold Inter Display headings at top (y~330),
+  rounded centre "sky card" with stylised skyline behind one big hero object, callout cards, check/cross marks,
+  quick-glance table, small white-pill subtitles (y 1440). No character at all. Example: studio/examples/yue-yuen-infographic/info_yy.py
+- Standalone renderer (no ink pass). YT = same frames + cover overlay first 0.25 s.
