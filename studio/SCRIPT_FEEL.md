@@ -145,3 +145,4 @@ Owner: "improve design like that, and don't put my character". Reference: clean 
   rounded centre "sky card" with stylised skyline behind one big hero object, callout cards, check/cross marks,
   quick-glance table, small white-pill subtitles (y 1440). No character at all. Example: studio/examples/yue-yuen-infographic/info_yy.py
 - Standalone renderer (no ink pass). YT = same frames + cover overlay first 0.25 s.
+- 23 Nov update (owner: "use that font and color and paper style"): default THEME=paper = Libre Caslon serif (line 2 italic deep red), charcoal/deep red/gold on textured cream paper. OMB_THEME=flat gives the Inter/navy version.

@@ -33,7 +33,7 @@ def s_hook(c, t):
     if t > th - 0.25:
         def badge():
             c.drawCircle(540, 900, 112, P(YEL)); c.drawCircle(540, 900, 112, S(INK, 5))
-            factory(c, 540, 950, 0.3, t); text(c, 'YUE YUEN', 540, 990, 30, INK, 'Black')
+            factory(c, 540, 950, 0.3, t); text(c, 'YUE YUEN', 540, 1000, 26, INK, 'Black', maxw=170)
         pop(c, pr(t, th - 0.25, 0.45), 540, 900, badge)
     if t > te - 0.2:
         for i, (x, y) in enumerate(pos): arrow(c, 540 + (-90 if x < 540 else 90), 900 + (-40 if y < 900 else 40), x + (130 if x < 540 else -130), y + (-10 if y < 900 else -10), pr(t, te - 0.2 + i * 0.1, 0.3), RED, 6)
@@ -52,7 +52,7 @@ def s_who(c, t):
 def s_volume(c, t):
     t0 = SCENES[2][0]; tn = ph('two hundred'); te = ph('eight pairs')
     title(c, t - t0, ['Shoes shipped', 'in 2025'])
-    card(c, 70, 500, 940, 830, (232, 242, 250))
+    card(c, 70, 500, 940, 830, CARD_SKY)
     conveyor(c, 110, 700, 860, t, 2.2 if t > te else 1.0, 6, 0.34)
     if t > tn - 0.3:
         def big():
@@ -114,9 +114,7 @@ TR = 0.32
 
 
 def page(c, t):
-    c.drawRect(skia.Rect.MakeWH(W, H), P(BG))
-    for x in range(0, W, 54): c.drawLine(x, 0, x, H, S((0, 0, 0), 1, 0.025))
-    for y in range(0, H, 54): c.drawLine(0, y, W, y, S((0, 0, 0), 1, 0.025))
+    paper(c)
 
 
 def draw_scene(c, i, t): page(c, t); SCENES[i][1](c, t)
@@ -139,8 +137,8 @@ def frame(t):
 
 def cover(out):
     s = skia.Surface(W, H); c = s.getCanvas(); page(c, 0)
-    chip(c, 'OOPS, MY BUSINESS', 540, 300, YEL, 30)
-    text(c, 'Who makes', 540, 450, 130, INK, 'Black'); text(c, 'your sneakers?', 540, 590, 120, RED, 'Black')
+    chip(c, 'oops, my business', 540, 300, YEL, 32)
+    text(c, 'Who makes', 540, 460, 136, INK, 'Black'); f = font(130, 'Medium', italic=True); s_ = 'your sneakers?'; c.drawString(s_, 540 - f.measureText(s_) / 2, 600, f, P(RED))
     sky_card(c, 70, 680, 940, 760, 5)
     factory(c, 540, 1240, 0.95, 0.4)
     sneaker(c, 280, 1270, 0.55, RED, BLUE, 0.05); sneaker(c, 800, 1270, 0.55, BLUE, YEL, -0.05, flip=True)

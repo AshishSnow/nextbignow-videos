@@ -10,12 +10,43 @@ BG = (247, 245, 239); INK = (26, 28, 36); NAVY = (30, 58, 118); BLUE = (58, 108,
 YEL = (245, 192, 44); SKY = (204, 226, 243); SKY2 = (176, 206, 232); GREY = (120, 124, 132); WHITE = (255, 255, 255); GREEN = (52, 160, 90)
 FD = '/usr/share/fonts/opentype/inter/'
 _TF = {}
+THEME = os.environ.get('OMB_THEME', 'paper')   # 'paper' = owner's pick 23 Nov 2026: sketch-reel font + colours + cream paper
+if THEME == 'paper':
+    BG = (244, 238, 224); INK = (40, 36, 34); NAVY = (52, 48, 46); BLUE = (128, 118, 106); RED = (150, 22, 34)
+    YEL = (212, 160, 46); SKY = (234, 226, 208); SKY2 = (218, 206, 182); GREY = (110, 102, 94); WHITE = (252, 249, 241); GREEN = (96, 116, 64)
+CARD_SKY, SKY3 = ((238, 230, 212), (244, 238, 224)) if THEME == 'paper' else ((232, 242, 250), (220, 234, 246))
+_SW = {'Black': 700, 'ExtraBold': 700, 'Bold': 700, 'SemiBold': 600, 'Medium': 500, 'Regular': 400}
 
 
-def font(size, w='Bold', disp=True):
+def font(size, w='Bold', disp=True, italic=False):
+    if THEME == 'paper':
+        k = ('serif', w, italic)
+        if k not in _TF:
+            base = skia.Typeface.MakeFromFile('/home/claude/studio/fonts_serif/' + ('LibreCaslonText-Italic-VF.ttf' if italic else 'LibreCaslonText-VF.ttf'))
+            co = skia.FontArguments.VariationPosition.Coordinate(0x77676874, float(_SW.get(w, 600)))
+            fa = skia.FontArguments(); fa.setVariationDesignPosition(skia.FontArguments.VariationPosition(skia.FontArguments.VariationPosition.Coordinates([co])))
+            _TF[k] = base.makeClone(fa)
+        f = skia.Font(_TF[k], size); f.setEdging(skia.Font.Edging.kAntiAlias); f.setSubpixel(True); return f
     k = (w, disp)
     if k not in _TF: _TF[k] = skia.Typeface.MakeFromFile(FD + ('InterDisplay-' if disp else 'Inter-') + w + '.otf')
     f = skia.Font(_TF[k], size); f.setEdging(skia.Font.Edging.kAntiAlias); f.setSubpixel(True); return f
+
+
+_PAPER = [None]
+
+
+def paper(c):
+    """cream paper: fibre noise + soft blotches + vignette, built once."""
+    if _PAPER[0] is None:
+        rnd = np.random.default_rng(7)
+        n = rnd.normal(0, 1, (H // 4, W // 4)); from scipy.ndimage import gaussian_filter, zoom
+        low = zoom(gaussian_filter(n, 6), 4, order=1)[:H, :W]; fine = rnd.normal(0, 1, (H, W))
+        yy, xx = np.mgrid[0:H, 0:W]; vig = ((xx - W / 2) / (W * 0.75)) ** 2 + ((yy - H / 2) / (H * 0.75)) ** 2
+        base = np.array(BG, np.float32)[None, None, :]
+        img = base + (low[..., None] * 14) + (fine[..., None] * 4) - (vig[..., None] * 26)
+        img = np.clip(img, 0, 255).astype(np.uint8)
+        _PAPER[0] = skia.Image.fromarray(np.ascontiguousarray(np.dstack([img, np.full((H, W), 255, np.uint8)])), colorType=skia.kRGBA_8888_ColorType)
+    c.drawImage(_PAPER[0], 0, 0)
 
 
 def C(rgb, a=1.0): return skia.Color4f(rgb[0] / 255, rgb[1] / 255, rgb[2] / 255, a)
@@ -66,11 +97,18 @@ def text(c, s, x, y, size, rgb=INK, w='Bold', align='c', a=1.0, maxw=940, disp=T
 
 
 def title(c, t, lines, t0=0.0, size=74, y0=330):
-    """bold two-line heading at the top, line by line fade-up."""
+    """two-line heading at the top, line by line fade-up. paper theme: line 2 = italic deep red (the sketch-reel headline)."""
     for i, s in enumerate(lines):
         k = eo(pr(t, t0 + i * 0.12, 0.35))
         if k <= 0: continue
-        c.save(); c.translate(0, 24 * (1 - k)); text(c, s, 540, y0 + i * (size * 1.08), size, INK, 'Bold', a=k); c.restore()
+        it = THEME == 'paper' and i == len(lines) - 1 and len(lines) > 1
+        c.save(); c.translate(0, 24 * (1 - k))
+        if it:
+            f = font(size * 1.08, 'Medium', italic=True); tw = f.measureText(s)
+            while tw > 940: f = font(f.getSize() * 0.95, 'Medium', italic=True); tw = f.measureText(s)
+            c.drawString(s, 540 - tw / 2, y0 + i * (size * 1.1), f, P(RED, k))
+        else: text(c, s, 540, y0 + i * (size * 1.1), size, INK, 'Bold', a=k)
+        c.restore()
 
 
 def rule(c, x0, x1, y): c.drawLine(x0, y, x1, y, S(INK, 3))
@@ -97,7 +135,7 @@ def skyline(c, x, y, w, h, seed=3, col=SKY2, k=1.0):
     rnd = random.Random(seed); xx = x; c.save(); c.clipRect(skia.Rect.MakeXYWH(x, y - h, w, h))
     while xx < x + w:
         bw = rnd.randint(70, 140); bh = rnd.randint(int(h * 0.35), int(h * 0.95)) * k
-        cc = [col, SKY, (220, 234, 246), BLUE][rnd.randint(0, 3) if rnd.random() < 0.85 else 3]
+        cc = [col, SKY, SKY3, BLUE][rnd.randint(0, 3) if rnd.random() < 0.85 else 3]
         r = skia.Rect.MakeXYWH(xx, y - bh, bw, bh); c.drawRect(r, P(cc)); c.drawRect(r, S(INK, 2.5))
         if cc != BLUE:
             for wy in np.arange(y - bh + 22, y - 10, 30): c.drawLine(xx + 14, wy, xx + bw - 14, wy, S(INK, 1.6, 0.35))
@@ -115,7 +153,7 @@ def card(c, x, y, w, h, fill=WHITE, r=36, ow=4):
 
 def sky_card(c, x, y, w, h, seed=3, sky_k=1.0):
     """the centre stage: rounded panel with sky fill + skyline at its bottom third."""
-    card(c, x, y, w, h, (232, 242, 250))
+    card(c, x, y, w, h, CARD_SKY)
     c.save(); c.clipRRect(rr(x, y, w, h, 36))
     c.drawCircle(x + w * 0.78, y + h * 0.22, 70, P(WHITE, 0.9))
     skyline(c, x, y + h, w, h * 0.62, seed, k=sky_k)
@@ -238,7 +276,7 @@ class Timing:
 def subs(c, T, t, y=1440):
     for ch in T.CH:
         if ch[0][1] - 0.05 <= t <= ch[-1][2] + 0.15:
-            f = font(40, 'SemiBold', False); sp = f.measureText(' ')
+            f = font(42, 'Medium', False, italic=(THEME == 'paper')); sp = f.measureText(' ')
             tw = sum(f.measureText(w) for w, a, b in ch) + sp * (len(ch) - 1); x = 540 - tw / 2
             c.drawRRect(rr(x - 26, y - 46, tw + 52, 66, 33), P(WHITE, 0.96)); c.drawRRect(rr(x - 26, y - 46, tw + 52, 66, 33), S(INK, 3))
             for w, a, b in ch:
