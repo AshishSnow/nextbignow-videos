@@ -1,0 +1,72 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "You breathe out about a pound and a half of carbon dioxide a day.",
+  "start": 0.0,
+  "dur": 3.775
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "Now multiply that by everyone on Earth.",
+  "start": 3.955,
+  "dur": 2.385
+ },
+ {
+  "i": 2,
+  "tag": "reveal",
+  "text": "Scientists just did. Two billion tons a year. Just from staying alive.",
+  "start": 6.49,
+  "dur": 4.455
+ },
+ {
+  "i": 3,
+  "tag": "story",
+  "text": "And it jumped seventy-four percent since 1985.",
+  "start": 11.145,
+  "dur": 3.754
+ },
+ {
+  "i": 4,
+  "tag": "tease",
+  "text": "But it's not because we breathe harder. There are just way more of us.",
+  "start": 15.079,
+  "dur": 4.149
+ },
+ {
+  "i": 5,
+  "tag": "serious",
+  "text": "So... is your breathing heating the planet? Nope.",
+  "start": 19.488,
+  "dur": 3.071
+ },
+ {
+  "i": 6,
+  "tag": "reveal",
+  "text": "That carbon came from your food. Plants pulled it from the air months ago. It's a loop.",
+  "start": 22.758,
+  "dur": 4.972
+ },
+ {
+  "i": 7,
+  "tag": "punchline",
+  "text": "But burning oil is different. That carbon was buried for millions of years.",
+  "start": 27.931,
+  "dur": 5.383
+ },
+ {
+  "i": 8,
+  "tag": "tease",
+  "text": "So why count your breath at all? Because climate math has to add up every source. Even you.",
+  "start": 33.614,
+  "dur": 6.184
+ },
+ {
+  "i": 9,
+  "tag": "friend",
+  "text": "So go ahead. Take a deep breath... and let it out.",
+  "start": 40.058,
+  "dur": 2.964
+ }
+]
