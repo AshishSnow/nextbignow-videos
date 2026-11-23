@@ -1,0 +1,6 @@
+# Sources: Delta x American Express
+- Delta IR, "Delta Air Lines Announces December Quarter and Full Year 2025 Financial Results" (Jan 2026): "American Express remuneration in 2025 grew 11 percent to $8.2 billion"; "Operating income of $5.8 billion with an operating margin of 9.2 percent"; operating revenue $63.4B; "Delta served more than 200 million customers in 2025." https://ir.delta.com/news/news-details/2026/Delta-Air-Lines-Announces-December-Quarter-and-Full-Year-2025-Financial-Results/default.aspx
+- Fortune, 3 Apr 2026: the card and perks "accounted for $8 billion, or about 10%, of Delta's revenue in 2025." https://fortune.com/2026/04/03/how-did-delta-ceo-ed-bastian-build-partnership-with-american-express-10-percent-airlines-revenue/
+- Payments Dive: Bastian, "we expect remuneration of $9 billion this year, up 10% over 2025" (implies ~$8.2B in 2025). https://www.paymentsdive.com/news/amex-delta-card-spending-soars/825180/
+- Mechanism (Amex pays Delta for miles + benefits on co-brand cards): View from the Wing https://viewfromthewing.com/amex-pays-delta-3-8-cents-per-dollar-charged-why-banks-pay-more-for-miles-than-you-do/
+- "more than the airline made in profit": $8.2B remuneration (revenue) > $5.8B operating income (our comparison, stated as such). "Credit card with wings" = our framing.
