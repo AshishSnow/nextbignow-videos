@@ -1,0 +1,5 @@
+# Sources: Rolex ownership
+- Hans Wilsdorf Foundation (Wikipedia, citing NZZ 2023 + wristler.eu 2023): set up 1 Aug 1945 "following the death of his wife in 1944"; "the sole owner of the watchmaking group Rolex"; will (1960) left the foundation all his shares; supports social institutions, people in need, scholarships, arts. https://en.wikipedia.org/wiki/Hans_Wilsdorf_Foundation
+- Business Standard (Jun 2026): "Rolex SA is owned wholly by a charitable trust"; "no public shareholders or private investors, no owning family, and no listing on any stock exchange"; founder set up the foundation in 1945; wife died 1944. https://www.business-standard.com/opinion/columns/why-rolex-s-ownership-model-offers-a-different-view-of-capitalism-126062601254_1.html
+- 2025 sales ~CHF 11 billion (estimate, Morgan Stanley x LuxeConsult): The Peak Singapore https://www.thepeakmagazine.com.sg/watch-jewellery/swiss-watch-industry-report-2026 ; DMARGE "crack CHF 11 billion" https://www.dmarge.com/watches/rolex-sales-2025
+- Wilsdorf died 1960: Wikipedia Hans Wilsdorf https://en.wikipedia.org/wiki/Hans_Wilsdorf

@@ -142,3 +142,5 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 - 2026-11-23 | QUEUED (R&D writers' room, doodle case study, SHORTS) — Raising Cane's: his professor gave the plan the lowest grade (chicken-chain boom + 3 moves) (queue/37-canes-worst-grade) | — | REVIEWED
 - 2026-11-23 | QUEUED (R&D writers' room, doodle case study, SHORTS) — Scrub Daddy: 3M didn't want this foam, it sat in a scrap box (cleaning-video boom + 3 moves) (queue/38-scrub-daddy-scrap) | — | REVIEWED
 2026-11-23 | Delta x Amex: credit card with wings | infographic paper look | posted 13:20 IST
+2026-11-23 | Rolex owned by a charity (Hans Wilsdorf Foundation) | infographic paper look | posted 16:20 IST
+2026-11-23 | Yue Yuen sneaker maker | infographic paper look | posted 10:20 IST
