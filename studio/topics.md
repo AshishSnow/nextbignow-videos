@@ -149,3 +149,5 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-23 | Purple Cow (Godin 2003), interactive hook | NEW ESSAY look (cream/dark alternating, Anton + accent block, ends full-accent) | posted 2026-11-24 07:20 IST
 2026-11-23 | Decoy pricing (Ariely / Economist offer) | ESSAY look, accent RED | posted 2026-11-24 10:20 IST
 2026-11-24 | CASE STUDY N°01 (red): Huy Fong sriracha, no ads + one farm | posted 13:20 IST
+2026-11-24 | BUSINESS IDEA N°01 (green): holiday light installation (CPSC 160/day, ~$440 avg install) | ESSAY | IG 438931798 / YT 438932056, 24 Nov 16:20 IST
+2026-11-24 | MONEY EXPLAINED N°01 (blue): Visa never lends a dollar, $20.1B profit FY25, 257.5B transactions | ESSAY | IG 438932253 / YT 438932755, 24 Nov 19:20 IST
