@@ -1,0 +1,72 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "A crow can make a decision faster than you can blink.",
+  "start": 0.0,
+  "dur": 2.866
+ },
+ {
+  "i": 1,
+  "tag": "question",
+  "text": "And it's about twice as fast as you.",
+  "start": 3.046,
+  "dur": 1.944
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "Scientists gave two crows a touchscreen full of moving dots.",
+  "start": 5.139,
+  "dur": 3.638
+ },
+ {
+  "i": 3,
+  "tag": "story",
+  "text": "Their job? Spot which way most dots were moving, and peck that side.",
+  "start": 8.957,
+  "dur": 4.129
+ },
+ {
+  "i": 4,
+  "tag": "reveal",
+  "text": "The crows did it in about a quarter of a second.",
+  "start": 13.266,
+  "dur": 2.653
+ },
+ {
+  "i": 5,
+  "tag": "deadpan",
+  "text": "In tasks like this, people usually take about twice as long.",
+  "start": 16.119,
+  "dur": 4.362
+ },
+ {
+  "i": 6,
+  "tag": "excited",
+  "text": "But here's the wild part. Their brain cells picked the answer just seventy milliseconds in.",
+  "start": 20.701,
+  "dur": 5.452
+ },
+ {
+  "i": 7,
+  "tag": "serious",
+  "text": "And crows don't even have the brain layer we use for this.",
+  "start": 26.303,
+  "dur": 3.645
+ },
+ {
+  "i": 8,
+  "tag": "deadpan",
+  "text": "It was only two crows, so it still needs more tests.",
+  "start": 30.148,
+  "dur": 3.253
+ },
+ {
+  "i": 9,
+  "tag": "friend",
+  "text": "But next time a crow stares at you... it already decided.",
+  "start": 33.621,
+  "dur": 3.533
+ }
+]
