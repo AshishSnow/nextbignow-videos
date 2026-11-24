@@ -103,3 +103,4 @@ CLAIMED 2026-11-23 15:20 IST (Claude-session) | phone-chawal | गीला फ�
 CLAIMED 2026-11-23 19:42 IST (Claude-session) | kela-fridge | केला फ्रिज में = खराब? (peel chilling injury; flesh fine)
 - 2026-11-23 | Short (Claude-session) kela-fridge | केला फ्रिज में = खराब? (cold chilling injury blackens peel only; flesh fine, ripening slows 2-3 days; green bananas don't ripen if chilled; bananas shipped ~13°C) | orange Food theme, motion-essay style, owner's real images | IG 438904756 22:19, YT 438904792 22:21
 CLAIMED 2026-11-24 14:37 IST (Claude-session) | earbud | कान में ईयरबड? (ears self-clean; ~263k US kids ER 1990-2010, ~34/day)
+- 2026-11-24 | Short (Claude-session) earbud | कान में ईयरबड? (ears self-clean via skin migration; swabs push wax in, can perforate eardrum; ~263k US kids ER 1990-2010, ~34/day, Nationwide Children's 2017) | green Health theme, motion-essay style, owner's real ear-model images | IG 440021300 15:30, YT 440021365 15:32
