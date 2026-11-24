@@ -21,3 +21,4 @@ Fill in the result columns 48 h or more after posting.
 | 97 | Why farts stink | explainer | WHY FARTS STINK | You fart around twenty times a day. So why does it stink? | cloud pops in | topic label as text hook (baseline to beat) | | | | |
 | 98 | Voyager light-day | news | ONE LIGHT-DAY AWAY | Text Voyager 1 right now, and it won't get it until tomorrow. | phone sends to probe | news topic reframed as "you texting" vs old "On Wednesday" (25%) | | | | |
 | 99 | Verica woman king | history | THE KING WAS A WOMAN? | Rome's invasion of Britain may have started with a woman. | map + coin pop | no "you" in hook, history paradox | | | | |
+| 100 | Tiny spider, 50% more DNA | explainer | IT BEATS YOUR / GENOME BY 50% (2-line, big) | This spider fits on a quarter. But its DNA beats yours. | spider wiggling on a quarter + DNA helixes | text hook = number/stake not spoken (vs label on ep97) -> expect 3s >= 70% | | | | |

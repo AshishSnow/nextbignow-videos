@@ -276,3 +276,34 @@ Every episode logs its 11 bricks and **one** improvement hypothesis in `tools/ex
 2. **Get measurably better each rep.** The experiment log in 8.6.
 3. **Funnel views into something.** The caption send prompt plus the YT subscribe end card. Revisit this when there's a lead magnet.
 4. **Never stop.** Kallaway says skills lock in around rep 50. We're at about ep100, so keep the loop running.
+
+## 9. "Script Writing: The Complete System" (brandbysid infographic, Nov 24 2026)
+
+### Strategy: why and what
+
+1. **Purpose.** Write one `PURPOSE` line in vo.py: what the viewer knows or feels after watching.
+2. **Audience.** Speak their language. Pick the pain point or stake that makes them care, such as "your DNA" or "your phone".
+3. **Structure: Hook, Build, Deliver, Close.** For us:
+
+   | Their step | Our version |
+   |---|---|
+   | Hook | text hook, visual hook, spoken hook |
+   | Build | setup and context (lines 2-4) |
+   | Deliver | the twist / reveal (BUT line) |
+   | Close | payoff, which loops back to line 1 |
+
+4. **Value in every line.** Each line must educate, entertain or inspire.
+   - Put the first value before 4 s.
+   - Cut any line that does none of the three.
+5. **Clear action.** One CTA in the caption: a question plus a send prompt. End with conviction, not hedging.
+
+### Execution: how
+
+1. **Research.** Use the primary source, plus real numbers and examples.
+2. **Strong hook.** A curiosity gap or a bold statement (section 8.4).
+3. **Build.** Clear sections in natural conversational flow, backed by a story or example.
+4. **Refine.**
+   - Cut fluff and filler.
+   - Read it aloud (the TTS pass).
+   - Cut 20%.
+5. **Test, review, improve.** Use the experiment log (8.6); analyze retention and 3s rate every tick.

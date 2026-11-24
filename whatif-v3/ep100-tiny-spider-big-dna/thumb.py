@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/spider/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFE08A', 'B2521A', CX, 1300); rays(fr, 0.4, 'FFFFFF', .16, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (helix(c, 140, 1350, 700, 0.3), helix(c, 940, 1350, 700, 1.3), quarter(c, CX, 1560, 1.25, 0), spider(c, CX, 1370, 1.35, 0.2))))
+burst(fr, '+50% DNA', 820, 1060, 1.0, r=150, col=YEL, size=44, rot=10)
+tape(fr, 'SMALLER THAN A COIN', 420, 330, 1.0, col=RED, size=52, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'MORE DNA', 520, 190, 'FFFFFF', -3)
+big_word(fr, 'THAN YOU?!', 730, 180, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/spider/out/thumb_spider.jpg', quality=95)
