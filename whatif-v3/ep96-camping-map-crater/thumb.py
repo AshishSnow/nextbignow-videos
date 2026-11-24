@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/crater/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('C9F0B0', '1F5A2A', CX, 1300); rays(fr, 0.4, 'FFFFFF', .14, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (satmap(c, CX + 60, 1330, 820, 820, 0.3, 1.0, 1.6), tent(c, 230, 1740, 1.1))))
+burst(fr, '16 MILES WIDE', 820, 1760, 1.0, r=170, col=YEL, size=34, rot=8)
+tape(fr, 'FOUND ON A CAMPING MAP', 440, 330, 1.0, col=RED, size=46, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'HIDDEN', 520, 200, 'FFFFFF', -3)
+big_word(fr, 'CRATER?!', 730, 200, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/crater/out/thumb_crater.jpg', quality=95)
