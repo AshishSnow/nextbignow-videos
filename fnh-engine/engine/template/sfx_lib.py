@@ -1436,3 +1436,36 @@ def radar_ping(level=-24):
     return _st(y / (np.abs(y).max() + 1e-9) * db(level))
 
 
+
+
+# ---------------- ep 61: the SCREEN LIGHT sound twin (tv_babble follows tv_scene cuts; needs anim_props_lib61.tv_scene exec'd, see ep 61 mix.py) + a Geiger counter ----------------
+def tv_babble(n_, t0=0.0, level=-34):
+    """the TV programme heard in the room: band-limited 'voices' (formant-ish noise bursts at syllable rate) + a little music, whose pitch/colour
+    changes at every SCENE CUT of tv_scene (the same cuts as the screen light)."""
+    tt = t0 + np.arange(n_) / SR
+    out = np.zeros(n_, np.float32); i0 = None; a = 0
+    for k in range(0, n_, int(0.05 * SR)):
+        i, _ = tv_scene(tt[k])
+        if i != i0 and k > 0:
+            seg = slice(a, k); fc = 600 + 220 * i0; syl = 3.5 + 0.7 * i0
+            out[seg] = (_bp(rng.standard_normal(k - a), fc, fc * 2.6) * (0.5 + 0.5 * np.sin(2 * np.pi * syl * tt[seg]) ** 4)
+                        + 0.4 * np.sin(2 * np.pi * (220 + 40 * i0) * tt[seg]) * (np.sin(2 * np.pi * 2 * tt[seg]) > 0))
+            a = k
+        i0 = i
+    fc = 600 + 220 * i0
+    out[a:] = _bp(rng.standard_normal(n_ - a), fc, fc * 2.6) * (0.5 + 0.5 * np.sin(2 * np.pi * 4 * tt[a:]) ** 4)
+    out = _lp(out, 3200)
+    return (out / (np.abs(out).max() + 1e-9) * db(level)).astype(np.float32)
+
+
+def geiger(level=-28, dur=2.0, rate0=4, rate1=40, seed=1):
+    """a Geiger counter: random clicks whose rate climbs from rate0 to rate1 per second."""
+    n_ = int(dur * SR); y = np.zeros(n_, np.float32); r = np.random.default_rng(seed); t_ = 0.0
+    while t_ < dur:
+        rate = rate0 + (rate1 - rate0) * (t_ / dur); t_ += r.exponential(1 / rate)
+        k = int(t_ * SR)
+        if k < n_ - 200: y[k:k + 200] += (r.standard_normal(200) * np.exp(-np.arange(200) / 18)).astype(np.float32)
+    y = _hp(y, 1500)
+    return y / (np.abs(y).max() + 1e-9) * db(level)
+
+

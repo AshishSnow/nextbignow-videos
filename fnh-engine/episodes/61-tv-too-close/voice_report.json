@@ -1,0 +1,35 @@
+{
+ "utmos": 4.486,
+ "utmos_chunk20": 4.484,
+ "utmos_line_mean": 4.446,
+ "utmos_lines": {
+  "i1": 4.44,
+  "i2": 4.42,
+  "i3": 4.42,
+  "a1q": 4.39,
+  "a1": 4.52,
+  "a2": 4.48,
+  "b1": 4.46,
+  "b2": 4.42,
+  "b3": 4.45,
+  "c1": 4.47
+ },
+ "f0_median_hz": 129.3,
+ "f0_range_st": 15.9,
+ "words": 130,
+ "duration_s": 48.0,
+ "wpm_overall": 162.4,
+ "wpm_speaking": 172.8,
+ "pause_ratio": 0.06,
+ "asr_word_error_approx": 0.053,
+ "asr_bad_lines": [
+  [
+   "a1",
+   "The 1960s, some new color TVs leaked radiation way above the safe level."
+  ],
+  [
+   "a2",
+   "They got recalled and fixed, and T V's made after 1968 don't have that problem."
+  ]
+ ]
+}
