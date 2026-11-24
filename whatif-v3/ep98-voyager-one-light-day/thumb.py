@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/voyager/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('5A6BD8', '0E1030', CX, 1250); rays(fr, 0.4, 'FFFFFF', .12, CX, 1250); overlay(fr, cairo_layer(lambda c: stars(c, 0.3))); vignette(fr, .45)
+overlay(fr, cairo_layer(lambda c: (voyager(c, 700, 1180, 1.3, 0.3), earth(c, 200, 1700, 120), beam(c, 290, 1650, 620, 1300, .7))))
+burst(fr, '24 HOURS', 780, 1680, 1.0, r=170, col=YEL, size=52, rot=8)
+tape(fr, 'VOYAGER 1 RIGHT NOW', 420, 330, 1.0, col=RED, size=52, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'A FULL DAY', 520, 175, 'FFFFFF', -3)
+big_word(fr, 'AWAY?!', 730, 210, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/voyager/out/thumb_voyager.jpg', quality=95)
