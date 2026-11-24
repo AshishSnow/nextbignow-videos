@@ -165,6 +165,12 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     beats up by year before writing; a spoken "no" from customers is the low point most founder stories already have. And use a name exactly as
     the source gives it ("Raising Cane", not "Cane"). (23 Nov, both fresh-eyes reviews.)
 
+59. **"Did it work?" claims a cause; a place must look like the source says.** After a list of store experiences, "Did it work? Sales doubled"
+    credits the experiences with growth no source attributes to them — say "And sales? They more than doubled." And describe a venue the way
+    its own page does: Jellycat's Harrods "airline" *is* a plane cabin (a display) with check-in desks, so "No plane" was false. Same family:
+    "their **own** stores" when a brand already sold through other shops (Bombas via Dick's/Nordstrom), "most-requested **clothing**" not
+    "what shelters ask for most", and one name for one speaker ("Their CEO" twice, never "their boss" then "He"). (24 Nov, Jellycat + Bombas reviews.)
+
 ## The checker (`tools/human_check.py`)
 H1 tells ≤ 1 per 150 words · H2 openers (top ≤ 15 %, But/So/And ≤ 20 %) · H3 no skeleton > 3× · H4 sentence-length CV ≥ 0.45, no flat run of 4,
 nothing > 18 words · H5 contractions ≥ 0.9, abstract nouns ≤ 3 per 100 words, no "-ing" tails · H6 one human reaction. Thresholds are style
