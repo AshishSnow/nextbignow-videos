@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/sailor/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('9FD8F5', '0E3A6E', CX, 1200); rays(fr, 0.4, 'FFFFFF', .14, CX, 1200); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (boat(c, 470, 1470, 1.3, 0.2, 1.0), dog(c, 470, 1400, .9, 0.2), sea(c, 0.3, 1520), beacon(c, 860, 1330, .8, 0.33, 1.0))))
+burst(fr, 'AGE 86', 220, 1080, 1.0, r=140, col=YEL, size=50, rot=-8)
+tape(fr, 'SAVED BY A BEACON', 420, 330, 1.0, col=RED, size=52, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, '2 MONTHS', 520, 190, 'FFFFFF', -3)
+big_word(fr, 'SILENT', 730, 200, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/sailor/out/thumb_sailor.jpg', quality=95)
