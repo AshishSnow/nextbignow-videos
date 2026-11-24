@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/verica/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFE08A', '8A3A12', CX, 1300); rays(fr, 0.4, 'FFFFFF', .16, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (britain(c, 260, 1450, 1.1, 1.0), coin(c, 720, 1380, 1.5, 0.2, 'slender', 'REX'))))
+burst(fr, 'ROME INVADED', 760, 1780, 1.0, r=160, col=YEL, size=36, rot=8)
+tape(fr, 'AD 43 BRITAIN', 420, 330, 1.0, col=RED, size=54, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'THE KING WAS', 520, 150, 'FFFFFF', -3)
+big_word(fr, 'A WOMAN?!', 730, 190, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/verica/out/thumb_verica.jpg', quality=95)
