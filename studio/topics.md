@@ -158,3 +158,4 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-24 | MONEY EXPLAINED N°02 (blue): Google pays Apple ~$20B default search | ESSAY | IG 439252177 / YT 439252257, 18:45
 2026-11-24 | FOUNDER MINDSET N°02 (orange): Sara Blakely's dinner failure question | ESSAY | IG 439256049 / YT 439256187, 21:52
 2026-11-24 | CASE STUDY N°03 (red): Dollar Shave Club $4,500 video (queue/27) | ESSAY | IG 439260304 / YT 439260396, 23:33
+2026-11-25 | MIND TRICKS N°04 (purple): jam study / choice overload (first script-system test) | ESSAY | IG 440500669 / YT 440500771, 25 Nov 07:30 IST
