@@ -41,3 +41,18 @@ Every day: read views per reel (Metricool / IG grid), log them below, keep the w
 | 24 Nov | Car wash stamps | Purple | Experiment | "2 FREE STAMPS. ALMOST 2X." | 140 | early |
 
 Reading so far (small sample): the two winners both put a concrete puzzle/contrast on frame 1 (three price tags; zero → five titles). Next tests: more Experiment/Scenario formats; frame-1 visuals that are the puzzle itself; "you" framing (viewer is the customer).
+
+## Script system (strategy -> execution), added 24 Nov 2026
+Strategy (decide before writing):
+1. Purpose: one goal per reel (follow / save / comment) and the one thing the viewer should remember.
+2. Audience: small-business owners and curious US viewers; name their pain ("customers can't decide", "ads cost too much") in their words.
+3. Structure: HOOK -> BUILD -> DELIVER -> CLOSE.
+4. Value every line: each line must teach, surprise or move the story. Value early (first fact by ~4 s), value often.
+5. Drive action: close with one clear, simple thing to do ("take one away"), said with conviction.
+Execution:
+1. Research: real study / case, two sources, and the honest limits (a caveat line builds trust and is a free rehook).
+2. Hook: attention in the first seconds via curiosity or a bold statement; make them need the answer.
+3. Build: clear sections, natural conversational flow, support with a story or example.
+4. Refine: cut fluff and filler, read it out loud, keep it crisp.
+5. Test: log retention/views, iterate (Results log above).
+Script sheet = BRICKS.md + a line-by-line tag: each vo line tagged HOOK / BUILD / DELIVER / CLOSE and with its value (fact, turn, or takeaway). Any line with no value gets cut.
