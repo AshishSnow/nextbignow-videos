@@ -159,3 +159,8 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-24 | FOUNDER MINDSET N°02 (orange): Sara Blakely's dinner failure question | ESSAY | IG 439256049 / YT 439256187, 21:52
 2026-11-24 | CASE STUDY N°03 (red): Dollar Shave Club $4,500 video (queue/27) | ESSAY | IG 439260304 / YT 439260396, 23:33
 2026-11-25 | MIND TRICKS N°04 (purple): jam study / choice overload (first script-system test) | ESSAY | IG 440500669 / YT 440500771, 25 Nov 07:30 IST
+2026-11-25 | MIND TRICKS N°05 (purple): IKEA effect (63% more) | ESSAY | IG 440973785 / YT 440973837, 09:12
+2026-11-25 | CASE STUDY N°04 (red): Nintendo started with playing cards (1889) | ESSAY | IG 440976520 / YT 440976588, 12:40
+2026-11-25 | BUSINESS IDEA N°03 (green): Texas cottage food law ($150K cap, SB 541) | ESSAY | IG 440979911 / YT 440979970, 15:50
+2026-11-25 | MONEY EXPLAINED N°03 (blue): Spotify paid out $10B+, 18 yrs to profit | ESSAY | IG 440983199 / YT 440983257, 18:45
+2026-11-25 | FOUNDER MINDSET N°03 (orange): Steve Jobs fired at 30 (Stanford 2005) | ESSAY | IG 440987012 / YT 440987077, 21:52

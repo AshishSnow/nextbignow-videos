@@ -56,3 +56,9 @@ Execution:
 4. Refine: cut fluff and filler, read it out loud, keep it crisp.
 5. Test: log retention/views, iterate (Results log above).
 Script sheet = BRICKS.md + a line-by-line tag: each vo line tagged HOOK / BUILD / DELIVER / CLOSE and with its value (fact, turn, or takeaway). Any line with no value gets cut.
+
+## Data pull 25 Nov 2026 03:15 IST (Metricool, IG reels: views / 3-s skip rate / avg watch s)
+Top: Black Friday 2394/43/15.3 · McDonald's rent 2247/45/13.3 · Chick-fil-A Sundays 1975/30/16.7 · IKEA meatballs 1911/28/16.8 · Decoy 1889/40/15.7 · LEGO tires 1863/26/15.1 · Coke Santa 1552/27/15.6 · Kobe 1547/28/19.8 · Rolex 1521/44/13.1 · Delta card 1500/27/22.1 · Yue Yuen 1415/32/12.2 · Purple Cow 954/60/7.2
+Low (essay, 23-24 Nov): Bezos 317 · Holiday lights 301 · Sriracha 299 · Canes 193 · Scrub Daddy 182 · Google/Apple 170 · Notary 164 · Car-wash stamps 165 · Visa 156 · Blakely 150
+Reading: winners = a FAMOUS brand or day everyone knows + a "you've been wrong" contradiction in the first line, skip rate ~26-30%, avg watch 15-17 s. Recent essay reels: skip 42-55%, avg watch 9-12 s. Some of the gap is age/time-of-post, but frame 1 is losing people.
+Change for 25 Nov batch: famous brand/person named in text hook + spoken hook (IKEA, Nintendo, Spotify, Steve Jobs; Texas law = timely Thanksgiving), shorter scripts (34-43 s).
