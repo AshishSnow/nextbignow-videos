@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/coffin/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFE08A', '6B3A1A', CX, 1300); rays(fr, 0.4, 'FFFFFF', .16, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (coffin(c, CX, 1520, 1.45, 0.2, .5), skull(c, CX - 140, 1320, 1.0, 0.2), bonehand(c, CX + 170, 1320, 1.1, 0.4))))
+burst(fr, '700 YEARS LATER', 800, 1000, 1.0, r=170, col=YEL, size=32, rot=10)
+tape(fr, 'ROMAN COFFIN, LONDON', 430, 330, 1.0, col=RED, size=50, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'WRONG MAN', 520, 185, 'FFFFFF', -3)
+big_word(fr, 'INSIDE?!', 730, 200, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/coffin/out/thumb_coffin.jpg', quality=95)
