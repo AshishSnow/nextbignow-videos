@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/bees/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFF0A0', 'C77A12', CX, 1300); rays(fr, 0.4, 'FFFFFF', .16, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (flower(c, 420, 1420, 1.6), bee(c, 360, 1230, 1.6, 0.2, 'honey', False, True), bee(c, 870, 1450, 1.1, 0.4, 'bumble', True))))
+burst(fr, 'SHOVE!', 830, 1180, 1.0, r=150, col=YEL, size=56, rot=10)
+tape(fr, 'NEW STUDY', 420, 330, 1.0, col=RED, size=56, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'HONEYBEES', 520, 175, 'FFFFFF', -3)
+big_word(fr, 'ARE BULLIES?', 730, 150, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/bees/out/thumb_bees.jpg', quality=95)
