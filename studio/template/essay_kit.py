@@ -34,12 +34,15 @@ def bigquote(c, lines, k, cite, dark=True, y=720, size=76):
     c.drawLine(150, yy, 200, yy, S(ACC[0], 4)); body(c, cite, 220, yy + 12, 28, MUTE, 'SemiBold', a=k)
 
 
-def final_fill(c, label, num, prog, lines, k, size=124, y=580):
+def final_fill(c, label, num, prog, lines, k, size=124, y=580, cta='FOLLOW FOR DAILY BUSINESS BREAKDOWNS'):
     page(c, False, label=label, num=num, prog=prog, fill=ACC[0])
     f = anton(size)
     for i, s_ in enumerate(lines):
         kk = eo(cl(k * 1.6 - i * 0.2)); c.save(); c.translate(0, 40 * (1 - kk))
         c.drawString(s_, 150, y + i * int(size * 1.1), f, P(CREAM_T if i < len(lines) - 1 else INKE, kk)); c.restore()
+    if cta and k > 0.6:
+        g = font(30, 'Bold', False); a = cl((k - 0.6) / 0.4)
+        yy = y + (len(lines) - 1) * int(size * 1.1) + 70; c.drawRect(skia.Rect.MakeXYWH(150, yy - 12, 40, 6), P(INKE, a)); c.drawString(cta, 206, yy, g, P(INKE, a))
 
 
 def build(T, SCENES, DARK_S, SHAKES, fill_t, TR=0.3):

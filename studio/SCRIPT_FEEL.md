@@ -151,3 +151,6 @@ Owner: "improve design like that, and don't put my character". Reference: clean 
 - 23 Nov 18:29 OWNER: logo must work with every accent (red, green, pink, blue...) -> logo is MONOCHROME black + cream ('O.' square full stop; wordmark 'OOPS. MY BUSINESS'), studio/brand/logo/. Accent colour lives only in the reels.
 - 23 Nov 19:05 OWNER: "Don't start always pick one. Follow style not script, make your script hook better from yourself." -> never reuse a hook pattern across reels; original hook every time (surprise / contradiction / stakes / curiosity gap), payoff calls back to the hook.
 - 23 Nov 19:23 OWNER: colour = series. PURPLE Mind Tricks · RED Case Study · GREEN Business Idea · BLUE Money Explained · ORANGE Founder Mindset. Label 'SERIES — N° NN' on every slide. Different hook AND story shape every reel.
+
+## 24 Nov 2026 — Lego-brick method
+See SHORTFORM_PLAYBOOK.md. Every reel gets a BRICKS.md (11 bricks + one hypothesis) before scripting; text hook (sound-off) > visual hook > spoken hook; vary formats; soft follow CTA on the final slide; caption ends with a question; log views daily and keep winning bricks.
