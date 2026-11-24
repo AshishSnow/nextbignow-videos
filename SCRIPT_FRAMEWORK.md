@@ -188,3 +188,91 @@ A topic is only a GO if it has all of these:
 
 - Run `tools/script_check.py`: 95-125 words, grade 5 or below, line 1 at most 12 words, no weak opener, 2+ "but".
 - Read it aloud and cut 20%.
+
+## 8. v4 (Nov 24 2026): Kallaway "content as science" + our latest numbers
+
+Source: Kallaway's *Short Form Growth System*, intro email. Ashish shared it so we would learn from it.
+
+### 8.1 The 11 Lego bricks, filled in for NextBigNow
+
+Each short is a stack of 11 bricks. To make a new short, keep most of them and swap one or two on purpose. They fall into 5 groups, built in this order:
+
+1. **Format** (one brick): what kind of short it is: news "what happens next", explainer, "what if you" scenario, or survival story.
+2. **Idea** (three bricks):
+   - **Topic**: the subject.
+   - **Seed**: the one-line premise. If you can't write it in one sentence, the idea isn't ready.
+   - **Substance**: the facts, numbers and examples that create emotion.
+3. **Hook** (three bricks, most important first):
+   - **Text hook**: the title on frame 1. It matters most.
+   - **Visual hook**: what moves in frame 1.
+   - **Spoken hook**: line 1 of the voiceover.
+4. **Script** (two bricks):
+   - **Story structure**: hook, BUT, snapback, beats, payoff, loop.
+   - **CTA**: the caption question plus the send prompt.
+5. **Edit** (two bricks):
+   - **Visual layout**: tortoise comic look plus 2-3 essay slides.
+   - **Elements**: tape labels, bursts, shakes, SFX, subtitles.
+
+### 8.2 Our own data, as Lego bricks (IG Reels, Nov 15-24)
+
+"3s" is the share of viewers still watching after 3 seconds.
+
+| Reel | Bricks | 3s | Views | Avg watch |
+|---|---|---|---|---|
+| Hippo dig ("What if you dug... and hit a hippo?") | you + object + absurd image | **77.8%** | 1331 | 18.8 s |
+| Breath CO2 ("You breathe out a pound and a half...") | you + body + number | **74.7%** | 1217 | 17.2 s |
+| Crow ("faster than you can blink") | animal + you-comparison | 69.5% | 159 | 14.4 s |
+| Measles ("wiped out in 2000... came back") | reversal | 69.3% | 457 | 21.4 s |
+| Energy drink ("That energy drink in your hand?") | object in your hand + danger | 62.9% | 1093 | 11.5 s |
+| Deep-sea rock ("You crack open a rock... full of animals") | you + object | 59.0% | **1850** | 17.0 s |
+| AI is #1 risk (Fed) | org + abstract money | 21.4% | 554 | 5.6 s |
+| Voyager ("On Wednesday...") | date opener | 25.0% | 823 | 8.6 s |
+| Starship ("A rocket came back...") | object, no you | 28.1% | 161 | 10.5 s |
+| ChatGPT Wallet | brand + abstract | 29.4% | 470 | 6.1 s |
+| Freezer hackers | abstract | 32.1% | 575 | 7.8 s |
+
+Read: since the tortoise comic style started (Nov 21), most reels hold **56-78%** at 3 s. Older photo/news reels held 21-56%.
+
+### 8.3 What works and what doesn't
+
+**Winning bricks:**
+- **Topic:** your body, an animal, or an ancient discovery.
+- **Seed:** an absurd image you can picture.
+- **Spoken hook:** "you" plus a physical object, either in your hand or one you'd find.
+
+**Losing bricks:**
+- Abstract tech, finance or AI news.
+- An organization or a date as the opener.
+- A brand name as the subject.
+
+**When a money/AI topic still makes sense:** only do it if the seed turns into an object in your hand. For example, "the phone in your pocket just got pricier because of AI", not "AI memory prices doubled".
+
+### 8.4 Hook rules (text hook first)
+
+1. **Text hook (frame-1 title):** 3-6 words.
+   - It must add context or a curiosity gap that the voice does not say.
+   - Never use a plain topic label. Bad: "WHY FARTS STINK". Better: "99% OF IT IS ODORLESS".
+   - The tape label above the title gives the subject ("YOUR BODY"); the title gives the gap.
+2. **Visual hook:** the hero object is already moving in frame 1, at the center, big. No empty frame, and no text-only opener.
+3. **Spoken hook:** 12 words or fewer. Keep the "you + object" or paradox pattern from section 3.
+
+### 8.5 Seed test (before any research)
+
+Write the seed in one line: `[you/your thing] + [surprising fact] + [why it matters to you]`.
+
+If the seed isn't a picture someone can see in 1 second, change the angle or the topic.
+
+### 8.6 One experiment per video (the scientist loop)
+
+Every episode logs its 11 bricks and **one** improvement hypothesis in `tools/experiments.md`. Example: "text hook states a number instead of a label → expect higher 3s rate."
+
+- Change one brick at a time, so the result tells us something.
+- After 48 h or more, fill in 3s rate, average watch, shares and saves from Metricool (IGRE28, IGRE24, IGRE21, IGRE12).
+- Keep the brick if it beat the 7-day median; drop it if not.
+
+### 8.7 The 4 "cannot lose" conditions, applied to us
+
+1. **Post consistently.** 5 reels a day at fixed slots (09:40, 12:10, 15:10, 18:10, 20:40 IST).
+2. **Get measurably better each rep.** The experiment log in 8.6.
+3. **Funnel views into something.** The caption send prompt plus the YT subscribe end card. Revisit this when there's a lead magnet.
+4. **Never stop.** Kallaway says skills lock in around rep 50. We're at about ep100, so keep the loop running.
