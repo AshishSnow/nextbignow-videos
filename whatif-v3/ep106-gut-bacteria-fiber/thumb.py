@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/gut/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFC2CF', 'C2304A', CX, 1300); rays(fr, 0.4, 'FFFFFF', .16, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (gut(c, CX, 1330, 1.25, 0.3, .5), swarm(c, CX, 1330, 1.25, 0.3, 150))))
+burst(fr, 'CHOMP!', 830, 1000, 1.0, r=150, col=YEL, size=50, rot=8)
+tape(fr, 'SKIP YOUR VEGGIES?', 420, 330, 1.0, col=RED, size=52, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'YOUR GUT IS', 520, 165, 'FFFFFF', -3)
+big_word(fr, 'ON THE MENU', 720, 170, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/gut/out/thumb_gut.jpg', quality=95)

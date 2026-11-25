@@ -14,7 +14,7 @@ def grade(t):
 src = open(sys.argv[1]).read(); a = src.index('L=['); b = src.index(']\n', a)
 lines = [m[1] for m in re.findall(r'\("(\w+)",\s*"((?:[^"\\]|\\.)*)"\)', src[a:b + 1])]
 text = ' '.join(lines); words = len(text.split())
-print(f'words {words}  (~{words / 2.7:.0f}s at our pace; target 95-125 words / 30-45 s)')
+print(f'words {words}  (~{words / 2.7:.0f}s at our pace; target 80-95 words / 30-35 s)')
 print(f'reading grade {grade(text):.1f}  (target <= 5)')
 first = lines[0]
 print(f'line 1: {len(first.split())} words (target <= 12): "{first}"')
