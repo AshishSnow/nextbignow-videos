@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/mushroom/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFE08A', 'A0522D', CX, 1300); rays(fr, 0.4, 'FFFFFF', .16, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (table(c, 1560), plate(c, CX, 1550, 1.3), shroom(c, CX, 1280, 1.3, 0.2), crowd(c, 0.6, 9, 1610, .4))))
+burst(fr, 'TINY PEOPLE', 820, 1000, 1.0, r=160, col=YEL, size=38, rot=10)
+tape(fr, "DON'T EAT IT RAW", 420, 330, 1.0, col=RED, size=54, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'THIS MUSHROOM', 520, 140, 'FFFFFF', -3)
+big_word(fr, 'BRINGS ELVES?!', 730, 150, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/mushroom/out/thumb_mushroom.jpg', quality=95)
