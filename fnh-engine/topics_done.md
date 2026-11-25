@@ -111,3 +111,4 @@ CLAIMED 2026-11-24 21:05 IST (Claude-session) | petrol-phone | पेट्र�
 - 2026-11-24 | NOT POSTED (Claude-session) hichki remake — duplicate of Short #47 (17 Nov); kept as file only
 CLAIMED 2026-11-25 12:28 IST (Claude-session) | copper-lota | तांबे के लोटे का पानी: दादी सही? (Sudha 2012 JHPN: E. coli/cholera germs undetectable after 16 h in copper pot)
 - 2026-11-25 | Short (Claude-session) copper-lota | तांबे का लोटा: दादी सही थीं? (Sudha 2012 JHPN: no live diarrhoeal germs after 16 h in copper pot; copper within safe limits; clean with lemon+salt) | deep-green Health theme; voice: Viraj - Energetic Clear Narrator (owner's pick) | IG 441395361 14:05, YT 441395416 14:07
+CLAIMED 2026-11-25 16:20 IST | 62-cold-milk-acidity | Does cold milk cure acidity? (brief calm, then milk raises acid: Ippoliti 1976 Ann Intern Med; fat loosens the LES valve)
