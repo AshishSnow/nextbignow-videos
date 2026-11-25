@@ -62,3 +62,12 @@ Top: Black Friday 2394/43/15.3 · McDonald's rent 2247/45/13.3 · Chick-fil-A Su
 Low (essay, 23-24 Nov): Bezos 317 · Holiday lights 301 · Sriracha 299 · Canes 193 · Scrub Daddy 182 · Google/Apple 170 · Notary 164 · Car-wash stamps 165 · Visa 156 · Blakely 150
 Reading: winners = a FAMOUS brand or day everyone knows + a "you've been wrong" contradiction in the first line, skip rate ~26-30%, avg watch 15-17 s. Recent essay reels: skip 42-55%, avg watch 9-12 s. Some of the gap is age/time-of-post, but frame 1 is losing people.
 Change for 25 Nov batch: famous brand/person named in text hook + spoken hook (IKEA, Nintendo, Spotify, Steve Jobs; Texas law = timely Thanksgiving), shorter scripts (34-43 s).
+
+## Audit 25 Nov 2026 23:10 IST (owner asked: check YT + IG, find issues)
+- All 36 posts 23-25 Nov published OK (no failures). Metricool analytics lag: IG data ends 24 Nov ~18:00 UTC, YT data ends 23 Nov, so 25 Nov reels are not measured yet.
+- Volume: 24 Nov had 11 OMB posts (old schedule + extra slots overlapped), some 13 min apart. Rule now: max 5/day, >= 2 h apart.
+- IG captions: winners open with the fact itself; since 23 Nov captions open with "Mind Tricks N° 03:" etc. Fix: hook first, series label last.
+- Hashtags: #oopsmybusiness / #businessexplained dropped from new captions. Fix: keep them.
+- Frame 1: winners showed the famous thing big; essay reels open on big headline text + small prop -> 3-s skip 42-55% vs ~27%. Fix: big moving prop + 2-4 word text hook.
+- Shares ~0 on almost all new reels (Kobe 20, Black Friday 6, McDonald's 5). Fix: end on a send-worthy line.
+- YouTube: 6-827 views per Short, avg view 5-22 s; IKEA meatballs best (827).
