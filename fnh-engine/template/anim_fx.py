@@ -1260,3 +1260,46 @@ def food_steam(f, x, y, t, w=120, h=420, n=4, s=1.0, seed=0, amt=1.0, col=(255, 
         roi[:] = roi * (1 - Li[..., None]) + np.array(C((150, 136, 128)), np.float32) * Li[..., None]
 
 
+
+
+# ================= THE CLOCK WIPE (ep 62, 25 Nov): an editing transition that SAYS 'time passed' =================
+# Craft notes (Wikipedia 'Wipe (transition)': a clock wipe 'sweeps a radius around the center point of the frame to reveal the subsequent shot,
+# like the sweeping hands of an analog clock' and 'is often used to indicate that time has passed'; Boris FX Sapphire WipeClock: animate a
+# 0..1 wipe percent with your own curve, Edge Softness = a soft edge, a coloured Border at the wipe edge, a movable Center, clockwise by default;
+# Filmlifestyle: use it 'judiciously' - overuse distracts). My rules: ONE per video, only on a line that really jumps in time ('a little later'),
+# start at 12 o'clock and go clockwise, ~0.6 s with a gentle ease-in-out (the hand starts, sweeps, settles), a soft 2-3 degree edge, and the
+# edge drawn as a real MINUTE HAND from a small clock face on the pivot, so it reads as a clock even on a white board; a clock tick in the mix.
+_CWG = {}
+
+
+def clock_wipe(prev, cur, p, cx=540, cy=960, feather=3.0, hand=True, r_face=64, col=(46, 32, 26)):
+    """CLOCK WIPE: the new shot is revealed by a radius sweeping clockwise from 12 o'clock around (cx, cy). p 0..1 (eased inside).
+    hand=True draws the wipe edge as a minute hand + a small clock face on the pivot. Use with compose: elif k == 'clock' and dt < 0.6."""
+    key = (int(cx), int(cy))
+    if key not in _CWG:
+        yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+        _CWG[key] = np.mod(np.arctan2(xx - cx, -(yy - cy)), 2 * np.pi)
+    ang = _CWG[key]
+    q = 0.5 - 0.5 * math.cos(math.pi * clamp(p))                                   # ease in-out
+    sweep = q * 2 * math.pi * 1.0005
+    fe = math.radians(feather)
+    m = np.clip((sweep - ang) / fe + 0.5, 0, 1)[..., None]
+    out = prev * (1 - m) + cur * m
+    if hand and 0.0 < q < 1.0:
+        L = math.hypot(max(cx, W - cx), max(cy, H - cy))
+        ex, ey = cx + L * math.sin(sweep), cy - L * math.cos(sweep)
+        sh = out.copy()
+        cv2.line(sh, (int(cx + 8), int(cy + 10)), (int(ex + 8), int(ey + 10)), (0, 0, 0), 18, cv2.LINE_AA)
+        out = out * 0.82 + sh * 0.18                                                  # soft shadow of the hand
+        cv2.line(out, (int(cx), int(cy)), (int(ex), int(ey)), C(col), 12, cv2.LINE_AA)
+        cv2.circle(out, (int(cx), int(cy)), int(r_face), C((252, 248, 236)), -1, cv2.LINE_AA)
+        cv2.circle(out, (int(cx), int(cy)), int(r_face), C(col), 7, cv2.LINE_AA)
+        for j in range(12):
+            a = j / 12 * 2 * math.pi
+            cv2.line(out, (int(cx + r_face * 0.7 * math.sin(a)), int(cy - r_face * 0.7 * math.cos(a))),
+                     (int(cx + r_face * 0.88 * math.sin(a)), int(cy - r_face * 0.88 * math.cos(a))), C(col), 4, cv2.LINE_AA)
+        cv2.line(out, (int(cx), int(cy)), (int(cx + r_face * 0.8 * math.sin(sweep)), int(cy - r_face * 0.8 * math.cos(sweep))), C(col), 6, cv2.LINE_AA)
+        ah = sweep / 12 + 2.1
+        cv2.line(out, (int(cx), int(cy)), (int(cx + r_face * 0.5 * math.sin(ah)), int(cy - r_face * 0.5 * math.cos(ah))), C(col), 8, cv2.LINE_AA)
+        cv2.circle(out, (int(cx), int(cy)), 8, C(col), -1, cv2.LINE_AA)
+    return out
