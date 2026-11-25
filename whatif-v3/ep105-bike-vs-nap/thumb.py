@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/bike/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFE08A', 'C2501A', CX, 1300); rays(fr, 0.4, 'FFFFFF', .16, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (bike(c, 720, 1420, 1.15, 0.3, 1.0, True, BLUE), bed(c, 240, 1700, .6, 0.4))))
+burst(fr, 'MEMORY BOOST', 300, 1100, 1.0, r=160, col=YEL, size=34, rot=-8)
+tape(fr, 'NO SLEEP? TRY THIS', 420, 330, 1.0, col=RED, size=52, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, '20 MIN BIKE', 520, 175, 'FFFFFF', -3)
+big_word(fr, 'VS 90 MIN NAP', 730, 150, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/bike/out/thumb_bike.jpg', quality=95)
