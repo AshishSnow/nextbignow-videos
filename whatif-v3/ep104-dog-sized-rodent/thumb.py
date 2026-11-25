@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/rodent/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFE08A', '7A4E2A', CX, 1300); rays(fr, 0.4, 'FFFFFF', .16, CX, 1300); vignette(fr, .4)
+overlay(fr, cairo_layer(lambda c: (rodent(c, 400, 1500, 1.2, 0.2, walk=0), dog(c, 860, 1560, .7, 0.3), tooth(c, 830, 1080, .7, 0))))
+burst(fr, '66 LBS', 300, 1150, 1.0, r=150, col=YEL, size=52, rot=-8)
+tape(fr, 'THAILAND, 35M YEARS AGO', 430, 330, 1.0, col=RED, size=48, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'DOG-SIZED', 520, 190, 'FFFFFF', -3)
+big_word(fr, 'RODENT?!', 730, 200, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/rodent/out/thumb_rodent.jpg', quality=95)
