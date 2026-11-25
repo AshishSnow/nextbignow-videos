@@ -109,3 +109,4 @@ CLAIMED 2026-11-24 19:22 IST (Claude-session) | hichki | हिचकी आई 
 CLAIMED 2026-11-24 21:05 IST (Claude-session) | petrol-phone | पेट्रोल पंप पर फ़ोन = आग? (PEI: ~200 static refuelling fires, zero documented from phones; re-entering car builds static)
 - 2026-11-24 | Short (Claude-session) petrol-phone | पेट्रोल पंप पर फ़ोन = आग? (PEI ~200 static refuelling fires, zero documented from phones; don't re-enter car, touch metal) | teal Tech theme; TEST: spoken action CTA at end | IG 440547990 22:10, YT 440548057 22:12
 - 2026-11-24 | NOT POSTED (Claude-session) hichki remake — duplicate of Short #47 (17 Nov); kept as file only
+CLAIMED 2026-11-25 12:28 IST (Claude-session) | copper-lota | तांबे के लोटे का पानी: दादी सही? (Sudha 2012 JHPN: E. coli/cholera germs undetectable after 16 h in copper pot)
