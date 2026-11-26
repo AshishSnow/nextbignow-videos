@@ -102,3 +102,12 @@ Where to find these ideas:
 - 11/12 **The shopping cart and the fake shoppers** (made 26 Nov).
 - 11/12 **Costco's $1.50 hot dog**, the same price since 1985, kept on purpose as a loss leader (the founder's reported "kill you" quote must be checked verbatim before use).
 - 10/12 **Bacon and eggs as "America's breakfast"** came from Edward Bernays' 1920s PR campaign for a bacon company.
+
+## 9. Hook upgrade (owner feedback, 26 Nov: "hook in 5 sec")
+- Copy the opening of reference 4: **one designed frame per spoken word for the first ~5 s.**
+  - Paper colours alternate: cream / series colour.
+  - Each frame uses a different type treatment: a selection box with handles, a huge italic serif word, a dashed guide line, a hand-drawn arrow onto the real object.
+- **Point at the real object in second 1** ("You push this every week." + an arrow onto a real cart photo).
+- The wow word lands on screen by ~5–6 s ("FAKE SHOPPERS").
+- **The owner liked** the series paper colour, the italic serif captions + condensed boiling hero words, the logo/badge, and the sticker look. Keep these.
+- **Real images:** fetch Wikimedia **standard-size thumbnails (1280 px) directly** with a policy-compliant User-Agent (tools_ref/thumbget.py). The API search and original files get 429s; thumbnails mostly work.

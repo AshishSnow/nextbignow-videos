@@ -4,7 +4,7 @@ import os, sys, random, math
 import numpy as np, soundfile as sf
 from scipy.signal import butter, lfilter
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import info_ct2 as R
+import info_ct3 as R
 
 HERE = os.path.dirname(os.path.abspath(__file__)); SR = 48000
 X = os.path.join(HERE, 'sfx')
@@ -84,19 +84,18 @@ def mix(voice_path, out_path):
     # scene changes: whoosh on every cut
     for t0, _ in R.SCENES[1:]: put(whoosh(), t0 - 0.12, -17, rnd.uniform(-0.5, 0.5), rate=rnd.uniform(0.9, 1.1))
     put(drone(R.DUR), 0.0, -31)
-    put(load('cardPlace1'), 0.15, -16)
-    put(impact(), ph('nobody'), -9, duck=False)
+    for w in ('you', 'push', 'this', 'it was', 'buy', 'and it only'): put(load('cardPlace1'), ph(w) - 0.04, -15)
+    put(impact(), ph('buy'), -10, duck=False)
     put(riser(0.5), ph('fake') - 0.5, -16); put(impact(), ph('fake'), -8, duck=False)
     for i in range(12): put(load('switch3'), ph('nineteen thirty') + i * 0.06, -20, -0.4 + i * 0.07, rate=1.0 + i * 0.02)
-    put(impact(), ph('oklahoma'), -12, duck=False)
+    put(load('cardPlace3'), ph('oklahoma') - 0.1, -14); put(load('cardPlace1'), ph('goldman') - 0.3, -15)
+    put(impact(), ph('problem'), -11, duck=False)
     for i in range(6): put(load('cardPlace3'), ph('his shoppers') + 0.3 + i * 0.35, -18, -0.3 + 0.12 * i)
     put(impact(), ph('heavy'), -10, duck=False)
-    put(riser(0.9), ph('so he put') - 0.1, -19)
-    put(ching(), ph('wheels'), -14)
+    for w in ('so he built', 'two baskets', 'folding', 'wheels'): put(load('cardPlace1'), ph(w) - 0.1, -14)
     put(load('bookFlip1'), ph('men said') - 0.1, -15); put(load('bookFlip1'), ph('women said') - 0.1, -15)
     for w in ('models', 'actors', 'pretending'): put(load('cardPlace1'), ph(w) - 0.1, -13)
-    put(load('switch7'), ph('copied') - 0.1, -14)
-    for i in range(6): put(load('cardPlace3'), ph('within weeks') + i * 0.16, -19, -0.5 + 0.2 * i)
+    put(load('switch7'), ph('copied') - 0.1, -14); put(load('cardPlace3'), ph('within weeks') - 0.1, -14)
     put(ching(), ph('multimillionaire'), -11)
     put(riser(0.6), ph("but here's") - 0.5, -16); put(impact(), ph('nobody tells'), -10, duck=False)
     put(impact(), ph('three'), -11, duck=False)
