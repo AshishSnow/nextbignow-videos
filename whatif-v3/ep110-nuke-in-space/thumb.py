@@ -1,0 +1,7 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/nuke/scenes.py').read().split("if __name__")[0])
+T = 1.2; img = space_bg(T); earth_np(img, CX, 1560, 640, T)
+add_layer(img, lambda c: (sat_ring(c, T, CX, 1560, 800, 260, 9), flash(c, CX + 150, 990, T, T - .25, 1.4)))
+fr = post(img, T, seed=1)
+tape(fr, 'TRUE STORY, 1962', CX, 330, 1.0, col=RED, size=50, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'A NUKE IN SPACE?', 520, 130, YEL, -3); big_word(fr, 'IT ALREADY HAPPENED', 680, 84, 'FFFFFF', -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/nuke/out/thumb_gta.jpg', quality=95)

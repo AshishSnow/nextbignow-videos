@@ -1,0 +1,93 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "What would happen if someone set off a nuke... in space?",
+  "start": 0.0,
+  "dur": 3.283
+ },
+ {
+  "i": 1,
+  "tag": "punchline",
+  "text": "Not on a city. Two hundred and fifty miles over your head.",
+  "start": 3.483,
+  "dur": 4.234
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "Because right now, US intelligence says Russia is building a satellite that can carry one. And Germany says it could go up as soon as next month.",
+  "start": 8.038,
+  "dur": 8.241
+ },
+ {
+  "i": 3,
+  "tag": "tease",
+  "text": "Here's the crazy part. It wouldn't hurt a single person on the ground... and that's exactly why it's so dangerous.",
+  "start": 16.559,
+  "dur": 6.922
+ },
+ {
+  "i": 4,
+  "tag": "story",
+  "text": "We know, because America already did it. July, nineteen sixty-two.",
+  "start": 23.991,
+  "dur": 4.68
+ },
+ {
+  "i": 5,
+  "tag": "story",
+  "text": "In Hawaii, people threw parties on their rooftops to watch.",
+  "start": 28.83,
+  "dur": 3.605
+ },
+ {
+  "i": 6,
+  "tag": "reveal",
+  "text": "At eleven p.m., the sky lit up like a brand new sun... then turned blood red.",
+  "start": 32.635,
+  "dur": 4.991
+ },
+ {
+  "i": 7,
+  "tag": "fast",
+  "text": "Nine hundred miles away, three hundred streetlights went dark. Burglar alarms went off. Phone calls between islands just... cut out.",
+  "start": 38.046,
+  "dur": 8.781
+ },
+ {
+  "i": 8,
+  "tag": "excited",
+  "text": "But the real damage was invisible.",
+  "start": 47.227,
+  "dur": 1.831
+ },
+ {
+  "i": 9,
+  "tag": "story",
+  "text": "The blast left a belt of radiation around Earth for years. Within months, at least six satellites were dead. Including Telstar, the first satellite to beam live TV.",
+  "start": 49.318,
+  "dur": 11.056
+ },
+ {
+  "i": 10,
+  "tag": "story",
+  "text": "That was nineteen sixty-two. Today, Starlink alone has over eleven thousand satellites up there. Plus the GPS in your phone.",
+  "start": 60.775,
+  "dur": 8.434
+ },
+ {
+  "i": 11,
+  "tag": "punchline",
+  "text": "So a nuke in space wouldn't hurt a single person...",
+  "start": 69.489,
+  "dur": 2.858
+ },
+ {
+  "i": 12,
+  "tag": "punchline",
+  "text": "it would just turn off the sky your phone talks to.",
+  "start": 72.946,
+  "dur": 2.653
+ }
+]
