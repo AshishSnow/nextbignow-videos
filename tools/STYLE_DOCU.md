@@ -40,3 +40,6 @@ Refs: Jamie Dimon reel (73 s) and Palmer Luckey / PayPal-mafia reel (78 s). Both
   8. Mirrored-phrase irony ("created so it would never need one banker... called one banker")
   9. Time jump: "Fifteen years later..." / "and the exact same thing happened. Same call, same man."
   10. Zoom-out ending that points at the viewer ("built the internet you scroll... the thing quietly watching you do it"). No CTA.
+
+## v5 hook (first 4 s)
+- Photo cards fly in from all four sides with a 3D tilt and motion blur, slam into a stack (whoosh + thud each, about 0.2 s apart), bounce slightly, then a "REPAIR RECEIPT" card with ??? fields slides up on top while the others darken, then the camera pushes through the stack into the next shot (zoom blur). Title stays from frame 1; the one-word caption sits between the title and the cards. Code: `hook5()` in scenes4.py.
