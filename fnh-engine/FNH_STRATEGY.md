@@ -32,3 +32,14 @@ Write the LAST line first (an ironic payoff or callback), then build backwards.
 8. Payoff: irony or callback to the hook ("same call, same man"). End the moment it lands, with no CTA, no doctor line, no "share".
 Rhythm: fragments of 3–7 words, rule of three, a "basically" or "असल में" tone, no list-reading. Every line must map to one visual technique (anchor word, flip year, cork board, HUD, window, ribbon).
 Score before recording (each item 0–2): hook clear in 3 s / paradox / vivid detail / turn / payoff irony / every line visual. Record only at 10/12 or more.
+
+## The 5-second hold system (26 Nov 2026 research: Kallaway, Jenny Hoyos, Paddy Galloway, retention-curve data)
+Data: 30-50% of viewers leave in seconds 0-3, another 15-25% in seconds 3-10 if the hook does not start paying off. Viewed-vs-swiped under 60% = dead; 70-90% = winners. Hoyos: "you have one second". Kallaway: speed-to-value is about 4 s in short form.
+Second-by-second:
+- 0.0-1.0 s FIRST FRAME = THUMBNAIL: subject already on screen, already moving (mid-action, never an establishing shot or logo), 3-5 word text that names the topic. Sound starts on frame 1.
+- 0-2 s CONTEXT: the topic in the first 2-3 spoken words, something every viewer has personally seen ("रसोई गैस की ये बदबू").
+- 2-3.5 s LEAN: a shock that flips what they believe ("असली नहीं है").
+- 3.5-6 s SNAPBACK WITH STAKES: the "why should I care", a concrete, heavy consequence, not a vague tease ("एक बार ये बदबू नहीं थी… और पूरा स्कूल उड़ गया").
+- Two "dopamine hits" before second 6: each spoken turn gets a visual event (freeze, colour drop, hard flash).
+Rules: the same message in voice + text + picture; staccato lines first (3-7 words); 5th-grade words; never repeat a fact in the hook; a visual change every 1.5-2 s; no intro/logo.
+Body: but/therefore, never "and then"; the tip must call back to a detail of the story (the switch); loop ending that flows back into line 1.
