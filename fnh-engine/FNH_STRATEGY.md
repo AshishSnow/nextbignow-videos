@@ -57,3 +57,9 @@ Body: but/therefore, never "and then"; the tip must call back to a detail of the
 4. The narrator has a point of view: one honest human line (an opinion or a feeling) right after the hardest fact. This is what makes people connect.
 5. A turn just before the payoff ("But…", "Until now.").
 6. End on the closed loop; any action goes in the caption, not the voice.
+
+## Voice (measured 26 Nov 2026)
+- Doc-reel references: one continuous, conversational storyteller at ~3.1-3.3 words/s with almost no pauses (0-5 pauses over 0.4 s, none over 0.8 s) and a music bed under everything. The emotion comes from the words, the music and the cuts, not from voice acting.
+- Our tag-directed takes ([whispers]/[sad]/[long pause]) had ~30% dead air and theatrical swings = sounds like an AI actor. Rule: no emotion tags in story shorts; write the emotion into the words and punctuation; let the music carry silence.
+- Voice: a documentary narrator voice (Aditya 2.0, KgnO7XaC644NBfmLZmwn) instead of an ad voice. Most human option: owner records the script on his phone, ElevenLabs Voice Changer converts it (keeps his real timing and emotion).
+- Apple-style pauses only for brand-film formats, never for story shorts.
