@@ -19,3 +19,16 @@
 - Topic = desi family rule / everyday habit + surprising twist + real proof (the chai and fish winners). Check the FULL topics_done.md before suggesting.
 - 30–35 s target; colour theme by topic type; black frames between ideas; everything in motion; owner's real images.
 - One improvement test per reel, written in topics_done.md ("TEST: ...").
+
+## Script system v3 (26 Nov 2026, learned from 2 viral doc-style reels: 73–78 s, ~150 wpm)
+Write the LAST line first (an ironic payoff or callback), then build backwards.
+1. Pointing hook (0–3 s): "ये है ___" + a surprising identity or familiar comparison, spoken over the title frame. The main answer goes in this first line.
+2. Paradox (3–7 s): "जिस चीज़ को हमने ___ समझा, वही ___" opens a loop the viewer needs closed.
+3. Story proof with time markers: "2012 में…", "रात भर…", "सुबह…". Time words drive the story, not "और फिर".
+4. One vivid concrete detail people can picture (they deliberately added cholera germs; a real number, a real place). Never generic.
+5. Contrast turn: "पर…", "वहीं…". Show the side-by-side result as two short fragments.
+6. Why, compared to something familiar; one line, 5th-grade words.
+7. Honesty line: what it does NOT do. This builds trust and lowers "fake" comments.
+8. Payoff: irony or callback to the hook ("same call, same man"). End the moment it lands, with no CTA, no doctor line, no "share".
+Rhythm: fragments of 3–7 words, rule of three, a "basically" or "असल में" tone, no list-reading. Every line must map to one visual technique (anchor word, flip year, cork board, HUD, window, ribbon).
+Score before recording (each item 0–2): hook clear in 3 s / paradox / vivid detail / turn / payoff irony / every line visual. Record only at 10/12 or more.
