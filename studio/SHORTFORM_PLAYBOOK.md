@@ -71,3 +71,11 @@ Change for 25 Nov batch: famous brand/person named in text hook + spoken hook (I
 - Frame 1: winners showed the famous thing big; essay reels open on big headline text + small prop -> 3-s skip 42-55% vs ~27%. Fix: big moving prop + 2-4 word text hook.
 - Shares ~0 on almost all new reels (Kobe 20, Black Friday 6, McDonald's 5). Fix: end on a send-worthy line.
 - YouTube: 6-827 views per Short, avg view 5-22 s; IKEA meatballs best (827).
+
+## Results log — 26 Nov 2026 (IG, Metricool, 24–25 Nov posts)
+- Winners: Decoy price 1,894 views (skip 40.5%), IKEA effect 1,629 (skip 30.1%), Jam choice 1,490 (skip 27.4%, avg watch 22 s). All three = psychology/pricing tricks with a number in the hook.
+- Middle: Texas cottage food 507 (skip 33.8%), Sriracha 322.
+- Losers: case studies / founder / money explained 145–207 views, skip 41–58% (Jobs 58%, Canes 55%, Blakely 53%).
+- Takeaway: Mind Tricks format earns ~8x the others. Keep 1 Mind Tricks daily, test a 2nd psychology-angle reel in another slot; for case studies open on the trick/number, not the person.
+- Shares/saves still ~0. Send-this endings started 26 Nov; check on 28 Nov.
+- New format on trial: DOC look (see DOC_STYLE.md), first test = Fort Knox $42.22/oz.

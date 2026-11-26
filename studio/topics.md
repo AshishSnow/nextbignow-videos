@@ -164,3 +164,9 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-25 | BUSINESS IDEA N°03 (green): Texas cottage food law ($150K cap, SB 541) | ESSAY | IG 440979911 / YT 440979970, 15:50
 2026-11-25 | MONEY EXPLAINED N°03 (blue): Spotify paid out $10B+, 18 yrs to profit | ESSAY | IG 440983199 / YT 440983257, 18:45
 2026-11-25 | FOUNDER MINDSET N°03 (orange): Steve Jobs fired at 30 (Stanford 2005) | ESSAY | IG 440987012 / YT 440987077, 21:52
+2026-11-26 | MIND TRICKS N°06 (purple): store music picked the wine (North et al., Nature 1997) | ESSAY | IG 442609570 / YT 442609458, 09:12
+2026-11-26 | CASE STUDY N°05 (red): Butterball Turkey Talk-Line, free since 1981 | ESSAY | IG 442617129 / YT 442617154, 12:40
+2026-11-26 | BUSINESS IDEA N°04 (green): Amex invented Small Business Saturday (2010) | ESSAY | IG 442617207 / YT 442617243, 15:50
+2026-11-26 | MONEY EXPLAINED N°04 (blue): why Macy's pays for the parade | ESSAY | IG 442618711 / YT 442618732, 18:45
+2026-11-26 | FOUNDER MINDSET N°04 (orange): Walt Disney's first company went bankrupt at 21 | ESSAY | IG 442617275 / YT 442617316, 21:52
+2026-11-26 | TRIAL (not posted): MONEY EXPLAINED N°05 Fort Knox gold booked at $42.22/oz | DOC look (documentary kinetic edit) | owner review
