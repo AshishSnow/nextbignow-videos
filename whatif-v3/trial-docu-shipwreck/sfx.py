@@ -19,14 +19,13 @@ def glitch_s():
 SYN = {'CLK': click, 'GL': glitch_s}
 def typing(t0, s, cps): return [(t0 + k / cps, 'CLK', .5) for k, ch in enumerate(s) if ch != ' ']
 W_ = wfind
-EV = ([(0.0, '1143', .5), (0.05, '788', .35), (S[1] - .06, '2627', .45), (S[2] - .02, 'GL', .5)] + typing(S[2], 'divers found the wreck...', 22) +
- [(W_(2, 'off') - .06, '1143', .4)] + [(W_(2, '2016') - .35 + k * .07, 'CLK', .6) for k in range(11)] +
- [(S[3] - .06, '2627', .45), (W_(3, 'pine'), '2364', .4), (W_(3, 'beeswax') - .06, 'GL', .45), (W_(3, 'beeswax'), '2364', .4),
-  (S[4] - .02, 'GL', .55)] + typing(S[4], 'stuck inside?', 18) + [(W_(4, 'tiny') - .06, '790', .4), (W_(4, 'pollen'), '788', .45),
-  (S[5] - .06, '2627', .45), (S[5], '2364', .4)] + typing(W_(5, 'friend') - .2, 'the friend who leaves', 26) + typing(W_(5, 'fingerprints'), 'fingerprints on everything', 26) +
- [(S[6] - .06, '1461', .45), (W_(6, 'four'), '1494', .5), (W_(6, 'some near italy') - .06, 'GL', .45), (W_(6, 'some near croatia') - .06, '2627', .4),
-  (S[7] - .02, 'GL', .5)] + typing(S[7], 'exact spots:', 20) + typing(W_(7, 'still'), 'still a mystery.', 20) +
- [(S[8] - .06, '1461', .45), (W_(8, 'repair'), '788', .45), (END, '1143', .45)] + typing(END + .2, 'send this to someone', 30))
+EV = ([(0.0, '1143', .5), (0.05, '788', .3), (S[1] - .06, '2627', .45), (W_(1, 'service'), '2364', .35), (W_(1, 'history'), '2364', .35),
+ (S[2] - .06, '1461', .45), (W_(2, 'hot') - .06, 'GL', .45), (W_(2, 'pine'), '1494', .5), (S[3] - .06, '2627', .45), (W_(3, 'pollen'), '788', .45),
+ (S[4] - .06, '1461', .45)] + [(S[4] + .1 + k * .22, '2364', .3) for k in range(4)] + [(W_(4, 'where'), '2357', .3),
+ (S[5] - .02, 'GL', .5)] + typing(S[5] - .05, '2,200 years later...', 16) + [(S[6] - .02, '1143', .35), (W_(6, 'ten'), '1494', .4), (W_(6, 'four'), '1494', .4),
+ (S[7] - .06, '2627', .45), (W_(7, 'some from') - .06, '1461', .45), (S[8] - .02, 'GL', .45), (W_(8, 'different'), '1494', .5),
+ (S[9] - .06, '1461', .45)] + typing(W_(9, 'friend') - .25, 'tag the friend who', 30) + typing(W_(9, 'never'), 'never services their car.', 30) +
+ [(S[10] - .06, '2627', .45), (W_(10, 'did'), '788', .5), (END, '1143', .4)] + typing(END + .2, 'send this to someone', 30))
 N = int((TOTAL + .5) * SR); fx = np.zeros(N, np.float32)
 for t, i, g in EV:
     a = SYN[i]() if i in SYN else snd(i)[:int(2.2 * SR)].copy(); n = min(len(a), N - int(t * SR)); fo = int(.15 * SR)
