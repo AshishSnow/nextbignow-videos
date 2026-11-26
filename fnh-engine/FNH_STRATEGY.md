@@ -43,3 +43,9 @@ Second-by-second:
 - Two "dopamine hits" before second 6: each spoken turn gets a visual event (freeze, colour drop, hard flash).
 Rules: the same message in voice + text + picture; staccato lines first (3-7 words); 5th-grade words; never repeat a fact in the hook; a visual change every 1.5-2 s; no intro/logo.
 Body: but/therefore, never "and then"; the tip must call back to a detail of the story (the switch); loop ending that flows back into line 1.
+
+## Editing language (26 Nov 2026, from owner's reference reels)
+- Apple-style ad: calm voice, half the runtime is silence while pictures speak; one fixed word over a 0.5 s chronological montage; black cards with small centred text; ending mirrors the opening.
+- Editorial creator reel: two-font system (heavy grotesk caps + elegant serif for the key word and captions); design-tool selection handles around a key word; big numerals on a blurred background, then focus pulls back; one signature colour set; physical props/hands instead of flat graphics.
+- Founder reel: B&W with chromatic edges + fine screen texture; small red labels ending in "//".
+- Our engine (tools/cine.py): AI depth map per photo -> 3D camera move + rack focus, bloom, haze shimmer, archive film, dust bokeh, split-tone grade.
