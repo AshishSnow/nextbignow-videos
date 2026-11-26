@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/nose/scenes.py').read().split("if __name__")[0])
+fr = radial_bg('FFE08A', 'F28C28', 600, 1250); rays(fr, 0.4, 'FFFFFF', .18, 600, 1250); vignette(fr, .35)
+overlay(fr, cairo_layer(lambda c: (face(c, 430, 1260, 1.1, 0.3, 1.0), dropper(c, 800, 1060, .8, 0.3))))
+burst(fr, 'BRAIN?!', 820, 1500, 1.0, r=130, col=YEL, size=46, rot=8)
+tape(fr, 'BACK DOOR TO YOUR BRAIN?', CX, 330, 1.0, col=RED, size=48, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'OLD MICE.', 520, 165, 'FFFFFF', -3)
+big_word(fr, 'YOUNG BRAINS.', 710, 140, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/nose/out/thumb_nose.jpg', quality=95)
