@@ -1,6 +1,6 @@
 # Lessons, 26 Nov 2026: our own data + the 4 reference reels
 
-## 1. What our own data says (98 Instagram reels, 20 Oct - 26 Nov)
+## 1. Our own Instagram data (Ashish, 26 Nov: "it's not about numbers". Old stats only show what we tried, not what could work. Don't pick format or topic from them; keep trying new things and learn from the references) (98 Instagram reels, 20 Oct - 26 Nov)
 | Format | Views | 3 s hold | Avg watch |
 |---|---|---|---|
 | "What would happen if YOU...?" + a real survivor (plane fall, whale, Chile miners, Onoda, Niagara, quicksand, elevator) | 1,200-1,650 | 65-75% | 38-55 s |
@@ -31,7 +31,7 @@
 8. **Mixed type**: a condensed grotesque for facts, serif italic for the emotional word.
 
 ## 4. Rules for the next video
-- Format: "What would happen if YOU...?" + one real survivor + the science, with a gag after each explanation (our proven winner).
+- Format: free to try new formats and topics; build them from the reference logic in sections 2-3, not from old view counts.
 - Script: claim/question → familiar comparison → irony thesis → picture sentences → turn every 10-15 s → mirrored ending aimed at the viewer.
 - Visuals: one colour world with an arc, a new picture per phrase, big layered sets with depth (not icons), hero words only on key nouns, silence screens at the turns.
 - Voice: the most natural voice available (Chatterbox clone was the approved one; Kokoro is the fallback).
