@@ -7,19 +7,19 @@ TAGS={"story":("mix_michael_puck",1.0,0,0.18),"excited":("hype",1.05,1,0.15),"de
  "tease":("calm",0.97,-1.5,0.26),"reveal":("hype",1.02,1.5,0.2),"serious":("calm",0.97,0,0.2),"hype":("hype",1.05,1.5,0.18),
  "aside":("calm",1.05,-2.5,0.12),"friend":("mix_michael_puck",1.02,0,0.18),"punchline":("calm",0.93,1,0.3),"question":("mix_michael_puck",1.03,0.5,0.15),"count":("hype",1.0,1.5,0.5)}
 CHAIN="highpass=f=80,lowpass=f=9500,equalizer=f=200:t=q:w=1:g=1.5,equalizer=f=6500:t=q:w=1.5:g=-4,deesser=i=0.6:m=0.5:f=0.5,afftdn=nf=-40,agate=threshold=0.012:ratio=6:attack=4:release=180:range=0.02,acompressor=threshold=-18dB:ratio=2.5:attack=8:release=120:knee=4"
-SEED = "A ship that sank 2,200 years ago still carries its 'service history': pollen trapped in each coat of pine tar shows where it was worked on."
+SEED = "A ship that sank 2,200 years ago still carries its 'repair receipts': pollen trapped in each coat of pine tar hints at where it was worked on."
 TEXT_HOOK = "WHERE HAS THIS SHIP BEEN?"
-HYPOTHESIS = "Docu v4: reference-matched script (demonstrative cold open + 'basically' analogy + irony thesis + vivid specifics + time jump + contrast couplet + callback), ~175 wpm with tight gaps, louder suspense bed, cuts on nouns."
+HYPOTHESIS = "Docu v6: open loop (receipt with ??? in the hook, filled in at the reveal), one consistent metaphor (receipts) end to end, condensed + serif-italic type system."
 PURPOSE = "Viewer learns that pollen trapped in 4-5 batches of pine-tar coating on a 2,200-year-old wreck off Croatia suggests work near Italy and near Croatia; exact spots unknown."
-L=[("hype","This ship sank twenty-two hundred years ago... and it still has its receipts."),
+L=[("hype","This ship sank twenty-two hundred years ago... but it never threw out its receipts."),
 ("story","It's basically a car that kept every service receipt."),
-("tease","Because the stuff that was supposed to keep water out... ended up keeping a secret in."),
-("story","Every time it got fixed, workers coated the hull in hot pine tar."),
-("reveal","And while it was still sticky, it grabbed whatever was in the air... pollen."),
-("serious","So every coat became a fingerprint of where the work happened."),
+("tease","Except these receipts are glued to the hull."),
+("story","Every time it got fixed, workers slapped on hot pine tar."),
+("reveal","And while it was sticky, it grabbed whatever was in the air... pollen from the trees nearby."),
+("serious","So every coat is a receipt... with an address on it."),
 ("aside","Twenty-two hundred years later,"),
-("story","scientists scraped ten samples and found four or five different coats."),
-("reveal","Some with pollen from near Italy. Some from the coast of Croatia."),
+("story","scientists scraped off ten samples and found four or five coats."),
+("reveal","Some from near Italy. Some from the coast of Croatia."),
 ("punchline","Same ship. Different repair shops."),
 ("friend","Tag the friend who never services their car."),
 ("punchline","The ship never made it home... but its receipts did.")]

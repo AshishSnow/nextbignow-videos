@@ -43,3 +43,17 @@ Refs: Jamie Dimon reel (73 s) and Palmer Luckey / PayPal-mafia reel (78 s). Both
 
 ## v5 hook (first 4 s)
 - Photo cards fly in from all four sides with a 3D tilt and motion blur, slam into a stack (whoosh + thud each, about 0.2 s apart), bounce slightly, then a "REPAIR RECEIPT" card with ??? fields slides up on top while the others darken, then the camera pushes through the stack into the next shot (zoom blur). Title stays from frame 1; the one-word caption sits between the title and the cards. Code: `hook5()` in scenes4.py.
+
+## v6: type system + holding the viewer (26 Nov)
+**Fonts** (OFL, in fonts-docu/):
+- **Archivo ExtraCondensed Black** (static instance wght 900 / wdth 62) for hero words. Tall and condensed like the reference's COLLAPSE / SUBPRIME, and it fits big words on a vertical frame.
+- **Instrument Serif Italic** for emotional accent words in red or yellow ("been?", "glued", "did.", "with an address."). This serif italic + condensed grotesque contrast is the editorial-documentary look.
+- **Courier Prime** typewriter for time jumps and the receipt, replacing DejaVu Mono.
+- **Inter Display ExtraBold** stays for the one-word captions and the black label boxes.
+
+**How the video holds the viewer:**
+1. **Open loop**: the hook shows a REPAIR RECEIPT with red ??? fields. The viewer wants them filled.
+2. **Payoff in steps**: SAMPLES 10 and COATS 4-5 get stamped VERIFIED mid-video; WHERE = ITALY + CROATIA closes the loop at "Same ship. Different repair shops."
+3. **One metaphor end to end**: receipts (hook → car analogy → "glued to the hull" → "a receipt with an address" → "its receipts did"). No metaphor switching.
+4. **A twist line every 3-4 s**: "Except…", "And while it was sticky…", "So every coat…".
+5. **Something on screen moves on every key noun** (punch-in / slam / stamp / type), and a sound accompanies each one.

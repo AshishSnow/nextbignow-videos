@@ -38,12 +38,12 @@ def riser(at, dur=1.2, g=.5):
     a = int((at - dur) * SR); n = int(dur * SR); k = np.arange(n) / SR
     nz = hp(rs.randn(n), 800) * (k / dur) ** 2; tone = np.sin(2 * np.pi * (200 + 900 * (k / dur) ** 2) * k) * (k / dur) ** 3 * .3
     seg = (nz * .5 + tone) * g; out[a:a + n] += seg[:max(0, min(n, N - a))]
-for at in (wfind(2, 'secret'), wfind(4, 'pollen'), S[6], wfind(9, 'different'), wfind(11, 'did')): riser(at, 1.1, .45)
+for at in (wfind(2, 'glued'), wfind(4, 'pollen'), S[6], wfind(9, 'different'), wfind(11, 'did')): riser(at, 1.1, .45)
 # 5) sub hits (boom) on key words
 def hit(at, g=1.0):
     n = int(1.4 * SR); k = np.arange(n) / SR; s = np.sin(2 * np.pi * (55 * np.exp(-k * 3) + 30) * k) * np.exp(-k * 3.5)
     s += lp(rs.randn(n), 900) * np.exp(-k * 14) * .5; i = int(at * SR); out[i:i + n] += s[:max(0, min(n, N - i))] * g
-for at in (0.0, wfind(2, 'secret'), wfind(4, 'pollen'), S[6], wfind(9, 'different'), wfind(11, 'did')): hit(at, .9)
+for at in (0.0, wfind(2, 'glued'), wfind(4, 'pollen'), S[6], wfind(9, 'different'), wfind(11, 'did')): hit(at, .9)
 # 6) the drop: silence the bed for 0.45 s right before the payoff word, then hit
 d = wfind(11, 'did'); gate = 1 - np.clip(1 - np.abs(t - (d - .22)) / .25, 0, 1)
 out *= np.where(t < d, gate, 1)
