@@ -1,0 +1,8 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/seapig/scenes.py').read().split("if __name__")[0])
+fr = np.zeros((H, W, 3), np.uint8); deep_bg(fr, 0.3); vignette(fr, .3)
+overlay(fr, cairo_layer(lambda c: (seapig(c, CX - 30, 1250, 1.3, 0.3, .7), microbe(c, CX - 60, 1260, .5, 0.3, '5BC0BE', 0, 1, True, 0))))
+burst(fr, '???', 840, 980, 1.0, r=120, col=YEL, size=60, rot=8)
+tape(fr, 'THIS IS A PIG?', CX, 330, 1.0, col=RED, size=52, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'IT HAS A SECRET', 520, 120, 'FFFFFF', -3)
+big_word(fr, 'ROOMMATE', 690, 170, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/seapig/out/thumb_seapig.jpg', quality=95)
