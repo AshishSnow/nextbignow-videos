@@ -9,9 +9,9 @@ Existing: char, stamp, tape, calendar, building, store, newspaper, coin_rain, ch
 | Line | Set (evolves) | Props pop in | Tape / stamp | Red marker | SFX |
 |---|---|---|---|---|---|
 | **SET 1 — the cooler (i1–a1)** | | | | | |
-| i1 | shop drink cooler, doors open | a vinegar bottle tips into a soda can, fizz | tape "APPLE CIDER VINEGAR" | "?" next to the can | can crack, fizz |
-| i2 | same cooler; a giant check slides in from a corporate building | — | stamp "DEAL ≈ $2 BILLION" | circle the check | chaching, stamp |
-| i3 | YOU pops up beside the cooler, scratching head | three empty boxes "1 2 3" on the cooler door | tape "3 MOVES" | — | pop |
+| i1 | shop drink cooler, doors open; a vinegar bottle tips into a soda can, fizz; a giant check slides in from a corporate building (hook = flat claim, rule 60, 26 Nov) | can + check | stamp "DEAL ≈ $2 BILLION" · tape "APPLE CIDER VINEGAR" | circle the check | can crack, fizz, stamp |
+| i2 | YOU pops up beside the cooler, sniffs the can, makes a face | — | — | big red "?" over YOU | pop, sniff |
+| i3 | three empty boxes "1 2 3" drop on the cooler door | — | tape "3 MOVES" | — | thud ×3 |
 | a1 | cooler shelves: cola cans shrink, a "PREBIOTIC" row grows | small chip "PREBIOTIC SODA ≈ $1.3B, +13% (SPATE, 52 WKS TO OCT 2026)" | tape "REGULAR SODA" | arrow down on cola | slide-whistle down, ding |
 | a2 | same shelves; the PREBIOTIC row glows | — | tape "THE HOT CORNER" | red arrow up | ding |
 | **SET 2 — the kitchen → market (b1–b2)** | | | | | |
@@ -34,7 +34,7 @@ Existing: char, stamp, tape, calendar, building, store, newspaper, coin_rain, ch
 | m2 | rulebook doodle opens over the stall; a state map outline | chip "DRINK RULES DIFFER BY STATE" | tape "2 · CHECK YOUR STATE" | circle the drinks page | page flip |
 | m3 | YOU's can label: "CURES EVERYTHING" | red marker strikes it → "TASTY. 30 CAL." (generic) | tape "3 · SMALL CLAIMS" | strike-through | marker squeak |
 | **SET 1 again — callback (e1–z2)** | | | | | |
-| e1 | back to the shop cooler from i1; the vinegar can now front and center | the check from i2 floats back | — | big red tick | ding |
+| e1 | back to the shop cooler from i1; the vinegar can now front and center | the check from i1 floats back | — | big red tick | ding |
 | e2 | cooler door closes; a tiny price tag "~$2B" swings on the handle | — | — | — | chaching (soft) |
 | z1 | phone send arrow flies to a friend doodle holding a fizzy can | — | — | — | whoosh |
 | z2 | two cans side by side: "VINEGAR SODA" vs "CLASSIC COLA" | comment bubble | — | "?" between them | pop |

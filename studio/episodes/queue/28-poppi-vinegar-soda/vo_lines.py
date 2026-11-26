@@ -9,9 +9,9 @@
 SERIES = "HOW THEY GOT SO BIG"; PART = 0; EP = 0   # build run takes the next free number
 CBVOICES = {"b5": "usa_young"}
 LINES = [
-    ('i1', 'Would you drink a soda made with apple cider vinegar?', 0.97, 0.25, +0.8, 1.45, ['vinegar?'], None),
-    ('i2', 'PepsiCo did a deal worth nearly two billion dollars for one.', 0.97, 0.25, +0.8, 1.45, ['two', 'one.'], None),
-    ('i3', 'You want the next one? Three moves at the end.', 0.97, 0.3, +0.8, 1.45, ['next', 'Three'], 'low'),
+    ('i1', 'PepsiCo did a deal worth nearly two billion dollars for a vinegar soda.', 0.97, 0.25, +0.8, 1.45, ['two', 'vinegar'], None),
+    ('i2', 'Would you drink one? PepsiCo bet you would.', 0.97, 0.25, +0.8, 1.45, ['drink', 'bet'], None),
+    ('i3', 'You want to start the next one? Three moves at the end.', 0.97, 0.3, +0.8, 1.45, ['next', 'Three'], 'low'),
     ('a1', "Regular soda's slipping.", 0.97, 0.15, +0.8, 1.45, ['slipping.'], None),
     ('a2', 'The hot corner of the drinks aisle? Prebiotic soda.', 0.97, 0.25, +0.8, 1.45, ['hot', 'Prebiotic'], None),
     ('b1', 'A Dallas couple mixes juice and vinegar in their kitchen.', 0.97, 0.25, +0.8, 1.45, ['Dallas', 'vinegar'], None),

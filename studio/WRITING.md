@@ -171,11 +171,27 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     "their **own** stores" when a brand already sold through other shops (Bombas via Dick's/Nordstrom), "most-requested **clothing**" not
     "what shelters ask for most", and one name for one speaker ("Their CEO" twice, never "their boss" then "He"). (24 Nov, Jellycat + Bombas reviews.)
 
+60. **Line 1 is a flat claim about a name everyone can picture; the viewer's question comes in line 2.** IG reels 6–25 Nov (n = 70,
+    `lab/story/hook_form_audit.py` on `ig_reels_26nov.csv`): reels whose first line is a STATEMENT about a known brand/thing ("McDonald's made
+    more from rent than burgers", "The world's biggest tire maker isn't Michelin. It's LEGO.") had a median ~1,000 views and 14 of 28 broke 1k;
+    yes/no QUESTION openers ("Would you wear shoes people called clown shoes?") a median ~260 and 4 of 20 — and two of those four were absurd-price
+    questions ($5 for nothing, $40 cereal). Series-label-first captions ("Case Study N° 04: …") median ~195. Separately, a reel with a 3-s hold
+    ≥ 65 % broke 1k views 71 % of the time vs 15 % under 60 % — line 1 + frame 1 decide whether a reel leaves the test pool. So: (1) i1 names
+    the brand / person / place in its first words and *states* the surprising thing ("PepsiCo did a deal worth nearly two billion dollars for a
+    vinegar soda."); (2) i2 asks the viewer's question or gives the reason to stay ("Would you drink one? PepsiCo bet you would."); (3) a
+    "Would you pay …?" opener only when the price itself is the joke. **Honest limit:** hook form is confounded with the look — the 9 posted
+    Shorts-length doodles sat at 143–272 views whether their line 1 passes this rule or not (Yankee, Dave's, Cane's, Scrub Daddy pass; Febreze,
+    Liquid Death, Sriracha, Hoka, Domino's fail), so this is necessary, not sufficient; frame 1 (big famous prop, 2–4 word text hook) and
+    length are the other levers (SHORTFORM_PLAYBOOK 25 Nov audit). `human_check.py --strict` now has a **HOOK gate** (line 1 names something
+    specific and isn't a yes/no question unless it carries a price) and a **SEND gate** (a "Send this to the friend who…" line in the last 3).
+    `story_check` R1 now accepts the question in i1 *or* i2. Applied 26 Nov to the two queued scripts that failed it (28 Poppi, 30 Gymshark).
+
 ## The checker (`tools/human_check.py`)
 H1 tells ≤ 1 per 150 words · H2 openers (top ≤ 15 %, But/So/And ≤ 20 %) · H3 no skeleton > 3× · H4 sentence-length CV ≥ 0.45, no flat run of 4,
 nothing > 18 words · H5 contractions ≥ 0.9, abstract nouns ≤ 3 per 100 words, no "-ing" tails · H6 one human reaction. Thresholds are style
 heuristics, not AI detectors (GPTZero itself dropped "burstiness" as a detection signal in 2023): a script can pass and still sound stiff —
 **the read-aloud test (rule 21) is the real gate.** Wikipedia's editors stress that one tell proves nothing; clusters do.
+`--strict` adds LENGTH (≤ 90 s est., rule 53), STALL (rule 57), HOOK + SEND (rule 60, 26 Nov 2026); each prints PASS/FAIL on its own line.
 
 ## Sources
 Wikipedia: Signs of AI writing (WikiProject AI Cleanup) · Kobak et al. 2024, arXiv 2406.07016 (excess vocabulary) · Reinhart et al., PNAS 2025

@@ -8,11 +8,10 @@ calendar, laptop, envelope, phone, crates, coin_rain, building, checklist, stopw
 
 | Line | Set (evolves) | Props pop in | Tape / stamp | Red marker | SFX |
 |---|---|---|---|---|---|
-| **SET 1 — the garage (i1–b5)** | | | | | |
-| i1 | closed garage door at night; a pizza box on the drive | door rolls up, one bulb flicks on | tape "PIZZA GUY → £1BN BRAND (2020 VALUATION)?" | "?" on the door | door rattle |
-| i2 | YOU pops up next to the pizza box | stick doodle with tape "BEN FRANCIS" waves | — | — | pop |
-| i3 | three boxes "1 2 3" drop on the workbench | — | tape "3 MOVES AT THE END" | — | thud ×3 |
-| b1 | inside the garage; a pizza box on the bench (story opens on Ben, no spoken place/year — R&D 22 Nov rule 54) | calendar "2012"; tape "BIRMINGHAM · AGE 19" | — | — | box thud |
+| **SET 1 — the garage (i1–b5; i3 cut 26 Nov)** | | | | | |
+| i1 | closed garage door at night; a pizza box on the drive; door rolls up, one bulb flicks on (hook = flat claim, rule 60, 26 Nov) | price tag "£1BN BRAND (2020 VALUATION)" swings from the door | tape "PIZZA DRIVER → £1BN" | red arrow pizza box → tag | door rattle |
+| i2 | YOU pops up next to the pizza box; three boxes "1 2 3" drop on the workbench | — | tape "3 MOVES AT THE END" | — | pop, thud ×3 |
+| b1 | inside the garage; a pizza box on the bench (story opens on Ben doing something; year on the calendar only — rule 57) | calendar "2012"; tape "BEN FRANCIS · BIRMINGHAM · AGE 19" | — | — | box thud |
 | b2 | empty clothes rail | quote chip "Bodybuilding wear just wasn't available here." (Forbes) | — | red "?" on the empty rail | hanger clink |
 | b3 | a sewing machine and a screen printer pop in | first tee on the rail | tape "THE GARAGE = A FACTORY" | tick | sewing whirr, squeegee swipe |
 | b4 | envelopes stack up and fly out of the garage to tiny phone screens | phones show "YOUTUBER" doodles | stamp "FREE" | arrows from garage to phones | whoosh ×3 |

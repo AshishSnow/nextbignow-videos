@@ -15,6 +15,14 @@ Extra gates in --strict (printed separately, so the H-score stays /6):
                 opener (R&D 22 Nov 2026: on 4 of 6 posted Shorts-length doodles the average viewer left during exactly that
                 trend-stat / "Place, year." block, 9-17 s in — WRITING.md rule 57). Move the trend after the result, put place + year
                 on the tape label, start the story on an action.
+  HOOK          line 1's first sentence must (a) name something specific — a capitalised brand / person / place after the first
+                word, or a first word that isn't a generic opener ("Would", "You", "This", …) — and (b) be a flat STATEMENT, not a
+                yes/no question, unless it carries an absurd price ("Would you pay five dollars for nothing?").
+                (R&D 26 Nov 2026, lab/story/hook_form_audit.py, IG n = 70 posts 6–25 Nov: statement hooks about a known name median
+                ~1,000 views, 14 of 28 broke 1k; question hooks median ~260, 4 of 20 — both price questions among the winners.
+                Confounded with look/series — evidence, not proof. WRITING.md rule 60.) `--hook-ok` for an owner-approved exception.
+  SEND          one of the last 3 lines asks for a send to a specific friend ("Send this to the friend who …") — sends per reach
+                is the top Reels signal for non-followers (ALGORITHM.md); 25 Nov audit: shares ~0 on almost every reel.
 """
 import re, sys, ast, math, statistics as st
 
@@ -115,6 +123,24 @@ def stall_lines(L, window=16.0):
     return out
 
 
+GENERIC_START = set("would could can do does did is are was were will you your this that these those what why how when where who "
+                    "if imagine ever have has so and but the a an it it's in on at one".split())
+YESNO = re.compile(r"^(would|could|can|do|does|did|is|are|was|were|will|have|has|should)\b", re.I)
+PRICE = re.compile(r"\b(dollars?|pounds?|euros?|cents?|bucks)\b|\$|£|€", re.I)
+
+
+def hook_problems(L):
+    """R&D 26 Nov 2026 (WRITING rule 60): line 1 = a flat claim about a name everyone can picture; the question comes second."""
+    if not L: return ["no lines"]
+    first = (sentences(L[0][1]) or [L[0][1]])[0].strip(); toks = re.findall(r"[A-Za-z][A-Za-z'.-]*", first); out = []
+    named = any(t[0].isupper() for t in toks[1:]) or (toks and toks[0].lower().strip("'s") not in GENERIC_START and toks[0][0].isupper()
+                                                       and toks[0].lower() not in GENERIC_START)
+    if not named: out.append("line 1 names nothing specific (no brand / person / place) — open on the famous name")
+    if first.endswith("?") and YESNO.match(first) and not PRICE.search(first):
+        out.append("line 1 is a yes/no question — say it as a flat claim, ask the viewer's question in line 2")
+    return out
+
+
 def main():
     path = sys.argv[1]; strict = "--strict" in sys.argv
     L = load(path); text = " ".join(t for _, t in L); low = text.lower()
@@ -173,12 +199,20 @@ def main():
     print(f"  length ~{est:.0f} s estimated ({nW} words, {len(L)} lines) — Shorts target 50-75 s, hard cap 90 s" + ("  ** OVER THE CAP **" if long_fail else ""))
     stalls = stall_lines(L)
     for i, t0, why, txt in stalls: print(f"  STALL line {i} (~{t0:.0f} s): {why}: {txt!r} — WRITING rule 57: move the trend after the result; place/year on the tape, not spoken first")
+    hook = hook_problems(L)
+    for h in hook: print(f"  HOOK {h}: {L[0][1]!r} — WRITING rule 60")
+    tail = " ".join(t.lower() for _, t in L[-3:]); send_ok = bool(re.search(r"\bsend (this|it) to\b", tail))
+    if not send_ok: print("  SEND no 'Send this to the friend who …' line in the last 3 lines — sends drive non-follower reach (ALGORITHM.md)")
+    print(f"  HOOK gate {'PASS' if not hook else 'FAIL'} · SEND gate {'PASS' if send_ok else 'FAIL'}")
     ok = sum(G.values()); print(f"\n{ok}/{len(G)} human-voice gates passed (H1–H6) — studio/WRITING.md" + (f"; STALL gate: {len(stalls)} line(s)" if stalls else "; STALL gate PASS"))
     if stalls and strict and "--stall-ok" not in sys.argv:
         print("STALL GATE FAIL: a stat / source / date-place line in the first ~16 s (rule 57) — reorder; --stall-ok only for an owner-approved exception")
         sys.exit(1)
     if long_fail and strict and "--long-ok" not in sys.argv:
         print("LENGTH GATE FAIL: estimated > 90 s — cut lines (WRITING.md 'Length'); pass --long-ok only for an owner-approved long-form script")
+        sys.exit(1)
+    if (hook and "--hook-ok" not in sys.argv or not send_ok) and strict:
+        print("HOOK/SEND GATE FAIL: rewrite line 1 as a flat claim about a named thing (rule 60) / end on a send line; --hook-ok only for an owner-approved exception")
         sys.exit(1)
     sys.exit(0 if ok == len(G) or not strict else 1)
 

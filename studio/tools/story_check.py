@@ -14,7 +14,7 @@ Format gates S0–S5 (STORY.md, 30 Oct 2026): series declared, viewer in the sea
 WHO REALLY OWNS IT: tag/comment), \"Oops\" at most once, part logic (Part 1 promises Part two; Part 2 says it in the hook).
 
 Rules (7 gates; evidence + our own data in lab/story/NOTES.md and PLAYBOOK §4 "Story rules"; R&D Story run 27 Oct 2026):
-  R1 hook      i1 ≤ 16 words and a question; the core claim (number or question) lands by ~6.5 s
+  R1 hook      i1 ≤ 16 words; a question in i1 or i2 (rule 60, 26 Nov: i1 may be a flat claim); the core claim (number or question) lands by ~6.5 s
   R2 loops     a question / teaser / turn / item label at least every 25 s — curiosity gaps (Loewenstein 1994; Kang 2009)
   R4 causal    no "and then" chains (≤ 1 "and then"/"then" opener) — causal links are recalled better (Trabasso & van den Broek 1985)
   R5 load      ≤ 1 figure per sentence, ≤ 18 words per sentence (spoken load, Lang LC4MP — thresholds are heuristics)
@@ -113,7 +113,8 @@ def check(path, target_len=None):
     # R1 hook
     i1 = lines[0][1]
     hw = len(words(i1))
-    hook_q = i1.strip().endswith("?")
+    # 26 Nov 2026 (WRITING rule 60): i1 may be a flat claim about a named thing; the viewer's question can come in i2
+    hook_q = i1.strip().endswith("?") or (len(lines) > 1 and "?" in lines[1][1])
     hook_num = count_numbers(i1) > 0
     # time to the core claim: end of the first line containing a number or the hook question
     claim_t = next((tl[k][1] for k, l in enumerate(lines[:3]) if count_numbers(l[1]) or "?" in l[1]), tl[0][1])
@@ -124,7 +125,7 @@ def check(path, target_len=None):
     R["R1_hook"] = hw <= 16 and hook_q and claim_t <= 6.5
     if hw > 16: flags.append(f"R1 hook is {hw} words (≤ 16): {i1!r}")
     if claim_t > 6.5: flags.append(f"R1 core claim lands at {claim_t:.1f} s (≤ 6.5)")
-    if not hook_q: flags.append("R1 hook is not a question")
+    if not hook_q: flags.append("R1 no question in the first two lines")
 
     # R2 loops: events = questions/teasers/turn markers; gap measured between event line starts (and from 0 / to end)
     ev = [tl[k][0] for k, l in enumerate(lines) if TEASE_RE.search(l[1]) or TURN_RE.search(l[1]) or LABEL_RE.match(l[1].strip())]
