@@ -26,3 +26,21 @@
 - Grade: faded matte film (blacks lifted ~19/255, whites capped ~236, 38% desaturated, cool shadows) applied to every element via one ColorFilter; halation bloom on highlights; top/bottom bands softly blurred (only the middle sharp); grain + heavy vignette; photo scenes dimmed 20-40%.
 - Type: captions small off-white (never pure white), Archivo SemiBold with tight tracking (letters nearly touching), soft dark glow, centred on the subject; hook words spread across the frame in columns over a thin grid; big words = grey "ghost" words in the same tight grotesk.
 - Cutting/animation: 3D card spin-in with motion trail, triangle 3-pane split, photo wall with camera push, red wavy ribbons with repeating name, rolodex year card, red 3D word swinging on a pale wall, green-felt investigation board with pins, string and sticky notes.
+
+## Script lessons from the two reference reels (26 Nov) — the script carries these videos
+1. **Point at it.** "This is the most [superlative] [person/thing] [where/when]." The viewer is told what's on screen and why it matters, in one line.
+2. **Pop-culture anchor.** "...and he's basically Tony Stark in real life" / "the godfather of America". One familiar picture = instant understanding.
+3. **Name late.** "His name's ___." comes at ~8 s, after curiosity is built, never first.
+4. **Paradox thesis (the open loop).** "The thing that made him X is the same thing that got him laughed at." The whole story is one contradiction, set up in sentence 3.
+5. **Vivid proof, not stats.** "Bartenders were becoming mortgage brokers." "Six-month analysts taking home seven-figure bonuses." Concrete images beat abstract numbers.
+6. **Pivot with "But instead of... he did the one thing..."** Turn on the contradiction.
+7. **Rhythm: lists of three, then a short punch.** "Went under, got bailed out, or came looking for a buyer." → "Dimon bought two of them."
+8. **Mirror irony.** Repeat the same words with the meaning flipped: "created so it would never need one banker to save the economy... called one banker to save the economy."
+9. **Echo before the end.** "Same call. Same man."
+10. **Zoom-out closer.** "And at this point, that's basically just how [the system] works." Makes the story about the world, so people share it.
+11. **Escalate scale.** One person → a network ("Palantir Mafia") → the internet you scroll.
+12. **Human fillers in moderation:** basically, quietly, literally. Every sentence starts with And/But/So — no dead air.
+Applied in Fort Knox v3 (thesis, vivid trio "Tons of steel. Its own police force. No visitors.", mirror line "too valuable to visit... too cheap to count", echo, closer).
+
+## Brand in every DOC reel
+"O." badge top-right (inside safe zone), series name in the series accent block + issue number top-left with progress rule, accent colour = series colour for ribbons / name boxes / 3D word, OOPS. MY BUSINESS wordmark on the final frame + follow line.

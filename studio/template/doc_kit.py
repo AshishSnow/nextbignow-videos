@@ -403,7 +403,7 @@ def sticky(c, x, y, txt, col=(236, 150, 160), rot=6, size=40):
 def ribbons(c, txt, t, col=(214, 32, 40)):
     """two wavy red bands with repeating condensed text scrolling (reference: 'HIS NAME'S' banners)"""
     f = cond(190); unit = txt + '  '; uw = f.measureText(unit)
-    for k, (y0, dirn, amp) in enumerate(((330, 1, 70), (1620, -1, 60))):
+    for k, (y0, dirn, amp) in enumerate(((500, 1, 60), (1440, -1, 50))):
         off = (t * 240 * dirn) % uw
         pth = skia.Path(); top = []; bot = []
         for i in range(0, W + 41, 40):
@@ -446,3 +446,36 @@ def word3d(c, txt, t, t0, col=(226, 30, 38), bg=(214, 212, 208)):
         card3d(c, img, W / 2, H / 2, surf_w, surf_h, ry=ang + k * 9 * (1 - u), rz=-6, border=0, a=aa)
 KALAM = '/home/claude/studio/fonts/ttf/PermanentMarker.ttf'
 ELITE = '/home/claude/studio/fonts/ttf/SpecialElite.ttf'
+
+
+# ================================================================== brand (OOPS. MY BUSINESS) — black+cream logo stays, reel accent = series colour
+_LOGO = '/home/claude/studio/logo/'
+_BR = {}
+
+
+def _logo(name):
+    if name not in _BR: _BR[name] = sk(Image.open(_LOGO + name))
+    return _BR[name]
+
+
+def brand_badge(c, x=880, y=330, r=56, a=1.0):
+    """'O.' avatar, top-right inside the safe zone (left of the like/share column)"""
+    img = _logo('logo_final_avatar_dark.png'); p = skia.Paint(AntiAlias=True, Alphaf=a)
+    p.setImageFilter(skia.ImageFilters.DropShadow(0, 4, 8, 8, skia.Color4f(0, 0, 0, 0.45 * a)))
+    c.save(); pth = skia.Path(); pth.addCircle(x, y, r); c.clipPath(pth, doAntiAlias=True)
+    c.drawImageRect(img, skia.Rect.MakeXYWH(x - r * 1.0, y - r * 1.0, 2 * r, 2 * r), skia.SamplingOptions(skia.FilterMode.kLinear), skia.Paint(AntiAlias=True, Alphaf=a)); c.restore()
+    c.drawCircle(x, y, r, S((236, 230, 218), 3, 0.8 * a))
+
+
+def series_tag(c, series, num, acc, t, dur, x=80, y=330, dark=True):
+    """accent block with the series name + issue number, thin progress rule (brand sheet: 'ANY TOPIC / IN COLOUR')"""
+    f = cond(40); w = f.measureText(series)
+    c.drawRect(skia.Rect.MakeXYWH(x - 10, y - 38, w + 20, 50), P(acc))
+    c.drawString(series, x, y, f, P((240, 236, 228)))
+    g = capf(28); c.drawString(num, x + w + 26, y - 4, g, P(OFFW if dark else (20, 20, 20), 0.9))
+    c.drawRect(skia.Rect.MakeXYWH(x - 10, y + 22, 640 * cl(t / dur), 4), P(acc, 0.9))
+
+
+def wordmark(c, cx, cy, w=620, dark_bg=False, a=1.0):
+    img = _logo('logo_final_wordmark_dark.png' if dark_bg else 'logo_final_wordmark_light.png'); h = w * img.height() / img.width()
+    c.drawImageRect(img, skia.Rect.MakeXYWH(cx - w / 2, cy - h / 2, w, h), skia.SamplingOptions(skia.FilterMode.kLinear), skia.Paint(AntiAlias=True, Alphaf=a))
