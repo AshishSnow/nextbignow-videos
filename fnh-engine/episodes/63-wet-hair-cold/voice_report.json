@@ -1,0 +1,25 @@
+{
+ "utmos": 4.488,
+ "utmos_chunk20": 4.484,
+ "utmos_line_mean": 4.456,
+ "utmos_lines": {
+  "i1": 4.39,
+  "i2": 4.45,
+  "a1": 4.48,
+  "a2": 4.41,
+  "a3": 4.48,
+  "a4": 4.51,
+  "a5": 4.49,
+  "c1": 4.45,
+  "c2": 4.45
+ },
+ "f0_median_hz": 130.4,
+ "f0_range_st": 16.5,
+ "words": 136,
+ "duration_s": 48.5,
+ "wpm_overall": 168.3,
+ "wpm_speaking": 177.9,
+ "pause_ratio": 0.054,
+ "asr_word_error_approx": 0.0,
+ "asr_bad_lines": []
+}

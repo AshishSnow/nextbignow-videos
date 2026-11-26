@@ -1469,3 +1469,33 @@ def geiger(level=-28, dur=2.0, rate0=4, rate1=40, seed=1):
     return y / (np.abs(y).max() + 1e-9) * db(level)
 
 
+
+
+# ---------------- ep 63 CRAFT: SPLIT EDITS (J-cut / L-cut) for the ambience + pre-lapped foley ----------------
+def split_edit(beds, timeline, n_, story=(), lead=0.45, tail=0.4, sr=48000):
+    """J-cut / L-cut room tone. beds = {place: mono array (len n_)}; timeline = [(t_start, place), ...] in shot order; story = the lit places.
+    At every change of place the crossfade moves OFF the picture cut: INTO a story place the new room leads the cut by `lead` s (J-cut: you hear
+    where you're going before you see it), OUT of a story place into the board the old room trails by `tail` s (L-cut: the place lingers under the
+    explanation). Equal-power fades; places that don't change get no fade. Returns (mono ambience, {place: weight array})."""
+    t_ = np.arange(n_) / sr
+    names = list(beds)
+    wts = {p: np.zeros(n_, np.float32) for p in names}
+    cur = timeline[0][1]; wts[cur][:] = 1.0
+    for (c, p) in timeline[1:]:
+        if p == cur: continue
+        a, b = (c - lead, c) if p in story else (c, c + tail)
+        u = np.clip((t_ - a) / max(1e-3, b - a), 0, 1)
+        fin = np.sin(u * np.pi / 2).astype(np.float32); fout = np.cos(u * np.pi / 2).astype(np.float32)
+        m = t_ >= a
+        for q in names:
+            wts[q][m] *= fout[m]
+        wts[p][m] += fin[m]
+        cur = p
+    out = np.zeros(n_, np.float32)
+    for p in names: out += np.asarray(beds[p][:n_], np.float32) * wts[p]
+    return out, wts
+
+
+def prelap(fx, t_cut, lead, xpos=540, where=None):
+    """pre-lap a foley under the outgoing shot: it starts `lead` s BEFORE the cut that shows its source (the sound pulls the eye into the next shot)."""
+    place(fx, t_cut - lead, xpos, where=where)
