@@ -19,13 +19,14 @@ def glitch_s():
 SYN = {'CLK': click, 'GL': glitch_s}
 def typing(t0, s, cps): return [(t0 + k / cps, 'CLK', .5) for k, ch in enumerate(s) if ch != ' ']
 W_ = wfind
-EV = ([(0.0, '1143', .5), (0.05, '788', .3), (S[1] - .06, '2627', .45), (W_(1, 'service'), '2364', .35), (W_(1, 'history'), '2364', .35),
- (S[2] - .06, '1461', .45), (W_(2, 'hot') - .06, 'GL', .45), (W_(2, 'pine'), '1494', .5), (S[3] - .06, '2627', .45), (W_(3, 'pollen'), '788', .45),
- (S[4] - .06, '1461', .45)] + [(S[4] + .1 + k * .22, '2364', .3) for k in range(4)] + [(W_(4, 'where'), '2357', .3),
- (S[5] - .02, 'GL', .5)] + typing(S[5] - .05, '2,200 years later...', 16) + [(S[6] - .02, '1143', .35), (W_(6, 'ten'), '1494', .4), (W_(6, 'four'), '1494', .4),
- (S[7] - .06, '2627', .45), (W_(7, 'some from') - .06, '1461', .45), (S[8] - .02, 'GL', .45), (W_(8, 'different'), '1494', .5),
- (S[9] - .06, '1461', .45)] + typing(W_(9, 'friend') - .25, 'tag the friend who', 30) + typing(W_(9, 'never'), 'never services their car.', 30) +
- [(S[10] - .06, '2627', .45), (W_(10, 'did'), '788', .5), (END, '1143', .4)] + typing(END + .2, 'send this to someone', 30))
+EV = ([(0.0, '1143', .5), (S[1] - .06, '2627', .45)] + [(W_(1, w), '2364', .35) for w in ('basically', 'kept', 'service')] +
+ [(S[2] - .02, 'GL', .45), (W_(2, 'water'), '2364', .35), (W_(2, 'ended'), '2357', .3), (W_(2, 'secret'), '1494', .45),
+ (S[3] - .06, '1461', .45), (W_(3, 'workers') - .06, 'GL', .4), (W_(3, 'hot'), '1494', .45), (S[4] - .06, '2627', .45), (W_(4, 'pollen'), '788', .4),
+ (S[5] - .06, '1461', .45)] + [(S[5] + .1 + k * .22, '2364', .3) for k in range(4)] + [(W_(5, 'where'), '2357', .3),
+ (S[6] - .02, 'GL', .5)] + typing(S[6] - .05, '2,200 years later,', 18) + [(S[7] - .02, '1143', .35), (W_(7, 'ten'), '1494', .4), (W_(7, 'four'), '1494', .4),
+ (S[8] - .06, '2627', .45), (W_(8, 'some from') - .06, '1461', .45), (S[9] - .02, 'GL', .45), (W_(9, 'different'), '1494', .5),
+ (S[10] - .06, '1461', .45)] + typing(W_(10, 'friend') - .25, 'tag the friend who', 34) + typing(W_(10, 'never'), 'never services their car.', 34) +
+ [(S[11] - .06, '2627', .45), (W_(11, 'did'), '788', .5), (END, '1143', .4)] + typing(END + .2, 'send this to someone', 30))
 N = int((TOTAL + .5) * SR); fx = np.zeros(N, np.float32)
 for t, i, g in EV:
     a = SYN[i]() if i in SYN else snd(i)[:int(2.2 * SR)].copy(); n = min(len(a), N - int(t * SR)); fo = int(.15 * SR)
@@ -35,5 +36,7 @@ vo = sf.read(D + '/vo.wav', dtype='float32')[0]
 if vo.ndim > 1: vo = vo.mean(1)
 v = np.zeros(N, np.float32); v[:len(vo)] = vo[:N]
 env = np.convolve(np.abs(v), np.ones(2400) / 2400, 'same'); duck = 1 - .45 * np.clip(env / (env.max() * .25), 0, 1)
-mix = v + fx * duck; sf.write('/tmp/mix_pre.wav', np.stack([mix, mix], 1), SR, subtype='FLOAT')
+mu = np.zeros(N, np.float32); m_ = sf.read(D + '/music.wav', dtype='float32')[0][:N]; mu[:len(m_)] = m_
+duck2 = 1 - .35 * np.clip(env / (env.max() * .25), 0, 1)
+mix = v + fx * duck + mu * .55 * duck2; sf.write('/tmp/mix_pre.wav', np.stack([mix, mix], 1), SR, subtype='FLOAT')
 subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', '/tmp/mix_pre.wav', '-af', 'alimiter=limit=0.89,loudnorm=I=-14:TP=-1.5:LRA=9', '-ar', '48000', D + '/mix.wav'], check=True); print('ok', len(EV))

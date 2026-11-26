@@ -1,7 +1,7 @@
 """usage: render.py plat f0 f1 out.mp4"""
 import sys, subprocess, numpy as np
 plat, f0, f1, out = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4]
-sys.argv = ['x']; exec(open('/home/claude/docu/scenes2.py').read().split("if __name__")[0])
+sys.argv = ['x']; exec(open('/home/claude/docu/scenes3.py').read().split("if __name__")[0])
 from PIL import Image
 TH = None
 vf = 'scale=1440:2560:flags=lanczos,format=yuv420p' if plat == 'yt' else 'format=yuv420p'

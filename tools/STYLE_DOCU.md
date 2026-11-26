@@ -24,3 +24,19 @@ Refs: Jamie Dimon reel (73 s) and Palmer Luckey / PayPal-mafia reel (78 s). Both
 - Captions sit at y≈1300 (centre-low) so they never hit the IG caption bar.
 - Our NEXT/BIG/NOW badge top-right; end card is paper + typewriter CTA.
 - 30-35 s, share line around 55-65 %.
+
+## v4: measured from the reference audio (Whisper transcripts in /home/claude/ref/*.txt)
+- **Speech pace: 185-198 words per minute** with almost no gaps (max pause 0.5-0.8 s). Ours was ~150 wpm, so v4 runs at ~181 wpm with tight 0.05-0.14 s gaps between lines.
+- **Cuts land on words**: 69-76 % of cuts fall within 0.15 s of a word onset (137 cuts / 72 s). v4 adds hard 9 % punch-ins on key nouns (`PUNCH` in scenes3.py) plus a transition on every line.
+- **Music is loud**: in the gaps between words the level is only ~1.5 dB below the overall mix, i.e. a strong bed. v4 uses a synthesised suspense score (`music.py`: drone, heartbeat, clock tick, risers, sub booms, silence drop) mixed louder with lighter ducking.
+- **Script skeleton, identical in both reels:**
+  1. "This is the [thing] that [stakes]." (demonstrative + stakes, ~3 s)
+  2. "And it's basically [famous comparison]." (Godfather / Tony Stark)
+  3. Pop-culture sound bite (film quote) as a pattern interrupt; we can't use film audio, so we use a hard visual/sound hit instead
+  4. Name reveal ~9 s: "His name's ___."
+  5. **Irony thesis**: "the thing that made him X is the same thing that got him laughed at" / "the same company that made him a billionaire threw him out"
+  6. Vivid specifics, each a picture ("bartenders were becoming mortgage brokers")
+  7. Turn: "But instead of ___, he did the one thing ___"
+  8. Mirrored-phrase irony ("created so it would never need one banker... called one banker")
+  9. Time jump: "Fifteen years later..." / "and the exact same thing happened. Same call, same man."
+  10. Zoom-out ending that points at the viewer ("built the internet you scroll... the thing quietly watching you do it"). No CTA.
