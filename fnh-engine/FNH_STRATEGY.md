@@ -49,3 +49,11 @@ Body: but/therefore, never "and then"; the tip must call back to a detail of the
 - Editorial creator reel: two-font system (heavy grotesk caps + elegant serif for the key word and captions); design-tool selection handles around a key word; big numerals on a blurred background, then focus pulls back; one signature colour set; physical props/hands instead of flat graphics.
 - Founder reel: B&W with chromatic edges + fine screen texture; small red labels ending in "//".
 - Our engine (tools/cine.py): AI depth map per photo -> 3D camera move + rack focus, bloom, haze shimmer, archive film, dust bokeh, split-tone grade.
+
+## Script logic shared by every reference (26 Nov 2026)
+1. First line = a promise (what you will get / what you believe is wrong).
+2. Open a loop early, close it at the very end (the ending mirrors the opening).
+3. Hard specifics: numbers, names, dates, exact times.
+4. The narrator has a point of view: one honest human line (an opinion or a feeling) right after the hardest fact. This is what makes people connect.
+5. A turn just before the payoff ("But…", "Until now.").
+6. End on the closed loop; any action goes in the caption, not the voice.
