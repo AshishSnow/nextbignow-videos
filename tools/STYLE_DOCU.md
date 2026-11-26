@@ -57,3 +57,19 @@ Refs: Jamie Dimon reel (73 s) and Palmer Luckey / PayPal-mafia reel (78 s). Both
 3. **One metaphor end to end**: receipts (hook → car analogy → "glued to the hull" → "a receipt with an address" → "its receipts did"). No metaphor switching.
 4. **A twist line every 3-4 s**: "Except…", "And while it was sticky…", "So every coat…".
 5. **Something on screen moves on every key noun** (punch-in / slam / stamp / type), and a sound accompanies each one.
+
+## Reference 3: "Sol" launch film (104 s, 26 Nov). Manifesto style
+Measured: ~95 wpm (half the speed of the power-story reels), 37 pauses over 0.5 s (longest 3.2 s), 62 cuts (one every ~1.7 s), -14 LUFS, quiet ambient bed.
+**Words, beat by beat:**
+1. Universal premise everyone agrees with: "Everything we make evolves. It's not a choice."
+2. Proof as a list of single nouns, one picture each: "Light. Maps. Money. Pokémon. Music. Computers." (nostalgia hit: Charmeleon evolving)
+3. Turn to the subject with a question: "And this?" (Mail icon)
+4. "Oh, it evolved. Constantly." Then a verb list: crossed the world, held attachments, reached your pocket, sorted itself, defended itself.
+5. Two-halves contrast, the spine of the film: "made mail better at arriving. Not one in 50 years made getting started any easier."
+6. Personify the object so it hurts: "Your inbox watches your work arrive all day… It has everything it needs. And it waits for you anyway."
+7. Silence, then "Until now." (beat drop, logo)
+8. Fragment triplets: "The doc. Created. The time. Found. The reply. Drafted."
+9. Trust line: "All of it ready. None of it sent. That part is still you."
+10. Callback close that repeats the spine: "Half your inbox took 50 years. The other half starts today."
+**Emotion arc:** wonder/nostalgia → recognition ("that's my inbox") → quiet frustration → relief ("Until now") → trust → hope.
+**Styling:** black screen with small centred white words appearing one by one in silence; huge white grotesque words over archival photos (B&W past → colour present); map collages sliding; pixel-game UI insert; VHS/CRT footage with scanlines and yellow film subtitles; defocused UI close-ups; then a switch to bright white light-mode with an iridescent pastel glow ring (= "the new thing"); a 3D museum of pedestals as the evolution metaphor. Visual arc = emotional arc: dark, gritty past → bright, clean future.
