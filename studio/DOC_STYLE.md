@@ -21,3 +21,8 @@
 - Code: studio/doc_kit.py (cover/push-in, film, kword, big_word, name_box, tag_boxes, typewriter, highlight, rgb_split, flip_counter, card, sticker, whip, flash);
   example: projects/fort-knox/info_fk.py.
 - Depth tuck: needs a mask of the subject. For a building photo use a hand-measured roofline + color rule for flag/pole.
+
+## v2 (owner frame notes, 26 Nov): what changed
+- Grade: faded matte film (blacks lifted ~19/255, whites capped ~236, 38% desaturated, cool shadows) applied to every element via one ColorFilter; halation bloom on highlights; top/bottom bands softly blurred (only the middle sharp); grain + heavy vignette; photo scenes dimmed 20-40%.
+- Type: captions small off-white (never pure white), Archivo SemiBold with tight tracking (letters nearly touching), soft dark glow, centred on the subject; hook words spread across the frame in columns over a thin grid; big words = grey "ghost" words in the same tight grotesk.
+- Cutting/animation: 3D card spin-in with motion trail, triangle 3-pane split, photo wall with camera push, red wavy ribbons with repeating name, rolodex year card, red 3D word swinging on a pale wall, green-felt investigation board with pins, string and sticky notes.

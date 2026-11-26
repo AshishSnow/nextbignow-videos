@@ -221,3 +221,228 @@ def whip(t, t0, d=0.16):
 
 def flash(c, t, t0, d=0.08, a=0.85):
     if t0 <= t < t0 + d: c.drawRect(skia.Rect.MakeWH(W, H), P(WHITE_, a * (1 - (t - t0) / d)))
+
+
+# ================================================================== v2 (26 Nov, after owner's frame-by-frame notes)
+# Grade: faded/matte film look like the references (lifted blacks, softened whites, ~35% desaturated, cool shadows).
+def grade_filter(desat=0.38, lift=0.075, gain=0.85, cool=0.018):
+    s = 1 - desat; lr, lg, lb = 0.2126 * desat, 0.7152 * desat, 0.0722 * desat
+    m = [gain * (s + lr), gain * lg, gain * lb, 0, lift - cool * 0.4,
+         gain * lr, gain * (s + lg), gain * lb, 0, lift + cool * 0.2,
+         gain * lr, gain * lg, gain * (s + lb), 0, lift + cool,
+         0, 0, 0, 1, 0]
+    return skia.ColorFilters.Matrix(m)
+
+
+GRADE = grade_filter()
+
+
+def soft_edges(surf, amt=9.0):
+    """tilt-shift: blur the top and bottom bands of the finished frame (references keep only the middle sharp)"""
+    img = surf.makeImageSnapshot(); c = surf.getCanvas()
+    c.saveLayer(None, None)
+    p = skia.Paint(); p.setImageFilter(skia.ImageFilters.Blur(amt, amt)); c.drawImage(img, 0, 0, skia.SamplingOptions(), p)
+    m = skia.Paint(BlendMode=skia.BlendMode.kDstIn)
+    m.setShader(skia.GradientShader.MakeLinear([(0, 0), (0, H)], [skia.Color4f(0, 0, 0, 1), skia.Color4f(0, 0, 0, 0), skia.Color4f(0, 0, 0, 0), skia.Color4f(0, 0, 0, 1)], [0, 0.26, 0.74, 1]))
+    c.drawRect(skia.Rect.MakeWH(W, H), m); c.restore()
+
+
+def halation(surf, a=0.22, r=26):
+    """bloom on highlights (soft glow around bright areas / white text)"""
+    img = surf.makeImageSnapshot(); c = surf.getCanvas()
+    p = skia.Paint(Alphaf=a, BlendMode=skia.BlendMode.kScreen)
+    p.setImageFilter(skia.ImageFilters.Blur(r, r, skia.TileMode.kDecal, skia.ImageFilters.ColorFilter(skia.ColorFilters.Matrix([2.2, 0, 0, 0, -1.25, 0, 2.2, 0, 0, -1.25, 0, 0, 2.2, 0, -1.25, 0, 0, 0, 1, 0]))))
+    c.drawImage(img, 0, 0, skia.SamplingOptions(), p)
+
+
+OFFW = (236, 236, 232)   # references never use pure white text: soft off-white
+
+
+def draw_tight(c, s, x, y, f, paint, track=-0.035):
+    """Helvetica-style tight tracking (letters almost touching) — skia has no letter-spacing, so place glyphs"""
+    g = f.textToGlyphs(s); ws = f.getWidths(g); tr = track * f.getSize(); pos = []; xx = 0.0
+    for w in ws: pos.append(skia.Point(xx, 0)); xx += w + tr
+    blob = skia.TextBlob.MakeFromPosText(s, pos, f) if hasattr(skia.TextBlob, 'MakeFromPosText') else None
+    if blob is None:
+        xx = 0.0
+        for ch, w in zip(s, ws): c.drawString(ch, x + xx, y, f, paint); xx += w + tr
+    else: c.drawTextBlob(blob, x, y, paint)
+    return xx - tr
+
+
+def tight_w(s, f, track=-0.035): return sum(f.getWidths(f.textToGlyphs(s))) + track * f.getSize() * (len(s) - 1)
+
+
+def glow_paint(col=OFFW, a=1.0):
+    p = P(col, a); p.setImageFilter(skia.ImageFilters.DropShadow(0, 0, 9, 9, skia.Color4f(0, 0, 0, 0.55 * a))); return p
+
+
+def cap2(size): return dfont('Archivo-SemiBold', size)
+
+
+def kword2(c, T, t, t0, t1, x, y, size=58, col=OFFW, maxw=760, lh=1.02, spread=False):
+    """reference captions: small off-white tight grotesk, 1-3 words, centred in frame; spread=True places each word
+    at evenly spaced columns across the frame (hook frame 'This   is   the   most')"""
+    ws = [(w, a) for (w, a, b) in T.AL if t0 - 0.01 <= a < t1]
+    shown = [(w, a) for (w, a) in ws if a - 0.03 <= t]
+    if not shown or t > t1 + 0.2: return
+    f = cap2(size)
+    if spread:
+        n = len(ws); x0 = 140; step = (W - 280) / max(1, n - 1) if n > 1 else 0
+        for i, (w, a) in enumerate(ws):
+            if a - 0.03 > t: continue
+            k = cl((t - a + 0.03) / 0.1); ww = tight_w(w, f); cx = x0 + i * step if n > 1 else W / 2
+            draw_tight(c, w, cx - ww / 2, y, f, glow_paint(col, k)); 
+        return
+    lines = [[]]; cw = 0; sp = f.measureText(' ') * 0.8
+    for w, a in shown:
+        ww = tight_w(w, f)
+        if lines[-1] and cw + sp + ww > maxw: lines.append([]); cw = 0
+        lines[-1].append((w, a)); cw += (sp if cw else 0) + ww
+    for li, L in enumerate(lines):
+        tw = sum(tight_w(w, f) for w, a in L) + sp * (len(L) - 1); xx = x - tw / 2; yy = y + li * size * lh
+        for w, a in L:
+            k = cl((t - a + 0.03) / 0.1)
+            draw_tight(c, w, xx, yy, f, glow_paint(col, k)); xx += tight_w(w, f) + sp
+
+
+def ghost_word(c, txt, x, y, size, k=1.0, col=OFFW, a=0.9, track=-0.05, font_name='Archivo-Bold'):
+    """big grey word laid over the picture (reference: 'YEARS', 'SUBPRIME')"""
+    if k <= 0: return
+    f = dfont(font_name, size); w = tight_w(txt, f, track)
+    c.save(); c.translate(x, y); s = 1.06 - 0.06 * eo(k); c.scale(s, s)
+    draw_tight(c, txt, -w / 2, size * 0.36, f, glow_paint(col, a * eo(k)), track); c.restore()
+
+
+def grid_lines(c, a=0.35, cols=3, rows=4):
+    for i in range(1, cols): c.drawLine(W * i / cols, 0, W * i / cols, H, S((10, 10, 10), 2, a))
+    for j in range(1, rows): c.drawLine(0, H * j / rows, W, H * j / rows, S((10, 10, 10), 2, a))
+
+
+# ---------------------------------------------------------------- 3D card (perspective) with motion-blur trail
+def _proj(pts3, f=1600.0, cx=W / 2, cy=H / 2):
+    return [skia.Point(cx + x * f / (f + z), cy + y * f / (f + z)) for (x, y, z) in pts3]
+
+
+def card3d(c, img, cx, cy, w, h, ry=0.0, rx=0.0, rz=0.0, z=0.0, border=10, a=1.0, trail=0, trail_d=(0, 0, 0)):
+    """draw img on a 3D-rotated plane (degrees). trail=N draws N fading copies offset by trail_d (ry, rz, z) = motion blur"""
+    for k in range(trail, -1, -1):
+        ryk, rzk, zk = ry + trail_d[0] * k, rz + trail_d[1] * k, z + trail_d[2] * k
+        aa = a * (1.0 if k == 0 else 0.22 * (1 - k / (trail + 1)))
+        ay, ax, az = math.radians(ryk), math.radians(rx), math.radians(rzk)
+        pts = []
+        for (px, py) in ((-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2)):
+            x1 = px * math.cos(az) - py * math.sin(az); y1 = px * math.sin(az) + py * math.cos(az)
+            x2 = x1 * math.cos(ay); z2 = -x1 * math.sin(ay)
+            y3 = y1 * math.cos(ax) - z2 * math.sin(ax); z3 = y1 * math.sin(ax) + z2 * math.cos(ax)
+            pts.append((x2, y3, z3 + zk))
+        dst = _proj(pts, cx=cx, cy=cy)
+        src = [skia.Point(0, 0), skia.Point(w, 0), skia.Point(w, h), skia.Point(0, h)]
+        M = skia.Matrix(); 
+        if not M.setPolyToPoly(src, dst): continue
+        c.save(); c.concat(M)
+        if border: c.drawRect(skia.Rect.MakeXYWH(-border, -border, w + 2 * border, h + 2 * border), P((240, 238, 232), aa))
+        cover(c, img, 1.0, rect=skia.Rect.MakeWH(w, h), a=aa)
+        c.restore()
+
+
+def split3(c, imgs, t, t0, k=1.0):
+    """three diagonal panes (reference: three-person triangle split)"""
+    pts = [[(0, 0), (W * 0.58, 0), (W * 0.5, H * 0.52), (0, H * 0.78)],
+           [(W * 0.58, 0), (W, 0), (W, H * 0.85), (W * 0.5, H * 0.52)],
+           [(0, H * 0.78), (W * 0.5, H * 0.52), (W, H * 0.85), (W, H), (0, H)]]
+    for i, (img, poly) in enumerate(zip(imgs, pts)):
+        kk = eo(cl(k * 3 - i * 0.6))
+        if kk <= 0: continue
+        p = skia.Path(); p.moveTo(*poly[0]); [p.lineTo(*q) for q in poly[1:]]; p.close()
+        c.save(); c.clipPath(p, doAntiAlias=True)
+        b = p.getBounds(); dx = (1 - kk) * (-300 if i == 0 else 300)
+        cover(c, img, 1.08 + 0.06 * cl((t - t0) / 3), rect=b.makeOffset(dx, 0))
+        c.restore(); c.drawPath(p, S((10, 10, 10), 10))
+
+
+def photo_wall(c, imgs, t, t0, push=1.0, cols=4, rows=6, tile=(420, 300), gap=26, focus=None):
+    """grid of photo tiles on a tilted wall, camera pushing in (reference: collage wall behind subject)"""
+    tw, th = tile; Wd = cols * (tw + gap); Hd = rows * (th + gap)
+    zc = 1400 - 900 * eo(cl(push))
+    c.drawRect(skia.Rect.MakeWH(W, H), P((226, 224, 220)))
+    for j in range(rows):
+        for i in range(cols):
+            x = -Wd / 2 + i * (tw + gap) + tw / 2; y = -Hd / 2 + j * (th + gap) + th / 2
+            img = imgs[(i * 3 + j * 5) % len(imgs)]
+            pts = [(x - tw / 2, y - th / 2, zc), (x + tw / 2, y - th / 2, zc + 40), (x + tw / 2, y + th / 2, zc + 40), (x - tw / 2, y + th / 2, zc)]
+            dst = _proj(pts); src = [skia.Point(0, 0), skia.Point(tw, 0), skia.Point(tw, th), skia.Point(0, th)]
+            M = skia.Matrix(); M.setPolyToPoly(src, dst); c.save(); c.concat(M)
+            cover(c, img, 1.0, 0.3 * math.sin(i + j), 0.0, rect=skia.Rect.MakeWH(tw, th)); c.restore()
+
+
+def felt(c, col=(28, 92, 52)):
+    c.drawRect(skia.Rect.MakeWH(W, H), P(col))
+    rng = np.random.default_rng(3)
+    for _ in range(500):
+        x, y = rng.uniform(0, W), rng.uniform(0, H); c.drawCircle(x, y, rng.uniform(1, 3), P((0, 0, 0) if rng.random() < .5 else (90, 160, 110), 0.12))
+
+
+def pin(c, x, y, col=(80, 50, 160)):
+    c.drawCircle(x + 3, y + 5, 15, P((0, 0, 0), 0.35)); c.drawCircle(x, y, 15, P(col)); c.drawCircle(x - 5, y - 5, 5, P((255, 255, 255), 0.6))
+
+
+def string(c, pts, col=(70, 60, 170)):
+    p = skia.Path(); p.moveTo(*pts[0]); [p.lineTo(*q) for q in pts[1:]]; c.drawPath(p, S(col, 4, 0.85))
+
+
+def sticky(c, x, y, txt, col=(236, 150, 160), rot=6, size=40):
+    c.save(); c.translate(x, y); c.rotate(rot)
+    sh = P((0, 0, 0), 0.35); sh.setMaskFilter(skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, 10)); c.drawRect(skia.Rect.MakeXYWH(-120, -110, 250, 240), sh)
+    c.drawRect(skia.Rect.MakeXYWH(-125, -120, 250, 240), P(col))
+    f = skia.Font(skia.Typeface.MakeFromFile(KALAM), size) if os.path.exists(KALAM) else capf(size)
+    for i, ln in enumerate(txt.split('\n')): c.drawString(ln, -f.measureText(ln) / 2, -10 + i * size * 1.1, f, P((40, 30, 30)))
+    c.restore()
+
+
+def ribbons(c, txt, t, col=(214, 32, 40)):
+    """two wavy red bands with repeating condensed text scrolling (reference: 'HIS NAME'S' banners)"""
+    f = cond(190); unit = txt + '  '; uw = f.measureText(unit)
+    for k, (y0, dirn, amp) in enumerate(((330, 1, 70), (1620, -1, 60))):
+        off = (t * 240 * dirn) % uw
+        pth = skia.Path(); top = []; bot = []
+        for i in range(0, W + 41, 40):
+            yy = y0 + amp * math.sin(i / W * math.pi * 1.4 + k * 2 + t * 0.6); top.append((i, yy - 120)); bot.append((i, yy + 120))
+        pth.moveTo(*top[0]); [pth.lineTo(*q) for q in top[1:]]; [pth.lineTo(*q) for q in reversed(bot)]; pth.close()
+        c.drawPath(pth, P(col))
+        c.save(); c.clipPath(pth, doAntiAlias=True)
+        for i in range(-2, 5):
+            x = i * uw - off
+            yy = y0 + amp * math.sin((x + uw / 2) / W * math.pi * 1.4 + k * 2 + t * 0.6)
+            c.drawString(unit, x, yy + 68, f, P((240, 236, 230)))
+        c.restore()
+
+
+def rolodex(c, cx, cy, txt, k, t, w=760, h=520):
+    """old desk calendar / rolodex card with tabs and two rings (reference: '2007')"""
+    c.drawRect(skia.Rect.MakeWH(W, H), P((18, 18, 18)))
+    f = cond(300); flip = 1 - eo(cl(k))
+    c.save(); c.translate(cx, cy)
+    for tx, lab in ((-200, '19'), (60, 'KY')):
+        c.drawRRect(rr(tx, -h / 2 - 60, 200, 80, 8), P((60, 60, 60))); g = mono(32); c.drawString(lab, tx + 100 - g.measureText(lab) / 2, -h / 2 - 8, g, P((160, 160, 160)))
+    c.scale(1, max(0.02, 1 - flip)); 
+    c.drawRRect(rr(-w / 2, -h / 2, w, h, 26), P((228, 226, 220)))
+    shd = skia.GradientShader.MakeRadial((0, 0), w * 0.7, [skia.Color4f(0, 0, 0, 0), skia.Color4f(0, 0, 0, 0.35)], [0.5, 1]); c.drawRRect(rr(-w / 2, -h / 2, w, h, 26), skia.Paint(Shader=shd))
+    c.drawString(txt, -f.measureText(txt) / 2, 100, f, P((24, 24, 24)))
+    for rx_ in (-120, 120): c.drawRect(skia.Rect.MakeXYWH(rx_ - 22, h / 2 - 100, 44, 160), P((30, 30, 30)))
+    c.restore()
+
+
+def word3d(c, txt, t, t0, col=(226, 30, 38), bg=(214, 212, 208)):
+    """big red word swinging in 3D on a pale wall with motion blur (reference: red 'AND')"""
+    c.drawRect(skia.Rect.MakeWH(W, H), P(bg))
+    vg = skia.GradientShader.MakeRadial((W / 2, H / 2), H * 0.6, [skia.Color4f(0, 0, 0, 0), skia.Color4f(0, 0, 0, 0.35)], [0.3, 1]); c.drawRect(skia.Rect.MakeWH(W, H), skia.Paint(Shader=vg))
+    f = cond(330); w = f.measureText(txt); hh = 330
+    u = cl((t - t0) / 0.55); ang = -70 * (1 - eo(u)) + 6 * math.sin((t - t0) * 2)
+    surf_w, surf_h = int(w + 40), int(hh * 1.2)
+    s = skia.Surface(surf_w, surf_h); cc = s.getCanvas(); cc.drawString(txt, 20, hh * 0.95, f, P(col)); img = s.makeImageSnapshot()
+    for k in (3, 2, 1, 0):
+        aa = 1.0 if k == 0 else 0.18
+        card3d(c, img, W / 2, H / 2, surf_w, surf_h, ry=ang + k * 9 * (1 - u), rz=-6, border=0, a=aa)
+KALAM = '/home/claude/studio/fonts/ttf/PermanentMarker.ttf'
+ELITE = '/home/claude/studio/fonts/ttf/SpecialElite.ttf'

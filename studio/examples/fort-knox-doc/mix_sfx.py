@@ -4,7 +4,7 @@ import os, sys, random, math
 import numpy as np, soundfile as sf
 from scipy.signal import butter, lfilter
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import info_fk as R
+import info_fk2 as R
 
 HERE = os.path.dirname(os.path.abspath(__file__)); SR = 48000
 X = os.path.join(HERE, 'sfx')
