@@ -111,3 +111,14 @@ Where to find these ideas:
 - The wow word lands on screen by ~5–6 s ("FAKE SHOPPERS").
 - **The owner liked** the series paper colour, the italic serif captions + condensed boiling hero words, the logo/badge, and the sticker look. Keep these.
 - **Real images:** fetch Wikimedia **standard-size thumbnails (1280 px) directly** with a policy-compliant User-Agent (tools_ref/thumbget.py). The API search and original files get 429s; thumbnails mostly work.
+
+## 10. Voice (26 Nov owner: "voice looks so much AI")
+- **Measured against the references:** our Chatterbox+PSOLA voice paused ~31 times a minute (a pause after every sentence), and its pitch swung 16 st with fast wobble (sing-song, robotic). The references flow in long phrases with few pauses and a natural pitch range.
+- **New engine: Maya1** (maya-research/maya1, Apache-2.0; the voice is *designed from a text description*, with no reference speaker or cloning). It runs on CPU via llama.cpp Q4_K_M GGUF plus the SNAC-24k ONNX decoder (studio/lib/maya_tts.py, maya_vo.py). About 18x slower than real time, so roughly 20 min for a 60 s reel.
+- **Method:**
+  - Generate in **paragraphs** (2–3 sentences), not line by line, so the delivery flows.
+  - Cap silences at 0.26 s.
+  - Re-align words with Whisper small.en.
+  - No PSOLA pitch exaggeration.
+  - Result: 189 wpm, 6.5 st range, flowing.
+- **Next:** try the inline tags (<chuckle>, <excited>, <sigh>) at emotional beats, and test seeds/descriptions per channel.
