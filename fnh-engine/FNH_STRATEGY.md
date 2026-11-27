@@ -63,3 +63,13 @@ Body: but/therefore, never "and then"; the tip must call back to a detail of the
 - Our tag-directed takes ([whispers]/[sad]/[long pause]) had ~30% dead air and theatrical swings = sounds like an AI actor. Rule: no emotion tags in story shorts; write the emotion into the words and punctuation; let the music carry silence.
 - Voice: a documentary narrator voice (Aditya 2.0, KgnO7XaC644NBfmLZmwn) instead of an ad voice. Most human option: owner records the script on his phone, ElevenLabs Voice Changer converts it (keeps his real timing and emotion).
 - Apple-style pauses only for brand-film formats, never for story shorts.
+
+## Script system v4 — owner notes 27 Nov 2026 (Copy Posse 'Quips/Tips/Clips' + owner's 6-step framework)
+- Step 0 PACKAGING before any script: pick the idea by human psychology, write the TITLE and the COVER/THUMBNAIL line first; the hook = the cover text.
+- Step 1 ASSURITY: the intro must pay a REWARD in 3-6 s (the shocking fact itself, not a tease), then open a curiosity gap with a question or a fear.
+- Step 2 RESEARCH: watch ~10 videos on ONE topic (not 10 topics) before writing; note how big creators open, turn and close it.
+- Step 3 MASTER SCRIPT: build our own pattern from those creators; body told as a short story.
+- Step 5 CTA: one fixed signature line every time (brand repetition): "ऐसे ही रोज़ के सच के लिए FreshNestHub को फ़ॉलो करो।"
+- Length discipline: ~75 words = 30 s, 150 words = 60 s; cut every word that isn't needed; too much content = split into two reels.
+- Funnel mix: QUIPS (myth/stat, broad, for shares/follows) + TIPS (practical how-to, for saves) + CLIPS (personal/behind-the-scenes, for comments). We only made quips so far.
+- Natural Hinglish over shuddh Hindi; short punchy sentences.
