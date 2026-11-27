@@ -1,0 +1,6 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/bf/scenes.py').read().split("if __name__")[0])
+T = 1.0; s, c = surface(); sale_bg(c, T); tagshape(c, CX, 1200, 1.2, T, '$679.99', 'BLACK FRIDAY', sale=True)
+fr = post(to_np(s), T, seed=1)
+tape(fr, 'CHECK BEFORE YOU BUY', CX, 330, 1.0, col=YEL2, size=48, font=LUCKY, rot=-3)
+big_word(fr, "THIS 'DEAL' COST", 520, 110, 'FFFFFF', -3); big_word(fr, '$78 MORE', 690, 170, HOT, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/bf/out/thumb_gta.jpg', quality=95)

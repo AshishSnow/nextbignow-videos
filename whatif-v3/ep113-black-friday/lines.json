@@ -1,0 +1,72 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Last Black Friday, this deal cost seventy-eight dollars more than it did a month earlier.",
+  "start": 0.0,
+  "dur": 5.766
+ },
+ {
+  "i": 1,
+  "tag": "story",
+  "text": "A smartwatch. Six hundred and two dollars in October... then six seventy-nine on Black Friday, with a sale badge on it.",
+  "start": 5.966,
+  "dur": 8.039
+ },
+ {
+  "i": 2,
+  "tag": "reveal",
+  "text": "A watchdog group checked three hundred fifty Amazon deals. Almost one in three were no cheaper than the month before. Nearly one in ten cost more.",
+  "start": 14.325,
+  "dur": 9.303
+ },
+ {
+  "i": 3,
+  "tag": "story",
+  "text": "One pair of boots went from ninety-eight dollars... to a hundred and eighty, as a Cyber Monday deal.",
+  "start": 23.889,
+  "dur": 5.47
+ },
+ {
+  "i": 4,
+  "tag": "story",
+  "text": "Amazon says that study is flawed, and that its own check found almost every deal was a real low.",
+  "start": 29.639,
+  "dur": 6.343
+ },
+ {
+  "i": 5,
+  "tag": "tease",
+  "text": "So how do you know?",
+  "start": 36.342,
+  "dur": 1.086
+ },
+ {
+  "i": 6,
+  "tag": "story",
+  "text": "In Europe, stores have to show the lowest price from the last thirty days. In the US, they don't.",
+  "start": 37.738,
+  "dur": 6.638
+ },
+ {
+  "i": 7,
+  "tag": "excited",
+  "text": "So before you buy, paste the link into a free price tracker like Keepa or CamelCamelCamel, and look at the last thirty days.",
+  "start": 44.616,
+  "dur": 7.272
+ },
+ {
+  "i": 8,
+  "tag": "punchline",
+  "text": "If the line didn't drop... the deal is just a sticker.",
+  "start": 52.188,
+  "dur": 2.886
+ },
+ {
+  "i": 9,
+  "tag": "punchline",
+  "text": "Save this, and check before you tap buy.",
+  "start": 55.514,
+  "dur": 3.053
+ }
+]
