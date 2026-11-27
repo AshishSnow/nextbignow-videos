@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "Free money made people work more.",
+  "start": 0.0,
+  "dur": 2.073
+ },
+ {
+  "i": 1,
+  "tag": "reveal",
+  "text": "A California city gave people five hundred dollars a month. Full-time jobs jumped from twenty-eight percent... to forty.",
+  "start": 2.313,
+  "dur": 6.887
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "Now Elon Musk says he'll give every kid in America a SpaceX share. That's seventy-two million kids.",
+  "start": 9.5,
+  "dur": 7.42
+ },
+ {
+  "i": 3,
+  "tag": "tease",
+  "text": "So... will they grow up lazy?",
+  "start": 17.12,
+  "dur": 2.027
+ },
+ {
+  "i": 4,
+  "tag": "story",
+  "text": "Alaska already ran this test. Since nineteen eighty-two, almost everyone there, even babies, gets a yearly oil check.",
+  "start": 19.537,
+  "dur": 8.04
+ },
+ {
+  "i": 5,
+  "tag": "story",
+  "text": "In twenty twenty-two, it hit over three thousand dollars each.",
+  "start": 27.737,
+  "dur": 3.862
+ },
+ {
+  "i": 6,
+  "tag": "reveal",
+  "text": "Economists checked. Jobs didn't drop. Part-time work went up.",
+  "start": 31.839,
+  "dur": 3.957
+ },
+ {
+  "i": 7,
+  "tag": "story",
+  "text": "Turns out a cushion doesn't make people quit. It gives them room to find better work.",
+  "start": 36.096,
+  "dur": 5.444
+ },
+ {
+  "i": 8,
+  "tag": "punchline",
+  "text": "So the real question isn't if these kids get lazy. It's what they'll build.",
+  "start": 41.94,
+  "dur": 4.387
+ }
+]
