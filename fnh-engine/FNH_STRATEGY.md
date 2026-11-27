@@ -101,3 +101,17 @@ Voice/timing tools: Handy = offline dictation (Whisper / Parakeet) with Silero V
 between voice lines (cap gaps ~0.45 s); keep Whisper for Hindi word timings (Parakeet is English/European only).
 The owner can dictate his own read with Handy-style tools and we run it through the ElevenLabs Voice Changer for the
 most human take.
+
+## Topic + script system v5 (27 Nov 2026, everything the owner shared, combined)
+TOPIC SCORE (0-2 each, publish only >= 11/14):
+ 1 In every Indian home / daily habit  2 Real surprise (most people believe the opposite)  3 Stakes/fear for family
+ 4 Action the viewer can take today  5 Share trigger ("send to the person who...")  6 Timely (season/news)
+ 7 Proof: a named study/hospital/regulator + one real case
+HOOK SCORE (write 3 variants, 0-20 each, keep the best, >= 70/100): Clarity in 2 s, Emotion, Disruption (opening frame
+ looks different from the feed), Stakes, Promise of a payoff. Reels favour a relatable pain point; Shorts favour a
+ curiosity gap or bold claim. Pass the SILENT TEST: frame 0-3 s must work with sound off.
+SCRIPT: hook -> reward (the shocking fact) by 3-6 s -> stacked open loops (close one, open the next: "aur ye toh
+ aadha sach hai...") -> pattern interrupt every 2-3 s (visual change / one-word line) -> proof as a mini story ->
+ tip -> last line points back to the hook (loop) -> fixed short CTA. Every line advances or raises a question.
+ Payoff spread across the reel (a viewer leaving at 50 % still learned something). 75-90 words.
+Then the humanizer pass (no fake contrasts, no staged candour, no dashes, no hype words, no repeat closers).
