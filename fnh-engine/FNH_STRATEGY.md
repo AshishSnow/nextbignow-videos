@@ -115,3 +115,11 @@ SCRIPT: hook -> reward (the shocking fact) by 3-6 s -> stacked open loops (close
  tip -> last line points back to the hook (loop) -> fixed short CTA. Every line advances or raises a question.
  Payoff spread across the reel (a viewer leaving at 50 % still learned something). 75-90 words.
 Then the humanizer pass (no fake contrasts, no staged candour, no dashes, no hype words, no repeat closers).
+
+## Motion system v6 (73-microwave, 2026-11-27)
+- Hook = a visual reveal, not just a headline: start inside the object (extreme close-up), pull back to show it, then reveal the invisible danger (heat-vision scan line over the microwave window).
+- Camera on every scene: slow 5% push-in; screen shake + zoom punch + 1-frame chromatic split on every impact word.
+- No hard cuts: alternate whip-pan (motion blur) and zoom punch-through transitions, 0.15 s each side; a white flash into the brand card.
+- Show, don't tell: particles fly TOWARD the camera (3D depth), dive into the plastic wall before the 1 cm square, microscope eyepiece for lab results with cells shrinking and dying (not X marks).
+- Particles and props draw UNDER headlines; never cover the key words.
+- Code: episodes/73-microwave-plastic/_mw2.py (camera(), transition(), frame() override after the tail, before __main__).
