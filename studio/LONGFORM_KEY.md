@@ -12,6 +12,18 @@ A topic qualifies only if ALL are true:
 7. **Not in topics.md.**
 Use the 80% rule: 4 of 5 videos on the proven format; 1 experiment.
 
+
+## 1b. What people actually click in 2026 (owner: old founder biographies are NOT interesting)
+Evidence: How Money Works outliers (3–6 M views) and "how brands make money" channels (OutlierKit, Cliptude, Nov 2026).
+- **Present tense + the viewer's wallet or job.** "WTF Is Happening To The Car Market?", "How Is Everything Outpacing Inflation At The Same Time?", "If Nobody Can Afford A Home… Who's Going To Buy Them?"
+- **A contradiction or mystery in the title.** "Why Hasn't The Economy Collapsed… Yet?", "We (Still) Don't Know How Epstein Got So Rich".
+- **The hidden profit line.** "How Costco really makes money" (membership fees vs groceries), "Why Costco sells gold bars".
+- **Cheap challenger vs giant / versus.** "How China's $15 Smartwatch Broke Garmin's $35B Empire", "How Temu Sells Things So Cheap", "How BYD Became Tesla's Biggest Rival".
+- **Corporate greed, scams explained (court-proven), consumer market failures.**
+- Mix ≈ 75 % evergreen money mechanics + 25 % riding this week's news.
+- AVOID: "the inspiring story of [old founder]", chronological biographies, companies the viewer doesn't use.
+- Topic test (add to §1): would a 25-year-old in the US say "wait, what?" and feel it touches THEIR money, job or daily life? If not, drop it.
+
 ## 2. Packaging before script (Galloway)
 - Write 30–40 title options in ~10 min; start with the most exaggerated, then pull back to what's true.
 - Proven devices: outcome reveal, superlatives (first, biggest), versus, a real number, a name plus a descriptor ("KFC's founder").
