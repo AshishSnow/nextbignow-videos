@@ -186,12 +186,31 @@ catch", "here's why"), *forced connectors* (27 % of sentences opened with But/So
     specific and isn't a yes/no question unless it carries a price) and a **SEND gate** (a "Send this to the friend who…" line in the last 3).
     `story_check` R1 now accepts the question in i1 *or* i2. Applied 26 Nov to the two queued scripts that failed it (28 Poppi, 30 Gymshark).
 
+61. **Join beats with "but" or "so", not "and then".** Trey Parker (South Park, NYU class 2011, via Cracked): "What should happen between every beat
+    that you've written, is either the word 'therefore' or 'but.'" A chain like Grillo's "Then buyers push him… Later, seven thousand stores…
+    Then King's Hawaiian buys it" is a list of dates; "But buyers push him… So he…" is a story. Turn the join into a turn or a cause ("until…",
+    "so…", "which is why…") or merge two beats; H2 still caps But/So/And openers at 20 %, so "until" / "which means" / a question often fit
+    better. `--strict` **BEATS gate**: ≥ 3 'then / next / later / soon' beat openers fails (hook i-, move m- and CTA z-lines are skipped); 2 is a note.
+    Strength: craft rule, not our data — across 21 doodle scripts the count did not track IG watch time (R&D 27 Nov 2026).
+62. **Line 1 must pass the title test, and no setup phrase anywhere.** Jenny Hoyos (~10M views per Short, Creator Science podcast, 10 Oct 2023):
+    a hook works "if it could be used as a title and thumbnail on a long form" and "needs to be very visual — you need to understand it without
+    even listening to it"; she cut "let's get started" for "so I cooked illegally". YouTube's own blog (28 Jan 2025) quotes her: "you have one
+    second to hook someone". So: i1's first sentence ≤ ~12 words (note above 14), the COVER title and line 1 say the same thing, and the frame on
+    screen in second 1 shows it with the sound off. H1 now counts setup phrases ("let's get started", "in this video", "let me tell you",
+    "story time", "let's break it down", "here's the story"…).
+63. **Stop soon after the payoff.** Hoyos: "Whatever you say you're gonna do, you end it right after you do it" — trimming one second off the end
+    took one Short from 83 % to 88 % retention (her single A/B anecdote). Our CTA is required, so keep it to exactly two short lines (send line +
+    one A-or-B question, ≤ ~7 s; `human_check` notes a longer tail) and put the callback/punchline right before it, not a recap. Her other
+    numbers, for context only: her best Shorts run "exactly 34 seconds", and she aims for "over a 100 % retention" (rewatches); Paddy Galloway's
+    5,400-Short study (Apr 2023) found < 60 % viewed-vs-swiped is "probably in trouble", 70–90 % for the best. Our 50–75 s target stays the
+    owner's call; our own data (PERFORMANCE.md) keeps pointing at ≤ 45 s for reach.
+
 ## The checker (`tools/human_check.py`)
 H1 tells ≤ 1 per 150 words · H2 openers (top ≤ 15 %, But/So/And ≤ 20 %) · H3 no skeleton > 3× · H4 sentence-length CV ≥ 0.45, no flat run of 4,
 nothing > 18 words · H5 contractions ≥ 0.9, abstract nouns ≤ 3 per 100 words, no "-ing" tails · H6 one human reaction. Thresholds are style
 heuristics, not AI detectors (GPTZero itself dropped "burstiness" as a detection signal in 2023): a script can pass and still sound stiff —
 **the read-aloud test (rule 21) is the real gate.** Wikipedia's editors stress that one tell proves nothing; clusters do.
-`--strict` adds LENGTH (≤ 90 s est., rule 53), STALL (rule 57), HOOK + SEND (rule 60, 26 Nov 2026); each prints PASS/FAIL on its own line.
+`--strict` adds LENGTH (≤ 90 s est., rule 53), STALL (rule 57), HOOK + SEND (rule 60, 26 Nov 2026), BEATS (rule 61, 27 Nov 2026); notes for the title test (62) and the CTA tail (63).
 
 ## Sources
 Wikipedia: Signs of AI writing (WikiProject AI Cleanup) · Kobak et al. 2024, arXiv 2406.07016 (excess vocabulary) · Reinhart et al., PNAS 2025
@@ -199,6 +218,11 @@ Wikipedia: Signs of AI writing (WikiProject AI Cleanup) · Kobak et al. 2024, ar
 NPR, "7 tips for writing a script" (17 Feb 2023) · UF/IFAS EDIS WC193, writing for broadcast · Jenny Hoyos via vidIQ · MrBeast production memo
 (Simon Willison excerpts, Sep 2024) · Drew & Grimes 1987, *Communication Research* 14(4) · ElevenLabs docs: numbers/symbols, pauses.
 Research run 6 Nov 2026; full links in the RND.md log line of that date.
+27 Nov 2026 (rules 61–63): Creator Science podcast, Jenny Hoyos, 10 Oct 2023 https://creatorscience.com/podcast/jenny-hoyos/ ·
+YouTube Official Blog, Shorts deep dive, 28 Jan 2025 https://blog.youtube/creator-and-artist-stories/youtube-shorts-deep-dive/ ·
+Paddy Galloway thread, 14 Apr 2023 https://threadreaderapp.com/thread/1646898356419981315.html ·
+Cracked on Parker & Stone's NYU class (2011) https://cracked.com/article_43358_trey-parker-and-matt-stones-surprise-nyu-class-contains-some-great-writing-advice.html ·
+Kallaway hooks transcript https://sozai.app/transcript/psychology-killer-hooks/ (transcript page; quotes via WebFetch summaries — re-check wording before quoting on screen).
 
 ## Learned from the owner's reference reel (15 Nov 2026 — doodle tech-news explainer he sent: "see their animation style and story writing, learn")
 Script moves that make it feel human and keep people watching:

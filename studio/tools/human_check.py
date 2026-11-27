@@ -21,6 +21,9 @@ Extra gates in --strict (printed separately, so the H-score stays /6):
                 (R&D 26 Nov 2026, lab/story/hook_form_audit.py, IG n = 70 posts 6–25 Nov: statement hooks about a known name median
                 ~1,000 views, 14 of 28 broke 1k; question hooks median ~260, 4 of 20 — both price questions among the winners.
                 Confounded with look/series — evidence, not proof. WRITING.md rule 60.) `--hook-ok` for an owner-approved exception.
+  BEATS         (R&D 27 Nov 2026, WRITING rule 61) ≥ 3 sentences open with "Then / And then / Next / Later / Soon / After that":
+                beats joined by "and then" instead of "but" / "so" (Trey Parker & Matt Stone, NYU 2011: "either the word
+                'therefore' or 'but'"). 2 = note only. Craft rule, not our data: in 21 doodle scripts the count didn't track IG watch.
   SEND          one of the last 3 lines asks for a send to a specific friend ("Send this to the friend who …") — sends per reach
                 is the top Reels signal for non-followers (ALGORITHM.md); 25 Nov audit: shares ~0 on almost every reel.
 """
@@ -37,6 +40,10 @@ AI_TELLS = [
     # house clichés (our own list: they were in every script)
     "picture this", r"here'?s the catch", r"here'?s why", r"here'?s the thing", r"let'?s dive in", "buckle up", "let that sink in", "ever wondered",
     "imagine this", "the truth is", r"but here'?s", "plot twist", "spoiler", "game changer", "unlock", "secret sauce",
+    # setup / transition phrases (R&D 27 Nov 2026, WRITING rule 62 — Hoyos, Creator Science 10 Oct 2023: say "so I cooked
+    # illegally", not "let's get started"; Kallaway: "no vague setups")
+    r"let'?s get started", "in this video", r"today,? we'?re", r"today,? i'?m", "let me tell you", "story time", "without further ado",
+    r"let'?s talk about", r"let'?s break it down", r"here'?s the story",
 ]
 EXPANDABLE = [r"\bdo not\b", r"\bdoes not\b", r"\bdid not\b", r"\bis not\b", r"\bare not\b", r"\bwas not\b", r"\bwere not\b", r"\bcannot\b",
               r"\bcan not\b", r"\bwill not\b", r"\bwould not\b", r"\bit is\b", r"\bthat is\b", r"\bthere is\b", r"\byou are\b", r"\bwe are\b",
@@ -141,6 +148,19 @@ def hook_problems(L):
     return out
 
 
+THEN_RX = re.compile(r"(and )?then\b|next\b|after that\b|later\b|soon\b")
+
+
+def then_joins(L):
+    """Sentences that join beats with 'and then' (rule 61). The i-lines (hook) and the m-lines (numbered moves) are skipped."""
+    out = []
+    for i, t in L:
+        if i[:1] in ("i", "m", "z"): continue
+        for s in sentences(t):
+            if THEN_RX.match(s.lower().lstrip('"\'')): out.append((i, s))
+    return out
+
+
 def main():
     path = sys.argv[1]; strict = "--strict" in sys.argv
     L = load(path); text = " ".join(t for _, t in L); low = text.lower()
@@ -203,13 +223,28 @@ def main():
     for h in hook: print(f"  HOOK {h}: {L[0][1]!r} — WRITING rule 60")
     tail = " ".join(t.lower() for _, t in L[-3:]); send_ok = bool(re.search(r"\bsend (this|it) to\b", tail))
     if not send_ok: print("  SEND no 'Send this to the friend who …' line in the last 3 lines — sends drive non-follower reach (ALGORITHM.md)")
-    print(f"  HOOK gate {'PASS' if not hook else 'FAIL'} · SEND gate {'PASS' if send_ok else 'FAIL'}")
+    # rule 61: but/therefore, not 'and then'
+    tj = then_joins(L); beats_fail = len(tj) >= 3
+    if tj: print(f"  {'BEATS' if beats_fail else 'note beats'}: {len(tj)} beat(s) joined by 'then/next/later/soon': {[s for _, s in tj]} — "
+                 "turn them into 'But …' / 'So …' (rule 61)")
+    # rule 62: the hook passes the title test (Hoyos: "if it could be used as a title and thumbnail on a long form")
+    h1 = sentences(L[0][1])[0] if L else ""
+    if len(words(h1)) > 14: print(f"  note title test: line 1's first sentence is {len(words(h1))} words — a hook should read as a video title (≤ ~12 words, rule 62)")
+    # rule 63: stop soon after the payoff (Hoyos: "you end it right after you do it"); our CTA is required, so keep it short
+    cta_i = next((k for k, (_, t) in enumerate(L) if re.search(r"\bsend (this|it) to\b", t.lower())), None)
+    if cta_i is not None:
+        tw = sum(len(words(t)) for _, t in L[cta_i:]); tsec = tw * 0.335 + 0.15 * (len(L) - cta_i)
+        if tsec > 7 or len(L) - cta_i > 2: print(f"  note tail: {len(L) - cta_i} CTA line(s), ~{tsec:.0f} s after the payoff — keep it to send + one A-or-B question, ≤ ~7 s (rule 63)")
+    print(f"  HOOK gate {'PASS' if not hook else 'FAIL'} · SEND gate {'PASS' if send_ok else 'FAIL'} · BEATS gate {'PASS' if not beats_fail else 'FAIL'}")
     ok = sum(G.values()); print(f"\n{ok}/{len(G)} human-voice gates passed (H1–H6) — studio/WRITING.md" + (f"; STALL gate: {len(stalls)} line(s)" if stalls else "; STALL gate PASS"))
     if stalls and strict and "--stall-ok" not in sys.argv:
         print("STALL GATE FAIL: a stat / source / date-place line in the first ~16 s (rule 57) — reorder; --stall-ok only for an owner-approved exception")
         sys.exit(1)
     if long_fail and strict and "--long-ok" not in sys.argv:
         print("LENGTH GATE FAIL: estimated > 90 s — cut lines (WRITING.md 'Length'); pass --long-ok only for an owner-approved long-form script")
+        sys.exit(1)
+    if beats_fail and strict and "--beats-ok" not in sys.argv:
+        print("BEATS GATE FAIL: 3+ beats joined by 'then' (rule 61) — make each join a 'but' or a 'so'")
         sys.exit(1)
     if (hook and "--hook-ok" not in sys.argv or not send_ok) and strict:
         print("HOOK/SEND GATE FAIL: rewrite line 1 as a flat claim about a named thing (rule 60) / end on a send line; --hook-ok only for an owner-approved exception")
