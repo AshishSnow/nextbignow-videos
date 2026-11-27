@@ -170,3 +170,9 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-26 | MONEY EXPLAINED N°04 (blue): why Macy's pays for the parade | ESSAY | IG 442618711 / YT 442618732, 18:45
 2026-11-26 | FOUNDER MINDSET N°04 (orange): Walt Disney's first company went bankrupt at 21 | ESSAY | IG 442617275 / YT 442617316, 21:52
 2026-11-26 | TRIAL (not posted): MONEY EXPLAINED N°05 Fort Knox gold booked at $42.22/oz | DOC look (documentary kinetic edit) | owner review
+2026-11-27 | MONEY EXPLAINED N°05 (blue): popcorn pays for the theater (~70% ticket to studios, ~85% snack margin) | PAPER story, Maya voice | IG 443893663 / YT 443893682, 09:12 — NOTE: popcorn was already covered 26 Oct + 21 Nov (missed the check; repeat angle)
+2026-11-27 | CASE STUDY N°06 (red): Bubble Wrap was supposed to be wallpaper (1957; IBM; CD&R deal Apr 2026) | PAPER story | IG 443917575 / YT 443917609, 12:40
+2026-11-27 | FOUNDER MINDSET N°05 (orange): a tire company invented Michelin stars (1900, <3,000 cars, 35,000 free guides) | PAPER story | IG 443931475 / YT 443931511, 15:50
+2026-11-27 | BUSINESS IDEA N°05 (green): Wrigley's gum started as a free gift (1891 soap → baking powder → gum; Mars ~$23B 2008) | PAPER story | IG 443937491 / YT 443937516, 18:45
+2026-11-27 | MIND TRICKS N°07 (purple): shopping cart + fake shoppers (Goldman 1937) | PAPER v4, ElevenLabs Marcus voice, no song | IG 443685560 / YT 443685617, 21:52
+2026-11-27 | DRAFTS (not posted, repeat topics): De Beers ring, Costco $1.50 hot dog, Pet Rock — all already in this log (Oct 25/27, Nov 15) → examples/_drafts-27nov

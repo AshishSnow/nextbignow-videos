@@ -79,3 +79,10 @@ Change for 25 Nov batch: famous brand/person named in text hook + spoken hook (I
 - Takeaway: Mind Tricks format earns ~8x the others. Keep 1 Mind Tricks daily, test a 2nd psychology-angle reel in another slot; for case studies open on the trick/number, not the person.
 - Shares/saves still ~0. Send-this endings started 26 Nov; check on 28 Nov.
 - New format on trial: DOC look (see DOC_STYLE.md), first test = Fort Knox $42.22/oz.
+
+## 27 Nov 2026 batch notes
+- New default look: PAPER story (studio/template/paper_story.py, data-driven scenes; paper_mix.py SFX from the spec; paper_sheet.py stills with safe-zone guides). One paper colour per series.
+- Voice: Maya1 calm-narrator description renders ~150–170 wpm, UTMOS ~4.5. Owner-picked ElevenLabs takes can be dropped in with tools/ext_vo.py (our workspace can't download from ElevenLabs).
+- Never run Maya TTS while a render is running: llama.cpp + 3 render procs on 2 CPUs/8 GB caused one OOM-killed TTS and one dropped render chunk. Check final duration == voice duration before hosting.
+- Before writing, grep topics.md for the topic (popcorn/De Beers/Costco/Pet Rock were repeats — caught 3 of 4).
+- Images: Openverse API (cc0/pdm, source=wikimedia) + direct 1280px thumbnails works; Commons API is rate-limited. Render generic props (bubble film, a plain tin, a phone-book page) when no CC0 photo exists. No owner song in posted reels (copyright).
