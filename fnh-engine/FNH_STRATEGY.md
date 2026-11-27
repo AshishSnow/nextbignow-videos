@@ -73,3 +73,16 @@ Body: but/therefore, never "and then"; the tip must call back to a detail of the
 - Length discipline: ~75 words = 30 s, 150 words = 60 s; cut every word that isn't needed; too much content = split into two reels.
 - Funnel mix: QUIPS (myth/stat, broad, for shares/follows) + TIPS (practical how-to, for saves) + CLIPS (personal/behind-the-scenes, for comments). We only made quips so far.
 - Natural Hinglish over shuddh Hindi; short punchy sentences.
+
+## Learned from ghost-editor (MIT) + OpenMontage — 27 Nov 2026
+- Caption News grammar fits our petrol style: captions slam in 2-3 chunks on the word onsets (scale 1.3 -> 1 in 0.13 s);
+  ONE keyword per caption on a coloured block that wipes left->right in 0.12 s; first caption lands by frame 4 (0.13 s).
+- Title sting -> channel bug: the title lands big once, then shrinks to a small corner bug for the rest of the reel.
+- Evidence beat: when a source is named, show the real document tilted on a dark desk, a highlighter sweeps the words AS
+  they are spoken, plus a 'SOURCE: ...' tag. No number on screen without its source.
+- Colour has meaning: accent = the point, red = the bad thing, white = everything else, grey = labels.
+- Sound only where something enters: hit on frame 4, a pop under every keyword wipe, paper/whoosh into cards, marker sound
+  under each highlighter sweep, one soft boom under the verdict. CC0 kit copied to studio/sfxlib/ghost/.
+- Short-form data (OpenMontage): visual change every 1-3 s; 16-30 s ~84 % completion vs 31-60 s ~68 %; 85 % watch muted ->
+  every word must read without sound; universal safe zone 900x1400 centred; 1-2 font families max.
+- Workflow: preview + approval sheet (frame at every beat) before the final render; log every owner correction as a taste rule.
