@@ -1,3 +1,15 @@
+# READ FIRST — owner rules, 27 Nov 2026 (override anything below)
+1. **Packaging before script.** Pick the idea, then the title and the cover line (frame-1 text) from what people react to instantly. The cover line IS the hook. Write PACKAGING.md (template: PACKAGING_TEMPLATE.md) before any script; the script is written to deliver the package.
+2. **Reward in 3–6 s.** Don't only tease. Say the shocking fact itself by second 3–6, THEN open a gap (a question or a fear) that the rest pays off. (Miss: FNH sponge script put "as many bacteria as poop" at ~8 s.)
+3. **One topic, deep.** Before writing, study ~10 videos on the SAME topic (not 10 topics): how each opens, turns and closes. Build our own master script from the best moves (never copy lines, never mention other creators), and tell the body as a short story.
+4. **Mix three reel types** across the week, not only quips:
+   - quips: myths and shocking stats → shares and follows (what we've made so far)
+   - tips: practical how-tos people want to keep → saves
+   - clips: personal or behind-the-scenes (how a reel was researched or made, what we got wrong) → comments
+5. **Word discipline.** ~75 words = 30 s, ~150 words = 60 s. Cut every word that doesn't earn its place; if it's still long, split it into two reels. Short, punchy lines. Hindi channels: natural Hinglish. OMB: plain American English.
+6. **Gate:** `python3 tools/script_check.py <project>` must print PASS before TTS (it checks PACKAGING.md exists, the word budget, and that the reward lands by ~6 s).
+- Self-check on 27 Nov batch: scripts ran 100–120 words (43–46 s) and the first fact sometimes landed after 6 s. Too long → next batch targets 75–80 words for quips/tips.
+
 # OMB Short-Form Playbook (Lego-brick method, adopted 24 Nov 2026)
 
 Content = data + psychology. Every reel is a stack of 11 bricks. Keep most bricks that already work, change 1–3 on purpose, and write down which brick was tested.
