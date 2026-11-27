@@ -22,6 +22,7 @@ from paper_kit import *
 YEL = (255, 214, 92); RED_ = (232, 70, 60); INK = (30, 16, 44); PAPER_C = (240, 232, 216)
 SERIES_PAL = {   # paper, dark paper, tag accent, hero accent
     'MIND TRICKS': ((88, 40, 146), (40, 18, 70), (150, 84, 230), YEL),
+    'BUSINESS TRICKS': ((92, 38, 150), (34, 14, 64), (160, 92, 240), YEL),
     'CASE STUDY': ((168, 34, 42), (62, 12, 18), (236, 72, 64), YEL),
     'FOUNDER MINDSET': ((206, 98, 30), (78, 32, 8), (255, 140, 50), (255, 236, 190)),
     'BUSINESS IDEA': ((34, 110, 68), (12, 44, 26), (80, 196, 124), YEL),
@@ -65,7 +66,9 @@ def D_text(txt, size=200, col=INK, font='cond', sub=None, subcol=(120, 90, 150))
         f = cond(size) if font == 'cond' else serif(size); w = f.measureText(txt)
         c.drawString(txt, -w / 2, size * 0.34 - (24 if sub else 0), f, P(col))
         if sub:
-            g = capf(30); c.drawString(sub, -g.measureText(sub) / 2, size * 0.34 + 34, g, P(subcol))
+            gs = 30
+            while gs > 16 and capf(gs).measureText(sub) > max(440, w * 1.05): gs -= 2
+            g = capf(gs); c.drawString(sub, -g.measureText(sub) / 2, size * 0.34 + 34, g, P(subcol))
     return d
 
 
@@ -141,7 +144,7 @@ class Story:
             if t >= ta - 0.08: boil_text(c, txt, x, y, size, t, ta - 0.08, col or self.HERO, scribble=0.14)
         if 'cap' in sc:
             y, size, col, until = sc['cap']; te = self.res(until, t0) if until is not None else t1
-            if t < te: scap(c, self.T, t, t0, te - 0.02, y, size, col or CREAM)
+            if t < te: scap(c, self.T, t, t0, te - 0.02, y, size, col or CREAM, maxw=getattr(self, 'CAPW', 860))
 
     def frame(self, t):
         s = skia.Surface(W, H); c = s.getCanvas()

@@ -40,6 +40,7 @@ def draw_cut(c, pair, x, y, h, k, t, rot=0.0):
 
 
 class WideStory(Story):
+    CAPW = 1500
     def __init__(self, HERE, series, num, scenes_fn, assets, cuts=None, **kw):
         A = os.path.join(HERE, 'assets'); self.CUT = {k: load_cut(os.path.join(A, v[0]), v[1] if len(v) > 1 else 'sepia') for k, v in (cuts or {}).items()}
         super().__init__(HERE, series, num, scenes_fn, assets, **kw)
