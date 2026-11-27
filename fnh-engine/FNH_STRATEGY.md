@@ -86,3 +86,18 @@ Body: but/therefore, never "and then"; the tip must call back to a detail of the
 - Short-form data (OpenMontage): visual change every 1-3 s; 16-30 s ~84 % completion vs 31-60 s ~68 %; 85 % watch muted ->
   every word must read without sound; universal safe zone 900x1400 centred; 1-2 font families max.
 - Workflow: preview + approval sheet (frame at every beat) before the final render; log every owner correction as a taste rule.
+
+## Human-sounding scripts and captions (from humanizer, MIT) + voice tooling (Handy) — 27 Nov 2026
+Before sending any script, caption or description, strip AI tells:
+- "Not X but Y" contrasts: keep one ONLY when X is a belief people really hold (the myth we bust: "आग फ़ोन से नहीं…
+  कपड़ों से"). Never invent a fake X just for drama.
+- No one-line closers that repeat the point, no staged candour ("सच कहूँ…", "Honestly?", "Here's the thing"), no
+  run-ups ("चलो जानते हैं", "आज हम बात करेंगे"): start with the fact.
+- No forced threes, no dashes (— –) in captions/descriptions: use comma, full stop or colon. Vary line openings.
+- No inflated words (crucial, game-changer, shocking truth, "बहुत बड़ा राज़") or borrowed authority without a named source.
+- Every line must add a new fact; if it only restates, cut it.
+- Match the owner's own writing when he gives a sample.
+Voice/timing tools: Handy = offline dictation (Whisper / Parakeet) with Silero VAD. Use Silero VAD to trim dead air
+between voice lines (cap gaps ~0.45 s); keep Whisper for Hindi word timings (Parakeet is English/European only).
+The owner can dictate his own read with Handy-style tools and we run it through the ElevenLabs Voice Changer for the
+most human take.
