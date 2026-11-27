@@ -27,6 +27,7 @@ SERIES_PAL = {   # paper, dark paper, tag accent, hero accent
     'FOUNDER MINDSET': ((206, 98, 30), (78, 32, 8), (255, 140, 50), (255, 236, 190)),
     'BUSINESS IDEA': ((34, 110, 68), (12, 44, 26), (80, 196, 124), YEL),
     'MONEY EXPLAINED': ((30, 72, 156), (12, 26, 64), (84, 144, 244), YEL),
+    'MONEY TIPS': ((16, 120, 112), (6, 46, 44), (60, 200, 180), YEL),
 }
 
 
@@ -158,7 +159,7 @@ class Story:
         else: self.scene(c, t, i)
         c.restore(); c.restore()
         if i == len(self.SC) - 1:   # brand end card
-            k = pr(t, self.ph('send this') + 1.2, 0.4)
+            k = pr(t, self.starts[i] + 1.2, 0.4)
             if k > 0:
                 wordmark(c, 540, 1365, 400, i not in self.LIGHT, k)
                 g = capf(24); s_ = 'FOLLOW FOR DAILY BUSINESS BREAKDOWNS'
