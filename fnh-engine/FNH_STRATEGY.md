@@ -124,3 +124,18 @@ Then the humanizer pass (no fake contrasts, no staged candour, no dashes, no hyp
 - Particles and props draw UNDER headlines; never cover the key words.
 - Code: episodes/73-microwave-plastic/_mw2.py (camera(), transition(), frame() override after the tail, before __main__).
 - v7 real-image rule: Pexels/Pixabay/Unsplash are blocked here; Wikimedia Commons works (wmget.py, 20 s spacing on 429). Use a real photo plate for the hook (full-bleed blurred copy + purple grade behind a framed sharp copy), rembg cutouts of real objects, real microscope images for lab results (HEK 293 = kidney cells). Glass cuts out badly with rembg, so use it as a framed photo card.
+
+## Script lessons from reference reel 1000216625 (dandruff, 60 s, 28 Nov 2026)
+Script map: 0-4 s "अभी सिर में खुजली करो, नाखूनों में फँसा सफ़ेद डैंड्रफ देखो" (do-it-now hook) -> 4-6 s disgust threat ("अगली बार सौ बार सोचना")
+-> 6-12 s myth flip ("सूखी चमड़ी नहीं, करोड़ों फंगस का कचरा") -> 12-16 s open loop ("महँगे शैम्पू के बाद भी जाता क्यों नहीं?")
+-> 16-18 s blame twist ("क्योंकि तुम खुद इन्हें दावत दे रहे हो") -> 18-45 s named villain with a personality (Malassezia: "आज तो फ्री पार्टी")
+explained as a cause chain (oil -> fungus eats -> acid -> irritation -> skin made too fast -> flakes) -> 45-50 s callback punchline
+("तेल लगाकर भगा नहीं रहे, दावत दे रहे हो") -> 50-60 s part-2 cliffhanger follow + identity share ("उस दोस्त को भेजो जो सिर को तेल की टंकी बना लेता है") + comment question.
+Rules taken:
+1. Participation hook: make the viewer DO something with their body or the object in hand right now (check, touch, look).
+2. Myth flip within 12 s; then blame the viewer's own everyday habit (the cultural one: champi, tiffin, chai).
+3. Give the villain a name and a voice; one funny line from it. Explain HOW as a 4-6 step cause chain, one visual per link.
+4. One sticky word introduced early and paid back in the punchline (दावत).
+5. CTA = withhold the fix for part 2 ("सॉल्यूशन अगली वीडियो में") + identity-tagged share + yes/no comment question.
+6. Tone: तुम, slang (दबा के, बेटा), short lines; zero report language (no university names in the first 15 s).
+Visual: one recurring character in a home set, cute personified villains in a "micro world" set, metaphor machines (body = factory).
