@@ -35,3 +35,21 @@
 - Script: claim/question → familiar comparison → irony thesis → picture sentences → turn every 10-15 s → mirrored ending aimed at the viewer.
 - Visuals: one colour world with an arc, a new picture per phrase, big layered sets with depth (not icons), hero words only on key nouns, silence screens at the turns.
 - Voice: the most natural voice available (Chatterbox clone was the approved one; Kokoro is the fallback).
+
+## 5. Owner's lessons, 27 Nov 2026 (these override the order of work above)
+1. **Packaging before script.** First fix the idea, the title and the cover line, based on what people instinctively react to. The cover text IS the hook and the first spoken line. Only then write the script.
+2. **Reward in 3-6 s.** Hand over the shocking fact early ("free money made people work MORE" + the number by ~4 s), THEN open a gap with a question or fear. Teasing alone is too slow (the shock at ~8 s was late).
+3. **One topic, deep.** Study ~10 videos on ONE topic (how big creators open, turn and close it), build our master script from that, and tell the body as a short story.
+4. **Mix 3 reel types:**
+   - Quips: myths and shocking stats, for shares and follows (all we've made so far).
+   - Tips: practical how-tos, for saves.
+   - Clips: personal or behind-the-scenes, for comments.
+5. **Word discipline:** ~75 words = 30 s, ~150 words = 60 s. Cut every word that isn't needed; if it's still long, split it into two reels. Short, punchy lines (natural Hinglish for Hindi scripts).
+
+### Pre-production checklist (every reel)
+- [ ] Type: quip / tip / clip (rotate)
+- [ ] Idea + title + cover line written FIRST; cover line = first spoken line
+- [ ] Shocking fact/number lands by second 3-6; question or fear opens the gap right after
+- [ ] Research ~10 creator videos on this ONE topic: opens, turns, closes
+- [ ] Word count: <=150 (target 75-120); split if longer
+- [ ] Body = one short story; ending pays the gap off
