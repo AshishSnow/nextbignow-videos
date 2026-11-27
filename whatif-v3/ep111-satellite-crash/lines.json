@@ -1,0 +1,100 @@
+[
+ {
+  "i": 0,
+  "tag": "hype",
+  "text": "What would happen if two satellites crashed... right over your head?",
+  "start": 0.0,
+  "dur": 3.322
+ },
+ {
+  "i": 1,
+  "tag": "punchline",
+  "text": "Not a fender bender. A hit ten times faster than a bullet.",
+  "start": 3.522,
+  "dur": 3.485
+ },
+ {
+  "i": 2,
+  "tag": "story",
+  "text": "It already happened. February two thousand nine, almost five hundred miles over Siberia.",
+  "start": 7.328,
+  "dur": 5.65
+ },
+ {
+  "i": 3,
+  "tag": "story",
+  "text": "A working American satellite... and a dead Russian one that nobody was steering.",
+  "start": 13.138,
+  "dur": 4.514
+ },
+ {
+  "i": 4,
+  "tag": "reveal",
+  "text": "In a split second, both were gone. Over two thousand pieces of shrapnel.",
+  "start": 18.012,
+  "dur": 4.334
+ },
+ {
+  "i": 5,
+  "tag": "tease",
+  "text": "And fifteen years later... over a thousand of those pieces are still up there.",
+  "start": 22.765,
+  "dur": 4.166
+ },
+ {
+  "i": 6,
+  "tag": "story",
+  "text": "In twenty twelve, astronauts on the space station had to hide in their escape capsules from one of them.",
+  "start": 27.161,
+  "dur": 5.308
+ },
+ {
+  "i": 7,
+  "tag": "excited",
+  "text": "But that was one crash.",
+  "start": 32.909,
+  "dur": 1.479
+ },
+ {
+  "i": 8,
+  "tag": "story",
+  "text": "Today, there are over sixteen thousand working satellites. And half of everything we track up there is dead junk. Like a highway where half the cars have no driver.",
+  "start": 34.648,
+  "dur": 9.911
+ },
+ {
+  "i": 9,
+  "tag": "story",
+  "text": "Starlink alone dodges a crash almost a thousand times a day.",
+  "start": 44.76,
+  "dur": 4.139
+ },
+ {
+  "i": 10,
+  "tag": "story",
+  "text": "Scientists even built a clock for it. If every satellite lost control, say in a huge solar storm, the first crash would come in under three days. In twenty eighteen, it was four months.",
+  "start": 49.139,
+  "dur": 11.693
+ },
+ {
+  "i": 11,
+  "tag": "tease",
+  "text": "And every crash makes more junk... that causes more crashes.",
+  "start": 61.152,
+  "dur": 3.848
+ },
+ {
+  "i": 12,
+  "tag": "punchline",
+  "text": "Right now, satellites are dodging a crash every ninety seconds...",
+  "start": 65.47,
+  "dur": 3.896
+ },
+ {
+  "i": 13,
+  "tag": "punchline",
+  "text": "and they have to win every single time.",
+  "start": 69.966,
+  "dur": 2.958
+ }
+]

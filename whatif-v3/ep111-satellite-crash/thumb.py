@@ -1,0 +1,7 @@
+import sys; sys.argv = ['x']; exec(open('/home/claude/sat/scenes.py').read().split("if __name__")[0])
+T = 1.0; img = space_bg(T); earth_np(img, CX, 1700, 820, T, light=(.3, -.8, .5))
+add_layer(img, lambda c: (flash(c, CX, 1000, T, T - .3, 1.3), debris(c, T, T - .5, CX, 1000, n=420, spread=900, seed=3), iridium(c, 300, 1150, .5, T, rot=.4), cosmos(c, 800, 1180, .45, T, rot=.8)))
+fr = post(img, T, seed=1)
+tape(fr, 'TRUE STORY, 2009', CX, 330, 1.0, col=RED, size=50, font=LUCKY, rot=-3, tcol='FFFFFF')
+big_word(fr, 'TWO SATELLITES', 520, 120, 'FFFFFF', -3); big_word(fr, 'CRASHED.', 680, 160, YEL, -3)
+logo(fr); Image.fromarray(fr).save('/home/claude/sat/out/thumb_gta.jpg', quality=95)
