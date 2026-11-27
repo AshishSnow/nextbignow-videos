@@ -1303,3 +1303,30 @@ def clock_wipe(prev, cur, p, cx=540, cy=960, feather=3.0, hand=True, r_face=64, 
         cv2.line(out, (int(cx), int(cy)), (int(cx + r_face * 0.5 * math.sin(ah)), int(cy - r_face * 0.5 * math.cos(ah))), C(col), 8, cv2.LINE_AA)
         cv2.circle(out, (int(cx), int(cy)), 8, C(col), -1, cv2.LINE_AA)
     return out
+
+
+# ================= MATCH ON ACTION (ep 71 craft skill: 'cutting on action') =================
+# Editing rule: cut in the MIDDLE of a movement, about a third of the way in, and let the same movement finish in the next framing (wide -> close).
+# The eye follows the motion across the cut, so the cut itself disappears. Keys: ONE action clock shared by both shots (action_k), the same direction
+# and speed on both sides, the cut a third into the move (action_cut), a hard cut (no dissolve) with a 1-2 frame directional motion smear along the
+# move (action_smear), and the move's sound running straight across the seam (one whoosh / gulp spanning both shots, see ep 71 mix.py).
+def action_k(t, t0, dur, ease=True):
+    """progress 0..1 of ONE action shared by the shots on both sides of a cut (call it with the same t0/dur in both)."""
+    k = clamp((t - t0) / max(1e-3, dur))
+    return eio(k) if ease else k
+
+
+def action_cut(t0, dur, frac=1 / 3):
+    """the cut time for a movement that starts at t0 and lasts dur: about a third of the way in (enough motion before AND after)."""
+    return t0 + dur * frac
+
+
+def action_smear(f, vec, amt=1.0):
+    """directional motion blur along vec=(dx, dy) px (the movement's direction and travel per frame), scaled by amt 0..1."""
+    dx, dy = vec[0] * amt, vec[1] * amt; L = int(max(abs(dx), abs(dy)))
+    if L < 2: return f
+    k = np.zeros((2 * L + 1, 2 * L + 1), np.float32)
+    for i in range(L + 1):
+        q = i / L; cv2.circle(k, (int(L + dx * q * 0.5 - dx * 0.25), int(L + dy * q * 0.5 - dy * 0.25)), 0, 1.0, -1)
+    k /= max(1e-6, k.sum())
+    return cv2.filter2D(f, -1, k, borderType=cv2.BORDER_REFLECT)
