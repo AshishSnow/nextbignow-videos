@@ -123,3 +123,4 @@ Then the humanizer pass (no fake contrasts, no staged candour, no dashes, no hyp
 - Show, don't tell: particles fly TOWARD the camera (3D depth), dive into the plastic wall before the 1 cm square, microscope eyepiece for lab results with cells shrinking and dying (not X marks).
 - Particles and props draw UNDER headlines; never cover the key words.
 - Code: episodes/73-microwave-plastic/_mw2.py (camera(), transition(), frame() override after the tail, before __main__).
+- v7 real-image rule: Pexels/Pixabay/Unsplash are blocked here; Wikimedia Commons works (wmget.py, 20 s spacing on 429). Use a real photo plate for the hook (full-bleed blurred copy + purple grade behind a framed sharp copy), rembg cutouts of real objects, real microscope images for lab results (HEK 293 = kidney cells). Glass cuts out badly with rembg, so use it as a framed photo card.
