@@ -12,7 +12,8 @@ pk = os.path.join(d, 'PACKAGING.md'); ok = True
 if not os.path.exists(pk): print('FAIL: write PACKAGING.md first (type, title, cover line, reward line, gap question)'); ok = False
 else:
     s = open(pk).read(); m = re.search(r'Reward:\s*(.+)', s); typ = re.search(r'Type:\s*(\w+)', s)
-    limit = 155 if (typ and typ.group(1).lower() == 'story') else 80
+    t_ = typ.group(1).lower() if typ else 'quip'
+    limit = {'story': 155, 'long': 1000}.get(t_, 80)   # long = 5-6 min YouTube video (~150 wpm)
     if n > limit: print(f'FAIL: {n} words > {limit} — cut filler or split into two reels'); ok = False
     if m:
         key = m.group(1).strip().split()[:3]; low = [w.lower().strip('.,?!') for w in words]
