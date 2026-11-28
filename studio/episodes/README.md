@@ -6,7 +6,8 @@ before anyone renders (STORY.md §8). The R&D task keeps **≥ 3 REVIEWED** epis
 Folder per episode: `queue/NN-slug/` with `vo_lines.py` (SERIES / PART / EP + LINES), `shots.md` (storyboard: one row per line)
 and a `SOURCES-*.md` (every number and quote with link + date). After posting: move the folder to `done/` and fill the row below.
 
-Pre-flight: `python3 studio/tools/board_check.py queue/<NN-slug>` (R&D Tooling run, 31 Oct) — rows ↔ lines, missing template assets
+Doodle pre-flight (28 Nov): `python3 studio/tools/kit_check.py queue/<NN-slug>` — every asset the shots.md names exists in doodlekit.py (exit 1 + the missing names otherwise).
+Whiteboard pre-flight: `python3 studio/tools/board_check.py queue/<NN-slug>` (R&D Tooling run, 31 Oct) — rows ↔ lines, missing template assets
 (= the build brief), caption sizes, static rows, signature beats; `--all queue` for the whole room; `--strict` once the assets are written.
 Writers: keep `say()` captions ≤ ~22 characters (or two `say()` lines), name sets by their registered name (`bedroom90s`, not "bedroom"),
 and put every new asset the header lists into at least one row.

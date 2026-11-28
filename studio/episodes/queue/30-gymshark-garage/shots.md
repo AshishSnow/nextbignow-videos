@@ -5,6 +5,7 @@ Recurring plain "YOU" stick doodle from i2. One set per section that evolves; so
 NEW kit assets (no object character this time — cut for length): `sewing_machine()`, `screen_printer()` (frame + squeegee),
 `garage()` (roll-up door, bulb, shelves), `pizza_box()`, `expo_stand()` (booth + banner "FITNESS EXPO"). Existing: char, stamp, tape,
 calendar, laptop, envelope, phone, crates, coin_rain, building, checklist, stopwatch.
+KIT READY (28 Nov R&D run, `python3 studio/tools/kit_check.py` → 0 missing; lab frame `lab/visuals/kit_28nov/sheet_small.jpg`): `sewing_machine(t, run)`; `screen_printer(pull 0..1, word)`; `garage(door 0..1, bulb, night)`; `pizza_box(open_)`; `expo_stand(banner)`; `crates(n, label)`; `stopwatch(frac, word)`.
 
 | Line | Set (evolves) | Props pop in | Tape / stamp | Red marker | SFX |
 |---|---|---|---|---|---|

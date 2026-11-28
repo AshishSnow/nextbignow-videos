@@ -12,6 +12,7 @@ NEW kit assets: `_sock` character (plain striped crew sock, dot eyes, a little a
 (cardboard box "DONATE · 1 FOR 1"), `cockroach_doodle()` (cartoon bug, harmless), `storefront_plain()` (can reuse `store`), `census_pie()`
 (pie 18 % online / 82 % not), `popup_table()` (folding table + tent), `tm_seal()` ("™?" magnifier). Existing: char, stamp, tape, store,
 money_stack, checklist, clipboard, bars, register, calendar, stall.
+KIT READY (28 Nov R&D run, `python3 studio/tools/kit_check.py` → 0 missing; lab frame `lab/visuals/kit_28nov/sheet_small.jpg`): `_sock` → `char(c, "sock", …)`; `shark_chair(mark='x'|'tick', tip 0..1)`; `shelter_list(hl)`; `donate_box(socks)`; `popup_table(sign)`; `tm_seal()` (+ `magnifier()`); cockroach = existing `cockroach()`, census pie = existing `pie()`.
 
 | Line | Set (evolves) | Props pop in | Tape / stamp | Red marker | SFX |
 |---|---|---|---|---|---|

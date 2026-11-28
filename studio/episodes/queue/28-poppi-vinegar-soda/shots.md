@@ -5,6 +5,7 @@ Recurring plain "YOU" stick doodle (tape "YOU") from i2. One set per section tha
 NEW kit assets: `_sodacan` character (plain tall can with a face, stripes, tape label — NO Poppi/PepsiCo can art or colours), `vinegar_bottle()`,
 `market_stall()` (awning + crate + chalk sign), `shark_fin()` (a fin in a TV frame — no show logo), `tiktok_phone()` = existing `phone` + play icon + view counter.
 Existing: char, stamp, tape, calendar, building, store, newspaper, coin_rain, chart arrow, gavel (or draw one), checklist.
+KIT READY (28 Nov R&D run, `python3 studio/tools/kit_check.py` → 0 missing; lab frame `lab/visuals/kit_28nov/sheet_small.jpg`): `_sodacan` → `char(c, "sodacan", …, label=, col=, fizz=)`; `vinegar_bottle()`; `market_stall(…, board=)`; `shark_fin(…, tv=True)`; tiktok phone = existing `phone_video(views=)`.
 
 | Line | Set (evolves) | Props pop in | Tape / stamp | Red marker | SFX |
 |---|---|---|---|---|---|

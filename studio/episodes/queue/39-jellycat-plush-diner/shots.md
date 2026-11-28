@@ -12,6 +12,7 @@ NEW kit assets: `_fries` character (generic paper cone of plush fries, felt-text
 `fryer()` from 37 if built), `chip_paper()` (newspaper cone wrap), `checkin_desk()` (plain desk + "GATE 1" sign + toy suitcase),
 `toy_shelf()` (3-shelf unit of plush_blobs), `lab_flask()` (CPSC test flask + a "CERTIFICATE" paper), `market_stall()` (awning stall).
 Existing: char, stamp, tape, store, building, money_stack, checklist, clipboard, bars, register, calendar, stall, receipt.
+KIT READY (28 Nov R&D run, `python3 studio/tools/kit_check.py` → 0 missing; lab frame `lab/visuals/kit_28nov/sheet_small.jpg`): `_fries` → `char(c, "fries", …)`; `plush_blob(variant 0–3, col)`; `cloche_plate(lift, price)`; `chip_paper()`; `checkin_desk(sign, kg)` + `suitcase()`; `toy_shelf(fill)`; `lab_flask(cert)`; `market_stall()`; receipt = `receipt_printer(feed, lines)` (the d1 receipt → bar-chart moment); fryer = existing `fryer()`.
 
 | Line | Set (evolves) | Props pop in | Tape / stamp | Red marker | SFX |
 |---|---|---|---|---|---|

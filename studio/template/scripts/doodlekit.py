@@ -355,7 +355,7 @@ def char(c, kind, x, y, s=1.0, t=0.0, talk=0.0, look=(0, 0), mood="neutral", arm
     bob = (abs(math.sin(t * 12)) * 10 if walk else math.sin(t * 2.6 + seed) * 4) * s
     c.save(); c.translate(x, y); c.rotate(rot); c.translate(-x, -y)
     hshadow(c, x, y + 4, 230 * s * kw.get("shadow_w", 1.0), seed)
-    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie, "candle": _candle, "tender": _tender, "pickle": _pickle}[kind]
+    fn = {"hotdog": _hotdog, "soda": _soda, "tag": _tag, "card": _card, "bill": _bill, "cart": _cart_char, "box": _box, "mattress": _mattress, "fax": _fax, "scissors": _scissors, "tub": _tub, "pbar": _pbar, "choc": _choc, "pista": _pista, "razor": _razor, "spray": _spray, "cat": _cat, "tallcan": _tallcan, "chunky": _chunkyshoe, "sauce": _sauce, "hoodie": _hoodie, "candle": _candle, "tender": _tender, "pickle": _pickle, "sodacan": _sodacan, "fries": _fries, "sock": _sock}[kind]
     fn(c, x, y - bob, s, t, talk, look, mood, arms, walk, blink, seed, **kw)
     c.restore()
 
@@ -2427,4 +2427,479 @@ def state_card(c, x, y, s=1.0, seed=0, k=1.0, name="TEXAS", ok=True, note=None, 
             wline(c, [(-80, -40), (80, 100)], seed + 1, 18, RED)
             if mark > 0.5: wline(c, [(80, -40), (-80, 100)], seed + 2, 18, RED)
     if note: text(c, note, 0, 160, 24, INK, BLK_F, maxw=370)
+    c.restore()
+
+
+# ------------------------------------------------------------------ queue kit, 28 Nov 2026 R&D run: the NEW assets the four REVIEWED doodle
+# Shorts list in their shots.md (28 Poppi, 30 Gymshark, 39 Jellycat, 40 Bombas). All generic, our own shapes — no can art, show set, toy
+# character, sock logo or trade dress. Convention: (x, y) = bottom centre (characters: feet), s = scale, k = pop scale (0 = hidden).
+FIZZ = (255, 120, 150); AMBER = (214, 150, 60); FELT = (246, 226, 196); CONE = (226, 60, 56); SOCKG = (236, 236, 230)
+
+
+def _sodacan(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, label="SODA", col=FIZZ, band=YEL, fizz=1.0, **kw):
+    """plain 12-oz soda can character: wavy band, tape label, fizz bubbles rising from the tab (fizz 0..1). Not any real can's art."""
+    leg = 80 * s; cb = y - leg; ct = cb - 320 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 38)
+    body = wrrect(x - 120 * s, ct, x + 120 * s, cb, 34 * s, seed, 2.0); ink(c, body, col, 9 * s)
+    c.save(); c.clipPath(body, doAntiAlias=True)
+    wv = [(x - 130 * s + i * 26 * s, ct + 210 * s + math.sin(i * 1.1 + seed) * 14 * s) for i in range(11)]
+    band_p = wpoly(wv + [(x + 130 * s, cb + 10 * s), (x - 130 * s, cb + 10 * s)], seed + 3, 1.4, True, 40); c.drawPath(band_p, P(band))
+    c.drawRect(skia.Rect.MakeLTRB(x - 130 * s, ct, x - 78 * s, cb), P(WHITE, 0.28)); c.restore(); ink(c, body, None, 9 * s)
+    ink(c, wrrect(x - 104 * s, ct - 26 * s, x + 104 * s, ct + 10 * s, 14 * s, seed + 1, 1.2), (206, 210, 218), 7 * s)
+    ink(c, wellipse(x + 20 * s, ct - 10 * s, 22 * s, 8 * s, seed + 2, 0.8), None, 5 * s)       # tab
+    if label: tape(c, label, x, cb - 64 * s, 30 * s, -4, 1.0, WHITE, INK, seed + 4)
+    for j in range(int(6 * fizz)):                                                             # bubbles
+        u = (t * 0.9 + h01(j, seed)) % 1.0; bx = x + 20 * s + (h01(j + 9, seed) - 0.5) * 90 * s + math.sin(t * 5 + j) * 8 * s
+        ink(c, wellipse(bx, ct - 30 * s - u * 170 * s, (7 + 6 * h01(j, seed + 2)) * s, (7 + 6 * h01(j, seed + 2)) * s, seed + j, 0.6), WHITE, 4 * s, a=1 - u * 0.7)
+    _arms(c, x - 118 * s, x + 118 * s, ct + 170 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 86 * s, s, look, blink, 42, 26, mood, seed + 9)
+    mouth(c, x, ct + 150 * s, s * 0.8, talk, mood, seed + 5)
+    if kw.get("cheeks", True): c.drawCircle(x - 74 * s, ct + 136 * s, 13 * s, P(PNK, 0.6)); c.drawCircle(x + 74 * s, ct + 136 * s, 13 * s, P(PNK, 0.6))
+
+
+def vinegar_bottle(c, x, y, s=1.0, seed=0, k=1.0, label="VINEGAR", mother=True, rot=0.0):
+    """amber glass vinegar bottle with a cork, paper label and a cloudy 'mother' wisp inside. rot tilts it (pouring)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    bot = wpoly([(-80, 0), (80, 0), (84, -230), (40, -300), (30, -380), (-30, -380), (-40, -300), (-84, -230)], seed, 1.4, True, 30)
+    ink(c, bot, AMBER, 8)
+    c.save(); c.clipPath(bot, doAntiAlias=True)
+    c.drawRect(skia.Rect.MakeLTRB(-90, -200, 90, 10), P(shade(AMBER, 0.82)))
+    if mother:
+        for j in range(3): wline(c, [(-50 + j * 30, -90 - j * 12), (-20 + j * 30, -120 - j * 10), (10 + j * 30, -96 - j * 14)], seed + 6 + j, 6, (250, 236, 200), 1.6, 0.8)
+    c.drawRect(skia.Rect.MakeLTRB(-70, -380, -48, -20), P(WHITE, 0.3)); c.restore(); ink(c, bot, None, 8)
+    ink(c, wrrect(-28, -420, 28, -372, 8, seed + 1, 1.0), (196, 150, 100), 7)                  # cork
+    ink(c, wrrect(-72, -200, 72, -110, 8, seed + 2, 1.0), CREAM, 6)
+    text(c, label, 0, -144, 28, INK, BLK_F, maxw=130)
+    c.restore()
+
+
+def market_stall(c, x, y, s=1.0, seed=0, k=1.0, sign="FARMERS MARKET", awn=RED, t=0.0, crate=True, board=None):
+    """farmers-market stall: striped awning on two poles (flaps in the wind), plank table, wooden crate, chalk A-board (board text)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for px in (-300, 300): wline(c, [(px, 0), (px, -560)], seed + px, 10)
+    ink(c, wrrect(-340, -260, 340, -220, 8, seed, 1.4), (196, 140, 84), 8)                       # table top
+    ink(c, wrrect(-320, -220, 320, -40, 6, seed + 1, 1.4), (240, 232, 214), 7)                  # cloth
+    for j in range(6): wline(c, [(-320 + j * 128, -220), (-320 + j * 128 + 20, -40)], seed + 20 + j, 3, GREY)
+    pts = [(-360, -560), (360, -560)] + [(360 - i * 60, -500 + (12 if i % 2 else 0) + math.sin(t * 6 + i) * 4) for i in range(13)]
+    aw = wpoly(pts, seed + 2, 1.4, True, 30); ink(c, aw, WHITE, 8)
+    c.save(); c.clipPath(aw, doAntiAlias=True)
+    for j in range(0, 12, 2): c.drawRect(skia.Rect.MakeLTRB(-360 + j * 60, -600, -300 + j * 60, -460), P(awn))
+    c.restore(); ink(c, aw, None, 8)
+    if sign:
+        ink(c, wrrect(-230, -680, 230, -590, 10, seed + 3, 1.2), CREAM, 7); text(c, sign, 0, -620, 44, INK, MARK_F, maxw=420)
+    if crate:
+        cr = wrrect(140, -360, 300, -262, 6, seed + 4, 1.2); ink(c, cr, (200, 150, 90), 7)
+        for j in range(2): wline(c, [(146, -330 + j * 34), (294, -330 + j * 34)], seed + 5 + j, 4, (130, 86, 46))
+        for j in range(4): ink(c, wellipse(170 + j * 38, -372, 20, 18, seed + 30 + j, 1), (j % 2 and GRN) or RED, 5)
+    if board:
+        ink(c, wpoly([(-310, -10), (-200, -10), (-220, -200), (-290, -200)], seed + 8, 1.2, True, 20), (44, 48, 52), 7)
+        text(c, board, -255, -96, 26, WHITE, MARK_F, maxw=90)
+    c.restore()
+
+
+def shark_fin(c, x, y, s=1.0, seed=0, k=1.0, t=0.0, tv=True):
+    """a cartoon shark fin circling in wavy water, optionally inside a plain TV frame (no show logo or set). (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    if tv:
+        ink(c, wrrect(-260, -420, 260, -40, 30, seed, 1.6), (60, 62, 72), 9)
+        scr = wrrect(-226, -390, 226, -70, 18, seed + 1, 1.2); ink(c, scr, (150, 210, 255), 6)
+        for sx in (-1, 1): wline(c, [(sx * 120, -40), (sx * 160, 0)], seed + 2 + sx, 8)
+        for sx in (-1, 1): wline(c, [(sx * 20, -420), (sx * 110, -520)], seed + 5 + sx, 6)
+        c.save(); c.clipPath(scr, doAntiAlias=True)
+    fx = math.sin(t * 1.6) * 120
+    fin = wpoly([(fx - 70, -170), (fx + 10, -330), (fx + 60, -170)], seed + 3, 1.2, True, 20); ink(c, fin, (110, 120, 136), 8)
+    c.drawRect(skia.Rect.MakeLTRB(-300, -170, 300, -40), P((60, 150, 230)))
+    wline(c, [(-260 + i * 40, -170 + (8 if i % 2 else -6) + math.sin(t * 4 + i) * 3) for i in range(14)], seed + 4, 7, WHITE)
+    if tv: c.restore(); ink(c, scr, None, 6)
+    c.restore()
+
+
+def sewing_machine(c, x, y, s=1.0, seed=0, k=1.0, t=0.0, run=True, cloth=BLU):
+    """plain home sewing machine (C-shaped body, wheel, spool on top, needle that bobs when run) on a strip of cloth."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-300, -60, 300, 0, 8, seed, 1.2), (190, 150, 110), 7)                         # base
+    cl = wpoly([(-260, -60), (280, -60), (300, -96), (-240, -100)], seed + 1, 1.4, True, 30); ink(c, cl, cloth, 7)
+    for j in range(8): wline(c, [(-220 + j * 56, -78), (-196 + j * 56, -78)], seed + 10 + j, 4, WHITE)  # stitches
+    body = wpoly([(-260, -100), (-260, -420), (220, -420), (220, -300), (-150, -300), (-150, -100)], seed + 2, 1.6, True, 30)
+    ink(c, body, WHITE, 9)
+    ink(c, wrrect(-260, -420, 220, -380, 14, seed + 3, 1.0), RED, 7)
+    bob = (math.sin(t * 30) * 0.5 + 0.5) * 26 if run else 0
+    ink(c, wrrect(150, -300, 210, -230 + bob * 0.4, 8, seed + 4, 1.0), GREY, 7)
+    wline(c, [(180, -230 + bob * 0.4), (180, -170 + bob)], seed + 5, 6)                         # needle
+    ink(c, wellipse(-276, -300, 26, 62, seed + 6, 1.2), (110, 110, 120), 7)                     # hand wheel
+    ink(c, wrrect(-20, -480, 20, -420, 6, seed + 7, 0.8), YEL, 6)                               # spool
+    wline(c, [(0, -450), (120, -440), (180, -300)], seed + 8, 3, YEL)
+    c.restore()
+
+
+def screen_printer(c, x, y, s=1.0, seed=0, k=1.0, pull=0.0, col=BLU, word=None):
+    """hinged silk-screen frame over a flat tee; a squeegee sweeps left→right with pull 0..1 and reveals the ink (and word)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-330, -40, 330, 0, 8, seed, 1.2), (150, 110, 80), 7)                          # board
+    tee(c, 0, -170, 1.1, WHITE, 0.0, seed + 1, 1.0, "tee")
+    if pull > 0:
+        c.save(); c.clipRect(skia.Rect.MakeLTRB(-150, -400, -150 + 300 * pull, 0))
+        ink(c, wrrect(-80, -230, 80, -140, 10, seed + 2, 1.4), col, 0)
+        if word: text(c, word, 0, -168, 40, WHITE, ANTON_F, maxw=150)
+        c.restore()
+    fr = wrrect(-260, -330, 260, -40, 6, seed + 3, 1.2); c.drawPath(fr, P((180, 230, 255), 0.25)); ink(c, fr, None, 10, (196, 140, 84))
+    wline(c, [(-260, -40), (-300, -60)], seed + 4, 8)                                            # hinge
+    sx = -200 + 400 * pull
+    ink(c, wrrect(sx - 18, -360, sx + 18, -20, 6, seed + 5, 0.8), (60, 60, 70), 6)              # rubber blade
+    ink(c, wrrect(sx - 30, -430, sx + 30, -350, 10, seed + 6, 1.0), YEL, 7)                     # handle
+    c.restore()
+
+
+def garage(c, x, y, w=760, h=640, seed=0, k=1.0, door=1.0, bulb=True, t=0.0, night=False):
+    """suburban garage front: brick-band wall, roll-up door (door 0 = closed .. 1 = up), one hanging bulb + shelves inside."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(k, k)
+    wall = wpoly([(-w / 2, 0), (w / 2, 0), (w / 2, -h), (0, -h - 150), (-w / 2, -h)], seed, 1.6, True, 40)
+    ink(c, wall, (226, 170, 140) if not night else (120, 100, 110), 9)
+    c.save(); c.clipPath(wall, doAntiAlias=True)
+    for j in range(int(h / 40) + 4):
+        yy = -j * 40; off = 30 if j % 2 else 0
+        c.drawLine(-w / 2, yy, w / 2, yy, S(shade((226, 170, 140), 0.8), 2))
+        for i in range(-6, 7): c.drawLine(i * 60 + off, yy, i * 60 + off, yy - 40, S(shade((226, 170, 140), 0.8), 2))
+    c.restore(); ink(c, wall, None, 9)
+    dx = w / 2 - 70; dh = h - 120
+    hole = wrrect(-dx, -dh, dx, 0, 4, seed + 1, 1.0); ink(c, hole, (40, 40, 52), 8)
+    if door < 1:
+        c.save(); c.clipPath(hole, doAntiAlias=True)
+        top = -dh; bot = -dh + dh * (1 - door)
+        c.drawRect(skia.Rect.MakeLTRB(-dx, top, dx, bot), P((236, 236, 240)))
+        yy = bot
+        while yy > top: c.drawLine(-dx, yy, dx, yy, S(GREY, 5)); yy -= 46
+        c.restore()
+    if door > 0.3:
+        c.save(); c.clipPath(hole, doAntiAlias=True)
+        for j in range(2): ink(c, wrrect(-dx + 30, -dh + 160 + j * 150, -dx + 260, -dh + 176 + j * 150, 4, seed + 4 + j, 0.8), (160, 110, 70), 5)
+        for j in range(3): ink(c, wrrect(-dx + 50 + j * 64, -dh + 104, -dx + 100 + j * 64, -dh + 158, 4, seed + 8 + j, 0.8), (j == 1 and BLU) or TAN, 5)
+        if bulb:
+            sw = math.sin(t * 2.2) * 10
+            wline(c, [(0, -dh), (sw, -dh + 120)], seed + 12, 4, GREY)
+            c.drawCircle(sw, -dh + 140, 90, P(YEL, 0.22)); ink(c, wellipse(sw, -dh + 140, 22, 26, seed + 13, 0.8), YEL, 6)
+        c.restore()
+    c.restore()
+
+
+def pizza_box(c, x, y, s=1.0, seed=0, k=1.0, open_=0.0, word="PIZZA", rot=0.0):
+    """plain square pizza box seen at 3/4 (no chain's art); open_ 0..1 lifts the lid and shows a pizza with pepperoni."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(rot); c.scale(s * k, s * k)
+    base = wpoly([(-200, -40), (200, -40), (240, -120), (-160, -120)], seed, 1.2, True, 30); ink(c, base, (226, 196, 150), 8)
+    ink(c, wpoly([(-200, -40), (200, -40), (200, 0), (-200, 0)], seed + 1, 1.0, True, 30), (206, 170, 120), 8)
+    if open_ > 0.05:
+        ink(c, wellipse(20, -82, 170, 34, seed + 2, 1.2), (246, 200, 90), 7)
+        for j in range(5): c.drawCircle(-90 + j * 50, -84 + (j % 2) * 14 - 6, 12, P(RED))
+        lid = wpoly([(-160, -120), (240, -120), (240 - 40 * open_, -120 - 240 * open_), (-160 + 40 * open_, -120 - 240 * open_)], seed + 3, 1.2, True, 30)
+    else:
+        lid = wpoly([(-200, -40), (200, -40), (240, -120), (-160, -120)], seed + 3, 1.2, True, 30)
+    ink(c, lid, (236, 210, 168), 8)
+    lb = lid.getBounds(); text(c, word, lb.centerX(), lb.centerY() + 14, 40, RED, MARK_F, maxw=220)
+    c.restore()
+
+
+def expo_stand(c, x, y, s=1.0, seed=0, k=1.0, banner="FITNESS EXPO", t=0.0, rail=True):
+    """trade-show booth: back wall with a banner, counter, rail of tees. No brand names on it."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-380, -700, 380, -150, 8, seed, 1.4), (240, 240, 246), 9)
+    ink(c, wrrect(-340, -680, 340, -580, 8, seed + 1, 1.2), INK, 6); text(c, banner, 0, -612, 56, YEL, ANTON_F, maxw=640)
+    if rail:
+        wline(c, [(-300, -480), (300, -480)], seed + 2, 8, GREY)
+        for j in range(6): tee(c, -250 + j * 100, -400, 0.62, (BLU, INK, RED, GRN, INK, PUR)[j], math.sin(t * 2 + j) * 3, seed + 10 + j, 1.0, "tee")
+    ink(c, wrrect(-260, -200, 260, 0, 8, seed + 3, 1.4), INK, 8)
+    ink(c, wrrect(-260, -200, 260, -160, 6, seed + 4, 1.0), YEL, 6)
+    c.restore()
+
+
+def _plush_shape(c, x, y, s, col, variant, seed):
+    """the soft-toy body shared by plush_blob / toy_shelf / _fries; centre (x, y)."""
+    pts = []
+    for j in range(36):
+        a = j / 36 * 2 * math.pi; r = 1 + (0.06 * math.sin(a * 5 + seed) if variant == 2 else 0.02 * math.sin(a * 3 + seed))
+        pts.append((x + math.cos(a) * 110 * s * r, y + math.sin(a) * 100 * s * r * (1.08 if math.sin(a) > 0 else 1.0)))
+    body = wpoly(pts, seed, 1.2, True, 24)
+    if variant == 1:   # long floppy ears
+        for sx in (-1, 1): ink(c, wellipse(x + sx * 56 * s, y - 150 * s, 26 * s, 70 * s, seed + sx, 1.4, sx * 0.25), col, 8 * s)
+    if variant == 3:   # two round ears
+        for sx in (-1, 1): ink(c, wellipse(x + sx * 76 * s, y - 86 * s, 34 * s, 34 * s, seed + sx, 1.0), col, 8 * s)
+    ink(c, body, col, 8 * s)
+    for j in range(14):   # felt texture: short soft dashes
+        fx = x + (h01(j, seed) - 0.5) * 170 * s; fy = y + (h01(j + 14, seed) - 0.5) * 150 * s
+        wline(c, [(fx, fy), (fx + 10 * s, fy + 4 * s)], seed + j, 3 * s, shade(col, 0.82), 0.6)
+    return body
+
+
+def plush_blob(c, x, y, s=1.0, seed=0, k=1.0, col=FELT, variant=0, t=0.0, mood="happy", blink=False):
+    """generic round soft toy of our own design (variant 0 bean, 1 floppy ears, 2 bumpy, 3 round ears): dot eyes, stitched smile,
+    blushing cheeks, little stub feet. (x, y) = bottom centre. Not modelled on any real toy line."""
+    if k <= 0: return
+    sq = 1 + math.sin(t * 3 + seed) * 0.02
+    c.save(); c.translate(x, y); c.scale(s * k * sq, s * k / sq)
+    for sx in (-1, 1): ink(c, wellipse(sx * 50, -14, 30, 16, seed + 4 + sx, 0.8), shade(col, 0.9), 6)
+    _plush_shape(c, 0, -110, 1.0, col, variant, seed)
+    for sx in (-1, 1):
+        if blink: wline(c, [(sx * 38 - 9, -132), (sx * 38 + 9, -132)], seed + 7 + sx, 6)
+        else: c.drawCircle(sx * 38, -132, 9, P(INK))
+        c.drawCircle(sx * 66, -100, 13, P(PNK, 0.55))
+    if mood == "sad": wline(c, quad_pts(-22, -88, 22, -88, -10, 6), seed + 9, 5)
+    else:
+        wline(c, quad_pts(-24, -100, 24, -100, 14, 6), seed + 9, 5)
+        for j in range(3): wline(c, [(-16 + j * 16, -96), (-16 + j * 16, -86)], seed + 10 + j, 3)   # stitch ticks
+    c.restore()
+
+
+def _fries(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=CONE, stick=(255, 214, 96), **kw):
+    """plush fries character: a soft paper cone (red) with felt fry sticks poking out, face on the cone. Attitude only, generic."""
+    leg = 76 * s; cb = y - leg; ct = cb - 300 * s
+    _legs(c, x, cb - 6 * s, y, s, t, walk, seed, 34)
+    for j in range(7):   # felt sticks behind the cone rim
+        fx = x + (-96 + j * 32) * s; top = ct - (70 + 50 * h01(j, seed)) * s; wob = math.sin(t * 3 + j) * 3 * s
+        ink(c, wrrect(fx - 16 * s + wob, top, fx + 16 * s + wob, ct + 60 * s, 14 * s, seed + 20 + j, 1.0), stick, 6 * s)
+        wline(c, [(fx + wob - 4 * s, top + 14 * s), (fx + wob - 4 * s, top + 40 * s)], seed + 40 + j, 3 * s, shade(stick, 0.8))
+    cone = wpoly([(x - 150 * s, ct), (x + 150 * s, ct), (x + 96 * s, cb), (x - 96 * s, cb)], seed, 1.6, True, 30); ink(c, cone, col, 9 * s)
+    c.save(); c.clipPath(cone, doAntiAlias=True)
+    for j in range(5): wline(c, [(x - 150 * s, ct + 40 * s + j * 60 * s), (x + 150 * s, ct + 40 * s + j * 60 * s)], seed + 50 + j, 3 * s, shade(col, 1.15), 1.2, 0.6)
+    c.restore(); ink(c, cone, None, 9 * s)
+    _arms(c, x - 130 * s, x + 130 * s, ct + 150 * s, arms, t, s, seed + 7)
+    eyes(c, x, ct + 80 * s, s * 0.9, look, blink, 40, 24, mood, seed + 9)
+    mouth(c, x, ct + 150 * s, s * 0.7, talk, mood, seed + 5)
+
+
+def cloche_plate(c, x, y, s=1.0, seed=0, k=1.0, lift=0.0, col=FELT, variant=0, price=None, t=0.0):
+    """white diner plate with a plush 'meal' under a silver dome; lift 0..1 raises + tilts the dome. price = toothpick flag text."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wellipse(0, -30, 260, 50, seed, 1.4), WHITE, 8); ink(c, wellipse(0, -34, 190, 32, seed + 1, 1.0), None, 4, GREY)
+    if lift > 0.15:
+        plush_blob(c, 0, -30, 0.9, seed + 2, 1.0, col, variant, t)
+        if price:
+            wline(c, [(80, -150), (130, -300)], seed + 3, 4, (196, 150, 100))
+            ink(c, wpoly([(130, -300), (230, -290), (130, -250)], seed + 4, 0.8, True, 20), WHITE, 5)
+            text(c, price, 170, -276, 26, RED, BLK_F, maxw=80)
+    c.save(); c.translate(-90 * lift, -330 * lift); c.rotate(-16 * lift)
+    dome = wpoly([(-220, -40)] + [(math.cos(math.pi * (1 - i / 16)) * 220, -40 - math.sin(math.pi * i / 16) * 230) for i in range(17)], seed + 5, 1.4, True, 30)
+    ink(c, dome, (214, 218, 228), 9)
+    c.save(); c.clipPath(dome, doAntiAlias=True); c.drawRect(skia.Rect.MakeLTRB(-150, -260, -100, -40), P(WHITE, 0.6)); c.restore()
+    ink(c, wellipse(0, -278, 26, 16, seed + 6, 0.8), (214, 218, 228), 7)
+    c.restore(); c.restore()
+
+
+def chip_paper(c, x, y, s=1.0, seed=0, k=1.0, inner=True, col=FELT):
+    """newspaper cone (chip-shop wrap) with smudgy print lines; inner = a small plush blob peeking out. (x, y) = cone tip."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    if inner: plush_blob(c, 0, -330, 0.6, seed + 1, 1.0, col, 3)
+    cone = wpoly([(0, 0), (-170, -340), (170, -340)], seed, 1.6, True, 30); ink(c, cone, (238, 236, 226), 8)
+    c.save(); c.clipPath(cone, doAntiAlias=True)
+    for j in range(9): wline(c, [(-150, -320 + j * 34), (150, -320 + j * 34)], seed + 3 + j, 4, GREY, 1.0)
+    ink(c, wrrect(-60, -300, 40, -240, 4, seed + 20, 0.8), (180, 180, 186), 0)
+    c.restore(); ink(c, cone, None, 8)
+    c.restore()
+
+
+def suitcase(c, x, y, s=1.0, seed=0, k=1.0, col=RED):
+    """small toy-ish suitcase with a handle and two straps. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-40, -200, 40, -160, 14, seed + 1, 0.8), None, 10)
+    ink(c, wrrect(-120, -170, 120, 0, 20, seed, 1.2), col, 8)
+    for sx in (-1, 1): wline(c, [(sx * 60, -170), (sx * 60, 0)], seed + 2 + sx, 7, shade(col, 0.7))
+    c.restore()
+
+
+def checkin_desk(c, x, y, s=1.0, seed=0, k=1.0, sign="GATE 1", bag=True, kg=None, t=0.0):
+    """plain check-in counter + a gate sign on a pole + a belt scale with a suitcase (kg = scale readout). No airline branding."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    wline(c, [(300, 0), (300, -620)], seed + 1, 10)
+    ink(c, wrrect(200, -720, 420, -620, 10, seed + 2, 1.2), YEL, 8); text(c, sign, 310, -652, 50, INK, ANTON_F, maxw=200)
+    ink(c, wrrect(-340, -300, 120, 0, 10, seed, 1.4), (90, 110, 150), 9)
+    ink(c, wrrect(-360, -320, 140, -280, 8, seed + 3, 1.0), WHITE, 7)
+    ink(c, wrrect(140, -120, 420, -80, 6, seed + 4, 1.0), (60, 62, 72), 7)                     # belt scale
+    if bag: suitcase(c, 270, -120, 0.8, seed + 5, 1.0, RED)
+    if kg:
+        ink(c, wrrect(-200, -420, 20, -330, 8, seed + 6, 1.0), INK, 6); text(c, kg, -90, -360, 44, GRN, TYPE_F, maxw=200)
+    c.restore()
+
+
+def toy_shelf(c, x, y, s=1.0, seed=0, k=1.0, rows=3, per=4, t=0.0, fill=1.0):
+    """3-shelf wooden unit filled with plush_blobs (fill 0..1 = share of slots filled, left→right, top→bottom)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    w, rh = 640, 230; h = rows * rh + 40
+    ink(c, wrrect(-w / 2, -h, w / 2, 0, 8, seed, 1.4), (200, 150, 96), 9)
+    cols_ = (FELT, (255, 190, 210), (180, 220, 255), (200, 236, 180), (255, 226, 140), (220, 200, 255))
+    n = 0; tot = rows * per
+    for r in range(rows):
+        yb = -h + 20 + (r + 1) * rh
+        ink(c, wrrect(-w / 2 + 14, yb - 4, w / 2 - 14, yb + 16, 4, seed + 10 + r, 0.8), (160, 110, 70), 6)
+        for j in range(per):
+            if n < tot * fill:
+                plush_blob(c, -w / 2 + 80 + j * (w - 160) / max(1, per - 1), yb - 4, 0.62, seed + 30 + n, 1.0, cols_[n % 6], n % 4, t)
+            n += 1
+    c.restore()
+
+
+def lab_flask(c, x, y, s=1.0, seed=0, k=1.0, t=0.0, liquid=GRN, cert=0.0, word="CERTIFICATE"):
+    """conical lab flask with bubbling liquid; cert 0..1 slides a certificate paper with a seal out from behind it (product-safety test)."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    if cert > 0:
+        c.save(); c.translate(170 * eout(cert), -40 * eout(cert)); c.rotate(6 * cert)
+        ink(c, wrrect(-130, -360, 130, 0, 10, seed + 1, 1.2), CREAM, 7); text(c, word, 0, -300, 30, INK, BLK_F, maxw=230)
+        for j in range(4): wline(c, [(-90, -240 + j * 40), (90, -240 + j * 40)], seed + 2 + j, 4, GREY)
+        ink(c, wellipse(60, -60, 36, 36, seed + 8, 1.0), RED, 6); c.restore()
+    fl = wpoly([(-40, -320), (40, -320), (40, -220), (150, 0), (-150, 0), (-40, -220)], seed, 1.4, True, 30)
+    ink(c, fl, (236, 246, 255), 8)
+    c.save(); c.clipPath(fl, doAntiAlias=True); c.drawRect(skia.Rect.MakeLTRB(-160, -120, 160, 10), P(liquid))
+    for j in range(5):
+        u = (t * 0.7 + h01(j, seed)) % 1; c.drawCircle(-60 + j * 30, -20 - u * 110, 8 + 4 * h01(j, seed + 3), P(WHITE, 0.8 * (1 - u)))
+    c.restore(); ink(c, fl, None, 8)
+    ink(c, wrrect(-50, -340, 50, -316, 6, seed + 9, 0.8), GREY, 6)
+    c.restore()
+
+
+def receipt_printer(c, x, y, s=1.0, seed=0, k=1.0, feed=0.0, lines=None, t=0.0):
+    """countertop receipt printer; feed 0..1 pushes a long paper strip UP out of it (up to ~700 px), lines = text rows printed on it."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    L = 700 * eout(feed); wob = math.sin(t * 7) * 6 * feed
+    if L > 4:
+        strip_ = wpoly([(-90, -150), (90, -150), (90 + wob, -150 - L), (-90 + wob, -150 - L)], seed + 1, 1.0, True, 40)
+        ink(c, strip_, WHITE, 6)
+        for j, ln in enumerate(lines or ()):
+            yy = -150 - L + 50 + j * 46
+            if yy < -170: text(c, ln, wob, yy, 28, INK, TYPE_F, maxw=160)
+        for j in range(9): c.drawCircle(-90 + j * 22.5 + wob, -150 - L, 6, P(PAPER))   # torn top edge
+    ink(c, wrrect(-150, -170, 150, 0, 20, seed, 1.4), (60, 62, 72), 9)
+    ink(c, wrrect(-110, -170, 110, -140, 6, seed + 2, 0.8), INK, 6)
+    c.drawCircle(100, -60, 12, P(GRN if feed > 0 else GREY))
+    c.restore()
+
+
+def _sock(c, x, y, s, t, talk, look, mood, arms, walk, blink, seed, col=SOCKG, stripe=(RED, BLU), **kw):
+    """plain striped crew sock character: upright tube + foot pointing right, two cuff stripes, heel/toe patches, a little arch line.
+    Feet = the toe end on (x, y). No bee, no honeycomb, no brand marks."""
+    sk_ = wpoly([(x - 90 * s, y - 520 * s), (x + 60 * s, y - 520 * s), (x + 60 * s, y - 150 * s), (x + 190 * s, y - 130 * s),
+                 (x + 220 * s, y - 60 * s), (x + 180 * s, y), (x - 40 * s, y), (x - 100 * s, y - 60 * s)], seed, 1.8, True, 36)
+    hshadow(c, x + 60 * s, y + 2, 160 * s, seed)
+    ink(c, sk_, col, 9 * s)
+    c.save(); c.clipPath(sk_, doAntiAlias=True)
+    for j, sc in enumerate(stripe): c.drawRect(skia.Rect.MakeLTRB(x - 120 * s, y - (470 - j * 48) * s, x + 80 * s, y - (446 - j * 48) * s), P(sc))
+    c.drawRect(skia.Rect.MakeLTRB(x - 120 * s, y - 520 * s, x + 80 * s, y - 500 * s), P(shade(col, 0.85)))
+    ink(c, wellipse(x - 90 * s, y - 50 * s, 70 * s, 70 * s, seed + 3, 1.2), shade(col, 0.86), 0)          # heel
+    ink(c, wellipse(x + 210 * s, y - 50 * s, 60 * s, 60 * s, seed + 4, 1.2), shade(col, 0.86), 0)         # toe
+    for j in range(5): wline(c, [(x - 70 * s + j * 22 * s, y - 520 * s), (x - 70 * s + j * 22 * s, y - 486 * s)], seed + 20 + j, 3 * s, shade(col, 0.7))
+    c.restore(); ink(c, sk_, None, 9 * s)
+    wline(c, quad_pts(x + 20 * s, y - 70 * s, x + 130 * s, y - 70 * s, 14 * s, 6), seed + 5, 4 * s, shade(col, 0.6))   # arch line
+    _arms(c, x - 88 * s, x + 58 * s, y - 300 * s, arms, t, s, seed + 7)
+    eyes(c, x - 14 * s, y - 380 * s, s * 0.85, look, blink, 38, 24, mood, seed + 9)
+    mouth(c, x - 14 * s, y - 318 * s, s * 0.7, talk, mood, seed + 10)
+
+
+def shark_chair(c, x, y, s=1.0, seed=0, k=1.0, mark=None, tip=0.0, col=(52, 54, 66)):
+    """empty high-back studio chair silhouette (no people, no set). mark = 'x' red X | 'tick' green tick; tip 0..1 topples it backwards."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.rotate(-80 * eout(tip)); c.scale(s * k, s * k)
+    ink(c, wrrect(-90, -560, 90, -260, 40, seed, 1.6), col, 9)
+    ink(c, wrrect(-110, -280, 110, -220, 16, seed + 1, 1.2), shade(col, 1.25), 8)
+    wline(c, [(0, -220), (0, -60)], seed + 2, 12)
+    for sx in (-1, 0, 1): wline(c, [(0, -60), (sx * 110, 0)], seed + 3 + sx, 10)
+    c.restore()
+    if mark and tip < 0.2:
+        c.save(); c.translate(x, y); c.scale(s * k, s * k)
+        if mark == "x": wline(c, [(-80, -520), (80, -300)], seed + 8, 18, RED); wline(c, [(80, -520), (-80, -300)], seed + 9, 18, RED)
+        else: wline(c, [(-70, -420), (-14, -350), (90, -520)], seed + 8, 18, GRN)
+        c.restore()
+
+
+def shelter_list(c, x, y, s=1.0, seed=0, k=1.0, items=("SOCKS", "COATS", "BLANKETS", "TOWELS"), hl=1.0, head="MOST REQUESTED"):
+    """clipboard list headed head; the first item gets a yellow highlighter swipe (hl 0..1) and a red circle once hl = 1. (x, y) = centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-190, -260, 190, 260, 16, seed, 1.6), BROWN, 8)
+    ink(c, wrrect(-162, -226, 162, 236, 6, seed + 1, 1.2), WHITE, 6)
+    ink(c, wrrect(-70, -284, 70, -234, 10, seed + 2, 1), GREY, 6)
+    text(c, head, 0, -170, 36, INK, BLK_F, maxw=300)
+    for j, it in enumerate(items):
+        yy = -90 + j * 80
+        if j == 0 and hl > 0: c.drawRect(skia.Rect.MakeLTRB(-120, yy - 38, -120 + 250 * eout(hl), yy + 8), P(YEL, 0.85))
+        text(c, f"{j + 1}. {it}", -120, yy, 38, INK, HAND_F, "l", maxw=270)
+    if hl >= 1: scribble(c, -2, -104, 150, 46, 1.0, RED, 7, seed + 9)
+    c.restore()
+
+
+def donate_box(c, x, y, s=1.0, seed=0, k=1.0, label="DONATE", sub="1 FOR 1", socks=0.0):
+    """open cardboard box with flaps; socks 0..1 = how full of rolled socks it is."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for sx in (-1, 1): ink(c, wpoly([(sx * 170, -300), (sx * 250, -370), (sx * 110, -380), (sx * 20, -300)], seed + sx, 1.2, True, 20), (206, 160, 104), 7)
+    for j in range(int(7 * socks)):
+        ink(c, wellipse(-120 + (j % 4) * 80 + (j // 4) * 40, -300 - (j // 4) * 40, 46, 34, seed + 10 + j, 1.0), (SOCKG, (255, 190, 200), (190, 220, 255))[j % 3], 6)
+    ink(c, wrrect(-180, -300, 180, 0, 6, seed, 1.4), (220, 176, 120), 8)
+    wline(c, [(-180, -250), (180, -250)], seed + 4, 4, (170, 120, 70))
+    text(c, label, 0, -150, 64, INK, ANTON_F, maxw=320)
+    if sub: tape(c, sub, 0, -70, 34, -3, 1.0, ORG, INK, seed + 5)
+    c.restore()
+
+
+def popup_table(c, x, y, s=1.0, seed=0, k=1.0, sign="POP-UP", canopy=YEL, t=0.0):
+    """pop-up market tent (canopy on 4 legs) over a folding table with a sign. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    for px in (-300, 300): wline(c, [(px, 0), (px, -520)], seed + px, 9, GREY)
+    can = wpoly([(-360, -520), (-240, -640), (240, -640), (360, -520)], seed, 1.4, True, 30); ink(c, can, canopy, 8)
+    val = [(-360 + i * 60, -520 + (24 if i % 2 else 0) + math.sin(t * 5 + i) * 3) for i in range(13)]
+    ink(c, wpoly([(-360, -520), (360, -520)] + val[::-1], seed + 1, 1.0, True, 30), shade(canopy, 0.88), 6)
+    c.restore()
+    folding_table(c, x, y, 520 * s, seed + 2, k, WHITE, sign)
+
+
+def tm_seal(c, x, y, s=1.0, seed=0, k=1.0, q=True):
+    """round seal with a big ™ and a '?' — 'check the name is free' (pair with magnifier()). (x, y) = centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    pts = [(math.cos(a / 24 * 2 * math.pi) * (130 if a % 2 else 112), math.sin(a / 24 * 2 * math.pi) * (130 if a % 2 else 112)) for a in range(24)]
+    ink(c, wpoly(pts, seed, 1.0, True, 20), YEL, 7)
+    ink(c, wellipse(0, 0, 90, 90, seed + 1, 1.0), WHITE, 6)
+    text(c, "TM", 0, 22, 66, INK, ANTON_F)
+    if q: text(c, "?", 100, -70, 90, RED, MARK_F)
+    c.restore()
+
+
+def crates(c, x, y, s=1.0, seed=0, k=1.0, n=3, label="ORDERS"):
+    """a stack of n cardboard shipping boxes (pyramid), the top one taped + labelled. (x, y) = bottom centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    pos = [(-210, 0), (0, 0), (210, 0), (-105, -200), (105, -200), (0, -400)][:n]
+    for j, (bx, by) in enumerate(pos):
+        ink(c, wrrect(bx - 100, by - 200, bx + 100, by, 6, seed + j, 1.2), (220, 176, 120), 8)
+        wline(c, [(bx - 30, by - 200), (bx - 30, by - 120)], seed + 10 + j, 10, (200, 150, 90))
+    tx, ty = pos[-1]; tape(c, label, tx, ty - 70, 26, -4, 1.0, ORG, INK, seed + 20)
+    c.restore()
+
+
+def stopwatch(c, x, y, s=1.0, seed=0, k=1.0, frac=0.0, word=None):
+    """chunky stopwatch; frac 0..1 sweeps the red hand once round; word = small text under the hand. (x, y) = centre."""
+    if k <= 0: return
+    c.save(); c.translate(x, y); c.scale(s * k, s * k)
+    ink(c, wrrect(-30, -190, 30, -150, 8, seed + 1, 0.8), GREY, 7)
+    for sx in (-1, 1): ink(c, wrrect(sx * 110 - 20, -150, sx * 110 + 20, -116, 6, seed + 2 + sx, 0.6), GREY, 6)
+    ink(c, wellipse(0, 0, 160, 160, seed, 1.4), WHITE, 10)
+    for j in range(12):
+        a = j / 12 * 2 * math.pi; wline(c, [(math.sin(a) * 130, -math.cos(a) * 130), (math.sin(a) * 148, -math.cos(a) * 148)], seed + 10 + j, 6)
+    if frac > 0:
+        pth = skia.Path(); pth.moveTo(0, 0); pth.arcTo(skia.Rect.MakeLTRB(-120, -120, 120, 120), -90, 360 * frac, False); pth.close()
+        c.drawPath(pth, P(YEL, 0.7))
+    a = frac * 2 * math.pi; wline(c, [(0, 0), (math.sin(a) * 118, -math.cos(a) * 118)], seed + 30, 10, RED)
+    c.drawCircle(0, 0, 12, P(INK))
+    if word: text(c, word, 0, 220, 40, INK, BLK_F, maxw=320)
     c.restore()
