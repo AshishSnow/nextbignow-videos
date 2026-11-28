@@ -176,3 +176,12 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 2026-11-27 | BUSINESS IDEA N°05 (green): Wrigley's gum started as a free gift (1891 soap → baking powder → gum; Mars ~$23B 2008) | PAPER story | IG 443937491 / YT 443937516, 18:45
 2026-11-27 | MIND TRICKS N°07 (purple): shopping cart + fake shoppers (Goldman 1937) | PAPER v4, ElevenLabs Marcus voice, no song | IG 443685560 / YT 443685617, 21:52
 2026-11-27 | DRAFTS (not posted, repeat topics): De Beers ring, Costco $1.50 hot dog, Pet Rock — all already in this log (Oct 25/27, Nov 15) → examples/_drafts-27nov
+
+## 28 Nov 2026 (Heart voice, Kokoro)
+| Date | Series | Topic | IG id | Time |
+|---|---|---|---|---|
+| 28 Nov | Mind Tricks N° 08 | Movie villains can't use iPhones (Rian Johnson 2020) | 445443577 | 20:00 |
+| 28 Nov | Money Explained N° 06 | Toblerone gaps (UK 2016 shrinkflation) | 445443624 | 22:15 |
+| 29 Nov | Case Study N° 07 | Same mattress, different name (Serta, Consumers' Checkbook) | 445443656 | 09:12 |
+| 29 Nov | Money Tips N° 01 | Starbucks short size | 445443699 | 12:40 |
+| 28 Nov | YT Short | Shopping cart (best IG reel not yet on YT) | 444986119 | 12:40 |
