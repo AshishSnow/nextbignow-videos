@@ -139,3 +139,11 @@ Rules taken:
 5. CTA = withhold the fix for part 2 ("सॉल्यूशन अगली वीडियो में") + identity-tagged share + yes/no comment question.
 6. Tone: तुम, slang (दबा के, बेटा), short lines; zero report language (no university names in the first 15 s).
 Visual: one recurring character in a home set, cute personified villains in a "micro world" set, metaphor machines (body = factory).
+
+## FNH Paper look v1 (adapted from the OopsMyBusiness paper system, 28 Nov 2026)
+- Backgrounds: cream paper #F0E8D8 (fibres + soft vignette) alternating with deep series-colour paper (purple #5C2696 for interesting topics). Replaces gradients, sunbursts and black slides.
+- Headlines: flat, no 3D, centred, Teko 700 (condensed Devanagari, the Hindi stand-in for Archivo Condensed Black). Cream: ink #1E102C + key word red #E8463C; colour paper: cream text + key word yellow #FFD65C; red block only for the shock word.
+- Subtitles: small Tiro Devanagari, sheared to italic, ink/cream with the current word in red/yellow, no pill. Strip ? and , (Tiro has no Latin glyphs).
+- Cut-outs get a white die-cut sticker edge + soft shadow; photos as tilted white-border cards. Notes turn red on cream.
+- Header: brand pill "FRESHNESTHUB" (Archivo 900, white on series colour) top-left at y~316 + round black logo badge top-right (x 900). Film grain on every frame.
+- Code: episodes/74-tiffin-plastic/_paper.py (append last before __main__).
