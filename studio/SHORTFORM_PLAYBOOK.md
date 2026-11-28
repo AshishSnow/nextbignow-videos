@@ -1,4 +1,8 @@
 # READ FIRST — owner rules, 27 Nov 2026 (override anything below)
+
+**VOICE (owner, 28 Nov 2026): use Kokoro voice `af_heart` ("Heart") for all OMB reels and long videos.**
+Run: `python3 /home/claude/studio/lib/kokoro_vo.py <proj> af_heart 0.9` (speed 0.88-0.95 so pace lands ~150-175 wpm). Writes work/vo.wav + comic/cd/align.json directly; no download needed.
+Kokoro-82M is Apache-2.0 (commercial OK). Model files: /home/claude/models/kokoro (re-download from github.com/thewh1teagle/kokoro-onnx releases model-files-v1.0 if the container is new). Maya1 is retired. ElevenLabs only if the owner asks, and one take only.
 0. **YouTube plan (owner, 27 Nov):** NO reel-Shorts on YouTube except ONE per day = the best-performing Instagram reel. YouTube's main upload is one 5–6 min 16:9 long video per day (LONGFORM_KEY.md, template/paper_wide.py + render_wide.sh). Long-video topics = BUSINESS TRICKS (how companies make you spend: apps, fees, checkout, pricing), not founder biographies. Instagram keeps the daily reels.
 1. **Packaging before script.** Pick the idea, then the title and the cover line (frame-1 text) from what people react to instantly. The cover line IS the hook. Write PACKAGING.md (template: PACKAGING_TEMPLATE.md) before any script; the script is written to deliver the package.
 2. **Reward in 3–6 s.** Don't only tease. Say the shocking fact itself by second 3–6, THEN open a gap (a question or a fear) that the rest pays off. (Miss: FNH sponge script put "as many bacteria as poop" at ~8 s.)
