@@ -3,7 +3,7 @@
 @functools.lru_cache(maxsize=400)
 def modak_line(segs, size, mode):
     f = ImageFont.truetype(MODAK, size, layout_engine=ImageFont.Layout.RAQM)
-    onp = mode == 'black'; sw = max(5, size // 11)
+    onp = mode == 'black'; sw = 3
     widths = [int(f.getlength(s)) for s, _ in segs]; pad = 40 + sw
     w = sum(widths) + 2 * pad + 36 * len(segs); h = int(size * 1.7) + 2 * sw
     im = Image.new('RGBA', (w + 16, h + 16), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
