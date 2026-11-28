@@ -1330,3 +1330,33 @@ def action_smear(f, vec, amt=1.0):
         q = i / L; cv2.circle(k, (int(L + dx * q * 0.5 - dx * 0.25), int(L + dy * q * 0.5 - dy * 0.25)), 0, 1.0, -1)
     k /= max(1e-6, k.sum())
     return cv2.filter2D(f, -1, k, borderType=cv2.BORDER_REFLECT)
+
+
+# ================= ep 75 (28 Nov): THE EYELINE MATCH + THE INSERT SHOT (editing craft; StudioBinder 'What is an eyeline match' + 'Insert shot',
+# Wikipedia 'Eyeline match'). Shot A: the character looks OFF-SCREEN at something (eyes lead, the head follows, HOLD the look ~8 frames so the question
+# forms); cut on the look to shot B = what he sees, framed from his eye position (POV: the object enters from the edge he looked toward, same light and
+# colour as A, matched vertical direction); keep the 180-degree side; then a REACTION beat. An INSERT = a short, purposeful close-up of the one detail the
+# line names, cut in MID-ACTION, with a slow push-in (never a static close-up). Sound twin (ep 75 mix.py near()): the insert's foley is dry + bright +
+# near (sfx_lib.persp d=0), the wide's is the same sound further away (d~0.35).
+def look_to(x0, y0, x1, y1, gain=1.0):
+    """the look vector (-1..1) for a head at (x0, y0) looking at a point (x1, y1), on- or off-screen."""
+    dx, dy = x1 - x0, y1 - y0; L = math.hypot(dx, dy) + 1e-6
+    return (clamp(gain * dx / L, -1, 1), clamp(gain * dy / L, -1, 1))
+
+
+def insert_push(f, t, t0, dur, z0=1.0, z1=1.07, cx=W / 2, cy=H / 2):
+    """the slow push-in of an INSERT: attention drifts into the detail (ease-out)."""
+    k = eo(clamp((t - t0) / max(1e-3, dur)))
+    return cam(f, z0 + (z1 - z0) * k, cx, cy)
+
+
+def pov_insert(f, amt=1.0, blur_edge=7):
+    """POV framing for the 'what he sees' half of an eyeline match: soft focus at the top + bottom edges + a gentle dark oval."""
+    if amt <= 0: return f
+    b = cv2.GaussianBlur(f, (0, 0), blur_edge)
+    yy = np.linspace(-1, 1, H, dtype=np.float32)[:, None, None]
+    m = np.clip((np.abs(yy) - 0.55) / 0.45, 0, 1) * amt
+    f = f * (1 - m) + b * m
+    xx = np.linspace(-1, 1, W, dtype=np.float32)[None, :, None]
+    v = np.clip((xx ** 2 * 0.9 + yy ** 2 * 0.55 - 0.45) / 0.8, 0, 1) * 0.28 * amt
+    return f * (1 - v)
