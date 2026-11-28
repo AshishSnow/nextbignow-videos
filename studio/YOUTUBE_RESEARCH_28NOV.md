@@ -30,3 +30,26 @@
 | 8 | Ferrari Builds One Car Less Than You Want | secret business of scarcity | luxury + trick, fresh brand |
 
 Format change proposal: EP 04+ → 8-10 min, single story, title in a proven pattern, custom thumbnail, chapters.
+
+## Round 2 (28 Nov, later)
+### More channels
+- MagnatesMedia: Secret Chinese company that owns everything 12.0M; Disturbing history of Coca-Cola 7.6M; Why Netflix is collapsing 6.5M; How WhatsApp makes money 5.2M → "secret/dark truth about famous brand", "how X makes money".
+- Logically Answered (~179K avg): recent breakouts "$1 Billion To Forgotten: How Dollar Shave Club Lost Everything" 1.4M; titles = blunt verdicts ("No One Is Using X…", "X Is (Finally) Getting What They Deserve…"); 60% evergreen / 40% trend.
+- Wall Street Millennial: 70% trendjacking; recent breakouts = current-news skepticism.
+- NEW small channels (proof a new channel can break out): The World Economy Explained (68 days old, ~1.09M monthly views, 1.9K subs): "How China's $15 Smartwatch Broke Garmin's $35 Billion Empire" 493K; "How China's $2,000 Bike Broke Specialized's $12,000 Monopoly" 361K → "cheap challenger broke giant's $X empire" (cliptude niche page). Business Decoded ~49K avg on 6K subs.
+
+### Timely angles (news this month, Nov 2026)
+- Surveillance / personalized pricing: FTC demanded Delta, JetBlue, United, Lyft, Uber, DoorDash, Instacart, Target, Walmart explain how personal data sets prices; NY, MD, GA bills to ban it and e-shelf labels; Walmart CEO says income/urgency won't set prices (The Week, 17 Nov 2026). → "Your Price Isn't My Price" — fits our business-tricks brand exactly, famous brands, current.
+- Dollar General: FTC + 20 states sued in Oct 2026 alleging register prices higher than shelf tags (allegation, say "the FTC says"). → "The Price on the Shelf Isn't the Price".
+- Franchisee bankruptcy wave: ~700 restaurants filed Chapter 11 in 2026, may top 2020; Wendy's (Meritage, 314 units), Popeyes (Sailormen, 136), KFC, Applebee's, Subway, Outback, Denny's franchisees (Restaurant Dive). KFC/Taco Bell/Pizza Hut Puerto Rico shut overnight when Yum cut off franchisee Encanto (FinanceBuzz). → "Why Your Favorite Chain Is Closing (It's Not the Food)": explains franchising, the trick that makes brands rich while franchisees go broke.
+- Red Lobster still closing locations (FinanceBuzz Nov 2026) → Red Lobster story stays relevant.
+
+### Ranked slate for long videos (score: proven format + familiar + timely + fits "business tricks" + fresh brand)
+1. Your Price Isn't My Price: the surveillance-pricing trick (Uber, Instacart, Target, Walmart; FTC 2026) — timely + tricks
+2. Why Your Favorite Chains Are Closing (It's Not the Food): franchise trick, 2026 bankruptcy wave — decline format + timely
+3. The Endless Shrimp That Sank Red Lobster — decline, one decision
+4. The Price on the Shelf Isn't the Price: Dollar General + dollar-store economics — how it makes money + news
+5. How a $15 Chinese Smartwatch Broke Garmin's Empire–style "cheap challenger" story (pick a fresh pair, e.g. Temu vs Amazon, Shein vs Zara) — proven on new small channels
+6. Spirit Airlines: The Cheapest Airline Went Broke, Twice
+7. Why Waffle House Never Closes
+8. Ferrari Builds One Car Less Than You Want
