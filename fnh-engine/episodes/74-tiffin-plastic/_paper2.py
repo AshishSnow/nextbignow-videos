@@ -1,6 +1,6 @@
 
 # ================= Paper look v2: "shady" boiling headline font, stop-motion jiggle, sticker blocks, selection box, series progress bar
-NSD9 = '/home/claude/studio/fonts/doc/nsd-900.ttf'
+NSD9 = '/home/claude/studio/fonts/doc/nsd-900.ttf'; MODAK = '/home/claude/studio/fonts/doc/d_modak.ttf'
 CUR = [0.0]
 def boil_seed(): return int(CUR[0] * 8) % 3                      # edges re-draw 8x a second (line boil)
 
@@ -15,7 +15,7 @@ def roughen(mask, seed, amp=1.7, freq=4):
 
 @functools.lru_cache(maxsize=600)
 def shady_line(segs, size, mode, seed):
-    f = ImageFont.truetype(NSD9, size, layout_engine=ImageFont.Layout.RAQM)
+    f = ImageFont.truetype(MODAK, size, layout_engine=ImageFont.Layout.RAQM)
     onp = mode == 'black'
     widths = [int(f.getlength(s)) for s, _ in segs]; pad = 40
     w = sum(widths) + 2 * pad + 30 * len(segs); h = int(size * 1.75)
@@ -28,17 +28,19 @@ def shady_line(segs, size, mode, seed):
         elif hi in (2, 3): c = INKP
         else: c = PAPER if onp else INKP
         cols.append((xx, xx + sw, c)); xx += sw + (14 if hi in (2, 3) else 0)
-    m = roughen(np.array(txtm), seed)
-    out = np.zeros((h + 12, w + 12, 4), np.float32)
+    m = np.array(txtm).astype(np.float32)
+    out = np.zeros((h + 12, w + 12, 4), np.float32); allc = np.zeros((h + 12, w + 12), np.float32)
     for x0, y0, x1, y1, hi in cards:                                  # sticker cards behind key words (yellow / white)
         cm = Image.new('L', (w + 12, h + 12), 0); ImageDraw.Draw(cm).rounded_rectangle((x0, y0, x1, y1), 14, fill=255)
-        cm = np.array(cm).astype(np.float32); csh = cv2.GaussianBlur(np.roll(np.roll(cm, 10, 0), 6, 1), (0, 0), 6) * .45
+        cm = np.array(cm).astype(np.float32); allc = np.maximum(allc, cm); csh = cv2.GaussianBlur(np.roll(np.roll(cm, 10, 0), 6, 1), (0, 0), 6) * .45
         out[..., 3] = np.maximum(out[..., 3], csh)
         a = cm / 255; cc = np.array(rgb(YLP if hi == 3 else 'FBF7EE'), np.float32)
         out[..., :3] = out[..., :3] * (1 - a[..., None]) + cc * a[..., None]; out[..., 3] = np.maximum(out[..., 3], cm)
     sh = np.zeros((h + 12, w + 12), np.float32)
-    if onp: sh[8:8 + h, 6:6 + w] = m
-    shc = np.array(rgb('140A22' if onp else 'B8AC98'), np.float32)
+    if onp: sh[9:9 + h, 7:7 + w] = m
+    else: sh[6:6 + h, 5:5 + w] = m
+    sh = sh * (1 - allc / 255)
+    shc = np.array(rgb('140A22' if onp else 'CDBFA5'), np.float32)
     sa = sh / 255 * (1 - out[..., 3] / 255 * 0)                         # hard offset shadow
     out[..., :3] = out[..., :3] * (1 - sa[..., None]) + shc * sa[..., None]; out[..., 3] = np.maximum(out[..., 3], sh)
     tm = np.zeros((h + 12, w + 12), np.float32); tm[:h, :w] = m
@@ -50,7 +52,7 @@ def shady_line(segs, size, mode, seed):
 
 def title_line(fr, segs, y, t, size=112, mode=None, x=LX, wipe=True, sel=False):
     if t <= 0: return
-    mode = mode or MODE[0]; im = shady_line(tuple(segs), int(size * .9), mode, boil_seed())
+    mode = mode or MODE[0]; im = shady_line(tuple(segs), int(size * .92), mode, 0)
     h, w = im.shape[:2]
     if w > W - 60: s0 = (W - 60) / w
     else: s0 = 1.0
@@ -106,11 +108,6 @@ def frame(T):
     camera(fr, l, t, T)
     if V != 'thumb': transition(fr, T)
     if V != 'thumb': subtitle(fr, T)
-    hd, pw = paper_header2('black' if MODE[0] == 'black' else 'c')
-    _put0(fr, hd, CX, 316, 1.0, 1.0, 0)
-    def bar(c):                                                       # series progress underline
-        c.rectangle(70, 360, (pw - 70) * clamp(T / TOTAL), 6); c.set_source_rgba(*hx('8E5BD8')); c.fill()
-    overlay(fr, cairo_layer(bar))
     overlay(fr, BADGE)
     g = cv2.resize(_GR[int(T * 12) % 6], (W, H))[..., None]
     return np.clip(fr.astype(np.float32) + g, 0, 255).astype(np.uint8)
