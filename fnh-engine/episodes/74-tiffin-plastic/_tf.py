@@ -57,7 +57,7 @@ def sc_s1(fr, T, t, l):
         overlay(fr, cairo_layer(mg))
     title_line(fr, [('अपना टिफ़िन', 0)], 380, tt + 1.0, 112)
     title_line(fr, [('अंदर से देखो', 3)], 552, tt + 1.0, 124)
-    note(fr, 'अभी उठाओ', 820, 1380, 1.0 if thumb else tt - .5, 56, YL, 5)
+    note(fr, 'अभी उठाओ', 820, 1290, 1.0 if thumb else tt - .5, 56, YL, 5)
 
 def sc_s2(fr, T, t, l):
     ebg(fr, 'black', T)
@@ -106,7 +106,7 @@ def sc_s4(fr, T, t, l):
     pl = plate_frame(T, scan, hot)
     card = np.zeros((pl.shape[0] + 20, MWW + 20, 4), np.uint8); card[..., :3] = 255; card[..., 3] = 255; card[10:-10, 10:-10, :3] = pl
     k = back(clamp(t / .45))
-    put_rgba(fr, card, CX, 1080, lerp(.6, 1.0, k), clamp(t / .2), lerp(6, -1.5, k))
+    put_rgba(fr, card, CX, 1068, lerp(.6, .9, k), clamp(t / .2), lerp(6, -1.5, k))
     if t > 1.2: timer_txt(fr, 905, 790, 180 - (t - 1.2) * 20, '7DFF9B', 64)
     title_line(fr, [('सबसे ज़्यादा कब?', 0)], 380, t, 112)
     if t > 3.3: title_line(fr, [('माइक्रोवेव में', 3)], 552, t - 3.3, 124)
@@ -124,7 +124,7 @@ def sc_s6(fr, T, t, l):
     ebg(fr, 'black', T)
     _p2body(fr, T, t)
     title_line(fr, [('हर ', 0), ('1 सेंटीमीटर', 1), (' से', 0)], 400, t, 112)
-    if t > 1.4: title_line(fr, [('200 करोड़+ कण', 3)], 580, t - 1.4, 124)
+    if t > 1.4: title_line(fr, [('200 करोड़+ कण', 3)], 580, t - 1.4, 124, sel=True)
 
 def chain_card(c, x, y, w, h, k):
     rrect(c, x - w / 2 + 10, y - h / 2 + 12, w, h, 26); c.set_source_rgba(0, 0, 0, .35 * k); c.fill()
@@ -176,32 +176,32 @@ def sc_s8(fr, T, t, l):
                 if y < H: rrect(c, x, y, 10 + 12 * rng.random(), 8 + 10 * rng.random(), 3); c.set_source_rgba(.85, .9, 1, .9); c.fill()
         overlay(fr, cairo_layer(cr))
     title_line(fr, [('टिफ़िन गर्म करके', 0)], 400, t, 112)
-    if t > 2.95: title_line(fr, [('डिब्बा भी खा रहे हो', 3)], 580, t - 2.95, 94)
+    if t > 2.95: title_line(fr, [('डिब्बा भी खा रहे हो', 3)], 580, t - 2.95, 112, sel=True)
 
 def sc_s10(fr, T, t, l):
     fr[:] = photo_bg()
     k = back(clamp(t / .4))
     def phone(c):
-        c.save(); c.translate(CX, 1090); c.rotate(-.05); c.scale(k, k)
+        c.save(); c.translate(CX, 1040); c.rotate(-.05); c.scale(k * .92, k * .92)
         rrect(c, -230, -330, 460, 660, 56); c.set_source_rgba(*hx('111111')); c.fill()
         rrect(c, -210, -300, 420, 600, 40); c.set_source_rgba(*hx('2B1B55')); c.fill()
         c.restore()
     overlay(fr, cairo_layer(phone))
-    put_rgba(fr, BOXR, CX, 1000, .55 * k, 1.0, -6)
+    put_rgba(fr, BOXR, CX, 960, .5 * k, 1.0, -6)
     tap = clamp((t - 1.0) / .25)
     def btn(c):
         if k < 1: return
         s = 1 + .12 * math.sin(math.pi * tap)
-        rrect(c, CX - 150 * s, 1220 - 44 * s, 300 * s, 88 * s, 44 * s); c.set_source_rgba(*hx(GRN)); c.fill()
+        rrect(c, CX - 150 * s, 1160 - 44 * s, 300 * s, 88 * s, 44 * s); c.set_source_rgba(*hx(GRN)); c.fill()
         if 1.2 < t < 2.6:                                             # chat bubble lands
             a = clamp((t - 1.2) / .2)
             rrect(c, CX - 40, 770, 330, 90, 30); c.set_source_rgba(1, 1, 1, a); c.fill()
     overlay(fr, cairo_layer(btn))
-    if k >= 1: put_rgba(fr, htext('भेजो', 52, 'FFFFFF', HI_B), CX, 1220, 1.0, 1.0, 0)
+    if k >= 1: put_rgba(fr, htext('भेजो', 52, 'FFFFFF', HI_B), CX, 1160, 1.0, 1.0, 0)
     if 1.2 < t < 2.6: put_rgba(fr, htext('भाई, ये देख!', 44, '1C1614', HI_B), CX + 125, 815, 1.0, clamp((t - 1.2) / .2), 0)
     title_line(fr, [('उस दोस्त को ', 0), ('भेजो', 1)], 380, t, 116)
     if t > 1.6: title_line(fr, [('जो रोज़ ऐसा करता है', 0)], 552, t - 1.6, 96)
-    note(fr, 'टैग करो', 840, 1390, t - 2.2, 56, YL, 6)
+    note(fr, 'टैग करो', 860, 1300, t - 2.2, 56, YL, 6)
 
 def recycle(c, x, y, R, T, a=1.0):
     if R < 4: return

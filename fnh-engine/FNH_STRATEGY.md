@@ -147,3 +147,5 @@ Visual: one recurring character in a home set, cute personified villains in a "m
 - Cut-outs get a white die-cut sticker edge + soft shadow; photos as tilted white-border cards. Notes turn red on cream.
 - Header: brand pill "FRESHNESTHUB" (Archivo 900, white on series colour) top-left at y~316 + round black logo badge top-right (x 900). Film grain on every frame.
 - Code: episodes/74-tiffin-plastic/_paper.py (append last before __main__).
+- Paper look v2 (28 Nov, from OopsMyBusiness "FAKE SHOPPERS" frames): headlines in Noto Sans Devanagari 900 with roughened "shady" edges that re-draw 8x/s (line boil) + stepped stop-motion jiggle and a pop-in; key words on tilted yellow/white sticker cards; dark offset shadow only on colour paper (none on cream);
+  design-tool dashed selection box with corner handles around the punchline; vintage film cards (thick white border + black film edge + warm grade); every card/cut-out wobbles in 8 fps steps; series pill "रोज़ का सच N° xx" with a progress underline that fills across the video. Code: _paper2.py (append after _paper.py).
