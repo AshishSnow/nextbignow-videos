@@ -56,3 +56,18 @@ def D_mattress(name, price=None, w=720, h=300, tag=(255, 214, 64)):
         if price:
             g = cond(60); c.drawString(price, w / 2 - 40 - g.measureText(price), h / 2 - 50, g, P((200, 60, 50)))
     return d
+
+
+def D_bottle(num='57', w=300, h=620, col=(214, 40, 36), tag=(250, 246, 236), lid=(244, 244, 240)):
+    """generic glass sauce bottle with a round number sticker (no brand label shape)"""
+    def d(c):
+        p = skia.Path(); nw = w * 0.28
+        p.moveTo(-nw / 2, -h / 2 + 70); p.lineTo(-nw / 2, -h / 2 + 150); p.cubicTo(-w / 2, -h / 2 + 230, -w / 2, -h / 2 + 260, -w / 2, -h / 2 + 300)
+        p.lineTo(-w / 2, h / 2 - 30); p.quadTo(-w / 2, h / 2, -w / 2 + 30, h / 2); p.lineTo(w / 2 - 30, h / 2); p.quadTo(w / 2, h / 2, w / 2, h / 2 - 30)
+        p.lineTo(w / 2, -h / 2 + 300); p.cubicTo(w / 2, -h / 2 + 260, w / 2, -h / 2 + 230, nw / 2, -h / 2 + 150); p.lineTo(nw / 2, -h / 2 + 70); p.close()
+        c.drawPath(p, P(col)); c.drawPath(p, S(INK2, 5))
+        c.drawRRect(rr(-nw / 2 - 14, -h / 2, nw + 28, 80, 14), P(lid)); c.drawRRect(rr(-nw / 2 - 14, -h / 2, nw + 28, 80, 14), S(INK2, 5))
+        c.drawRect(skia.Rect.MakeXYWH(-w / 2 + 36, -h / 2 + 320, 22, h - 400), P((255, 255, 255), 0.35))
+        c.drawCircle(0, 60, w * 0.36, P(tag)); c.drawCircle(0, 60, w * 0.36, S(INK2, 5))
+        f = cond(int(w * 0.42)); c.drawString(num, -f.measureText(num) / 2, 60 + w * 0.15, f, P(INK2))
+    return d

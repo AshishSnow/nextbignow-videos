@@ -183,5 +183,7 @@ The owner sometimes uploads videos manually, so this list alone is not enough.
 | 28 Nov | Mind Tricks N° 08 | Movie villains can't use iPhones (Rian Johnson 2020) | 445443577 | 20:00 |
 | 28 Nov | Money Explained N° 06 | Toblerone gaps (UK 2016 shrinkflation) | 445443624 | 22:15 |
 | 29 Nov | Case Study N° 07 | Same mattress, different name (Serta, Consumers' Checkbook) | 445443656 | 09:12 |
-| 29 Nov | Money Tips N° 01 | Starbucks short size | 445443699 | 12:40 |
+| 29 Nov | ~~Money Tips N° 01 Starbucks short~~ PULLED (repeat brand), draft 445473106 | | |
+| 29 Nov | Mind Tricks N° 09 | Heinz 57 means nothing | 445495275 | 12:40 |
+| 30 Nov | YT long EP 03 | Hotels hide the real price (Heart voice) | 445495252 | 18:30 |
 | 28 Nov | YT Short | Shopping cart (best IG reel not yet on YT) | 444986119 | 12:40 |
