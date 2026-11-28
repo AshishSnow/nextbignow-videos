@@ -155,3 +155,4 @@ Visual: one recurring character in a home set, cute personified villains in a "m
 
 ## Posting rule (owner, 28 Nov 2026)
 - Before every post, make a custom thumbnail (1080x1920 JPG, same look as the reel: colour paper, headline cards, hero cut-out, logo badge) and attach it to BOTH posts in Metricool via info.videoThumbnailUrl (Instagram REEL/TRIAL_REEL and YouTube short). Host the JPG next to the MP4 on the temp branch.
+- ElevenLabs (owner, 28 Nov): ALWAYS generations_count=1 — never 2 takes; credits matter.
